@@ -1,0 +1,132 @@
+
+.aside {
+	text-align: center;
+
+	&-title {
+		font-family: $serif-font-family;
+		font-size: 44px;
+		margin-bottom: 1.5rem;
+		padding-bottom: 1.5rem;
+		position: relative;
+
+		@media (min-width: $breakpoint-small) {
+			white-space: nowrap;
+			font-size: 70px;
+		}
+
+		&:before {
+			content: '';
+			display: block;
+			height: 1px;
+			width: 20%;
+			left: 50%;
+			bottom: 0;
+			transform: translate(-50%, 0);
+			position: absolute;
+			background-color: $global-font-color;
+		}
+
+		+ p {
+			margin-top: 0;
+		}
+
+		~ p {
+			font-size: 20px;
+
+			// em {
+			// 	white-space: nowrap;
+			// 	color: $color-white;
+			// 	background-color: $link-background-color;
+			// 	display: inline-block;
+			// 	padding-right: 0.3em;
+			// 	padding-left: 0.3em;
+			// }
+
+			a {
+				box-shadow: 0 -3px 0 0 $link-background-color inset;
+				color: transparent;
+				display: inline-block;
+				padding-left: 0.2em;
+				padding-right: 0.2em;
+				position: relative;
+				perspective: 1000px;
+				perspective-origin: bottom center;
+				// transition: 0.35s background-color,
+				// 			0.35s color;
+				// will-change: background-color, color;
+				contain: paint;
+				backface-visibility: hidden;
+
+				&:before {
+					content: '';
+					position: absolute;
+					background-color: $link-background-color;
+					top: 0;
+					left: 0;
+					right: 0;
+					bottom: 0;
+					transform-style: preserve-3d;
+					transform-origin: bottom center;
+					transition: 0.5s transform;
+					transform: rotateX(90deg);
+					will-change: transform;
+					backface-visibility: hidden;
+				}
+
+				&:after {
+					content: attr(data-text);
+					position: absolute;
+					top: 50%;
+					left: 50%;
+					width: 100%;
+					transform: translate(-50%, -50%);
+					text-align: center;
+					will-change: color;
+					transition: 0.1s color 0.25s;
+					color: $global-font-color;
+					backface-visibility: hidden;
+				}
+
+				&:hover {
+					&:before {
+						transform: rotateX(0deg);
+					}
+
+					&:after {
+						color: $color-white;
+						transition-delay: 0.1s;
+					}
+				}
+			}
+
+			// strong {
+			// 	// display: inline-block;
+			// 	position: relative;
+
+			// 	&:before {
+			// 		content: '';
+			// 		position: absolute;
+			// 		// top: 50%;
+			// 		// left: 50%;
+			// 		// transform: translate(-50%, -50%);
+			// 		// height: 100%;
+			// 		// width: 100%;
+			// 		background-size: contain;
+			// 		background-position: center;
+			// 		background-repeat: no-repeat;
+			// 		background-image: url('../images/highlight.svg');
+			// 		z-index: -1;
+			// 		opacity: 0.35;
+			// 		top: -0.2em;
+			// 		left: -0.2em;
+			// 		right: -0.2em;
+			// 		bottom: -0.2em;
+			// 	}
+			// }
+
+			// strong {
+			// 	display: block;
+			// }
+		}
+	}
+}

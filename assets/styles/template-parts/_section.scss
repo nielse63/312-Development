@@ -1,0 +1,10 @@
+
+.section {
+	position: relative;
+
+	& + & {
+		margin-top: 50px;
+		padding-top: 50px;
+		// border-top: 1px solid fade-out($color-black, 0.9);
+	}
+}

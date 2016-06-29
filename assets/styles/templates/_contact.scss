@@ -1,0 +1,28 @@
+
+.contact {
+	padding-top: 0;
+	padding-bottom: 100px;
+
+	&-banner {
+		background-image: url('../images/contact.jpg');
+		background-position: center;
+		background-repeat: no-repeat;
+		background-size: cover;
+	}
+
+	&-title {
+		text-align: center;
+		font-size: 100px;
+		font-family: $serif-font-family;
+	}
+
+	&-article {
+		padding: 100px 0 0;
+	}
+
+	&-row {
+		& + & {
+			margin-top: 150px;
+		}
+	}
+}

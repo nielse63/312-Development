@@ -1,0 +1,198 @@
+
+.services {
+	font-size: 20px;
+	flex-wrap: wrap;
+	position: relative;
+	height: 100vh;
+
+	@media (min-width: $breakpoint-small) {
+		height: 400px;
+	}
+}
+
+.service {
+	position: absolute;
+
+	p {
+		position: absolute;
+		top: 50%;
+		left: 50px;
+		transform: translate(0, -50%);
+		margin: 0;
+		white-space: nowrap;
+		// opacity: 0;
+		// transition: 1s opacity;
+		color: #de8068;
+
+		// .active & {
+		// 	opacity: 1;
+		// }
+	}
+
+	&-javascript {
+		$size: 140px;
+
+		top: 10%;
+		left: 10%;
+		// transform-origin: ($size / 2) ($size / 2);
+
+		.service-circle {
+			height: $size;
+			width: $size;
+		}
+
+		p {
+			top: ($size / 2);
+			left: ($size / 2);
+		}
+	}
+
+	&-html5 {
+		$size: 110px;
+
+		bottom: 0;
+		right: 15%;
+		// transform-origin: ($size / 2) ($size / 2);
+
+		@media (min-width: $breakpoint-small) {
+			bottom: 5%;
+		}
+
+		.service-circle {
+			height: $size;
+			width: $size;
+		}
+
+		p {
+			top: ($size / 2);
+			left: ($size / 2);
+		}
+	}
+
+	&-react {
+		$size: 105px;
+
+		top: 53%;
+		left: 0;
+		// transform-origin: ($size / 2) ($size / 2);
+
+		.service-circle {
+			height: $size;
+			width: $size;
+		}
+
+		p {
+			top: ($size / 2);
+			left: ($size / 2);
+		}
+	}
+
+	&-plugin {
+		$size: 120px;
+
+		top: 35%;
+		right: 37%;
+		// transform-origin: ($size / 2) ($size / 2);
+
+		.service-circle {
+			height: $size;
+			width: $size;
+		}
+
+		p {
+			top: ($size / 2);
+			left: ($size / 2);
+		}
+	}
+
+	&-node {
+		$size: 100px;
+
+		bottom: 10%;
+		left: 15%;
+		// transform-origin: ($size / 2) ($size / 2);
+
+		@media (min-width: $breakpoint-small) {
+			bottom: 0;
+			left: 31%;
+		}
+
+		.service-circle {
+			height: $size;
+			width: $size;
+		}
+
+		p {
+			top: ($size / 2);
+			left: ($size / 2);
+		}
+	}
+
+	&-es6 {
+		$size: 105px;
+
+		top: 5%;
+		right: 15%;
+		// transform-origin: ($size / 2) ($size / 2);
+
+		.service-circle {
+			height: $size;
+			width: $size;
+		}
+
+		p {
+			top: ($size / 2);
+			left: ($size / 2);
+		}
+	}
+
+	&-right {
+		p {
+			left: auto;
+			right: -50px;
+		}
+
+		// .service-circle {
+		// 	&:before {
+		// 		left: auto;
+		// 		right: 50%;
+		// 	}
+		// }
+	}
+
+	&-figure {
+		position: relative;
+		height: 100px;
+		font-family: $serif-font-family;
+		transform-origin: 50px 50px;
+		transform: rotate(-90deg);
+		transition: 1s transform;
+		will-change: transform;
+
+		.active & {
+			transform: rotate(0deg);
+		}
+	}
+
+	&-circle {
+		background-color: #dae9ec;
+		border-radius: 50%;
+		background-clip: padding-box;
+		width: 100px;
+		height: 100px;
+		display: block;
+		position: absolute;
+		// overflow: hidden;
+		// z-index: 1;
+
+		// &:before {
+		// 	content: attr(data-text);
+		// 	position: absolute;
+		// 	top: 50%;
+		// 	left: 50%;
+		// 	transform: translate(0, -50%);
+		// 	color: $color-white;
+		// 	white-space: nowrap;
+		// }
+	}
+}

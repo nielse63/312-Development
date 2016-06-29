@@ -1,0 +1,77 @@
+//
+// Name:            Layout
+//
+// Description:     Contains all style definitions concerning basic
+//					structure and layout
+//
+
+// ========================================================================
+// Variables
+// ========================================================================
+
+$main-background-color: $global-background-color;
+
+// ========================================================================
+// Component: Base
+// ========================================================================
+
+.main {
+	background-color: $main-background-color;
+	padding: 25px 0;
+
+	@media (min-width: $breakpoint-small) {
+		padding: 50px 0;
+	}
+
+	&-no-padding-top {
+		padding-top: 0;
+	}
+}
+
+.wrap {
+	max-width: 1200px;
+	margin: 0 auto;
+}
+
+.row {
+	margin-left: ($global-gutter / -2);
+	margin-right: ($global-gutter / -2);
+
+	@media (min-width: $breakpoint-small) {
+		margin-left: ($global-gutter-large / -2);
+		margin-right: ($global-gutter-large / -2);
+	}
+
+	&,
+	> [class*="col-"] {
+		position: relative;
+	}
+
+	> [class*="col-"] {
+		padding-left: ($global-gutter / 2);
+		padding-right: ($global-gutter / 2);
+
+		@media (min-width: $breakpoint-small) {
+			padding-left: ($global-gutter-large / 2);
+			padding-right: ($global-gutter-large / 2);
+		}
+	}
+}
+
+.container-fluid {
+	padding-left: $global-gutter;
+	padding-right: $global-gutter;
+
+	@media (min-width: $breakpoint-small) {
+		padding-right: $global-gutter-large;
+		padding-left: $global-gutter-large;
+	}
+}
+
+.col-xs-12 {
+	& + & {
+		@media (max-width: $breakpoint-mini-max) {
+			margin-top: $global-gutter;
+		}
+	}
+}

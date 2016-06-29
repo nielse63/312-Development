@@ -1,0 +1,110 @@
+
+.single {
+	padding-top: 0;
+
+	.banner {
+		padding-top: 150px;
+		padding-bottom: 150px;
+	}
+
+	&-title {
+		text-align: center;
+		font-size: 100px;
+		font-family: $serif-font-family;
+	}
+
+	&-article {
+		padding: 50px 0;
+		font-size: 18px;
+		font-weight: 200;
+
+		blockquote {
+			display: block;
+			float: left;
+			width: 50%;
+			margin: 0 50px 25px -50px;
+			font-size: 26px;
+			font-weight: 200;
+			padding: 5px 25px;
+			border-left-color: $color-orange;
+		}
+
+		pre {
+			font-size: 14px;
+			line-height: (22 / 14);
+		}
+
+		* + p {
+			margin-top: 1em;
+		}
+	}
+
+	&-buttons {
+
+		.button {
+			width: 205px;
+		}
+	}
+
+	&-footer {
+		margin-top: 50px;
+		padding-top: 50px;
+		border-top: 1px solid currentColor;
+
+		&-section {
+
+			& + & {
+				margin-top: 100px;
+			}
+		}
+
+		&-lead {
+			text-align: center;
+			font-size: 36px;
+			font-weight: 200;
+
+			+ .work {
+				margin-top: 0;
+			}
+		}
+	}
+
+	&-chart {
+		height: 350px;
+	}
+}
+
+.chart {
+	&-buttons {
+		.button {
+			width: 250px;
+			background-color: transparent;
+			border-color: $color-orange;
+			color: $color-orange;
+		}
+	}
+}
+
+.blog-figure {
+	float: right;
+	margin: 0 -50px 25px 50px;
+	width: 50%;
+	border: 1px solid fade-out($global-font-color, 0.75);
+	padding: 5px;
+
+	figcaption {
+		font-size: 14px;
+		padding: 5px 5px 0;
+		font-style: italic;
+	}
+}
+
+.single {
+	&-blog {
+		&-code {
+			display: block;
+			width: 100%;
+			clear: both;
+		}
+	}
+}

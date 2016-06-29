@@ -1,0 +1,73 @@
+// Name:            Sidebar
+//
+// Description:     Defines styles for sidebar object
+//
+// Component:       `.aside`
+//
+// Sub-object:      `.widget`
+//
+
+// ========================================================================
+// Variables
+// ========================================================================
+
+$sidebar-padding-vertical: 30px;
+$sidebar-padding-horizontal: ($sidebar-padding-vertical / 2);
+
+$list-item-border-color: fade-out($color-black, 0.9);
+
+$widget-background-color: $color-white;
+$widget-padding-vertical: 30px;
+$widget-padding-horizontal: 20px;
+
+// ========================================================================
+// Component
+// ========================================================================
+
+.aside {
+	background-color: $color-gray;
+	padding: $sidebar-padding-vertical $sidebar-padding-horizontal;
+
+	&-nav {
+		width: 100%;
+
+		ul {
+			margin: 0;
+			padding: 0;
+			list-style: none;
+
+			li {
+
+				a {
+					display: block;
+					padding: 10px;
+				}
+
+				+ li {
+					border-top: 1px solid $list-item-border-color;
+				}
+			}
+		}
+	}
+}
+
+// Sub-Object: `.widget`
+// ========================================================================
+
+.widget {
+	// margin-top: 25px;
+	background-color: $color-white;
+	padding: $widget-padding-vertical $widget-padding-horizontal;
+
+	& + & {
+		margin-top: $global-gutter;
+
+		@media (min-width: $breakpoint-small) {
+			margin-top: $global-gutter-large;
+		}
+	}
+
+	> ul {
+		padding-left: 15px;
+	}
+}

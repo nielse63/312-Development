@@ -1,0 +1,15 @@
+{
+	"disallowSpaceAfterKeywords" : [
+		"if",
+		"for",
+		"while",
+		"do",
+		"switch",
+		"catch"
+	],
+	"disallowSpaceAfterLineComment" : false,
+	"disallowSpaceBeforeSemicolon" : true,
+	"disallowSpaceAfterObjectKeys" : false,
+	"requireSpaceAfterObjectKeys" : true,
+	"validateIndentation" : "\t"
+}

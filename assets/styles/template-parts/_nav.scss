@@ -1,0 +1,128 @@
+// Name:            Nav
+//
+// Description:     Defines styles for navigation items
+//
+// Component:       `.topnav`
+//
+
+// ========================================================================
+// Variables
+// ========================================================================
+
+$menu-transition-duration: $global-menu-transition-duration;
+
+$menu-border-color: fade-out($color-black, 0.9);
+
+$link-padding-horizontal-small: 20px;
+$link-padding-large: 10px;
+
+$menu-item-color: $global-font-color;
+
+// ========================================================================
+// Component
+// ========================================================================
+
+// .topnav {
+// 	@media (max-width: $breakpoint-small-max) {
+// 		display: none;
+// 	}
+// }
+
+.mobile-nav {
+	position: fixed;
+	top: 0;
+	right: 0;
+	width: 70vw;
+	height: 100vh;
+	transform: translate(70vw, 0);
+	display: flex;
+	align-items: center;
+	opacity: 0;
+	transition: $global-menu-transition-duration transform,
+				$global-menu-transition-duration opacity;
+	text-align: center;
+
+	.menu-open & {
+		transform: translate(0, 0);
+		opacity: 1;
+	}
+
+	.nav-menu {
+		width: 100%;
+
+		> li {
+			+ li {
+				border: 0;
+			}
+		}
+	}
+
+	@media (min-width: $breakpoint-small) {
+		display: none;
+	}
+}
+
+.nav-menu {
+	margin: 0;
+	padding: 0;
+	display: flex;
+	flex-wrap: wrap;
+	list-style: none;
+	font-size: 22px;
+	line-height: (28 / 16);
+	font-family: $serif-font-family;
+	position: relative;
+	contain: paint content size layout style;
+
+	@media (min-width: $breakpoint-medium) {
+		margin-left: -$link-padding-large;
+	}
+
+	@media (max-width: $breakpoint-medium) {
+		flex-direction: column;
+	}
+
+	.line {
+		position: absolute;
+		bottom: 0;
+		left: 0;
+		height: 3px;
+		background-color: $color-orange;
+		width: 73px;
+		left: 0;
+		padding: 0;
+		margin: 0;
+		transition: 0.5s transform,
+					0.5s width;
+		will-change: transform, width;
+
+		@media (max-width: $breakpoint-small-max) {
+			display: none;
+		}
+	}
+
+	> li {
+		position: relative;
+
+		@media (max-width: $breakpoint-medium) {
+
+			+ li {
+				border-top: 1px solid $menu-border-color;
+				margin: 0;
+				padding: 0;
+			}
+		}
+
+		a {
+			display: block;
+			padding: 10px $link-padding-horizontal-small;
+			color: $menu-item-color;
+			transition: $global-link-transition-duration;
+			position: relative;
+
+			@media (min-width: $breakpoint-medium) {
+				padding: $link-padding-large;
+			}
+		}
+	}
+}

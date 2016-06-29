@@ -1,0 +1,10 @@
+
+
+.box {
+	background-color: $color-gray;
+	padding: $global-gutter;
+
+	@media (min-width: $breakpoint-small) {
+		padding: $global-gutter-large;
+	}
+}

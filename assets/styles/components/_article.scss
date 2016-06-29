@@ -1,0 +1,134 @@
+//
+// Name:            Base
+//
+// Description:     Contains all base styles, including basic resets
+//
+
+// ========================================================================
+// Variables
+// ========================================================================
+
+$title-font-size: 44px;
+$title-color: $global-font-color;
+
+$link-background-color: $color-orange;
+// $link-background-color: fade-out($global-font-color, 0.25);
+$link-color: $color-white;
+
+// ========================================================================
+// Component
+// ========================================================================
+
+.article {
+	perspective-origin: top center;
+	perspective: 100vw;
+	contain: style;
+
+	&-title {
+		font-size: 26px;
+		line-height: (56 / 40);
+		transform-style: preserve-3d;
+		transform-origin: center;
+		transform: rotateX(9deg) rotateY(-7deg);
+		opacity: 0;
+		will-change: opacity, transform;
+
+		@media (min-width: $breakpoint-small) {
+			font-size: 40px;
+		}
+
+		html.loaded & {
+			transition: 1s transform 1.25s,
+						1s opacity 1.25s;
+			opacity: 1;
+			transform: none;
+		}
+
+		a {
+			box-shadow: 0 -3px 0 0 $link-background-color inset;
+			color: transparent;
+			display: inline-block;
+			padding-left: 0.2em;
+			padding-right: 0.2em;
+			position: relative;
+			perspective: 1000px;
+			perspective-origin: bottom center;
+			transition: 0.35s background-color,
+						0.35s color;
+			will-change: background-color, color;
+			contain: paint;
+			backface-visibility: hidden;
+
+			&:before {
+				content: '';
+				position: absolute;
+				background-color: $link-background-color;
+				top: 0;
+				left: 0;
+				right: 0;
+				bottom: 0;
+				transform-style: preserve-3d;
+				transform-origin: bottom center;
+				transition: 0.5s transform;
+				transform: rotateX(90deg);
+				will-change: transform;
+				backface-visibility: hidden;
+			}
+
+			&:after {
+				content: attr(data-text);
+				position: absolute;
+				top: 50%;
+				left: 50%;
+				width: 100%;
+				transform: translate(-50%, -50%);
+				text-align: center;
+				will-change: color;
+				transition: 0.1s color 0.25s;
+				color: $global-font-color;
+				backface-visibility: hidden;
+			}
+
+			&:hover {
+				&:before {
+					transform: rotateX(0deg);
+				}
+
+				&:after {
+					color: $color-white;
+					transition-delay: 0.1s;
+				}
+			}
+		}
+	}
+
+	&-lead {
+		font-size: 2em;
+		text-align: center;
+		margin-top: 1em;
+		padding-top: 1em;
+		margin-bottom: 1em;
+		padding-bottom: 1em;
+		position: relative;
+
+		&:before,
+		&:after {
+			content: '';
+			display: block;
+			height: 1px;
+			width: 25%;
+			left: 50%;
+			transform: translate(-50%, 0);
+			position: absolute;
+			background-color: $global-font-color;
+		}
+
+		&:before {
+			bottom: 0;
+		}
+
+		&:after {
+			top: 0;
+		}
+	}
+}
