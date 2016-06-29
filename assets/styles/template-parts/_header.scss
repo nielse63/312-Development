@@ -1,0 +1,72 @@
+// Name:            Nav
+//
+// Description:     Defines styles for navigation items
+//
+// Component:       `.topnav`
+//
+
+// ========================================================================
+// Variables
+// ========================================================================
+
+$logo-color: $global-font-color;
+
+// ========================================================================
+// Component
+// ========================================================================
+
+.header {
+	padding: 15px 0;
+
+	@media (min-width: $breakpoint-small) {
+		padding-bottom: 25px;
+	}
+
+	@media (max-width: $breakpoint-small-max) {
+		background-color: $color-white;
+		position: fixed;
+		top: 0;
+		left: 0;
+		right: 0;
+		z-index: 2;
+
+		+ * {
+			padding-top: 69px;
+		}
+	}
+}
+
+.logo {
+	margin: 0;
+	font-size: 28px;
+	white-space: nowrap;
+
+	@media (max-width: $breakpoint-small-max) {
+		font-size: 34px;
+		text-align: center;
+	}
+
+	a {
+		color: $logo-color;
+		display: block;
+	}
+
+	span {
+		display: inline-block;
+		background-color: $logo-color;
+		color: $color-white;
+		padding: 0 0.2em;
+		margin-right: 0.1em;
+	}
+
+	&-col {
+		position: relative;
+
+		@media (max-width: $breakpoint-small-max) {
+			width: 100%;
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+		}
+	}
+}

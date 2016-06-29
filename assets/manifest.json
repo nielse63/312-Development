@@ -1,0 +1,52 @@
+{
+  "dependencies": {
+    "main.js": {
+      "files": [
+
+		"scripts/lib/utils/_utils.js",
+		"scripts/lib/utils/_support.js",
+		"scripts/lib/utils/_events.js",
+		"scripts/lib/utils/_url.js",
+		"scripts/lib/utils/_browser.js",
+
+		"scripts/lib/plugins/_scrollto.js",
+
+		"scripts/lib/modules/_loader.js",
+		"scripts/lib/modules/_body-class.js",
+		"scripts/lib/modules/_checkbox.js",
+		"scripts/lib/modules/_radio.js",
+		"scripts/lib/modules/_select.js",
+		"scripts/lib/modules/_file-input.js",
+		"scripts/lib/modules/_form.js",
+		"scripts/lib/modules/_scrollto.js",
+		"scripts/lib/modules/_deadlinks.js",
+
+		"scripts/lib/vendor/_hamburger.js",
+		"scripts/lib/vendor/animation.gsap.js",
+
+        "scripts/mobile-button.js",
+        "scripts/main.js",
+        "scripts/prefetch.js",
+
+        "scripts/lib/components/_footer.js"
+      ],
+      "main": true
+    },
+    "main.css": {
+      "files": [
+        "styles/main.scss"
+      ],
+      "main": true
+    },
+    "jquery.js": {
+      "bower": ["jquery"]
+    }
+  },
+  "config": {
+    "devUrl": "http://frontendboilerplate.dev"
+  },
+  "paths": {
+  	"source": "assets/",
+  	"dist": "dist/"
+  }
+}

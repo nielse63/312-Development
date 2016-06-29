@@ -1,0 +1,182 @@
+
+$transition-delay: 0.75s;
+
+.work {
+	&-section {
+		margin: 50px -20px 0;
+
+		@media (min-width: $breakpoint-small) {
+			display: flex;
+			margin: 100px 0 0;
+		}
+	}
+
+	&-grid {
+		margin: 0;
+		padding: 0;
+		list-style: none;
+		display: flex;
+		flex-direction: column;
+		width: 100%;
+
+		@media (min-width: $breakpoint-small) {
+			width: 50%;
+			transform: translate(0, -250px);
+			will-change: transform;
+		}
+
+		html.loaded & {
+			@media (min-width: $breakpoint-small) {
+				transition: 1s transform cubic-bezier(0.770, 0.000, 0.175, 1.000) $transition-delay;
+				transform: translate(0, 0);
+			}
+		}
+
+		& + & {
+			html.loaded & {
+				@media (min-width: $breakpoint-small) {
+					transition-delay: ($transition-delay + 0.15s);
+				}
+			}
+		}
+	}
+
+	&-block {
+		position: relative;
+		display: block;
+		overflow: hidden;
+		contain: paint content size layout style;
+		transform: translate(0, 15px);
+		will-change: transform;
+
+		&:before {
+			content: '';
+			display: block;
+			will-change: background-color;
+			transition: 0.5s background-color;
+		}
+
+		&:not(.not-loaded) {
+			transform: translate(0, 0);
+			transition: 0.5s transform;
+
+			&:before {
+				background-color: transparent;
+			}
+
+			a {
+				opacity: 1;
+				transform: scale(1);
+			}
+		}
+
+		a {
+			display: block;
+			position: absolute;
+			top: 0;
+			left: 0;
+			height: 100%;
+			width: 100%;
+			will-change: opacity, transform;
+			transition: 0.5s transform,
+						0.5s opacity;
+
+			&:hover {
+				.work-block {
+					&-figure {
+						opacity: 0;
+					}
+				}
+
+				.preview {
+					opacity: 1;
+					transform: translate(0, 0);
+				}
+			}
+		}
+
+		&-large {
+			&:before {
+				padding-top: 75%;
+			}
+		}
+
+		&-medium {
+			&:before {
+				padding-top: 65%;
+			}
+		}
+
+		&-small {
+			&:before {
+				padding-top: 55%;
+			}
+		}
+
+		&-content {
+			position: absolute;
+			top: 0;
+			left: 0;
+			height: 100%;
+			width: 100%;
+			color: $color-white;
+			padding: 50px;
+			display: flex;
+			flex-direction: column;
+			justify-content: space-between;
+
+			.tag {
+				font-size: 14px;
+				letter-spacing: 10px;
+				text-transform: uppercase;
+			}
+
+			h3 {
+				font-size: 26px;
+				letter-spacing: 5px;
+			}
+
+			.preview {
+				font-size: 32px;
+				font-family: $serif-font-family;
+				transform: translate(-15px, 0);
+				opacity: 0;
+				transition: 0.5s transform,
+							0.5s opacity;
+				will-change: opacity, transform;
+			}
+		}
+
+		&-figure {
+			$diff: 5vh;
+
+			position: absolute;
+			top: 0;
+			left: -15px;
+			right: -15px;
+			height: calc(100% + #{$diff});
+			background-position: center;
+			background-repeat: no-repeat;
+			background-size: cover;
+			opacity: 0.15;
+			-webkit-filter: sepia(80%);
+			filter: sepia(80%);
+			margin: 0;
+			will-change: opacity, transform;
+			transition: 0.35s opacity;
+		}
+	}
+}
+
+.not-loaded {
+	transform: translate(0, 25px);
+
+	&:before {
+		background-color: $color-white;
+	}
+
+	a {
+		opacity: 0;
+		transform: scale(0.9);
+	}
+}

@@ -1,0 +1,56 @@
+
+@function strip-unit($number) {
+	@if type-of($number) == 'number' and not unitless($number) {
+		@return $number / ($number * 0 + 1);
+	}
+	@return $number;
+}
+
+// Transition
+@mixin transition($duration) {
+    transition: $duration;
+}
+
+// Transforms
+@mixin transformX($percent) {
+    transform: translateX($percent);
+}
+@mixin transformY($percent) {
+    transform: translateY($percent);
+}
+@mixin transformXY($percent) {
+    transform: translateY($percent) translateX($percent);
+}
+@mixin rotate($degree) {
+    transform: rotate($degree);
+}
+@mixin skew($degreeX, $degreeY) {
+    transform: skew($degreeX, $degreeY);
+}
+
+// border radius
+@mixin border-radius($value) {
+	@if type-of($value) == 'number' and unitless($value) {
+		$value: $value + px;
+	}
+	border-radius: $value;
+	background-clip: padding-box;
+}
+
+@mixin size($width, $height: $width) {
+	@if type-of($width) == 'number' and unitless($width) {
+		$width: $width + px;
+	}
+	@if type-of($height) == 'number' and unitless($height) {
+		$height: $height + px;
+	}
+
+	width: $width;
+	height: $height;
+}
+
+@mixin micro-clearfix() {
+	content: '';
+	clear: both;
+	display: table-cell;
+}

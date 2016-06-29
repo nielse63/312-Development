@@ -1,0 +1,126 @@
+// Name:            Fonts
+//
+// Description:     All font-face kits
+//
+
+// ========================================================================
+// Component: Fonts
+// ========================================================================
+
+
+@font-face {
+    font-family: 'Proxima Nova';
+	src: url('../fonts/ProximaNovaLightIt.eot?#iefix') format('embedded-opentype'),
+		 url('../fonts/ProximaNovaLightIt.woff2') format('woff2'),
+		 url('../fonts/ProximaNovaLightIt.woff') format('woff'),
+		 url('../fonts/ProximaNovaLightIt.ttf') format('truetype');
+	font-weight: 200;
+	font-style: italic;
+	unicode-range: U+000-5FF;
+}
+
+@font-face {
+    font-family: 'Proxima Nova';
+	src: url('../fonts/ProximaNovaLight.eot?#iefix') format('embedded-opentype'),
+		 url('../fonts/ProximaNovaLight.woff2') format('woff2'),
+		 url('../fonts/ProximaNovaLight.woff') format('woff'),
+		 url('../fonts/ProximaNovaLight.ttf') format('truetype');
+	font-weight: 200;
+	font-style: normal;
+	unicode-range: U+000-5FF;
+}
+
+@font-face {
+    font-family: 'Proxima Nova';
+    src: url('../fonts/ProximaNova.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/ProximaNova.woff2') format('woff2'),
+         url('../fonts/ProximaNova.woff') format('woff'),
+         url('../fonts/ProximaNova.ttf') format('truetype');
+    font-weight: 400;
+    font-style: normal;
+    unicode-range: U+000-5FF;
+}
+
+@font-face {
+    font-family: 'Proxima Nova';
+	src: url('../fonts/ProximaNovaItalic.eot?#iefix') format('embedded-opentype'),
+		 url('../fonts/ProximaNovaItalic.woff2') format('woff2'),
+		 url('../fonts/ProximaNovaItalic.woff') format('woff'),
+		 url('../fonts/ProximaNovaItalic.ttf') format('truetype');
+	font-weight: 400;
+	font-style: italic;
+	unicode-range: U+000-5FF;
+}
+
+@font-face {
+    font-family: 'Proxima Nova';
+    src: url('../fonts/ProximaNovaBold.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/ProximaNovaBold.woff2') format('woff2'),
+         url('../fonts/ProximaNovaBold.woff') format('woff'),
+         url('../fonts/ProximaNovaBold.ttf') format('truetype');
+    font-weight: 700;
+    font-style: normal;
+    unicode-range: U+000-5FF;
+}
+
+@font-face {
+    font-family: 'Proxima Nova';
+	src: url('../fonts/ProximaNovaBoldItalic.eot?#iefix') format('embedded-opentype'),
+		 url('../fonts/ProximaNovaBoldItalic.woff2') format('woff2'),
+		 url('../fonts/ProximaNovaBoldItalic.woff') format('woff'),
+		 url('../fonts/ProximaNovaBoldItalic.ttf') format('truetype');
+	font-weight: 700;
+	font-style: italic;
+	unicode-range: U+000-5FF;
+}
+
+@font-face {
+	font-family: "Brandon Grotesque";
+	src: url("../fonts/Brandon_bld.eot");
+	src: url("../fonts/Brandon_bld.eot?#iefix") format("embedded-opentype"),
+		 url("../fonts/Brandon_bld.woff") format("woff"),
+		 url("../fonts/Brandon_bld.ttf") format("truetype"),
+		 url("../fonts/Brandon_bld.svg#41e76bd6e414417d52adb646f262964a") format("svg");
+	font-style:    normal;
+	font-weight:   700;
+	unicode-range: U+000-5FF;
+}
+
+@font-face {
+	font-family: 'Brandon Grotesque';
+	src: url('../fonts/Brandon_reg.eot');
+	src: url('../fonts/Brandon_reg.eot?#iefix') format('embedded-opentype'),
+		 url('../fonts/Brandon_reg.woff') format('woff'),
+		 url('../fonts/Brandon_reg.ttf')  format('truetype'),
+		 url('../fonts/Brandon_reg.svg#50bf5a2005a5412419d6a4b30314e68e') format('svg');
+	font-style:    normal;
+	font-weight:   400;
+	unicode-range: U+000-5FF;
+}
+
+
+// @font-face {
+//     font-family: 'Playfair';
+//     src: url('../fonts/playfairdisplay-bold-webfont.eot');
+//     src: url('../fonts/playfairdisplay-bold-webfont.eot?#iefix') format('embedded-opentype'),
+//          url('../fonts/playfairdisplay-bold-webfont.woff2') format('woff2'),
+//          url('../fonts/playfairdisplay-bold-webfont.woff') format('woff'),
+//          url('../fonts/playfairdisplay-bold-webfont.ttf') format('truetype'),
+//          url('../fonts/playfairdisplay-bold-webfont.svg#playfair_displaybold') format('svg');
+//     font-weight: 700;
+//     font-style: normal;
+// 	unicode-range: U+000-5FF;
+// }
+
+// @font-face {
+//     font-family: 'Playfair';
+//     src: url('../fonts/playfairdisplaysc-black-webfont.eot');
+//     src: url('../fonts/playfairdisplaysc-black-webfont.eot?#iefix') format('embedded-opentype'),
+//          url('../fonts/playfairdisplaysc-black-webfont.woff2') format('woff2'),
+//          url('../fonts/playfairdisplaysc-black-webfont.woff') format('woff'),
+//          url('../fonts/playfairdisplaysc-black-webfont.ttf') format('truetype'),
+//          url('../fonts/playfairdisplaysc-black-webfont.svg#playfair_display_scblack') format('svg');
+//     font-weight: 800;
+//     font-style: normal;
+// 	unicode-range: U+000-5FF;
+// }

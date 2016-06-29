@@ -1,0 +1,35 @@
+
+.text {
+
+	&-right {
+		text-align: right;
+	}
+}
+
+.visible {
+	&-small {
+		@media (min-width: $breakpoint-small) {
+			display: none;
+		}
+	}
+
+	&-medium {
+		@media (min-width: $breakpoint-medium) {
+			display: none;
+		}
+	}
+}
+
+.hidden {
+	&-small {
+		@media (max-width: $breakpoint-small-max) {
+			display: none;
+		}
+	}
+
+	// &-medium {
+	// 	@media (min-width: $breakpoint-medium) {
+	// 		display: none;
+	// 	}
+	// }
+}

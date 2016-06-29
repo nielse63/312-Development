@@ -1,0 +1,63 @@
+.footer {
+	background-color: #2c3e50;
+	padding: 50px 0;
+	position: relative;
+	overflow: hidden;
+	contain: style;
+
+	&.inview {
+		path {
+			transition-delay: 0.5s;
+			stroke-dashoffset: 0 !important;
+		}
+	}
+
+	svg {
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		width: 100%;
+		transform: translate(-50%, -50%);
+		opacity: 0.75;
+		contain: style;
+
+		~ * {
+			position: relative;
+		}
+	}
+
+	path {
+		transition: 2s stroke-dashoffset;
+	}
+
+	&-nav {
+		font-weight: 200;
+		font-size: 14px;
+
+		ul {
+			margin: 0;
+			display: flex;
+			flex-wrap: wrap;
+			list-style: none;
+			padding: 0;
+
+			> li {
+				+ li {
+					border-left: 1px solid fade-out($color-white, 0.5);
+					margin-left: 10px;
+					padding-left: 10px;
+				}
+			}
+		}
+
+		a {
+			padding: 10px 3px;
+
+			&,
+			&:hover,
+			&:focus {
+				color: $color-white;
+			}
+		}
+	}
+}

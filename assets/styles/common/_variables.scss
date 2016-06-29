@@ -1,0 +1,191 @@
+//
+// Component:       Variables
+// Description:     Defines all color and style related values as variables
+//                  to allow easy customization for the most common cases.
+//
+// ========================================================================
+
+// ========================================================================
+// Component: Variables
+// ========================================================================
+
+// *** COLORS: http://www.calltoidea.com/p-flat.php *** ///
+
+
+// Glyphicons font path
+$font-path:     "../fonts/";
+
+// Colors
+// $brand-primary: #f88601;
+$brand-primary: #f65846;
+
+
+// ========================================================================
+// Component: Media Queries
+// ========================================================================
+
+$breakpoint-small: 480px;
+$breakpoint-medium: 768px;
+$breakpoint-large: 960px;
+$breakpoint-xlarge: 1220px;
+$breakpoint-mini-max: ($breakpoint-small - 1);
+$breakpoint-small-max: ($breakpoint-medium - 1);
+$breakpoint-medium-max: ($breakpoint-large - 1);
+$breakpoint-large-max: ($breakpoint-xlarge - 1);
+
+
+// ========================================================================
+// Component: Colors
+// ========================================================================
+
+$color-white: #fff;
+$color-black: #111;
+$color-primary: #1fa5db;
+$color-success: #8cc14c;
+$color-warning: #faa732;
+$color-danger: #da314b;
+$color-gray: #f6f6f6;
+$color-gray-light: #e1e1e1;
+
+$color-orange: $brand-primary;
+$color-blue: #4d84f1;
+
+// Sub-modifier: Text State Colors
+// ========================================================================
+
+$global-text-shadow: $color-white;
+$global-link-color: #07D;
+$global-link-color-hover: #059;
+$global-muted-color: #999;
+
+// Modifier: `.heme Colors
+// ========================================================================
+
+$color-primary-text: #2d7091;
+$color-primary-background: #00a8e6;
+$color-primary-background-light: #ebf7fd;
+$color-primary-border: fade($color-primary-text, 30%);
+
+$color-success-text: #659f13;
+$color-success-background: $color-success;
+$color-success-background-light: #f2fae3;
+$color-success-border: fade($color-success-text, 30%);
+
+$color-warning-text: #e28327;
+$color-warning-background: $color-warning;
+$color-warning-background-light: #fffceb;
+$color-warning-border: fade($color-warning-text, 30%);
+
+// $color-danger-text: #d85030;
+$color-danger-text: #ce4844;
+$color-danger-background: $color-danger;
+$color-danger-background-light: #fff1f0;
+$color-danger-border: fade($color-danger-text, 30%);
+
+// ========================================================================
+// Component: Font
+// ========================================================================
+
+$global-font-color: #484747;
+$global-font-family: "Proxima Nova", "Helvetica Neue", Helvetica, Arial, sans-serif;
+$header-font-family: "Brandon Grotesque", "Proxima Nova", "Helvetica Neue", Helvetica, Arial, sans-serif;
+$serif-font-family: "Crimson Text", Georgia, Times, "Times New Roman", serif;
+$global-font-size: 16px;
+$global-line-height: 24px;
+
+// Modifier: `.ont
+// ========================================================================
+
+$global-font-color-darker: darken($global-font-color, 8%);
+$global-highlight-color: #ffa;
+$global-emphasis-color: #d05;
+
+// ========================================================================
+// Component: Button
+// ========================================================================
+
+// Backgrounds
+// ========================================================================
+
+$global-background: $color-white;
+$global-background-color: $global-background;
+$global-default-background: #eee;
+
+// Borders
+// ========================================================================
+
+$global-border-color: #ddd;
+$global-border-radius: 4px;
+$global-border-width: 1px;
+
+// ========================================================================
+// Component: Scaffolding
+// ========================================================================
+
+// ========================================================================
+// Component: Form
+// ========================================================================
+
+// ========================================================================
+// Component: Other
+// ========================================================================
+
+// Text
+// ========================================================================
+
+$global-font-size-mini: 11px;
+$global-font-size-small: 12px;
+$global-font-size-large: 16px;
+$global-font-size-block-title: 18px;
+
+$global-line-height-mini: 16px;
+$global-line-height-small: 18px;
+$global-line-height-large: 24px;
+$global-line-height-block-title: 24px;
+
+// Spacings
+// ========================================================================
+
+$global-gutter: 20px;
+$global-gutter-large: $global-gutter + 10;
+$global-gutter-small: $global-gutter - 10px;
+$global-gutter-mini: $global-gutter-small - 5px;
+
+$global-margin: 15px;
+$global-margin-large: $global-margin + 10px;
+$global-margin-small: $global-margin - 10px;
+$global-margin-mini: $global-gutter-small - 5px;
+
+// $global-grid-gutter: 25px;
+// $global-grid-gutter-large: 35px;
+
+// Controls
+// ========================================================================
+
+$global-height: 30px;
+$global-height-mini: 20px;
+$global-height-small: 26px;
+$global-height-large: 40px;
+
+// Modifier Variables
+// ========================================================================
+
+$global-inactive-opacity: 0.7;
+$global-active-opacity: 1;
+
+$global-link-decoration: none;
+$global-link-decoration-hover: underline;
+
+// Transform Values
+// ========================================================================
+
+$global-scale-in: 1.3;
+
+// Transitions
+// ========================================================================
+
+$global-transition-duration: 0.25s;
+$global-transition-timing-function: ease-in-out;
+$global-link-transition-duration: $global-transition-duration;
+$global-menu-transition-duration: 0.5s;
+

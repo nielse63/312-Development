@@ -1,0 +1,211 @@
+
+<!--#include file="header/_head.html" -->
+<!--#include file="header/_header.html" -->
+
+<main class="main single" id="main">
+	<section class="banner single-banner" style="background-image:url(images/about.jpg);">
+		<div class="wrap container-fluid">
+			<div class="row">
+				<div class="col-xs-12">
+					<h2 class="banner-title single-title">How to Speed Up WordPress Without a Plugin</h2>
+				</div>
+			</div>
+		</div>
+	</section>
+	<div class="wrap container-fluid">
+		<div class="row single-row">
+			<div class="col-xs-12">
+				<article class="article single-article">
+					<div class="row">
+						<div class="col-xs-8 container-center">
+							<p class="article-lead">Page load time should always be one of the primary focuses of any member of a team or company building an online project.</p>
+							<p>The evidence showing [how page load time affects sales] and traffic is insurmountable, and its side effects (including the [impact on SEO] and ability to include more [bleeding-edge front-end technology]) should never be overlooked. Despite the wide availability of caching plugins, modules, and other scripts that can be included while a building a client’s site, the employ of the native [WP_Cache class]among plugin and theme developers seems greatly overlooked.</p>
+							<figure class="blog-figure">
+								<img src="images/blog-sample.jpg" alt="How to Speed Up WordPress Without a Plugin">
+								<figcaption>How to Speed Up WordPress Without a Plugin</figcaption>
+							</figure>
+							<p>When learning how to increase the speed of your WordPress theme or plugin, using the WP_Cache class can give you a quick and easy solution with measurable results, while still maintaining the malleability of your custom queries. Of course, however, we’ll want to understand the how and why we should be using WP_Cache in our themes and plugins at all, which is far simpler than you might assume. Each database query takes time to execute, and over the course of a page loading several dozen (if not hundred) queries to your database could be firing off all at once. This puts weight on the servers response to your user, who you want to show your content and media to as quickly as possible. Now, lets compound these executions per user, and if you check your site’s analytics often enough, you’ll understand why this is important. Assuming you receive moderate to heavy site traffic, during peak usage time you could be executing hundreds of a thoughts of queries per minute, which, if you aren’t using a decent caching mechanism, can leave a lot of your users with a poor experience.</p>
+							<blockquote>
+								<p>...instead of your site executing a new database query each time the page is loaded, it will only be executed once and the return data will be retained and distributed for all page requests until the expiration time is met.</p>
+							</blockquote>
+							<p>So how does caching work? Caching retains the data that you are serving up to your users for a specified amount of time (meaning that it’s non-persistent), and won’t be refreshed again until it expires. This means that instead of your site executing a new database query each time the page is loaded, it will only be executed once and the return data will be retained and distributed for all page requests until the expiration time is met. Essentially, it runs one call or however long you want it to, thus preventing your site from executing taxing database queries.</p>
+							<p>In this example, we’re going to be looking at the problem of a slow-loading WordPress site from that of a theme developer – meaning someone who creates an original theme. In order to fully understand what is going on behind our code, it’s best to have a previous knowledge of [actions], [filters], and [hooks], and hopefully you’ve created a custom post-type or two before reading this. It’s also good to have a general knowledge of server-side cache in PHP, and the different types, and how to find out which kinda is present on your server (but not absolutely necessary).</p>
+							<p>The `WP_Cache` class uses four primary methods to create, set, retrieve, and delete. These include (with variables listed):</p>
+							<pre><code class="language-php">wp_cache_add($key, $data, $group, $expire); /* Create a new caching object if one does not exist for the given key */
+wp_cache_set($key, $data, $group, $expire); /* Sets and/or overwrites the data of the object for the given key */
+wp_cache_get($key, $group); /* Retrieves and returns the data for the given key */
+wp_cache_delete($key, $group); /* Deletes the data for the given key */</code></pre>
+							<p>The $group and $expire variables are optional, with $group defaulting to an empty string and $expire defaulting to 0, which is as long as possible.</p>
+							<p>Let’s say that you have a custom query for a widget that you’re creating for your theme, and that this widget queries a list of the five latest posts for a custom post type called “portfolio.” Normally this can be written as simply as:</p>
+							<pre><code class="language-php">&lt;?php
+$args = array(
+	'post_type' => 'portfolio',
+	'posts_per_page' => 5
+);
+$portfolio_objects = get_posts($args);
+foreach($portfolio_objects as $portfolio_object) {
+	/*
+	 * Do something with our post object
+	 */
+}
+?&gt;</code></pre>
+							<p>This will begin our initial loop over the arguments that we pass through the query function `get_posts`. It’s this `get_posts` function which uses the `WP_Query` class, thus making a request to the database for new information. Here’s how we would create a new cache object in this instance:</p>
+							<pre><code class="language-php">&lt;?php
+$args = array(
+	'post_type'      => 'portfolio',
+	'posts_per_page' => 5
+);
+$portfolio_objects = get_posts($args);
+foreach($portfolio_objects as $portfolio_object) {
+	/*
+	 * Do something with our post object
+	 */
+}
+?&gt;</code></pre>
+							<p>This of course will set our cache object which we can then later retrieve for a period of one day (24 hours x 60 minutes x 60 seconds). However this is still making a database request, as we aren’t checking if our cache object exists. To do so, we would write our query as such:</p>
+							<pre><code class="language-php">&lt;?php
+$args = array(
+	'post_type'      => 'portfolio',
+	'posts_per_page' => 5
+);
+$portfolio_object = wp_cache_get('my_cache_object');
+if($portfolio_object === false) {
+	$portfolio_objects = get_posts($args);
+	wp_cache_set('my_cache_object', $portfolio_objects, '', (3600 * 24));
+}
+foreach($portfolio_objects as $portfolio_object) {
+	/*
+	 * Do something with our post object
+	 */
+}
+?&gt;</code></pre>
+							<p>Using this conditional method would cause the script to check for a cache object with our given key of “my_cache_object”, and if it exists then will skip over the database query. If, however, the object doesn’t exist for the key, it will then add the key and save the data (note that, in my opinion, this is a more efficient way of handling an empty object over registering a new key with `wp_cache_add` and then settings the data with `wp_cache_set`). This sort of function can save your page from making unnecessary database requests and thus reduce the amount of time it takes to load a WordPress site.</p>
+							<p>Now that we know how to check for and retrieve cached data, when would it be appropriate to employ `wp_cache_delete`? One of the largest drawbacks of using a cache-based method of displaying data is that, even if you post a new portfolio piece immediately, it won’t be served up to your users until the cache object is set to expire – in this case, that won’t be until tomorrow. For sites that publish frequently, this can become a huge issue.</p>
+							<p>Because we want to display the most recent posts to our visitors, we would want to delete our cache whenever a new post is saved by adding a `wp_cache_delete` method into the [`save_post` action] and then resetting it once it’s been cleared like such:</p>
+							<pre><code class="language-php">&lt;?php
+add_action('save_post', 'update_our_cache', 10, 1);
+function update_our_cache($post_id, $post = '') {
+	wp_delete_cache('my_cache_object');
+		$args = array(
+		'post_type' => 'portfolio',
+		'posts_per_page' => 5
+	);
+	$portfolio_object = wp_cache_get('my_cache_object');
+	if($portfolio_object === false) {
+		$portfolio_objects = get_posts($args);
+		wp_cache_set('my_cache_object', $portfolio_objects, '', (3600 * 24));
+	}
+}</code></pre>
+							<p>Using this method, we are then able to, whenever a post is saved, clear our cache object and reset it, given each user the best experience with the fastest possible load time.</p>
+							<p>Below are some example function which you can include in your theme or plugin, and if you come up with anything you’d like to share, post it in the comments.</p>
+							<pre><code class="language-php">&lt;?php
+
+if(!function_exists('_get_cached_query')) {
+	function _get_cached_query($key = null, $group = '', $query = array(), $expiry = 3600) {
+		/**
+		*
+		* @param string $key Sets the key for the cache object being returned; if null will return false
+		* @param string $group Sets the group accessibility for the cache object; defaults to ''
+		* @param array $query The query arguments being set
+		* @param int $expiry The amount of time (in seconds) until the cache object expires; defaults to 3600 (one hour)
+		*
+		* @return array Returns and array of post objects
+		*
+		* */
+
+		if(is_null($key)) {
+			return false;
+		}
+		if(empty($query)) {
+			$query = new WP_Query();
+		}
+		$posts_array = wp_cache_get($key);
+		if($posts_array === false) {
+			$posts_array = get_posts($query);
+			wp_cache_set($key, $posts_array, $group, $time);
+		}
+		return $posts_array;
+	}
+}
+
+if(!function_exists('_delete_cache_object')) {
+	function _delete_cache_on_save($key, $group, $query, $expiry) {
+		/**
+		*
+		* @param string $key Sets the key for the cache object being returned; if null will return false
+		* @param string $group Sets the group accessibility for the cache object; defaults to ''
+		* @param array $query The query arguments being set
+		* @param int $expiry The amount of time (in seconds) until the cache object expires; defaults to 3600 (one hour)
+		*
+		* @return array Returns and array of post objects
+		*
+		* */
+
+		if(is_null($key)) {
+			return false;
+		}
+		if(empty($query)) {
+			$query = new WP_Query();
+		}
+		wp_cache_delete($key, $group);
+		$posts_array = get_posts($query);
+		wp_cache_set($key, $posts_array, $group, $time);
+		return $posts_array;
+	}
+}
+
+?&gt;</code></pre>
+						</div>
+					</div>
+				</article>
+				<footer class="single-footer">
+					<div class="single-footer-section">
+						<p class="single-footer-lead">Share:</p>
+						<ul class="list list-inline flex-center single-buttons">
+							<li><a href="#" class="button button-facebook"><i class="fa fa-facebook"></i> Facebook</a></li>
+							<li><a href="#" class="button button-twitter"><i class="fa fa-twitter"></i> Twitter</a></li>
+							<li><a href="#" class="button button-linkedin"><i class="fa fa-linkedin"></i> LinkedIn</a></li>
+							<li><a href="#" class="button button-email"><i class="fa fa-envelope-o"></i> Email</a></li>
+						</ul>
+					</div>
+					<div class="single-footer-section">
+						<p class="single-footer-lead">Similar Articles:</p>
+						<div class="work-section">
+							<ul class="work-grid">
+								<li class="work-block work-block-large">
+									<a href="/single-blog.html">
+										<figure class="work-block-figure" style="background-image:url(images/photo1.jpg);"></figure>
+										<div class="work-block-content">
+											<header class="work-block-header">
+												<p class="tag">Article</p>
+												<h3>How to speed up WordPress</h3>
+											</header>
+											<p class="preview">Page load time should always be one of the primary focuses of any member of a team or company building…</p>
+										</div>
+									</a>
+								</li>
+							</ul>
+							<ul class="work-grid">
+								<li class="work-block work-block-small">
+									<a href="/single.html">
+										<figure class="work-block-figure" style="background-image:url(images/photo3.jpg);"></figure>
+										<div class="work-block-content">
+											<header class="work-block-header">
+												<p class="tag">JavaScript</p>
+												<h3>jquery.resizeend</h3>
+											</header>
+											<p class="preview">A custom event that fires when a user stops resizing their browser.</p>
+										</div>
+									</a>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</footer>
+			</div>
+		</div>
+	</div>
+</main>
+
+<!--#include file="footer/_footer.html" -->
+<!--#include file="footer/_foot.html" -->

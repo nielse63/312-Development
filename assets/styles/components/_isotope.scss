@@ -1,0 +1,21 @@
+
+.grid-item {
+	width: 25%;
+	height: 250px;
+	background: $color-gray;
+	box-shadow: 0 0 0 5px fade-out($color-white, 0.5) inset;
+
+	// &:before {
+	// 	content: '';
+	// 	display: block;
+	// 	padding-top: 100%;
+	// }
+
+	&-wide {
+		width: 50%;
+	}
+
+	// &-tall {
+	// 	height: 500px;
+	// }
+}

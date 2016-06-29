@@ -1,0 +1,16 @@
+{
+	"curly" : true,
+	"eqnull" : true,
+	"eqeqeq" : true,
+	"undef" : true,
+	"unused": true,
+	"maxdepth": 2,
+	"shadow": "outer",
+	"singleGroups": true,
+	"browser": true,
+	"devel": true,
+	"jquery": true,
+	"globals": {
+		"define": true
+	}
+}
