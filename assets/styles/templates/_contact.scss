@@ -12,17 +12,47 @@
 
 	&-title {
 		text-align: center;
-		font-size: 100px;
+		font-size: 60px;
 		font-family: $serif-font-family;
+
+		@media (min-width: $breakpoint-small) {
+			font-size: 100px;
+		}
 	}
 
 	&-article {
-		padding: 100px 0 0;
+		padding: 50px 0 0;
+
+		@media (min-width: $breakpoint-small) {
+			padding: 100px 0 0;
+		}
 	}
 
 	&-row {
 		& + & {
-			margin-top: 150px;
+			margin-top: 50px;
+
+			@media (min-width: $breakpoint-small) {
+				margin-top: 75px;
+			}
+
+			@media (min-width: $breakpoint-medium) {
+				margin-top: 150px;
+			}
+		}
+
+		&:nth-child(even) {
+			@media (max-width: $breakpoint-small-max) {
+				flex-direction: column-reverse;
+
+				> * {
+					margin: 0;
+
+					+ * {
+						margin: 0 0 20px;
+					}
+				}
+			}
 		}
 	}
 }

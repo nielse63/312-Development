@@ -1,10 +1,9 @@
 
-
 (function(_c) {
+	'use strict';
 
-
-	var trigger  = $('#hamburger'),
-		isClosed = true;
+	var trigger  = $('.js-hamburger'),
+		isClosed = !! _c.$html.hasClass('menu-open');
 
 	function burgerTime() {
 		if( isClosed === true ) {
@@ -20,8 +19,9 @@
 		}
 	}
 
-	_c.$html.on('click', '#hamburger', function () {
-		burgerTime();
-	});
+	// _c.$html.on('click', '.js-hamburger', function() {
+	// 	console.log('howdy');
+	// 	burgerTime();
+	// });
 
 })(window.Clique);

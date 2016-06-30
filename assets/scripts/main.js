@@ -269,36 +269,31 @@
 		.addTo(Sage.controller);
 	}
 
-	function setTweetStyle() {
-		var diff = 15;
-		$('.tweet').each(function() {
-			var x = Math.floor(Math.random() * ((diff * 2) + 1)) - diff;
-			var y = Math.floor(Math.random() * ((diff * 2) + 1)) - diff;
-			$(this).css({
-				transform : 'rotateX(' + x + 'deg) rotateY(' + y + 'deg)'
-			});
-		});
-	}
+	// function setTweetStyle() {
+	// 	var diff = 15;
+	// 	$('.tweet').each(function() {
+	// 		var x = Math.floor(Math.random() * ((diff * 2) + 1)) - diff;
+	// 		var y = Math.floor(Math.random() * ((diff * 2) + 1)) - diff;
+	// 		$(this).css({
+	// 			transform : 'rotateX(' + x + 'deg) rotateY(' + y + 'deg)'
+	// 		});
+	// 	});
+	// }
 
-	function bindTweetScroll() {
-		$('.tweet').each(function() {
-			var target = this;
+	// function bindTweetScroll() {
+	// 	$('.tweet').each(function() {
+	// 		var target = this;
 
-			new ScrollMagic.Scene({
-				triggerElement : target,
-			})
-			.on('enter', function() {
-				_c.$(target).removeAttr('style');
-				this.remove();
-			})
-			.addTo(Sage.controller);
-		});
-	}
-
-	function setMobileHeader() {
-		var $header = $('.header');
-		$('.mobile-nav').after($header);
-	}
+	// 		new ScrollMagic.Scene({
+	// 			triggerElement : target,
+	// 		})
+	// 		.on('enter', function() {
+	// 			_c.$(target).removeAttr('style');
+	// 			this.remove();
+	// 		})
+	// 		.addTo(Sage.controller);
+	// 	});
+	// }
 
 	// Use this variable to set up the common and page specific functions. If you
 	// rename this variable, you will also need to rename the namespace below.
@@ -318,14 +313,21 @@
 		// All pages
 		'common': {
 			init: function() {
+
+				if( ! _c.support.transition || ! _c.support.transition.end ) {
+					_c.showLoading = false;
+				}
+
 				if( Sage.supportsTouch ) {
 					_c.$html.addClass('touch');
-					setMobileHeader();
 				} else {
 					_c.$html.addClass('no-touch');
 				}
 
 				// create scroll controller
+				if( Sage.controller ) {
+					Sage.controller.destroy(true);
+				}
 				Sage.controller = new ScrollMagic.Controller();
 
 				// set work block transition delay
@@ -349,10 +351,10 @@
 				// JavaScript to be fired on all pages, after page specific JS is fired
 
 				// setup tweet styles
-				if( ! Sage.supportsTouch ) {
-					setTweetStyle();
-					bindTweetScroll();
-				}
+				// if( ! Sage.supportsTouch ) {
+				// 	setTweetStyle();
+				// 	bindTweetScroll();
+				// }
 			}
 		},
 
@@ -477,15 +479,6 @@
 					elements.css({
 						'transition-delay' : delay + 's'
 					});
-
-					var scroll = new ScrollMagic.Scene({
-						triggerElement : trigger
-					})
-					.setClassToggle(trigger, 'active')
-					.on('start', function() {
-						this.remove();
-					})
-					.addTo(Sage.controller);
 				});
 
 				// 'where i work' transition delay
@@ -496,9 +489,20 @@
 					});
 				});
 
-				// where i work scroll listener
-				var container = document.querySelector('.where-i-work');
+				// services scroll listener
+				var container = document.querySelector('.services');
 				var scroll = new ScrollMagic.Scene({
+					triggerElement : container
+				})
+				.setClassToggle(container, 'active')
+				.on('start', function() {
+					this.remove();
+				})
+				.addTo(Sage.controller);
+
+				// where i work scroll listener
+				container = document.querySelector('.where-i-work');
+				scroll = new ScrollMagic.Scene({
 					triggerElement : container,
 				})
 				.setClassToggle(container, 'active')
@@ -508,7 +512,6 @@
 				.addTo(Sage.controller);
 			},
 			finalize: function() {
-
 				// ...
 			}
 		},

@@ -14,7 +14,11 @@
 		padding: 50px 0 0;
 
 		@media (min-width: $breakpoint-small) {
-			padding: 100px 0 0;
+			padding-top: 75px;
+		}
+
+		@media (min-width: $breakpoint-medium) {
+			padding-top: 100px;
 		}
 	}
 
@@ -58,13 +62,6 @@
 			max-height: 100%;
 		}
 	}
-
-	// &:nth-child(1),
-	// &:nth-child(2) {
-	// 	@media (max-width: $breakpoint-small-max) {
-	// 		display: none;
-	// 	}
-	// }
 
 	.active & {
 		opacity: 1;
@@ -118,11 +115,11 @@
 	border-radius: 3px;
 	background-clip: border-box;
 	overflow: hidden;
-	margin-bottom: 20px;
-	backface-visibility: hidden;
-	transform-style: preserve-3d;
-	transition: 0.5s transform;
-	will-change: transform;
+	margin-bottom: 10px;
+	// backface-visibility: hidden;
+	// transform-style: preserve-3d;
+	// transition: 0.5s transform;
+	// will-change: transform;
 
 	p {
 		> a {

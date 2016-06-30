@@ -2,31 +2,61 @@
 .single {
 	padding-top: 0;
 
-	.banner {
-		padding-top: 150px;
-		padding-bottom: 150px;
-	}
+	// .banner {
+
+	// 	@media (min-width: $breakpoint-small) {
+	// 		padding-top: 75px;
+	// 		padding-bottom: 75px;
+	// 	}
+
+	// 	@media (min-width: $breakpoint-medium) {
+	// 		padding-top: 150px;
+	// 		padding-bottom: 150px;
+	// 	}
+	// }
 
 	&-title {
 		text-align: center;
-		font-size: 100px;
+		font-size: 40px;
 		font-family: $serif-font-family;
+
+		@media (min-width: $breakpoint-small) {
+			font-size: 64px;
+		}
+
+		@media (min-width: $breakpoint-medium) {
+			font-size: 100px;
+		}
 	}
 
 	&-article {
-		padding: 50px 0;
+		padding: 25px 0;
 		font-size: 18px;
 		font-weight: 200;
 
+		@media (min-width: $breakpoint-small) {
+			padding: 50px 0;
+		}
+
 		blockquote {
 			display: block;
-			float: left;
-			width: 50%;
-			margin: 0 50px 25px -50px;
-			font-size: 26px;
+			margin: 0 0 15px;
 			font-weight: 200;
-			padding: 5px 25px;
+			padding: 5px 15px;
+			font-size: 22px;
 			border-left-color: $color-orange;
+
+			@media (min-width: $breakpoint-small) {
+				float: left;
+				width: 50%;
+				margin: 0 25px 15px -25px;
+			}
+
+			@media (min-width: $breakpoint-medium) {
+				// float: left;
+				// width: 50%;
+				margin: 0 50px 25px -50px;
+			}
 		}
 
 		pre {
@@ -40,9 +70,14 @@
 	}
 
 	&-buttons {
+		flex-wrap: wrap;
 
 		.button {
-			width: 205px;
+			width: 100%;
+
+			@media (min-width: $breakpoint-small) {
+				width: 205px;
+			}
 		}
 	}
 
@@ -76,21 +111,30 @@
 
 .chart {
 	&-buttons {
+		margin-bottom: 40px;
+
 		.button {
-			width: 250px;
+			width: 100%;
 			background-color: transparent;
 			border-color: $color-orange;
 			color: $color-orange;
+
+			@media (min-width: $breakpoint-small) {
+				width: 250px;
+			}
 		}
 	}
 }
 
 .blog-figure {
-	float: right;
-	margin: 0 -50px 25px 50px;
-	width: 50%;
 	border: 1px solid fade-out($global-font-color, 0.75);
 	padding: 5px;
+
+	@media (min-width: $breakpoint-small) {
+		float: right;
+		margin: 0 -50px 25px 50px;
+		width: 50%;
+	}
 
 	figcaption {
 		font-size: 14px;

@@ -32,15 +32,15 @@ $menu-item-color: $global-font-color;
 	position: fixed;
 	top: 0;
 	right: 0;
-	width: 70vw;
+	width: 75vw;
 	height: 100vh;
-	transform: translate(70vw, 0);
+	transform: translate(75vw, 0);
 	display: flex;
 	align-items: center;
 	opacity: 0;
 	transition: $global-menu-transition-duration transform,
 				$global-menu-transition-duration opacity;
-	text-align: center;
+	text-align: right;
 
 	.menu-open & {
 		transform: translate(0, 0);
@@ -49,15 +49,37 @@ $menu-item-color: $global-font-color;
 
 	.nav-menu {
 		width: 100%;
+		padding-right: 20px;
 
 		> li {
 			+ li {
 				border: 0;
 			}
+
+			a {
+				color: $color-white;
+				display: inline-block;
+				padding: 20px 0 5px;
+			}
 		}
 	}
 
-	@media (min-width: $breakpoint-small) {
+	.active {
+		a {
+			box-shadow: 0 -3px 0 0 $color-orange inset;
+		}
+	}
+
+	a {
+		font-size: 36px;
+		font-family: $global-font-family;
+		text-transform: uppercase;
+		font-weight: 200;
+		letter-spacing: 10px;
+		line-height: (42 / 36);
+	}
+
+	@media (min-width: $breakpoint-medium) {
 		display: none;
 	}
 }

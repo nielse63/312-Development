@@ -27,6 +27,10 @@ $link-color: $color-white;
 	contain: paint;
 
 	@media (min-width: $breakpoint-small) {
+		padding: 75px 0;
+	}
+
+	@media (min-width: $breakpoint-medium) {
 		padding: 100px 0;
 	}
 
@@ -52,10 +56,14 @@ $link-color: $color-white;
 		will-change: opacity, transform;
 
 		@media (min-width: $breakpoint-small) {
+			font-size: 36px;
+		}
+
+		@media (min-width: $breakpoint-medium) {
 			font-size: $title-font-size;
 		}
 
-		html.loaded & {
+		.loaded & {
 			transition: 1s transform 0.5s,
 						1s opacity 0.5s;
 			opacity: 1;
