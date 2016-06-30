@@ -24,7 +24,6 @@
 		"scripts/lib/vendor/_hamburger.js",
 		"scripts/lib/vendor/animation.gsap.js",
 
-        "scripts/lib/components/_mobile-button.js",
         "scripts/lib/components/_footer.js",
 
         "scripts/main.js",
