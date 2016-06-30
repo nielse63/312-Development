@@ -106,7 +106,7 @@ $hamburger-types: (
 	margin: 0;
 	overflow: visible;
 
-	@media (min-width: $breakpoint-small) {
+	@media (min-width: $breakpoint-medium) {
 		display: none;
 	}
 

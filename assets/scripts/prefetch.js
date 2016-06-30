@@ -43,10 +43,12 @@
 		if( ! html ) {
 			throw new Error('No HTML passed to function');
 		}
+		var $bodyWrap = _c.$('.body-wrap');
+		$bodyWrap.addClass('loaded');
 		_c.$('html').removeClass('loaded');
 
 		// cache existing dom objects
-		_c.$('.body-wrap').addClass('transition-out-wrapper');
+		$bodyWrap.addClass('transition-out-wrapper');
 		var $curMain = _c.$('.transition-out-wrapper');
 
 		var _doc = document.implementation.createHTMLDocument('');
@@ -106,12 +108,44 @@
 		}, 100);
 	}
 
+	var timestamp;
+	function mobileTransitionEndHandler(e) {
+		timestamp = _c.utils.now();
+	}
+
 	if( ! _c.support.touch ) {
 
 		_c.$html.on('click', 'a', function(e) {
 			if( shouldFetchPage( this ) ) {
 				e.preventDefault();
-				loadURL(this.href);
+				var url = this.href;
+				if( _c.$html.hasClass('menu-open') ) {
+					var interval = setInterval(function() {
+						if( ! timestamp ) {
+							return;
+						}
+						var diff = _c.utils.now() - timestamp;
+						if( diff < 175 ) {
+							return;
+						}
+
+						// reset counter;
+						clearInterval(interval);
+						interval = null;
+
+						// unbind listener
+						_c.$('.body-wrap').off(_c.support.transition.end, mobileTransitionEndHandler);
+
+						// reset timestamp var
+						timestamp = undefined;
+
+						// exec function
+						loadURL(url);
+					}, 150);
+					_c.$('.body-wrap').on(_c.support.transition.end, mobileTransitionEndHandler);
+				} else {
+					loadURL(url);
+				}
 			}
 		});
 

@@ -16,34 +16,19 @@ $link-color-hover: darken($link-color, 7%);
 // Component
 // ========================================================================
 
-html {
-	&.menu-open {
-		overflow: hidden;
-	}
-}
-
 body {
 	overflow-x: hidden;
-	// background-color: #484747;
 
 	@media (max-width: $breakpoint-small-max) {
 		perspective: 100vh;
 		perspective-origin: 50vw 50vh;
+		transition: 0.5s background-color;
+		will-change: background-color;
+
+		.menu-open & {
+			background-color: fade-out($global-font-color, 0.5);
+		}
 	}
-
-	// .body-wrap {
-	// 	@media (max-width: $breakpoint-small-max) {
-	// 		transition: transform $global-menu-transition-duration;
-	// 		position: relative;
-	// 		z-index: 1;
-	// 		transform-style: preserve-3d;
-
-	// 		.menu-open & {
-	// 			transform: translate(-70vw, 0);
-	// 		}
-
-	// 	}
-	// }
 }
 
 a {
@@ -80,8 +65,11 @@ main {
 		transform-style: preserve-3d;
 
 		.menu-open & {
-			transform: translate(-50vw) rotateY(35deg) translateZ(-100px);
+			transform: translate(-50vw) rotateY(35deg) translateZ(-175px);
 			opacity: 0.5;
+			overflow: hidden;
+			height: 100vh;
+			pointer-events: none;
 		}
 
 		&:after {

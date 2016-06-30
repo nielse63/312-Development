@@ -23,6 +23,13 @@ $main-background-color: $global-background-color;
 		padding: 50px 0;
 	}
 
+	&.work,
+	&.single {
+		@media (max-width: $breakpoint-small-max) {
+			padding-bottom: 0;
+		}
+	}
+
 	&-no-padding-top {
 		padding-top: 0;
 	}

@@ -10,6 +10,10 @@
 		position: relative;
 
 		@media (min-width: $breakpoint-small) {
+			font-size: 64px;
+		}
+
+		@media (min-width: $breakpoint-medium) {
 			white-space: nowrap;
 			font-size: 70px;
 		}
@@ -33,15 +37,6 @@
 		~ p {
 			font-size: 20px;
 
-			// em {
-			// 	white-space: nowrap;
-			// 	color: $color-white;
-			// 	background-color: $link-background-color;
-			// 	display: inline-block;
-			// 	padding-right: 0.3em;
-			// 	padding-left: 0.3em;
-			// }
-
 			a {
 				box-shadow: 0 -3px 0 0 $link-background-color inset;
 				color: transparent;
@@ -51,9 +46,6 @@
 				position: relative;
 				perspective: 1000px;
 				perspective-origin: bottom center;
-				// transition: 0.35s background-color,
-				// 			0.35s color;
-				// will-change: background-color, color;
 				contain: paint;
 				backface-visibility: hidden;
 

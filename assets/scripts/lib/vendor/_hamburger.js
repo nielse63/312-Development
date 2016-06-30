@@ -169,7 +169,8 @@
 
 			if(hamburgers.length) {
 				forEach(hamburgers, function(hamburger) {
-					hamburger.addEventListener("click", Hamburgers.clickHandle, false);
+					_c.$html.on('click', '.js-hamburger', Hamburgers.clickHandle);
+					// hamburger.addEventListener("click", Hamburgers.clickHandle, false);
 				});
 			}
 
@@ -179,7 +180,7 @@
 		clickHandle: function(e) {
 			e.preventDefault();
 
-			var target = _c.$('body > *:not(.topnav):not(.loader)');
+			var target = _c.$(':not(.mobile-nav a)');
 
 			target.off('.clique.hamburger');
 			this.classList.toggle("is-active");
@@ -187,12 +188,17 @@
 
 			var ele = _c.$(this);
 
+			function cb(_e) {
+				// if( ! _c.$(_e.target).is('.mobile-nav a') ) {
+					_c.$html.off('click.clique.hamburger', cb);
+					ele.removeClass("is-active");
+					document.documentElement.classList.toggle('menu-open');
+				// }
+			}
+
 			if( ele.hasClass('is-active') ) {
 				target.first().one(_c.support.transition.end, function(e) {
-					target.one('click.clique.hamburger', function(_e) {
-						ele.removeClass("is-active");
-						document.documentElement.classList.toggle('menu-open');
-					});
+					_c.$html.one('click.clique.hamburger', cb);
 				});
 			}
 		},

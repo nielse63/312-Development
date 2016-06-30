@@ -24,11 +24,11 @@
 		"scripts/lib/vendor/_hamburger.js",
 		"scripts/lib/vendor/animation.gsap.js",
 
-        "scripts/mobile-button.js",
-        "scripts/main.js",
-        "scripts/prefetch.js",
+        "scripts/lib/components/_mobile-button.js",
+        "scripts/lib/components/_footer.js",
 
-        "scripts/lib/components/_footer.js"
+        "scripts/main.js",
+        "scripts/prefetch.js"
       ],
       "main": true
     },

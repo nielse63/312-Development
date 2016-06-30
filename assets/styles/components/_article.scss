@@ -24,7 +24,8 @@ $link-color: $color-white;
 	perspective: 100vw;
 	contain: style;
 
-	&-title {
+	&-title,
+	&-subtitle {
 		font-size: 26px;
 		line-height: (56 / 40);
 		transform-style: preserve-3d;
@@ -37,9 +38,9 @@ $link-color: $color-white;
 			font-size: 40px;
 		}
 
-		html.loaded & {
-			transition: 1s transform 1.25s,
-						1s opacity 1.25s;
+		.loaded & {
+			transition: 1s transform 1s,
+						1s opacity 1s;
 			opacity: 1;
 			transform: none;
 		}
@@ -102,14 +103,54 @@ $link-color: $color-white;
 		}
 	}
 
+	&-subtitle {
+		font-size: 26px;
+		transition-delay: 2s;
+	}
+
+	&-title {
+		+ .article-subtitle {
+			margin-top: 1em;
+			padding-top: 1em;
+			position: relative;
+
+			&:before {
+				content: '';
+				display: block;
+				position: absolute;
+				top: 0;
+				left: 50%;
+				height: 4px;
+				width: 0;
+				background-color: $title-color;
+				transform: translate(-50%, 0);
+				opacity: 0.5;
+				will-change: width;
+
+				.loaded & {
+					width: 175px;
+					transition: 1s width 1.5s;
+				}
+			}
+		}
+	}
+
 	&-lead {
-		font-size: 2em;
+		font-size: 1.25em;
 		text-align: center;
 		margin-top: 1em;
 		padding-top: 1em;
 		margin-bottom: 1em;
 		padding-bottom: 1em;
 		position: relative;
+
+		@media (min-width: $breakpoint-small) {
+			font-size: 1.75em;
+		}
+
+		@media (min-width: $breakpoint-medium) {
+			font-size: 2em;
+		}
 
 		&:before,
 		&:after {
