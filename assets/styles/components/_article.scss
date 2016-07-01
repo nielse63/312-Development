@@ -35,6 +35,10 @@ $link-color: $color-white;
 		will-change: opacity, transform;
 
 		@media (min-width: $breakpoint-small) {
+			font-size: 36px;
+		}
+
+		@media (min-width: $breakpoint-medium) {
 			font-size: 40px;
 		}
 
@@ -105,7 +109,10 @@ $link-color: $color-white;
 
 	&-subtitle {
 		font-size: 26px;
-		transition-delay: 2s;
+
+		.loaded & {
+			transition-delay: 1.2s;
+		}
 	}
 
 	&-title {

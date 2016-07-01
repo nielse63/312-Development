@@ -24,7 +24,6 @@
     "gsap": "^1.18.5",
     "highcharts": "^4.2.5",
     "jquery-validation": "^1.15.0",
-    "prism": "^1.5.1",
     "tinygradient": "^0.3.0"
   },
   "devDependencies": {}

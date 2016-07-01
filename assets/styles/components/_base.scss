@@ -56,20 +56,41 @@ main {
 	}
 }
 
+@keyframes hideBodyWrap {
+	to {
+		transform: translate(-50vw) rotateY(35deg) translateZ(-175px);
+		opacity: 0.5;
+	}
+}
+
+@keyframes showBodyWrap {
+	from {
+		transform: translate(-50vw) rotateY(35deg) translateZ(-175px);
+		opacity: 0.5;
+	}
+	to {
+		transform: none;
+		opacity: 1;
+	}
+}
+
 .body-wrap {
 	@media (max-width: $breakpoint-small-max) {
-		transition: transform $global-menu-transition-duration,
-					opacity $global-menu-transition-duration;
+		// transition: transform $global-menu-transition-duration,
+		// 			opacity $global-menu-transition-duration;
 		position: relative;
 		z-index: 1;
 		transform-style: preserve-3d;
 
 		.menu-open & {
-			transform: translate(-50vw) rotateY(35deg) translateZ(-175px);
-			opacity: 0.5;
+			animation: $global-menu-transition-duration hideBodyWrap both;
 			overflow: hidden;
 			height: 100vh;
 			pointer-events: none;
+		}
+
+		.menu-closed & {
+			animation: $global-menu-transition-duration showBodyWrap both;
 		}
 
 		&:after {

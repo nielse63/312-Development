@@ -17,17 +17,17 @@
 			padding-top: 75px;
 		}
 
-		@media (min-width: $breakpoint-medium) {
+		@media (min-width: $breakpoint-large) {
 			padding-top: 100px;
 		}
-	}
 
-	&-row {
-		& + & {
-			margin-top: 50px;
-
-			@media (min-width: $breakpoint-small) {
-				margin-top: 150px;
+		> .row {
+			> * {
+				+ * {
+					@media (max-width: $breakpoint-medium-max) {
+						margin-top: 20px;
+					}
+				}
 			}
 		}
 	}
@@ -111,15 +111,11 @@
 	$tweet-border: 1px solid fade-out($global-font-color, 0.75);
 
 	border: $tweet-border;
-	padding: 25px 15px 15px;
+	padding: 25px 15px 0;
 	border-radius: 3px;
 	background-clip: border-box;
 	overflow: hidden;
-	margin-bottom: 10px;
-	// backface-visibility: hidden;
-	// transform-style: preserve-3d;
-	// transition: 0.5s transform;
-	// will-change: transform;
+	margin-bottom: 30px;
 
 	p {
 		> a {
@@ -130,9 +126,7 @@
 	}
 
 	&-footer {
-		margin-bottom: -15px;
-		margin-left: -15px;
-		margin-right: -15px;
+		margin: 0 -15px;
 		padding: 15px;
 		border-top: $tweet-border;
 		background-color: #313541;

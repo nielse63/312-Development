@@ -170,7 +170,6 @@
 			if(hamburgers.length) {
 				forEach(hamburgers, function(hamburger) {
 					_c.$html.on('click', '.js-hamburger', Hamburgers.clickHandle);
-					// hamburger.addEventListener("click", Hamburgers.clickHandle, false);
 				});
 			}
 
@@ -184,16 +183,18 @@
 
 			target.off('.clique.hamburger');
 			this.classList.toggle("is-active");
-			document.documentElement.classList.toggle('menu-open');
+			_c.$html
+				.addClass('menu-open')
+				.removeClass('menu-closed');
 
 			var ele = _c.$(this);
 
 			function cb(_e) {
-				// if( ! _c.$(_e.target).is('.mobile-nav a') ) {
-					_c.$html.off('click.clique.hamburger', cb);
-					ele.removeClass("is-active");
-					document.documentElement.classList.toggle('menu-open');
-				// }
+				_c.$html.off('click.clique.hamburger', cb);
+				ele.removeClass('is-active');
+				_c.$html
+					.addClass('menu-closed')
+					.removeClass('menu-open');
 			}
 
 			if( ele.hasClass('is-active') ) {

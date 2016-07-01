@@ -8,6 +8,7 @@
 		"scripts/lib/utils/_events.js",
 		"scripts/lib/utils/_url.js",
 		"scripts/lib/utils/_browser.js",
+		"scripts/lib/utils/_colorbrew.js",
 
 		"scripts/lib/plugins/_scrollto.js",
 
@@ -22,8 +23,17 @@
 		"scripts/lib/modules/_deadlinks.js",
 
 		"scripts/lib/vendor/_hamburger.js",
+		"scripts/lib/vendor/prism.js",
 		"scripts/lib/vendor/animation.gsap.js",
 
+        "scripts/lib/components/_nav.js",
+        "scripts/lib/components/_banner.js",
+        "scripts/lib/components/_work-grid.js",
+        "scripts/lib/components/_contact.js",
+        "scripts/lib/components/_single.js",
+        "scripts/lib/components/_photos.js",
+        "scripts/lib/components/_services.js",
+        "scripts/lib/components/_charts.js",
         "scripts/lib/components/_footer.js",
 
         "scripts/main.js",

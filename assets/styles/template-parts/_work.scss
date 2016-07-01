@@ -30,6 +30,10 @@ $transition-delay: 0.75s;
 			will-change: transform;
 		}
 
+		@media (min-width: $breakpoint-large) {
+			width: 50%;
+		}
+
 		.loaded & {
 			@media (min-width: $breakpoint-small) {
 				transition: 1s transform cubic-bezier(0.770, 0.000, 0.175, 1.000) $transition-delay;
@@ -50,46 +54,25 @@ $transition-delay: 0.75s;
 		position: relative;
 		display: block;
 		overflow: hidden;
-		contain: paint content size layout style;
+		contain: style;
 		transform: translate(0, 15px);
-		will-change: transform;
+		will-change: transform, opacity;
+		transition: 0.5s transform 1s,
+					0.5s opacity 1s;
 
-		&:before {
-			@media (min-width: $breakpoint-medium) {
-				content: '';
-				display: block;
-				will-change: background-color;
-				transition: 0.5s background-color;
-			}
-		}
-
-		&:not(.not-loaded) {
-			transform: translate(0, 0);
-			transition: 0.5s transform;
-
-			&:before {
-				background-color: transparent;
-			}
-
-			a {
-				opacity: 1;
-				transform: scale(1);
+		&.dark {
+			.work-block-content {
+				color: $global-font-color;
 			}
 		}
 
 		a {
 			display: block;
 			height: 100%;
-			width: 100%;
+			position: relative;
 			will-change: opacity, transform;
-			transition: 0.5s transform,
-						0.5s opacity;
-
-			@media (min-width: $breakpoint-medium) {
-				position: absolute;
-				top: 0;
-				left: 0;
-			}
+			transition: 0.5s opacity 1s,
+						0.5s transform 1s;
 
 			&:hover {
 				.work-block {
@@ -105,24 +88,6 @@ $transition-delay: 0.75s;
 			}
 		}
 
-		&-large {
-			&:before {
-				padding-top: 75%;
-			}
-		}
-
-		&-medium {
-			&:before {
-				padding-top: 65%;
-			}
-		}
-
-		&-small {
-			&:before {
-				padding-top: 55%;
-			}
-		}
-
 		&-content {
 			color: $color-white;
 			padding: 50px 25px;
@@ -131,11 +96,6 @@ $transition-delay: 0.75s;
 			justify-content: space-between;
 
 			@media (min-width: $breakpoint-medium) {
-				position: absolute;
-				top: 0;
-				left: 0;
-				height: 100%;
-				width: 100%;
 				padding: 50px;
 			}
 
@@ -157,9 +117,10 @@ $transition-delay: 0.75s;
 				transition: 0.5s transform,
 							0.5s opacity;
 				will-change: opacity, transform;
+				transform: translate(-15px, 0);
+				// display: none;
 
-				@media (max-width: $breakpoint-small-max) {
-					transform: translate(-15px, 0);
+				html.touch & {
 					display: none;
 				}
 			}
@@ -180,21 +141,42 @@ $transition-delay: 0.75s;
 			-webkit-filter: sepia(80%);
 			filter: sepia(80%);
 			margin: 0;
-			will-change: opacity, transform;
+			will-change: opacity;
 			transition: 0.35s opacity;
 		}
 	}
 }
 
+.related-work {
+	&-section {
+		@media (min-width: $breakpoint-medium) {
+			margin: 0;
+		}
+	}
+
+	&-grid {
+		padding: 0;
+		margin: 0;
+		list-style: none;
+
+		@media (min-width: $breakpoint-medium) {
+			display: flex;
+		}
+
+		> li {
+			@media (min-width: $breakpoint-medium) {
+				width: 50%;
+			}
+		}
+	}
+
+	&-block {
+		transform: none;
+	}
+}
+
 .not-loaded {
-	transform: translate(0, 25px);
-
-	&:before {
-		background-color: $color-white;
-	}
-
-	a {
-		opacity: 0;
-		transform: scale(0.9);
-	}
+	display: none;
+	opacity: 0;
+	transform: translate(0, -100%);
 }

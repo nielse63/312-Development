@@ -7,4 +7,18 @@
 		padding-top: 50px;
 		// border-top: 1px solid fade-out($color-black, 0.9);
 	}
+
+	&-row {
+		& + & {
+			margin-top: 50px;
+
+			@media (min-width: $breakpoint-small) {
+				margin-top: 75px;
+			}
+
+			@media (min-width: $breakpoint-large) {
+				margin-top: 150px;
+			}
+		}
+	}
 }
