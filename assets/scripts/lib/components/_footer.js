@@ -3,24 +3,39 @@
 	'use strict';
 
 	function setupFooter() {
-		var $paths = $('.footer path');
+
+		var $footer = $('.footer');
+		var offsetTop = $footer.offset().top;
+		var offsetBottom = offsetTop + $footer.outerHeight();
+
+		var $paths = $footer.find('path');
 		var controller = new ScrollMagic.Controller();
 		$paths.each(function() {
 			var $path  = $(this);
+
+			// see if we even need to set object
+			var rects  = $path[0].getBoundingClientRect();
+			var top    = $path.offset().top;
+			var bottom = top + rects.height;
+
+			if( bottom < offsetTop || top > offsetBottom ) {
+				return;
+			}
+
 			var length = this.getTotalLength();
 			$path.css({
 				'stroke-dasharray'  : length,
 				'stroke-dashoffset' : length,
-			}).data('length', length);
+			});
 		});
 
 		var footer = document.querySelector('.footer');
 		var _scroll = new ScrollMagic.Scene({
-			triggerElement : footer,
+			triggerElement : $footer[0],
 			triggerHook    : 'onEnter',
-			offset         : footer.clientHeight / 2,
+			offset         : $footer[0].clientHeight / 2,
 		})
-		.setClassToggle(footer, 'inview')
+		.setClassToggle($footer[0], 'inview')
 		.addTo(controller);
 	}
 

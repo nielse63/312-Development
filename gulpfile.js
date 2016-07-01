@@ -21,6 +21,10 @@ var sourcemaps   = require('gulp-sourcemaps');
 var uglify       = require('gulp-uglify');
 var includer     = require('gulp-html-ssi');
 var connect      = require('gulp-connect');
+var postcss      = require('gulp-postcss');
+var reporter     = require('postcss-reporter');
+var syntax_scss  = require('postcss-scss');
+var stylelint    = require('stylelint');
 
 // See https://github.com/austinpray/asset-builder
 var manifest = require('asset-builder')('./assets/manifest.json');
@@ -238,8 +242,9 @@ gulp.task('images', function() {
 // `gulp jshint` - Lints configuration JSON and project JS.
 gulp.task('jshint', function() {
 	return gulp.src([
-		'bower.json', 'gulpfile.js'
-	].concat(project.js))
+			'assets/scripts/**/*.js',
+			'!assets/scripts/lib/vendor/**/*.js',
+		])
 		.pipe(jshint())
 		.pipe(jshint.reporter('jshint-stylish'))
 		.pipe(gulpif(enabled.failJSHint, jshint.reporter('fail')));
@@ -312,6 +317,55 @@ gulp.task('wiredep', function() {
 			hasChanged: changed.compareSha1Digest
 		}))
 		.pipe(gulp.dest(path.source + 'styles'));
+});
+
+gulp.task("scss-lint", function() {
+
+	// Stylelint config rules
+	var stylelintConfig = {
+		"plugins": [
+			"stylelint-statement-max-nesting-depth"
+		],
+		"rules": {
+			"block-no-empty": true,
+			"color-no-invalid-hex": true,
+			"declaration-colon-space-after": "always",
+			"declaration-colon-space-before": "never",
+			"function-comma-space-after": "always",
+			"function-url-quotes": "always",
+			"media-feature-colon-space-after": "always",
+			"media-feature-colon-space-before": "never",
+			"media-feature-name-no-vendor-prefix": true,
+			"max-empty-lines": 5,
+			"number-leading-zero": "always",
+			"number-no-trailing-zeros": true,
+			"property-no-vendor-prefix": true,
+			// "rule-no-duplicate-properties": true,
+			// "declaration-block-no-single-line": true,
+			// "rule-trailing-semicolon": "always",
+			"selector-list-comma-space-before": "never",
+			"selector-list-comma-newline-after": "always",
+			"selector-no-id": true,
+			"string-quotes": "single",
+			"value-no-vendor-prefix": true,
+			"statement-max-nesting-depth": [4, {
+				countAtRules: false
+			}],
+		}
+	};
+
+	var processors = [
+		stylelint(stylelintConfig),
+		reporter({
+			clearMessages : true,
+			throwError    : false
+		})
+	];
+
+	return gulp.src('assets/styles/templates/**/*.scss')
+		.pipe(postcss(processors, {
+			syntax : syntax_scss
+		}));
 });
 
 // ### Gulp

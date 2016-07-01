@@ -43,6 +43,10 @@
 		if( ! html ) {
 			throw new Error('No HTML passed to function');
 		}
+		_c.$doc.trigger('loadstart');
+
+		_c.$html.removeClass('menu-open menu-closed');
+
 		var $bodyWrap = _c.$('.body-wrap');
 		$bodyWrap.addClass('loaded');
 		_c.$('html').removeClass('loaded');
@@ -63,24 +67,27 @@
 		_c.$body.removeAttr('class');
 		var slug = _c.utils.makeSlug(CACHE.currentURL);
 		_c.$body.addClass('page-' + (slug ? slug : 'home'));
-		window.Sage.UTIL.loadEvents();
+		_c.$doc.trigger('loadready');
+		// window.Sage.UTIL.loadEvents();
 
 		_c.$html.addClass('transitioning');
 
-		$curMain.one(_c.support.animation.end, function(e) {
+		$curMain.one(_c.support.animation.end, function() {
 			$(this).remove();
 		});
 
-		$main.one(_c.support.animation.end, function(e) {
-			_c.$html.removeClass('transitioning');
+		$main.one(_c.support.animation.end, function() {
+			_c.$html
+				.removeClass('transitioning')
+				.addClass('loaded');
+
+			_c.$('.body-wrap').attr('class', 'body-wrap');
 
 			// update history
 			window.history.pushState(null, title, CACHE.currentURL);
 
-			// re-add html class
+			// trigger event
 			setTimeout(function() {
-				_c.$html.addClass('loaded');
-				_c.$('.body-wrap').attr('class', 'body-wrap');
 				_c.$doc.trigger('loaded');
 			}, 0);
 		});
@@ -113,49 +120,24 @@
 		timestamp = _c.utils.now();
 	}
 
-	if( ! _c.support.touch ) {
-
-		_c.$html.on('click', 'a', function(e) {
-			if( shouldFetchPage( this ) ) {
-				e.preventDefault();
-				var url = this.href;
-				if( _c.$html.hasClass('menu-open') ) {
-					var interval = setInterval(function() {
-						if( ! timestamp ) {
-							return;
-						}
-						var diff = _c.utils.now() - timestamp;
-						if( diff < 175 ) {
-							return;
-						}
-
-						// reset counter;
-						clearInterval(interval);
-						interval = null;
-
-						// unbind listener
-						_c.$('.body-wrap').off(_c.support.transition.end, mobileTransitionEndHandler);
-
-						// reset timestamp var
-						timestamp = undefined;
-
-						// exec function
-						loadURL(url);
-					}, 150);
-					_c.$('.body-wrap').on(_c.support.transition.end, mobileTransitionEndHandler);
-				} else {
-					loadURL(url);
-				}
+	_c.$html.on('click', 'a', function(e) {
+		if( shouldFetchPage( this ) ) {
+			e.preventDefault();
+			var url = this.href;
+			if( _c.$html.hasClass('menu-open') ) {
+				_c.$('.body-wrap').one(_c.support.animation.end, loadURL.bind(null, url));
+			} else {
+				loadURL(url);
 			}
-		});
+		}
+	});
 
-		_c.$(window).one('load', function() {
-			CACHE[window.location.href] = _c.$html[0].outerHTML;
-		});
+	_c.$(window).one('load', function() {
+		CACHE[window.location.href] = _c.$html[0].outerHTML;
+	});
 
-		window.onpopstate = function(e) {
-			loadURL( document.location.href );
-		};
-	}
+	window.onpopstate = function(e) {
+		loadURL( document.location.href );
+	};
 
 })(window.Clique);

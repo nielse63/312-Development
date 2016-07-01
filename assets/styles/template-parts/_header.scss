@@ -39,10 +39,12 @@ $logo-color: $global-font-color;
 		transition: 0.25s color;
 
 		&:hover {
-			color: #f14d76;
+			html.no-touch & {
+				color: #f14d76;
 
-			span {
-				background-color: #f14d76;
+				span {
+					background-color: #f14d76;
+				}
 			}
 		}
 	}

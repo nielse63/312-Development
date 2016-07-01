@@ -1,9 +1,3 @@
-/* http://prismjs.com/download.html?themes=prism-okaidia&languages=markup+css+clike+javascript+php&plugins=line-highlight+line-numbers+show-language */
-/**
- * okaidia theme for JavaScript, CSS and HTML
- * Loosely based on Monokai textmate theme by http://www.monokai.nl/
- * @author ocodia
- */
 
 code[class*="language-"],
 pre[class*="language-"] {
@@ -17,18 +11,10 @@ pre[class*="language-"] {
 	word-break: normal;
 	word-wrap: normal;
 	line-height: 1.5;
-
-	-moz-tab-size: 4;
-	-o-tab-size: 4;
 	tab-size: 4;
-
-	-webkit-hyphens: none;
-	-moz-hyphens: none;
-	-ms-hyphens: none;
 	hyphens: none;
 }
 
-/* Code blocks */
 pre[class*="language-"] {
 	padding: 1em;
 	margin: .5em 0;
@@ -41,7 +27,6 @@ pre[class*="language-"] {
 	background: #272822;
 }
 
-/* Inline code */
 :not(pre) > code[class*="language-"] {
 	padding: .1em;
 	border-radius: .3em;
@@ -131,43 +116,37 @@ pre[data-line] {
 	left: 0;
 	right: 0;
 	padding: inherit 0;
-	margin-top: 1em; /* Same as .prism’s padding-top */
-
+	margin-top: 1em;
 	background: hsla(24, 20%, 50%,.08);
-	background: -moz-linear-gradient(to right, hsla(24, 20%, 50%,.1) 70%, hsla(24, 20%, 50%,0));
-	background: -webkit-linear-gradient(to right, hsla(24, 20%, 50%,.1) 70%, hsla(24, 20%, 50%,0));
-	background: -o-linear-gradient(to right, hsla(24, 20%, 50%,.1) 70%, hsla(24, 20%, 50%,0));
 	background: linear-gradient(to right, hsla(24, 20%, 50%,.1) 70%, hsla(24, 20%, 50%,0));
-
 	pointer-events: none;
-
 	line-height: inherit;
 	white-space: pre;
 }
 
-	.line-highlight:before,
-	.line-highlight[data-end]:after {
-		content: attr(data-start);
-		position: absolute;
-		top: .4em;
-		left: .6em;
-		min-width: 1em;
-		padding: 0 .5em;
-		background-color: hsla(24, 20%, 50%,.4);
-		color: hsl(24, 20%, 95%);
-		font: bold 65%/1.5 sans-serif;
-		text-align: center;
-		vertical-align: .3em;
-		border-radius: 999px;
-		text-shadow: none;
-		box-shadow: 0 1px white;
-	}
+.line-highlight:before,
+.line-highlight[data-end]:after {
+	content: attr(data-start);
+	position: absolute;
+	top: .4em;
+	left: .6em;
+	min-width: 1em;
+	padding: 0 .5em;
+	background-color: hsla(24, 20%, 50%,.4);
+	color: hsl(24, 20%, 95%);
+	font: bold 65%/1.5 sans-serif;
+	text-align: center;
+	vertical-align: .3em;
+	border-radius: 999px;
+	text-shadow: none;
+	box-shadow: 0 1px white;
+}
 
-	.line-highlight[data-end]:after {
-		content: attr(data-end);
-		top: auto;
-		bottom: .4em;
-	}
+.line-highlight[data-end]:after {
+	content: attr(data-end);
+	top: auto;
+	bottom: .4em;
+}
 
 pre.line-numbers {
 	position: relative;
@@ -185,30 +164,26 @@ pre.line-numbers > code {
 	top: 0;
 	font-size: 100%;
 	left: -3.8em;
-	width: 3em; /* works for line-numbers below 1000 lines */
+	width: 3em;
 	letter-spacing: -1px;
 	border-right: 1px solid #999;
-
-	-webkit-user-select: none;
-	-moz-user-select: none;
-	-ms-user-select: none;
 	user-select: none;
 
 }
 
-	.line-numbers-rows > span {
-		pointer-events: none;
-		display: block;
-		counter-increment: linenumber;
-	}
+.line-numbers-rows > span {
+	pointer-events: none;
+	display: block;
+	counter-increment: linenumber;
+}
 
-		.line-numbers-rows > span:before {
-			content: counter(linenumber);
-			color: #999;
-			display: block;
-			padding-right: 0.8em;
-			text-align: right;
-		}
+.line-numbers-rows > span:before {
+	content: counter(linenumber);
+	color: #999;
+	display: block;
+	padding-right: 0.8em;
+	text-align: right;
+}
 div.prism-show-language {
 	position: relative;
 }
@@ -229,13 +204,85 @@ div.prism-show-language > div.prism-show-language-label {
 	padding: 0 0.5em;
 	text-shadow: none;
 	z-index: 1;
-	-webkit-box-shadow: none;
-	-moz-box-shadow: none;
 	box-shadow: none;
-	-webkit-transform: none;
-	-moz-transform: none;
-	-ms-transform: none;
-	-o-transform: none;
 	transform: none;
 }
 
+
+
+// Font definition
+$code-font-size:    16px;
+
+// Monokai colors
+$monokay-background:#272822;
+$monokai-gray:      #75715E;
+$monokai-red:       #F92672;
+$monokai-green:     #A6E22E;
+$monokai-yellow:    #E6DB74;
+$monokai-blue:      #76d9e6;
+$monokai-white:     #F8F8F0;
+$monokai-violet:    #AE81FF;
+
+// prism variables
+$code-background:         $monokay-background;
+$code-color-comment:      $monokai-gray;
+$code-color-keyword:      $monokai-red;
+$code-color-keyword2:     $monokai-blue;
+$code-color-value:        $monokai-blue;
+$code-color-string:       $monokai-yellow;
+$code-color-name:         $monokai-yellow;
+$code-color-number:       $monokai-violet;
+$code-color-variable:     $monokai-white;
+$code-color-selector:     $monokai-green;
+$code-color-function:     $monokai-green;
+$code-color-class-ext:    $monokai-green;
+$code-color-const:        $monokai-violet;
+$code-color-docblock:     $monokai-red;
+$code-color-operator:     $monokai-red;
+$code-color-punctuation:  $monokai-white;
+$code-color-punctuation2: $monokai-red;
+$code-color-datatype:     $monokai-blue;
+
+pre {
+	.token {
+		&.punctuation2 {
+			color: $code-color-punctuation2;
+		}
+
+		&.datatype {
+			color: $code-color-datatype;
+		}
+
+		&.operator {
+			color: $code-color-operator;
+		}
+
+		&.keyword2 {
+			color: $code-color-keyword2;
+		}
+
+		&.class-extension {
+			color: $code-color-class-ext;
+		}
+
+		&.dockblock {
+			color: $code-color-docblock;
+		}
+
+		&.const {
+			color: $code-color-const;
+		}
+
+		&.scope .keyword {
+			color: $code-color-keyword2;
+		}
+
+		&.function {
+			color: $code-color-function;
+		}
+
+		&.punctuation {
+			color: $code-color-punctuation;
+		}
+	}
+}
