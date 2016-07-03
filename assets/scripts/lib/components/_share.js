@@ -157,23 +157,23 @@ export default class Share {
 
 			_c.$('[data-share]').each(function () {
 				var ele = _c.$(this),
-				type = ele.data('share');
+					type = ele.data('share');
 				if (!SHARE.loaded[type]) {
 					var _global;
 					switch (type) {
-						case 'facebook':
+					case 'facebook':
 						_global = 'FB';
 						break;
 
-						case 'googleplus':
+					case 'googleplus':
 						_global = 'gapi';
 						break;
 
-						case 'twitter':
+					case 'twitter':
 						_global = 'twttr';
 						break;
 
-						case 'pinterest':
+					case 'pinterest':
 						_global = 'PDK';
 						break;
 					}
