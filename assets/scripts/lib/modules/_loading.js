@@ -8,7 +8,6 @@ export default class Loading {
 
 		// guards
 		if( _c.showLoading === false || ! this.$element.length ) {
-			// console.log(this.$element);
 			_c.$html.addClass('loaded');
 			this.hide(true);
 			return;
@@ -49,7 +48,6 @@ export default class Loading {
 		console.log('here');
 		this.$element.removeClass('hidden');
 		_c.$html.addClass('loaded');
-		// _c.$body.removeClass('hidden');
 	}
 
 	hide(immediate) {
@@ -63,6 +61,4 @@ export default class Loading {
 			});
 		}
 	}
-
-	// _c.$html.data('clique.data.loading', new Loading());
 }

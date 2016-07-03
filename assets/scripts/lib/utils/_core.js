@@ -8,29 +8,29 @@ import ScrollMagic from 'scrollmagic';
 
 export default class Clique {
 
-	                    constructor() {
+	constructor() {
 		// cache jquery & dom objects
-		                    this.$ = $;
-		                    this.$win = this.$(window);
-		                    this.$doc = this.$(document);
-		                    this.$html = this.$('html');
-		                    this.$body = this.$('body');
+		this.$ = $;
+		this.$win = this.$(window);
+		this.$doc = this.$(document);
+		this.$html = this.$('html');
+		this.$body = this.$('body');
 
 		// global vars
-		                    this.showLoading = true;
+		this.showLoading = true;
 
 		// global modules
-		                    this.controller = new ScrollMagic.Controller();
+		this.controller = new ScrollMagic.Controller();
 
 		// set on the global object
-		                    window._c = this;
+		window._c = this;
 
 		// properties from custom classes
-		                    this.support = new Support();
-		                    this.browser = new Browser();
-		                    this.utils = new Utils();
-		                    this.events = new Events();
+		this.support = new Support();
+		this.browser = new Browser();
+		this.utils = new Utils();
+		this.events = new Events();
 
-		                    return this;
+		return this;
 	}
 }
