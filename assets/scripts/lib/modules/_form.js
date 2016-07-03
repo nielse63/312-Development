@@ -152,7 +152,7 @@ export default class Form {
 					let $target;
 					for (let i = 0; i < errorList.length; i++) {
 						let object = errorList[i],
-						$input = _c.$(object.element);
+							$input = _c.$(object.element);
 
 						if (i === 0) {
 							$target = $input;
@@ -172,7 +172,7 @@ export default class Form {
 					// scroll to first invalid element
 					if ($target && $target.length) {
 						let screenTop = window.pageYOffset,
-						top = $target.offset().top;
+							top = $target.offset().top;
 
 						// scroll of input is out of view
 						if (top < window.pageYOffset || top > screenTop + window.innerHeight) {
@@ -189,7 +189,7 @@ export default class Form {
 			}(this),
 			success(label, input) {
 				let $li = _c.$(input).closest('li'),
-				$input = _c.$(input);
+					$input = _c.$(input);
 
 				// trigger input event
 				if ($input.hasClass('error')) {

@@ -30,7 +30,7 @@ export default class Events {
 
 				                    teardown() {
 					                    var element = _c.$(this),
-					                        uid = element.data('clique.event.scrollstart.uid');
+					                        																				uid = element.data('clique.event.scrollstart.uid');
 
 					                    element.off('scrolling.clique.events', element.data(uid));
 					                    element.removeData(uid);
@@ -73,20 +73,20 @@ export default class Events {
 			                    resizestart: {
 				                    setup() {
 					                    var element = _c.$(this),
-					                        uid = _c.utils.uid('resizestart'),
-					                        ns = 'resize.clique.events.' + uid,
-					                        latency = _c.$.event.special.resizeend.latency + 150,
-					                        timer,
-					                        handler = function (e) {
+					                        																				uid = _c.utils.uid('resizestart'),
+					                        																				ns = 'resize.clique.events.' + uid,
+					                        																				latency = _c.$.event.special.resizeend.latency + 150,
+					                        																				timer,
+					                        																				handler = function (e) {
 						                    if (timer) {
 							                    window.clearTimeout(timer);
 						}
 
 						                    var memory = {
-							                                        height: window.innerHeight,
-							                                        width: window.innerWidth,
-						                    },
-						                        target = _c.$(e.target);
+							                                        																				height: window.innerHeight,
+							                                        																				width: window.innerWidth,
+						                    																				},
+						                        																				target = _c.$(e.target);
 
 						                    target.one('resizeend', function () {
 							                    if (timer) {
@@ -129,11 +129,11 @@ export default class Events {
 				                    latency: 250,
 				                    setup(data) {
 					                    var uid = _c.utils.uid('resizeend'),
-					                        _data = _c.$.extend({ latency: _c.$.event.special.resizeend.latency }, data),
-					                        timer,
-					                        ns = 'resize.clique.events.' + uid,
-					                        element = _c.$(this),
-					                        handler = function (e) {
+					                        																				_data = _c.$.extend({ latency: _c.$.event.special.resizeend.latency }, data),
+					                        																				timer,
+					                        																				ns = 'resize.clique.events.' + uid,
+					                        																				element = _c.$(this),
+					                        																				handler = function (e) {
 						                    if (timer) {
 							                    window.clearTimeout(timer);
 						}

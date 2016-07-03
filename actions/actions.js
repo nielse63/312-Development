@@ -25,17 +25,17 @@ function getTweets(callback) {
 	})
 	.then(function (data) {
 			// set data
-			AppStore.data.tweets = data;
+		AppStore.data.tweets = data;
 
 			// Emit change
-			AppStore.data.ready = true;
-			AppStore.emitChange();
+		AppStore.data.ready = true;
+		AppStore.emitChange();
 
 			// Trigger callback (from server)
-			if (callback) {
-				callback(false, AppStore);
-			}
-		}.bind(this));
+		if (callback) {
+			callback(false, AppStore);
+		}
+	}.bind(this));
 }
 
 export function getStore(checkTweets = true, callback) {

@@ -2,6 +2,7 @@
 	"parser": "babel-eslint",
 	"extends": "airbnb",
 	"rules": {
-		"indent" : ["error", "tab"]
+		"indent": ["warn", "tab"],
+		"react/jsx-indent": ["warn", "tab"]
 	}
 }
