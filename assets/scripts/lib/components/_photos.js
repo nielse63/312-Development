@@ -4,7 +4,6 @@ import ScrollMagic from 'scrollmagic';
 export default class Photos {
 
 	constructor() {
-
 		this.$figures = $('.where-figure');
 		if (! this.$figures.length) {
 			return;

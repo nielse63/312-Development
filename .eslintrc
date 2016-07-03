@@ -4,6 +4,9 @@
 	"rules": {
 		"indent": ["warn", "tab"],
 		"react/jsx-indent": ["warn", "tab"],
-		"no-spaced-func": "warn"
+		"no-spaced-func": "warn",
+		"space-before-function-paren": "never",
+		"space-in-parens": "never",
+		"space-infix-ops": "always"
 	}
 }

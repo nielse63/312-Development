@@ -23,13 +23,13 @@ export default class Utils {
 
 	prefixFor(property) {
 		var vendors = ['Webkit', 'Moz', 'O'],
-		prop = property[0].toUpperCase() + property.slice(1),
-		path = document.createElementNS('http://www.w3.org/2000/svg', 'a'),
-		style = path.style,
-		output = {
-			js: '',
-			css: '',
-		};
+			prop = property[0].toUpperCase() + property.slice(1),
+			path = document.createElementNS('http://www.w3.org/2000/svg', 'a'),
+			style = path.style,
+			output = {
+				js: '',
+				css: '',
+			};
 
 		if (prop.toLowerCase() in style) {
 			return output;
@@ -60,14 +60,14 @@ export default class Utils {
 		wait = wait || 0;
 		return function () {
 			var context = this,
-			args = arguments,
-			later = function () {
-				timeout = null;
-				if (! immediate) {
-					fn.apply(context, args);
-				}
-			},
-			callNow = immediate && ! timeout;
+				args = arguments,
+				later = function () {
+					timeout = null;
+					if (! immediate) {
+						fn.apply(context, args);
+					}
+				},
+				callNow = immediate && ! timeout;
 			if (timeout) {
 				window.clearTimeout(timeout);
 				timeout = null;
@@ -97,12 +97,12 @@ export default class Utils {
 		return path.replace(/\/|_/g, '-')
 			.toLowerCase()
 			.split('.')[0];
-		}
+	}
 
-		openWindow(url, width, height) {
-			width = _c.utils.isUndefined(width) ? 600 : width;
-			height = _c.utils.isUndefined(height) ? 600 : height;
-			var left = _c.$win.width() / 2 - width / 2, top = _c.$win.height() / 2 - height / 2;
-			return window.open(url, '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=' + height + ',width=' + width + ',left=' + left + ',top=' + top);
-		}
+	openWindow(url, width, height) {
+		width = _c.utils.isUndefined(width) ? 600 : width;
+		height = _c.utils.isUndefined(height) ? 600 : height;
+		var left = _c.$win.width() / 2 - width / 2, top = _c.$win.height() / 2 - height / 2;
+		return window.open(url, '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=' + height + ',width=' + width + ',left=' + left + ',top=' + top);
+	}
 	}

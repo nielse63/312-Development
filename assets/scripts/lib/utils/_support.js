@@ -13,12 +13,12 @@ export default class Support {
 		this.transition = function () {
 			const transitionEnd = function () {
 				let element = document.body || document.documentElement,
-				transEndEventNames = {
-					WebkitTransition: 'webkitTransitionEnd',
-					MozTransition: 'transitionend',
-					OTransition: 'oTransitionEnd otransitionend',
-					transition: 'transitionend',
-				};
+					transEndEventNames = {
+						WebkitTransition: 'webkitTransitionEnd',
+						MozTransition: 'transitionend',
+						OTransition: 'oTransitionEnd otransitionend',
+						transition: 'transitionend',
+					};
 
 				for (const name in transEndEventNames) {
 					if (element.style[name] !== undefined) {
@@ -34,12 +34,12 @@ export default class Support {
 		this.animation = function () {
 			const animationEnd = function () {
 				let element = document.body || document.documentElement,
-				animEndEventNames = {
-					animation: 'animationend',
-					WebkitAnimation: 'webkitAnimationEnd',
-					MozAnimation: 'animationend',
-					OAnimation: 'oAnimationEnd oanimationend',
-				};
+					animEndEventNames = {
+						animation: 'animationend',
+						WebkitAnimation: 'webkitAnimationEnd',
+						MozAnimation: 'animationend',
+						OAnimation: 'oAnimationEnd oanimationend',
+					};
 
 				for (const name in animEndEventNames) {
 					if (element.style[name] !== undefined) {

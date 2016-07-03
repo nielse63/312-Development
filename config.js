@@ -8,5 +8,5 @@ export default {
 	bucket: {
 		slug: '312-development',
 		media_url: 'https://cosmicjs.com/uploads',
-	}
+	},
 };

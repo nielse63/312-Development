@@ -24,14 +24,14 @@ function getTweets(callback) {
 		return response.json();
 	})
 	.then(function (data) {
-			// set data
+		// set data
 		AppStore.data.tweets = data;
 
-			// Emit change
+		// Emit change
 		AppStore.data.ready = true;
 		AppStore.emitChange();
 
-			// Trigger callback (from server)
+		// Trigger callback (from server)
 		if (callback) {
 			callback(false, AppStore);
 		}
