@@ -1,9 +1,7 @@
 
 // About.js
 import React, { Component } from 'react';
-import { Link } from 'react-router';
 import config from '../../config';
-import _ from 'lodash';
 
 // Components
 import TweetList from '../Partials/TweetList';
@@ -14,12 +12,12 @@ import AppDispatcher from '../../dispatcher/AppDispatcher';
 export default class About extends Component {
 
 	componentWillMount() {
-		window.postMessage('loading', window.location.origin);
+		window.postMessage( 'loading', window.location.origin );
 		this.getPageData();
 	}
 
 	componentDidMount() {
-		window.postMessage('loaded', window.location.origin);
+		window.postMessage( 'loaded', window.location.origin );
 	}
 
 	componentDidUpdate() {
@@ -28,28 +26,24 @@ export default class About extends Component {
 	}
 
 	componentWillUnmount() {
-		window.postMessage('unloaded', window.location.origin);
+		window.postMessage( 'unloaded', window.location.origin );
 	}
 
 	getSlug() {
-		return this.props.location.pathname.replace('/', '');
+		return this.props.location.pathname.replace( '/', '' );
 	}
 
 	getPageData() {
-		const page_slug = this.getSlug();
-		AppDispatcher.dispatch({
+		const pageSlug = this.getSlug();
+		AppDispatcher.dispatch( {
 			action: 'get-page-data',
-			page_slug,
-		});
+			pageSlug,
+		} );
 	}
 
 	render() {
-		const slug = this.getSlug();
 		const data = this.props.data;
 		const page = data.page;
-		// const tweets = data.tweets
-
-		const metafields = page.metafields;
 
 		return (
 			 <div>

@@ -17,35 +17,35 @@ export default class App extends Component {
 
 	// Add change listeners to stores
 	componentDidMount() {
-		AppStore.addChangeListener(this._onChange.bind(this));
+		AppStore.addChangeListener( this.onChange.bind( this ) );
 	}
 
 	// Remove change listeners from stores
 	componentWillUnmount() {
-		AppStore.removeChangeListener(this._onChange.bind(this));
+		AppStore.removeChangeListener( this.onChange.bind( this ) );
 	}
 
 	getStore() {
-		AppDispatcher.dispatch({
+		AppDispatcher.dispatch( {
 			action: 'get-app-store',
-		});
-	}
-
-	_onChange() {
-		this.setState(AppStore);
+		} );
 	}
 
 	getSlug() {
-		const path = this.props.location.pathname.replace('/', '').replace(/\//g, '-');
+		const path = this.props.location.pathname.replace( '/', '' ).replace( /\//g, '-' );
 		return !! path ? path : 'home';
+	}
+
+	onChange() {
+		this.setState( AppStore );
 	}
 
 	render() {
 		const data = AppStore.data;
 
 		// Show loading for browser
-		if (! data.ready) {
-			if (document) {
+		if ( ! data.ready ) {
+			if ( document ) {
 				document.title = 'Loading';
 			}
 
@@ -60,10 +60,10 @@ export default class App extends Component {
 		}
 
 		// Server first
-		const Routes = React.cloneElement(this.props.children, {
+		const Routes = React.cloneElement( this.props.children, {
 			key: this.props.location.pathname,
 			data,
-		});
+		} );
 
 		// props
 		const navItems = data.globals.nav_items;

@@ -10,15 +10,15 @@ export default class Footer extends Component {
 
 	render() {
 		const data = this.props.data;
-		const nav_items = data.globals.nav_items;
+		const navItems = data.globals.navItems;
 
-		const menu_items = nav_items.map((nav_item) => {
+		const menuItems = navItems.map( ( nav_item ) => {
 			return (
 				<li key={'key-' + nav_item.key}>
 					<Link to={nav_item.value} activeClassName="active">{nav_item.title}</Link>
 				</li>
 			);
-		});
+		} );
 
 		return (
 			<footer className="footer">
@@ -28,7 +28,7 @@ export default class Footer extends Component {
 						<div className="col">
 							<nav className="footer-nav">
 								<ul>
-									{menu_items}
+									{menuItems}
 								</ul>
 							</nav>
 						</div>

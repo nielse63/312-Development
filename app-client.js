@@ -16,5 +16,5 @@ const Routes = (
   </Router>
 );
 
-const app = document.getElementById('app');
-render(Routes, app);
+const app = document.getElementById( 'app' );
+render( Routes, app );
