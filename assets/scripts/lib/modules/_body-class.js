@@ -3,52 +3,51 @@
 export default class BodyClass {
 
 	// constructor
-	constructor(ele) {
+	                    constructor(ele) {
+		                    this.element = _c.$(ele);
 
-		this.element = _c.$(ele);
-
-		this.init();
-		return this;
+		                    this.init();
+		                    return this;
 	}
 
-	static exec() {
-		var classes = BodyClass.classes || [];
-		_c.$body.each(function () {
-			var ele  = _c.$(this);
-			if( ele.attr('class') ) {
-				classes = classes.concat(ele.attr('class').split(' '));
+	                    static exec() {
+		                    var classes = BodyClass.classes || [];
+		                    _c.$body.each(function () {
+			                    var ele = _c.$(this);
+			                    if (ele.attr('class')) {
+				                    classes = classes.concat(ele.attr('class').split(' '));
 			}
-			var obj = new BodyClass( ele );
-			classes.push(obj.class);
-			ele.data('bodyclass.clique.data', obj);
+			                    var obj = new BodyClass(ele);
+			                    classes.push(obj.class);
+			                    ele.data('bodyclass.clique.data', obj);
 		});
-		BodyClass.classes = classes;
+		                    BodyClass.classes = classes;
 	}
 
-	static removeClasses() {
-		if( ! BodyClass.classes || ! BodyClass.classes.length ) {
-			return;
+	                    static removeClasses() {
+		                    if (! BodyClass.classes || ! BodyClass.classes.length) {
+			                    return;
 		}
-		for(var i = 0; i < BodyClass.classes.length; i++) {
-			_c.$body.removeClass(BodyClass.classes[i]);
+		                    for (var i = 0; i < BodyClass.classes.length; i++) {
+			                    _c.$body.removeClass(BodyClass.classes[i]);
 		}
-		BodyClass.classes = [];
+		                    BodyClass.classes = [];
 	}
 
-	init() {
-		this.defineProperties();
-		this.setClass();
+	                    init() {
+		                    this.defineProperties();
+		                    this.setClass();
 	}
 
-	defineProperties() {
-		this.duration  = 400;
-		this.namespace = '.clique.bodyclass.' + _c.utils.uid();
-		this.slug      = _c.utils.makeSlug();
-		this.class     = 'page-' + (this.slug ? this.slug : 'home');
+	                    defineProperties() {
+		                    this.duration = 400;
+		                    this.namespace = '.clique.bodyclass.' + _c.utils.uid();
+		                    this.slug = _c.utils.makeSlug();
+		                    this.class = 'page-' + (this.slug ? this.slug : 'home');
 	}
 
-	setClass() {
-		BodyClass.removeClasses();
-		this.element.addClass(this.class);
+	                    setClass() {
+		                    BodyClass.removeClasses();
+		                    this.element.addClass(this.class);
 	}
 }

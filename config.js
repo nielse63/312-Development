@@ -8,6 +8,6 @@ export default {
   bucket: {
     slug: '312-development',
     // slug: 'react-universal-blog',
-    media_url: 'https://cosmicjs.com/uploads'
-  }
-}
+    media_url: 'https://cosmicjs.com/uploads',
+  },
+};

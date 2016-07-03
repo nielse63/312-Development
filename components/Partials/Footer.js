@@ -1,35 +1,34 @@
 
 // Footer.js
-import React, { Component } from 'react'
-import { Link } from 'react-router'
+import React, { Component } from 'react';
+import { Link } from 'react-router';
 
 // Components
-import Pattern from './Pattern'
+import Pattern from './Pattern';
 
 export default class Footer extends Component {
 
-	render() {
+	                    render() {
+		                    const data = this.props.data;
+		                    const nav_items = data.globals.nav_items;
 
-		const data = this.props.data
-		const nav_items = data.globals.nav_items
-
-		const menu_items = nav_items.map(( nav_item ) => {
-			return (
-				<li key={ 'key-' + nav_item.key }>
-					<Link to={ nav_item.value } activeClassName="active">{ nav_item.title }</Link>
+		                    const menu_items = nav_items.map((nav_item) => {
+			                    return (
+				<li key={'key-' + nav_item.key}>
+					<Link to={nav_item.value} activeClassName="active">{nav_item.title}</Link>
 				</li>
-			)
-		})
+			);
+		});
 
-		return (
-			<footer className='footer'>
+		                    return (
+			<footer className="footer">
 				<Pattern />
 				<div className="wrap container-fluid">
 					<div className="flex flex-space-between">
 						<div className="col">
 							<nav className="footer-nav">
 								<ul>
-									{ menu_items }
+									{menu_items}
 								</ul>
 							</nav>
 						</div>
@@ -44,6 +43,6 @@ export default class Footer extends Component {
 					</div>
 				</div>
 			</footer>
-		)
+		);
 	}
 }

@@ -1,27 +1,26 @@
 
 export default class URL {
 
-	constructor() {
-
+	                    constructor() {
 		// properties
-		this.isSSL       = window.location.protocol === 'https';
-		this.base        = window.location.protocol + '//' + window.location.host;
-		this.current     = window.location.href;
-		this.currentBase = window.location.protocol + '//' + window.location.host + window.location.pathname;
+		                    this.isSSL = window.location.protocol === 'https';
+		                    this.base = window.location.protocol + '//' + window.location.host;
+		                    this.current = window.location.href;
+		                    this.currentBase = window.location.protocol + '//' + window.location.host + window.location.pathname;
 
-		return this;
+		                    return this;
 	}
 
-	getHash(string) {
-		string = string || this.current;
+	                    getHash(string) {
+		                    string = string || this.current;
 
-		if (string.indexOf('#') < 0) {
-			return '';
+		                    if (string.indexOf('#') < 0) {
+			                    return '';
 		}
 
-		var a = document.createElement('a');
-		a.href = string;
+		                    var a = document.createElement('a');
+		                    a.href = string;
 
-		return a.hash;
+		                    return a.hash;
 	}
 }

@@ -1,42 +1,41 @@
 
-import ScrollMagic from 'scrollmagic'
+import ScrollMagic from 'scrollmagic';
 
 export default class Services {
 
-	constructor() {
-
-		this.$services = $('.service');
-		if( ! this.$services.length ) {
-			return;
+	                    constructor() {
+		                    this.$services = $('.service');
+		                    if (! this.$services.length) {
+			                    return;
 		}
 
-		this.$container = $('.services');
+		                    this.$container = $('.services');
 
-		this.setDelay()
-		this.setScene()
+		                    this.setDelay();
+		                    this.setScene();
 
-		return this
+		                    return this;
 	}
 
-	setDelay() {
-		this.$services.each(function() {
-			let delay = Math.random();
+	                    setDelay() {
+		                    this.$services.each(function () {
+			                  const delay = Math.random();
 
-			$(this).find('.service-figure, p').css({
-				'transition-delay' : delay + 's'
+			                    $(this).find('.service-figure, p').css({
+				                    'transition-delay': delay + 's',
 			});
 		});
 	}
 
-	setScene() {
-		const trigger = this.$container[0];
+	                    setScene() {
+		                    const trigger = this.$container[0];
 
-		this.scene = new ScrollMagic.Scene({
-			triggerElement : trigger
+		                    this.scene = new ScrollMagic.Scene({
+			                    triggerElement: trigger,
 		})
 		.setClassToggle(trigger, 'active')
-		.on('start', function() {
-			this.remove();
+		.on('start', function () {
+			                    this.remove();
 		})
 		.addTo(_c.controller);
 	}

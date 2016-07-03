@@ -1,31 +1,30 @@
 // AppDispatcher.js
-import { Dispatcher } from 'flux'
-import { getStore, getPageData, getMoreItems } from '../actions/actions'
+import { Dispatcher } from 'flux';
+import { getStore, getPageData, getMoreItems } from '../actions/actions';
 
-const AppDispatcher = new Dispatcher()
+const AppDispatcher = new Dispatcher();
 
 // Register callback with AppDispatcher
 AppDispatcher.register((payload) => {
-
-	let action = payload.action
-	switch(action) {
+	                  const action = payload.action;
+	                    switch (action) {
 
 		// case 'get-tweets':
 		// 	getTweets()
 		// 	break
-		case 'get-app-store':
-			getStore(payload.callback)
-			break
-		case 'get-page-data':
-			getPageData(payload.page_slug, payload.post_slug)
-			break
-		case 'get-more-items':
-			getMoreItems()
-			break
-		default:
-			return true
+		                    case 'get-app-store':
+			                                        getStore(payload.callback);
+			                                        break;
+		                    case 'get-page-data':
+			                                        getPageData(payload.page_slug, payload.post_slug);
+			                                        break;
+		                    case 'get-more-items':
+			                                        getMoreItems();
+			                                        break;
+		                    default:
+			                                        return true;
 	}
-	return true
-})
+	                    return true;
+});
 
-export default AppDispatcher
+export default AppDispatcher;

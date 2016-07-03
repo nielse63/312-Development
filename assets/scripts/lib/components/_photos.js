@@ -1,29 +1,28 @@
 
-import ScrollMagic from 'scrollmagic'
+import ScrollMagic from 'scrollmagic';
 
 export default class Photos {
 
-	constructor() {
-
+	                    constructor() {
 		// get all elements
-		this.$figures = $('.where-figure');
-		if( ! this.$figures.length ) {
-			return;
+		                    this.$figures = $('.where-figure');
+		                    if (! this.$figures.length) {
+			                    return;
 		}
 
-		this.$container = $('.where-i-work');
+		                    this.$container = $('.where-i-work');
 
-		this.setDelay()
-		this.setScene()
+		                    this.setDelay();
+		                    this.setScene();
 
-		return this
+		                    return this;
 	}
 
-	setDelay() {
-		this.$figures.each(function(i) {
-			let delay = i * 0.15;
-			$(this).css({
-				'transition-delay' : delay + 's'
+	                    setDelay() {
+		                    this.$figures.each(function (i) {
+			                  const delay = i * 0.15;
+			                    $(this).css({
+				                    'transition-delay': delay + 's',
 			});
 		});
 	}
@@ -32,20 +31,20 @@ export default class Photos {
 	// 	this.$container.addClass('active')
 	// }
 
-	setScene() {
-		const trigger = this.$container[0];
+	                    setScene() {
+		                    const trigger = this.$container[0];
 		// const duration = trigger.clientHeight
 		// const _this = this
 		// let inview = false
 		// let timeout
 
-		this.scene = new ScrollMagic.Scene({
-			triggerElement : trigger,
+		                    this.scene = new ScrollMagic.Scene({
+			                    triggerElement: trigger,
 			// duration       : duration,
 		})
 		.setClassToggle(trigger, 'active')
-		.on('start', function() {
-			this.remove()
+		.on('start', function () {
+			                    this.remove();
 		})
 		// .on('enter', function() {
 		// 	inview = true
