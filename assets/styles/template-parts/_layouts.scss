@@ -11,17 +11,58 @@
 
 $main-background-color: $global-background-color;
 
+$transition-out-duration: 0.5s;
+$transition-in-duration: $transition-out-duration + ($transition-out-duration * 0.3);
+
 // ========================================================================
 // Component: Base
 // ========================================================================
 
-.main {
-	background-color: $main-background-color;
-	padding: 25px 0;
+.body-wrap {
+	position: relative;
 
-	@media (min-width: $breakpoint-small) {
-		padding: 50px 0;
-	}
+	// @media (max-width: $breakpoint-small-max) {
+	// 	position: relative;
+	// 	z-index: 1;
+	// 	transform-style: preserve-3d;
+
+	// 	.menu-open & {
+	// 		animation: $global-menu-transition-duration hideBodyWrap both;
+	// 		overflow: hidden;
+	// 		height: 100vh;
+	// 		pointer-events: none;
+	// 	}
+
+	// 	.menu-closed & {
+	// 		animation: $global-menu-transition-duration showBodyWrap both;
+	// 	}
+
+	// 	&:after {
+	// 		position: absolute;
+	// 		top: 0;
+	// 		right: 0;
+	// 		width: 0;
+	// 		height: 0;
+	// 		background-color: fade-out($color-black, 0.4);
+	// 		content: '';
+	// 		opacity: 0;
+	// 		transition: opacity $global-menu-transition-duration,
+	// 		width ($global-menu-transition-duration / 5) $global-menu-transition-duration,
+	// 		height ($global-menu-transition-duration / 5) $global-menu-transition-duration;
+
+	// 		.menu-open & {
+	// 			width: 100%;
+	// 			height: calc(100% + 1px);
+	// 			opacity: 1;
+	// 			transition: opacity $global-menu-transition-duration;
+	// 		}
+	// 	}
+	// }
+}
+
+.main {
+	background-color: $color-blue-dark;
+	position: relative;
 
 	&.work,
 	&.single {
@@ -32,6 +73,59 @@ $main-background-color: $global-background-color;
 
 	&-no-padding-top {
 		padding-top: 0;
+	}
+
+	@media (max-width: $breakpoint-small-max) {
+		position: relative;
+		z-index: 1;
+		transform-style: preserve-3d;
+		transition: $transition-out-duration transform,
+					$transition-out-duration opacity;
+		transform-origin: 50% 50vh;
+
+		.menu-open & {
+			transform: scale(0.9);
+			opacity: 0.15;
+			// animation: $global-menu-transition-duration hideBodyWrap both;
+			// overflow: hidden;
+			// height: 100vh;
+			// pointer-events: none;
+		}
+
+		// .menu-closed & {
+		// 	animation: $global-menu-transition-duration showBodyWrap both;
+		// }
+
+		&:after {
+			position: absolute;
+			top: 0;
+			right: 0;
+			width: 0;
+			height: 0;
+			background-color: fade-out($color-black, 0.4);
+			opacity: 0;
+			transition: opacity $global-menu-transition-duration,
+			width ($global-menu-transition-duration / 5) $global-menu-transition-duration,
+			height ($global-menu-transition-duration / 5) $global-menu-transition-duration;
+
+			.menu-open & {
+				content: '';
+				width: 100%;
+				height: calc(100% + 1px);
+				opacity: 1;
+				transition: opacity $global-menu-transition-duration;
+			}
+		}
+	}
+}
+
+.transition-group {
+	// perspective: 100vw;
+	// perspective-origin: top center;
+
+	> div {
+		will-change: transform, opacity;
+		// background-color: $main-background-color;
 	}
 }
 

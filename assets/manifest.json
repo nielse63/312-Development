@@ -1,6 +1,6 @@
 {
   "dependencies": {
-    "main.js": {
+    "app.js": {
       "files": [
 
 		"scripts/lib/utils/_utils.js",
@@ -28,6 +28,7 @@
 
         "scripts/lib/components/_nav.js",
         "scripts/lib/components/_banner.js",
+        "scripts/lib/components/_links.js",
         "scripts/lib/components/_work-grid.js",
         "scripts/lib/components/_contact.js",
         "scripts/lib/components/_single.js",
@@ -41,7 +42,7 @@
       ],
       "main": true
     },
-    "main.css": {
+    "app.css": {
       "files": [
         "styles/main.scss"
       ],
@@ -56,6 +57,6 @@
   },
   "paths": {
   	"source": "assets/",
-  	"dist": "dist/"
+  	"dist": "public/"
   }
 }

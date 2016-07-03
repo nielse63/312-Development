@@ -22,62 +22,6 @@ $menu-item-color: $global-font-color;
 // Component
 // ========================================================================
 
-.mobile-nav {
-	position: fixed;
-	top: 0;
-	right: 0;
-	width: 75vw;
-	height: 100vh;
-	transform: translate(75vw, 0);
-	display: flex;
-	align-items: center;
-	opacity: 0;
-	transition: $global-menu-transition-duration transform,
-				$global-menu-transition-duration opacity;
-	text-align: right;
-
-	.menu-open & {
-		transform: translate(0, 0);
-		opacity: 1;
-	}
-
-	.nav-menu {
-		width: 100%;
-		padding-right: 20px;
-
-		> li {
-			+ li {
-				border: 0;
-			}
-
-			a {
-				color: $color-white;
-				display: inline-block;
-				padding: 20px 0 5px;
-			}
-		}
-	}
-
-	.active {
-		a {
-			box-shadow: 0 -3px 0 0 $color-orange inset;
-		}
-	}
-
-	a {
-		font-size: 36px;
-		font-family: $global-font-family;
-		text-transform: uppercase;
-		font-weight: 200;
-		letter-spacing: 10px;
-		line-height: (42 / 36);
-	}
-
-	@media (min-width: $breakpoint-medium) {
-		display: none;
-	}
-}
-
 .nav-menu {
 	margin: 0;
 	padding: 0;
@@ -85,10 +29,11 @@ $menu-item-color: $global-font-color;
 	flex-wrap: wrap;
 	list-style: none;
 	font-size: 22px;
-	line-height: (28 / 16);
+	line-height: (24 / 16);
 	font-family: $serif-font-family;
 	position: relative;
-	contain: paint content size layout style;
+	// contain: paint content size layout style;
+	contain: paint;
 
 	@media (min-width: $breakpoint-medium) {
 		margin-left: -$link-padding-large;
@@ -100,7 +45,7 @@ $menu-item-color: $global-font-color;
 
 	.line {
 		position: absolute;
-		bottom: 0;
+		bottom: -10px;
 		left: 0;
 		height: 3px;
 		background-color: $color-orange;
@@ -108,12 +53,19 @@ $menu-item-color: $global-font-color;
 		left: 0;
 		padding: 0;
 		margin: 0;
-		transition: 0.5s transform,
-					0.5s width;
-		will-change: transform, width;
+		opacity: 0;
+		will-change: transform, width, bottom;
 
 		@media (max-width: $breakpoint-small-max) {
 			display: none;
+		}
+
+		&.active {
+			bottom: 0;
+			opacity: 1;
+			transition: 0.5s transform,
+						0.5s width,
+						0.5s bottom;
 		}
 	}
 

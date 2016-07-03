@@ -1,4 +1,6 @@
 
+$transition-duration: 0.7s;
+
 .services {
 	font-size: 20px;
 	flex-wrap: wrap;
@@ -155,7 +157,7 @@
 		font-family: $serif-font-family;
 		transform-origin: 50px 50px;
 		transform: rotate(-90deg);
-		transition: 1s transform;
+		transition: $transition-duration transform;
 		will-change: transform;
 
 		.active & {

@@ -17,6 +17,7 @@ $logo-color: $global-font-color;
 
 .header {
 	padding: 20px 0;
+	background-color: $color-white;
 
 	@media (min-width: $breakpoint-small) {
 		padding: 25px 0;
@@ -29,7 +30,7 @@ $logo-color: $global-font-color;
 	white-space: nowrap;
 
 	@media (max-width: $breakpoint-small-max) {
-		font-size: 34px;
+		font-size: 28px;
 		text-align: center;
 	}
 
@@ -40,22 +41,24 @@ $logo-color: $global-font-color;
 
 		&:hover {
 			html.no-touch & {
-				color: #f14d76;
+				color: $color-pink;
 
-				span {
-					background-color: #f14d76;
+				.icon {
+					background-color: $color-pink;
 				}
 			}
 		}
 	}
 
-	span {
+	.icon {
 		display: inline-block;
 		background-color: $logo-color;
 		color: $color-white;
 		padding: 0 0.2em;
 		margin-right: 0.1em;
 		transition: 0.25s background-color;
+		line-height: (52 / 28);
+		width: 52px;
 	}
 
 	&-col {

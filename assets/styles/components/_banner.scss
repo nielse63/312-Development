@@ -25,6 +25,9 @@ $link-color: $color-white;
 	perspective-origin: top center;
 	perspective: 100vw;
 	contain: paint;
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: cover;
 
 	@media (min-width: $breakpoint-small) {
 		padding: 75px 0;
@@ -45,8 +48,18 @@ $link-color: $color-white;
 		background-image: linear-gradient(to bottom, rgba(31, 34, 50, 1) 0%, rgba(31, 34, 50, 0.5) 50%, rgba(31, 34, 50, 1) 100%);
 	}
 
+	&.loaded {
+		.banner {
+			&-title {
+				transition: 1s transform 0.5s,
+							1s opacity 0.5s;
+				opacity: 1;
+				transform: none;
+			}
+		}
+	}
+
 	&-title {
-		// font-size: $title-font-size;
 		font-size: 26px;
 		font-weight: 200;
 		transform-style: preserve-3d;
@@ -63,20 +76,12 @@ $link-color: $color-white;
 			font-size: $title-font-size;
 		}
 
-		.loaded & {
-			transition: 1s transform 0.5s,
-						1s opacity 0.5s;
-			opacity: 1;
-			transform: none;
-		}
-
 		&.no-trans {
 			transition: none !important;
 		}
 
 		a {
 			box-shadow: 0 -3px 0 0 $link-background-color inset;
-			// color: $link-color;
 			color: transparent;
 			display: inline-block;
 			padding-left: 0.2em;

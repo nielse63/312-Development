@@ -1,0 +1,272 @@
+//
+// Name:            Base
+//
+// Description:     Contains all base styles, including basic resets
+//
+
+// ========================================================================
+// Variables
+// ========================================================================
+
+$title-font-size: 44px;
+$title-color: $global-font-color;
+$title-transition-delay: 0.5s;
+
+$work-transition-delay: ($title-transition-delay * 0.75);
+
+// ========================================================================
+// Component
+// ========================================================================
+
+.article {
+	contain: style;
+	position: relative;
+
+	.page-home & {
+		perspective-origin: top center;
+		perspective: 100vw;
+	}
+
+	&-title,
+	&-subtitle {
+		font-size: 26px;
+		line-height: (56 / 40);
+		transform-style: preserve-3d;
+		transform-origin: center;
+		transform: rotateX(9deg) rotateY(-7deg);
+		opacity: 0;
+		will-change: opacity, transform;
+
+		@media (min-width: $breakpoint-small) {
+			font-size: 36px;
+		}
+
+		@media (min-width: $breakpoint-medium) {
+			font-size: 40px;
+		}
+
+		.loaded & {
+			transition: 1s transform $title-transition-delay,
+						1s opacity $title-transition-delay;
+			opacity: 1;
+			transform: none;
+		}
+
+		a {
+			@include content-link($color-orange);
+		}
+	}
+
+	&-subtitle {
+		font-size: 26px;
+
+		.loaded & {
+			transition-delay: 1.2s;
+		}
+	}
+
+	&-title {
+		+ .article-subtitle {
+			margin-top: 1em;
+			padding-top: 1em;
+			position: relative;
+
+			&:before {
+				content: '';
+				display: block;
+				position: absolute;
+				top: 0;
+				left: 50%;
+				height: 4px;
+				width: 0;
+				background-color: $title-color;
+				transform: translate(-50%, 0);
+				opacity: 0.5;
+				will-change: width;
+
+				.loaded & {
+					width: 175px;
+					transition: 1s width 1.5s;
+				}
+			}
+		}
+	}
+
+	&-lead {
+		font-size: 1.25em;
+		text-align: center;
+		margin-top: 1em;
+		padding-top: 1em;
+		margin-bottom: 1em;
+		padding-bottom: 1em;
+		position: relative;
+
+		@media (min-width: $breakpoint-small) {
+			font-size: 1.5em;
+		}
+
+		@media (min-width: $breakpoint-medium) {
+			font-size: 1.75em;
+		}
+
+		&:before,
+		&:after {
+			content: '';
+			display: block;
+			height: 1px;
+			width: 25%;
+			left: 50%;
+			transform: translate(-50%, 0);
+			position: absolute;
+			background-color: $global-font-color;
+		}
+
+		&:before {
+			top: 0;
+		}
+
+		&:after {
+			bottom: 0;
+		}
+	}
+}
+
+.work {
+	&-section {
+		margin: 50px -20px 0;
+
+		@media (min-width: $breakpoint-small) {
+			margin-left: -30px;
+			margin-right: -30px;
+		}
+
+		@media (min-width: $breakpoint-medium) {
+			display: flex;
+			margin: 100px 0 0;
+		}
+	}
+
+	&-grid {
+		margin: 0;
+		padding: 0;
+		list-style: none;
+		display: flex;
+		flex-wrap: wrap;
+
+		@media (min-width: $breakpoint-medium) {
+			transform: translate(0, -250px);
+			will-change: transform;
+		}
+
+		.loaded & {
+			@media (min-width: $breakpoint-small) {
+				transition: 1s transform cubic-bezier(0.770, 0.000, 0.175, 1.000) $work-transition-delay;
+				transform: translate(0, 0);
+			}
+		}
+	}
+
+	&-block {
+		width: 100%;
+		position: relative;
+		display: block;
+		overflow: hidden;
+		contain: style;
+
+		@media (min-width: $breakpoint-medium) {
+			width: 50%;
+		}
+
+		&:nth-child(odd) {
+			.work-block-figure {
+				top: auto;
+				bottom: 0;
+			}
+		}
+
+		&.dark {
+			.work-block-content {
+				color: $global-font-color;
+			}
+		}
+
+		.tag {
+			font-size: 14px;
+			letter-spacing: 10px;
+			text-transform: uppercase;
+		}
+
+		h3 {
+			font-size: 26px;
+			letter-spacing: 5px;
+		}
+
+		.preview {
+			font-size: 32px;
+			font-family: $serif-font-family;
+			opacity: 0;
+			transition: 0.5s transform,
+						0.5s opacity;
+			will-change: opacity, transform;
+			transform: translate(-15px, 0);
+
+			html.touch & {
+				display: none;
+			}
+		}
+
+		a {
+			display: block;
+			height: 100%;
+			position: relative;
+
+			&:hover {
+				.work-block-figure {
+					opacity: 0;
+				}
+
+				.preview {
+					opacity: 1;
+					transform: translate(0, 0);
+				}
+			}
+		}
+
+		&-content {
+			color: $color-white;
+			padding: 50px 25px;
+			display: flex;
+			flex-direction: column;
+			justify-content: space-between;
+
+			@media (min-width: $breakpoint-medium) {
+				padding: 50px;
+			}
+		}
+
+		&-figure {
+			$diff: 10vh;
+
+			position: absolute;
+			top: 0;
+			left: -15px;
+			right: -15px;
+			height: calc(100% + #{$diff});
+			background-position: center;
+			background-repeat: no-repeat;
+			background-size: cover;
+			opacity: 0.15;
+			-webkit-filter: sepia(80%);
+			filter: sepia(80%);
+			margin: 0;
+			transition: 0.35s opacity;
+			will-change: opacity;
+		}
+	}
+}
+
+.not-loaded {
+	display: none;
+	opacity: 0;
+	transform: translate(0, -100%);
+}

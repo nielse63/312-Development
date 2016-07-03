@@ -29,6 +29,11 @@ body {
 			background-color: fade-out($global-font-color, 0.5);
 		}
 	}
+
+	&.hidden {
+		display: block;
+		opacity: 0;
+	}
 }
 
 a {
@@ -74,44 +79,11 @@ main {
 	}
 }
 
-.body-wrap {
-	@media (max-width: $breakpoint-small-max) {
-		// transition: transform $global-menu-transition-duration,
-		// 			opacity $global-menu-transition-duration;
-		position: relative;
-		z-index: 1;
-		transform-style: preserve-3d;
+// #app {
+// 	opacity: 0;
+// 	transition: 0.5s opacity;
 
-		.menu-open & {
-			animation: $global-menu-transition-duration hideBodyWrap both;
-			overflow: hidden;
-			height: 100vh;
-			pointer-events: none;
-		}
-
-		.menu-closed & {
-			animation: $global-menu-transition-duration showBodyWrap both;
-		}
-
-		&:after {
-			position: absolute;
-			top: 0;
-			right: 0;
-			width: 0;
-			height: 0;
-			background-color: fade-out($color-black, 0.4);
-			content: '';
-			opacity: 0;
-			transition: opacity $global-menu-transition-duration,
-			width ($global-menu-transition-duration / 5) $global-menu-transition-duration,
-			height ($global-menu-transition-duration / 5) $global-menu-transition-duration;
-
-			.menu-open & {
-				width: 100%;
-				height: calc(100% + 1px);
-				opacity: 1;
-				transition: opacity $global-menu-transition-duration;
-			}
-		}
-	}
-}
+// 	html.loaded & {
+// 		opacity: 1;
+// 	}
+// }

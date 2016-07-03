@@ -1,35 +1,10 @@
 
-.about {
-	padding-top: 0;
-	padding-bottom: 100px;
+$col-padding: 50px;
+$transition-duration: 0.7s;
 
+.about {
 	&-banner {
 		background-image: url('../images/about.jpg');
-		background-position: center;
-		background-repeat: no-repeat;
-		background-size: cover;
-	}
-
-	&-article {
-		padding: 50px 0 0;
-
-		@media (min-width: $breakpoint-small) {
-			padding-top: 75px;
-		}
-
-		@media (min-width: $breakpoint-large) {
-			padding-top: 100px;
-		}
-
-		> .row {
-			> * {
-				+ * {
-					@media (max-width: $breakpoint-medium-max) {
-						margin-top: 20px;
-					}
-				}
-			}
-		}
 	}
 }
 
@@ -45,8 +20,8 @@
 .where-figure {
 	position: absolute;
 	width: 70%;
-	transition: 1s opacity,
-				1s transform;
+	transition: $transition-duration opacity,
+				$transition-duration transform;
 	will-change: opacity, transform;
 	opacity: 0;
 	transform: translate(0, 50px);
@@ -116,12 +91,13 @@
 	background-clip: border-box;
 	overflow: hidden;
 	margin-bottom: 30px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
 
 	p {
 		> a {
-			background-color: fade-out($color-blue, 0.8);
-			color: $color-blue;
-			padding: 0 0.5em;
+			@include content-link(lighten($color-blue, 20%));
 		}
 	}
 
@@ -129,7 +105,7 @@
 		margin: 0 -15px;
 		padding: 15px;
 		border-top: $tweet-border;
-		background-color: #313541;
+		background-color: $color-blue-dark;
 		color: $color-white;
 
 		.button {

@@ -49,6 +49,8 @@ $color-gray-light: #e1e1e1;
 
 $color-orange: $brand-primary;
 $color-blue: #4d84f1;
+$color-blue-dark: #2c3e50;
+$color-pink: #f14d76;
 
 // Sub-modifier: Text State Colors
 // ========================================================================
@@ -86,7 +88,8 @@ $color-danger-border: fade($color-danger-text, 30%);
 // Component: Font
 // ========================================================================
 
-$global-font-color: #484747;
+$global-font-color: #303336;
+// $global-font-color: #484747;
 $global-font-family: "Proxima Nova", "Helvetica Neue", Helvetica, Arial, sans-serif;
 $header-font-family: "Brandon Grotesque", "Proxima Nova", "Helvetica Neue", Helvetica, Arial, sans-serif;
 $serif-font-family: "Crimson Text", Georgia, Times, "Times New Roman", serif;
