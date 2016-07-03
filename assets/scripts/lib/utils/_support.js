@@ -8,11 +8,11 @@ export default class Support {
 			window.mozRequestAnimationFrame ||
 			window.msRequestAnimationFrame ||
 			window.oRequestAnimationFrame ||
-			function( callback ) {
-				setTimeout( callback, 1e3 / 60 );
+			function(callback) {
+				setTimeout(callback, 1e3 / 60);
 			};
 		this.touch = 'ontouchstart' in window &&
-			navigator.userAgent.toLowerCase().match( /mobile|tablet/ ) ||
+			navigator.userAgent.toLowerCase().match(/mobile|tablet/) ||
 			window.DocumentTouch &&
 			document instanceof window.DocumentTouch ||
 			window.navigator.msPointerEnabled &&
@@ -27,20 +27,20 @@ export default class Support {
 			const transitionEnd = (function() {
 				const element = document.body || document.documentElement,
 					transEndEventNames = {
-						WebkitTransition: 'webkitTransitionEnd',
-						MozTransition   : 'transitionend',
-						OTransition     : 'oTransitionEnd otransitionend',
-						transition      : 'transitionend',
+						WebkitTransition : 'webkitTransitionEnd',
+						MozTransition    : 'transitionend',
+						OTransition      : 'oTransitionEnd otransitionend',
+						transition       : 'transitionend',
 					};
 
-				for ( const name in transEndEventNames ) {
-					if ( element.style[name] !== undefined ) {
+				for (const name in transEndEventNames) {
+					if (element.style[name] !== undefined) {
 						return transEndEventNames[name];
 					}
 				}
 			})();
 			return transitionEnd && {
-				end: transitionEnd,
+				end : transitionEnd,
 			};
 		})();
 
@@ -48,20 +48,20 @@ export default class Support {
 			const animationEnd = (function() {
 				const element = document.body || document.documentElement,
 					animEndEventNames = {
-						animation      : 'animationend',
-						WebkitAnimation: 'webkitAnimationEnd',
-						MozAnimation   : 'animationend',
-						OAnimation     : 'oAnimationEnd oanimationend',
+						animation       : 'animationend',
+						WebkitAnimation : 'webkitAnimationEnd',
+						MozAnimation    : 'animationend',
+						OAnimation      : 'oAnimationEnd oanimationend',
 					};
 
-				for ( const name in animEndEventNames ) {
-					if ( element.style[name] !== undefined ) {
+				for (const name in animEndEventNames) {
+					if (element.style[name] !== undefined) {
 						return animEndEventNames[name];
 					}
 				}
 			})();
 			return animationEnd && {
-				end: animationEnd,
+				end : animationEnd,
 			};
 		})();
 

@@ -12,12 +12,12 @@ import AppDispatcher from '../../dispatcher/AppDispatcher';
 export default class Contact extends Component {
 
 	componentWillMount() {
-		window.postMessage( 'loading', window.location.origin );
+		window.postMessage('loading', window.location.origin);
 		this.getPageData();
 	}
 
 	componentDidMount() {
-		window.postMessage( 'loaded', window.location.origin );
+		window.postMessage('loaded', window.location.origin);
 	}
 
 	componentDidUpdate() {
@@ -26,19 +26,19 @@ export default class Contact extends Component {
 	}
 
 	componentWillUnmount() {
-		window.postMessage( 'unloaded', window.location.origin );
+		window.postMessage('unloaded', window.location.origin);
 	}
 
 	getSlug() {
-		return this.props.location.pathname.replace( '/', '' );
+		return this.props.location.pathname.replace('/', '');
 	}
 
 	getPageData() {
 		const pageSlug = this.getSlug();
-		AppDispatcher.dispatch( {
-			action: 'get-page-data',
+		AppDispatcher.dispatch({
+			action : 'get-page-data',
 			pageSlug,
-		} );
+		});
 	}
 
 	render() {

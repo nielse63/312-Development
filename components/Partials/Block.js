@@ -2,7 +2,7 @@
 // Block.js
 import React, { Component } from 'react';
 import { Link } from 'react-router';
-import _ from 'lodash'
+import _ from 'lodash';
 
 export default class Block extends Component {
 
@@ -12,16 +12,16 @@ export default class Block extends Component {
 		// single vars
 		const id = data._id;
 		const metafields = data.metafields;
-		const category = _.findWhere( metafields, { key: 'category' } ).value;
+		const category = _.findWhere(metafields, { key : 'category' }).value;
 		const title = data.title;
 		const slug = '/articles/' + data.slug;
 		const background = this.props.background;
 		const style = {
-			backgroundImage: 'url(' + background + ')',
+			backgroundImage : 'url(' + background + ')',
 		};
 
-		const previewObject = _.findWhere( metafields, { key: 'preview_text' } );
-		const preview = !! previewObject && previewObject.value ? previewObject.value : _.findWhere( metafields, { key: 'leading_paragraph' } ).value;
+		const previewObject = _.findWhere(metafields, { key : 'preview_text' });
+		const preview = !! previewObject && previewObject.value ? previewObject.value : _.findWhere(metafields, { key : 'leading_paragraph' }).value;
 
 		return (
 		 <li className="work-block" data-id={id}>

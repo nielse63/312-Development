@@ -4,12 +4,12 @@ import ScrollMagic from 'scrollmagic';
 export default class Services {
 
 	constructor() {
-		this.$services = $( '.service' );
-		if ( ! this.$services.length ) {
+		this.$services = $('.service');
+		if (! this.$services.length) {
 			return;
 		}
 
-		this.$container = $( '.services' );
+		this.$container = $('.services');
 
 		this.setDelay();
 		this.setScene();
@@ -18,25 +18,25 @@ export default class Services {
 	}
 
 	setDelay() {
-		this.$services.each( function() {
+		this.$services.each(function() {
 			const delay = Math.random();
 
-			$( this ).find( '.service-figure, p' ).css( {
-				'transition-delay': delay + 's',
-			} );
-		} );
+			$(this).find('.service-figure, p').css({
+				'transition-delay' : delay + 's',
+			});
+		});
 	}
 
 	setScene() {
 		const trigger = this.$container[0];
 
-		this.scene = new ScrollMagic.Scene( {
-			triggerElement: trigger,
-		} )
-		.setClassToggle( trigger, 'active' )
-		.on( 'start', function() {
+		this.scene = new ScrollMagic.Scene({
+			triggerElement : trigger,
+		})
+		.setClassToggle(trigger, 'active')
+		.on('start', function() {
 			this.remove();
-		} )
-		.addTo( _c.controller );
+		})
+		.addTo(_c.controller);
 	}
 }
