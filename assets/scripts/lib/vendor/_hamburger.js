@@ -15,7 +15,7 @@ export default class MobileButton {
 		 * @param {Array|Object|NodeList} scope=null - Object/NodeList/Array that forEach is iterating over, to use as the this value when executing callback.
 		 * @returns {}
 		 */
-		                    var forEach = function (collection, callback, scope) {
+		                    var forEach = function(collection, callback, scope) {
 			                    if (Object.prototype.toString.call(collection) === '[object Object]') {
 				                    for (var prop in collection) {
 					                    if (Object.prototype.hasOwnProperty.call(collection, prop)) {
@@ -41,13 +41,13 @@ export default class MobileButton {
 
 		// requestAnimationFrame() shim by Paul Irish
 		// http://paulirish.com/2011/requestanimationframe-for-smart-animating/
-		                    window.requestAnimFrame = (function () {
+		                    window.requestAnimFrame = (function() {
 			                    return window.requestAnimationFrame ||
 			window.webkitRequestAnimationFrame ||
 			window.mozRequestAnimationFrame ||
 			window.oRequestAnimationFrame ||
 			window.msRequestAnimationFrame ||
-			function (callback, element) {
+			function(callback, element) {
 				                    window.setTimeout(callback, 1000 / 60);
 			};
 		})();
@@ -58,7 +58,7 @@ export default class MobileButton {
 		 * @param {int} delay The delay in milliseconds
 		 */
 
-		                    window.requestInterval = function (fn, delay) {
+		                    window.requestInterval = function(fn, delay) {
 			                    if (! window.requestAnimationFrame &&
 				! window.webkitRequestAnimationFrame &&
 				! (window.mozRequestAnimationFrame && window.mozCancelRequestAnimationFrame) &&
@@ -67,11 +67,11 @@ export default class MobileButton {
 				                    return window.setInterval(fn, delay);
 
 			                    var start = new Date().getTime(),
-			                    																																								handle = {};
+			                    																																																		handle = {};
 
 			                    function loop() {
 				                    var current = new Date().getTime(),
-				                    																																								delta = current - start;
+				                    																																																		delta = current - start;
 
 				                    if (delta >= delay) {
 					                    fn.call();
@@ -89,7 +89,7 @@ export default class MobileButton {
 		 * Behaves the same as clearInterval except uses cancelRequestAnimationFrame() where possible for better performance
 		 * @param {int|object} fn The callback function
 		 */
-		                    window.clearRequestInterval = function (handle) {
+		                    window.clearRequestInterval = function(handle) {
 			                    if (window.cancelAnimationFrame) {
 				                    window.cancelAnimationFrame(handle.value);
 			} else if (window.webkitCancelAnimationFrame) {
@@ -112,7 +112,7 @@ export default class MobileButton {
 		 * @param {function} fn The callback function
 		 * @param {int} delay The delay in milliseconds
 		 */
-		                    window.requestTimeout = function (fn, delay) {
+		                    window.requestTimeout = function(fn, delay) {
 			                    if (! window.requestAnimationFrame &&
 				! window.webkitRequestAnimationFrame &&
 					      ! (window.mozRequestAnimationFrame && window.mozCancelRequestAnimationFrame) && // Firefox 5 ships without cancel support
@@ -121,11 +121,11 @@ export default class MobileButton {
 				                    return window.setTimeout(fn, delay);
 
 			                    var start = new Date().getTime(),
-			                    																																								handle = {};
+			                    																																																		handle = {};
 
 			                    function loop() {
 				                    var current = new Date().getTime(),
-				                    																																								delta = current - start;
+				                    																																																		delta = current - start;
 
 				                    if (delta >= delay) {
 					                    fn.call();
@@ -165,7 +165,7 @@ export default class MobileButton {
 				                    var hamburgers = document.querySelectorAll('.js-hamburger');
 
 				                    if (hamburgers.length) {
-					                    forEach(hamburgers, function (hamburger) {
+					                    forEach(hamburgers, function(hamburger) {
 						// console.log(_c)
 						                    _c.$html.on('click', '.js-hamburger', Hamburgers.clickHandle);
 					});
@@ -196,7 +196,7 @@ export default class MobileButton {
 				}
 
 				                    if (ele.hasClass('is-active')) {
-					                    target.first().one(_c.support.transition.end, function (e) {
+					                    target.first().one(_c.support.transition.end, function(e) {
 						                    _c.$html.one('click.clique.hamburger', cb);
 					});
 				}
@@ -229,7 +229,7 @@ export default class MobileButton {
 
 				                    var animateTimer = window.requestInterval(animate, Hamburgers.headerAnimateDelay);
 
-				                    window.requestTimeout(function () {
+				                    window.requestTimeout(function() {
 					                    window.clearRequestInterval(animateTimer);
 					                    animateTimer = window.requestInterval(animate, Hamburgers.headerAnimateInterval);
 				}, Hamburgers.headerAnimateDelay);
@@ -237,11 +237,11 @@ export default class MobileButton {
 				                    function animate() {
 					                    var current = parseInt(logo.getAttribute('data-class'), 10);
 					                    logo.classList.add('hamburger--' + classes[current]);
-					                    window.requestTimeout(function () {
+					                    window.requestTimeout(function() {
 						                    logo.classList.add('is-active');
-						                    window.requestTimeout(function () {
+						                    window.requestTimeout(function() {
 							                    logo.classList.remove('is-active');
-							                    window.requestTimeout(function () {
+							                    window.requestTimeout(function() {
 								                    logo.classList.remove('hamburger--' + classes[current]);
 								                    var next = current + 1;
 								                    if (next === classes.length) {

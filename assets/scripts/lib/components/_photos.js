@@ -18,7 +18,7 @@ export default class Photos {
 	}
 
 	setDelay() {
-		this.$figures.each(function (i) {
+		this.$figures.each(function(i) {
 			const delay = i * 0.15;
 			$(this).css({
 				'transition-delay': delay + 's',
@@ -33,7 +33,7 @@ export default class Photos {
 			triggerElement: trigger,
 		})
 		.setClassToggle(trigger, 'active')
-		.on('start', function () {
+		.on('start', function() {
 			this.remove();
 		})
 		.addTo(_c.controller);

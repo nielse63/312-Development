@@ -17,13 +17,13 @@ function getTweets(callback) {
 		cache: 'default',
 	};
 	fetch(url, opts)
-	.then(function (response) {
+	.then(function cb(response) {
 		if (! response.ok) {
 			return console.error('Error getting tweets', reponse);
 		}
 		return response.json();
 	})
-	.then(function (data) {
+	.then((data) =>
 		// set data
 		AppStore.data.tweets = data;
 
@@ -35,7 +35,7 @@ function getTweets(callback) {
 		if (callback) {
 			callback(false, AppStore);
 		}
-	}.bind(this));
+	});
 }
 
 export function getStore(checkTweets = true, callback) {
@@ -58,7 +58,7 @@ export function getStore(checkTweets = true, callback) {
 	// 	}
 	// );
 
-	Cosmic.getObjects(config, function (err, response) {
+	Cosmic.getObjects(config, function(err, response) {
 		const object = response.object;
 		const objects = response.objects;
 		const globals = AppStore.data.globals;
@@ -132,7 +132,7 @@ export function getMoreItems() {
 	AppStore.data.loading = true;
 	AppStore.emitChange();
 
-	setTimeout(function () {
+	setTimeout(function() {
 		const itemNum = AppStore.data.itemNum;
 		const moreItemNum = itemNum + 5;
 		AppStore.data.itemNum = moreItemNum;

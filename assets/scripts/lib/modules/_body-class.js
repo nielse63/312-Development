@@ -12,7 +12,7 @@ export default class BodyClass {
 
 	static exec() {
 		var classes = BodyClass.classes || [];
-		_c.$body.each(function () {
+		_c.$body.each(function() {
 			var ele = _c.$(this);
 			if (ele.attr('class')) {
 				classes = classes.concat(ele.attr('class').split(' '));

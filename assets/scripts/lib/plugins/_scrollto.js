@@ -16,8 +16,8 @@ export default class ScrollTo {
 		// based on easing equations from Robert Penner (http://www.robertpenner.com/easing)
 		var baseEasings = {};
 
-		$.each(['Quad', 'Cubic', 'Quart', 'Quint', 'Expo'], function (i, name) {
-			baseEasings[name] = function (p) {
+		$.each(['Quad', 'Cubic', 'Quart', 'Quint', 'Expo'], function(i, name) {
+			baseEasings[name] = function(p) {
 				return Math.pow(p, i + 2);
 			};
 		});
@@ -45,12 +45,12 @@ export default class ScrollTo {
 			},
 		});
 
-		$.each(baseEasings, function (name, easeIn) {
+		$.each(baseEasings, function(name, easeIn) {
 			$.easing['easeIn' + name] = easeIn;
-			$.easing['easeOut' + name] = function (p) {
+			$.easing['easeOut' + name] = function(p) {
 				return 1 - easeIn(1 - p);
 			};
-			$.easing['easeInOut' + name] = function (p) {
+			$.easing['easeInOut' + name] = function(p) {
 				return p < 0.5 ?
 				easeIn(p * 2) / 2 :
 				1 - easeIn(p * -2 + 2) / 2;
@@ -72,7 +72,7 @@ export default class ScrollTo {
 		}
 
 		// validate callback
-		callback = callback || function () {};
+		callback = callback || function() {};
 
 		// merge options with default
 		options = $.extend(true, {
@@ -111,8 +111,8 @@ export default class ScrollTo {
 		}, options);
 
 		// bind scroll listener to kill animation
-		setTimeout(function () {
-			$(window).one('mousewheel', function () {
+		setTimeout(function() {
+			$(window).one('mousewheel', function() {
 				$('body').stop(true);
 			});
 		}, 0);
