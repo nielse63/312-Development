@@ -76,11 +76,12 @@ export default class App extends Component {
 					<Header navItems={navItems} />
 					<main className={'main ' + this.getSlug()} id="main">
 						<ReactCSSTransitionGroup
-							component="div"
-							className="transition-group"
-							transitionName="transition"
-							transitionEnterTimeout={transitionDuration}
-							transitionLeaveTimeout={transitionDuration}>
+  component="div"
+  className="transition-group"
+  transitionName="transition"
+  transitionEnterTimeout={transitionDuration}
+  transitionLeaveTimeout={transitionDuration}
+      >
 							{Routes}
 						</ReactCSSTransitionGroup>
 					</main>

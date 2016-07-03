@@ -161,19 +161,19 @@ export default class Share {
 				                    if (!SHARE.loaded[type]) {
 					                    var _global;
 					                    switch (type) {
-						                    case 'facebook':
+						case 'facebook':
 						                                        _global = 'FB';
 						                                        break;
 
-						                    case 'googleplus':
+						case 'googleplus':
 						                                        _global = 'gapi';
 						                                        break;
 
-						                    case 'twitter':
+						case 'twitter':
 						                                        _global = 'twttr';
 						                                        break;
 
-						                    case 'pinterest':
+						case 'pinterest':
 						                                        _global = 'PDK';
 						                                        break;
 					}

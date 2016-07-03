@@ -38,10 +38,10 @@ export default class ScrollTo {
 			},
 			Bounce(p) {
 				var pow2,
-				bounce = 4;
+					bounce = 4;
 
 				while (p < ((pow2 = Math.pow(2, --bounce)) - 1) / 11) {}
-					return 1 / Math.pow(4, 3 - bounce) - 7.5625 * Math.pow((pow2 * 3 - 2) / 22 - p, 2);
+				return 1 / Math.pow(4, 3 - bounce) - 7.5625 * Math.pow((pow2 * 3 - 2) / 22 - p, 2);
 			},
 		});
 
@@ -83,7 +83,7 @@ export default class ScrollTo {
 
 		// set position
 		var start = window.pageYOffset,
-		to = start;
+			to = start;
 		if (positionType === 'number') {
 			to = position;
 		} else if ($(position).length) {
