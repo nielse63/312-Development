@@ -14,6 +14,14 @@ export default class Utils {
 		return (prefix || 'id') + this.now() + 'RAND' + Math.ceil(Math.random() * 100000);
 	}
 
+	isUndefined(obj) {
+		return obj === void 0;
+	}
+
+	isString(obj) {
+		return Object.prototype.toString.call(obj) === '[object String]';
+	}
+
 	prefixFor(property) {
 		var vendors  = ['Webkit', 'Moz', 'O'],
 			prop     = property[0].toUpperCase() + property.slice(1),
@@ -90,5 +98,12 @@ export default class Utils {
 		return path.replace(/\/|_/g, '-') // replace underscores & slashes with hyphens
 			.toLowerCase()                // convert to lowercase
 			.split('.')[0];               // remove extension
+	}
+
+	openWindow(url, width, height) {
+		width    = _c.utils.isUndefined(width) ? 600 : width;
+		height   = _c.utils.isUndefined(height) ? 600 : height;
+		var left = _c.$win.width() / 2 - width / 2, top = _c.$win.height() / 2 - height / 2;
+		return window.open(url, "", "menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=" + height + ",width=" + width + ",left=" + left + ",top=" + top);
 	}
 }

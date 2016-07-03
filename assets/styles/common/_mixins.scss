@@ -35,8 +35,8 @@
 
 @mixin content-link($background, $color: $global-font-color) {
 	box-shadow: 0 -3px 0 0 $background inset;
-	// color: transparent;
-	color: inherit;
+	color: transparent;
+	// color: inherit;
 	display: inline-block;
 	padding-left: 0.2em;
 	padding-right: 0.2em;
@@ -76,7 +76,7 @@
 		text-align: center;
 		will-change: color;
 		transition: 0.1s color 0.25s;
-		// color: $color;
+		color: $color;
 		// backface-visibility: hidden;
 	}
 

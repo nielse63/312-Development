@@ -156,6 +156,8 @@ $button-transition-timing-function: ease-in;
 		color: $button-disabled-color !important;
 		border-color: fade-out(#000, 0.4);
 		cursor: default;
+		pointer-events: none;
+
 		&:active,
 		&.active {
 			box-shadow: none;

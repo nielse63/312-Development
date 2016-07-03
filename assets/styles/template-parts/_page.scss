@@ -6,9 +6,9 @@ $col-padding: 50px;
 		background-color: $color-white;
 		padding: 25px 0;
 
-		body.page-home & {
-			padding-bottom: 0;
-		}
+		// body.page-home & {
+		// 	padding-bottom: 0;
+		// }
 
 		@media (min-width: $breakpoint-small) {
 			padding: 100px 0;

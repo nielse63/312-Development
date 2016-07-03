@@ -10,6 +10,10 @@ export default _.extend({}, EventEmitter.prototype, {
 		globals  : {},
 		pages    : [],
 		articles : [],
+		tweets   : [],
+		checked  : {
+			twitter : null
+		},
 	},
 
 	// Emit Change event

@@ -12,7 +12,6 @@ import AppStore from '../stores/AppStore'
 import MobileNav from './Partials/MobileNav'
 import Header from './Partials/Header'
 import Footer from './Partials/Footer'
-import Loading from './Partials/Loading'
 
 export default class App extends Component {
 
@@ -28,7 +27,7 @@ export default class App extends Component {
 
 	getStore() {
 		AppDispatcher.dispatch({
-			action: 'get-app-store'
+			action: 'get-app-store',
 		})
 	}
 
@@ -47,8 +46,8 @@ export default class App extends Component {
 
 		// Show loading for browser
 		if( ! data.ready ) {
-			if( document in window ) {
-				window.document.title = 'Loading'
+			if( document ) {
+				document.title = 'Loading'
 			}
 
 			this.getStore()
@@ -57,10 +56,8 @@ export default class App extends Component {
 				marginTop: 120
 			}
 			return (
-				<div>
-				<Loading />
-				</div>
-				)
+				<div />
+			)
 		}
 
 		// Server first

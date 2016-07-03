@@ -96,6 +96,8 @@ $transition-duration: 0.7s;
 	justify-content: space-between;
 
 	p {
+		margin-bottom: 25px;
+
 		> a {
 			@include content-link(lighten($color-blue, 20%));
 		}

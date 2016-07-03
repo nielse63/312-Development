@@ -45,9 +45,10 @@ export default class About extends Component {
 
 	render() {
 
-		const slug = this.getSlug()
-		const data = this.props.data
-		const page = data.page
+		const slug   = this.getSlug()
+		const data   = this.props.data
+		const page   = data.page
+		// const tweets = data.tweets
 
 		const metafields = page.metafields
 

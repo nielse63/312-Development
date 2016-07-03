@@ -7,12 +7,12 @@ import Clique from './lib/utils/_core'
 window._c = new Clique()
 
 // modules
-import Loading from "./lib/components/_loading"
+// import Loading from "./lib/components/_loading"
 import Nav from './lib/components/_nav'
 import Banner from './lib/components/_banner'
 
 // plugins
-// import ScrollTo from "./lib/plugins/_scrollto"
+import ScrollTo from "./lib/plugins/_scrollto"
 
 // modules
 import BodyClass from "./lib/modules/_body-class"
@@ -36,12 +36,14 @@ import WorkGrid from "./lib/components/_work-grid"
 import Photos from "./lib/components/_photos"
 import Services from "./lib/components/_services"
 // import Banner from "./lib/components/_charts"
+import Share from "./lib/components/_share"
 import Footer from "./lib/components/_footer"
 
 
 // immediate modules
-new Loading()
-BodyClass.exec();
+// new Loading()
+BodyClass.exec()
+new ScrollTo()
 
 // globals
 let didLoad = false
@@ -81,7 +83,15 @@ let modules = [
 		val : null
 	}, {
 		preload : false,
+		cls : Form,
+		val : null
+	}, {
+		preload : false,
 		cls : Footer,
+		val : null
+	}, {
+		preload : false,
+		cls : Share,
 		val : null
 	}
 ]
@@ -133,11 +143,15 @@ function enterPage() {
 	let t = setTimeout(function() {
 		clearTimeout(t)
 		t = null
-		didLoad = true
+
+		if( ! delay ) {
+			_c.$html.addClass('app-ready')
+		}
 
 		_c.controller.update()
 		initModules();
 
+		didLoad = true
 	}, delay);
 }
 

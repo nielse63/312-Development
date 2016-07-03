@@ -8,7 +8,44 @@ import _ from 'lodash'
 // AppStore
 import AppStore from '../stores/AppStore'
 
-export function getStore(callback) {
+function getTweets(callback) {
+
+	const url = 'http://api.312development.dev/tweets.php'
+	const opts = {
+		method: 'GET',
+		headers: new Headers(),
+		mode: 'cors',
+		cache: 'default'
+	}
+	fetch(url, opts)
+		.then(function(response) {
+			if( ! response.ok ) {
+				return console.error('Error getting tweets', reponse)
+			}
+			return response.json()
+		})
+		.then(function(data) {
+
+			// set data
+			AppStore.data.tweets = data
+
+			// Emit change
+			AppStore.data.ready = true
+			AppStore.emitChange()
+
+			// Trigger callback (from server)
+			if(callback) {
+				callback(false, AppStore)
+			}
+		}.bind(this))
+}
+
+export function getStore(checkTweets = true, callback) {
+
+	if( typeof checkTweets === 'function' ) {
+		callback = checkTweets
+		checkTweets = true
+	}
 
 	// const client = contentful.createClient({
 	// 	space: 'o4irotzruet8',
@@ -44,12 +81,27 @@ export function getStore(callback) {
 		AppStore.data.globals = globals
 
 		// Emit change
-		AppStore.data.ready = true
-		AppStore.emitChange()
+		// AppStore.data.ready = true
+		// AppStore.emitChange()
 
 		// Trigger callback (from server)
-		if(callback) {
-			callback(false, AppStore)
+		// if(callback) {
+		// 	callback(false, AppStore)
+		// }
+
+		// get tweets
+		if( checkTweets ) {
+			getTweets(callback)
+		} else {
+
+			// Emit change
+			AppStore.data.ready = true
+			AppStore.emitChange()
+
+			// Trigger callback (from server)
+			if(callback) {
+				callback(false, AppStore)
+			}
 		}
 	})
 }
@@ -60,56 +112,35 @@ export function getPageData(page_slug, post_slug) {
 		page_slug = 'home'
 	}
 
-	// Get page info
-	const data = AppStore.data
-	let items
+	function setPageData() {
+		const data = AppStore.data
 
-	if( page_slug === 'articles' ) {
-		page_slug = post_slug
-		items = data.articles
-	} else{
-		items = data.pages
+		let items
+
+		if( page_slug === 'articles' ) {
+			page_slug = post_slug
+			items = data.articles
+		} else{
+			items = data.pages
+		}
+
+		// get page data
+		const page = _.findWhere(items, { slug: page_slug })
+		const metafields = page.metafields
+
+		// set meta fields
+		page.fields = metafields
+
+		AppStore.data.page = page
+		AppStore.emitChange()
 	}
 
-	// get page data
-	const page = _.findWhere(items, { slug: page_slug })
-	const metafields = page.metafields
-
-	// set meta fields
-	page.fields = metafields
-
-	// for( var i = 0; i < metafields.length; i++ ) {
-	//   let metafield = metafields[i]
-	//   let key = metafield.key
-	//   let key = metafield.key
-	//   page[]
-	// }
-
-	// if(metafields && metafields.length) {
-	//   console.log(metafields);
-	//   // const hero = _.findWhere(metafields, { key: 'banner_image' })
-	//   // page.hero = config.bucket.media_url + '/' + hero.value
-
-	//   // const headline = _.findWhere(metafields, { key: 'headline' })
-	//   // page.headline = headline.value
-
-	//   // const subheadline = _.findWhere(metafields, { key: 'subheadline' })
-	//   // page.subheadline = subheadline.value
-	// }
-	// if(post_slug) {
-	//   if(page_slug === 'home'){
-	//     const articles = data.articles
-	//     const article = _.findWhere(articles, { slug: post_slug })
-	//     page.title = article.title
-	//   }
-	//   if(page_slug === 'work'){
-	//     const work_items = data.work_items
-	//     const work_item = _.findWhere(work_items, { slug: post_slug })
-	//     page.title = work_item.title
-	//   }
-	// }
-	AppStore.data.page = page
-	AppStore.emitChange()
+	// Get page info
+	if( ! AppStore.data.pages.length ) {
+		getStore(false, setPageData)
+	} else {
+		setPageData()
+	}
 }
 
 export function getMoreItems() {

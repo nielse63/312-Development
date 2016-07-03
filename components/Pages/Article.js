@@ -40,6 +40,7 @@ export default class Article extends Component {
 
 		// console.log(this.props)
 		const page = this.props.data.page
+		console.log(this.props.data)
 
 		// page vars
 		const title = page.title
@@ -47,7 +48,7 @@ export default class Article extends Component {
 		let content = page.content
 
 		// default
-		let background = '/images/blog-sample.jpg'
+		let background = window.location.origin + '/images/blog-sample.jpg'
 
 		// meta fields
 		const fields = page.metafield
@@ -91,6 +92,25 @@ export default class Article extends Component {
 			})
 		}
 
+		// share links
+		const url = window.location.origin + '/articles/' + this.props.routeParams.slug
+		const shareText = 'Check out ' + title + ' on 312 Development at ' + url
+		const image = background
+		const encodedText = encodeURIComponent(shareText)
+		const encodedURL = encodeURIComponent(url)
+		// console.log(url)
+		// $short_url = get_post_meta( $post->ID, '_shortened_url', true );
+		// if( ! $short_url ) {
+		// 	$short_url = shorten_url( $url );
+		// 	update_post_meta( $post->ID, '_shortened_url', $short_url );
+		// }
+
+		// urls
+		const facebook_url   = url
+		const twitter_url    = 'https://twitter.com/intent/tweet?text=' + encodedText + '&amp;via=cliquechicago&amp;url=' + encodedURL
+		const googleplus_url = url
+		const linkedin_url   = 'http://www.linkedin.com/shareArticle?mini=true&amp;url=' + url + '&amp;title=' + encodedText + '&amp;summary=' + encodedText + encodedURL + '&amp;source=http://312development.com'
+
 		let footer
 		if( buttons ) {
 			footer = <footer className="single-footer">
@@ -123,17 +143,17 @@ export default class Article extends Component {
 								</div>
 							</article>
 							{footer}
-							{/*<footer className="single-footer">
+							<footer className="single-footer">
 								<div className="single-footer-section section-row">
-									<p className="single-footer-lead">Stats:</p>
+									<p className="article-lead">Share:</p>
 									<ul className="list list-inline flex-center single-buttons chart-buttons">
-										<li><a href="#chart-commits" className="button active"><i className="fa fa-code"></i> Commits</a></li>
-										<li><a href="#chart-frequency" className="button"><i className="fa fa-area-chart"></i> Code Frequency</a></li>
+										<li><a href={twitter_url} data-share="twitter" className="button button-twitter"><i className="fa fa-twitter"></i> Tweet</a></li>
+										<li><a href={linkedin_url} data-share="linkedin" className="button button-linkedin"><i className="fa fa-linkedin"></i> Share</a></li>
+										<li><a href={facebook_url} data-share="facebook" className="button button-facebook"><i className="fa fa-facebook"></i> Post</a></li>
+										<li><a href={googleplus_url} data-share="googleplus" className="button button-googleplus"><i className="fa fa-googleplus"></i> Send</a></li>
 									</ul>
-									<div className="single-chart single-chart-commits" id="chart-commits"></div>
-									<div className="single-chart single-chart-frequency hidden" id="chart-frequency"></div>
 								</div>
-							</footer>*/}
+							</footer>
 						</div>
 					</div>
 				</div>

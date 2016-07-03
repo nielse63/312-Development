@@ -141,6 +141,16 @@
 		&:after {
 			bottom: 0;
 		}
+
+		.article-lead {
+			margin-top: 0;
+			padding-top: 0;
+
+			&:before,
+			&:after {
+				display: none;
+			}
+		}
 	}
 
 	&-blog {
