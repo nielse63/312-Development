@@ -13,16 +13,16 @@ AppDispatcher.register((payload) => {
 		// 	getTweets()
 		// 	break
 	case 'get-app-store':
-			getStore(payload.callback);
-			break;
+		getStore(payload.callback);
+		break;
 	case 'get-page-data':
-			getPageData(payload.page_slug, payload.post_slug);
-			break;
+		getPageData(payload.page_slug, payload.post_slug);
+		break;
 	case 'get-more-items':
-			getMoreItems();
-			break;
+		getMoreItems();
+		break;
 	default:
-			return true;
+		return true;
 	}
 	                    return true;
 });

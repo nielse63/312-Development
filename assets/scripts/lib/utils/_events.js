@@ -9,18 +9,18 @@ export default class Events {
 					var element = $(this),
 						uid = _c.utils.uid('scrollstart'),
 						ns = 'scrolling.clique.events.' + uid,
-						handler = function (e) {
+						handler = function(e) {
 							var target = _c.$(e.target);
 
 							e.type = 'scrollstart';
 							target.trigger('scrollstart', e);
 						};
 
-					element.on('scrollstart', function () {
+					element.on('scrollstart', function() {
 						return element.off(ns);
 					});
 
-					element.on('scrollend', function () {
+					element.on('scrollend', function() {
 						return element.on(ns, handler).data(uid, handler);
 					});
 
@@ -47,11 +47,11 @@ export default class Events {
 
 					var uid = _c.utils.uid('scrollend'),
 						timer = null,
-						handler = function (e, scrollData) {
+						handler = function(e, scrollData) {
 							if (timer) {
 								window.clearTimeout(timer);
 							}
-							timer = window.setTimeout(function () {
+							timer = window.setTimeout(function() {
 								timer = null;
 								var target = _c.$(e.target);
 								// console.log(scrollData);
@@ -77,7 +77,7 @@ export default class Events {
 						ns = 'resize.clique.events.' + uid,
 						latency = _c.$.event.special.resizeend.latency + 150,
 						timer,
-						handler = function (e) {
+						handler = function(e) {
 							if (timer) {
 								window.clearTimeout(timer);
 							}
@@ -88,13 +88,13 @@ export default class Events {
 								},
 								target = _c.$(e.target);
 
-							target.one('resizeend', function () {
+							target.one('resizeend', function() {
 								if (timer) {
 									window.clearTimeout(timer);
 								}
 							});
 
-							timer = setTimeout(function () {
+							timer = setTimeout(function() {
 								timer = null;
 								if (memory.height === window.innerHeight && memory.width === window.innerWidth) {
 									target.trigger('resizeend');
@@ -105,11 +105,11 @@ export default class Events {
 						};
 
 					element.data('clique.event.resizestart.uid', uid);
-					element.on('resizestart', function () {
+					element.on('resizestart', function() {
 						return _c.$(this).off(ns);
 					});
 
-					element.on('resizeend', function () {
+					element.on('resizeend', function() {
 						return _c.$(this).on(ns, handler).data(uid, handler);
 					});
 
@@ -133,12 +133,12 @@ export default class Events {
 						timer,
 						ns = 'resize.clique.events.' + uid,
 						element = _c.$(this),
-						handler = function (e) {
+						handler = function(e) {
 							if (timer) {
 								window.clearTimeout(timer);
 							}
 
-							timer = setTimeout(function () {
+							timer = setTimeout(function() {
 								timer = null;
 								var target = _c.$(e.target);
 
@@ -147,11 +147,11 @@ export default class Events {
 						};
 
 					element.data('clique.event.resizeend.uid', uid);
-					element.on('resizeend', function () {
+					element.on('resizeend', function() {
 						return _c.$(this).off(ns);
 					});
 
-					return element.on('resizestart', function () {
+					return element.on('resizestart', function() {
 						return _c.$(this).on(ns, handler).data(uid, handler);
 					});
 				},
@@ -173,7 +173,7 @@ export default class Events {
 	}
 
 	createEvents() {
-		var evtFn = function (fn) {
+		var evtFn = function(fn) {
 			if (fn) {
 				return this.on(k, fn);
 			} else {

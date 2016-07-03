@@ -138,7 +138,7 @@ function enterPage() {
 
 	                  const delay = didLoad ? 700 : 0;
 
-	                    let t = setTimeout(function () {
+	                    let t = setTimeout(function() {
 		                    clearTimeout(t);
 		                    t = null;
 
@@ -189,7 +189,7 @@ function messageCallback(e) {
 
 		                    enterPage();
 
-		                    setTimeout(function () {
+		                    setTimeout(function() {
 			                    NProgress.done();
 		}, 500);
 	}

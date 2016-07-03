@@ -23,14 +23,14 @@ export default class Share {
 				},
 
 				facebook() {
-					window.fbAsyncInit = function () {
+					window.fbAsyncInit = function() {
 						return window.FB.init({
 							appId: '834389063291117',
 							xfbml: true,
 							version: 'v2.4',
 						});
 					};
-					return function (d, s, id) {
+					return function(d, s, id) {
 						var fjs = d.getElementsByTagName(s)[0];
 						if (d.getElementById(id)) {
 							return;
@@ -58,7 +58,7 @@ export default class Share {
 					return window.FB.ui({
 						method: 'share',
 						href: SHARE.data.url,
-					}, function (response) {
+					}, function(response) {
 						_c.$doc.trigger('didshare.clique.dom', [{
 							service: 'facebook',
 							response,
@@ -74,21 +74,21 @@ export default class Share {
 					}
 
 					function share() {
-						return window.gapi.client.load('plus', 'v1').then(function () {
+						return window.gapi.client.load('plus', 'v1').then(function() {
 							var shareUrl = SHARE.data.url;
 							var url = 'https://plus.google.com/share?url=' + shareUrl;
 							_c.utils.openWindow(url);
 						});
 					}
 
-					return window.gapi.load('auth2', function () {
+					return window.gapi.load('auth2', function() {
 						var auth2 = window.gapi.auth2.init({
 							client_id: '507239089267-8c37f28d595ct2ubpfpbbsa7jlue6o3b.apps.googleusercontent.com',
 							scope: 'profile',
 						});
-						return auth2.then(function () {
+						return auth2.then(function() {
 							if (!auth2.isSignedIn.get()) {
-								auth2.isSignedIn.listen(function (signedin) {
+								auth2.isSignedIn.listen(function(signedin) {
 									if (signedin) {
 										var user = auth2.currentUser.get().getBasicProfile();
 										return share(user);
@@ -112,7 +112,7 @@ export default class Share {
 					if (btn.attr('href') === SHARE.data.url) {
 						return;
 					}
-					window.twttr.events.bind('tweet', function (e) {
+					window.twttr.events.bind('tweet', function(e) {
 						_c.$doc.trigger('didshare.clique.dom', [{
 							service: 'twitter',
 							response: e,
@@ -136,7 +136,7 @@ export default class Share {
 		function activateShareButton(ele, global, method) {
 			if (ele.length && typeof SHARE.load[method] !== 'undefined') {
 				ele.addClass('disabled');
-				var interval = setInterval(function () {
+				var interval = setInterval(function() {
 					if (window[global]) {
 						clearInterval(interval);
 						return ele.removeClass('disabled');
@@ -155,7 +155,7 @@ export default class Share {
 				}
 			}
 
-			_c.$('[data-share]').each(function () {
+			_c.$('[data-share]').each(function() {
 				var ele = _c.$(this),
 					type = ele.data('share');
 				if (!SHARE.loaded[type]) {
@@ -187,7 +187,7 @@ export default class Share {
 			});
 		}
 
-		_c.$html.on('click', '[data-share]', function (e) {
+		_c.$html.on('click', '[data-share]', function(e) {
 			e.preventDefault();
 			var type = _c.$(this).data('share');
 			return SHARE.share[type](_c.$(this));
@@ -195,7 +195,7 @@ export default class Share {
 
 		const selector = '[data-retweet], [data-share]';
 		let checked = 0;
-		let interval = setInterval(function () {
+		let interval = setInterval(function() {
 			if (checked > 12 || _c.$(selector).length) {
 				clearInterval(interval);
 				interval = null;

@@ -36,7 +36,7 @@ export default class WorkGrid {
 	colorizeWorkBlocks() {
 		const colors = this.getRandomColor();
 		let idx = 0;
-		this.$workBlocks.each(function () {
+		this.$workBlocks.each(function() {
 			const $ele = $(this);
 			if ($ele.data('colorset')) {
 				return;
@@ -72,13 +72,13 @@ export default class WorkGrid {
 
 	blockHover() {
 		// bind work blocks scroll listener
-		this.$workBlocks.each(function (i) {
+		this.$workBlocks.each(function(i) {
 			const $ele = $(this);
 
 			$ele.off('mouseenter mouseleave');
-			$ele.on('mouseenter', function () {
+			$ele.on('mouseenter', function() {
 				$(this).find('.work-block-figure').addClass('hovering');
-			}).on('mouseleave', function () {
+			}).on('mouseleave', function() {
 				$(this).find('.work-block-figure').removeClass('hovering');
 			});
 		});
@@ -93,12 +93,12 @@ export default class WorkGrid {
 			triggerElement: section,
 			duration: section.clientHeight,
 		})
-		.on('progress', function (e) {
+		.on('progress', function(e) {
 			if (working) {
 				return;
 			}
 			working = true;
-			$workBlocks.filter(':not(.hovering)').each(function (i) {
+			$workBlocks.filter(':not(.hovering)').each(function(i) {
 				const $ele = $(this);
 				const $figure = $ele.find('.work-block-figure');
 				let diff = $figure.data('diff');

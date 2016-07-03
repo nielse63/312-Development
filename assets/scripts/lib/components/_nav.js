@@ -20,10 +20,10 @@ export default class Nav {
 
 		// bind listeners
 		if (! this.$line.hasClass('active')) {
-			_c.$('.transition-appear').one(_c.support.animation.end, function (_this) {
-				return function () {
+			_c.$('.transition-appear').one(_c.support.animation.end, function(_this) {
+				return function() {
 					_this.initActiveLine();
-					setTimeout(function () {
+					setTimeout(function() {
 						_this.$line.addClass('active');
 					}, 100);
 				};
@@ -65,7 +65,7 @@ export default class Nav {
 
 		var $target = $(e.target);
 		var _this = this;
-		var t = setTimeout(function () {
+		var t = setTimeout(function() {
 			if (! _this.hovering) {
 				clearTimeout(t);
 				t = null;
@@ -79,7 +79,7 @@ export default class Nav {
 	onMouseleave(e) {
 		this.hovering = false;
 		var _this = this;
-		this.timeout = setTimeout(function () {
+		this.timeout = setTimeout(function() {
 			_this.setActiveLine(_this.$active);
 		}, this.delay);
 	}
@@ -88,7 +88,7 @@ export default class Nav {
 		this.setActiveLine(this.$active);
 		var _this = this;
 
-		this.$items.each(function () {
+		this.$items.each(function() {
 			var $ele = $(this);
 			$ele.off('.nav');
 			$ele

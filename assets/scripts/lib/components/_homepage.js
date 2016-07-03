@@ -21,7 +21,7 @@ export default class Homepage {
 			triggerElement: trigger,
 		})
 		.setClassToggle(container, 'loaded')
-		.on('start', function () {
+		.on('start', function() {
 			this.remove();
 		})
 		.addTo(_c.controller);

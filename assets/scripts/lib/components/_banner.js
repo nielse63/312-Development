@@ -37,11 +37,11 @@ export default class Banner {
 			duration,
 			offset,
 		})
-		.on('enter', function () {
+		.on('enter', function() {
 			$title.addClass('no-trans');
 			this.off('enter');
 		})
-		.on('progress', function (e) {
+		.on('progress', function(e) {
 			const p = e.progress;
 			const y = -50 * p;
 			const o = 1 - p;

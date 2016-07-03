@@ -2,7 +2,7 @@
 export default class Utils {
 
 	constructor() {
-		this.now = Date.now || function () {
+		this.now = Date.now || function() {
 			return new Date().getTime();
 		};
 
@@ -58,10 +58,10 @@ export default class Utils {
 	debounce(fn, wait, immediate) {
 		var timeout;
 		wait = wait || 0;
-		return function () {
+		return function() {
 			var context = this,
 				args = arguments,
-				later = function () {
+				later = function() {
 					timeout = null;
 					if (! immediate) {
 						fn.apply(context, args);

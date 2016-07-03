@@ -40,7 +40,7 @@ export default class Form {
 	}
 
 	defineListeners() {
-		this.element.on('submit', function (e) {
+		this.element.on('submit', function(e) {
 			e.preventDefault();
 			e.stopPropagation();
 
@@ -51,13 +51,13 @@ export default class Form {
 			}
 		});
 
-		this.$inputs.on('focus', function () {
+		this.$inputs.on('focus', function() {
 			_c.$(this).closest('.input-wrapper').addClass('focus');
-		}).on('blur', function () {
+		}).on('blur', function() {
 			_c.$(this).closest('.input-wrapper').removeClass('focus');
-		}).on('keyup blur', function () {
+		}).on('keyup blur', function() {
 			let isValid = true;
-			this.$inputs.each(function () {
+			this.$inputs.each(function() {
 				if (this.getAttribute('aria-invalid') === 'true' || this.getAttribute('aria-invalid') === null) {
 					isValid = false;
 					return false;
@@ -85,7 +85,7 @@ export default class Form {
 	}
 
 	setNames() {
-		this.$inputs.each(function (i) {
+		this.$inputs.each(function(i) {
 			if (this.getAttribute('name')) {
 				return;
 			}
@@ -135,8 +135,8 @@ export default class Form {
 				}
 			},
 			onsubmit: false,
-			showErrors: function (_this) {
-				return function (errorMap, errorList) {
+			showErrors: function(_this) {
+				return function(errorMap, errorList) {
 					// didSubmit = true;
 					// console.log(this);
 
@@ -180,7 +180,7 @@ export default class Form {
 							_c.$.scrollTo($target, {
 								offset: -50,
 								duration: distance,
-							}, function () {
+							}, function() {
 								$target.focus();
 							});
 						}

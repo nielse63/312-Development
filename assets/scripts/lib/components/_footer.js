@@ -19,7 +19,7 @@ export default class Footer {
 		const offsetTop = this.$footer.offset().top;
 		const offsetBottom = offsetTop + this.$footer.outerHeight();
 
-		this.$footer.find('path').each(function () {
+		this.$footer.find('path').each(function() {
 			const $path = $(this);
 
 			// see if we even need to set object
@@ -51,7 +51,7 @@ export default class Footer {
 			offset: footer.clientHeight / 2,
 		})
 		.setClassToggle(footer, 'inview')
-		.on('start', function () {
+		.on('start', function() {
 			this.remove();
 		})
 		.addTo(_c.controller);

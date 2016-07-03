@@ -18,7 +18,7 @@ export default class Services {
 	}
 
 	setDelay() {
-		this.$services.each(function () {
+		this.$services.each(function() {
 			const delay = Math.random();
 
 			$(this).find('.service-figure, p').css({
@@ -34,7 +34,7 @@ export default class Services {
 			triggerElement: trigger,
 		})
 		.setClassToggle(trigger, 'active')
-		.on('start', function () {
+		.on('start', function() {
 			this.remove();
 		})
 		.addTo(_c.controller);
