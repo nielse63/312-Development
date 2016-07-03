@@ -7,6 +7,6 @@
 		"no-spaced-func": "warn",
 		"space-before-function-paren": ["warn", "never"],
 		"space-in-parens": ["warn", "never"],
-		"space-infix-ops": ["warn", "always"]
+		"space-infix-ops": ["error"]
 	}
 }
