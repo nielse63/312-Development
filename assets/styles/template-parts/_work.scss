@@ -1,5 +1,6 @@
 
 $transition-delay: 0.75s;
+$figure-offset: 15vh;
 
 .work {
 	&-section {
@@ -21,17 +22,11 @@ $transition-delay: 0.75s;
 		padding: 0;
 		list-style: none;
 		display: flex;
-		flex-direction: column;
-		width: 100%;
+		flex-wrap: wrap;
 
 		@media (min-width: $breakpoint-medium) {
-			width: 50%;
 			transform: translate(0, -250px);
 			will-change: transform;
-		}
-
-		@media (min-width: $breakpoint-large) {
-			width: 50%;
 		}
 
 		.loaded & {
@@ -40,17 +35,10 @@ $transition-delay: 0.75s;
 				transform: translate(0, 0);
 			}
 		}
-
-		& + & {
-			.loaded & {
-				@media (min-width: $breakpoint-small) {
-					transition-delay: ($transition-delay + 0.15s);
-				}
-			}
-		}
 	}
 
 	&-block {
+		width: 100%;
 		position: relative;
 		display: block;
 		overflow: hidden;
@@ -59,6 +47,17 @@ $transition-delay: 0.75s;
 		will-change: transform, opacity;
 		transition: 0.5s transform 1s,
 					0.5s opacity 1s;
+
+		@media (min-width: $breakpoint-medium) {
+			width: 50%;
+		}
+
+		&:nth-child(even) {
+			.work-figure {
+				top: auto;
+				bottom: 0;
+			}
+		}
 
 		&.dark {
 			.work-block-content {
@@ -118,7 +117,6 @@ $transition-delay: 0.75s;
 							0.5s opacity;
 				will-change: opacity, transform;
 				transform: translate(-15px, 0);
-				// display: none;
 
 				html.touch & {
 					display: none;
@@ -127,13 +125,11 @@ $transition-delay: 0.75s;
 		}
 
 		&-figure {
-			$diff: 5vh;
-
 			position: absolute;
 			top: 0;
 			left: -15px;
 			right: -15px;
-			height: calc(100% + #{$diff});
+			height: calc(100% + #{$figure-offset});
 			background-position: center;
 			background-repeat: no-repeat;
 			background-size: cover;

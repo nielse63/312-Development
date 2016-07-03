@@ -10,6 +10,7 @@
 
 $title-font-size: 44px;
 $title-color: $global-font-color;
+$title-transition-delay: 0.35s;
 
 $link-background-color: $color-orange;
 // $link-background-color: fade-out($global-font-color, 0.25);
@@ -23,6 +24,7 @@ $link-color: $color-white;
 	perspective-origin: top center;
 	perspective: 100vw;
 	contain: style;
+	// padding-top: 100px;
 
 	&-title,
 	&-subtitle {
@@ -43,8 +45,8 @@ $link-color: $color-white;
 		}
 
 		.loaded & {
-			transition: 1s transform 1s,
-						1s opacity 1s;
+			transition: 1s transform $title-transition-delay,
+						1s opacity $title-transition-delay;
 			opacity: 1;
 			transform: none;
 		}
@@ -152,19 +154,19 @@ $link-color: $color-white;
 		position: relative;
 
 		@media (min-width: $breakpoint-small) {
-			font-size: 1.75em;
+			font-size: 1.5em;
 		}
 
-		@media (min-width: $breakpoint-medium) {
-			font-size: 2em;
-		}
+		// @media (min-width: $breakpoint-medium) {
+		// 	font-size: 2em;
+		// }
 
-		&:before,
-		&:after {
+		&:before {
 			content: '';
 			display: block;
 			height: 1px;
-			width: 25%;
+			width: 215px;
+			max-width: 80%;
 			left: 50%;
 			transform: translate(-50%, 0);
 			position: absolute;
@@ -175,8 +177,8 @@ $link-color: $color-white;
 			bottom: 0;
 		}
 
-		&:after {
-			top: 0;
-		}
+		// &:after {
+		// 	top: 0;
+		// }
 	}
 }

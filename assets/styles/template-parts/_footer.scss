@@ -1,13 +1,16 @@
+
+
 .footer {
-	background-color: #2c3e50;
+	background-color: $color-blue-dark;
 	padding: 50px 0;
 	position: relative;
 	overflow: hidden;
 	contain: style;
+	line-height: 1;
 
 	&.inview {
 		path {
-			transition-delay: 0.5s;
+			// transition-delay: 0.5s;
 			stroke-dashoffset: 0 !important;
 		}
 	}

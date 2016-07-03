@@ -1,81 +1,62 @@
 
-html.transitioning {
+$transition-out-duration: 0.5s;
+$transition-in-duration: $transition-out-duration + ($transition-out-duration * 0.3);
 
-	// &,
-	// body {
-	// 	background-color: $color-black;
-	// }
-
-	body {
-		perspective: 1200px;
-		perspective-origin: 50% 50vh;
-	}
-}
-
-.transition-in-wrapper,
-.transition-out-wrapper {
-	background-color: $color-white;
-	width: 100%;
-	height: 100%;
-	position: absolute;
-	min-height: 100vh;
-	top: 0;
-	left: 0;
-	visibility: hidden;
-	overflow: hidden;
-	backface-visibility: hidden;
-	transform: translate3d(0, 0, 0);
-	transform-style: preserve-3d;
-}
-
-@keyframes pageIn {
+@keyframes transitionAppear {
 	from {
-		transform: scale(0.8);
+		transform: scale(0.95);
+		opacity: 0;
 	}
 	to {
 		transform: scale(1);
+		opacity: 1;
 	}
 }
 
-.transition-in-wrapper {
-	position: absolute;
-	top: 0;
-	left: 0;
-	width: 100%;
-	z-index: -1;
-	// transform: translate3d(0, 0, -150px);
-	transform: scale(0.8);
-	transform-origin: 50% 50vh;
-	will-change: visibility, transform;
+.transition {
+	&-appear {
+		animation: 0.5s transitionAppear ease-out both;
+		opacity: 0;
+		transform: scale(0.9);
+		transform-origin: 50% 50vh;
+	}
 
-	&.coming {
-		visibility: visible;
-		animation: 0.7s pageIn ease both;
-		// transition: 0.5s transform ease-in;
+	&-enter,
+	&-leave {
+		pointer-events: none;
+		transition-timing-function: ease-in;
+		backface-visibility: hidden;
+	}
+
+	&-enter {
+		transform: translate(0, 100%);
+		transition: $transition-in-duration transform 0.3s;
+		position: relative;
+		z-index: 1;
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100vw;
+
+		&.transition-enter-active {
+			transform: translate(0, 0);
+		}
+	}
+
+	&-leave {
 		// transform: scale(1);
-		// transform: translate3d(0, 0, 0);
-	}
-}
+		transform-origin: 50% 50vh;
+		transition-duration: $transition-out-duration;
+		// position: absolute;
+		// top: 0;
+		// left: 0;
+		// width: 100vw;
+		transition: $transition-out-duration transform,
+					$transition-out-duration opacity;
 
-@keyframes pageOut {
-	from {
-		transform: translate(0, 0);
-	}
-	to {
-		transform: translate(-100%, 0);
-	}
-}
-
-.transition-out-wrapper {
-	visibility: visible;
-	position: relative;
-	z-index: 1;
-	transform: translate(0, 0);
-	will-change: transform;
-
-	&.leaving {
-		animation: 0.7s pageOut ease both;
-		// transition: 0.7s transform ease;
-		// transform: translate(-100%, 0);
+		&.transition-leave-active {
+			transform: scale(0.9);
+			opacity: 0.5;
+		}
 	}
 }

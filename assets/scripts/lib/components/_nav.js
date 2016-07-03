@@ -1,60 +1,102 @@
 
-(function(_c) {
-	'use strict';
+export default class Nav {
 
-	function initActiveLine() {
-		var $line = _c.$('.body-wrap').last().find('.nav-menu .line');
+	constructor() {
+		this.$line = _c.$('.body-wrap').last().find('.nav-menu .line');
 
 		// guards
-		if( ! $line.is(':visible') ) {
+		if( ! this.$line.is(':visible') ) {
 			return;
 		}
 
-		var $items  = $line.prevAll('li');
-		var $active = $items.filter('.active');
-		var timeout;
-		var hovering = false;
+		// properties
+		this.$parent   = this.$line.closest('.nav-menu');
+		this.$items    = this.$line.prevAll('li').find('a');
+		this.$active   = this.$items.filter('.active').last();
+		this.hovering  = false;
+		this.delay     = 500;
+		this.top       = 10;
+		this.timeout;
 
-		function setActiveLine($ele) {
-			var left  = $ele.position().left + parseFloat( $ele.css('margin-left') ) + parseFloat( $ele.css('padding-left') );
-			var width = $ele.width();
+		// bind listeners
+		if( ! this.$line.hasClass('active') ) {
+			_c.$('.transition-appear').one(_c.support.animation.end, function(_this) {
+				return function() {
+					_this.initActiveLine();
+					setTimeout(function() {
+						_this.$line.addClass('active')
+					}, 100);
+				};
+			}(this));
 
-			$line.css({
-				transform : 'translate(' + left + 'px, 0)',
-				width : width
-			});
+		} else {
+			this.setActiveLine(this.$active);
 		}
 
-		setActiveLine( $active );
-		$items.each(function() {
-			$(this).off('mouseenter mouseleave');
-			$(this).on('mouseenter', function() {
-				hovering = true;
+		// init
 
-				if( timeout ) {
-					clearTimeout(timeout);
-					timeout = null;
-				}
+		return this
+	}
 
-				var $this = $(this);
-				var t = setTimeout(function() {
-					if( ! hovering ) {
-						clearTimeout(t);
-						t = null;
-						return;
-					}
+	setActiveLine($link) {
+		var $ele  = $link.parent('li');
+		var left  = $ele.position().left + parseFloat( $ele.css('margin-left') ) + parseFloat( $ele.css('padding-left') );
+		var width = $ele.width();
 
-					setActiveLine( $this );
-				}, 150);
-			}).on('mouseleave', function() {
-				hovering = false;
-				timeout = setTimeout(function() {
-					setActiveLine( $active );
-				}, 1000);
-			});
+		this.$line.css({
+			transform : 'translate(' + left + 'px, 0)',
+			width     : width
 		});
 	}
 
-	_c.$doc.on('ready loadready loaded', initActiveLine);
+	onClick(e) {
+		this.$active = $(e.target);
+		this.$items.removeClass('active');
+		this.$active.addClass('active');
+		this.setActiveLine(this.$active);
+	}
 
-})(window.Clique);
+	onMouseenter(e) {
+		this.hovering = true;
+
+		if( this.timeout ) {
+			clearTimeout(this.timeout);
+			this.timeout = null;
+		}
+
+		var $target = $(e.target);
+		var _this = this;
+		var t = setTimeout(function() {
+			if( ! _this.hovering ) {
+				clearTimeout(t);
+				t = null;
+				return;
+			}
+
+			_this.setActiveLine( $target );
+		}, 100);
+	}
+
+	onMouseleave(e) {
+		this.hovering = false;
+		var _this = this;
+		this.timeout = setTimeout(function() {
+			_this.setActiveLine( _this.$active );
+		}, this.delay);
+	}
+
+	initActiveLine() {
+
+		this.setActiveLine( this.$active );
+		var _this = this;
+
+		this.$items.each(function() {
+			var $ele = $(this);
+			$ele.off('.nav');
+			$ele
+				.on('click.nav', _this.onClick.bind(_this))
+				.on('mouseenter.nav', _this.onMouseenter.bind(_this))
+				.on('mouseleave.nav', _this.onMouseleave.bind(_this));
+		});
+	}
+}

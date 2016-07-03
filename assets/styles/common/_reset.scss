@@ -8,7 +8,7 @@
 // Variables
 // ========================================================================
 
-$base-body-background: $global-background;
+$base-body-background: $color-blue-dark;
 $base-body-font-family: $global-font-family;
 $base-body-font-size: $global-font-size;
 $base-body-line-height: strip-unit($global-line-height) / strip-unit($global-font-size); // (16px / 24px)
@@ -85,7 +85,6 @@ $base-selection-color: $color-white;
 html {
 	-webkit-text-size-adjust: 100%;
 	-ms-text-size-adjust: 100%;
-	background-color: $base-body-background;
 }
 
 html,

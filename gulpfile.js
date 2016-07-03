@@ -10,7 +10,6 @@ var gulpif       = require('gulp-if');
 var imagemin     = require('gulp-imagemin');
 var jshint       = require('gulp-jshint');
 var lazypipe     = require('lazypipe');
-var less         = require('gulp-less');
 var merge        = require('merge-stream');
 var cssNano      = require('gulp-cssnano');
 var plumber      = require('gulp-plumber');
@@ -92,9 +91,6 @@ var cssTasks = function(filename) {
 			return gulpif(enabled.maps, sourcemaps.init());
 		})
 		.pipe(function() {
-			return gulpif('*.less', less());
-		})
-		.pipe(function() {
 			return gulpif('*.scss', sass({
 				outputStyle: 'nested', // libsass doesn't support expanded yet
 				precision: 10,
@@ -110,9 +106,9 @@ var cssTasks = function(filename) {
 				'opera 12'
 			]
 		})
-		.pipe(cssNano, {
-			safe: true
-		})
+		// .pipe(cssNano, {
+		// 	safe: true
+		// })
 		.pipe(function() {
 			return gulpif(enabled.rev, rev());
 		})
@@ -169,12 +165,12 @@ var writeToManifest = function(directory) {
 // Run `gulp -T` for a task summary
 
 // ### HTML
-gulp.task('htmlSSI', function() {
-	gulp.src('ssi/**/*.html')
-		.pipe(includer())
-		.pipe(gulp.dest('./dist/'))
-		.pipe(connect.reload());
-});
+// gulp.task('htmlSSI', function() {
+// 	gulp.src('ssi/**/*.html')
+// 		.pipe(includer())
+// 		.pipe(gulp.dest('./dist/'))
+// 		.pipe(connect.reload());
+// });
 
 // ### Styles
 // `gulp styles` - Compiles, combines, and optimizes Bower CSS and project CSS.
@@ -262,10 +258,6 @@ gulp.task('other', function() {
 		.pipe(gulp.dest(path.dist));
 });
 
-// ### Clean
-// `gulp clean` - Deletes the build folder entirely.
-gulp.task('clean', require('del').bind(null, [path.dist]));
-
 // ### Watch
 // `gulp watch` - Use BrowserSync to proxy your dev server and synchronize code
 // changes across devices. Specify the hostname of your dev server at
@@ -281,17 +273,18 @@ gulp.task('watch', function() {
 	//     blacklist: ['/wp-admin/**']
 	//   }
 	// });
-	connect.server({
-		root: __dirname + '/dist',
-		livereload: true
-	});
-	gulp.watch(['ssi/**/*.html'], ['wiredep', 'htmlSSI']);
+	// connect.server({
+	// 	root: __dirname + '/dist',
+	// 	livereload: true,
+	// 	port: 8888
+	// });
+	// gulp.watch(['ssi/**/*.html'], ['wiredep', 'htmlSSI']);
 	gulp.watch([path.source + 'styles/**/*'], ['styles']);
-	gulp.watch([path.source + 'scripts/**/*'], ['jshint', 'scripts']);
+	// gulp.watch([path.source + 'scripts/**/*'], ['jshint', 'scripts']);
 	gulp.watch([path.source + 'fonts/**/*'], ['fonts']);
 	gulp.watch([path.source + 'images/**/*'], ['images']);
 	gulp.watch([path.source + 'other/**/*'], ['other']);
-	gulp.watch(['bower.json', 'assets/manifest.json'], ['build']);
+	// gulp.watch(['bower.json', path.source + 'manifest.json'], ['build']);
 });
 
 
@@ -302,7 +295,7 @@ gulp.task('build', function(callback) {
 	runSequence('styles',
 							'scripts',
 							['fonts', 'images'],
-							'htmlSSI',
+							// 'htmlSSI',
 							callback);
 });
 

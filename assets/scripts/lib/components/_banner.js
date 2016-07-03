@@ -1,49 +1,58 @@
 
-(function(_c) {
-	'use strict';
+import ScrollMagic from 'scrollmagic'
+import {TweenMax} from 'gsap'
 
-	var controller;
+export default class Banner {
 
-	function bannerScroll() {
-		var $banner  = $('.banner');
-		var $title   = $('.banner-title');
-		var offset   = $banner[0].offsetTop;
-		var duration = $title.offset().top + $title.outerHeight() - offset;
+	constructor() {
 
-		new ScrollMagic.Scene({
+		this.$banner = _c.$('.banner')
+		if( ! this.$banner.length ) {
+			return
+		}
+
+		this.$title = this.$banner.find('.banner-title')
+		this.offset = this.$banner[0].offsetTop;
+
+		// bind banner scroll listener
+		if( _c.controller.scrollPos() <= this.offset ) {
+			this.bindTrigger();
+		}
+
+		// set loaded class
+		this.$banner.addClass('loaded')
+
+		return this
+	}
+
+	bindTrigger() {
+		this.$title.one(_c.support.transition.end, this.bindScroll.bind(this));
+	}
+
+	bindScroll(e) {
+
+		const $title     = this.$title;
+		const offset     = this.offset;
+		const duration   = $title.offset().top + $title.outerHeight() - offset;
+
+		this.scene = new ScrollMagic.Scene({
 			duration : duration,
-			offset : offset,
+			offset   : offset,
 		})
 		.on('enter', function() {
 			$title.addClass('no-trans');
 			this.off('enter');
 		})
-		.setTween($title[0], {
-			y       : '-50vh',
-			opacity : 0,
+		.on('progress', function(e) {
+			let p = e.progress
+			let y = -50 * p
+			let o = 1 - p
+
+			TweenMax.to($title[0], 0.5, {
+				y : y,
+				opacity : o
+			})
 		})
-		.addTo(controller);
+		.addTo(_c.controller);
 	}
-
-	function initBanner() {
-
-		if( ! $('.banner').length ) {
-			return;
-		}
-
-		if( controller ) {
-			controller.destroy(true);
-		}
-		controller = new ScrollMagic.Controller();
-
-		// bind banner scroll listener
-		_c.$('.banner-title').each(function() {
-			_c.$(this).one(_c.support.transition.end, function() {
-				bannerScroll();
-			});
-		});
-	}
-
-	_c.$doc.on('ready loadready loaded', initBanner);
-
-})(window.Clique);
+}

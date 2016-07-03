@@ -48,8 +48,10 @@ $button-large-padding-horizontal: 15px;
 $button-background: $color-orange;
 $button-color: $color-white;
 
-$button-hover-background: darken($button-background, 4%);
-$button-hover-color: darken($button-color, 4%);
+// $button-hover-background: darken($button-background, 10%);
+$button-hover-background: fade-out($button-background, 0.2);
+// $button-hover-color: darken($button-color, 4%);
+$button-hover-color: $button-color;
 
 $button-active-background: $button-hover-background;
 $button-active-color: $button-hover-color;
@@ -87,8 +89,8 @@ $button-border-width: $global-border-width;
 $button-border: fade-out(#000, 0.94);
 $button-hover-border: fade-out(#000, 0.84);
 
-$button-transition-duration: $global-transition-duration;
-$button-transition-timing-function: $global-transition-timing-function;
+$button-transition-duration: 0.15s;
+$button-transition-timing-function: ease-in;
 
 // ========================================================================
 // Component: Button
@@ -109,7 +111,7 @@ $button-transition-timing-function: $global-transition-timing-function;
 	height: $button-height;
 	text-decoration: none;
 	text-align: center;
-	border: $button-border-width solid $button-border;
+	border: 0;
 	cursor: pointer;
 	transition-property: background-color, border-color, color;
 	transition-duration: $button-transition-duration;
@@ -119,6 +121,7 @@ $button-transition-timing-function: $global-transition-timing-function;
 	letter-spacing: 2px;
 	width: 100%;
 	appearance: none;
+	box-shadow: 0 -3px 0 fade-out($color-black, 0.75) inset;
 
 	@media (min-width: $breakpoint-small) {
 		width: auto;
@@ -178,7 +181,7 @@ $button-transition-timing-function: $global-transition-timing-function;
 		&:focus,
 		&:active,
 		&.active {
-			background-color: darken($background-color, 4%);
+			background-color: fade-out($background-color, 0.2);
 			color: $color;
 		}
 	}

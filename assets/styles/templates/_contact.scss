@@ -1,13 +1,8 @@
 
 .contact {
-	padding-top: 0;
-	padding-bottom: 100px;
 
 	&-banner {
 		background-image: url('../images/contact.jpg');
-		background-position: center;
-		background-repeat: no-repeat;
-		background-size: cover;
 	}
 
 	&-title {
@@ -21,11 +16,6 @@
 	}
 
 	&-article {
-		padding: 50px 0 0;
-
-		@media (min-width: $breakpoint-small) {
-			padding: 100px 0 0;
-		}
 
 		.section-row {
 			&:nth-child(even) {
@@ -43,32 +33,4 @@
 			}
 		}
 	}
-
-	// &-row {
-	// 	// & + & {
-	// 	// 	margin-top: 50px;
-
-	// 	// 	@media (min-width: $breakpoint-small) {
-	// 	// 		margin-top: 75px;
-	// 	// 	}
-
-	// 	// 	@media (min-width: $breakpoint-medium) {
-	// 	// 		margin-top: 150px;
-	// 	// 	}
-	// 	// }
-
-	// 	&:nth-child(even) {
-	// 		@media (max-width: $breakpoint-small-max) {
-	// 			flex-direction: column-reverse;
-
-	// 			> * {
-	// 				margin: 0;
-
-	// 				+ * {
-	// 					margin: 0 0 20px;
-	// 				}
-	// 			}
-	// 		}
-	// 	}
-	// }
 }

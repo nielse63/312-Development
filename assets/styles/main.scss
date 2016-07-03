@@ -4,8 +4,8 @@
 // bower:scss
 // endbower
 // bower:css
-@import "../../bower_components/flexboxgrid/dist/flexboxgrid.css";
 // endbower
+
 
 // common
 @import "common/mixins";
@@ -14,6 +14,7 @@
 
 // sacffolding/primary
 @import "common/reset";
+@import "components/grid";
 @import "template-parts/layouts";
 @import "components/row";
 @import "components/loading";
@@ -21,36 +22,38 @@
 // components
 @import "components/base";
 @import "components/flex";
-@import "components/article";
+// @import "components/article";
+@import "components/progress";
 @import "components/animation";
 @import "components/button";
 @import "components/form";
 @import "components/list";
 @import "components/breadcrumbs";
-@import "components/isotope";
+// @import "components/isotope";
 @import "components/hamburger";
-@import "components/box";
-@import "components/slider";
+// @import "components/box";
+// @import "components/slider";
 @import "components/banner";
 @import "components/service";
 @import "components/code";
 
 // template parts
 @import "template-parts/header";
-// @import "template-parts/mobile-button";
 @import "template-parts/nav";
+@import "template-parts/nav-mobile";
+@import "template-parts/page";
 @import "template-parts/section";
 @import "template-parts/aside";
 @import "template-parts/footer";
 // @import "template-parts/sidebar";
-@import "template-parts/work";
+// @import "template-parts/work";
 @import "template-parts/preload";
 
 // template parts
 @import "templates/about";
 @import "templates/contact";
 @import "templates/single";
-// @import "templates/home";
+@import "templates/home";
 
 // IMPORTANT: utilities must be last
 // in order to override other classes

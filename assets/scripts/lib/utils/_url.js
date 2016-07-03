@@ -1,37 +1,27 @@
 
-(function(_c, factory) {
-	'use strict';
+export default class URL {
 
-	if( ! _c ) {
-		throw new Error('The URL module requires the Utility module');
-	}
-
-	factory(_c);
-
-})(window.Clique, function(_c) {
-	'use strict';
-
-	// url object
-	_c.url = {
+	constructor() {
 
 		// properties
-		isSSL: window.location.protocol === 'https',
-		base: window.location.protocol + '//' + window.location.host,
-		current: window.location.href,
-		currentBase: window.location.protocol + '//' + window.location.host + window.location.pathname,
+		this.isSSL       = window.location.protocol === 'https';
+		this.base        = window.location.protocol + '//' + window.location.host;
+		this.current     = window.location.href;
+		this.currentBase = window.location.protocol + '//' + window.location.host + window.location.pathname;
 
-		// methods
-		getHash: function(string) {
-			string = string || this.current;
+		return this;
+	}
 
-			if (string.indexOf('#') < 0) {
-				return '';
-			}
+	getHash(string) {
+		string = string || this.current;
 
-			var a = document.createElement('a');
-			a.href = string;
+		if (string.indexOf('#') < 0) {
+			return '';
+		}
 
-			return a.hash;
-		},
-	};
-});
+		var a = document.createElement('a');
+		a.href = string;
+
+		return a.hash;
+	}
+}

@@ -1,44 +1,60 @@
 
-(function(_c) {
-	'use strict';
+import ScrollMagic from 'scrollmagic'
 
-	function setupFooter() {
+export default class Footer {
 
-		var $footer = $('.footer');
-		var offsetTop = $footer.offset().top;
-		var offsetBottom = offsetTop + $footer.outerHeight();
+	constructor() {
 
-		var $paths = $footer.find('path');
-		var controller = new ScrollMagic.Controller();
-		$paths.each(function() {
-			var $path  = $(this);
+		this.$footer = _c.$('.footer');
+		if( ! this.$footer.length ) {
+			return
+		}
+
+		this.setPaths()
+		this.createScene()
+
+		return this
+	}
+
+	setPaths() {
+		const offsetTop = this.$footer.offset().top;
+		const offsetBottom = offsetTop + this.$footer.outerHeight();
+
+		this.$footer.find('path').each(function() {
+			let $path  = $(this);
 
 			// see if we even need to set object
-			var rects  = $path[0].getBoundingClientRect();
-			var top    = $path.offset().top;
-			var bottom = top + rects.height;
+			let rects  = this.getBoundingClientRect();
+			let top    = rects.top;
+			let bottom = top + rects.height;
 
 			if( bottom < offsetTop || top > offsetBottom ) {
 				return;
 			}
 
-			var length = this.getTotalLength();
+			let length = this.getTotalLength();
 			$path.css({
 				'stroke-dasharray'  : length,
 				'stroke-dashoffset' : length,
 			});
 		});
-
-		var footer = document.querySelector('.footer');
-		var _scroll = new ScrollMagic.Scene({
-			triggerElement : $footer[0],
-			triggerHook    : 'onEnter',
-			offset         : $footer[0].clientHeight / 2,
-		})
-		.setClassToggle($footer[0], 'inview')
-		.addTo(controller);
 	}
 
-	_c.$doc.on('ready loaded', setupFooter);
+	createScene() {
+		if( ! this.$footer.length ) {
+			return
+		}
+		const footer = document.querySelector('.footer');
 
-})(window.Clique);
+		this.scene = new ScrollMagic.Scene({
+			triggerElement : footer,
+			triggerHook    : 'onEnter',
+			offset         : footer.clientHeight / 2,
+		})
+		.setClassToggle(footer, 'inview')
+		.on('start', function() {
+			this.remove()
+		})
+		.addTo(_c.controller);
+	}
+}
