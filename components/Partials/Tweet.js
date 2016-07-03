@@ -1,12 +1,18 @@
 // Tweet.js
 import React, { Component } from 'react';
 
-export default class Tweet extends Component {
+class Tweet extends Component {
+
+	propTypes() {
+		return {
+			data: React.PropTypes.object,
+		};
+	}
 
 	render() {
 		const data = this.props.data;
 		const text = data.message;
-		const retweet = 'https://twitter.com/intent/retweet?tweet_id=' + data.id;
+		const retweet = `https://twitter.com/intent/retweet?tweet_id= ${data.id}!`;
 
 		return (
 			<div className="tweet">
@@ -25,3 +31,6 @@ export default class Tweet extends Component {
 		);
 	}
 }
+
+export default Tweet;
+

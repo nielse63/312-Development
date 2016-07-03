@@ -2,32 +2,32 @@
 import { EventEmitter } from 'events';
 import _ from 'lodash';
 
-export default _.extend({}, EventEmitter.prototype, {
+export default _.extend( {}, EventEmitter.prototype, {
 
 	// Initial data
-	                    data: {
-		                    ready: false,
-		                    globals: {},
-		                    pages: [],
-		                    articles: [],
-		                    tweets: [],
-		                    checked: {
-			                    twitter: null,
+	data: {
+		ready   : false,
+		globals : {},
+		pages   : [],
+		articles: [],
+		tweets  : [],
+		checked : {
+			twitter: null,
 		},
 	},
 
 	// Emit Change event
-	                    emitChange() {
-		                    this.emit('change');
+	emitChange() {
+		this.emit( 'change' );
 	},
 
 	// Add change listener
-	                    addChangeListener(callback) {
-		                    this.on('change', callback);
+	addChangeListener( callback ) {
+		this.on( 'change', callback );
 	},
 
 	// Remove change listener
-	                    removeChangeListener(callback) {
-		                    this.removeListener('change', callback);
+	removeChangeListener( callback ) {
+		this.removeListener( 'change', callback );
 	},
-});
+} );

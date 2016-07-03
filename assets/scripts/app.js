@@ -24,7 +24,7 @@ import Form from './lib/modules/_form';
 // import Banner from "./lib/modules/_scrollto"
 // import Banner from "./lib/modules/_deadlinks"
 
-import MobileButton from './lib/vendor/_hamburger';
+import MobileButton from './lib/vendor/hamburger';
 // import Banner from "./lib/vendor/prism"
 // import Banner from "./lib/vendor/animation.gsap"
 
@@ -50,76 +50,76 @@ let didLoad = false;
 const modules = [
 	                    {
 		                                        preload: false,
-		                                        cls: MobileButton,
-		                                        val: null,
+		                                        cls    : MobileButton,
+		                                        val    : null,
 	                    }, {
 		                    preload: false,
-		                    cls: Banner,
-		                    val: null,
+		                    cls    : Banner,
+		                    val    : null,
 	}, {
-		                    once: true,
+		                    once   : true,
 		                    preload: true,
-		                    cls: Nav,
-		                    val: null,
+		                    cls    : Nav,
+		                    val    : null,
 	}, {
 		                    preload: false,
-		                    cls: Homepage,
-		                    val: null,
-	}, {
-		                    preload: true,
-		                    cls: WorkGrid,
-		                    val: null,
-	}, {
-		                    preload: false,
-		                    cls: Services,
-		                    val: null,
-	}, {
-		                    preload: false,
-		                    cls: Photos,
-		                    val: null,
+		                    cls    : Homepage,
+		                    val    : null,
 	}, {
 		                    preload: true,
-		                    cls: Links,
-		                    val: null,
+		                    cls    : WorkGrid,
+		                    val    : null,
 	}, {
 		                    preload: false,
-		                    cls: Form,
-		                    val: null,
+		                    cls    : Services,
+		                    val    : null,
 	}, {
 		                    preload: false,
-		                    cls: Footer,
-		                    val: null,
+		                    cls    : Photos,
+		                    val    : null,
+	}, {
+		                    preload: true,
+		                    cls    : Links,
+		                    val    : null,
 	}, {
 		                    preload: false,
-		                    cls: Share,
-		                    val: null,
+		                    cls    : Form,
+		                    val    : null,
+	}, {
+		                    preload: false,
+		                    cls    : Footer,
+		                    val    : null,
+	}, {
+		                    preload: false,
+		                    cls    : Share,
+		                    val    : null,
 	},
 ];
 const transitionEvent = _c.support.transition.end + '.app';
 
-function initModules(preload = false) {
+function initModules( preload = false ) {
 	                  const scenes = [];
 
 	                    function killScenes() {
-		                    for (let i = 0; i < scenes.length; i++) {
-			                    scenes[i].destroy(true);
+		                    for ( let i = 0; i < scenes.length; i++ ) {
+			                    scenes[i].destroy( true );
 		}
 	}
 
-	                    _c.$('.transition-enter').off(transitionEvent, killScenes);
-	                    _c.$('.transition-enter').one(transitionEvent, killScenes);
+	                    _c.$( '.transition-enter' ).off( transitionEvent, killScenes );
+	                    _c.$( '.transition-enter' ).one( transitionEvent, killScenes );
 
-	                    for (let i = 0; i < modules.length; i++) {
+	                    for ( let i = 0; i < modules.length; i++ ) {
 		                  const module = modules[i];
 
 		// guards
-		                    if (module.preload !== preload || (module.once && module.val)) {
+		                    if ( module.preload !== preload || ( module.once && module.val ) ) {
 			                    continue;
 		}
 
 		// destroy scroll scene
-		                    if (module.val && module.val.scene) {
-			                    scenes.push(module.val.scene);
+		                    if ( module.val && module.val.scene ) {
+			                    scenes.push( module.val.scene );
 			                    module.val.scene.remove();
 		}
 
@@ -130,7 +130,7 @@ function initModules(preload = false) {
 
 function preMount() {
 	                    BodyClass.exec();
-	                    initModules(true);
+	                    initModules( true );
 }
 
 function enterPage() {
@@ -138,19 +138,19 @@ function enterPage() {
 
 	                  const delay = didLoad ? 700 : 0;
 
-	                    let t = setTimeout(function() {
-		                    clearTimeout(t);
+	                    let t = setTimeout( function() {
+		                    clearTimeout( t );
 		                    t = null;
 
-		                    if (! delay) {
-			                    _c.$html.addClass('app-ready');
+		                    if ( ! delay ) {
+			                    _c.$html.addClass( 'app-ready' );
 		}
 
 		                    _c.controller.update();
 		                    initModules();
 
 		                    didLoad = true;
-	}, delay);
+	}, delay );
 }
 
 // const messages = ['loading', 'loaded', 'unloaded']
@@ -162,18 +162,18 @@ function enterPage() {
 // 	NProgress.done()
 // }, 2000);
 
-function messageCallback(e) {
-	                    if (! e.isTrusted) {
+function messageCallback( e ) {
+	                    if ( ! e.isTrusted ) {
 		                    return;
 	}
 
 	// console.log(e)
 
-	                    if (e.data === 'loading') {
+	                    if ( e.data === 'loading' ) {
 		                    NProgress.start();
 	}
 
-	                    if (e.data === 'loaded') {
+	                    if ( e.data === 'loaded' ) {
 		// const newHeight = document.body.clientHeight
 		// if( newHeight < lastBodyHeight ) {
 		// 	_c.$body.height(lastBodyHeight)
@@ -189,10 +189,10 @@ function messageCallback(e) {
 
 		                    enterPage();
 
-		                    setTimeout(function() {
+		                    setTimeout( function() {
 			                    NProgress.done();
-		}, 500);
+		}, 500 );
 	}
 }
 
-window.addEventListener('message', messageCallback, false);
+window.addEventListener( 'message', messageCallback, false );

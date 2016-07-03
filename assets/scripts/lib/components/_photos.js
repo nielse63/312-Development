@@ -4,12 +4,12 @@ import ScrollMagic from 'scrollmagic';
 export default class Photos {
 
 	constructor() {
-		this.$figures = $('.where-figure');
-		if (! this.$figures.length) {
+		this.$figures = $( '.where-figure' );
+		if ( ! this.$figures.length ) {
 			return;
 		}
 
-		this.$container = $('.where-i-work');
+		this.$container = $( '.where-i-work' );
 
 		this.setDelay();
 		this.setScene();
@@ -18,24 +18,24 @@ export default class Photos {
 	}
 
 	setDelay() {
-		this.$figures.each(function(i) {
+		this.$figures.each( function( i ) {
 			const delay = i * 0.15;
-			$(this).css({
+			$( this ).css( {
 				'transition-delay': delay + 's',
-			});
-		});
+			} );
+		} );
 	}
 
 	setScene() {
 		const trigger = this.$container[0];
 
-		this.scene = new ScrollMagic.Scene({
+		this.scene = new ScrollMagic.Scene( {
 			triggerElement: trigger,
-		})
-		.setClassToggle(trigger, 'active')
-		.on('start', function() {
+		} )
+		.setClassToggle( trigger, 'active' )
+		.on( 'start', function() {
 			this.remove();
-		})
-		.addTo(_c.controller);
+		} )
+		.addTo( _c.controller );
 	}
 }

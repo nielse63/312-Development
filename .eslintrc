@@ -7,6 +7,11 @@
 		"no-spaced-func": "warn",
 		"space-before-function-paren": ["warn", "never"],
 		"space-in-parens": ["warn", "never"],
-		"space-infix-ops": ["error"]
+		"space-infix-ops": ["error"],
+		"key-spacing": ["error", {
+			"beforeColon": true,
+			"align": "colon"
+		}],
+		"prefer-arrow-callback": "warn"
 	}
 }
