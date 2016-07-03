@@ -1,11 +1,11 @@
 
 // NoMatch.js
-import React, { Component } from 'react'
-import { Link } from 'react-router'
-import config from '../../config'
+import React, { Component } from 'react';
+import { Link } from 'react-router';
+import config from '../../config';
 
 // Dispatcher
-import AppDispatcher from '../../dispatcher/AppDispatcher'
+import AppDispatcher from '../../dispatcher/AppDispatcher';
 
 export default class NoMatch extends Component {
 
@@ -14,7 +14,7 @@ export default class NoMatch extends Component {
 	}
 
 	componentDidMount() {
-		document.title = config.site.title + ' | Page Not Found'
+		document.title = config.site.title + ' | Page Not Found';
 		window.postMessage('loaded', window.location.origin);
 	}
 
@@ -23,9 +23,8 @@ export default class NoMatch extends Component {
 	}
 
 	render() {
-
-		const data = this.props.data
-		const page = data.page
+		const data = this.props.data;
+		const page = data.page;
 
 		return (
 			<section className="page-content page-404">
@@ -34,6 +33,6 @@ export default class NoMatch extends Component {
 				<h1>Page Not Found</h1>
 			</div>
 			</section>
-		)
+		);
 	}
 }

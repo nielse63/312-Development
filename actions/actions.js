@@ -1,50 +1,47 @@
 
 // actions.js
-import config from '../config'
-import Cosmic from 'cosmicjs'
-import contentful from 'contentful'
-import _ from 'lodash'
+import config from '../config';
+import Cosmic from 'cosmicjs';
+import contentful from 'contentful';
+import _ from 'lodash';
 
 // AppStore
-import AppStore from '../stores/AppStore'
+import AppStore from '../stores/AppStore';
 
 function getTweets(callback) {
-
-	const url = 'http://api.312development.dev/tweets.php'
+	const url = 'http://api.312development.dev/tweets.php';
 	const opts = {
 		method: 'GET',
 		headers: new Headers(),
 		mode: 'cors',
-		cache: 'default'
-	}
+		cache: 'default',
+	};
 	fetch(url, opts)
-		.then(function(response) {
-			if( ! response.ok ) {
-				return console.error('Error getting tweets', reponse)
-			}
-			return response.json()
-		})
-		.then(function(data) {
-
+	.then(function (response) {
+		if (! response.ok) {
+			return console.error('Error getting tweets', reponse);
+		}
+		return response.json();
+	})
+	.then(function (data) {
 			// set data
-			AppStore.data.tweets = data
+			AppStore.data.tweets = data;
 
 			// Emit change
-			AppStore.data.ready = true
-			AppStore.emitChange()
+			AppStore.data.ready = true;
+			AppStore.emitChange();
 
 			// Trigger callback (from server)
-			if(callback) {
-				callback(false, AppStore)
+			if (callback) {
+				callback(false, AppStore);
 			}
-		}.bind(this))
+		}.bind(this));
 }
 
 export function getStore(checkTweets = true, callback) {
-
-	if( typeof checkTweets === 'function' ) {
-		callback = checkTweets
-		checkTweets = true
+	if (typeof checkTweets === 'function') {
+		callback = checkTweets;
+		checkTweets = true;
 	}
 
 	// const client = contentful.createClient({
@@ -61,24 +58,23 @@ export function getStore(checkTweets = true, callback) {
 	// 	}
 	// );
 
-	Cosmic.getObjects(config, function(err, response) {
-
-		let object = response.object
-		let objects = response.objects
-		let globals = AppStore.data.globals
+	Cosmic.getObjects(config, function (err, response) {
+		const object = response.object;
+		const objects = response.objects;
+		const globals = AppStore.data.globals;
 
 		// nav
-		globals.nav_items = object.nav.metafields
+		globals.nav_items = object.nav.metafields;
 
 		// pages
-		let pages = objects.type.pages
-		AppStore.data.pages = pages
+		const pages = objects.type.pages;
+		AppStore.data.pages = pages;
 
 		// articles
-		let articles = objects.type.articles
-		AppStore.data.articles = _.sortBy(articles, 'created')
+		const articles = objects.type.articles;
+		AppStore.data.articles = _.sortBy(articles, 'created');
 
-		AppStore.data.globals = globals
+		AppStore.data.globals = globals;
 
 		// Emit change
 		// AppStore.data.ready = true
@@ -90,69 +86,66 @@ export function getStore(checkTweets = true, callback) {
 		// }
 
 		// get tweets
-		if( checkTweets ) {
-			getTweets(callback)
+		if (checkTweets) {
+			getTweets(callback);
 		} else {
-
 			// Emit change
-			AppStore.data.ready = true
-			AppStore.emitChange()
+			AppStore.data.ready = true;
+			AppStore.emitChange();
 
 			// Trigger callback (from server)
-			if(callback) {
-				callback(false, AppStore)
+			if (callback) {
+				callback(false, AppStore);
 			}
 		}
-	})
+	});
 }
 
 export function getPageData(page_slug, post_slug) {
-
-	if( ! page_slug ) {
-		page_slug = 'home'
+	if (! page_slug) {
+		page_slug = 'home';
 	}
 
 	function setPageData() {
-		const data = AppStore.data
+		const data = AppStore.data;
 
-		let items
+		let items;
 
-		if( page_slug === 'articles' ) {
-			page_slug = post_slug
-			items = data.articles
-		} else{
-			items = data.pages
+		if (page_slug === 'articles') {
+			page_slug = post_slug;
+			items = data.articles;
+		} else {
+			items = data.pages;
 		}
 
 		// get page data
-		const page = _.findWhere(items, { slug: page_slug })
-		const metafields = page.metafields
+		const page = _.findWhere(items, { slug: page_slug });
+		const metafields = page.metafields;
 
 		// set meta fields
-		page.fields = metafields
+		page.fields = metafields;
 
-		AppStore.data.page = page
-		AppStore.emitChange()
+		AppStore.data.page = page;
+		AppStore.emitChange();
 	}
 
 	// Get page info
-	if( ! AppStore.data.pages.length ) {
-		getStore(false, setPageData)
+	if (! AppStore.data.pages.length) {
+		getStore(false, setPageData);
 	} else {
-		setPageData()
+		setPageData();
 	}
 }
 
 export function getMoreItems() {
+	AppStore.data.loading = true;
+	AppStore.emitChange();
 
-	AppStore.data.loading = true
-	AppStore.emitChange()
-
-	setTimeout(function(){
-		let item_num = AppStore.data.item_num
-		let more_item_num = item_num + 5
-		AppStore.data.item_num = more_item_num
-		AppStore.data.loading = false
-		AppStore.emitChange()
-	}, 300)
+	setTimeout(function () {
+		const item_num = AppStore.data.item_num;
+		const more_item_num = item_num + 5;
+		AppStore.data.item_num = more_item_num;
+		AppStore.data.loading = false;
+		AppStore.emitChange();
+	}, 300);
 }

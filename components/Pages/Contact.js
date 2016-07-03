@@ -1,21 +1,21 @@
 
 // Contact.js
-import React, { Component } from 'react'
-import { Link } from 'react-router'
-import config from '../../config'
-import _ from 'lodash'
+import React, { Component } from 'react';
+import { Link } from 'react-router';
+import config from '../../config';
+import _ from 'lodash';
 
 // Components
-import TweetList from '../Partials/TweetList'
+import TweetList from '../Partials/TweetList';
 
 // Dispatcher
-import AppDispatcher from '../../dispatcher/AppDispatcher'
+import AppDispatcher from '../../dispatcher/AppDispatcher';
 
 export default class Contact extends Component {
 
 	componentWillMount() {
 		window.postMessage('loading', window.location.origin);
-		this.getPageData()
+		this.getPageData();
 	}
 
 	componentDidMount() {
@@ -23,8 +23,8 @@ export default class Contact extends Component {
 	}
 
 	componentDidUpdate() {
-		const data = this.props.data
-		document.title = config.site.title + ' | ' + data.page.title
+		const data = this.props.data;
+		document.title = config.site.title + ' | ' + data.page.title;
 	}
 
 	componentWillUnmount() {
@@ -32,25 +32,24 @@ export default class Contact extends Component {
 	}
 
 	getSlug() {
-		return this.props.location.pathname.replace('/','')
+		return this.props.location.pathname.replace('/', '');
 	}
 
 	getPageData() {
-		const page_slug = this.getSlug()
+		const page_slug = this.getSlug();
 		AppDispatcher.dispatch({
 			action: 'get-page-data',
-			page_slug: page_slug
-		})
+			page_slug,
+		});
 	}
 
 	render() {
-
-		const slug   = this.getSlug()
-		const data   = this.props.data
-		const page   = data.page
+		const slug = this.getSlug();
+		const data = this.props.data;
+		const page = data.page;
 		// const tweets = data.tweets
 
-		const metafields = page.metafields
+		const metafields = page.metafields;
 
 		return (
 			<div>
@@ -131,6 +130,6 @@ export default class Contact extends Component {
 				</div>
 				</section>
 			</div>
-		)
+		);
 	}
 }

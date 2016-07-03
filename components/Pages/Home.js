@@ -1,25 +1,25 @@
 
 // Home.js
-import React, { Component } from 'react'
-import _ from 'lodash'
-import config from '../../config'
-import { withRouter } from 'react-router'
+import React, { Component } from 'react';
+import _ from 'lodash';
+import config from '../../config';
+import { withRouter } from 'react-router';
 
 // Dispatcher
-import AppDispatcher from '../../dispatcher/AppDispatcher'
+import AppDispatcher from '../../dispatcher/AppDispatcher';
 
 // Components
-import Block from '../Partials/Block'
+import Block from '../Partials/Block';
 
 export default class Home extends Component {
 
 	componentWillMount() {
 		window.postMessage('loading', window.location.origin);
-		this.getPageData()
+		this.getPageData();
 	}
 
 	componentDidMount() {
-		document.title = config.site.title + ' | ' + config.site.description
+		document.title = config.site.title + ' | ' + config.site.description;
 		window.postMessage('loaded', window.location.origin);
 	}
 
@@ -29,28 +29,27 @@ export default class Home extends Component {
 
 	getPageData() {
 		AppDispatcher.dispatch({
-			action    : 'get-page-data',
-			page_slug : 'home',
-		})
+			action: 'get-page-data',
+			page_slug: 'home',
+		});
 	}
 
 	render() {
+		const data = this.props.data;
+		const articles = data.articles;
+		let i = 1;
+		const max = 10;
 
-		const data = this.props.data
-		const articles = data.articles
-		let i = 1
-		const max = 10
-
-		const homepage_items = articles.map(( article ) => {
-			if(i > max) {
-				i = 1
+		const homepage_items = articles.map((article) => {
+			if (i > max) {
+				i = 1;
 			}
-			let background = '/images/photo' + i + '.jpg'
-			i++
+			let background = '/images/photo' + i + '.jpg';
+			i++;
 			return (
-				<Block key={ article._id } data={ article } background={ background } />
-				)
-		})
+				<Block key={article._id} data={article} background={background} />
+				);
+		});
 
 		return (
 			<section className="page-content">
@@ -58,10 +57,10 @@ export default class Home extends Component {
 					<div className="row">
 						<div className="col-xs-12">
 							<article className="article">
-								<div dangerouslySetInnerHTML={{__html: data.page.content }} />
+								<div dangerouslySetInnerHTML={{ __html: data.page.content }} />
 								<div className="work-section">
 									<ul className="work-grid">
-										{ homepage_items }
+										{homepage_items}
 									</ul>
 								</div>
 							</article>
@@ -69,6 +68,6 @@ export default class Home extends Component {
 					</div>
 				</div>
 			</section>
-		)
+		);
 	}
 }

@@ -32,5 +32,8 @@ module.exports = {
 			jQuery: "jquery",
 			"window.jQuery": "jquery"
 		})
-	]
+	],
+	// eslint: {
+	// 	fix : true
+	// }
 };
