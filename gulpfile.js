@@ -24,6 +24,8 @@ var postcss      = require('gulp-postcss');
 var reporter     = require('postcss-reporter');
 var syntax_scss  = require('postcss-scss');
 var stylelint    = require('stylelint');
+// var inline_base64 = require('gulp-inline-base64');
+var base64 = require('./tools/gulp-base64-encode');
 
 // See https://github.com/austinpray/asset-builder
 var manifest = require('asset-builder')('./assets/manifest.json');
@@ -92,12 +94,20 @@ var cssTasks = function(filename) {
 		})
 		.pipe(function() {
 			return gulpif('*.scss', sass({
-				outputStyle: 'nested', // libsass doesn't support expanded yet
+				outputStyle: 'expanded', // libsass doesn't support expanded yet
 				precision: 10,
 				includePaths: ['.'],
 				errLogToConsole: !enabled.failStyleTask
 			}));
 		})
+		// .pipe(sass({
+		// 	outputStyle: 'expanded', // libsass doesn't support expanded yet
+		// 	precision: 10,
+		// 	includePaths: ['.'],
+		// 	imagePath: 'public/images',
+		// 	errLogToConsole: ! enabled.failStyleTask
+		// }))
+		.pipe(base64)
 		.pipe(concat, filename)
 		.pipe(autoprefixer, {
 			browsers: [

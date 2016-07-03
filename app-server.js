@@ -1,3 +1,4 @@
+
 // app-server.js
 import React from 'react'
 import { match, RoutingContext } from 'react-router'
@@ -5,8 +6,11 @@ import ReactDOMServer from 'react-dom/server'
 import express from 'express'
 import hogan from 'hogan-express'
 
-// Routes
+// Routes & Actions
+import config from './config'
 import routes from './routes'
+import AppStore from './stores/AppStore'
+import { getPageData } from './actions/actions'
 
 // Express
 const app = express()

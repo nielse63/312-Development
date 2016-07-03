@@ -28,43 +28,47 @@ export default class Photos {
 		});
 	}
 
-	showScene() {
-		this.$container.addClass('active')
-	}
+	// showScene() {
+	// 	this.$container.addClass('active')
+	// }
 
 	setScene() {
 		const trigger = this.$container[0];
-		const duration = trigger.clientHeight
-		const _this = this
-		let inview = false
-		let timeout
+		// const duration = trigger.clientHeight
+		// const _this = this
+		// let inview = false
+		// let timeout
 
 		this.scene = new ScrollMagic.Scene({
 			triggerElement : trigger,
-			duration       : duration,
+			// duration       : duration,
 		})
-		.on('enter', function() {
-			inview = true
+		.setClassToggle(trigger, 'active')
+		.on('start', function() {
+			this.remove()
+		})
+		// .on('enter', function() {
+		// 	inview = true
 
-			if(timeout) {
-				clearTimeout(timeout)
-				timeout = null
-			}
-			timeout = setTimeout(function() {
-				clearTimeout(timeout)
-				timeout = null
-				if(inview) {
-					_this.scene.remove()
-					_this.showScene()
-				}
-			}, 250);
-		})
-		.on('leave', function() {
-			inview = false
+		// 	if(timeout) {
+		// 		clearTimeout(timeout)
+		// 		timeout = null
+		// 	}
+		// 	timeout = setTimeout(function() {
+		// 		clearTimeout(timeout)
+		// 		timeout = null
+		// 		if(inview) {
+		// 			_this.scene.remove()
+		// 			_this.showScene()
+		// 		}
+		// 	}, 250);
+		// })
+		// .on('leave', function() {
+		// 	inview = false
 
-			clearTimeout(timeout)
-			timeout = null
-		})
+		// 	clearTimeout(timeout)
+		// 	timeout = null
+		// })
 		.addTo(_c.controller);
 	}
 }

@@ -167,7 +167,7 @@ export default class MobileButton {
 
 				if(hamburgers.length) {
 					forEach(hamburgers, function(hamburger) {
-						console.log(_c)
+						// console.log(_c)
 						_c.$html.on('click', '.js-hamburger', Hamburgers.clickHandle);
 					});
 				}

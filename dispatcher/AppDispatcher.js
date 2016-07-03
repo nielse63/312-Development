@@ -8,11 +8,13 @@ const AppDispatcher = new Dispatcher()
 AppDispatcher.register((payload) => {
 
 	let action = payload.action
-
 	switch(action) {
 
+		// case 'get-tweets':
+		// 	getTweets()
+		// 	break
 		case 'get-app-store':
-			getStore()
+			getStore(payload.callback)
 			break
 		case 'get-page-data':
 			getPageData(payload.page_slug, payload.post_slug)
@@ -26,4 +28,4 @@ AppDispatcher.register((payload) => {
 	return true
 })
 
-	export default AppDispatcher
+export default AppDispatcher

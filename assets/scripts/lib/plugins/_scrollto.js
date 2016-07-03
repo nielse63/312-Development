@@ -84,7 +84,7 @@ export default class ScrollTo {
 		}, options);
 
 		// set position
-		var start = win.pageYOffset,
+		var start = window.pageYOffset,
 			to    = start;
 		if (positionType === 'number') {
 			to = position;
@@ -104,7 +104,7 @@ export default class ScrollTo {
 
 		// normalize the 'to' value
 		to += options.offset;
-		to = Math.min( to, $('body').outerHeight() - win.innerHeight );
+		to = Math.min( to, $('body').outerHeight() - window.innerHeight );
 		delete options.offset;
 
 		// animate
@@ -114,7 +114,7 @@ export default class ScrollTo {
 
 		// bind scroll listener to kill animation
 		setTimeout(function() {
-			$(win).one('mousewheel', function() {
+			$(window).one('mousewheel', function() {
 				$('body').stop(true);
 			});
 		}, 0);

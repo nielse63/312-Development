@@ -3,9 +3,12 @@ require('jquery-validation')
 
 export default class Form {
 	// constructor
-	constructor(ele) {
+	constructor() {
 
-		this.element = _c.$(ele);
+		this.element = _c.$('form');
+		if( ! this.element.length ) {
+			return
+		}
 
 		this.init();
 		return this;
@@ -14,6 +17,7 @@ export default class Form {
 	init() {
 		this.defineProperties();
 		this.defineElements();
+		this.defineListeners();
 
 		// append form classes
 		this.setupForm();
@@ -31,8 +35,41 @@ export default class Form {
 
 	defineElements() {
 		this.$list        = this.element.find('> ul, > * > ul').first();
-		this.$inputs      = this.element.find('input:not([submit]), select, textarea');
+		this.$inputs      = this.element.find('input:not([type="submit"]), select, textarea');
 		this.$required    = this.element.find('[required]');
+		this.$submit      = this.element.find('input[type="submit"]')
+	}
+
+	defineListeners() {
+		this.element.on('submit', function(e) {
+			e.preventDefault()
+			e.stopPropagation()
+
+			let $form = _c.$(this)
+			if( $form.valid() ) {
+				$form.off('submit')
+				$form.trigger('submit')
+			}
+		});
+
+		this.$inputs.on('focus', function() {
+			_c.$(this).closest('.input-wrapper').addClass('focus')
+		}).on('blur', function() {
+			_c.$(this).closest('.input-wrapper').removeClass('focus')
+		}).on('keyup blur', function() {
+			let isValid = true
+			this.$inputs.each(function() {
+				if( this.getAttribute('aria-invalid') === 'true' || this.getAttribute('aria-invalid') === null ) {
+					isValid = false
+					return false
+				}
+			});
+			if( isValid ) {
+				this.$submit.removeClass('disabled')
+			} else {
+				this.$submit.addClass('disabled')
+			}
+		}.bind(this));
 	}
 
 	setupForm() {
@@ -49,8 +86,11 @@ export default class Form {
 	}
 
 	setNames() {
-		this.$inputs.not('[name]').each(function(i) {
-			_c.$(this).attr('name', 'form-input-' + i);
+		this.$inputs.each(function(i) {
+			if( this.getAttribute('name') ) {
+				return;
+			}
+			_c.$(this).attr('name', 'input-' + i);
 		});
 	}
 
@@ -60,35 +100,45 @@ export default class Form {
 	}
 
 	setRequiredClass() {
-		this.$required.not('.required').each(function(){
-			_c.$(this).addClass('required');
-		});
+		this.$required.not('.required').addClass('required');
 	}
 
 	initValidation() {
 		// var lastTriggered;
 
-		var didSubmit = false;
-		var validator = this.element.validate({
+		// let didSubmit = false;
+		let validator = this.element.validate({
 			focusInvalid : false,
 			onkeyup      : false,
 			onfocusout: function(input, e) {
-				if( didSubmit ) {
-					var isValid = validator.element(input);
-					if( _c.$(input).data('formerror') && isValid ) {
-						return true;
-					} else {
-						return false;
+				let isValid = validator.element(input);
+				const $input = _c.$(input)
+
+				if( ! input.hasAttribute('required') ) {
+					const $li = $input.closest('li')
+
+					// alter class
+					if( isValid ) {
+						$li.removeClass('form-error')
+
+						if( ! $input.val() ) {
+							$li.removeClass('form-valid')
+						} else {
+							$li.addClass('form-valid')
+						}
 					}
 				}
-				return false;
+
+				if( $input.data('formerror') && isValid ) {
+					return true;
+				} else {
+					return false;
+				}
 			},
-			onsubmit: function() {
-				return true;
-			},
+			onsubmit: false,
 			showErrors: function(_this) {
 				return function(errorMap, errorList) {
-					didSubmit = true;
+					// didSubmit = true;
 					// console.log(this);
 
 					// show default errors
@@ -100,9 +150,9 @@ export default class Form {
 					}
 
 					// loop over errors
-					var $target;
-					for( var i = 0; i < errorList.length; i++ ) {
-						var object = errorList[i],
+					let $target;
+					for( let i = 0; i < errorList.length; i++ ) {
+						let object = errorList[i],
 							$input = _c.$(object.element);
 
 						if( i === 0 ) {
@@ -122,12 +172,12 @@ export default class Form {
 
 					// scroll to first invalid element
 					if( $target && $target.length ) {
-						var screenTop = window.pageYOffset,
+						let screenTop = window.pageYOffset,
 							top = $target.offset().top;
 
 						// scroll of input is out of view
 						if( top < window.pageYOffset || top > screenTop + window.innerHeight) {
-							var distance  = distance < 400 ? 400 : distance;
+							let distance  = distance < 400 ? 400 : distance;
 							_c.$.scrollTo($target, {
 								offset   : -50,
 								duration : distance,
@@ -140,7 +190,7 @@ export default class Form {
 			}(this),
 			success: function(label, input) {
 
-				var $li    = _c.$(input).closest('li'),
+				let $li    = _c.$(input).closest('li'),
 					$input = _c.$(input);
 
 				// trigger input event

@@ -45,9 +45,10 @@ export default class Contact extends Component {
 
 	render() {
 
-		const slug = this.getSlug()
-		const data = this.props.data
-		const page = data.page
+		const slug   = this.getSlug()
+		const data   = this.props.data
+		const page   = data.page
+		// const tweets = data.tweets
 
 		const metafields = page.metafields
 
@@ -104,7 +105,7 @@ export default class Contact extends Component {
 									<footer className="form-footer">
 										<ul className="list list-inline">
 											<li>
-												<input type="submit" className="button" value="Submit" />
+												<input type="submit" className="button disabled" value="Submit" />
 											</li>
 										</ul>
 									</footer>
