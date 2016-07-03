@@ -8,19 +8,19 @@ import Pattern from './Pattern';
 
 export default class Footer extends Component {
 
-	                    render() {
-		                    const data = this.props.data;
-		                    const nav_items = data.globals.nav_items;
+	render() {
+		const data = this.props.data;
+		const nav_items = data.globals.nav_items;
 
-		                    const menu_items = nav_items.map((nav_item) => {
-			                    return (
+		const menu_items = nav_items.map((nav_item) => {
+			return (
 				<li key={'key-' + nav_item.key}>
 					<Link to={nav_item.value} activeClassName="active">{nav_item.title}</Link>
 				</li>
 			);
 		});
 
-		                    return (
+		return (
 			<footer className="footer">
 				<Pattern />
 				<div className="wrap container-fluid">

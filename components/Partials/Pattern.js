@@ -4,8 +4,8 @@ import React, { Component } from 'react';
 
 export default class Pattern extends Component {
 
-	                    render() {
-		                    return (
+	render() {
+		return (
 			<svg viewBox="0 0 1584.14 703.31">
 				<path d="M1524.6,336.65l-64,85,72,57Z" fill="none" stroke="#de6551" strokeWidth="0.6" />
 				<path d="M1453.6,192.65l66,92,50-129Z" fill="none" stroke="#de6551" strokeWidth="0.6" />

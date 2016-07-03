@@ -5,25 +5,25 @@ import { Link } from 'react-router';
 
 export default class Block extends Component {
 
-	                    render() {
-		                    const data = this.props.data;
+	render() {
+		const data = this.props.data;
 		// const size = this.props.size
 
 		// single vars
-		                    const id = data._id;
-		                    const metafields = data.metafields;
-		                    const category = _.findWhere(metafields, { key: 'category' }).value;
-		                    const title = data.title;
-		                    const slug = '/articles/' + data.slug;
-		                    const background = this.props.background;
-		                    const style = {
-			                    backgroundImage: 'url(' + background + ')',
+		const id = data._id;
+		const metafields = data.metafields;
+		const category = _.findWhere(metafields, { key: 'category' }).value;
+		const title = data.title;
+		const slug = '/articles/' + data.slug;
+		const background = this.props.background;
+		const style = {
+			backgroundImage: 'url(' + background + ')',
 		};
 
-		                    const previewObject = _.findWhere(metafields, { key: 'preview_text' });
-		                    const preview = !! previewObject && previewObject.value ? previewObject.value : _.findWhere(metafields, { key: 'leading_paragraph' }).value;
+		const previewObject = _.findWhere(metafields, { key: 'preview_text' });
+		const preview = !! previewObject && previewObject.value ? previewObject.value : _.findWhere(metafields, { key: 'leading_paragraph' }).value;
 
-		                    return (
+		return (
 		 <li className="work-block" data-id={id}>
 			<Link to={slug}>
 				<figure className="work-block-figure" style={style}></figure>

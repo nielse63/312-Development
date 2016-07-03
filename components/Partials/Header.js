@@ -7,8 +7,8 @@ import { Link } from 'react-router';
 import Nav from './Nav';
 
 export default class Header extends Component {
-	                    render() {
-		                    return (
+	render() {
+		return (
 			<header className="header">
 				<div className="wrap container-fluid">
 					<div className="flex flex-middle flex-space-between">
