@@ -2,7 +2,7 @@
 // actions.js
 import config from '../config';
 import Cosmic from 'cosmicjs';
-import contentful from 'contentful';
+// import contentful from 'contentful';
 import _ from 'lodash';
 
 // AppStore
@@ -76,15 +76,6 @@ export function getStore(checkTweets = true, callback) {
 
 		AppStore.data.globals = globals;
 
-		// Emit change
-		// AppStore.data.ready = true
-		// AppStore.emitChange()
-
-		// Trigger callback (from server)
-		// if(callback) {
-		// 	callback(false, AppStore)
-		// }
-
 		// get tweets
 		if (checkTweets) {
 			getTweets(callback);
@@ -101,9 +92,9 @@ export function getStore(checkTweets = true, callback) {
 	});
 }
 
-export function getPageData(page_slug, post_slug) {
-	if (! page_slug) {
-		page_slug = 'home';
+export function getPageData(pageSlug, postSlug) {
+	if (! pageSlug) {
+		pageSlug = 'home';
 	}
 
 	function setPageData() {
@@ -111,15 +102,15 @@ export function getPageData(page_slug, post_slug) {
 
 		let items;
 
-		if (page_slug === 'articles') {
-			page_slug = post_slug;
+		if (pageSlug === 'articles') {
+			pageSlug = postSlug;
 			items = data.articles;
 		} else {
 			items = data.pages;
 		}
 
 		// get page data
-		const page = _.findWhere(items, { slug: page_slug });
+		const page = _.findWhere(items, { slug: pageSlug });
 		const metafields = page.metafields;
 
 		// set meta fields
@@ -142,9 +133,9 @@ export function getMoreItems() {
 	AppStore.emitChange();
 
 	setTimeout(function () {
-		const item_num = AppStore.data.item_num;
-		const more_item_num = item_num + 5;
-		AppStore.data.item_num = more_item_num;
+		const itemNum = AppStore.data.itemNum;
+		const moreItemNum = itemNum + 5;
+		AppStore.data.itemNum = moreItemNum;
 		AppStore.data.loading = false;
 		AppStore.emitChange();
 	}, 300);

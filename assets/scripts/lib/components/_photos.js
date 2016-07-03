@@ -3,71 +3,40 @@ import ScrollMagic from 'scrollmagic';
 
 export default class Photos {
 
-	                    constructor() {
-		// get all elements
-		                    this.$figures = $('.where-figure');
-		                    if (! this.$figures.length) {
-			                    return;
+	constructor() {
+
+		this.$figures = $('.where-figure');
+		if (! this.$figures.length) {
+			return;
 		}
 
-		                    this.$container = $('.where-i-work');
+		this.$container = $('.where-i-work');
 
-		                    this.setDelay();
-		                    this.setScene();
+		this.setDelay();
+		this.setScene();
 
-		                    return this;
+		return this;
 	}
 
-	                    setDelay() {
-		                    this.$figures.each(function (i) {
-			                  const delay = i * 0.15;
-			                    $(this).css({
-				                    'transition-delay': delay + 's',
+	setDelay() {
+		this.$figures.each(function (i) {
+			const delay = i * 0.15;
+			$(this).css({
+				'transition-delay': delay + 's',
 			});
 		});
 	}
 
-	// showScene() {
-	// 	this.$container.addClass('active')
-	// }
+	setScene() {
+		const trigger = this.$container[0];
 
-	                    setScene() {
-		                    const trigger = this.$container[0];
-		// const duration = trigger.clientHeight
-		// const _this = this
-		// let inview = false
-		// let timeout
-
-		                    this.scene = new ScrollMagic.Scene({
-			                    triggerElement: trigger,
-			// duration       : duration,
+		this.scene = new ScrollMagic.Scene({
+			triggerElement: trigger,
 		})
 		.setClassToggle(trigger, 'active')
 		.on('start', function () {
-			                    this.remove();
+			this.remove();
 		})
-		// .on('enter', function() {
-		// 	inview = true
-
-		// 	if(timeout) {
-		// 		clearTimeout(timeout)
-		// 		timeout = null
-		// 	}
-		// 	timeout = setTimeout(function() {
-		// 		clearTimeout(timeout)
-		// 		timeout = null
-		// 		if(inview) {
-		// 			_this.scene.remove()
-		// 			_this.showScene()
-		// 		}
-		// 	}, 250);
-		// })
-		// .on('leave', function() {
-		// 	inview = false
-
-		// 	clearTimeout(timeout)
-		// 	timeout = null
-		// })
 		.addTo(_c.controller);
 	}
 }

@@ -26,8 +26,6 @@ export default class Article {
 					'<img src="' + $img + '">',
 				'</figure>',
 			].join('')
-
-
 		});
 	}
 }

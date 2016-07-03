@@ -12,17 +12,17 @@ AppDispatcher.register((payload) => {
 		// case 'get-tweets':
 		// 	getTweets()
 		// 	break
-		case 'get-app-store':
-			                    getStore(payload.callback);
-			                    break;
-		case 'get-page-data':
-			                    getPageData(payload.page_slug, payload.post_slug);
-			                    break;
-		case 'get-more-items':
-			                    getMoreItems();
-			                    break;
-		default:
-			                    return true;
+	case 'get-app-store':
+			          getStore(payload.callback);
+			          break;
+	case 'get-page-data':
+			          getPageData(payload.page_slug, payload.post_slug);
+			          break;
+	case 'get-more-items':
+			          getMoreItems();
+			          break;
+	default:
+			          return true;
 	}
 	                    return true;
 });
