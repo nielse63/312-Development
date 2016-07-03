@@ -12,13 +12,13 @@ export default class Footer extends Component {
 		const data = this.props.data;
 		const navItems = data.globals.navItems;
 
-		const menuItems = navItems.map( ( nav_item ) => {
+		const menuItems = navItems.map((nav_item) => {
 			return (
 				<li key={'key-' + nav_item.key}>
 					<Link to={nav_item.value} activeClassName="active">{nav_item.title}</Link>
 				</li>
 			);
-		} );
+		});
 
 		return (
 			<footer className="footer">

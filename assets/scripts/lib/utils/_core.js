@@ -11,10 +11,10 @@ export default class Clique {
 	constructor() {
 		// cache jquery & dom objects
 		this.$ = $;
-		this.$win = this.$( window );
-		this.$doc = this.$( document );
-		this.$html = this.$( 'html' );
-		this.$body = this.$( 'body' );
+		this.$win = this.$(window);
+		this.$doc = this.$(document);
+		this.$html = this.$('html');
+		this.$body = this.$('body');
 
 		// global vars
 		this.showLoading = true;

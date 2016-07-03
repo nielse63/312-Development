@@ -5,7 +5,7 @@ class Tweet extends Component {
 
 	propTypes() {
 		return {
-			data: React.PropTypes.object,
+			data : React.PropTypes.object,
 		};
 	}
 
@@ -16,11 +16,11 @@ class Tweet extends Component {
 
 		return (
 			<div className="tweet">
-				<p dangerouslySetInnerHTML={{ __html: text }} />
+				<p dangerouslySetInnerHTML={{ __html : text }} />
 				<footer className="tweet-footer">
 					<div className="flex flex-space-between flex-middle">
 						<div className="col">
-							<time dangerouslySetInnerHTML={{ __html: data.time }} />
+							<time dangerouslySetInnerHTML={{ __html : data.time }} />
 						</div>
 						<div className="col">
 							<a href={retweet} className="button" data-retweet>Retweet</a>

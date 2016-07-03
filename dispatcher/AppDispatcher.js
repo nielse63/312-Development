@@ -5,24 +5,24 @@ import { getStore, getPageData, getMoreItems } from '../actions/actions';
 const AppDispatcher = new Dispatcher();
 
 // Register callback with AppDispatcher
-AppDispatcher.register( ( payload ) => {
+AppDispatcher.register((payload) => {
 	const action = payload.action;
-	switch ( action ) {
+	switch (action) {
 
-		case 'get-app-store':
-			getStore( payload.callback );
-			break;
+	case 'get-app-store':
+		getStore(payload.callback);
+		break;
 
-		case 'get-page-data':
-			getPageData( payload.page_slug, payload.post_slug );
-			break;
+	case 'get-page-data':
+		getPageData(payload.page_slug, payload.post_slug);
+		break;
 
-		case 'get-more-items':
-			getMoreItems();
-			break;
+	case 'get-more-items':
+		getMoreItems();
+		break;
 
-		default:
-			return true;
+	default:
+		return true;
 	}
 	return true;
 });

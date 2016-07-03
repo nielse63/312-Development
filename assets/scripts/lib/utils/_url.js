@@ -14,12 +14,12 @@ export default class URL {
 		return this;
 	}
 
-	getHash( string = this.current ) {
-		if ( string.indexOf( '#' ) < 0 ) {
+	getHash(string = this.current) {
+		if (string.indexOf('#') < 0) {
 			return '';
 		}
 
-		const a = document.createElement( 'a' );
+		const a = document.createElement('a');
 		a.href = string;
 
 		return a.hash;
