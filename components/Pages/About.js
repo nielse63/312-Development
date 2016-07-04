@@ -46,6 +46,7 @@ export default class About extends Component {
 
 	render() {
 		const data = this.props.data;
+		// console.log(data.tweets);
 		// const page = data.page;
 
 		return (

@@ -7,12 +7,6 @@ import _ from 'lodash';
 export default class Block extends Component {
 
 	makeSlug(string) {
-		// string = string || window.location.href;
-
-		// var a = document.createElement('a');
-		// a.href = string.replace(/[\s|_|.]/g, '-');
-
-		// var path = a.pathname;
 		let path = string.replace(/[\s|_|.]/g, '-');
 
 		// remove leading slash

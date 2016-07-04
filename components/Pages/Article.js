@@ -12,12 +12,13 @@ import Block from '../Partials/Block';
 
 export default class Article extends Component {
 
-	// componentWillMount() {
-	// 	window.postMessage('loading', window.location.origin);
-	// }
+	componentWillMount() {
+		// window.postMessage('loading', window.location.origin);
+		this.getPostData();
+	}
 
 	componentDidMount() {
-		document.title = config.site.title + ' | ' + this.props.data.page.title;
+		// document.title = config.site.title + ' | ' + this.props.data.page.title;
 		window.postMessage('loaded', window.location.origin);
 	}
 
@@ -28,50 +29,51 @@ export default class Article extends Component {
 	getPostData() {
 		AppDispatcher.dispatch({
 			action    : 'get-post-data',
+			page_slug : 'articles',
 			post_slug : this.props.params.slug,
 		});
 	}
 
 	render() {
 		const page = this.props.data.page;
-		console.log(page);
-		return (
-			<div>
-				<Loading />
-			</div>
-		);
+		// console.log(page);
+		// return (
+		// 	<div>
+		// 		<div />
+		// 	</div>
+		// );
 
-		/*
 		// page vars
 		const title = page.title;
-		let content = page.content;
+		const content = page.content;
 
-		// default
-		let background = window.location.origin + '/images/blog-sample.jpg';
-
-		// meta fields
-		const fields = page.metafield;
-
-		// background image
-		if (fields.banner_image && fields.banner_image.value) {
-			background = fields.banner_image.imgix_url;
-		}
+		// banner image
+		const background = '/images/photo' + Math.floor(Math.random() * 10) + '.jpg';
+		// let background = window.location.origin + '/images/blog-sample.jpg';
 		const style = {
 			backgroundImage : 'url(' + background + ')',
 		};
 
+		// meta fields
+		// const fields = page.metafield;
+
+		// background image
+		// if (fields.banner_image && fields.banner_image.value) {
+		// 	background = fields.banner_image.imgix_url;
+		// }s
+
 		// leading paragraph
-		if (fields.leading_paragraph && fields.leading_paragraph.value) {
-			content = ['<p class="article-lead">', fields.leading_paragraph.value, '</p>'].join('') + content;
-		}
+		// if (fields.leading_paragraph && fields.leading_paragraph.value) {
+		// 	content = ['<p class="article-lead">', fields.leading_paragraph.value, '</p>'].join('') + content;
+		// }
 
 		// links
-		let buttons;
+		let buttons = '';
 		const links = [];
-		if (fields.links && fields.links.value) {
-			const linksArray = fields.links.value.split('\n');
-			for (let i = 0; i < linksArray.length; i++) {
-				const link = linksArray[i].split(':');
+		if (page.links && page.links.length) {
+			// const linksArray = page.links.value.split('\n');
+			for (let i = 0; i < page.links.length; i++) {
+				const link = page.links[i].split(':');
 				const text = link.shift().trim();
 				const url = link.join('').trim();
 
@@ -80,12 +82,12 @@ export default class Article extends Component {
 					url,
 				});
 			}
+			// console.log(links);
 
 			buttons = links.map((link) => {
-				let icon = 'fa fa-' + link.text.toLowerCase();
 				return (
 					<li key={'key-' + link.text}>
-						<a href={link.url} className="button button-blue"><i className={icon}></i> {link.text}</a>
+						<a href={link.url} className="button button-blue">{link.text}</a>
 					</li>
 				);
 			});
@@ -153,6 +155,5 @@ export default class Article extends Component {
 				</section>
 			</main>
 	    );
-	    */
 	}
 }

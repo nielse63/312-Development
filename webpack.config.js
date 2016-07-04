@@ -21,9 +21,9 @@ var plugins = [
 // var plugins;
 
 if(process.env.NODE_ENV === 'development') {
-	loaders = ['react-hot', 'eslint-loader', 'babel']
+	loaders = ['react-hot', 'babel']
 } else {
-	loaders = ['babel', 'eslint-loader']
+	loaders = ['babel']
 	plugins.push(new webpack.optimize.UglifyJsPlugin({
 		compress: {
 			warnings: false
