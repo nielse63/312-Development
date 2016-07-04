@@ -2,24 +2,51 @@
 import colorbrewer from '../utils/_colorbrew';
 import tinycolor from 'tinycolor2';
 import ScrollMagic from 'scrollmagic';
+import SplitText from '../vendor/SplitText';
 
 export default class WorkGrid {
 
 	constructor() {
 		this.$workBlocks = $('.work-block');
+		// console.log(this.$workBlocks.length)
 		if (! this.$workBlocks.length) {
 			return;
 		}
 
 		this.section = document.querySelector('.work-section');
+		this.scene = [];
 
 		this.init();
 	}
 
 	init() {
+		this.setPreviewText();
 		this.colorizeWorkBlocks();
 		this.blockHover();
 		this.scrollWorkGrid();
+	}
+
+	setPreviewText() {
+		this.$workBlocks.each(function() {
+			const $preview = _c.$(this).find('.preview');
+			const text = [];
+
+			new SplitText($preview[0], {
+				type : 'lines',
+			}).lines.forEach(function(line, i) {
+				if (! line.childNodes || ! line.childNodes.length) {
+					return;
+				}
+
+				text.push(line.childNodes[0].nodeValue.trim());
+
+				if (i > 2) {
+					return false;
+				}
+			});
+
+			$preview.html(text.join(' '));
+		});
 	}
 
 	getRandomColor() {
@@ -34,7 +61,7 @@ export default class WorkGrid {
 	}
 
 	colorizeWorkBlocks() {
-		const colors = this.getRandomColor();
+		let colors = this.getRandomColor();
 		let idx = 0;
 		this.$workBlocks.each(function() {
 			const $ele = $(this);
@@ -45,6 +72,7 @@ export default class WorkGrid {
 			$ele.data('colorset', true);
 			let color;
 			if (! colors[idx]) {
+				colors = colors.reverse();
 				idx = 0;
 			}
 			color = colors[idx];
@@ -71,7 +99,6 @@ export default class WorkGrid {
 	}
 
 	blockHover() {
-		// bind work blocks scroll listener
 		this.$workBlocks.each(function(i) {
 			const $ele = $(this);
 
@@ -85,34 +112,42 @@ export default class WorkGrid {
 	}
 
 	scrollWorkGrid() {
-		const section = this.section;
-		let working = false;
-		const $workBlocks = this.$workBlocks;
+		const _this = this;
 
-		this.scene = new ScrollMagic.Scene({
-			triggerElement : section,
-			duration       : section.clientHeight,
-		})
-		.on('progress', function(e) {
-			if (working) {
-				return;
-			}
-			working = true;
-			$workBlocks.filter(':not(.hovering)').each(function(i) {
-				const $ele = $(this);
-				const $figure = $ele.find('.work-block-figure');
-				let diff = $figure.data('diff');
-				if (! diff) {
-					diff = $ele.outerHeight() - $figure.outerHeight();
-					$figure.data('diff', diff);
-				}
-				const y = diff * e.progress * (i % 2 === 0 ? -1 : 1);
-				$figure.css({
-					transform : 'translateY(' + y + 'px)',
+		this.$workBlocks.each(function(i) {
+			const trigger = this;
+			const $block = _c.$(this);
+			const $figure = $block.find('.work-block-figure');
+			const diff = $block.outerHeight() - $figure.outerHeight();
+
+			if (i > 3) {
+				$block.css({
+					'transition-delay' : Math.random() + 's',
 				});
-			});
-			working = false;
-		})
-		.addTo(_c.controller);
+			}
+
+			const scene = new ScrollMagic.Scene({
+				triggerElement : trigger,
+				triggerHook    : 'onEnter',
+				duration       : window.innerHeight + trigger.clientHeight,
+			})
+			.on('enter', function(block) {
+				return function() {
+					block.addClass('inview');
+					this.off('enter');
+				};
+			}($block))
+			.on('progress', function(_i, _figure, _diff) {
+				return function(e) {
+					const y = _diff * e.progress * (_i % 2 === 0 ? -1 : 1);
+					_figure.css({
+						transform : 'translateY(' + y + 'px)',
+					});
+				};
+			}(i, $figure, diff))
+			.addTo(_c.controller);
+
+			_this.scene.push(scene);
+		});
 	}
 }

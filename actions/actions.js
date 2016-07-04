@@ -2,13 +2,13 @@
 // actions.js
 import config from '../config';
 import Cosmic from 'cosmicjs';
-// import contentful from 'contentful';
+import contentful from 'contentful';
 import _ from 'lodash';
 
 // AppStore
 import AppStore from '../stores/AppStore';
 
-function getTweets(callback) {
+export function getTweets(callback) {
 	const url = 'http://api.312development.dev/tweets.php';
 	const opts = {
 		method  : 'GET',
@@ -16,128 +16,138 @@ function getTweets(callback) {
 		mode    : 'cors',
 		cache   : 'default',
 	};
-	fetch(url, opts)
-	.then((response) => {
-		if (! response.ok) {
-			throw new Error(`Error getting tweets: ${response}`);
-		}
-		return response.json();
-	})
-	.then((data) => {
-		// set data
-		AppStore.data.tweets = data;
 
-		// Emit change
-		AppStore.data.ready = true;
-		AppStore.emitChange();
-
-		// Trigger callback (from server)
+	function always() {
 		if (callback) {
-			callback(false, AppStore);
+			callback();
 		}
-	});
-}
-
-export function getStore(checkTweets = true, callback) {
-	let cb = callback;
-	let ct = checkTweets;
-	if (typeof checkTweets === 'function') {
-		cb = checkTweets;
-		ct = true;
 	}
 
-	// const client = contentful.createClient({
-	// 	space: 'o4irotzruet8',
-	// 	accessToken: 'f4a44d21a363ca93576e4e881fd762f88bd38dc912c2c37eba9f359d6ea0a0cb',
-	// 	host: 'preview.contentful.com'
-	// })
+	fetch(url, opts)
+		.then((response) => {
+			if (! response.ok) {
+				throw new Error(`Error getting tweets: ${response}`);
+			}
+			return response.json();
+		})
+		.then((data) => {
+			AppStore.data.tweets = data;
+			always();
+		})
+		.catch(always);
+}
 
-	// client.getEntries()
-	// 	.then(function(_entries) {
-	// 		const obj = _entries.toPlainObject();
-	// 		let content = obj.items;
-	// 		console.log(entries)
-	// 	}
-	// );
+// function getFromContentful() {
+// }
 
-	Cosmic.getObjects(config, (err, response) => {
-		const object = response.object;
-		const objects = response.objects;
-		const globals = AppStore.data.globals;
+export function getStore(callback) {
+	const globals = AppStore.data.globals;
+	globals.navItems = [{
+		key   : 'homepage',
+		value : '/',
+		title : 'Work',
+	}, {
+		key   : 'about',
+		value : '/about',
+		title : 'About',
+	}, {
+		key   : 'contact',
+		value : '/contact',
+		title : 'Contact',
+	}];
 
-		// nav
-		globals.nav_items = object.nav.metafields;
+	// set globals
 
-		// pages
-		const pages = objects.type.pages;
-		AppStore.data.pages = pages;
+	getTweets(function() {
+		const client = contentful.createClient({
+			space       : 'o4irotzruet8',
+			accessToken : 'f4a44d21a363ca93576e4e881fd762f88bd38dc912c2c37eba9f359d6ea0a0cb',
+			host        : 'preview.contentful.com',
+		});
 
-		// articles
-		const articles = objects.type.articles;
-		AppStore.data.articles = _.sortBy(articles, 'created');
+		client.getEntries({
+			'content_type' : '47g12FQ9BKOiU0A2OwYIkA',
+		}).then(function(_entries) {
+			const entries = _entries.toPlainObject();
+			const items = entries.items;
+			const posts = [];
 
-		AppStore.data.globals = globals;
+			items.forEach(function(object) {
+				const item = object.fields;
+				item.id = object.sys.id;
+				posts.push(item);
+			});
 
-		// get tweets
-		if (ct) {
-			getTweets(cb);
-		} else {
-			// Emit change
+			// set data
+			AppStore.data.posts = posts;
+			AppStore.data.globals = globals;
+
+			// trigger change even
 			AppStore.data.ready = true;
 			AppStore.emitChange();
 
-			// Trigger callback (from server)
-			if (cb) {
-				cb(false, AppStore);
+			if (callback) {
+				callback(false, AppStore);
 			}
-		}
+		});
 	});
 }
 
-export function getPageData(pageSlug = 'home', postSlug) {
-	function setPageData() {
-		const data = AppStore.data;
-
-		let items;
-		let slug = pageSlug;
-
-		if (slug === 'articles') {
-			slug = postSlug;
-			items = data.articles;
-		} else {
-			items = data.pages;
-		}
-
-		// get page data
-		const page = _.findWhere(items, {
-			slug,
-		});
-		const metafields = page.metafields;
-
-		// set meta fields
-		page.fields = metafields;
-
-		AppStore.data.page = page;
-		AppStore.emitChange();
-	}
+export function getPostData(id) {
+	console.log(id);
 
 	// Get page info
-	if (! AppStore.data.pages.length) {
-		getStore(false, setPageData);
-	} else {
-		setPageData();
-	}
+	// const data = AppStore.data;
+	// let pages = [];
+	// let slug = pageSlug;
+
+	// if (slug === 'articles') {
+	// 	slug = postSlug;
+	// 	pages = data.articles;
+	// } else {
+	// 	pages = data.pages;
+	// }
+
+	// // const pages = data.pages
+	// const page = _.findWhere(pages, { slug });
+
+	// AppStore.data.page = page;
+	// AppStore.emitChange();
 }
 
-export function getMoreItems() {
-	AppStore.data.loading = true;
-	AppStore.emitChange();
+// export function getPageData(pageSlug, postSlug) {
+// 	if (! pageSlug) {
+// 		pageSlug = 'home';
+// 	}
 
-	setTimeout(function() {
-		const itemNum = AppStore.data.itemNum;
-		const moreItemNum = itemNum + 5;
-		AppStore.data.itemNum = moreItemNum;
-		AppStore.data.loading = false;
-		AppStore.emitChange();
-	}, 300);
-}
+// 	// Get page info
+// 	const data = AppStore.data;
+// 	let pages = [];
+// 	let slug = pageSlug;
+
+// 	if (slug === 'articles') {
+// 		slug = postSlug;
+// 		pages = data.articles;
+// 	} else {
+// 		pages = data.pages;
+// 	}
+
+// 	// const pages = data.pages
+// 	const page = _.findWhere(pages, { slug });
+
+// 	AppStore.data.page = page;
+// 	AppStore.emitChange();
+// }
+
+// export function getMoreItems() {
+// 	AppStore.data.loading = true;
+// 	AppStore.emitChange();
+
+// 	setTimeout(function() {
+// 		const itemNum = AppStore.data.itemNum;
+// 		const moreItemNum = itemNum + 5;
+// 		AppStore.data.itemNum = moreItemNum;
+// 		AppStore.data.loading = false;
+// 		AppStore.emitChange();
+// 	}, 300);
+// }

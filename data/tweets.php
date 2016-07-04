@@ -1,5 +1,6 @@
 <?php
 
+require_once __DIR__ . '/functions.php';
 require_once dirname(__DIR__) . '/vendor/autoload.php';
 
 
@@ -156,13 +157,6 @@ function get_tweets( $count = 3 )
 	// update_option( 'custom_latest_tweets', $output );
 	// update_option( 'custom_last_checked_tweets', $time );
 	return $output;
-}
-
-function debug($n)
-{
-	echo '<pre>';
-	print_r($n);
-	echo '</pre>';
 }
 
 header("Access-Control-Allow-Origin: *");

@@ -18,8 +18,11 @@ export default class Services {
 	}
 
 	setDelay() {
-		this.$services.each(function() {
-			const delay = Math.random();
+		this.$services.each(function(i) {
+			if (!i) {
+				return;
+			}
+			const delay = i * 0.1;
 
 			$(this).find('.service-figure, p').css({
 				'transition-delay' : delay + 's',

@@ -11,9 +11,15 @@ import AppDispatcher from '../../dispatcher/AppDispatcher';
 
 export default class About extends Component {
 
+	static get defaultProps() {
+		return {
+			pageTitle : 'About',
+		};
+	}
+
 	componentWillMount() {
 		window.postMessage('loading', window.location.origin);
-		this.getPageData();
+		this.getTweets();
 	}
 
 	componentDidMount() {
@@ -21,8 +27,7 @@ export default class About extends Component {
 	}
 
 	componentDidUpdate() {
-		const data = this.props.data;
-		document.title = config.site.title + ' | ' + data.page.title;
+		document.title = config.site.title + ' | ' + this.props.title;
 	}
 
 	componentWillUnmount() {
@@ -33,17 +38,15 @@ export default class About extends Component {
 		return this.props.location.pathname.replace('/', '');
 	}
 
-	getPageData() {
-		const pageSlug = this.getSlug();
+	getTweets() {
 		AppDispatcher.dispatch({
-			action : 'get-page-data',
-			pageSlug,
+			action : 'get-tweets',
 		});
 	}
 
 	render() {
 		const data = this.props.data;
-		const page = data.page;
+		// const page = data.page;
 
 		return (
 			 <div>
@@ -115,7 +118,7 @@ export default class About extends Component {
 						</div>
 						<div className="row section-row">
 							<div className="col-xs-12">
-								<article className="article about-article">
+								<article className="article page-article">
 									<div className="row flex-middle">
 										<div className="col-xs-12 col-md-7">
 											<div className="where-i-work">
@@ -146,7 +149,7 @@ export default class About extends Component {
 						</div>
 						<div className="row section-row">
 							<div className="col-xs-12">
-								<article className="article about-article">
+								<article className="article page-article">
 									<div className="row flex-middle">
 										<div className="col-xs-12 col-md-5">
 											<aside className="aside">
@@ -159,7 +162,7 @@ export default class About extends Component {
 											</aside>
 										</div>
 										<div className="col-xs-12 col-md-7">
-											<TweetList />
+											<TweetList tweets={data.tweets} />
 										</div>
 									</div>
 								</article>

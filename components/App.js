@@ -12,17 +12,18 @@ import AppStore from '../stores/AppStore';
 import MobileNav from './Partials/MobileNav';
 import Header from './Partials/Header';
 import Footer from './Partials/Footer';
+import Loading from './Partials/Loading';
 
 export default class App extends Component {
 
 	// Add change listeners to stores
 	componentDidMount() {
-		AppStore.addChangeListener(this.onChange.bind(this));
+		AppStore.addChangeListener(this._onChange.bind(this));
 	}
 
 	// Remove change listeners from stores
 	componentWillUnmount() {
-		AppStore.removeChangeListener(this.onChange.bind(this));
+		AppStore.removeChangeListener(this._onChange.bind(this));
 	}
 
 	getStore() {
@@ -36,27 +37,31 @@ export default class App extends Component {
 		return !! path ? path : 'home';
 	}
 
-	onChange() {
+	_onChange() {
 		this.setState(AppStore);
 	}
 
 	render() {
+		// return (
+		// 	<div>
+		// 		<Loading />
+		// 	</div>
+		// );
 		const data = AppStore.data;
 
 		// Show loading for browser
 		if (! data.ready) {
-			if (document) {
+			if (typeof document !== 'undefined') {
 				document.title = 'Loading';
 			}
 
 			this.getStore();
 
-			const style = {
-				marginTop : 120,
-			};
 			return (
-				<div />
-				);
+				<div>
+					<Loading />
+				</div>
+			);
 		}
 
 		// Server first
@@ -66,7 +71,7 @@ export default class App extends Component {
 		});
 
 		// props
-		const navItems = data.globals.nav_items;
+		const navItems = data.globals.navItems;
 		const transitionDuration = 1000;
 
 		return (

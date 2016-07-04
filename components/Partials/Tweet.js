@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 
 class Tweet extends Component {
 
-	propTypes() {
+	static get propTypes() {
 		return {
 			data : React.PropTypes.object,
 		};

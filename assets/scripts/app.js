@@ -42,155 +42,145 @@ import Footer from './lib/components/_footer';
 
 // immediate modules
 // new Loading()
-BodyClass.exec();
-new ScrollTo();
 
 // globals
 let didLoad = false;
 const modules = [
-	                    {
-		                                        preload : false,
-		                                        cls     : MobileButton,
-		                                        val     : null,
-	                    }, {
-		                    preload : false,
-		                    cls     : Banner,
-		                    val     : null,
+	{
+		preload : false,
+		cls     : MobileButton,
+		val     : null,
 	}, {
-		                    once    : true,
-		                    preload : true,
-		                    cls     : Nav,
-		                    val     : null,
+		preload : false,
+		cls     : Banner,
+		val     : null,
 	}, {
-		                    preload : false,
-		                    cls     : Homepage,
-		                    val     : null,
+		once    : true,
+		preload : true,
+		cls     : Nav,
+		val     : null,
 	}, {
-		                    preload : true,
-		                    cls     : WorkGrid,
-		                    val     : null,
+		preload : false,
+		cls     : Homepage,
+		val     : null,
 	}, {
-		                    preload : false,
-		                    cls     : Services,
-		                    val     : null,
+		preload : true,
+		cls     : WorkGrid,
+		val     : null,
 	}, {
-		                    preload : false,
-		                    cls     : Photos,
-		                    val     : null,
+		preload : false,
+		cls     : Services,
+		val     : null,
 	}, {
-		                    preload : true,
-		                    cls     : Links,
-		                    val     : null,
+		preload : false,
+		cls     : Photos,
+		val     : null,
 	}, {
-		                    preload : false,
-		                    cls     : Form,
-		                    val     : null,
+		preload : true,
+		cls     : Links,
+		val     : null,
 	}, {
-		                    preload : false,
-		                    cls     : Footer,
-		                    val     : null,
+		preload : false,
+		cls     : Form,
+		val     : null,
 	}, {
-		                    preload : false,
-		                    cls     : Share,
-		                    val     : null,
+		preload : false,
+		cls     : Footer,
+		val     : null,
+	}, {
+		preload : false,
+		cls     : Share,
+		val     : null,
 	},
 ];
 const transitionEvent = _c.support.transition.end + '.app';
 
 function initModules(preload = false) {
-	                  const scenes = [];
+	const scenes = [];
 
-	                    function killScenes() {
-		                    for (let i = 0; i < scenes.length; i++) {
-			                    scenes[i].destroy(true);
+	function killScenes() {
+		for (let i = 0; i < scenes.length; i++) {
+			if (_c.utils.isArray(scenes[i])) {
+				scenes[i].forEach(function(scene) {
+					scene.destroy(true);
+				});
+			} else {
+				scenes[i].destroy(true);
+			}
 		}
 	}
 
-	                    _c.$('.transition-enter').off(transitionEvent, killScenes);
-	                    _c.$('.transition-enter').one(transitionEvent, killScenes);
+	_c.$('.transition-enter').off(transitionEvent, killScenes);
+	_c.$('.transition-enter').one(transitionEvent, killScenes);
 
-	                    for (let i = 0; i < modules.length; i++) {
-		                  const module = modules[i];
+	for (let i = 0; i < modules.length; i++) {
+		const module = modules[i];
 
 		// guards
-		                    if (module.preload !== preload || (module.once && module.val)) {
-			                    continue;
+		if (module.preload !== preload || (module.once && module.val)) {
+			continue;
 		}
 
 		// destroy scroll scene
-		                    if (module.val && module.val.scene) {
-			                    scenes.push(module.val.scene);
-			                    module.val.scene.remove();
+		if (module.val && module.val.scene) {
+			const scene = module.val.scene;
+			scenes.push(scene);
+
+			if (_c.utils.isArray(scene)) {
+				scene.forEach(function(_scene) {
+					_scene.destroy(true);
+				});
+			} else {
+				scene.destroy(true);
+			}
 		}
 
 		// create new class
-		                    module.val = new module.cls();
+		module.val = new module.cls();
 	}
 }
 
 function preMount() {
-	                    BodyClass.exec();
-	                    initModules(true);
+	BodyClass.exec();
+	new ScrollTo();
+
+	initModules(true);
 }
 
 function enterPage() {
-	                    preMount();
+	preMount();
 
-	                  const delay = didLoad ? 700 : 0;
+	const delay = didLoad ? 700 : 0;
 
-	                    let t = setTimeout(function() {
-		                    clearTimeout(t);
-		                    t = null;
+	let t = setTimeout(function() {
+		clearTimeout(t);
+		t = null;
 
-		                    if (! delay) {
-			                    _c.$html.addClass('app-ready');
+		if (! delay) {
+			_c.$html.addClass('app-ready');
 		}
 
-		                    _c.controller.update();
-		                    initModules();
+		_c.controller.update();
+		initModules();
 
-		                    didLoad = true;
+		didLoad = true;
 	}, delay);
 }
 
-// const messages = ['loading', 'loaded', 'unloaded']
-// let lastBodyHeight = 0
-
-// NProgress.start()
-
-// setTimeout(function() {
-// 	NProgress.done()
-// }, 2000);
-
 function messageCallback(e) {
-	                    if (! e.isTrusted) {
-		                    return;
+	if (! e.isTrusted) {
+		return;
 	}
 
-	// console.log(e)
-
-	                    if (e.data === 'loading') {
-		                    NProgress.start();
+	if (e.data === 'loading') {
+		NProgress.start();
 	}
 
-	                    if (e.data === 'loaded') {
-		// const newHeight = document.body.clientHeight
-		// if( newHeight < lastBodyHeight ) {
-		// 	_c.$body.height(lastBodyHeight)
-		// }
-		// if( _c.$('.transition-enter').length ) {
-		// 	_c.$('.transition-enter').one(transitionEvent, function() {
-		// 		_c.$body.css('height', '')
-		// 	});
-		// } else {
-		// 	_c.$body.css('height', '')
-		// }
-		// lastBodyHeight = newHeight
+	if (e.data === 'loaded') {
+		enterPage();
 
-		                    enterPage();
-
-		                    setTimeout(function() {
-			                    NProgress.done();
+		setTimeout(function() {
+			NProgress.done();
 		}, 500);
 	}
 }

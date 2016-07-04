@@ -14,13 +14,14 @@ export default class Homepage {
 	}
 
 	setScene() {
-		const trigger = document.querySelector('.article-title');
-		const container = $(trigger).closest('.wrap')[0];
+		const $trigger = _c.$('.article-title');
+		const $container = $trigger.closest('.wrap');
 
 		this.scene = new ScrollMagic.Scene({
-			triggerElement : trigger,
+			triggerElement : $trigger[0],
+			triggerHook    : 'onEnter',
 		})
-		.setClassToggle(container, 'loaded')
+		.setClassToggle($container[0], 'loaded')
 		.on('start', function() {
 			this.remove();
 		})
