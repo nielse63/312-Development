@@ -12,12 +12,14 @@ import Block from '../Partials/Block';
 
 export default class Home extends Component {
 
-	componentWillMount() {
-		window.postMessage('loading', window.location.origin);
-		// this.getPageData();
-	}
+	// componentWillMount() {
+	// 	// console.log(typeof window);
+	// 	// window.postMessage('loading', window.location.origin);
+	// 	// this.getPageData();
+	// }
 
 	componentDidMount() {
+		// console.log(typeof window.postMessage);
 		document.title = config.site.title + ' | ' + config.site.description;
 		window.postMessage('loaded', window.location.origin);
 	}
@@ -39,6 +41,7 @@ export default class Home extends Component {
 		// const content = data.page.content;
 		let i = 1;
 		const max = 10;
+		// console.log(data);
 
 		const items = posts.map((post) => {
 			if (i > max) {

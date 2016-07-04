@@ -76,12 +76,15 @@ export default class WorkGrid {
 				idx = 0;
 			}
 			color = colors[idx];
+			$ele.css({
+				'background-color' : color,
+			});
 
 			const tc = tinycolor(color);
 
 			// create gradient
-			const darker = tc.darken(35).toHexString();
-			const gradient = 'linear-gradient(150deg, ' + darker + ', ' + color + ')';
+			// const darker = tc.darken(35).toHexString();
+			// const gradient = 'linear-gradient(150deg, ' + darker + ', ' + color + ')';
 
 			// get luma
 			const rgb = tc.toRgb();
@@ -91,9 +94,9 @@ export default class WorkGrid {
 			}
 
 			// set style
-			$ele.css({
-				'background-image' : gradient,
-			});
+			// $ele.css({
+			// 	'background-image' : gradient,
+			// });
 			idx++;
 		});
 	}

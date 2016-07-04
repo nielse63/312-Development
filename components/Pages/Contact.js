@@ -18,7 +18,7 @@ export default class Contact extends Component {
 	}
 
 	componentWillMount() {
-		window.postMessage('loading', window.location.origin);
+		// window.postMessage('loading', window.location.origin);
 		// this.getPageData();
 		this.getTweets();
 	}
