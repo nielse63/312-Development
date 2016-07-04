@@ -5,9 +5,9 @@ import config from '../../config';
 
 export default class NoMatch extends Component {
 
-	componentWillMount() {
-		window.postMessage('loading', window.location.origin);
-	}
+	// componentWillMount() {
+	// 	window.postMessage('loading', window.location.origin);
+	// }
 
 	componentDidMount() {
 		document.title = config.site.title + ' | Page Not Found';

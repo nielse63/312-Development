@@ -16,11 +16,11 @@ import Contact from './components/Pages/Contact';
 import NoMatch from './components/Pages/NoMatch';
 
 export default (
-  <Route path="/" data={AppStore.data} component={App}>
-    <IndexRoute component={Home} />
-    <Route path="/articles/:slug" component={Article} />
-    <Route path="about" component={About} />
-    <Route path="contact" component={Contact} />
-    <Route path="*" component={NoMatch} />
-  </Route>
+	<Route path="/" data={AppStore.data} component={App}>
+		<IndexRoute component={Home} />
+		<Route path="/articles/:slug" component={Article} />
+		<Route path="about" component={About} />
+		<Route path="contact" component={Contact} />
+		<Route path="*" component={NoMatch} />
+	</Route>
 );

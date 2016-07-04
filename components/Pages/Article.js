@@ -12,13 +12,11 @@ import Block from '../Partials/Block';
 
 export default class Article extends Component {
 
-	componentWillMount() {
-		window.postMessage('loading', window.location.origin);
-		// this.getPageData();
-	}
+	// componentWillMount() {
+	// 	window.postMessage('loading', window.location.origin);
+	// }
 
 	componentDidMount() {
-		// const data = this.props.data;
 		document.title = config.site.title + ' | ' + this.props.data.page.title;
 		window.postMessage('loaded', window.location.origin);
 	}
@@ -36,7 +34,14 @@ export default class Article extends Component {
 
 	render() {
 		const page = this.props.data.page;
+		console.log(page);
+		return (
+			<div>
+				<Loading />
+			</div>
+		);
 
+		/*
 		// page vars
 		const title = page.title;
 		let content = page.content;
@@ -148,5 +153,6 @@ export default class Article extends Component {
 				</section>
 			</main>
 	    );
+	    */
 	}
 }

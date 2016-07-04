@@ -6,31 +6,29 @@ var loaders;
 var eslintConfig = {
 	fix : false
 };
+var plugins = [
+	new webpack.NoErrorsPlugin(),
+	new webpack.optimize.OccurenceOrderPlugin(),
+	new webpack.optimize.DedupePlugin(),
+	new webpack.ProvidePlugin({
+		$: "jquery",
+		jQuery: "jquery",
+		"window.jQuery": "jquery"
+	})
+];
+
+
 // var plugins;
 
 if(process.env.NODE_ENV === 'development') {
-	loaders = ['react-hot', 'babel']
-	plugins = [
-		new webpack.ProvidePlugin({
-			$: "jquery",
-			jQuery: "jquery",
-			"window.jQuery": "jquery"
-		})
-	]
+	loaders = ['react-hot', 'eslint-loader', 'babel']
 } else {
 	loaders = ['babel', 'eslint-loader']
-	plugins = [
-		new webpack.ProvidePlugin({
-			$: "jquery",
-			jQuery: "jquery",
-			"window.jQuery": "jquery"
-		}),
-		new webpack.optimize.UglifyJsPlugin({
-			compress: {
-				warnings: false
-			}
-		})
-	]
+	plugins.push(new webpack.optimize.UglifyJsPlugin({
+		compress: {
+			warnings: false
+		}
+	}));
 	eslintConfig.fix = true
 }
 

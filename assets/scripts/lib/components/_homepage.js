@@ -4,7 +4,7 @@ import ScrollMagic from 'scrollmagic';
 export default class Homepage {
 
 	constructor() {
-		if (! _c.$('.main.home').length) {
+		if (! _c.$('.article-title').length) {
 			return;
 		}
 

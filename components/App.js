@@ -42,11 +42,6 @@ export default class App extends Component {
 	}
 
 	render() {
-		// return (
-		// 	<div>
-		// 		<Loading />
-		// 	</div>
-		// );
 		const data = AppStore.data;
 
 		// Show loading for browser
@@ -66,7 +61,7 @@ export default class App extends Component {
 
 		// Server first
 		const Routes = React.cloneElement(this.props.children, {
-			key : this.props.location.pathname,
+			// key : this.props.location.pathname,
 			data,
 		});
 
@@ -74,6 +69,7 @@ export default class App extends Component {
 		const navItems = data.globals.navItems;
 		const transitionDuration = 1000;
 
+		// console.log(Routes);
 		return (
 			<div>
 				<MobileNav navItems={navItems} />
