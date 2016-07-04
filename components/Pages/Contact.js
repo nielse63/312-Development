@@ -11,9 +11,16 @@ import AppDispatcher from '../../dispatcher/AppDispatcher';
 
 export default class Contact extends Component {
 
+	static get defaultProps() {
+		return {
+			pageTitle : 'Contact Me',
+		};
+	}
+
 	componentWillMount() {
 		window.postMessage('loading', window.location.origin);
-		this.getPageData();
+		// this.getPageData();
+		this.getTweets();
 	}
 
 	componentDidMount() {
@@ -21,8 +28,7 @@ export default class Contact extends Component {
 	}
 
 	componentDidUpdate() {
-		const data = this.props.data;
-		document.title = config.site.title + ' | ' + data.page.title;
+		document.title = config.site.title + ' | ' + this.props.pageTitle;
 	}
 
 	componentWillUnmount() {
@@ -33,11 +39,17 @@ export default class Contact extends Component {
 		return this.props.location.pathname.replace('/', '');
 	}
 
-	getPageData() {
-		const pageSlug = this.getSlug();
+	// getPageData() {
+	// 	const pageSlug = this.getSlug();
+	// 	AppDispatcher.dispatch({
+	// 		action : 'get-page-data',
+	// 		pageSlug,
+	// 	});
+	// }
+
+	getTweets() {
 		AppDispatcher.dispatch({
-			action : 'get-page-data',
-			pageSlug,
+			action : 'get-tweets',
 		});
 	}
 
@@ -107,7 +119,7 @@ export default class Contact extends Component {
 						</div>
 						<div className="row flex-middle section-row">
 							<div className="col-xs-12 col-md-7">
-								<TweetList />
+								<TweetList tweets={data.tweets} />
 							</div>
 							<div className="col-xs-12 col-md-5">
 								<aside className="aside">

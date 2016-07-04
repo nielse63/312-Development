@@ -157,7 +157,7 @@ $transition-duration: 0.7s;
 		font-family: $serif-font-family;
 		transform-origin: 50px 50px;
 		transform: rotate(-90deg);
-		transition: $transition-duration transform;
+		transition: $transition-duration transform ease-in-out;
 		will-change: transform;
 
 		.active & {

@@ -1,6 +1,6 @@
 // AppDispatcher.js
 import { Dispatcher } from 'flux';
-import { getStore, getPageData, getMoreItems } from '../actions/actions';
+import { getTweets, getStore } from '../actions/actions';
 
 const AppDispatcher = new Dispatcher();
 
@@ -9,17 +9,25 @@ AppDispatcher.register((payload) => {
 	const action = payload.action;
 	switch (action) {
 
+	case 'get-Tweets':
+		getTweets();
+		break;
+
 	case 'get-app-store':
-		getStore(payload.callback);
+		getStore();
 		break;
 
 	case 'get-page-data':
-		getPageData(payload.page_slug, payload.post_slug);
+		getPageData(payload.page_slug);
 		break;
 
-	case 'get-more-items':
-		getMoreItems();
-		break;
+	// case 'get-page-data':
+	// 	getPageData(payload.page_slug, payload.post_slug);
+	// 	break;
+
+	// case 'get-more-items':
+	// 	getMoreItems();
+	// 	break;
 
 	default:
 		return true;

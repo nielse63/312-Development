@@ -14,6 +14,8 @@ $title-transition-delay: 0.5s;
 
 $work-transition-delay: ($title-transition-delay * 0.75);
 
+$figure-diff: 10vh;
+
 // ========================================================================
 // Component
 // ========================================================================
@@ -172,15 +174,30 @@ $work-transition-delay: ($title-transition-delay * 0.75);
 		display: block;
 		overflow: hidden;
 		contain: style;
+		will-change: transform, opacity;
 
 		@media (min-width: $breakpoint-medium) {
 			width: 50%;
 		}
 
-		&:nth-child(odd) {
+		&.inview {
+			transition: 0.5s transform,
+						0.5s opacity;
+		}
+
+		&:nth-child(even) {
 			.work-block-figure {
-				top: auto;
-				bottom: 0;
+				top: 0;
+				bottom: auto;
+			}
+		}
+
+		&:nth-child(4) {
+			~ * {
+				&:not(.inview) {
+					opacity: 0;
+					transform: translate(0, 50px);
+				}
 			}
 		}
 
@@ -248,7 +265,8 @@ $work-transition-delay: ($title-transition-delay * 0.75);
 			$diff: 10vh;
 
 			position: absolute;
-			top: 0;
+			bottom: 0;
+			// top: 0;
 			left: -15px;
 			right: -15px;
 			height: calc(100% + #{$diff});
@@ -260,7 +278,7 @@ $work-transition-delay: ($title-transition-delay * 0.75);
 			filter: sepia(80%);
 			margin: 0;
 			transition: 0.35s opacity;
-			will-change: opacity;
+			will-change: opacity, transform;
 		}
 	}
 }

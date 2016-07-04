@@ -45,17 +45,31 @@ $figure-offset: 15vh;
 		contain: style;
 		transform: translate(0, 15px);
 		will-change: transform, opacity;
-		transition: 0.5s transform 1s,
-					0.5s opacity 1s;
+		transition: 1s transform 1s,
+					1s opacity 1s;
 
 		@media (min-width: $breakpoint-medium) {
 			width: 50%;
 		}
 
+		&.inview {
+			opacity: 1;
+			transform: translate(0, 0);
+		}
+
 		&:nth-child(even) {
 			.work-figure {
-				top: auto;
-				bottom: 0;
+				// top: auto;
+				// bottom: 0;
+				top: 0;
+				bottom: auto;
+			}
+		}
+
+		&:nth-child(4) {
+			~ * {
+				opacity: 0;
+				transform: translate(0, 50px);
 			}
 		}
 
@@ -98,6 +112,10 @@ $figure-offset: 15vh;
 				padding: 50px;
 			}
 
+			> * {
+				flex: 0 1 auto;
+			}
+
 			.tag {
 				font-size: 14px;
 				letter-spacing: 10px;
@@ -126,7 +144,8 @@ $figure-offset: 15vh;
 
 		&-figure {
 			position: absolute;
-			top: 0;
+			bottom: 0;
+			// top: 0;
 			left: -15px;
 			right: -15px;
 			height: calc(100% + #{$figure-offset});
@@ -137,7 +156,7 @@ $figure-offset: 15vh;
 			-webkit-filter: sepia(80%);
 			filter: sepia(80%);
 			margin: 0;
-			will-change: opacity;
+			will-change: opacity, transform;
 			transition: 0.35s opacity;
 		}
 	}

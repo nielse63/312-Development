@@ -14,12 +14,12 @@ export default class Article extends Component {
 
 	componentWillMount() {
 		window.postMessage('loading', window.location.origin);
-		this.getPageData();
+		// this.getPageData();
 	}
 
 	componentDidMount() {
-		const data = this.props.data;
-		document.title = config.site.title + ' | ' + data.page.title;
+		// const data = this.props.data;
+		document.title = config.site.title + ' | ' + this.props.data.page.title;
 		window.postMessage('loaded', window.location.origin);
 	}
 
@@ -27,18 +27,15 @@ export default class Article extends Component {
 		window.postMessage('unloaded', window.location.origin);
 	}
 
-	getPageData() {
+	getPostData() {
 		AppDispatcher.dispatch({
-			action    : 'get-page-data',
-			page_slug : 'articles',
+			action    : 'get-post-data',
 			post_slug : this.props.params.slug,
 		});
 	}
 
 	render() {
-		// console.log(this.props)
 		const page = this.props.data.page;
-		console.log(this.props.data);
 
 		// page vars
 		const title = page.title;

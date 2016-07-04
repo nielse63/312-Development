@@ -1,11 +1,37 @@
 
 // webpack.config.js
-var webpack = require('webpack');
+const webpack = require('webpack');
 
-if(process.env.NODE_ENV === 'development'){
-	var loaders = ['react-hot', 'babel', 'eslint-loader']
+var loaders;
+var eslintConfig = {
+	fix : false
+};
+// var plugins;
+
+if(process.env.NODE_ENV === 'development') {
+	loaders = ['react-hot', 'babel']
+	plugins = [
+		new webpack.ProvidePlugin({
+			$: "jquery",
+			jQuery: "jquery",
+			"window.jQuery": "jquery"
+		})
+	]
 } else {
-	var loaders = ['babel', 'eslint-loader']
+	loaders = ['babel', 'eslint-loader']
+	plugins = [
+		new webpack.ProvidePlugin({
+			$: "jquery",
+			jQuery: "jquery",
+			"window.jQuery": "jquery"
+		}),
+		new webpack.optimize.UglifyJsPlugin({
+			compress: {
+				warnings: false
+			}
+		})
+	]
+	eslintConfig.fix = true
 }
 
 module.exports = {
@@ -26,19 +52,7 @@ module.exports = {
 			exclude: /(node_modules|bower_components)/,
 		}]
 	},
-	plugins : [
-		new webpack.ProvidePlugin({
-			$: "jquery",
-			jQuery: "jquery",
-			"window.jQuery": "jquery"
-		}),
-		new webpack.optimize.UglifyJsPlugin({
-			compress: {
-				warnings: false
-			}
-		})
-	],
-	eslint: {
-		fix : true
-	}
+	plugins : plugins,
+	eslint: eslintConfig
 };
+

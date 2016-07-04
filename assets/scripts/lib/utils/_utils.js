@@ -21,6 +21,10 @@ export default class Utils {
 		return Object.prototype.toString.call(obj) === '[object String]';
 	}
 
+	isArray(obj) {
+		return Object.prototype.toString.call(obj) === '[object Array]';
+	}
+
 	prefixFor(property) {
 		var vendors = ['Webkit', 'Moz', 'O'],
 			prop = property[0].toUpperCase() + property.slice(1),
