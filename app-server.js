@@ -11,7 +11,7 @@ import hogan from 'hogan-express'
 import config from './config'
 
 // Actions
-import { getStore, getPageData } from './actions/actions'
+import { getStore, getPostData } from './actions/actions'
 
 // Routes
 import routes from './routes'
@@ -32,6 +32,7 @@ app.get('*',(req, res) => {
 		}
 		// console.log('no errors')
 		match({ routes, location: req.url }, (error, redirectLocation, renderProps) => {
+			// console.log('match complete');
 
 			const slugArray = req.url.split('/')
 			const pageSlug = slugArray[1]
@@ -57,13 +58,14 @@ app.get('*',(req, res) => {
 			res.locals.site = config.site
 
 			// Get React markup
-			try {
-				const reactMarkup = ReactDOMServer.renderToString(<RoutingContext {...renderProps} />)
+			// try {
+			// console.log(renderProps);
+				const reactMarkup = renderToString(<RoutingContext {...renderProps} />)
 				res.locals.reactMarkup = reactMarkup
-			} catch(e) {
-				throw new Error(e);
-			}
-			console.log('render complete');
+			// } catch(e) {
+			// 	throw new Error(e);
+			// }
+			// console.log('render complete');
 
 			if (error) {
 				res.status(500).send(error.message)

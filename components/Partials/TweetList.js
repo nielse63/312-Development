@@ -18,6 +18,7 @@ export default class TweetList extends Component {
 	}
 
 	render() {
+		// console.log(this.props.tweets);
 		const tweets = this.props.tweets.map((tweet) => {
 			return (
 				<div className="col-xs-12 col-md-6 flex" key={'key-' + tweet.id}>

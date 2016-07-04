@@ -5,7 +5,7 @@ import { Link } from 'react-router';
 import config from '../../config';
 
 // Dispatcher
-import AppDispatcher from '../../dispatcher/AppDispatcher';
+// import AppDispatcher from '../../dispatcher/AppDispatcher';
 
 // Components
 import Block from '../Partials/Block';
@@ -28,15 +28,21 @@ export default class Home extends Component {
 		window.postMessage('unloaded', window.location.origin);
 	}
 
-	// getPageData() {
-	// 	AppDispatcher.dispatch({
-	// 		action    : 'get-page-data',
-	// 		page_slug : 'home',
-	// 	});
-	// }
+	getPageData() {
+		AppDispatcher.dispatch({
+			action    : 'get-page-data',
+			page_slug : 'home',
+		});
+	}
 
 	render() {
 		const data = this.props.data;
+		// console.log('home');
+		// return (
+		// 	<div>
+		// 		<div />
+		// 	</div>
+		// );
 		const posts = data.posts;
 		// const content = data.page.content;
 		let i = 1;

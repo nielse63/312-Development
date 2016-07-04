@@ -94,9 +94,21 @@ const modules = [
 	},
 ];
 const transitionEvent = _c.support.transition.end + '.app';
+const scenes = [];
+
+_c.$win.on('resizeend', function() {
+	for (let i = 0; i < scenes.length; i++) {
+		if (_c.utils.isArray(scenes[i])) {
+			scenes[i].forEach(function(scene) {
+				scene.update();
+			});
+		} else {
+			scenes[i].update();
+		}
+	}
+})
 
 function initModules(preload = false) {
-	const scenes = [];
 
 	function killScenes() {
 		for (let i = 0; i < scenes.length; i++) {

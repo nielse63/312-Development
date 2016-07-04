@@ -8,7 +8,21 @@ import _ from 'lodash';
 // AppStore
 import AppStore from '../stores/AppStore';
 
+function makeSlug(string) {
+	let path = string.replace(/[\s|_|.]/g, '-');
+
+	// remove leading slash
+	if (path[0] === '/') {
+		path = path.substr(1);
+	}
+
+	return path.replace(/\//g, '-')
+		.toLowerCase()
+		.split('.')[0];
+}
+
 export function getTweets(callback) {
+	// console.log(callback);
 	const url = 'http://api.312development.dev/tweets.php';
 	const opts = {
 		method  : 'GET',
@@ -16,6 +30,7 @@ export function getTweets(callback) {
 		mode    : 'cors',
 		cache   : 'default',
 	};
+	// console.log(url);
 
 	function always() {
 		if (callback) {
@@ -32,6 +47,8 @@ export function getTweets(callback) {
 		})
 		.then((data) => {
 			AppStore.data.tweets = data;
+			AppStore.emitChange();
+			// console.log(data);
 			always();
 		})
 		.catch(always);
@@ -71,6 +88,7 @@ export function getStore(callback) {
 		items.forEach(function(object) {
 			const item = object.fields;
 			item.id = object.sys.id;
+			item.slug = makeSlug(item.title);
 			posts.push(item);
 		});
 
@@ -89,21 +107,21 @@ export function getStore(callback) {
 	// });
 }
 
-export function getPostData(id) {
+export function getPostData(pageSlug, postSlug) {
+	// console.log(pageSlug, postSlug)
 	// Get page info
 	const data = AppStore.data;
-	let pages = [];
+	const pages = [];
 	let slug = pageSlug;
 
 	if (slug === 'articles') {
 		slug = postSlug;
-		pages = data.articles;
-	} else {
-		pages = data.pages;
 	}
 
 	// const pages = data.pages
-	const page = _.findWhere(pages, { slug });
+	// console.log(data.posts);
+	const page = _.findWhere(data.posts, { slug });
+	// console.log(page);
 
 	AppStore.data.page = page;
 	AppStore.emitChange();
