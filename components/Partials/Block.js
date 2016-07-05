@@ -25,28 +25,19 @@ export default class Block extends Component {
 
 		// single vars
 		const id = data.id;
-		// const metafields = data.metafields;
 		const category = data.category;
 		const title = data.title;
 		const excerpt = data.excerpt;
-		// console.log(title)
 		const slug = '/articles/' + this.makeSlug(title);
-		// console.log(slug)
-		// return (
-		// 	<div />
-		// );
 		const background = this.props.background;
-		const style = {
-			backgroundImage : 'url(' + background + ')',
-		};
-
-		// const previewObject = _.findWhere(metafields, { key : 'preview_text' });
-		// const preview = !! previewObject && previewObject.value ? previewObject.value : _.findWhere(metafields, { key : 'leading_paragraph' }).value;
+		// const style = {
+		// 	backgroundImage : 'url(' + background + ')',
+		// };
 
 		return (
 			 <li className="work-block" data-id={id}>
 				<Link to={slug}>
-					<figure className="work-block-figure" style={style}></figure>
+					<figure className="work-block-figure" data-greta={background} />
 					<div className="work-block-content">
 						<header className="work-block-header">
 							<p className="tag">{category}</p>

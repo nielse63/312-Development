@@ -11,6 +11,7 @@ import hogan from 'hogan-express'
 import config from './config'
 import nodemailer from 'nodemailer'
 import bodyParser from 'body-parser'
+import compression from 'compression'
 
 
 // Actions
@@ -23,11 +24,12 @@ import routes from './routes'
 const app = express()
 app.engine('html', hogan)
 app.set('views', __dirname + '/views')
-app.use('/', express.static(__dirname + '/public/'))
+app.use(compression())
+app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({ extended: true }))
+app.use(express.static(__dirname + '/public/'))
 app.set('port', (process.env.PORT || 3030))
 
-app.use(bodyParser.json()); // support json encoded bodies
-app.use(bodyParser.urlencoded({ extended: true })); // support encoded bodies
 
 app.post('/submit', (req, res) => {
 	var transporter = nodemailer.createTransport({
