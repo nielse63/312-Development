@@ -28,14 +28,14 @@ function loadTwitterScript(callback) {
 	}
 
 	$.getScript('https://platform.twitter.com/widgets.js')
-	.done(function() {
-		loaded = true;
-		callback();
-	})
-	.fail(function(jqxhr, settings, exception) {
-		console.warn(jqxhr, settings, exception);
-		callback();
-	});
+		.done(function() {
+			loaded = true;
+			callback();
+		})
+		.fail(function(jqxhr, settings, exception) {
+			console.warn(jqxhr, settings, exception);
+			callback();
+		});
 }
 
 export function loadTweets() {
@@ -45,7 +45,8 @@ export function loadTweets() {
 	}
 
 	var main = document.querySelector('.main');
-	if (! main) {
+	var tweets = document.querySelector('.tweets');
+	if (! main || ! tweets) {
 		return;
 	}
 
@@ -54,7 +55,7 @@ export function loadTweets() {
 	window.twttr.widgets.createTimeline({
 		sourceType : 'profile',
 		screenName : 'ErikKyleNielsen',
-	}, document.querySelector('.tweets'), {
+	}, tweets, {
 		tweetLimit : 10,
 	});
 }

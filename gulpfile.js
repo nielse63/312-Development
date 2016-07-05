@@ -27,6 +27,7 @@ var stylelint    = require('stylelint');
 var newer        = require('gulp-newer');
 // var inline_base64 = require('gulp-inline-base64');
 var base64 = require('./tools/gulp-base64-encode');
+var zopfli = require('gulp-zopfli');
 
 // See https://github.com/austinpray/asset-builder
 var manifest = require('asset-builder')('./assets/manifest.json');
@@ -60,15 +61,10 @@ var project = manifest.getProjectGlobs();
 
 // CLI options
 var enabled = {
-	// Enable static asset revisioning when `--production`
 	rev: argv.production,
-	// Disable source maps when `--production`
 	maps: !argv.production,
-	// Fail styles task on error when `--production`
 	failStyleTask: argv.production,
-	// Fail due to JSHint warnings only when `--production`
 	failJSHint: argv.production,
-	// Strip debug statments from javascript when `--production`
 	stripJSDebug: argv.production
 };
 
@@ -128,7 +124,12 @@ gulp.task('images', function() {
 		}))
 		.pipe(gulp.dest(path.dist + 'images'))
 		.pipe(connect.reload());
-		// .pipe(browserSync.stream());
+});
+
+gulp.task('scripts', function() {
+	return gulp.src(['public/dist/*.js'])
+		.pipe(zopfli())
+		.pipe(gulp.dest('public/dist'));
 });
 
 // ### JSHint
@@ -156,33 +157,17 @@ gulp.task('other', function() {
 
 // ### Watch
 gulp.task('watch', function() {
-	// browserSync.init({
-	//   files: ['{lib,templates}/**/*.php', '*.php'],
-	//   proxy: config.devUrl,
-	//   snippetOptions: {
-	//     whitelist: ['/wp-admin/admin-ajax.php'],
-	//     blacklist: ['/wp-admin/**']
-	//   }
-	// });
-	// connect.server({
-	// 	root: __dirname + '/dist',
-	// 	livereload: true,
-	// 	port: 8888
-	// });
-	// gulp.watch(['ssi/**/*.html'], ['wiredep', 'htmlSSI']);
 	gulp.watch([path.source + 'styles/**/*'], ['styles']);
-	// gulp.watch([path.source + 'scripts/**/*'], ['jshint', 'scripts']);
 	gulp.watch([path.source + 'fonts/**/*'], ['fonts']);
 	gulp.watch([path.source + 'images/**/*'], ['images']);
 	gulp.watch([path.source + 'other/**/*'], ['other']);
-	// gulp.watch(['bower.json', path.source + 'manifest.json'], ['build']);
 });
 
 
 // ### Build
 gulp.task('build', function(callback) {
 	runSequence(
-		['other', 'styles', 'images', 'fonts'],
+		['other', 'styles', 'images', 'fonts', 'scripts'],
 		callback
 	);
 });
@@ -218,9 +203,6 @@ gulp.task("scss-lint", function() {
 			"number-leading-zero": "always",
 			"number-no-trailing-zeros": true,
 			"property-no-vendor-prefix": true,
-			// "rule-no-duplicate-properties": true,
-			// "declaration-block-no-single-line": true,
-			// "rule-trailing-semicolon": "always",
 			"selector-list-comma-space-before": "never",
 			"selector-list-comma-newline-after": "always",
 			"selector-no-id": true,
