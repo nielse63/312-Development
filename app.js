@@ -1,3 +1,7 @@
 // app.js
 require('babel/register')
-require('./app-server.js')
+if(process.env.NODE_ENV === 'development') {
+	require('./dev-app-server.js')
+} else {
+	require('./app-server.js')
+}

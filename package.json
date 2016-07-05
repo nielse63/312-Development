@@ -10,6 +10,7 @@
     "babel": "^5.8.29",
     "babel-core": "^5.8.32",
     "babel-loader": "^5.3.2",
+    "body-parser": "^1.15.2",
     "contentful": "^3.4.3",
     "events": "^1.1.0",
     "express": "^4.13.3",
@@ -21,6 +22,7 @@
     "jquery": "^3.0.0",
     "jquery-validation": "^1.15.0",
     "lodash": "^3.10.1",
+    "nodemailer": "^2.4.2",
     "npm": "^3.10.3",
     "nprogress": "^0.2.0",
     "react": "^15.2.0",
@@ -34,11 +36,11 @@
   },
   "scripts": {
     "start": "npm run production",
-    "production": "NODE_ENV=production node app.js",
+    "production": "rm -rf public/index.html && NODE_ENV=production webpack -p && NODE_ENV=production node app.js",
     "webpack-dev-server": "NODE_ENV=development PORT=8080 webpack-dev-server --content-base public/ --hot --inline --devtool inline-source-map --history-api-fallback",
     "development": "cp views/index.html public/index.html && NODE_ENV=development webpack -d && npm run webpack-dev-server",
-    "build-release": "gulp build --production && NODE_ENV=production webpack -p",
-    "heroku-release": "npm run build-release && git add -A && git commit -m 'New release' && git push && git push heroku master && heroku open && heroku logs --tail"
+    "build-release": "gulp build --production && NODE_ENV=production webpack -p --release",
+    "heroku-release": "rm -rf public && npm run build-release && git add -A && git commit -m 'New release' && git push && git push heroku master && heroku open && heroku logs --tail"
   },
   "author": "",
   "license": "ISC",

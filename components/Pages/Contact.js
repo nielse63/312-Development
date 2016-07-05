@@ -7,7 +7,8 @@ import config from '../../config';
 import TweetList from '../Partials/TweetList';
 
 // Dispatcher
-// import AppDispatcher from '../../dispatcher/AppDispatcher';
+import AppDispatcher from '../../dispatcher/AppDispatcher'
+import AppStore from '../../stores/AppStore'
 
 export default class Contact extends Component {
 
@@ -17,18 +18,20 @@ export default class Contact extends Component {
 		};
 	}
 
-	// componentWillMount() {
-	// 	// window.postMessage('loading', window.location.origin);
-	// 	// this.getPageData();
-	// 	this.getTweets();
-	// }
-
-	componentDidMount() {
-		window.postMessage('loaded', window.location.origin);
+	getPageData() {
+		AppDispatcher.dispatch({
+			action    : 'get-page-data',
+			page_slug : 'contact',
+		});
 	}
 
-	componentDidUpdate() {
-		document.title = config.site.title + ' | ' + this.props.pageTitle;
+	componentWillMount() {
+		this.getPageData();
+	}
+
+	componentDidMount() {
+		document.title = [(AppStore.data.page.title || this.props.pageTitle), config.site.title].join(' | ');
+		window.postMessage('loaded', window.location.origin);
 	}
 
 	componentWillUnmount() {
@@ -38,20 +41,6 @@ export default class Contact extends Component {
 	getSlug() {
 		return this.props.location.pathname.replace('/', '');
 	}
-
-	// getPageData() {
-	// 	const pageSlug = this.getSlug();
-	// 	AppDispatcher.dispatch({
-	// 		action : 'get-page-data',
-	// 		pageSlug,
-	// 	});
-	// }
-
-	// getTweets() {
-	// 	AppDispatcher.dispatch({
-	// 		action : 'get-tweets',
-	// 	});
-	// }
 
 	render() {
 		const data = this.props.data;
@@ -79,31 +68,26 @@ export default class Contact extends Component {
 								</aside>
 							</div>
 							<div className="col-xs-12 col-md-6">
-								<form className="form">
+								<form action="submit" method="post" className="form">
 									<ul className="list">
 										<li>
 											<div className="input-wrapper">
-												<input type="text" placeholder="Name" required />
+												<input type="text" name="name" placeholder="Name" required />
 											</div>
 										</li>
 										<li>
 											<div className="input-wrapper">
-												<input type="email" placeholder="Email Address" required />
+												<input type="email" name="email" placeholder="Email Address" required />
 											</div>
 										</li>
 										<li>
 											<div className="input-wrapper">
-												<input type="tel" placeholder="Phone Nuber" />
+												<input type="url" name="url" placeholder="Website" />
 											</div>
 										</li>
 										<li>
 											<div className="input-wrapper">
-												<input type="url" placeholder="Website" />
-											</div>
-										</li>
-										<li>
-											<div className="input-wrapper">
-												<textarea placeholder="Message" required></textarea>
+												<textarea name="message" placeholder="Message" required></textarea>
 											</div>
 										</li>
 									</ul>

@@ -12,10 +12,10 @@ export default class Footer extends Component {
 		const data = this.props.data;
 		const navItems = data.globals.navItems;
 
-		const menuItems = navItems.map((nav_item) => {
+		const menuItems = navItems.map((navItem) => {
 			return (
-				<li key={'key-' + nav_item.key}>
-					<Link to={nav_item.value} activeClassName="active">{nav_item.title}</Link>
+				<li key={'key-' + navItem.key}>
+					<Link to={navItem.value} activeClassName="active">{navItem.label}</Link>
 				</li>
 			);
 		});
@@ -35,7 +35,7 @@ export default class Footer extends Component {
 						<div className="col">
 							<nav className="footer-nav footer-nav-right">
 								<ul>
-									<li><Link to="/">Credits, Code, &amp; Styleguide</Link></li>
+									{/*<li><Link to="/">Credits, Code, &amp; Styleguide</Link></li>*/}
 									<li><Link to="/">&copy; 2016 Erik Nielsen</Link></li>
 								</ul>
 							</nav>

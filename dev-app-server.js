@@ -24,10 +24,10 @@ const app = express()
 app.engine('html', hogan)
 app.set('views', __dirname + '/views')
 app.use('/', express.static(__dirname + '/public/'))
-app.set('port', (process.env.PORT || 3030))
+app.set('port', (process.env.PORT || 8080));
 
-app.use(bodyParser.json()); // support json encoded bodies
-app.use(bodyParser.urlencoded({ extended: true })); // support encoded bodies
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 
 app.post('/submit', (req, res) => {
 	var transporter = nodemailer.createTransport({

@@ -18,7 +18,7 @@ export default class Article extends Component {
 	}
 
 	componentDidMount() {
-		// document.title = config.site.title + ' | ' + this.props.data.page.title;
+		document.title = config.site.title + ' | ' + this.props.data.page.title;
 		window.postMessage('loaded', window.location.origin);
 	}
 

@@ -35,6 +35,7 @@ import WorkGrid from './lib/components/_work-grid';
 // import Banner from "./lib/components/_single"
 import Photos from './lib/components/_photos';
 import Services from './lib/components/_services';
+// import Contact from './lib/components/_contact';
 // import Banner from "./lib/components/_charts"
 import Share from './lib/components/_share';
 import Footer from './lib/components/_footer';
@@ -83,6 +84,10 @@ const modules = [
 		preload : false,
 		cls     : Form,
 		val     : null,
+	// }, {
+	// 	preload : false,
+	// 	cls     : Contact,
+	// 	val     : null,
 	}, {
 		preload : false,
 		cls     : Footer,

@@ -10,7 +10,7 @@ export default class Nav extends Component {
 		const menuItems = navItems.map((item) => {
 			return (
 				<li key={'key-' + item.key}>
-					<Link to={item.value} activeClassName="active">{item.title}</Link>
+					<Link to={item.value} activeClassName="active">{item.label}</Link>
 				</li>
 			);
 		});
