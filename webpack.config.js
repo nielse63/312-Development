@@ -1,6 +1,7 @@
 
 // webpack.config.js
 const webpack = require('webpack');
+const CompressionPlugin = require('compression-webpack-plugin');
 
 var loaders;
 var eslintConfig = {
@@ -10,13 +11,24 @@ var plugins = [
 	new webpack.NoErrorsPlugin(),
 	new webpack.optimize.DedupePlugin(),
 	new webpack.optimize.OccurenceOrderPlugin(),
+	// new webpack.DefinePlugin({
+	// 	'process.env': {
+	// 		NODE_ENV: '"production"'
+	// 	}
+	// }),
+	new CompressionPlugin({
+		asset: "[path].gz[query]",
+		algorithm: "gzip",
+		test: /\.js$|\.html$/,
+		threshold: 10240,
+		minRatio: 0.8
+	}),
 	new webpack.ProvidePlugin({
 		$: "jquery",
 		jQuery: "jquery",
 		"window.jQuery": "jquery"
 	})
 ];
-
 
 // var plugins;
 if(process.env.NODE_ENV === 'development') {
@@ -37,6 +49,11 @@ if(process.env.NODE_ENV === 'development') {
 
 module.exports = {
 	devtool: 'eval',
+	node: {
+		net: "empty",
+		tls: "empty",
+		hiredis: "empty",
+	},
 	entry: {
 		ui  : './assets/scripts/app.js',
 		app : './app-client.js'

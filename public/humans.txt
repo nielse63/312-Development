@@ -3,11 +3,7 @@
 
 # TEAM
 
-  <name> -- <role> -- <twitter>
-
-# THANKS
-
-  <name>
+  Erik Nielsen -- Engineeer -- @erikkylenielsen
 
 # TECHNOLOGY COLOPHON
 

@@ -1,8 +1,8 @@
 {
 	"version": "1.0.0",
-	"name": "Front-End Boilerplate",
+	"name": "312 Development",
 	"launch_path": "/index.html",
-	"description": "A boilerplate for creating front-end development projects",
+	"description": "The portfolio of Erik Nielsen, Chicago JavaScript Engineer",
 	"icons": {
 		"128": "/images/icon-128x128.png"
 	},
@@ -18,8 +18,8 @@
 	},
 	"locales": {
 		"en": {
-			"name": "Front-End Boilerplate",
-			"description": "A boilerplate for creating front-end development projects"
+			"name": "312 Development",
+			"description": "The portfolio of Erik Nielsen, Chicago JavaScript Engineer"
 		}
 	}
 }
