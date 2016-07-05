@@ -26,26 +26,25 @@ export default class Utils {
 	}
 
 	prefixFor(property) {
-		var vendors = ['Webkit', 'Moz', 'O'],
-			prop = property[0].toUpperCase() + property.slice(1),
-			path = document.createElementNS('http://www.w3.org/2000/svg', 'a'),
-			style = path.style,
-			output = {
-				js  : '',
-				css : '',
-			};
+		const vendors = ['Webkit', 'Moz', 'O'];
+		const prop = property[0].toUpperCase() + property.slice(1);
+		const path = document.createElementNS('http://www.w3.org/2000/svg', 'a');
+		const style = path.style;
+		const output = {
+			js  : '',
+			css : '',
+		};
 
 		if (prop.toLowerCase() in style) {
 			return output;
-		} else {
-			for (var i = 0; i < vendors.length; i++) {
-				if (vendors[i] + prop in style) {
-					var vendor = vendors[i].toLowerCase();
-					return {
-						js  : vendor[0].toUpperCase() + vendor.splice(1),
-						css : '-' + vendor + '-',
-					};
-				}
+		}
+		for (let i = 0; i < vendors.length; i++) {
+			const vendor = vendors[i].toLowerCase();
+			if (vendor + prop in style) {
+				return {
+					js  : vendor[0].toUpperCase() + vendor.splice(1),
+					css : '-' + vendor + '-',
+				};
 			}
 		}
 		return output;
@@ -54,29 +53,26 @@ export default class Utils {
 	convertSize(int) {
 		if (int > 1024 * 1024) {
 			return (Math.round(int * 100 / (1024 * 1024)) / 100).toString() + 'MB';
-		} else {
-			return (Math.round(int * 100 / 1024) / 100).toString() + 'KB';
 		}
+		return (Math.round(int * 100 / 1024) / 100).toString() + 'KB';
 	}
 
-	debounce(fn, wait, immediate) {
-		var timeout;
-		wait = wait || 0;
-		return function() {
-			var context = this,
-				args = arguments,
-				later = function() {
-					timeout = null;
-					if (! immediate) {
-						fn.apply(context, args);
-					}
-				},
-				callNow = immediate && ! timeout;
+	debounce(fn, delay, immediate) {
+		let timeout;
+		let wait = delay || 0;
+		return function(...args) {
+			const context = this;
+			const later = function() {
+				timeout = null;
+				if (! immediate) {
+					fn.apply(context, args);
+				}
+			};
+			const callNow = immediate && ! timeout;
 			if (timeout) {
 				window.clearTimeout(timeout);
 				timeout = null;
 			}
-			// console.log(wait);
 			timeout = window.setTimeout(later, wait);
 
 			if (callNow) {
@@ -86,12 +82,9 @@ export default class Utils {
 	}
 
 	makeSlug(string) {
-		string = string || window.location.href;
-
-		var a = document.createElement('a');
-		a.href = string;
-
-		var path = a.pathname;
+		const a = document.createElement('a');
+		a.href = string || window.location.href;
+		let path = a.pathname;
 
 		// remove leading slash
 		if (path[0] === '/') {
@@ -99,14 +92,15 @@ export default class Utils {
 		}
 
 		return path.replace(/\/|_/g, '-')
-		.toLowerCase()
-		.split('.')[0];
+	.toLowerCase()
+	.split('.')[0];
 	}
 
-	openWindow(url, width, height) {
-		width = _c.utils.isUndefined(width) ? 600 : width;
-		height = _c.utils.isUndefined(height) ? 600 : height;
-		var left = _c.$win.width() / 2 - width / 2, top = _c.$win.height() / 2 - height / 2;
+	openWindow(url, w, h) {
+		const width = _c.utils.isUndefined(w) ? 600 : w;
+		const height = _c.utils.isUndefined(h) ? 600 : h;
+		const left = window.innerWidth / 2 - width / 2;
+		const top = window.innerHeight / 2 - height / 2;
 		return window.open(url, '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=' + height + ',width=' + width + ',left=' + left + ',top=' + top);
 	}
 }

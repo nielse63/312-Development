@@ -11,13 +11,13 @@ export default class BodyClass {
 	}
 
 	static exec() {
-		var classes = BodyClass.classes || [];
+		let classes = BodyClass.classes || [];
 		_c.$body.each(function() {
-			var ele = _c.$(this);
+			const ele = _c.$(this);
 			if (ele.attr('class')) {
 				classes = classes.concat(ele.attr('class').split(' '));
 			}
-			var obj = new BodyClass(ele);
+			const obj = new BodyClass(ele);
 			classes.push(obj.class);
 			ele.data('bodyclass.clique.data', obj);
 		});
@@ -28,7 +28,7 @@ export default class BodyClass {
 		if (! BodyClass.classes || ! BodyClass.classes.length) {
 			return;
 		}
-		for (var i = 0; i < BodyClass.classes.length; i++) {
+		for (let i = 0; i < BodyClass.classes.length; i++) {
 			_c.$body.removeClass(BodyClass.classes[i]);
 		}
 		BodyClass.classes = [];

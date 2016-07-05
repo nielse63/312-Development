@@ -32,16 +32,12 @@ export default class WorkGrid {
 
 			new SplitText($preview[0], {
 				type : 'lines',
-			}).lines.forEach(function(line, i) {
+			}).lines.slice(0, 3).forEach(function(line) {
 				if (! line.childNodes || ! line.childNodes.length) {
 					return;
 				}
 
 				text.push(line.childNodes[0].nodeValue.trim());
-
-				if (i > 2) {
-					return false;
-				}
 			});
 
 			$preview.html(text.join(' '));
@@ -51,12 +47,8 @@ export default class WorkGrid {
 	getRandomColor() {
 		const keys = Object.keys(colorbrewer);
 		const key = keys[Math.floor(Math.random() * keys.length)];
-		const array = [];
-		for (const i in colorbrewer[key]) {
-			const v = colorbrewer[key][i];
-			array.push(v);
-		}
-		return array.pop();
+		const object = colorbrewer[key]
+		return object[Math.max.apply( null,  Object.keys(object) )];
 	}
 
 	colorizeWorkBlocks() {
@@ -69,12 +61,11 @@ export default class WorkGrid {
 			}
 
 			$ele.data('colorset', true);
-			let color;
 			if (! colors[idx]) {
 				colors = colors.reverse();
 				idx = 0;
 			}
-			color = colors[idx];
+			const color = colors[idx];
 			$ele.css({
 				'background-color' : color,
 			});
@@ -92,14 +83,14 @@ export default class WorkGrid {
 	}
 
 	blockHover() {
-		this.$workBlocks.each(function(i) {
-			const $ele = $(this);
+		this.$workBlocks.each(function() {
+			const $ele = _c.$(this);
 
 			$ele.off('mouseenter mouseleave');
 			$ele.on('mouseenter', function() {
-				$(this).find('.work-block-figure').addClass('hovering');
+				_c.$(this).find('.work-block-figure').addClass('hovering');
 			}).on('mouseleave', function() {
-				$(this).find('.work-block-figure').removeClass('hovering');
+				_c.$(this).find('.work-block-figure').removeClass('hovering');
 			});
 		});
 	}
@@ -124,20 +115,20 @@ export default class WorkGrid {
 				triggerHook    : 'onEnter',
 				duration       : window.innerHeight + trigger.clientHeight,
 			})
-			.on('enter', function(block) {
+			.on('enter', (function(block) {
 				return function() {
 					block.addClass('inview');
 					this.off('enter');
 				};
-			}($block))
-			.on('progress', function(_i, _figure, _diff) {
+			}($block)))
+			.on('progress', (function(_i, _figure, _diff) {
 				return function(e) {
 					const y = _diff * e.progress * (_i % 2 === 0 ? -1 : 1);
 					_figure.css({
 						transform : 'translateY(' + y + 'px)',
 					});
 				};
-			}(i, $figure, diff))
+			}(i, $figure, diff)))
 			.addTo(_c.controller);
 
 			_this.scene.push(scene);

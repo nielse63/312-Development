@@ -3,7 +3,6 @@ import Utils from './_utils';
 import Support from './_support';
 import Browser from './_browser';
 import Events from './_events';
-import URL from './_url';
 import ScrollMagic from 'scrollmagic';
 
 export default class Clique {

@@ -20,15 +20,13 @@ export default class Banner {
 
 		// set loaded class
 		this.$banner.addClass('loaded');
-
-		return this;
 	}
 
 	bindTrigger() {
 		this.$title.one(_c.support.transition.end, this.bindScroll.bind(this));
 	}
 
-	bindScroll(e) {
+	bindScroll() {
 		const $title = this.$title;
 		const offset = this.offset;
 		const duration = $title.offset().top + $title.outerHeight() - offset;
@@ -43,12 +41,10 @@ export default class Banner {
 		})
 		.on('progress', function(e) {
 			const p = e.progress;
-			const y = -50 * p;
-			const o = 1 - p;
 
 			TweenMax.to($title[0], 0.5, {
-				y,
-				opacity : o,
+				y : -50 * p,
+				opacity : 1 - p,
 			});
 		})
 		.addTo(_c.controller);

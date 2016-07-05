@@ -9,8 +9,6 @@ export default class Homepage {
 		}
 
 		this.setScene();
-
-		return this;
 	}
 
 	setScene() {

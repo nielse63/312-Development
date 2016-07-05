@@ -15,8 +15,6 @@ export default class Loading {
 
 		// init
 		this.init();
-
-		return this;
 	}
 
 	init() {
@@ -26,16 +24,16 @@ export default class Loading {
 		this.setTimeout();
 	}
 
+	onLoad() {
+		if( this.timeout ) {
+			clearTimeout(this.timeout);
+			this.timeout = null;
+		}
+		setTimeout(this.hide.bind(this), 0);
+	}
+
 	defineListeners() {
-		_c.$win.on('load', function(_this) {
-			return function() {
-				if( _this.timeout ) {
-					clearTimeout(_this.timeout);
-					_this.timeout = false;
-				}
-				setTimeout(_this.hide.bind(_this), 0);
-			};
-		}(this));
+		_c.$win.on('load', this.onLoad.bind(this));
 
 		_c.$win.on('beforeunload', this.show.bind(this));
 	}
@@ -51,9 +49,7 @@ export default class Loading {
 	}
 
 	hide(immediate) {
-		immediate = immediate || false;
-
-		if( immediate ) {
+		if( immediate || false ) {
 			this.$element.addClass('hidden');
 		} else {
 			this.$element.one(_c.support.transition.end, function() {

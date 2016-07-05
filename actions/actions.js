@@ -21,6 +21,7 @@ function makeSlug(string) {
 
 let loaded = false;
 
+
 function loadTwitterScript(callback) {
 	if (loaded || window.twttr) {
 		callback();
@@ -38,9 +39,8 @@ function loadTwitterScript(callback) {
 		});
 }
 
-export function getTweets(callback) {
-	let cb = callback || loadTweets;
-	loadTwitterScript(cb);
+export function getTweets(callback = function() {}) {
+	loadTwitterScript(callback);
 }
 
 export function loadTweets() {
