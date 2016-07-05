@@ -8,8 +8,8 @@ var eslintConfig = {
 };
 var plugins = [
 	new webpack.NoErrorsPlugin(),
-	new webpack.optimize.OccurenceOrderPlugin(),
 	new webpack.optimize.DedupePlugin(),
+	new webpack.optimize.OccurenceOrderPlugin(),
 	new webpack.ProvidePlugin({
 		$: "jquery",
 		jQuery: "jquery",
