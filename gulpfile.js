@@ -223,7 +223,7 @@ gulp.task('watch', function() {
 
 
 // ### Build
-gulp.task('build', ['clean'], function(callback) {
+gulp.task('build', function(callback) {
 	runSequence(
 		['other', 'styles', 'images', 'fonts'],
 		callback

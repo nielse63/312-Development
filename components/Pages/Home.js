@@ -5,22 +5,27 @@ import { Link } from 'react-router';
 import config from '../../config';
 
 // Dispatcher
-// import AppDispatcher from '../../dispatcher/AppDispatcher';
+import AppDispatcher from '../../dispatcher/AppDispatcher';
+import AppStore from '../../stores/AppStore';
 
 // Components
 import Block from '../Partials/Block';
 
 export default class Home extends Component {
 
-	// componentWillMount() {
-	// 	// console.log(typeof window);
-	// 	// window.postMessage('loading', window.location.origin);
-	// 	// this.getPageData();
-	// }
+	getPageData() {
+		AppDispatcher.dispatch({
+			action    : 'get-page-data',
+			page_slug : '',
+		});
+	}
+
+	componentWillMount() {
+		this.getPageData();
+	}
 
 	componentDidMount() {
-		// console.log(typeof window.postMessage);
-		document.title = config.site.title + ' | ' + config.site.description;
+		document.title = [(AppStore.data.page.title || config.site.description), config.site.title].join(' | ');
 		window.postMessage('loaded', window.location.origin);
 	}
 
@@ -28,26 +33,12 @@ export default class Home extends Component {
 		window.postMessage('unloaded', window.location.origin);
 	}
 
-	getPageData() {
-		AppDispatcher.dispatch({
-			action    : 'get-page-data',
-			page_slug : 'home',
-		});
-	}
-
 	render() {
+		console.log(AppStore.data)
 		const data = this.props.data;
-		// console.log('home');
-		// return (
-		// 	<div>
-		// 		<div />
-		// 	</div>
-		// );
 		const posts = data.posts;
-		// const content = data.page.content;
 		let i = 1;
 		const max = 10;
-		// console.log(data);
 
 		const items = posts.map((post) => {
 			if (i > max) {

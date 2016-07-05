@@ -13,6 +13,7 @@ import Home from './components/Pages/Home';
 import Article from './components/Pages/Article';
 import About from './components/Pages/About';
 import Contact from './components/Pages/Contact';
+import ThankYou from './components/Pages/ThankYou';
 import NoMatch from './components/Pages/NoMatch';
 
 export default (
@@ -21,6 +22,7 @@ export default (
 		<Route path="/articles/:slug" component={Article} />
 		<Route path="about" component={About} />
 		<Route path="contact" component={Contact} />
+		<Route path="submission-received" component={ThankYou} />
 		<Route path="*" component={NoMatch} />
 	</Route>
 );

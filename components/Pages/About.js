@@ -7,7 +7,8 @@ import config from '../../config';
 import TweetList from '../Partials/TweetList';
 
 // Dispatcher
-// import AppDispatcher from '../../dispatcher/AppDispatcher';
+import AppDispatcher from '../../dispatcher/AppDispatcher';
+import AppStore from '../../stores/AppStore'
 
 export default class About extends Component {
 
@@ -17,17 +18,20 @@ export default class About extends Component {
 		};
 	}
 
-	// componentWillMount() {
-	// 	// window.postMessage('loading', window.location.origin);
-	// 	this.getTweets();
-	// }
-
-	componentDidMount() {
-		window.postMessage('loaded', window.location.origin);
+	getPageData() {
+		AppDispatcher.dispatch({
+			action    : 'get-page-data',
+			page_slug : 'about',
+		});
 	}
 
-	componentDidUpdate() {
-		document.title = config.site.title + ' | ' + this.props.title;
+	componentWillMount() {
+		this.getPageData();
+	}
+
+	componentDidMount() {
+		document.title = [(AppStore.data.page.title || this.props.pageTitle), config.site.title].join(' | ');
+		window.postMessage('loaded', window.location.origin);
 	}
 
 	componentWillUnmount() {
@@ -38,16 +42,8 @@ export default class About extends Component {
 		return this.props.location.pathname.replace('/', '');
 	}
 
-	// getTweets() {
-	// 	AppDispatcher.dispatch({
-	// 		action : 'get-tweets',
-	// 	});
-	// }
-
 	render() {
 		const data = this.props.data;
-		// console.log(data.tweets);
-		// const page = data.page;
 
 		return (
 			 <div>
