@@ -34,7 +34,7 @@ export default class Home extends Component {
 	}
 
 	render() {
-		console.log(AppStore.data)
+		// console.log(AppStore.data)
 		const data = this.props.data;
 		const posts = data.posts;
 		let i = 1;
