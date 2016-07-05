@@ -195,7 +195,6 @@ export default class Events {
 		var memory = -1;
 		var working = false;
 		var dir = 0;
-		var delta = 0;
 		var pageY = 0;
 
 		function checkScrollPosition() {

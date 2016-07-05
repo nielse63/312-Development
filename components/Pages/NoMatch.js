@@ -20,15 +20,14 @@ export default class NoMatch extends Component {
 
 	render() {
 		const data = this.props.data;
-		const page = data.page;
 
 		return (
 			<section className="page-content page-404">
-				<figure className="page-404-background"></figure>
-				<div>
-					<h1>Page Not Found</h1>
-				</div>
+			<figure className="page-404-background"></figure>
+			<div>
+			<h1>Page Not Found</h1>
+			</div>
 			</section>
-		);
+			);
 	}
 }

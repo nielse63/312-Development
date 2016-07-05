@@ -43,12 +43,6 @@ export default class App extends Component {
 
 	render() {
 		const data = AppStore.data;
-		// console.log(this);
-		// 	return (
-		// 		<div>
-		// 			<Loading />
-		// 		</div>
-		// 	);
 
 		// Show loading for browser
 		if (! data.ready) {
@@ -60,9 +54,9 @@ export default class App extends Component {
 
 			return (
 				<div>
-					<Loading />
+				<Loading />
 				</div>
-			);
+				);
 		}
 
 		// Server first

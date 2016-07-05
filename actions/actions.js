@@ -1,8 +1,7 @@
 
 // actions.js
-import config from '../config'
-import contentful from 'contentful'
-import _ from 'lodash'
+import contentful from 'contentful';
+import _ from 'lodash';
 
 // AppStore
 import AppStore from '../stores/AppStore';
@@ -16,48 +15,48 @@ function makeSlug(string) {
 	}
 
 	return path.replace(/\//g, '-')
-		.toLowerCase()
-		.split('.')[0];
+	.toLowerCase()
+	.split('.')[0];
 }
 
 let loaded = false;
 
 function loadTwitterScript(callback) {
-	if( loaded || window.twttr ) {
-		callback()
+	if (loaded || window.twttr) {
+		callback();
 		return;
 	}
 
 	$.getScript('https://platform.twitter.com/widgets.js')
-		.done(function( script, textStatus ) {
-			loaded = true;
-			callback()
-		})
-		.fail(function( jqxhr, settings, exception ) {
-			console.warn( jqxhr, settings, exception );
-			callback()
-		});
+	.done(function() {
+		loaded = true;
+		callback();
+	})
+	.fail(function(jqxhr, settings, exception) {
+		console.warn(jqxhr, settings, exception);
+		callback();
+	});
 }
 
 export function loadTweets() {
-	if( ! window.twttr ) {
+	if (! window.twttr) {
 		getTweets();
-		return
+		return;
 	}
 
-	var main = document.querySelector('.main')
-	if( ! main ) {
+	var main = document.querySelector('.main');
+	if (! main) {
 		return;
 	}
 
 	window.twttr.widgets.load(main);
 
 	window.twttr.widgets.createTimeline({
-		sourceType: "profile",
-		screenName: "ErikKyleNielsen",
+		sourceType : 'profile',
+		screenName : 'ErikKyleNielsen',
 	}, document.querySelector('.tweets'), {
-		tweetLimit: 10,
-	})
+		tweetLimit : 10,
+	});
 }
 
 export function getTweets() {
@@ -65,7 +64,6 @@ export function getTweets() {
 }
 
 export function getStore(callback) {
-
 	// set globals
 	const client = contentful.createClient({
 		space       : 'o4irotzruet8',
@@ -75,9 +73,8 @@ export function getStore(callback) {
 	let complete = false;
 
 	function always() {
-
 		// trigger change even
-		AppStore.data.ready = true
+		AppStore.data.ready = true;
 		AppStore.emitChange();
 
 		if (callback) {
@@ -104,10 +101,10 @@ export function getStore(callback) {
 		AppStore.data.posts = posts;
 
 		// trigger complete
-		if( complete ) {
-			always()
+		if (complete) {
+			always();
 		} else {
-			complete = true
+			complete = true;
 		}
 	});
 
@@ -121,21 +118,21 @@ export function getStore(callback) {
 
 		items.forEach(function(object) {
 			navItems.push({
-				key : object.sys.id,
+				key   : object.sys.id,
 				value : object.fields.path,
 				title : object.fields.title,
 				label : object.fields.navLable,
-			})
+			});
 		});
 
 		// set data
 		AppStore.data.globals.navItems = navItems;
 
 		// trigger complete
-		if( complete ) {
-			always()
+		if (complete) {
+			always();
 		} else {
-			complete = true
+			complete = true;
 		}
 	});
 }
@@ -150,7 +147,7 @@ export function getPostData(pageSlug, postSlug) {
 	}
 
 	const page = _.findWhere(data.posts, {
-		slug : slug
+		slug,
 	});
 
 	AppStore.data.page = page;
@@ -159,10 +156,10 @@ export function getPostData(pageSlug, postSlug) {
 
 export function getPageData(pageSlug) {
 	// Get page info
-	let slug = '/' + pageSlug
-	const items = AppStore.data.globals.navItems
+	const slug = '/' + pageSlug;
+	const items = AppStore.data.globals.navItems;
 	const page = _.findWhere(items, {
-		value : slug
+		value : slug,
 	});
 
 	AppStore.data.page = page;

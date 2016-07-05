@@ -14,14 +14,6 @@ export default class Loading {
 
 		loader.appendChild(jumpRef);
 
-		// TweenMax.set([container, loader], {
-		// 	position: 'absolute',
-		// 	top:'50%',
-		// 	left: '50%',
-		// 	xPercent: -50,
-		// 	yPercent: -50
-		// })
-
 		TweenMax.set(jumpRef, {
 			transformOrigin: '50% 110%',
 			scaleY: -1,

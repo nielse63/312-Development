@@ -12,6 +12,8 @@
 			"beforeColon": true,
 			"align": "colon"
 		}],
-		"prefer-arrow-callback": "warn"
-	}
+		"prefer-arrow-callback": "warn",
+		"no-unused-vars": "error"
+	},
+	"plugins": ["react"]
 }

@@ -8,7 +8,6 @@ export default class WorkGrid {
 
 	constructor() {
 		this.$workBlocks = $('.work-block');
-		// console.log(this.$workBlocks.length)
 		if (! this.$workBlocks.length) {
 			return;
 		}
@@ -82,21 +81,12 @@ export default class WorkGrid {
 
 			const tc = tinycolor(color);
 
-			// create gradient
-			// const darker = tc.darken(35).toHexString();
-			// const gradient = 'linear-gradient(150deg, ' + darker + ', ' + color + ')';
-
 			// get luma
 			const rgb = tc.toRgb();
 			const luma = (rgb.r * 0.3) + (rgb.g * 0.59) + (rgb.b * 0.11);
 			if (luma > 215) {
 				$ele.addClass('dark');
 			}
-
-			// set style
-			// $ele.css({
-			// 	'background-image' : gradient,
-			// });
 			idx++;
 		});
 	}

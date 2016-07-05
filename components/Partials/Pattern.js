@@ -1,6 +1,6 @@
 
 // Pattern.js
-import React, { Component } from 'react';
+import React, { Component } from 'react'
 
 export default class Pattern extends Component {
 

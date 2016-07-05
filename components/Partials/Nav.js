@@ -15,7 +15,7 @@ export default class Nav extends Component {
 			);
 		});
 
-		return (
+		                    return (
 			<nav className={this.props.cls}>
 				<ul className="nav-menu list-inline">
 					{menuItems}
