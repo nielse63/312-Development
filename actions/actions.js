@@ -21,37 +21,74 @@ function makeSlug(string) {
 		.split('.')[0];
 }
 
-export function getTweets(callback) {
-	// console.log(callback);
-	const url = 'http://api.312development.dev/tweets.php';
-	const opts = {
-		method  : 'GET',
-		headers : new Headers(),
-		mode    : 'cors',
-		cache   : 'default',
-	};
-	// console.log(url);
+let loaded = false;
 
-	function always() {
-		if (callback) {
-			callback();
-		}
+function loadTwitterScript(callback) {
+	if( loaded ) {
+		callback()
+		return;
 	}
 
-	fetch(url, opts)
-		.then((response) => {
-			if (! response.ok) {
-				throw new Error(`Error getting tweets: ${response}`);
-			}
-			return response.json();
+	console.log('loading twitter script')
+	$.getScript('https://platform.twitter.com/widgets.js')
+		.done(function( script, textStatus ) {
+			// console.log( textStatus );
+			loaded = true;
+			callback()
 		})
-		.then((data) => {
-			AppStore.data.tweets = data;
-			AppStore.emitChange();
-			// console.log(data);
-			always();
+		.fail(function( jqxhr, settings, exception ) {
+			console.warn( jqxhr, settings, exception );
+			callback()
+		});
+}
+
+export function getTweets(callback) {
+
+	loadTwitterScript(function() {
+		// console.log('done')
+
+		twttr.widgets.load(
+			document.querySelector('.main')
+		);
+
+		twttr.widgets.createTimeline({
+			sourceType: "profile",
+			screenName: "ErikKyleNielsen",
+		}, document.querySelector('.tweets'), {
+			tweetLimit: 10,
 		})
-		.catch(always);
+	});
+
+	// console.log(callback);
+	// const url = 'http://api.312development.dev/tweets.php';
+	// const opts = {
+	// 	method  : 'GET',
+	// 	headers : new Headers(),
+	// 	mode    : 'cors',
+	// 	cache   : 'default',
+	// };
+	// console.log(url);
+
+	// function always() {
+	// 	if (callback) {
+	// 		callback();
+	// 	}
+	// }
+
+	// fetch(url, opts)
+	// 	.then((response) => {
+	// 		if (! response.ok) {
+	// 			throw new Error(`Error getting tweets: ${response}`);
+	// 		}
+	// 		return response.json();
+	// 	})
+	// 	.then((data) => {
+	// 		AppStore.data.tweets = data;
+	// 		AppStore.emitChange();
+	// 		// console.log(data);
+	// 		always();
+	// 	})
+	// 	.catch(always);
 }
 
 export function getStore(callback) {

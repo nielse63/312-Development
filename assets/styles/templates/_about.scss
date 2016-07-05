@@ -75,47 +75,50 @@ $transition-duration: 0.7s;
 }
 
 .tweets {
-	> .row {
-		> * {
-			perspective: 100vw;
-		}
-	}
+	height: 100vh;
+	max-height: 500px;
+	overflow: auto;
+	// > .row {
+	// 	> * {
+	// 		perspective: 100vw;
+	// 	}
+	// }
 }
 
-.tweet {
-	$tweet-border: 1px solid fade-out($global-font-color, 0.75);
+// .tweet {
+// 	$tweet-border: 1px solid fade-out($global-font-color, 0.75);
 
-	border: $tweet-border;
-	padding: 25px 15px 0;
-	border-radius: 3px;
-	background-clip: border-box;
-	overflow: hidden;
-	margin-bottom: 30px;
-	display: flex;
-	flex-direction: column;
-	justify-content: space-between;
+// 	border: $tweet-border;
+// 	padding: 25px 15px 0;
+// 	border-radius: 3px;
+// 	background-clip: border-box;
+// 	overflow: hidden;
+// 	margin-bottom: 30px;
+// 	display: flex;
+// 	flex-direction: column;
+// 	justify-content: space-between;
 
-	p {
-		margin-bottom: 25px;
+// 	p {
+// 		margin-bottom: 25px;
 
-		> a {
-			@include content-link(lighten($color-blue, 20%));
-		}
-	}
+// 		> a {
+// 			@include content-link(lighten($color-blue, 20%));
+// 		}
+// 	}
 
-	&-footer {
-		margin: 0 -15px;
-		padding: 15px;
-		border-top: $tweet-border;
-		background-color: $color-blue-dark;
-		color: $color-white;
+// 	&-footer {
+// 		margin: 0 -15px;
+// 		padding: 15px;
+// 		border-top: $tweet-border;
+// 		background-color: $color-blue-dark;
+// 		color: $color-white;
 
-		.button {
-			height: 34px;
-			line-height: (34 / 14);
-		}
-	}
-}
+// 		.button {
+// 			height: 34px;
+// 			line-height: (34 / 14);
+// 		}
+// 	}
+// }
 
 .social-links {
 	@media (max-width: $breakpoint-small-max) {

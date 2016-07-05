@@ -117,21 +117,7 @@ export default class Contact extends Component {
 								</form>
 							</div>
 						</div>
-						<div className="row flex-middle section-row">
-							<div className="col-xs-12 col-md-7">
-								<TweetList tweets={data.tweets} />
-							</div>
-							<div className="col-xs-12 col-md-5">
-								<aside className="aside">
-									<h2 className="aside-title">Stay in Touch</h2>
-									<p>I'm very active on Twitter, and try to contribute to as many Open-Source projects as time will allow. If you'd like to stay abreast with my work, follow me!</p>
-									<ul className="list list-inline flex-center social-links">
-										<li><a href="https://github.com/nielse63" target="_blank"><i className="fa fa-github"></i> GitHub</a></li>
-										<li><a href="https://twitter.com/ErikKyleNielsen" target="_blank"><i className="fa fa-twitter"></i> Twitter</a></li>
-									</ul>
-								</aside>
-							</div>
-						</div>
+						<TweetList />
 					</article>
 				</div>
 				</section>
