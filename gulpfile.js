@@ -28,6 +28,7 @@ var newer        = require('gulp-newer');
 // var inline_base64 = require('gulp-inline-base64');
 var base64 = require('./tools/gulp-base64-encode');
 var zopfli = require('gulp-zopfli');
+var eslint = require('gulp-eslint');
 
 // See https://github.com/austinpray/asset-builder
 var manifest = require('asset-builder')('./assets/manifest.json');
@@ -142,6 +143,81 @@ gulp.task('jshint', function() {
 		.pipe(jshint.reporter('jshint-stylish'))
 		.pipe(gulpif(enabled.failJSHint, jshint.reporter('fail')));
 });
+
+gulp.task('eslint', function() {
+	var fs = require('fs');
+	var _path = require('path');
+	var rimraf = require('rimraf');
+	var outPath = 'test/results/eslint';
+	var mkdirp = require('mkdirp');
+
+	fs.stat(outPath, function(err) {
+		if( ! err ) {
+			rimraf(outPath, function(err) {
+				if( ! err ) {
+					fs.mkdir(outPath, function(err) {
+						if(err) console.log(err);
+					});
+				}
+			});
+		} else {
+			fs.mkdir(outPath, function(err) {
+				if(err) console.log(err);
+			});
+		}
+	});
+
+	function writeFile(path, contents, cb) {
+		mkdirp(_path.dirname(path), function (err) {
+			if (err) return cb(err);
+			fs.writeFile(path, contents, cb);
+		});
+	}
+
+	return gulp.src([
+			'./app-client.js',
+			'./app-server.js',
+			'./app.js',
+			'actions/**/*.js',
+			'components/**/*.js',
+			'dispatcher/**/*.js',
+			'stores/scripts/**/*.js',
+			'assets/scripts/**/*.js',
+			'!assets/scripts/lib/vendor/*.js',
+			'!node_modules',
+			'!bower_components'
+		])
+        .pipe(eslint({
+        	fix : true
+        }))
+        .pipe(eslint.result(result => {
+        	if( ! result.errorCount ) {
+        		return;
+        	}
+        	var basename = result.filePath
+	        	.replace(__dirname, '')
+        		.replace(/\/_/, '/')
+        		.replace(/\.js$/, '');
+    		var content = [];
+    		result.messages.forEach(function(message, i) {
+    			if( message.severity < 2 ) {
+    				return;
+    			}
+    			content.push([
+    				'Location: ' + message.line + ':'+  message.column,
+    				'Offender: ' + message.source.trim(),
+    				'Error:    ' + message.message,
+    				'Rule:     ' + message.ruleId,
+    				'============================='
+    				].join('\n') + '\n');
+    		});
+        	var outputFile = _path.join(outPath, basename + '.txt');
+        	writeFile(outputFile, content.join('\n'), function(err) {
+        		if(err) console.log(err);
+        	})
+	    }))
+        .pipe(eslint.failAfterError());
+})
 
 // ### Clean
 gulp.task('clean', require('del').bind(null, ['public/']));

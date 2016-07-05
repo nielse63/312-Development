@@ -3,7 +3,7 @@
 // import { match, history, RouterContext } from 'react-router'
 
 import React from 'react'
-import { match, RouterContext, Route, IndexRoute } from 'react-router'
+import { match, RouterContext } from 'react-router'
 // import ReactDOMServer from 'react-dom/server'
 import { renderToStaticMarkup } from 'react-dom/server'
 import express from 'express'
@@ -23,16 +23,16 @@ import routes from './routes'
 // Express
 const app = express()
 app.engine('html', hogan)
-app.set('views', __dirname + '/views')
+app.set('views', `${__dirname}/views`)
 app.use(compression())
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
-app.use(express.static(__dirname + '/public/'))
+app.use(express.static(`${__dirname}/public/`))
 app.set('port', (process.env.PORT || 3030))
 
 
 app.post('/submit', (req, res) => {
-	var transporter = nodemailer.createTransport({
+	const transporter = nodemailer.createTransport({
 		host: 'smtp.mailgun.org',
 		port: 465,
 		secure: true,
@@ -42,10 +42,16 @@ app.post('/submit', (req, res) => {
 		}
 	});
 
-	var output = [];
-	for(var k in req.body) {
-		var v = req.body[k];
-		output.push(`<p><strong>${k}:</strong> ${v}</p>`);
+	let output = [];
+	if( typeof req.body === 'object' ) {
+		Object.keys(req.body).forEach(function(k) {
+			const v = req.body[k];
+			output.push(`<p><strong>${k}:</strong> ${v}</p>`);
+		});
+		// for(const k in req.body) {
+		// 	const v = req.body[k];
+		// 	output.push(`<p><strong>${k}:</strong> ${v}</p>`);
+		// }
 	}
 
 	// send mail with defined transport object
@@ -67,22 +73,23 @@ app.get('*', (req, res) => {
 		if(err) {
 			return res.status(500).end('error')
 		}
-		match({ routes, location: req.url }, (error, redirectLocation, renderProps) => {
+		return match({ routes, location: req.url }, (error, redirectLocation, renderProps) => {
 
 			const slugArray = req.url.split('/')
 			const pageSlug = slugArray[1]
+
 			if(pageSlug === 'articles') {
 				getPostData(slugArray[2])
 			} else {
 				getPageData(pageSlug)
 			}
 
-			res.locals.page = AppStore.data.page
-			res.locals.site = config.site
+			res.locals.page = AppStore.data.page // eslint-disable-line no-param-reassign
+			res.locals.site = config.site // eslint-disable-line no-param-reassign
 
 			// Get React markup
 			const reactMarkup = renderToStaticMarkup(<RouterContext {...renderProps} />)
-			res.locals.reactMarkup = reactMarkup
+			res.locals.reactMarkup = reactMarkup // eslint-disable-line no-param-reassign
 
 			if (error) {
 				res.status(500).send(error.message)

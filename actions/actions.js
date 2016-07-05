@@ -38,14 +38,19 @@ function loadTwitterScript(callback) {
 		});
 }
 
+export function getTweets(callback) {
+	let cb = callback || loadTweets;
+	loadTwitterScript(cb);
+}
+
 export function loadTweets() {
 	if (! window.twttr) {
-		getTweets();
+		getTweets(loadTweets);
 		return;
 	}
 
-	var main = document.querySelector('.main');
-	var tweets = document.querySelector('.tweets');
+	const main = document.querySelector('.main');
+	const tweets = document.querySelector('.tweets');
 	if (! main || ! tweets) {
 		return;
 	}
@@ -58,10 +63,6 @@ export function loadTweets() {
 	}, tweets, {
 		tweetLimit : 10,
 	});
-}
-
-export function getTweets() {
-	loadTwitterScript(loadTweets);
 }
 
 export function getStore(callback) {
@@ -157,7 +158,7 @@ export function getPostData(pageSlug, postSlug) {
 
 export function getPageData(pageSlug) {
 	// Get page info
-	const slug = '/' + pageSlug;
+	const slug = `/${pageSlug}`;
 	const items = AppStore.data.globals.navItems;
 	const page = _.findWhere(items, {
 		value : slug,

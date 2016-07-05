@@ -16,14 +16,23 @@ import Loading from './Partials/Loading';
 
 export default class App extends Component {
 
+	static get propTypes() {
+		return {
+			children: React.PropTypes.element,
+			location: React.PropTypes.shape({
+				pathname: React.PropTypes.string,
+			}),
+		}
+	}
+
 	// Add change listeners to stores
 	componentDidMount() {
-		AppStore.addChangeListener(this._onChange.bind(this));
+		AppStore.addChangeListener(this.stateDidChange.bind(this));
 	}
 
 	// Remove change listeners from stores
 	componentWillUnmount() {
-		AppStore.removeChangeListener(this._onChange.bind(this));
+		AppStore.removeChangeListener(this.stateDidChange.bind(this));
 	}
 
 	getStore() {
@@ -37,7 +46,7 @@ export default class App extends Component {
 		return !! path ? path : 'home';
 	}
 
-	_onChange() {
+	stateDidChange() {
 		this.setState(AppStore);
 	}
 
@@ -67,9 +76,8 @@ export default class App extends Component {
 
 		// props
 		const navItems = data.globals.navItems;
-		const transitionDuration = 1000;
+		const transitionDuration = 1200;
 
-		// console.log(Routes);
 		return (
 			<div>
 				<MobileNav navItems={navItems} />

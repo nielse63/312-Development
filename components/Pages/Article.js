@@ -12,6 +12,22 @@ import AppDispatcher from '../../dispatcher/AppDispatcher';
 
 export default class Article extends Component {
 
+	static get propTypes() {
+		return {
+			data: React.PropTypes.shape({
+				page: React.PropTypes.shape({
+					title: React.PropTypes.string,
+				}),
+			}),
+			params: React.PropTypes.shape({
+				slug: React.PropTypes.string,
+			}),
+			routeParams: React.PropTypes.shape({
+				slug: React.PropTypes.string,
+			}),
+		}
+	}
+
 	componentWillMount() {
 		this.getPostData();
 	}
@@ -59,14 +75,14 @@ export default class Article extends Component {
 			}
 
 			buttons = links.map((link) => {
-				link.url = link.url.replace('http//', 'http://');
-				link.url = link.url.replace('https//', 'https://');
+				let url = link.url.replace(/^http(.*?)\/\//, 'http$1://');
+				const text = link.text;
 
 				return (
-					<li key={'key-' + link.text}>
-						<a href={link.url} className="button button-blue" target="_blank">{link.text}</a>
+					<li key={`key-${text}`}>
+						<a href={url} className="button button-blue" target="_blank">{text}</a>
 					</li>
-					);
+				);
 			});
 		}
 
@@ -77,10 +93,10 @@ export default class Article extends Component {
 		const encodedURL = encodeURIComponent(url);
 
 		// urls
-		const facebook_url = url;
-		const twitter_url = 'https://twitter.com/intent/tweet?text=' + encodedText + '&amp;via=cliquechicago&amp;url=' + encodedURL;
-		const googleplus_url = url;
-		const linkedin_url = 'http://www.linkedin.com/shareArticle?mini=true&amp;url=' + url + '&amp;title=' + encodedText + '&amp;summary=' + encodedText + encodedURL + '&amp;source=http://312development.com';
+		const facebookUrl = url;
+		const twitterUrl = 'https://twitter.com/intent/tweet?text=' + encodedText + '&amp;via=cliquechicago&amp;url=' + encodedURL;
+		const googleplusUrl = url;
+		const linkedinUrl = 'http://www.linkedin.com/shareArticle?mini=true&amp;url=' + url + '&amp;title=' + encodedText + '&amp;summary=' + encodedText + encodedURL + '&amp;source=http://312development.com';
 
 		let footer;
 		if (buttons) {
@@ -120,10 +136,10 @@ export default class Article extends Component {
 									<div className="single-footer-section section-row">
 										<p className="article-lead">Share:</p>
 										<ul className="list list-inline flex-center single-buttons chart-buttons">
-											<li><a href={twitter_url} data-share="twitter" className="button button-twitter"><i className="fa fa-twitter"></i> Tweet</a></li>
-											<li><a href={linkedin_url} data-share="linkedin" className="button button-linkedin"><i className="fa fa-linkedin"></i> Share</a></li>
-											<li><a href={facebook_url} data-share="facebook" className="button button-facebook"><i className="fa fa-facebook"></i> Post</a></li>
-											<li><a href={googleplus_url} data-share="googleplus" className="button button-googleplus"><i className="fa fa-googleplus"></i> Send</a></li>
+											<li><a href={twitterUrl} data-share="twitter" className="button button-twitter"><i className="fa fa-twitter"></i> Tweet</a></li>
+											<li><a href={linkedinUrl} data-share="linkedin" className="button button-linkedin"><i className="fa fa-linkedin"></i> Share</a></li>
+											<li><a href={facebookUrl} data-share="facebook" className="button button-facebook"><i className="fa fa-facebook"></i> Post</a></li>
+											<li><a href={googleplusUrl} data-share="googleplus" className="button button-googleplus"><i className="fa fa-googleplus"></i> Send</a></li>
 										</ul>
 									</div>
 								</footer>

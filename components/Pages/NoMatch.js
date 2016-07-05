@@ -5,6 +5,12 @@ import config from '../../config';
 
 export default class NoMatch extends Component {
 
+	static get propTypes() {
+		return {
+			data: React.PropTypes.object,
+		}
+	}
+
 	componentDidMount() {
 		document.title = config.site.title + ' | Page Not Found';
 		window.postMessage('loaded', window.location.origin);
@@ -15,7 +21,7 @@ export default class NoMatch extends Component {
 	}
 
 	render() {
-		const data = this.props.data;
+		// const data = this.props.data;
 
 		return (
 			<section className="page-content page-404">

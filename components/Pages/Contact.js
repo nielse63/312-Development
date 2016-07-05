@@ -12,17 +12,19 @@ import AppStore from '../../stores/AppStore';
 
 export default class Contact extends Component {
 
+	static get propTypes() {
+		return {
+			pageTitle: React.PropTypes.string,
+			location: React.PropTypes.shape({
+				pathname: React.PropTypes.string,
+			}),
+		}
+	}
+
 	static get defaultProps() {
 		return {
 			pageTitle : 'Contact Me',
 		};
-	}
-
-	getPageData() {
-		AppDispatcher.dispatch({
-			action    : 'get-page-data',
-			page_slug : 'contact',
-		});
 	}
 
 	componentWillMount() {
@@ -38,12 +40,19 @@ export default class Contact extends Component {
 		window.postMessage('unloaded', window.location.origin);
 	}
 
+	getPageData() {
+		AppDispatcher.dispatch({
+			action    : 'get-page-data',
+			page_slug : 'contact',
+		});
+	}
+
 	getSlug() {
 		return this.props.location.pathname.replace('/', '');
 	}
 
 	render() {
-		const data = this.props.data;
+		// const data = this.props.data;
 
 		return (
 			<div>

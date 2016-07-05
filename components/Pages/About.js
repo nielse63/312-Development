@@ -12,17 +12,19 @@ import AppStore from '../../stores/AppStore';
 
 export default class About extends Component {
 
+	static get propTypes() {
+		return {
+			pageTitle: React.PropTypes.string,
+			location: React.PropTypes.shape({
+				pathname: React.PropTypes.string,
+			}),
+		}
+	}
+
 	static get defaultProps() {
 		return {
 			pageTitle : 'About',
 		};
-	}
-
-	getPageData() {
-		AppDispatcher.dispatch({
-			action    : 'get-page-data',
-			page_slug : 'about',
-		});
 	}
 
 	componentWillMount() {
@@ -36,6 +38,13 @@ export default class About extends Component {
 
 	componentWillUnmount() {
 		window.postMessage('unloaded', window.location.origin);
+	}
+
+	getPageData() {
+		AppDispatcher.dispatch({
+			action    : 'get-page-data',
+			page_slug : 'about',
+		});
 	}
 
 	getSlug() {
@@ -119,16 +128,16 @@ export default class About extends Component {
 			<div className="col-xs-12 col-md-7">
 			<div className="where-i-work">
 			<figure className="where-figure where-figure-1">
-			<img data-src="/images/work1.jpg" />
+			<img data-src="/images/work1.jpg" alt="After hours at Clique" />
 			</figure>
 			<figure className="where-figure where-figure-2">
-			<img data-src="/images/work2.jpg" />
+			<img data-src="/images/work2.jpg" alt="Demonstrating some of our work" />
 			</figure>
 			<figure className="where-figure where-figure-3">
-			<img data-src="/images/work3.jpg" />
+			<img data-src="/images/work3.jpg" alt="Our CTO, John Gile, leading a presentation" />
 			</figure>
 			<figure className="where-figure where-figure-4">
-			<img data-src="/images/work4.jpg" />
+			<img data-src="/images/work4.jpg" alt="A view from our office" />
 			</figure>
 			</div>
 			</div>

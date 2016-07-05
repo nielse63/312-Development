@@ -5,6 +5,13 @@ import { Link } from 'react-router';
 
 export default class Block extends Component {
 
+	static get propTypes() {
+		return {
+			data: React.PropTypes.object,
+			background: React.PropTypes.string,
+		}
+	}
+
 	makeSlug(string) {
 		let path = string.replace(/[\s|_|.]/g, '-');
 
@@ -20,7 +27,6 @@ export default class Block extends Component {
 
 	render() {
 		const data = this.props.data;
-
 
 		// single vars
 		const id = data.id;

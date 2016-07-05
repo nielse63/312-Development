@@ -4,9 +4,9 @@ const webpack = require('webpack');
 const CompressionPlugin = require('compression-webpack-plugin');
 
 var loaders;
-var eslintConfig = {
-	fix : false
-};
+// var eslintConfig = {
+// 	fix : false
+// };
 var plugins = [
 	new webpack.NoErrorsPlugin(),
 	new webpack.optimize.DedupePlugin(),
@@ -66,6 +66,6 @@ module.exports = {
 		}]
 	},
 	plugins : plugins,
-	eslint: eslintConfig
+	// eslint: eslintConfig
 };
 

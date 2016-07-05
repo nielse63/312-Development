@@ -1,26 +1,32 @@
 
 // MobileNav.js
-import React, { Component } from 'react';
+import React from 'react';
 import { Link } from 'react-router';
 
-export default class MobileNav extends Component {
+const MobileNav = function(props) {
 
-	render() {
-		const menuItems = this.props.navItems.map((item) => {
-			return (
-				<li key={'key-' + item.key}>
-					<Link to={item.value} activeClassName="active">{item.label}</Link>
-				</li>
-			);
-		});
-
+	function makeNavItem(item) {
 		return (
-			<nav className="mobile-nav">
-				<ul className="nav-menu list">
-					{menuItems}
-					<li className="line"></li>
-				</ul>
-			</nav>
+			<li key={`key-${item.key}`}>
+				<Link to={item.value} activeClassName="active">{item.label}</Link>
+			</li>
 		);
 	}
+
+	const menuItems = props.navItems.map(makeNavItem);
+
+	return (
+		<nav className="mobile-nav">
+			<ul className="nav-menu list">
+				{menuItems}
+			</ul>
+		</nav>
+	);
 }
+
+MobileNav.propTypes = {
+	navItems: React.PropTypes.array,
+	cls: React.PropTypes.string
+};
+
+export default MobileNav
