@@ -212,7 +212,7 @@ var _gsScope = (typeof(module) !== 'undefined' && module.exports && typeof(globa
 					                    node = nodes[i];
 					                    isChild = (node.parentNode === element);
 					                    if (isChild || absolute || (chars && !words)) {
-					 																																																																																																																																																																																																																			                    																																																																																offset = node.offsetTop;
+					 																																																																																																																																																																																																																			                    																																																																																										offset = node.offsetTop;
 						                    if (lines && isChild && offset !== lineOffsetY && node.nodeName !== 'BR') {
 							                    curLine = [];
 							                    lines.push(curLine);
