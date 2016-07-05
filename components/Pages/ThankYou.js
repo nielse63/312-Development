@@ -6,6 +6,12 @@ import AppStore from '../../stores/AppStore'
 
 export default class ThankYou extends Component {
 
+	static get propTypes() {
+		return {
+			pageTitle: React.PropTypes.string,
+		}
+	}
+
 	static get defaultProps() {
 		return {
 			pageTitle : 'Submission Received',

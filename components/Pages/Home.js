@@ -13,11 +13,12 @@ import Block from '../Partials/Block';
 
 export default class Home extends Component {
 
-	getPageData() {
-		AppDispatcher.dispatch({
-			action    : 'get-page-data',
-			page_slug : '',
-		});
+	static get propTypes() {
+		return {
+			data: React.PropTypes.shape({
+				posts: React.PropTypes.array,
+			}),
+		}
 	}
 
 	componentWillMount() {
@@ -33,9 +34,16 @@ export default class Home extends Component {
 		window.postMessage('unloaded', window.location.origin);
 	}
 
+	getPageData() {
+		AppDispatcher.dispatch({
+			action    : 'get-page-data',
+			page_slug : '',
+		});
+	}
+
 	render() {
-		const data = this.props.data;
-		const posts = data.posts;
+		// const data = this.props.data;
+		const posts = this.props.data.posts;
 		let i = 1;
 		const max = 10;
 
@@ -48,7 +56,7 @@ export default class Home extends Component {
 
 			return (
 				<Block key={post.id} data={post} background={background} />
-				);
+			);
 		});
 
 		return (

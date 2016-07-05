@@ -1,5 +1,20 @@
 {
 	"parser": "babel-eslint",
+	"parserOptions": {
+		"ecmaVersion": 6,
+		"sourceType": "module",
+		"ecmaFeatures": {
+			"jsx": true
+		}
+	},
+	"env": {
+        "browser": true,
+        "node": true
+    },
+    "globals": {
+        "_c": true,
+        "$": false
+    },
 	"extends": "airbnb",
 	"rules": {
 		"indent": ["warn", "tab"],
@@ -13,7 +28,9 @@
 			"align": "colon"
 		}],
 		"prefer-arrow-callback": "warn",
-		"no-unused-vars": "error"
+		"no-unused-vars": "error",
+		"max-len": "warn",
+		"prefer-template": "warn"
 	},
 	"plugins": ["react"]
 }

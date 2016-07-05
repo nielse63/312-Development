@@ -2,8 +2,7 @@
 // app-client.js
 import React from 'react';
 import { render } from 'react-dom';
-import { Router } from 'react-router';
-import { browserHistory } from 'react-router';
+import { Router, browserHistory } from 'react-router';
 
 // Routes
 import routes from './routes';
