@@ -5,10 +5,6 @@ import config from '../../config';
 
 export default class NoMatch extends Component {
 
-	// componentWillMount() {
-	// 	window.postMessage('loading', window.location.origin);
-	// }
-
 	componentDidMount() {
 		document.title = config.site.title + ' | Page Not Found';
 		window.postMessage('loaded', window.location.origin);
@@ -23,11 +19,11 @@ export default class NoMatch extends Component {
 
 		return (
 			<section className="page-content page-404">
-			<figure className="page-404-background"></figure>
-			<div>
-			<h1>Page Not Found</h1>
-			</div>
+				<figure className="page-404-background"></figure>
+				<div>
+					<h1>Page Not Found</h1>
+				</div>
 			</section>
-			);
+		);
 	}
 }

@@ -29,23 +29,20 @@ export default class Block extends Component {
 		const excerpt = data.excerpt;
 		const slug = '/articles/' + this.makeSlug(title);
 		const background = this.props.background;
-		// const style = {
-		// 	backgroundImage : 'url(' + background + ')',
-		// };
 
 		return (
 			<li className="work-block" data-id={id}>
-			<Link to={slug}>
-			<figure className="work-block-figure" data-src={background} />
-			<div className="work-block-content">
-			<header className="work-block-header">
-			<p className="tag">{category}</p>
-			<h3>{title}</h3>
-			</header>
-			<p className="preview" dangerouslySetInnerHTML={{ __html : excerpt }} />
-			</div>
-			</Link>
+				<Link to={slug}>
+					<figure className="work-block-figure" data-src={background} />
+					<div className="work-block-content">
+						<header className="work-block-header">
+							<p className="tag">{category}</p>
+							<h3>{title}</h3>
+						</header>
+						<p className="preview" dangerouslySetInnerHTML={{ __html : excerpt }} />
+					</div>
+				</Link>
 			</li>
-			);
+		);
 	}
 }

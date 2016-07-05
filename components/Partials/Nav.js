@@ -6,8 +6,7 @@ import { Link } from 'react-router';
 export default class Nav extends Component {
 
 	render() {
-		const navItems = this.props.navItems;
-		const menuItems = navItems.map((item) => {
+		const menuItems = this.props.navItems.map((item) => {
 			return (
 				<li key={'key-' + item.key}>
 					<Link to={item.value} activeClassName="active">{item.label}</Link>
@@ -15,7 +14,7 @@ export default class Nav extends Component {
 			);
 		});
 
-		                    return (
+		return (
 			<nav className={this.props.cls}>
 				<ul className="nav-menu list-inline">
 					{menuItems}

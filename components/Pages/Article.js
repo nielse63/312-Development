@@ -13,7 +13,6 @@ import AppDispatcher from '../../dispatcher/AppDispatcher';
 export default class Article extends Component {
 
 	componentWillMount() {
-		// window.postMessage('loading', window.location.origin);
 		this.getPostData();
 	}
 

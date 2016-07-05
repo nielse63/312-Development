@@ -1,9 +1,8 @@
 
 // Pattern.js
-import React, { Component } from 'react'
+import React, { Component } from 'react';
 
 export default class Pattern extends Component {
-
 	render() {
 		return (
 			<svg viewBox="0 0 1584.14 703.31">
