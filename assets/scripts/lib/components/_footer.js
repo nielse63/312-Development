@@ -11,8 +11,6 @@ export default class Footer {
 
 		this.setPaths();
 		this.createScene();
-
-		return this;
 	}
 
 	setPaths() {

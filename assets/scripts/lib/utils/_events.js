@@ -6,15 +6,12 @@ export default class Events {
 
 			scrollstart : {
 				setup() {
-					var element = $(this),
-						uid = _c.utils.uid('scrollstart'),
-						ns = 'scrolling.clique.events.' + uid,
-						handler = function(e) {
-							var target = _c.$(e.target);
-
-							e.type = 'scrollstart';
-							target.trigger('scrollstart', e);
-						};
+					const element = $(this);
+					const uid = _c.utils.uid('scrollstart');
+					const ns = 'scrolling.clique.events.' + uid;
+					const handler = function(e) {
+						_c.$(e.target).trigger('scrollstart');
+					};
 
 					element.on('scrollstart', function() {
 						return element.off(ns);
@@ -29,8 +26,8 @@ export default class Events {
 				},
 
 				teardown() {
-					var element = _c.$(this),
-						uid = element.data('clique.event.scrollstart.uid');
+					const element = _c.$(this);
+					const uid = element.data('clique.event.scrollstart.uid');
 
 					element.off('scrolling.clique.events', element.data(uid));
 					element.removeData(uid);
@@ -41,68 +38,69 @@ export default class Events {
 			scrollend : {
 				latency : 50,
 				setup(data) {
-					data = _c.$.extend({
+					const _data = _c.$.extend({
 						latency : _c.$.event.special.scrollend.latency,
 					}, data);
 
-					var uid = _c.utils.uid('scrollend'),
-						timer = null,
-						handler = function(e, scrollData) {
-							if (timer) {
-								window.clearTimeout(timer);
-							}
-							timer = window.setTimeout(function() {
-								timer = null;
-								var target = _c.$(e.target);
-								// console.log(scrollData);
-								return target.trigger('scrollend', [scrollData]);
-							}, data.latency);
-						};
+					const uid = _c.utils.uid('scrollend');
+					let timer = null;
+					const handler = function(e, scrollData) {
+						if (timer) {
+							window.clearTimeout(timer);
+						}
+						timer = window.setTimeout(function() {
+							timer = null;
+							const target = _c.$(e.target);
+							// console.log(scrollData);
+							return target.trigger('scrollend', [scrollData]);
+						}, _data.latency);
+					};
 
 					_c.$(this).data('clique.event.scrollend.uid', uid);
 					return _c.$(this).on('scrolling', _c.utils.debounce(handler, 100)).data(uid, handler);
 				},
 				teardown() {
-					var uid = _c.$(this).data('clique.event.scrollend.uid');
-					_c.$(this).off('scrolling', _c.$(this).data(uid));
-					_c.$(this).removeData(uid);
-					return _c.$(this).removeData('clique.event.scrollend.uid');
+					const $element = _c.$(this);
+					const uid = $element.data('clique.event.scrollend.uid');
+					$element.off('scrolling', $element.data(uid));
+					$element.removeData(uid);
+					return $element.removeData('clique.event.scrollend.uid');
 				},
 			},
 
 			resizestart : {
 				setup() {
-					var element = _c.$(this),
-						uid = _c.utils.uid('resizestart'),
-						ns = 'resize.clique.events.' + uid,
-						latency = _c.$.event.special.resizeend.latency + 150,
-						timer,
-						handler = function(e) {
+					const element = _c.$(this);
+					const uid = _c.utils.uid('resizestart');
+					const ns = 'resize.clique.events.' + uid;
+					const latency = _c.$.event.special.resizeend.latency + 150;
+					let timer;
+					const handler = function(e) {
+						if (timer) {
+							window.clearTimeout(timer);
+						}
+
+						const memory = {
+							height : window.innerHeight,
+							width  : window.innerWidth,
+						};
+						const target = _c.$(e.target);
+
+						target.one('resizeend', function() {
 							if (timer) {
 								window.clearTimeout(timer);
 							}
+						});
 
-							var memory = {
-									height : window.innerHeight,
-									width  : window.innerWidth,
-								},
-								target = _c.$(e.target);
+						timer = setTimeout(function() {
+							timer = null;
+							if (memory.height === window.innerHeight && memory.width === window.innerWidth) {
+								target.trigger('resizeend');
+							}
+						}, latency);
 
-							target.one('resizeend', function() {
-								if (timer) {
-									window.clearTimeout(timer);
-								}
-							});
-
-							timer = setTimeout(function() {
-								timer = null;
-								if (memory.height === window.innerHeight && memory.width === window.innerWidth) {
-									target.trigger('resizeend');
-								}
-							}, latency);
-
-							target.trigger('resizestart', e);
-						};
+						target.trigger('resizestart', e);
+					};
 
 					element.data('clique.event.resizestart.uid', uid);
 					element.on('resizestart', function() {
@@ -117,30 +115,33 @@ export default class Events {
 				},
 
 				teardown() {
-					var uid = _c.$(this).data('clique.event.resizestart.uid');
+					const $element = _c.$(this);
+					const uid = $element.data('clique.event.resizestart.uid');
 
-					_c.$(this).off('resize', _c.$(this).data(uid));
-					_c.$(this).removeData(uid);
-					return _c.$(this).removeData('clique.event.resizestart.uid');
+					$element.off('resize', $element.data(uid));
+					$element.removeData(uid);
+					return $element.removeData('clique.event.resizestart.uid');
 				},
 			},
 
 			resizeend : {
 				latency : 250,
 				setup(data) {
-					var uid = _c.utils.uid('resizeend'),
-						_data = _c.$.extend({ latency : _c.$.event.special.resizeend.latency }, data),
-						timer,
-						ns = 'resize.clique.events.' + uid,
-						element = _c.$(this),
-						handler = function(e) {
+					let uid = _c.utils.uid('resizeend');
+					const _data = _c.$.extend({
+						latency : _c.$.event.special.resizeend.latency
+					}, data);
+					let timer;
+					const ns = 'resize.clique.events.' + uid;
+					const element = _c.$(this);
+					const handler = function(e) {
 							if (timer) {
 								window.clearTimeout(timer);
 							}
 
 							timer = setTimeout(function() {
 								timer = null;
-								var target = _c.$(e.target);
+								const target = _c.$(e.target);
 
 								return target.trigger('resizeend', e);
 							}, _data.latency);
@@ -157,11 +158,12 @@ export default class Events {
 				},
 
 				teardown() {
-					var uid = _c.$(this).data('clique.event.resizeend.uid');
+					const $element = _c.$(this);
+					const uid = $element.data('clique.event.resizeend.uid');
 
-					_c.$(this).off('resize', _c.$(this).data(uid));
-					_c.$(this).removeData(uid);
-					return _c.$(this).removeData('clique.event.resizeend.uid');
+					$element.off('resize', $element.data(uid));
+					$element.removeData(uid);
+					return $element.removeData('clique.event.resizeend.uid');
 				},
 			},
 		};
@@ -173,29 +175,27 @@ export default class Events {
 	}
 
 	createEvents() {
-		var evtFn = function(fn) {
-			if (fn) {
-				return this.on(k, fn);
-			} else {
-				return this.trigger(k);
-			}
-		};
 
-		for (var k in this.events) {
-			var v = this.events[k];
-
+		Object.keys(this.events).forEach((k) => {
+			const v = this.events[k];
 			if (typeof v === 'object') {
 				_c.$.event.special[k] = v;
-				_c.$.fn[k] = evtFn;
+				_c.$.fn[k] = function(fn) {
+					if (fn) {
+						return this.on(k, fn);
+					}
+					return this.trigger(k);
+				};
 			}
-		}
+		});
 	}
 
 	initScroll() {
-		var memory = -1;
-		var working = false;
-		var dir = 0;
-		var pageY = 0;
+		let memory = -1;
+		let working = false;
+		let dir = 0;
+		let pageY = 0;
+		const $doc = $(document);
 
 		function checkScrollPosition() {
 			if (working) {
@@ -209,14 +209,12 @@ export default class Events {
 				return;
 			}
 			dir = pageY > memory ? 1 : -1;
-			// delta  = pageY - memory;
 			memory = pageY;
 
 			// fire custom event
-			$(document).trigger('scrolling', [{
+			$doc.trigger('scrolling', [{
 				y : memory,
 				dir,
-				// delta : delta,
 			}]);
 
 			working = false;

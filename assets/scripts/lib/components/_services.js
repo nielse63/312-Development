@@ -13,8 +13,6 @@ export default class Services {
 
 		this.setDelay();
 		this.setScene();
-
-		return this;
 	}
 
 	setDelay() {

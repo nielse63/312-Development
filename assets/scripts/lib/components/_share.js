@@ -2,7 +2,7 @@
 export default class Share {
 
 	constructor() {
-		var SHARE = {
+		const SHARE = {
 			modal  : null,
 			loaded : {
 				gplus     : false,
@@ -19,7 +19,7 @@ export default class Share {
 			load : {
 
 				googleplus() {
-					return _c.$body.append('<script src="//apis.google.com/js/client:platform.js" async defer></script>');
+					_c.$body.append('<script src="//apis.google.com/js/client:platform.js" async defer></script>');
 				},
 
 				facebook() {
@@ -30,20 +30,20 @@ export default class Share {
 							version : 'v2.4',
 						});
 					};
-					return function(d, s, id) {
-						var fjs = d.getElementsByTagName(s)[0];
+					(function(d, s, id) {
+						const fjs = d.getElementsByTagName(s)[0];
 						if (d.getElementById(id)) {
 							return;
 						}
-						var js = d.createElement(s);
+						const js = d.createElement(s);
 						js.id = id;
 						js.src = '//connect.facebook.net/en_US/sdk.js';
-						return fjs.parentNode.insertBefore(js, fjs);
-					}(document, 'script', 'facebook-jssdk');
+						fjs.parentNode.insertBefore(js, fjs);
+					}(document, 'script', 'facebook-jssdk'));
 				},
 
 				twitter() {
-					return _c.$body.append('<script src="//platform.twitter.com/widgets.js" async defer></script>');
+					_c.$body.append('<script src="//platform.twitter.com/widgets.js" async defer></script>');
 				},
 			},
 
@@ -55,7 +55,7 @@ export default class Share {
 					if (!SHARE.data.url) {
 						throw new Error('No URL provided for Facebook share button.');
 					}
-					return window.FB.ui({
+					window.FB.ui({
 						method : 'share',
 						href   : SHARE.data.url,
 					}, function(response) {
@@ -74,31 +74,30 @@ export default class Share {
 					}
 
 					function share() {
-						return window.gapi.client.load('plus', 'v1').then(function() {
-							var shareUrl = SHARE.data.url;
-							var url = 'https://plus.google.com/share?url=' + shareUrl;
+						window.gapi.client.load('plus', 'v1').then(function() {
+							const shareUrl = SHARE.data.url;
+							const url = 'https://plus.google.com/share?url=' + shareUrl;
 							_c.utils.openWindow(url);
 						});
 					}
 
-					return window.gapi.load('auth2', function() {
-						var auth2 = window.gapi.auth2.init({
+					window.gapi.load('auth2', function() {
+						const auth2 = window.gapi.auth2.init({
 							client_id : '507239089267-8c37f28d595ct2ubpfpbbsa7jlue6o3b.apps.googleusercontent.com',
 							scope     : 'profile',
 						});
-						return auth2.then(function() {
+						auth2.then(function() {
 							if (!auth2.isSignedIn.get()) {
 								auth2.isSignedIn.listen(function(signedin) {
 									if (signedin) {
-										var user = auth2.currentUser.get().getBasicProfile();
-										return share(user);
+										share(auth2.currentUser.get().getBasicProfile());
+										return;
 									}
 								});
-								return auth2.signIn();
-							} else {
-								var user = auth2.currentUser.get().getBasicProfile();
-								return share(user);
+								auth2.signIn();
+								return
 							}
+							share(auth2.currentUser.get().getBasicProfile());
 						});
 					});
 				},
@@ -108,7 +107,6 @@ export default class Share {
 					if (! SHARE.data.url) {
 						throw new Error('No URL provided for Twitter share button.');
 					}
-					// console.log(btn.attr('href'), SHARE.data.url);
 					if (btn.attr('href') === SHARE.data.url) {
 						return;
 					}
@@ -120,7 +118,7 @@ export default class Share {
 						}]);
 					});
 					btn.attr('href', SHARE.data.url);
-					return btn.off('click').trigger('click');
+					btn.off('click').trigger('click');
 				},
 
 				linkedin(btn) {
@@ -128,21 +126,22 @@ export default class Share {
 					if (!SHARE.data.url) {
 						throw new Error('No URL provided for LinkedIn share button.');
 					}
-					_c.utils.openWindow(SHARE.data.url);
+					return _c.utils.openWindow(SHARE.data.url);
 				},
 			},
 		};
 
-		function activateShareButton(ele, global, method) {
+		function activateShareButton(ele, g, method) {
 			if (ele.length && typeof SHARE.load[method] !== 'undefined') {
 				ele.addClass('disabled');
-				var interval = setInterval(function() {
-					if (window[global]) {
+				let interval = setInterval(function() {
+					if (window[g]) {
 						clearInterval(interval);
-						return ele.removeClass('disabled');
+						interval = null;
+						ele.removeClass('disabled');
 					}
 				}, 50);
-				return SHARE.load[method]();
+				SHARE.load[method]();
 			}
 		}
 
@@ -156,26 +155,27 @@ export default class Share {
 			}
 
 			_c.$('[data-share]').each(function() {
-				var ele = _c.$(this),
-					type = ele.data('share');
+				const ele = _c.$(this);
+				const type = ele.data('share');
 				if (!SHARE.loaded[type]) {
-					var _global;
+					let _global;
 					switch (type) {
-					case 'facebook':
-						_global = 'FB';
-						break;
+						case 'googleplus':
+							_global = 'gapi';
+							break;
 
-					case 'googleplus':
-						_global = 'gapi';
-						break;
+						case 'twitter':
+							_global = 'twttr';
+							break;
 
-					case 'twitter':
-						_global = 'twttr';
-						break;
+						case 'pinterest':
+							_global = 'PDK';
+							break;
 
-					case 'pinterest':
-						_global = 'PDK';
-						break;
+						case 'facebook':
+						default:
+							_global = 'FB';
+							break;
 					}
 
 					if (!_global || !_c.utils.isString(type)) {
@@ -187,11 +187,14 @@ export default class Share {
 			});
 		}
 
-		_c.$html.on('click', '[data-share]', function(e) {
+		const cb = function(e) {
 			e.preventDefault();
-			var type = _c.$(this).data('share');
+			const type = _c.$(this).data('share');
 			return SHARE.share[type](_c.$(this));
-		});
+		};
+
+		_c.$html.off('click', '[data-share]', cb);
+		_c.$html.on('click', '[data-share]', cb);
 
 		const selector = '[data-retweet], [data-share]';
 		let checked = 0;

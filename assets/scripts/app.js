@@ -10,9 +10,6 @@ window._c = new Clique();
 import Nav from './lib/components/_nav';
 import Banner from './lib/components/_banner';
 
-// plugins
-import ScrollTo from './lib/plugins/_scrollto';
-
 // modules
 import BodyClass from './lib/modules/_body-class';
 import Form from './lib/modules/_form';
@@ -37,52 +34,52 @@ let didLoad = false;
 const modules = [
 	{
 		preload : false,
-		cls     : MobileButton,
+		Cls     : MobileButton,
 		val     : null,
 	}, {
 		preload : false,
-		cls     : Banner,
+		Cls     : Banner,
 		val     : null,
 	}, {
 		once    : true,
 		preload : true,
-		cls     : Nav,
+		Cls     : Nav,
 		val     : null,
 	}, {
 		preload : false,
-		cls     : Homepage,
+		Cls     : Homepage,
 		val     : null,
 	}, {
 		preload : true,
-		cls     : WorkGrid,
+		Cls     : WorkGrid,
 		val     : null,
 	}, {
 		preload : false,
-		cls     : Services,
+		Cls     : Services,
 		val     : null,
 	}, {
 		preload : false,
-		cls     : Photos,
+		Cls     : Photos,
 		val     : null,
 	}, {
 		preload : true,
-		cls     : Links,
+		Cls     : Links,
 		val     : null,
 	}, {
 		preload : false,
-		cls     : Form,
+		Cls     : Form,
 		val     : null,
 	}, {
 		preload : false,
-		cls     : LazyLoad,
+		Cls     : LazyLoad,
 		val     : null,
 	}, {
 		preload : false,
-		cls     : Footer,
+		Cls     : Footer,
 		val     : null,
 	}, {
 		preload : false,
-		cls     : Share,
+		Cls     : Share,
 		val     : null,
 	},
 ];
@@ -118,16 +115,16 @@ function initModules(preload = false) {
 	_c.$('.transition-enter').one(transitionEvent, killScenes);
 
 	for (let i = 0; i < modules.length; i++) {
-		const module = modules[i];
+		const Module = modules[i];
 
 		// guards
-		if (module.preload !== preload || (module.once && module.val)) {
+		if (Module.preload !== preload || (Module.once && Module.val)) {
 			continue;
 		}
 
 		// destroy scroll scene
-		if (module.val && module.val.scene) {
-			const scene = module.val.scene;
+		if (Module.val && Module.val.scene) {
+			const scene = Module.val.scene;
 			scenes.push(scene);
 
 			if (_c.utils.isArray(scene)) {
@@ -140,14 +137,12 @@ function initModules(preload = false) {
 		}
 
 		// create new class
-		module.val = new module.cls();
+		Module.val = new Module.Cls();
 	}
 }
 
 function preMount() {
 	BodyClass.exec();
-	new ScrollTo();
-
 	initModules(true);
 }
 

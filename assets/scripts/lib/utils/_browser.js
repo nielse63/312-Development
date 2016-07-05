@@ -88,7 +88,8 @@ export default class Browser {
 		} else if (this.uamatches('opera') || this.uamatches('opr')) {
 			browser.name = 'opera';
 			browser.engine = 'presto';
-			this.version(browser, this.test(/version\/([\d\.]+)/) ? RegExp.$1 : this.test(/opera(\s|\/)([\d\.]+)/) ? RegExp.$2 : '');
+			const versionTest = this.test(/opera(\s|\/)([\d\.]+)/) ? RegExp.$2 : '';
+			this.version(browser, this.test(/version\/([\d\.]+)/) ? RegExp.$1 : versionTest);
 		} else if (this.uamatches('konqueror')) {
 			browser.name = 'konqueror';
 		} else if (this.uamatches('chrome')) {

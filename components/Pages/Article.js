@@ -57,7 +57,7 @@ export default class Article extends Component {
 		const content = page.content;
 
 		// banner image
-		const background = '/images/photo' + Math.floor(Math.random() * 10) + '.jpg';
+		const background = '/images/photo' + (Math.floor(Math.random() * 10) + 1) + '.jpg';
 
 		// links
 		let buttons = '';

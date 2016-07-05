@@ -10,7 +10,7 @@ export default class Form {
 		}
 
 		this.init();
-		return this;
+		// return this;
 	}
 
 	init() {
@@ -56,14 +56,10 @@ export default class Form {
 		}).on('blur', function() {
 			_c.$(this).closest('.input-wrapper').removeClass('focus');
 		}).on('keyup blur', function() {
-			let isValid = true;
-			this.$inputs.each(function() {
-				if (this.getAttribute('aria-invalid') === 'true' || this.getAttribute('aria-invalid') === null) {
-					isValid = false;
-					return false;
-				}
+			const isInvalid = !!! this.$inputs.toArray().find(function(input) {
+				return input.getAttribute('aria-invalid') === 'false';
 			});
-			if (isValid) {
+			if (isInvalid) {
 				this.$submit.removeClass('disabled');
 			} else {
 				this.$submit.addClass('disabled');
@@ -106,10 +102,11 @@ export default class Form {
 		// var lastTriggered;
 
 		// let didSubmit = false;
+		const self = this;
 		const validator = this.element.validate({
 			focusInvalid : false,
 			onkeyup      : false,
-			onfocusout(input, e) {
+			onfocusout(input) {
 				const isValid = validator.element(input);
 				const $input = _c.$(input);
 
@@ -130,72 +127,68 @@ export default class Form {
 
 				if ($input.data('formerror') && isValid) {
 					return true;
-				} else {
-					return false;
 				}
+				return false;
 			},
 			onsubmit   : false,
-			showErrors : function(_this) {
-				return function(errorMap, errorList) {
-					// didSubmit = true;
-					// console.log(this);
+			showErrors : function(errorMap, errorList) {
 
-					// show default errors
-					this.defaultShowErrors();
+				// show default errors
+				// console.log(arguments);
+				this.defaultShowErrors();
 
-					// trigger form event
-					if (errorList.length) {
-						_this.element.trigger('invalid', errorList);
+				// trigger form event
+				if (errorList.length) {
+					self.element.trigger('invalid', errorList);
+				}
+
+				// loop over errors
+				let $target;
+				for (let i = 0; i < errorList.length; i++) {
+					// let object = errorList[i];
+					const $input = _c.$(errorList[i].element);
+
+					if (i === 0) {
+						$target = $input;
 					}
 
-					// loop over errors
-					let $target;
-					for (let i = 0; i < errorList.length; i++) {
-						let object = errorList[i],
-							$input = _c.$(object.element);
-
-						if (i === 0) {
-							$target = $input;
-						}
-
-						// set li classes
-						$input.closest('li')
+					// set li classes
+					$input.closest('li')
 						.removeClass('form-valid')
 						.addClass('form-error');
 
-						// trigger input event
-						$input
+					// trigger input event
+					$input
 						.data('formerror', true)
 						.trigger('invalid');
-					}
+				}
 
-					// scroll to first invalid element
-					if ($target && $target.length) {
-						let screenTop = window.pageYOffset,
-							top = $target.offset().top;
+				// scroll to first invalid element
+				if ($target && $target.length) {
+					const screenTop = window.pageYOffset;
+					const top = $target.offset().top;
 
-						// scroll of input is out of view
-						if (top < window.pageYOffset || top > screenTop + window.innerHeight) {
-							const distance = distance < 400 ? 400 : distance;
-							_c.$.scrollTo($target, {
-								offset   : -50,
-								duration : distance,
-							}, function() {
-								$target.focus();
-							});
-						}
+					// scroll of input is out of view
+					if (top < screenTop || top > screenTop + window.innerHeight) {
+						const d = top - screenTop;
+						const duration = d < 400 ? 400 : d;
+						_c.$body.stop().animate({
+							scrollTop : top - 50,
+						}, duration, function() {
+							$target.focus();
+						});
 					}
-				};
-			}(this),
+				}
+			},
 			success(label, input) {
-				let $li = _c.$(input).closest('li'),
-					$input = _c.$(input);
+				const $li = _c.$(input).closest('li');
+				const $input = _c.$(input);
 
 				// trigger input event
 				if ($input.hasClass('error')) {
 					$input
-					.removeData('formerror')
-					.trigger('valid');
+						.removeData('formerror')
+						.trigger('valid');
 
 					// remove error class from li
 					$li.removeClass('form-error');

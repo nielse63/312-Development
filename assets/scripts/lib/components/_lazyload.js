@@ -11,8 +11,6 @@ export default class LazyLoad {
 
 		this.$images = Array.from(this.$images);
 		this.loadAll();
-
-		return this;
 	}
 
 	callback() {

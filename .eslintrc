@@ -13,7 +13,7 @@
     },
     "globals": {
         "_c": true,
-        "$": false
+        "$": true
     },
 	"extends": "airbnb",
 	"rules": {
@@ -30,7 +30,8 @@
 		"prefer-arrow-callback": "warn",
 		"no-unused-vars": "error",
 		"max-len": "warn",
-		"prefer-template": "warn"
+		"prefer-template": "warn",
+		"no-underscore-dangle": "warn"
 	},
 	"plugins": ["react"]
 }

@@ -13,8 +13,6 @@ export default class Photos {
 
 		this.setDelay();
 		this.setScene();
-
-		return this;
 	}
 
 	setDelay() {

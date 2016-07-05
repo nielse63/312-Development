@@ -16,31 +16,26 @@ export default class Nav {
 		this.hovering = false;
 		this.delay = 500;
 		this.top = 10;
-		this.timeout;
 
 		// bind listeners
 		if (! this.$line.hasClass('active')) {
-			_c.$('.transition-appear').one(_c.support.animation.end, function(_this) {
+			_c.$('.transition-appear').one(_c.support.animation.end, (function(_this) {
 				return function() {
 					_this.initActiveLine();
 					setTimeout(function() {
 						_this.$line.addClass('active');
 					}, 100);
 				};
-			}(this));
+			}(this)));
 		} else {
 			this.setActiveLine(this.$active);
 		}
-
-		// init
-
-		return this;
 	}
 
 	setActiveLine($link) {
-		var $ele = $link.parent('li');
-		var left = $ele.position().left + parseFloat($ele.css('margin-left')) + parseFloat($ele.css('padding-left'));
-		var width = $ele.width();
+		const $ele = $link.parent('li');
+		const left = $ele.position().left + parseFloat($ele.css('margin-left')) + parseFloat($ele.css('padding-left'));
+		const width = $ele.width();
 
 		this.$line.css({
 			transform : 'translate(' + left + 'px, 0)',
@@ -63,9 +58,9 @@ export default class Nav {
 			this.timeout = null;
 		}
 
-		var $target = $(e.target);
-		var _this = this;
-		var t = setTimeout(function() {
+		const $target = $(e.target);
+		const _this = this;
+		let t = setTimeout(function() {
 			if (! _this.hovering) {
 				clearTimeout(t);
 				t = null;
@@ -76,9 +71,9 @@ export default class Nav {
 		}, 100);
 	}
 
-	onMouseleave(e) {
+	onMouseleave() {
 		this.hovering = false;
-		var _this = this;
+		const _this = this;
 		this.timeout = setTimeout(function() {
 			_this.setActiveLine(_this.$active);
 		}, this.delay);
@@ -86,15 +81,15 @@ export default class Nav {
 
 	initActiveLine() {
 		this.setActiveLine(this.$active);
-		var _this = this;
+		const _this = this;
 
 		this.$items.each(function() {
-			var $ele = $(this);
+			const $ele = $(this);
 			$ele.off('.nav');
 			$ele
-			.on('click.nav', _this.onClick.bind(_this))
-			.on('mouseenter.nav', _this.onMouseenter.bind(_this))
-			.on('mouseleave.nav', _this.onMouseleave.bind(_this));
+				.on('click.nav', _this.onClick.bind(_this))
+				.on('mouseenter.nav', _this.onMouseenter.bind(_this))
+				.on('mouseleave.nav', _this.onMouseleave.bind(_this));
 		});
 	}
 }
