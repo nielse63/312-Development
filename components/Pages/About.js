@@ -7,7 +7,7 @@ import config from '../../config';
 import TweetList from '../Partials/TweetList';
 
 // Dispatcher
-import AppDispatcher from '../../dispatcher/AppDispatcher';
+// import AppDispatcher from '../../dispatcher/AppDispatcher';
 
 export default class About extends Component {
 
@@ -17,10 +17,10 @@ export default class About extends Component {
 		};
 	}
 
-	componentWillMount() {
-		// window.postMessage('loading', window.location.origin);
-		this.getTweets();
-	}
+	// componentWillMount() {
+	// 	// window.postMessage('loading', window.location.origin);
+	// 	this.getTweets();
+	// }
 
 	componentDidMount() {
 		window.postMessage('loaded', window.location.origin);
@@ -38,11 +38,11 @@ export default class About extends Component {
 		return this.props.location.pathname.replace('/', '');
 	}
 
-	getTweets() {
-		AppDispatcher.dispatch({
-			action : 'get-tweets',
-		});
-	}
+	// getTweets() {
+	// 	AppDispatcher.dispatch({
+	// 		action : 'get-tweets',
+	// 	});
+	// }
 
 	render() {
 		const data = this.props.data;

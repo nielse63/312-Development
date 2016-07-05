@@ -36,8 +36,7 @@
     "start": "npm run production",
     "production": "NODE_ENV=production node app.js",
     "webpack-dev-server": "NODE_ENV=development PORT=8080 webpack-dev-server --content-base public/ --hot --inline --devtool inline-source-map --history-api-fallback",
-    "development": "cp views/index.html public/index.html && npm run build-dev && npm run webpack-dev-server",
-    "build-dev": "gulp build && NODE_ENV=development webpack -d",
+    "development": "cp views/index.html public/index.html && NODE_ENV=development webpack -d && npm run webpack-dev-server",
     "build-release": "gulp build --production && NODE_ENV=production webpack -p",
     "heroku-release": "npm run build-release && git add -A && git commit -m 'New release' && git push && git push heroku master && heroku open && heroku logs --tail"
   },
@@ -66,6 +65,7 @@
     "gulp-inline-base64": "^0.1.4",
     "gulp-jshint": "^2.0.1",
     "gulp-less": "^3.1.0",
+    "gulp-newer": "^1.2.0",
     "gulp-plumber": "^1.1.0",
     "gulp-postcss": "^6.1.1",
     "gulp-rename": "^1.2.2",

@@ -1,7 +1,10 @@
 
 // TweetList.js
 import React, { Component } from 'react';
-// import AppDispatcher from '../../dispatcher/AppDispatcher';
+// import AppDispatcher from '../../dispatcher/AppDispatcher
+
+// Dispatcher
+import AppDispatcher from '../../dispatcher/AppDispatcher';
 
 // Store
 // import AppStore from '../../stores/AppStore';
@@ -16,6 +19,26 @@ export default class TweetList extends Component {
 	// 		tweets : [],
 	// 	};
 	// }
+
+	componentWillMount() {
+		this.getTweets();
+	}
+
+	componentDidMount() {
+		this.loadTweets();
+	}
+
+	getTweets() {
+		AppDispatcher.dispatch({
+			action : 'get-tweets',
+		});
+	}
+
+	loadTweets() {
+		AppDispatcher.dispatch({
+			action : 'load-tweets',
+		});
+	}
 
 	render() {
 		// console.log(this.props.tweets);

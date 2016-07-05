@@ -23,15 +23,13 @@ function makeSlug(string) {
 let loaded = false;
 
 function loadTwitterScript(callback) {
-	if( loaded ) {
+	if( loaded || window.twttr ) {
 		callback()
 		return;
 	}
 
-	console.log('loading twitter script')
 	$.getScript('https://platform.twitter.com/widgets.js')
 		.done(function( script, textStatus ) {
-			// console.log( textStatus );
 			loaded = true;
 			callback()
 		})
@@ -41,53 +39,29 @@ function loadTwitterScript(callback) {
 		});
 }
 
-export function getTweets(callback) {
+export function loadTweets() {
+	if( ! window.twttr ) {
+		getTweets();
+		return
+	}
 
-	loadTwitterScript(function() {
-		// console.log('done')
+	var main = document.querySelector('.main')
+	if( ! main ) {
+		return;
+	}
 
-		twttr.widgets.load(
-			document.querySelector('.main')
-		);
+	window.twttr.widgets.load(main);
 
-		twttr.widgets.createTimeline({
-			sourceType: "profile",
-			screenName: "ErikKyleNielsen",
-		}, document.querySelector('.tweets'), {
-			tweetLimit: 10,
-		})
-	});
+	window.twttr.widgets.createTimeline({
+		sourceType: "profile",
+		screenName: "ErikKyleNielsen",
+	}, document.querySelector('.tweets'), {
+		tweetLimit: 10,
+	})
+}
 
-	// console.log(callback);
-	// const url = 'http://api.312development.dev/tweets.php';
-	// const opts = {
-	// 	method  : 'GET',
-	// 	headers : new Headers(),
-	// 	mode    : 'cors',
-	// 	cache   : 'default',
-	// };
-	// console.log(url);
-
-	// function always() {
-	// 	if (callback) {
-	// 		callback();
-	// 	}
-	// }
-
-	// fetch(url, opts)
-	// 	.then((response) => {
-	// 		if (! response.ok) {
-	// 			throw new Error(`Error getting tweets: ${response}`);
-	// 		}
-	// 		return response.json();
-	// 	})
-	// 	.then((data) => {
-	// 		AppStore.data.tweets = data;
-	// 		AppStore.emitChange();
-	// 		// console.log(data);
-	// 		always();
-	// 	})
-	// 	.catch(always);
+export function getTweets() {
+	loadTwitterScript(loadTweets);
 }
 
 export function getStore(callback) {

@@ -24,6 +24,7 @@ var postcss      = require('gulp-postcss');
 var reporter     = require('postcss-reporter');
 var syntax_scss  = require('postcss-scss');
 var stylelint    = require('stylelint');
+var newer        = require('gulp-newer');
 // var inline_base64 = require('gulp-inline-base64');
 var base64 = require('./tools/gulp-base64-encode');
 
@@ -120,6 +121,7 @@ var cssTasks = function(filename) {
 // ### Styles
 gulp.task('styles', ['wiredep'], function() {
 	gulp.src(project.css)
+		.pipe(newer('public/styles/app.css'))
 		.pipe(sourcemaps.init())
 		.pipe(sass({
 			outputStyle: 'expanded',
@@ -145,7 +147,9 @@ gulp.task('styles', ['wiredep'], function() {
 
 // ### Fonts
 gulp.task('fonts', function() {
-	return gulp.src(globs.fonts)
+	var inPath = path.source + 'fonts/**/*';
+	return gulp.src(inPath)
+		.pipe(newer(inPath))
 		.pipe(flatten())
 		.pipe(gulp.dest(path.dist + 'fonts'))
 		.pipe(connect.reload());
@@ -153,11 +157,17 @@ gulp.task('fonts', function() {
 
 // ### Images
 gulp.task('images', function() {
-	return gulp.src(globs.images)
+	var inPath = path.source + 'images/**/*';
+	return gulp.src(inPath)
+		.pipe(newer(inPath))
 		.pipe(imagemin({
 			progressive: true,
 			interlaced: true,
-			svgoPlugins: [{removeUnknownsAndDefaults: false}, {cleanupIDs: false}]
+			svgoPlugins: [{
+				removeUnknownsAndDefaults: false
+			}, {
+				cleanupIDs: false
+			}]
 		}))
 		.pipe(gulp.dest(path.dist + 'images'))
 		.pipe(connect.reload());
@@ -180,7 +190,9 @@ gulp.task('clean', require('del').bind(null, ['public/']));
 
 // ### Other files
 gulp.task('other', function() {
-	return gulp.src('assets/other/**/*')
+	var inPath = 'assets/other/**/*';
+	return gulp.src(inPath)
+		.pipe(newer(path.dist))
 		.pipe(flatten())
 		.pipe(gulp.dest(path.dist));
 });
@@ -230,7 +242,6 @@ gulp.task('wiredep', function() {
 });
 
 gulp.task("scss-lint", function() {
-
 	// Stylelint config rules
 	var stylelintConfig = {
 		"plugins": [
