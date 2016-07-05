@@ -43,7 +43,7 @@
     "webpack-dev-server": "NODE_ENV=development PORT=8080 webpack-dev-server --content-base public/ --hot --inline --devtool inline-source-map --history-api-fallback",
     "development": "cp views/index.html public/index.html && NODE_ENV=development webpack -d && npm run webpack-dev-server",
     "build-release": "gulp build --production && NODE_ENV=production webpack -p --release",
-    "heroku-release": "rm -rf public && npm run build-release && git add -A && git commit -m 'New release' && git push && git push heroku master && heroku open && heroku logs --tail"
+    "heroku-release": "rm -rf public && npm run build-release && git add -A && git commit -m 'New release' && git push && git push heroku master && heroku open"
   },
   "author": "",
   "license": "ISC",
@@ -54,6 +54,7 @@
     "del": "^2.2.1",
     "eslint": "^3.0.0",
     "eslint-config-airbnb": "^9.0.1",
+    "eslint-loader": "^1.4.0",
     "eslint-plugin-import": "^1.10.1",
     "eslint-plugin-jsx-a11y": "^1.5.3",
     "eslint-plugin-react": "^5.2.2",
