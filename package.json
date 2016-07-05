@@ -34,14 +34,12 @@
   },
   "scripts": {
     "start": "npm run production",
-    "production": "npm run build-prod && NODE_ENV=production node app.js",
+    "production": "NODE_ENV=production node app.js",
     "webpack-dev-server": "NODE_ENV=development PORT=8080 webpack-dev-server --content-base public/ --hot --inline --devtool inline-source-map --history-api-fallback",
     "development": "cp views/index.html public/index.html && npm run build-dev && npm run webpack-dev-server",
-    "prebuild-dev": "bower install",
     "build-dev": "gulp build && NODE_ENV=development webpack -d",
-    "prebuild-prod": "bower install",
-    "build-prod": "gulp build --production && NODE_ENV=production webpack -p",
-    "heroku-release": "npm run build-prod && git add -A && git commit -m 'New release' && git push && git push heroku master && heroku open && heroku logs --tail"
+    "build-release": "gulp build --production && NODE_ENV=production webpack -p",
+    "heroku-release": "npm run build-release && git add -A && git commit -m 'New release' && git push && git push heroku master && heroku open && heroku logs --tail"
   },
   "author": "",
   "license": "ISC",
