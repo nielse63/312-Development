@@ -92,7 +92,7 @@
 	// initialize immediately
 	_c.$('input[type="checkbox"]').each(function() {
 		var ele = _c.$(this),
-			data = ele.data('clique.data.checkbox');
+		data = ele.data('clique.data.checkbox');
 		if( ! data ) {
 			ele.data('clique.data.checkbox', new Checkbox(ele));
 		}

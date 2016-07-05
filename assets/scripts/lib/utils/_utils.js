@@ -99,8 +99,8 @@ export default class Utils {
 		}
 
 		return path.replace(/\/|_/g, '-')
-			.toLowerCase()
-			.split('.')[0];
+		.toLowerCase()
+		.split('.')[0];
 	}
 
 	openWindow(url, width, height) {
@@ -109,4 +109,4 @@ export default class Utils {
 		var left = _c.$win.width() / 2 - width / 2, top = _c.$win.height() / 2 - height / 2;
 		return window.open(url, '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=' + height + ',width=' + width + ',left=' + left + ',top=' + top);
 	}
-	}
+}

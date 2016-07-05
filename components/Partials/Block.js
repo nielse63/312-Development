@@ -2,7 +2,6 @@
 // Block.js
 import React, { Component } from 'react';
 import { Link } from 'react-router';
-import _ from 'lodash';
 
 export default class Block extends Component {
 
@@ -15,8 +14,8 @@ export default class Block extends Component {
 		}
 
 		return path.replace(/\//g, '-')
-			.toLowerCase()
-			.split('.')[0];
+		.toLowerCase()
+		.split('.')[0];
 	}
 
 	render() {
@@ -35,18 +34,18 @@ export default class Block extends Component {
 		// };
 
 		return (
-			 <li className="work-block" data-id={id}>
-				<Link to={slug}>
-					<figure className="work-block-figure" data-src={background} />
-					<div className="work-block-content">
-						<header className="work-block-header">
-							<p className="tag">{category}</p>
-							<h3>{title}</h3>
-						</header>
-						<p className="preview" dangerouslySetInnerHTML={{ __html : excerpt }} />
-					</div>
-				</Link>
+			<li className="work-block" data-id={id}>
+			<Link to={slug}>
+			<figure className="work-block-figure" data-src={background} />
+			<div className="work-block-content">
+			<header className="work-block-header">
+			<p className="tag">{category}</p>
+			<h3>{title}</h3>
+			</header>
+			<p className="preview" dangerouslySetInnerHTML={{ __html : excerpt }} />
+			</div>
+			</Link>
 			</li>
-		);
+			);
 	}
 }

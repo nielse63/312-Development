@@ -48,140 +48,139 @@ import Footer from './lib/components/_footer';
 // globals
 let didLoad = false;
 const modules = [
-	{
-		preload : false,
-		cls     : MobileButton,
-		val     : null,
+	                    {
+		                                        preload : false,
+		                                        cls     : MobileButton,
+		                                        val     : null,
+	                    }, {
+		                    preload : false,
+		                    cls     : Banner,
+		                    val     : null,
 	}, {
-		preload : false,
-		cls     : Banner,
-		val     : null,
+		                    once    : true,
+		                    preload : true,
+		                    cls     : Nav,
+		                    val     : null,
 	}, {
-		once    : true,
-		preload : true,
-		cls     : Nav,
-		val     : null,
+		                    preload : false,
+		                    cls     : Homepage,
+		                    val     : null,
 	}, {
-		preload : false,
-		cls     : Homepage,
-		val     : null,
+		                    preload : true,
+		                    cls     : WorkGrid,
+		                    val     : null,
 	}, {
-		preload : true,
-		cls     : WorkGrid,
-		val     : null,
+		                    preload : false,
+		                    cls     : Services,
+		                    val     : null,
 	}, {
-		preload : false,
-		cls     : Services,
-		val     : null,
+		                    preload : false,
+		                    cls     : Photos,
+		                    val     : null,
 	}, {
-		preload : false,
-		cls     : Photos,
-		val     : null,
+		                    preload : true,
+		                    cls     : Links,
+		                    val     : null,
 	}, {
-		preload : true,
-		cls     : Links,
-		val     : null,
+		                    preload : false,
+		                    cls     : Form,
+		                    val     : null,
 	}, {
-		preload : false,
-		cls     : Form,
-		val     : null,
+		                    preload : false,
+		                    cls     : LazyLoad,
+		                    val     : null,
 	}, {
-		preload : false,
-		cls     : LazyLoad,
-		val     : null,
+		                    preload : false,
+		                    cls     : Footer,
+		                    val     : null,
 	}, {
-		preload : false,
-		cls     : Footer,
-		val     : null,
-	}, {
-		preload : false,
-		cls     : Share,
-		val     : null,
+		                    preload : false,
+		                    cls     : Share,
+		                    val     : null,
 	},
 ];
 const transitionEvent = _c.support.transition.end + '.app';
 const scenes = [];
 
 _c.$win.on('resizeend', function() {
-	for (let i = 0; i < scenes.length; i++) {
-		if (_c.utils.isArray(scenes[i])) {
-			scenes[i].forEach(function(scene) {
-				scene.update();
+	                    for (let i = 0; i < scenes.length; i++) {
+		                    if (_c.utils.isArray(scenes[i])) {
+			                    scenes[i].forEach(function(scene) {
+				                    scene.update();
 			});
 		} else {
-			scenes[i].update();
+			                    scenes[i].update();
 		}
 	}
-})
+});
 
 function initModules(preload = false) {
-
-	function killScenes() {
-		for (let i = 0; i < scenes.length; i++) {
-			if (_c.utils.isArray(scenes[i])) {
-				scenes[i].forEach(function(scene) {
-					scene.destroy(true);
+	                    function killScenes() {
+		                    for (let i = 0; i < scenes.length; i++) {
+			                    if (_c.utils.isArray(scenes[i])) {
+				                    scenes[i].forEach(function(scene) {
+					                    scene.destroy(true);
 				});
 			} else {
-				scenes[i].destroy(true);
+				                    scenes[i].destroy(true);
 			}
 		}
 	}
 
-	_c.$('.transition-enter').off(transitionEvent, killScenes);
-	_c.$('.transition-enter').one(transitionEvent, killScenes);
+	                    _c.$('.transition-enter').off(transitionEvent, killScenes);
+	                    _c.$('.transition-enter').one(transitionEvent, killScenes);
 
-	for (let i = 0; i < modules.length; i++) {
-		const module = modules[i];
+	                    for (let i = 0; i < modules.length; i++) {
+		                    const module = modules[i];
 
 		// guards
-		if (module.preload !== preload || (module.once && module.val)) {
-			continue;
+		                    if (module.preload !== preload || (module.once && module.val)) {
+			                    continue;
 		}
 
 		// destroy scroll scene
-		if (module.val && module.val.scene) {
-			const scene = module.val.scene;
-			scenes.push(scene);
+		                    if (module.val && module.val.scene) {
+			                    const scene = module.val.scene;
+			                    scenes.push(scene);
 
-			if (_c.utils.isArray(scene)) {
-				scene.forEach(function(_scene) {
-					_scene.destroy(true);
+			                    if (_c.utils.isArray(scene)) {
+				                    scene.forEach(function(_scene) {
+					                    _scene.destroy(true);
 				});
 			} else {
-				scene.destroy(true);
+				                    scene.destroy(true);
 			}
 		}
 
 		// create new class
-		module.val = new module.cls();
+		                    module.val = new module.cls();
 	}
 }
 
 function preMount() {
-	BodyClass.exec();
-	new ScrollTo();
+	                    BodyClass.exec();
+	                    new ScrollTo();
 
-	initModules(true);
+	                    initModules(true);
 }
 
 function enterPage() {
-	preMount();
+	                    preMount();
 
-	const delay = didLoad ? 700 : 0;
+	                    const delay = didLoad ? 700 : 0;
 
-	let t = setTimeout(function() {
-		clearTimeout(t);
-		t = null;
+	                    let t = setTimeout(function() {
+		                    clearTimeout(t);
+		                    t = null;
 
-		if (! delay) {
-			_c.$html.addClass('app-ready');
+		                    if (! delay) {
+			                    _c.$html.addClass('app-ready');
 		}
 
-		_c.controller.update();
-		initModules();
+		                    _c.controller.update();
+		                    initModules();
 
-		didLoad = true;
+		                    didLoad = true;
 	}, delay);
 }
 
@@ -198,11 +197,11 @@ function messageCallback(e) {
 	// 	NProgress.start();
 	// }
 
-	if (e.data === 'loaded') {
-		enterPage();
+	                    if (e.data === 'loaded') {
+		                    enterPage();
 
-		setTimeout(function() {
-			NProgress.done();
+		                    setTimeout(function() {
+			                    NProgress.done();
 		}, 500);
 	}
 }

@@ -2,13 +2,13 @@
 // Article.js
 import React, { Component } from 'react';
 import config from '../../config';
-import { withRouter } from 'react-router';
+// import { withRouter } from 'react-router';
 
 // Dispatcher
 import AppDispatcher from '../../dispatcher/AppDispatcher';
 
 // Components
-import Block from '../Partials/Block';
+// import Block from '../Partials/Block';
 
 export default class Article extends Component {
 
@@ -62,21 +62,19 @@ export default class Article extends Component {
 					url,
 				});
 			}
-			// console.log(links);
 
 			buttons = links.map((link) => {
 				return (
 					<li key={'key-' + link.text}>
-						<a href={link.url} className="button button-blue">{link.text}</a>
+					<a href={link.url} className="button button-blue">{link.text}</a>
 					</li>
-				);
+					);
 			});
 		}
 
 		// share links
 		const url = window.location.origin + '/articles/' + this.props.routeParams.slug;
 		const shareText = 'Check out ' + title + ' on 312 Development at ' + url;
-		const image = background;
 		const encodedText = encodeURIComponent(shareText);
 		const encodedURL = encodeURIComponent(url);
 
@@ -90,50 +88,50 @@ export default class Article extends Component {
 		if (buttons) {
 			footer = (<footer className="single-footer">
 				<div className="single-footer-section section-row">
-					<ul className="list list-inline flex-center single-buttons">
-						{buttons}
-					</ul>
+				<ul className="list list-inline flex-center single-buttons">
+				{buttons}
+				</ul>
 				</div>
-			</footer>);
+				</footer>);
 		}
 
 		return (
 			<main className="main single" id="main">
-				<section className="banner single-banner" data-src={background}>
-					<div className="wrap container-fluid">
-						<div className="row">
-							<div className="col-xs-12">
-								<h2 className="banner-title single-title">{title}</h2>
-							</div>
-						</div>
-					</div>
-				</section>
-		        <section className="page-content">
-					<div className="wrap container-fluid">
-						<div className="row single-row">
-							<div className="col-xs-12">
-								<article className="article single-article">
-									<div className="row">
-										<div className="col-xs-12 col-md-9 container-center article-content" dangerouslySetInnerHTML={{ __html : content }} />
-									</div>
-								</article>
-								{footer}
-								<footer className="single-footer">
-									<div className="single-footer-section section-row">
-										<p className="article-lead">Share:</p>
-										<ul className="list list-inline flex-center single-buttons chart-buttons">
-											<li><a href={twitter_url} data-share="twitter" className="button button-twitter"><i className="fa fa-twitter"></i> Tweet</a></li>
-											<li><a href={linkedin_url} data-share="linkedin" className="button button-linkedin"><i className="fa fa-linkedin"></i> Share</a></li>
-											<li><a href={facebook_url} data-share="facebook" className="button button-facebook"><i className="fa fa-facebook"></i> Post</a></li>
-											<li><a href={googleplus_url} data-share="googleplus" className="button button-googleplus"><i className="fa fa-googleplus"></i> Send</a></li>
-										</ul>
-									</div>
-								</footer>
-							</div>
-						</div>
-					</div>
-				</section>
+			<section className="banner single-banner" data-src={background}>
+			<div className="wrap container-fluid">
+			<div className="row">
+			<div className="col-xs-12">
+			<h2 className="banner-title single-title">{title}</h2>
+			</div>
+			</div>
+			</div>
+			</section>
+			<section className="page-content">
+			<div className="wrap container-fluid">
+			<div className="row single-row">
+			<div className="col-xs-12">
+			<article className="article single-article">
+			<div className="row">
+			<div className="col-xs-12 col-md-9 container-center article-content" dangerouslySetInnerHTML={{ __html : content }} />
+			</div>
+			</article>
+			{footer}
+			<footer className="single-footer">
+			<div className="single-footer-section section-row">
+			<p className="article-lead">Share:</p>
+			<ul className="list list-inline flex-center single-buttons chart-buttons">
+			<li><a href={twitter_url} data-share="twitter" className="button button-twitter"><i className="fa fa-twitter"></i> Tweet</a></li>
+			<li><a href={linkedin_url} data-share="linkedin" className="button button-linkedin"><i className="fa fa-linkedin"></i> Share</a></li>
+			<li><a href={facebook_url} data-share="facebook" className="button button-facebook"><i className="fa fa-facebook"></i> Post</a></li>
+			<li><a href={googleplus_url} data-share="googleplus" className="button button-googleplus"><i className="fa fa-googleplus"></i> Send</a></li>
+			</ul>
+			</div>
+			</footer>
+			</div>
+			</div>
+			</div>
+			</section>
 			</main>
-	    );
+			);
 	}
 }

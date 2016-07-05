@@ -6,8 +6,7 @@ import { Link } from 'react-router';
 export default class MobileNav extends Component {
 
 	render() {
-		const navItems = this.props.navItems;
-		const menuItems = navItems.map((item) => {
+		const menuItems = this.props.navItems.map((item) => {
 			return (
 				<li key={'key-' + item.key}>
 					<Link to={item.value} activeClassName="active">{item.label}</Link>
