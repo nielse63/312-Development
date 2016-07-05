@@ -67,7 +67,7 @@ export default class App extends Component {
 
 		// Server first
 		const Routes = React.cloneElement(this.props.children, {
-			// key : this.props.location.pathname,
+			key : this.props.location.pathname,
 			data,
 		});
 
@@ -82,13 +82,7 @@ export default class App extends Component {
 				<div className="body-wrap transition-appear">
 					<Header navItems={navItems} />
 					<main className={'main ' + this.getSlug()} id="main">
-						<ReactCSSTransitionGroup
-  component="div"
-  className="transition-group"
-  transitionName="transition"
-  transitionEnterTimeout={transitionDuration}
-  transitionLeaveTimeout={transitionDuration}
-      >
+						<ReactCSSTransitionGroup component="div" className="transition-group" transitionName="transition" transitionEnterTimeout={transitionDuration} transitionLeaveTimeout={transitionDuration}>
 							{Routes}
 						</ReactCSSTransitionGroup>
 					</main>
