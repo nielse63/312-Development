@@ -2,6 +2,7 @@
 // ThankYou.js
 import React, { Component } from 'react';
 import config from '../../config';
+import AppStore from '../../stores/AppStore'
 
 export default class ThankYou extends Component {
 
