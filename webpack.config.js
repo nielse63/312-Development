@@ -11,11 +11,6 @@ var plugins = [
 	new webpack.NoErrorsPlugin(),
 	new webpack.optimize.DedupePlugin(),
 	new webpack.optimize.OccurenceOrderPlugin(),
-	// new webpack.DefinePlugin({
-	// 	'process.env': {
-	// 		NODE_ENV: '"production"'
-	// 	}
-	// }),
 	new CompressionPlugin({
 		asset: "[path].gz[query]",
 		algorithm: "gzip",
@@ -34,7 +29,7 @@ var plugins = [
 if(process.env.NODE_ENV === 'development') {
 	loaders = ['react-hot', 'babel']
 } else {
-	loaders = ['babel']
+	loaders = ['babel', 'eslint-loader']
 	var options = {}
 	if(process.argv.indexOf('--release') < 0) {
 		options = {
