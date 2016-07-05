@@ -43,7 +43,6 @@ export default class About extends Component {
 	}
 
 	render() {
-		// const data = this.props.data;
 
 		return (
 			<div>

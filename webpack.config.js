@@ -11,13 +11,13 @@ var plugins = [
 	new webpack.NoErrorsPlugin(),
 	new webpack.optimize.DedupePlugin(),
 	new webpack.optimize.OccurenceOrderPlugin(),
-	new CompressionPlugin({
-		asset: "[path].gz[query]",
-		algorithm: "gzip",
-		test: /\.js$|\.html$/,
-		threshold: 10240,
-		minRatio: 0.8
-	}),
+	// new CompressionPlugin({
+	// 	asset: "[path].gz.js",
+	// 	algorithm: "gzip",
+	// 	test: /\.js$/,
+	// 	threshold: 10240,
+	// 	minRatio: 0.8
+	// }),
 	new webpack.ProvidePlugin({
 		$: "jquery",
 		jQuery: "jquery",
