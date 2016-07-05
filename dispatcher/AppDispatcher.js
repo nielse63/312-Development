@@ -29,10 +29,6 @@ AppDispatcher.register((payload) => {
 		getPostData(payload.page_slug, payload.post_slug);
 		break;
 
-	// case 'get-more-items':
-	// 	getMoreItems();
-	// 	break;
-
 	default:
 		return true;
 	}

@@ -29,7 +29,7 @@ var plugins = [
 if(process.env.NODE_ENV === 'development') {
 	loaders = ['react-hot', 'babel']
 } else {
-	loaders = ['babel', 'eslint-loader']
+	loaders = ['babel']
 	var options = {}
 	if(process.argv.indexOf('--release') < 0) {
 		options = {
@@ -39,7 +39,7 @@ if(process.env.NODE_ENV === 'development') {
 		}
 	}
 	plugins.push(new webpack.optimize.UglifyJsPlugin(options));
-	eslintConfig.fix = true
+	// eslintConfig.fix = true
 }
 
 module.exports = {
