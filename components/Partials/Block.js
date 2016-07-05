@@ -37,7 +37,7 @@ export default class Block extends Component {
 		return (
 			 <li className="work-block" data-id={id}>
 				<Link to={slug}>
-					<figure className="work-block-figure" data-greta={background} />
+					<figure className="work-block-figure" data-src={background} />
 					<div className="work-block-content">
 						<header className="work-block-header">
 							<p className="tag">{category}</p>
