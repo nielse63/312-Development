@@ -1,7 +1,6 @@
 
 // actions.js
 import config from '../config';
-import Cosmic from 'cosmicjs';
 import contentful from 'contentful';
 import _ from 'lodash';
 
