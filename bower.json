@@ -16,8 +16,7 @@
     "tests"
   ],
   "dependencies": {
-    "randomcolor": "^0.4.4",
-    "highcharts": "^4.2.5"
+    "flexboxgrid-sass": "^8.0.4"
   },
   "devDependencies": {}
 }
