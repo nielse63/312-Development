@@ -75,53 +75,10 @@ var enabled = {
 // Path to the compiled assets manifest in the dist directory
 var revManifest = path.dist + 'assets.json';
 
-// ### CSS processing pipeline
-var cssTasks = function(filename) {
-	return lazypipe()
-		.pipe(function() {
-			return gulpif(!enabled.failStyleTask, plumber());
-		})
-		.pipe(function() {
-			return gulpif(enabled.maps, sourcemaps.init());
-		})
-		.pipe(function() {
-			return gulpif('*.scss', sass({
-				outputStyle: 'expanded', // libsass doesn't support expanded yet
-				precision: 10,
-				includePaths: ['.'],
-				errLogToConsole: !enabled.failStyleTask
-			}));
-		})
-		.pipe(base64)
-		.pipe(concat, filename)
-		.pipe(autoprefixer, {
-			browsers: [
-				'last 2 versions',
-				'android 4',
-				'opera 12'
-			]
-		})
-		.pipe(cssNano({
-			safe : true,
-		}))
-		// .pipe(function() {
-		// 	console.log(argv.production);
-		// 	return gulpif(argv.production, cssNano());
-		// })
-		// .pipe(function() {
-		// 	return gulpif(enabled.rev, rev());
-		// })
-		.pipe(function() {
-			return gulpif(enabled.maps, sourcemaps.write('.', {
-				sourceRoot: 'assets/styles/'
-			}));
-		})();
-};
-
 // ### Styles
 gulp.task('styles', ['wiredep'], function() {
 	gulp.src(project.css)
-		.pipe(newer('public/styles/app.css'))
+		// .pipe(newer('public/styles/app.css'))
 		.pipe(sourcemaps.init())
 		.pipe(sass({
 			outputStyle: 'expanded',
@@ -138,7 +95,7 @@ gulp.task('styles', ['wiredep'], function() {
 				'opera 12'
 			]
 		}))
-		.pipe(gulpif(enabled.rev, cssNano()))
+		.pipe(gulpif(!enabled.maps, cssNano()))
 		.pipe(gulpif(enabled.maps, sourcemaps.write('.', {
 			sourceRoot: 'assets/styles/'
 		})))
