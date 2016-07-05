@@ -28,6 +28,7 @@ import MobileButton from './lib/vendor/hamburger';
 // import Banner from "./lib/vendor/prism"
 // import Banner from "./lib/vendor/animation.gsap"
 
+import LazyLoad from './lib/components/_lazyload';
 import Links from './lib/components/_links';
 import Homepage from './lib/components/_homepage';
 import WorkGrid from './lib/components/_work-grid';
@@ -84,10 +85,10 @@ const modules = [
 		preload : false,
 		cls     : Form,
 		val     : null,
-	// }, {
-	// 	preload : false,
-	// 	cls     : Contact,
-	// 	val     : null,
+	}, {
+		preload : false,
+		cls     : LazyLoad,
+		val     : null,
 	}, {
 		preload : false,
 		cls     : Footer,
@@ -184,14 +185,18 @@ function enterPage() {
 	}, delay);
 }
 
-function messageCallback(e) {
-	if (! e.isTrusted) {
-		return;
-	}
+NProgress.start();
 
-	if (e.data === 'loading') {
-		NProgress.start();
-	}
+function messageCallback(e) {
+	// console.log(e);
+	// if (! e.isTrusted) {
+	// 	return;
+	// }
+
+	// console.log('howdy');
+	// if (e.data === 'loading') {
+	// 	NProgress.start();
+	// }
 
 	if (e.data === 'loaded') {
 		enterPage();

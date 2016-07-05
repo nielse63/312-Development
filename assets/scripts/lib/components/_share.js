@@ -108,7 +108,7 @@ export default class Share {
 					if (! SHARE.data.url) {
 						throw new Error('No URL provided for Twitter share button.');
 					}
-					console.log(btn.attr('href'), SHARE.data.url);
+					// console.log(btn.attr('href'), SHARE.data.url);
 					if (btn.attr('href') === SHARE.data.url) {
 						return;
 					}

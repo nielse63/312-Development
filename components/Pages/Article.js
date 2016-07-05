@@ -36,12 +36,6 @@ export default class Article extends Component {
 
 	render() {
 		const page = this.props.data.page;
-		// console.log(page);
-		// return (
-		// 	<div>
-		// 		<div />
-		// 	</div>
-		// );
 
 		// page vars
 		const title = page.title;
@@ -49,23 +43,9 @@ export default class Article extends Component {
 
 		// banner image
 		const background = '/images/photo' + Math.floor(Math.random() * 10) + '.jpg';
-		// let background = window.location.origin + '/images/blog-sample.jpg';
-		const style = {
-			backgroundImage : 'url(' + background + ')',
-		};
-
-		// meta fields
-		// const fields = page.metafield;
-
-		// background image
-		// if (fields.banner_image && fields.banner_image.value) {
-		// 	background = fields.banner_image.imgix_url;
-		// }s
-
-		// leading paragraph
-		// if (fields.leading_paragraph && fields.leading_paragraph.value) {
-		// 	content = ['<p class="article-lead">', fields.leading_paragraph.value, '</p>'].join('') + content;
-		// }
+		// const style = {
+		// 	backgroundImage : 'url(' + background + ')',
+		// };
 
 		// links
 		let buttons = '';
@@ -119,7 +99,7 @@ export default class Article extends Component {
 
 		return (
 			<main className="main single" id="main">
-				<section className="banner single-banner" style={style}>
+				<section className="banner single-banner" data-src={background}>
 					<div className="wrap container-fluid">
 						<div className="row">
 							<div className="col-xs-12">

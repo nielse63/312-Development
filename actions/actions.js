@@ -65,7 +65,6 @@ export function getTweets() {
 }
 
 export function getStore(callback) {
-	console.log(client);
 
 	// set globals
 	const client = contentful.createClient({

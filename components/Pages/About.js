@@ -120,16 +120,16 @@ export default class About extends Component {
 										<div className="col-xs-12 col-md-7">
 											<div className="where-i-work">
 												<figure className="where-figure where-figure-1">
-													<img src="/images/work1.jpg" />
+													<img data-src="/images/work1.jpg" />
 												</figure>
 												<figure className="where-figure where-figure-2">
-													<img src="/images/work2.jpg" />
+													<img data-src="/images/work2.jpg" />
 												</figure>
 												<figure className="where-figure where-figure-3">
-													<img src="/images/work3.jpg" />
+													<img data-src="/images/work3.jpg" />
 												</figure>
 												<figure className="where-figure where-figure-4">
-													<img src="/images/work4.jpg" />
+													<img data-src="/images/work4.jpg" />
 												</figure>
 											</div>
 										</div>
