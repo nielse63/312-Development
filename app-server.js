@@ -69,12 +69,15 @@ app.post('/submit', (req, res) => {
 });
 
 app.get('*', (req, res) => {
+	// const css = [];
+	// const context = { insertCss: (styles) => css.push(styles._getCss()) };
 	getStore(function(err, AppStore) {
 		if(err) {
 			return res.status(500).end('error')
 		}
 		return match({ routes, location: req.url }, (error, redirectLocation, renderProps) => {
 
+			// console.log(AppStore);
 			const slugArray = req.url.split('/')
 			const pageSlug = slugArray[1]
 

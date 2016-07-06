@@ -25,10 +25,6 @@ import Services from './lib/components/_services';
 import Share from './lib/components/_share';
 import Footer from './lib/components/_footer';
 
-
-// immediate modules
-// new Loading()
-
 // globals
 let didLoad = false;
 const modules = [
@@ -166,11 +162,15 @@ function enterPage() {
 	}, delay);
 }
 
-NProgress.start();
-
 function messageCallback(e) {
 
 	if (e.data === 'loaded') {
+		if( didLoad ) {
+			if( window.pageYOffset ) {
+				window.scroll(0, 0);
+			}
+		}
+
 		enterPage();
 
 		setTimeout(function() {
@@ -178,5 +178,21 @@ function messageCallback(e) {
 		}, 500);
 	}
 }
+
+function initSW() {
+	if ('serviceWorker' in navigator) {
+		navigator.serviceWorker.register('/sw.js', {
+			scope: '/'
+		}).then(function(reg) {
+			console.log(reg);
+		}).catch(function(err) {
+			console.log(err);
+		});
+	}
+}
+
+// start progress bar
+NProgress.start();
+// initSW();
 
 window.addEventListener('message', messageCallback, false);

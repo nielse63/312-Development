@@ -1,6 +1,10 @@
 // App.js
 import React, { Component } from 'react';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
+// import withStyles from 'isomorphic-style-loader/lib/withStyles';
+// import withStyles from './withStyles.js';
+// require('./App.scss')
+import { default as styles } from './App.scss';
 
 // Dispatcher
 import AppDispatcher from '../dispatcher/AppDispatcher';
@@ -14,7 +18,7 @@ import Header from './Partials/Header';
 import Footer from './Partials/Footer';
 import Loading from './Partials/Loading';
 
-export default class App extends Component {
+class App extends Component {
 
 	static get propTypes() {
 		return {
@@ -51,6 +55,13 @@ export default class App extends Component {
 	}
 
 	render() {
+		// const css = [];
+		// this.context = { insertCss: (styles) => css.push(styles._getCss()) };
+		// console.log(withStyles);
+		// return (
+		// 	<div />
+		// );
+		console.log(styles);
 		const data = AppStore.data;
 
 		// Show loading for browser
@@ -78,10 +89,12 @@ export default class App extends Component {
 		const navItems = data.globals.navItems;
 		const transitionDuration = 1200;
 
+		// s._insertCss();
 		return (
 			<div>
 				<MobileNav navItems={navItems} />
-				<div className="body-wrap transition-appear">
+				<div className={styles.root}>
+				{/*<div className="body-wrap transition-appear">*/}
 					<Header navItems={navItems} />
 					<main className={'main ' + this.getSlug()} id="main">
 						<ReactCSSTransitionGroup component="div" className="transition-group" transitionName="transition" transitionEnterTimeout={transitionDuration} transitionLeaveTimeout={transitionDuration}>
@@ -94,3 +107,4 @@ export default class App extends Component {
 		);
 	}
 }
+export default App
