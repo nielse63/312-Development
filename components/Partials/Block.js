@@ -35,15 +35,15 @@ export default class Block extends Component {
 		const excerpt = data.excerpt;
 		const slug = '/articles/' + this.makeSlug(title);
 		const background = this.props.background;
-		const style = {
-			backgroundImage: `url(${background})`
-		};
+		// const style = {
+		// 	backgroundImage: `url(${this.props.background})`
+		// };
 
 		return (
 			<li className="work-block" data-id={id}>
 				<Link to={slug}>
-					<figure className="work-block-figure" style={ style } />
-					{/*<figure className="work-block-figure" data-src={background} />*/}
+					{/*<figure className="work-block-figure" style={ style } />*/}
+					<figure className="work-block-figure" data-src={background} />
 					<div className="work-block-content">
 						<header className="work-block-header">
 							<p className="tag">{category}</p>
