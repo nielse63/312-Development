@@ -2,7 +2,7 @@
 // webpack.config.js
 const webpack = require('webpack');
 const CompressionPlugin = require('compression-webpack-plugin');
-// const OfflinePlugin = require('offline-plugin');
+const OfflinePlugin = require('offline-plugin');
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
 const path = require('path');
 
@@ -25,17 +25,17 @@ var plugins = [
 		jQuery: "jquery",
 		"window.jQuery": "jquery"
 	}),
-	// new OfflinePlugin({
-	// 	publicPath: '/dist/',
-	// 	relativePaths: false,
-	// 	ServiceWorker: {
-	// 		output: '../sw.js',
-	// 	},
+	new OfflinePlugin({
+		publicPath: '/dist/',
+		relativePaths: false,
+		ServiceWorker: {
+			output: '../sw.js',
+		},
 
-	// 	AppCache: {
-	// 		directory: '../appcache/',
-	// 	}
-	// })
+		AppCache: {
+			directory: '../appcache/',
+		}
+	})
 ];
 
 // var plugins;
