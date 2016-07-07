@@ -4,7 +4,7 @@ import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 // import withStyles from 'isomorphic-style-loader/lib/withStyles';
 // import withStyles from './withStyles.js';
 // require('./App.scss')
-import { default as styles } from './App.scss';
+// import { default as styles } from './App.scss';
 
 // Dispatcher
 import AppDispatcher from '../dispatcher/AppDispatcher';
@@ -93,8 +93,8 @@ class App extends Component {
 		return (
 			<div>
 				<MobileNav navItems={navItems} />
-				<div className={styles.root}>
-				{/*<div className="body-wrap transition-appear">*/}
+				{/*<div className={styles.root}>*/}
+				<div className="body-wrap transition-appear">
 					<Header navItems={navItems} />
 					<main className={'main ' + this.getSlug()} id="main">
 						<ReactCSSTransitionGroup component="div" className="transition-group" transitionName="transition" transitionEnterTimeout={transitionDuration} transitionLeaveTimeout={transitionDuration}>
