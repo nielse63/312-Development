@@ -1,9 +1,0 @@
-CACHE MANIFEST
-#ver:7/5/2016, 9:16:54 PM
-
-CACHE:
-/dist/app.bundle.js
-/dist/ui.bundle.js
-
-NETWORK:
-*
