@@ -15,27 +15,27 @@ var plugins = [
 	new webpack.NoErrorsPlugin(),
 	new webpack.optimize.DedupePlugin(),
 	new webpack.optimize.OccurenceOrderPlugin(),
-	// new webpack.optimize.UglifyJsPlugin({
-	// 	compress: {
-	// 		warnings: ! process.env.NODE_ENV === 'development'
-	// 	}
-	// }),
+	new webpack.optimize.UglifyJsPlugin({
+		compress: {
+			warnings: ! process.env.NODE_ENV === 'development'
+		}
+	}),
 	new webpack.ProvidePlugin({
 		$: "jquery",
 		jQuery: "jquery",
 		"window.jQuery": "jquery"
 	}),
-	// new OfflinePlugin({
-	// 	publicPath: '/dist/',
-	// 	relativePaths: false,
-	// 	ServiceWorker: {
-	// 		output: '../sw.js',
-	// 	},
+	new OfflinePlugin({
+		publicPath: '/dist/',
+		relativePaths: false,
+		ServiceWorker: {
+			output: '../sw.js',
+		},
 
-	// 	AppCache: {
-	// 		directory: '../appcache/',
-	// 	}
-	// })
+		AppCache: {
+			directory: '../appcache/',
+		}
+	})
 ];
 
 // var plugins;
