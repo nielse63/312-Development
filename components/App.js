@@ -61,7 +61,7 @@ class App extends Component {
 		// return (
 		// 	<div />
 		// );
-		console.log(styles);
+		// console.log(styles);
 		const data = AppStore.data;
 
 		// Show loading for browser
