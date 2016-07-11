@@ -1,9 +1,6 @@
 // App.js
 import React, { Component } from 'react';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
-// import withStyles from 'isomorphic-style-loader/lib/withStyles';
-// import withStyles from './withStyles.js';
-// require('./App.scss')
 // import { default as styles } from './App.scss';
 
 // Dispatcher
@@ -55,13 +52,6 @@ class App extends Component {
 	}
 
 	render() {
-		// const css = [];
-		// this.context = { insertCss: (styles) => css.push(styles._getCss()) };
-		// console.log(withStyles);
-		// return (
-		// 	<div />
-		// );
-		// console.log(styles);
 		const data = AppStore.data;
 
 		// Show loading for browser
@@ -74,9 +64,9 @@ class App extends Component {
 
 			return (
 				<div>
-				<Loading />
+					<Loading />
 				</div>
-				);
+			);
 		}
 
 		// Server first
@@ -89,7 +79,6 @@ class App extends Component {
 		const navItems = data.globals.navItems;
 		const transitionDuration = 1200;
 
-		// s._insertCss();
 		return (
 			<div>
 				<MobileNav navItems={navItems} />
