@@ -4,7 +4,6 @@
 
 import React from 'react'
 import { match, RouterContext } from 'react-router'
-// import ReactDOMServer from 'react-dom/server'
 import { renderToStaticMarkup } from 'react-dom/server'
 import express from 'express'
 import hogan from 'hogan-express'
@@ -12,13 +11,19 @@ import config from './config'
 import nodemailer from 'nodemailer'
 import bodyParser from 'body-parser'
 import compression from 'compression'
-
+import raygun from 'raygun'
 
 // Actions
 import { getStore, getPostData, getPageData } from './actions/actions'
 
 // Routes
 import routes from './routes'
+
+// Raygun
+var raygunClient = new raygun.Client().init({
+	apiKey: 'jUh0t7Fbz5Kl3fKsNO8pDg=='
+})
+// raygunClient.send(theError);
 
 // Express
 const app = express()
@@ -28,8 +33,9 @@ app.use(compression())
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(express.static(`${__dirname}/public/`))
-app.set('port', (process.env.PORT || 3030))
+app.use(raygunClient.expressHandler)
 
+app.set('port', (process.env.PORT || 3030))
 
 app.post('/submit', (req, res) => {
 	const transporter = nodemailer.createTransport({
