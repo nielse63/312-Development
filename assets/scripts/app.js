@@ -163,7 +163,6 @@ function enterPage() {
 }
 
 function messageCallback(e) {
-
 	if (e.data === 'loaded') {
 		if( didLoad ) {
 			if( window.pageYOffset ) {
@@ -193,6 +192,6 @@ function initSW() {
 
 // start progress bar
 NProgress.start();
-// initSW();
+initSW();
 
 window.addEventListener('message', messageCallback, false);

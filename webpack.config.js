@@ -7,9 +7,6 @@ const ExtractTextPlugin = require("extract-text-webpack-plugin");
 const path = require('path');
 
 var loaders;
-// var eslintConfig = {
-// 	fix : false
-// };
 var plugins = [
 	new ExtractTextPlugin("../styles/[name].css"),
 	new webpack.NoErrorsPlugin(),

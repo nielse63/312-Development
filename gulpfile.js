@@ -25,10 +25,9 @@ var reporter     = require('postcss-reporter');
 var syntax_scss  = require('postcss-scss');
 var stylelint    = require('stylelint');
 var newer        = require('gulp-newer');
-// var inline_base64 = require('gulp-inline-base64');
-var base64 = require('./tools/gulp-base64-encode');
-var zopfli = require('gulp-zopfli');
-var eslint = require('gulp-eslint');
+var base64       = require('./tools/gulp-base64-encode');
+var zopfli       = require('gulp-zopfli');
+var eslint       = require('gulp-eslint');
 
 // See https://github.com/austinpray/asset-builder
 var manifest = require('asset-builder')('./assets/manifest.json');
@@ -306,6 +305,6 @@ gulp.task("scss-lint", function() {
 
 // ### Gulp
 // `gulp` - Run a complete build. To compile for production run `gulp --production`.
-gulp.task('default', ['clean'], function() {
+gulp.task('default', function() {
 	gulp.start('build');
 });
