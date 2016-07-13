@@ -55,16 +55,7 @@ export default class Form {
 			_c.$(this).closest('.input-wrapper').addClass('focus');
 		}).on('blur', function() {
 			_c.$(this).closest('.input-wrapper').removeClass('focus');
-		}).on('keyup blur', function() {
-			const isInvalid = !!! this.$inputs.toArray().find(function(input) {
-				return input.getAttribute('aria-invalid') === 'false';
-			});
-			if (isInvalid) {
-				this.$submit.removeClass('disabled');
-			} else {
-				this.$submit.addClass('disabled');
-			}
-		}.bind(this));
+		});
 	}
 
 	setupForm() {
