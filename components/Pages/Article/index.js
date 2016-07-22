@@ -1,14 +1,10 @@
 
 // Article.js
 import React, { Component } from 'react';
-import config from '../../config';
-// import { withRouter } from 'react-router';
+import config from '../../../config';
 
 // Dispatcher
-import AppDispatcher from '../../dispatcher/AppDispatcher';
-
-// Components
-// import Block from '../Partials/Block';
+import AppDispatcher from '../../../dispatcher/AppDispatcher';
 
 export default class Article extends Component {
 
