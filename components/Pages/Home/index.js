@@ -2,11 +2,11 @@
 // Home.js
 import React, { Component } from 'react';
 import { Link } from 'react-router';
-import config from '../../config';
+import config from '../../../config';
 
 // Dispatcher
-import AppDispatcher from '../../dispatcher/AppDispatcher';
-import AppStore from '../../stores/AppStore';
+import AppDispatcher from '../../../dispatcher/AppDispatcher';
+import AppStore from '../../../stores/AppStore';
 
 // Components
 import Block from '../Partials/Block';
