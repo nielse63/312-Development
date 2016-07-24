@@ -43,7 +43,7 @@
     "webpack-dev-server": "NODE_ENV=development PORT=8080 webpack-dev-server --content-base public/ --hot --inline --devtool inline-source-map --history-api-fallback",
     "development": "cp views/index.html public/index.html && NODE_ENV=development webpack -d && npm run webpack-dev-server",
     "build-release": "NODE_ENV=production webpack -p --release && gulp build --production",
-    "heroku-release": "rm -rf public && npm run build-release && git add -A && git commit -m 'New release' && git push heroku master && heroku open"
+    "heroku-release": "rm -rf public && npm run build-release && git add -A && git commit -m 'New release' && git push heroku master && heroku open && git push origin master"
   },
   "author": "",
   "license": "ISC",

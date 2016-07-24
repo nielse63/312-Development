@@ -5,6 +5,7 @@ import config from '../../../config';
 
 // Components
 import TweetList from '../../Partials/TweetList';
+import Service from '../../Partials/Service';
 
 // Dispatcher
 import AppDispatcher from '../../../dispatcher/AppDispatcher';
@@ -51,7 +52,48 @@ export default class About extends Component {
 		return this.props.location.pathname.replace('/', '');
 	}
 
+	makeSlug(string) {
+		let path = string.replace(/[\s|_|.]/g, '-');
+
+		// remove leading slash
+		if (path[0] === '/') {
+			path = path.substr(1);
+		}
+
+		return path.replace(/\//g, '-')
+		.toLowerCase()
+		.split('.')[0];
+	}
+
 	render() {
+
+		const services = [{
+			title : 'JavaScript',
+			class : 'service-javascript',
+		}, {
+			title : 'HTML5 Web APIs',
+			class : 'service-html5 service-right',
+		}, {
+			title : 'React/Angular/Backbone',
+			class : 'service-react',
+		}, {
+			title : 'jQuery Plugin Development',
+			class : 'service-plugin service-right',
+		}, {
+			title : 'Node.js',
+			class : 'service-node',
+		}, {
+			title : 'ES6/Harmony',
+			class : 'service-es6 service-right',
+		}];
+
+		const serviceItems = services.map((service) => {
+			const key = this.makeSlug(service.class);
+
+			return (
+				<Service key={key} class={service.class} title={service.title} />
+			);
+		});
 
 		return (
 			<div>
@@ -73,48 +115,13 @@ export default class About extends Component {
 										<div className="col-xs-12 col-md-4">
 											<aside className="aside">
 												<h2 className="aside-title">What I do</h2>
-												<p>I'm a UIE (User-Interface Engineer), and as such I focus heavily on JavaScript programming with a focus on algorithm design and performance enhancements.</p>
+												<p>I'm a UIE (User-Interface Engineer), and as such I focus heavily on JavaScript programming with a concentration on algorithm design and performance enhancements.</p>
 												<p>To see some of my work in action, check out my <a href="/" data-text="portfolio">portfolio</a>.</p>
 											</aside>
 										</div>
 										<div className="col-xs-12 col-md-8">
 											<div className="services">
-												<div className="service service-javascript">
-													<figure className="service-figure">
-														<span className="service-circle"></span>
-														<p>JavaScript</p>
-													</figure>
-												</div>
-												<div className="service service-html5 service-right">
-													<figure className="service-figure">
-														<span className="service-circle"></span>
-														<p>HTML5 Web APIs</p>
-													</figure>
-												</div>
-												<div className="service service-react">
-													<figure className="service-figure">
-														<span className="service-circle"></span>
-														<p>React/Angular/Backbone</p>
-													</figure>
-												</div>
-												<div className="service service-plugin service-right">
-													<figure className="service-figure">
-														<span className="service-circle"></span>
-														<p>jQuery Plugin Development</p>
-													</figure>
-												</div>
-												<div className="service service-node">
-													<figure className="service-figure">
-														<span className="service-circle"></span>
-														<p>Node.js</p>
-													</figure>
-												</div>
-												<div className="service service-es6 service-right">
-													<figure className="service-figure">
-														<span className="service-circle"></span>
-														<p>ES6/Harmony</p>
-													</figure>
-												</div>
+												{serviceItems}
 											</div>
 										</div>
 									</div>
