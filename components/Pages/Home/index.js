@@ -9,7 +9,7 @@ import AppDispatcher from '../../../dispatcher/AppDispatcher';
 import AppStore from '../../../stores/AppStore';
 
 // Components
-import Block from '../Partials/Block';
+import Block from '../../Partials/Block';
 
 export default class Home extends Component {
 
