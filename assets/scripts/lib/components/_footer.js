@@ -5,7 +5,8 @@ export default class Footer {
 
 	constructor() {
 		this.$footer = _c.$('.footer');
-		if (! this.$footer.length) {
+		this.$paths  = this.$footer.length && this.$footer.find('path');
+		if (! this.$footer.length || ! this.$paths.length) {
 			return;
 		}
 
@@ -17,7 +18,7 @@ export default class Footer {
 		const offsetTop = this.$footer.offset().top;
 		const offsetBottom = offsetTop + this.$footer.outerHeight();
 
-		this.$footer.find('path').each(function() {
+		this.$paths.each(function() {
 			const $path = $(this);
 
 			// see if we even need to set object
@@ -33,6 +34,8 @@ export default class Footer {
 			$path.css({
 				'stroke-dasharray'  : length,
 				'stroke-dashoffset' : length,
+			}).data({
+				'length' : length,
 			});
 		});
 	}
@@ -41,16 +44,32 @@ export default class Footer {
 		if (! this.$footer.length) {
 			return;
 		}
-		const footer = document.querySelector('.footer');
+		const footer   = document.querySelector('.footer');
+		const $paths   = this.$paths;
+		// const setPaths = this.setPaths;
+		// const offset = footer.clientHeight / 2;
 
 		this.scene = new ScrollMagic.Scene({
 			triggerElement : footer,
 			triggerHook    : 'onEnter',
 			offset         : footer.clientHeight / 2,
 		})
-		.setClassToggle(footer, 'inview')
-		.on('start', function() {
-			this.remove();
+		.on('enter', function() {
+			$paths.css({
+				'stroke-dashoffset' : 0,
+			});
+		})
+		.on('leave', function() {
+			$paths.each(function() {
+				const $path  = $(this);
+				const length = $path.data('length');
+				// if( ! length ) {
+				// 	return;
+				// }
+				$path.css({
+					'stroke-dashoffset' : length,
+				});
+			})
 		})
 		.addTo(_c.controller);
 	}

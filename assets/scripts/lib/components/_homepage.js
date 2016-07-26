@@ -4,7 +4,8 @@ import ScrollMagic from 'scrollmagic';
 export default class Homepage {
 
 	constructor() {
-		if (! _c.$('.article-title').length) {
+		this.$title = _c.$('.article-title');
+		if ( ! this.$title.length ) {
 			return;
 		}
 
@@ -12,11 +13,11 @@ export default class Homepage {
 	}
 
 	setScene() {
-		const $trigger = _c.$('.article-title');
-		const $container = $trigger.closest('.wrap');
+		// const $trigger   = _c.$('.article-title');
+		const $container = this.$title.closest('.wrap');
 
 		this.scene = new ScrollMagic.Scene({
-			triggerElement : $trigger[0],
+			triggerElement : this.$title[0],
 			triggerHook    : 'onEnter',
 		})
 		.setClassToggle($container[0], 'loaded')

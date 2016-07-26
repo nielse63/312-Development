@@ -1,19 +1,29 @@
 
-require('jquery-validation');
+// require('jquery-validation');
 
 export default class Form {
+
 	// constructor
 	constructor() {
-		this.element = _c.$('form');
-		if (! this.element.length) {
+		if (! _c.$('form').length) {
 			return;
 		}
-
 		this.init();
-		// return this;
 	}
 
 	init() {
+
+		this.checked = 0;
+		if( ! _c.$.fn.validate ) {
+			if( this.checked < 10 ) {
+				this.checked++;
+				return this.getScript();
+			} else {
+				console.warn('Couldn\'t load validation script');
+				return;
+			}
+		}
+
 		this.defineProperties();
 		this.defineElements();
 		this.defineListeners();
@@ -25,14 +35,32 @@ export default class Form {
 		this.setupValidation();
 	}
 
+	getScript() {
+		const self = this;
+		_c.$.getScript('https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.15.1/jquery.validate.min.js')
+			.done(function() {
+				[_c.$, $, window.jQuery, window.$].forEach(function(obj) {
+					if( 'validate' in obj.fn ) {
+						_c.$ = obj;
+						return false;
+					}
+				});
+				setTimeout(self.init(), 250);
+			})
+			.fail(function(xhr) {
+				console.warn(xhr.responseText);
+			});
+	}
+
 	defineProperties() {
-		this.namespace = '.clique.form.' + _c.utils.uid();
-		this.class = 'form';
-		this.listClass = 'form-list';
+		this.namespace         = '.clique.form.' + _c.utils.uid();
+		this.class             = 'form';
+		this.listClass         = 'form-list';
 		this.validationTrigger = '';
 	}
 
 	defineElements() {
+		this.element = _c.$('form');
 		this.$list = this.element.find('> ul, > * > ul').first();
 		this.$inputs = this.element.find('input:not([type="submit"]), select, textarea');
 		this.$required = this.element.find('[required]');
@@ -44,6 +72,8 @@ export default class Form {
 			e.preventDefault();
 			e.stopPropagation();
 
+			// console.log(_c.$.fn.validate);
+			// console.log(_c.$.fn.valid);
 			const $form = _c.$(this);
 			if ($form.valid()) {
 				$form.off('submit');
@@ -90,9 +120,6 @@ export default class Form {
 	}
 
 	initValidation() {
-		// var lastTriggered;
-
-		// let didSubmit = false;
 		const self = this;
 		const validator = this.element.validate({
 			focusInvalid : false,

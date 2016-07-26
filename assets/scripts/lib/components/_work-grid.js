@@ -100,15 +100,16 @@ export default class WorkGrid {
 
 		this.$workBlocks.each(function(i) {
 			const trigger = this;
-			const $block = _c.$(this);
+			const $block  = _c.$(this);
 			const $figure = $block.find('.work-block-figure');
-			const diff = $block.outerHeight() - $figure.outerHeight();
+			const diff    = $block.outerHeight() - $figure.outerHeight();
+			const delay   = (Math.random() * 0.25 + 0.25).toFixed(2);
 
-			if (i > 3) {
+			// if (i > 3) {
 				$block.css({
-					'transition-delay' : Math.random() + 's',
+					'transition-delay' : delay + 's',
 				});
-			}
+			// }
 
 			const scene = new ScrollMagic.Scene({
 				triggerElement : trigger,
