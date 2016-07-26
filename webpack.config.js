@@ -1,10 +1,10 @@
 
 // webpack.config.js
-const webpack = require('webpack');
+const webpack           = require('webpack');
 const CompressionPlugin = require('compression-webpack-plugin');
-const OfflinePlugin = require('offline-plugin');
+const OfflinePlugin     = require('offline-plugin');
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
-const path = require('path');
+const path              = require('path');
 
 var loaders;
 var plugins = [
@@ -12,51 +12,52 @@ var plugins = [
 	new webpack.NoErrorsPlugin(),
 	new webpack.optimize.DedupePlugin(),
 	new webpack.optimize.OccurenceOrderPlugin(),
-	new webpack.optimize.UglifyJsPlugin({
-		compress: {
-			warnings: ! process.env.NODE_ENV === 'development'
-		}
-	}),
 	new webpack.ProvidePlugin({
-		$: "jquery",
-		jQuery: "jquery",
-		"window.jQuery": "jquery"
+		$               : "jquery",
+		jQuery          : "jquery",
+		"window.jQuery" : "jquery"
 	}),
-	new OfflinePlugin({
-		publicPath: '/dist/',
-		relativePaths: false,
-		ServiceWorker: {
-			output: '../sw.js',
-		},
-
-		AppCache: {
-			directory: '../appcache/',
-		}
-	})
 ];
 
-// var plugins;
 if(process.env.NODE_ENV === 'development') {
-	loaders = ['react-hot', 'babel']
+	loaders = ['react-hot', 'babel'];
 } else {
-	loaders = ['babel']
+	loaders = ['babel'];
+	plugins = plugins.concat([
+		new webpack.optimize.UglifyJsPlugin({
+			compress: {
+				warnings: false
+			}
+		}),
+		new OfflinePlugin({
+			publicPath: '/dist/',
+			relativePaths: false,
+			ServiceWorker: {
+				output: '../sw.js',
+			},
+
+			AppCache: {
+				directory: '../appcache/',
+			}
+		})
+	]);
 }
 
 module.exports = {
 	devtool: 'eval',
 	node: {
-		net: "empty",
-		tls: "empty",
-		hiredis: "empty",
+		net     : "empty",
+		tls     : "empty",
+		hiredis : "empty",
 	},
 	entry: {
 		ui  : './assets/scripts/app.js',
 		app : './app-client.js'
 	},
 	output: {
-		path: __dirname + '/public/dist',
-		filename: '[name].bundle.js',
-		publicPath: '/dist/'
+		path       : __dirname + '/public/dist',
+		filename   : '[name].bundle.js',
+		publicPath : '/dist/'
 	},
 	module: {
 		loaders: [{
