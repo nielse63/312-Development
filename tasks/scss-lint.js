@@ -1,13 +1,13 @@
 
 // modules
-var gulp            = require('gulp');
-var fs              = require('fs');
-var path            = require('path');
-var mkdirp          = require('mkdirp');
-var del             = require('del');
-var scsslint        = require('gulp-scss-lint');
-var scssLintStylish = require('gulp-scss-lint-stylish');
-var styles          = require('./styles');
+var gulp      = require('gulp');
+var fs        = require('fs');
+var path      = require('path');
+var mkdirp    = require('mkdirp');
+var del       = require('del');
+var scsslint  = require('gulp-scss-lint');
+var styles    = require('./styles');
+var writeFile = require('./utils').writeFile;
 
 // global vars
 var outputFile = 'test/results/scss-lint/report.txt';
@@ -17,14 +17,7 @@ var inFiles = [
 	'!bower_components'
 ];
 
-gulp.task('scss-lint', ['styles'], function() {
-
-	function writeFile(_path, contents, cb) {
-		mkdirp(path.dirname(_path), function (err) {
-			if (err) return cb(err);
-			fs.appendFile(_path, contents, cb);
-		});
-	}
+gulp.task('scss-lint', function() {
 
 	String.prototype.ctrim = String.prototype.ctrim || function(what) {
 		what = what || /^\s+|\s+$/g;
