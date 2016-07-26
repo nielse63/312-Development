@@ -37,9 +37,9 @@ export default class About extends Component {
 		window.postMessage('loaded', window.location.origin);
 	}
 
-	componentWillUnmount() {
-		window.postMessage('unloaded', window.location.origin);
-	}
+	// componentWillUnmount() {
+	// 	window.postMessage('unloaded', window.location.origin);
+	// }
 
 	getPageData() {
 		AppDispatcher.dispatch({

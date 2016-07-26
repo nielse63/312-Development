@@ -1,33 +1,33 @@
 
 // Nav.js
-import React from 'react';
-import { Link } from 'react-router';
+import React, { Component } from 'react'
+import { Link } from 'react-router'
 
-const Nav = function(props) {
+// Components
+import NavItem from './NavItem'
 
-	function makeNavItem(item) {
-		return (
-			<li key={`key-${item.key}`}>
-				<Link to={item.value} activeClassName="active">{item.label}</Link>
-			</li>
-		);
+export default class Nav extends Component {
+
+	static get propTypes() {
+		return {
+			navItems : React.PropTypes.array,
+			cls      : React.PropTypes.string
+		}
 	}
 
-	const menuItems = props.navItems.map(makeNavItem);
+	render() {
 
-	return (
-		<nav className={props.cls}>
-			<ul className="nav-menu list-inline">
-				{menuItems}
-				<li className="line"></li>
-			</ul>
-		</nav>
-	);
+		const menuItems = this.props.navItems.map(function(item) {
+			return (<NavItem key={`key-${item.key}`} url={item.value} text={item.label} />);
+		});
+
+		return (
+			<nav className={this.props.cls}>
+				<ul className="nav-menu list-inline">
+					{menuItems}
+					<li className="line"></li>
+				</ul>
+			</nav>
+		);
+	}
 }
-
-Nav.propTypes = {
-	navItems: React.PropTypes.array,
-	cls: React.PropTypes.string
-};
-
-export default Nav
