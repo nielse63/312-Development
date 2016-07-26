@@ -33,9 +33,9 @@ export default class Article extends Component {
 		window.postMessage('loaded', window.location.origin);
 	}
 
-	componentWillUnmount() {
-		window.postMessage('unloaded', window.location.origin);
-	}
+	// componentWillUnmount() {
+	// 	window.postMessage('unloaded', window.location.origin);
+	// }
 
 	getPostData() {
 		AppDispatcher.dispatch({

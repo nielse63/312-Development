@@ -1,54 +1,54 @@
 
 // Footer.js
-import React from 'react';
-import { Link } from 'react-router';
+import React, { Component } from 'react'
+import { Link } from 'react-router'
 
 // Components
-import Pattern from './Pattern';
+import Pattern from './Pattern'
+import NavItem from './NavItem'
 
-const Footer = function(props) {
+export default class Footer extends Component {
 
-	function makeNavItem(item) {
-		return (
-			<li key={`key-${item.key}`}>
-				<Link to={item.value} activeClassName="active">{item.label}</Link>
-			</li>
-		);
+	static get propTypes() {
+		return {
+			navItems : React.PropTypes.array,
+		}
 	}
 
-	const menuItems = props.data.globals.navItems.map(makeNavItem);
+	static get defaultProps() {
+		return {
+			navItems : [],
+		};
+	}
 
-	return (
-		<footer className="footer">
-			<Pattern />
-			<div className="wrap container-fluid">
-				<div className="flex flex-space-between">
-					<div className="col">
-						<nav className="footer-nav">
-							<ul>
-								{menuItems}
-							</ul>
-						</nav>
-					</div>
-					<div className="col">
-						<nav className="footer-nav footer-nav-right">
-							<ul>
-								<li><Link to="/">&copy; 2016 Erik Nielsen</Link></li>
-							</ul>
-						</nav>
+	render() {
+
+		const menuItems = this.props.navItems.map(function(item) {
+			return (<NavItem key={`key-${item.key}`} url={item.value} text={item.label} />);
+		});
+
+		return (
+			<footer className="footer">
+				<Pattern />
+				<div className="wrap container-fluid">
+					<div className="flex flex-space-between">
+						<div className="col">
+							<nav className="footer-nav">
+								<ul>
+									{menuItems}
+								</ul>
+							</nav>
+						</div>
+						<div className="col">
+							<nav className="footer-nav footer-nav-right">
+								<ul>
+									<li><Link to="/">&copy; 2016 Erik Nielsen</Link></li>
+								</ul>
+							</nav>
+						</div>
 					</div>
 				</div>
-			</div>
-		</footer>
-	);
+			</footer>
+		);
+	}
 }
-
-Footer.propTypes = {
-	data: React.PropTypes.shape({
-		globals: React.PropTypes.shape({
-			navItems: React.PropTypes.array,
-		}),
-	}),
-};
-
-export default Footer

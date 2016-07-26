@@ -1,5 +1,5 @@
 
-// About.js
+// Service.js
 import React, { Component } from 'react';
 
 export default class About extends Component {
