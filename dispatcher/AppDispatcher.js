@@ -1,6 +1,6 @@
 // AppDispatcher.js
 import { Dispatcher } from 'flux';
-import { getTweets, loadTweets, getStore, getPostData, getPageData } from '../actions/actions';
+import { getTweets, loadTweets, getStore, getPostData, getPageData, didClickLink } from '../actions/actions';
 
 const AppDispatcher = new Dispatcher();
 
@@ -27,6 +27,10 @@ AppDispatcher.register((payload) => {
 
 	case 'get-post-data':
 		getPostData(payload.page_slug, payload.post_slug);
+		break;
+
+	case 'did-click-link':
+		didClickLink();
 		break;
 
 	default:
