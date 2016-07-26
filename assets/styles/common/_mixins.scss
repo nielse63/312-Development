@@ -48,7 +48,6 @@
 	will-change: background-color, color;
 	contain: paint;
 	transform: translate3d(0, 0, 0);
-	// backface-visibility: hidden;
 
 	&:before {
 		content: '';
@@ -63,7 +62,6 @@
 		transition: 0.5s transform;
 		transform: rotateX(90deg);
 		will-change: transform;
-		// backface-visibility: hidden;
 	}
 
 	&:after {

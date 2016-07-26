@@ -142,13 +142,13 @@ input {
 input {
 
 	// Remove inner padding and search cancel button in Chrome, Safari and Opera on OS X.
-	&[type="search"] {
+	&[type='search'] {
 		&::-webkit-search-cancel-button,
 		&::-webkit-search-decoration {}
 	}
 
 	// Remove button on `.number` input
-	&[type="number"] {
+	&[type='number'] {
 		&::-webkit-inner-spin-button,
 		&::-webkit-outer-spin-button {
 			appearance: none;
@@ -220,25 +220,25 @@ form > {
 }
 
 // Controls
-// Expand width to container of [class*="col-"]
+// Expand width to container of [class*='col-']
 select,
 textarea,
 input:not([type]),
-input[type="text"],
-input[type="password"],
-input[type="datetime"],
-input[type="datetime-local"],
-input[type="date"],
-input[type="month"],
-input[type="time"],
-input[type="week"],
-input[type="number"],
-input[type="email"],
-input[type="url"],
-input[type="search"],
-input[type="tel"],
-input[type="color"] {
-	[class*="col-"] > & {
+input[type='text'],
+input[type='password'],
+input[type='datetime'],
+input[type='datetime-local'],
+input[type='date'],
+input[type='month'],
+input[type='time'],
+input[type='week'],
+input[type='number'],
+input[type='email'],
+input[type='url'],
+input[type='search'],
+input[type='tel'],
+input[type='color'] {
+	[class*='col-'] > & {
 		width: 100%;
 		display: block;
 	}
@@ -301,7 +301,7 @@ legend {
 	line-height: strip-unit($form-legend-line-height) / strip-unit($form-legend-font-size);
 
 	&:after {
-		content: "";
+		content: '';
 		display: block;
 		border-bottom: $form-legend-border-width solid $form-legend-border;
 		width: 100%;
