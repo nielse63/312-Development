@@ -15,21 +15,35 @@
 		}
 	}
 
-	&-article {
+	// &-article {
 
-		.section-row {
-			&:nth-child(even) {
-				@media (max-width: $breakpoint-medium-max) {
-					flex-direction: column-reverse;
+	// 	.section-row {
+	// 		&:nth-child(even) {
+	// 			@media (max-width: $breakpoint-medium-max) {
+	// 				flex-direction: column-reverse;
 
-					> * {
-						margin: 0;
+	// 				> * {
+	// 					margin: 0;
 
-						+ * {
-							margin: 0 0 20px;
-						}
-					}
-				}
+	// 					+ * {
+	// 						margin: 0 0 20px;
+	// 					}
+	// 				}
+	// 			}
+	// 		}
+	// 	}
+	// }
+}
+
+.tweet-list {
+	@media (max-width: $breakpoint-medium-max) {
+		flex-direction: column-reverse;
+
+		> * {
+			margin: 0;
+
+			+ * {
+				margin: 0 0 20px;
 			}
 		}
 	}
