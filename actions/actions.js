@@ -156,6 +156,7 @@ export function getPostData(pageSlug, postSlug) {
 }
 
 export function getPageData(pageSlug) {
+
 	// Get page info
 	const slug = `/${pageSlug}`;
 	const items = AppStore.data.globals.navItems;
@@ -165,4 +166,8 @@ export function getPageData(pageSlug) {
 
 	AppStore.data.page = page;
 	AppStore.emitChange();
+}
+
+export function didClickLink() {
+	window.postMessage('unloaded', window.location.origin);
 }
