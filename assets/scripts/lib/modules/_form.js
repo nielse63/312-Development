@@ -1,6 +1,4 @@
 
-// require('jquery-validation');
-
 export default class Form {
 
 	// constructor
