@@ -24,6 +24,10 @@ const raygunClient = new raygun.Client().init({
 	apiKey: 'jUh0t7Fbz5Kl3fKsNO8pDg=='
 })
 
+// globals
+const index = process.env.NODE_ENV === 'production' ? 'index.prod.html' : 'index.dev.html'
+// const index = 'index.html'
+
 // Express
 const app = express()
 app.engine('html', hogan)
@@ -106,9 +110,9 @@ app.get('*', (req, res) => {
 			} else if (renderProps) {
 
 				// Success!
-				res.status(200).render('index.html')
+				res.status(200).render(index)
 			} else {
-				res.status(404).render('index.html')
+				res.status(404).render(index)
 			}
 		})
 	})
