@@ -1,6 +1,6 @@
 {
   "name": "312-development",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "description": "",
   "main": "app-server.js",
   "engine": {
@@ -43,7 +43,8 @@
     "preproduction": "npm run prerelease",
     "production": "NODE_ENV=production node app.js",
     "prerelease": "rm -rf public && NODE_ENV=production webpack -p --release && gulp build --production",
-    "release": "sh ./.bin/release.sh"
+    "release": "sh ./.bin/release.sh",
+    "postrelease": "heroku open"
   },
   "author": "Erik Nielsen",
   "license": "ISC",
