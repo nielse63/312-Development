@@ -29,7 +29,7 @@ export default class TweetList extends Component {
 
 	render() {
 		return (
-			<div className="row section-row">
+			<div className="row section-row tweet-list">
 				<div className="col-xs-12">
 					<article className="article page-article">
 						<div className="row flex-middle">

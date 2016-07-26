@@ -6,7 +6,9 @@ export default class About extends Component {
 
 	static get propTypes() {
 		return {
-			pageTitle: React.PropTypes.string,
+			pageTitle : React.PropTypes.string,
+			class     : React.PropTypes.string,
+			title     : React.PropTypes.string,
 		}
 	}
 

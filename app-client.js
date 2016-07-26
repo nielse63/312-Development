@@ -9,7 +9,7 @@ import routes from './routes';
 
 function Routes() {
 	return (
-		<Router history={browserHistory}>
+		<Router history={ browserHistory }>
 			{routes}
 		</Router>
 	);
