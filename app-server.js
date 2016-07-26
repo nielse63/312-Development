@@ -20,10 +20,9 @@ import { getStore, getPostData, getPageData } from './actions/actions'
 import routes from './routes'
 
 // Raygun
-var raygunClient = new raygun.Client().init({
+const raygunClient = new raygun.Client().init({
 	apiKey: 'jUh0t7Fbz5Kl3fKsNO8pDg=='
 })
-// raygunClient.send(theError);
 
 // Express
 const app = express()

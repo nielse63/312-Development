@@ -21,7 +21,6 @@ function makeSlug(string) {
 
 let loaded = false;
 
-
 function loadTwitterScript(callback) {
 	if (loaded || window.twttr) {
 		callback();
