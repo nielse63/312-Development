@@ -4,10 +4,7 @@ var browserSync  = require('browser-sync').create();
 var gulp         = require('gulp');
 var runSequence  = require('run-sequence');
 var connect      = require('gulp-connect');
-var postcss      = require('gulp-postcss');
-var reporter     = require('postcss-reporter');
-var syntax_scss  = require('postcss-scss');
-var stylelint    = require('stylelint');
+var bump         = require('gulp-bump');
 
 // custom tasks
 var requireDir = require('require-dir');
@@ -54,61 +51,35 @@ var enabled = {
 
 // ### Watch
 gulp.task('watch', function() {
-	gulp.watch([path.source + 'styles/**/*'], ['styles']);
-	gulp.watch([path.source + 'fonts/**/*'], ['fonts']);
-	gulp.watch([path.source + 'images/**/*'], ['images']);
-	gulp.watch([path.source + 'other/**/*'], ['other']);
+	gulp.watch(['assets/styles/**/*'], ['styles']);
+	gulp.watch(['assets/fonts/**/*'], ['fonts']);
+	gulp.watch(['assets/images/**/*'], ['images']);
+	gulp.watch(['assets/other/**/*'], ['other']);
+	gulp.watch(['views/index.dev.html'], ['views']);
 });
 
-// gulp.task("scss-lint", function() {
-// 	// Stylelint config rules
-// 	var stylelintConfig = {
-// 		"plugins": [
-// 			"stylelint-statement-max-nesting-depth"
-// 		],
-// 		"rules": {
-// 			"block-no-empty": true,
-// 			"color-no-invalid-hex": true,
-// 			"declaration-colon-space-after": "always",
-// 			"declaration-colon-space-before": "never",
-// 			"function-comma-space-after": "always",
-// 			"function-url-quotes": "always",
-// 			"media-feature-colon-space-after": "always",
-// 			"media-feature-colon-space-before": "never",
-// 			"media-feature-name-no-vendor-prefix": true,
-// 			"max-empty-lines": 5,
-// 			"number-leading-zero": "always",
-// 			"number-no-trailing-zeros": true,
-// 			"property-no-vendor-prefix": true,
-// 			"selector-list-comma-space-before": "never",
-// 			"selector-list-comma-newline-after": "always",
-// 			"selector-no-id": true,
-// 			"string-quotes": "single",
-// 			"value-no-vendor-prefix": true,
-// 			"statement-max-nesting-depth": [4, {
-// 				countAtRules: false
-// 			}],
-// 		}
-// 	};
-
-// 	var processors = [
-// 		stylelint(stylelintConfig),
-// 		reporter({
-// 			clearMessages : true,
-// 			throwError    : false
-// 		})
-// 	];
-
-// 	return gulp.src('assets/styles/templates/**/*.scss')
-// 		.pipe(postcss(processors, {
-// 			syntax : syntax_scss
-// 		}));
-// });
+// bump version
+gulp.task('bump', function(){
+	return gulp.src([
+			'./package.json',
+		])
+		.pipe(bump())
+		.pipe(gulp.dest('./'));
+});
 
 // ### Build
 gulp.task('build', function(callback) {
 	runSequence(
-		['other', 'styles', 'images', 'fonts', 'eslint'],
+		// ['other', 'styles', 'images', 'fonts', 'eslint', 'scss-lint'],
+		['other', 'styles', 'images', 'fonts'],
+		callback
+	);
+});
+
+// ### Tetst
+gulp.task('test', function(callback) {
+	runSequence(
+		['eslint', 'scss-lint'],
 		callback
 	);
 });

@@ -1,24 +1,18 @@
 
 // modules
-var gulp   = require('gulp');
-var eslint = require('gulp-eslint');
-var fs     = require('fs');
-var path   = require('path');
-var mkdirp = require('mkdirp');
-var del    = require('del');
+var gulp      = require('gulp');
+var eslint    = require('gulp-eslint');
+var fs        = require('fs');
+var path      = require('path');
+var mkdirp    = require('mkdirp');
+var del       = require('del');
+var writeFile = require('./utils').writeFile;
 
 // global vars
 var outPath = 'test/results/eslint';
 
 // task
 gulp.task('eslint', function() {
-
-	function writeFile(_path, contents, cb) {
-		mkdirp(path.dirname(_path), function (err) {
-			if (err) return cb(err);
-			fs.writeFile(_path, contents, cb);
-		});
-	}
 
 	del(['test/results/eslint']).then(function(paths) {
 		return gulp.src([
