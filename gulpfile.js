@@ -69,9 +69,14 @@ gulp.task('bump', function(){
 
 // ### Build
 gulp.task('build', function(callback) {
+
+	var tasks = ['other', 'styles', 'images', 'fonts'];
+	if( argv.production ) {
+		tasks.push('bump');
+	}
+
 	runSequence(
-		// ['other', 'styles', 'images', 'fonts', 'eslint', 'scss-lint'],
-		['other', 'styles', 'images', 'fonts'],
+		tasks,
 		callback
 	);
 });

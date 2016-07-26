@@ -1,6 +1,6 @@
 {
   "name": "312-development",
-  "version": "1.0.1",
+  "version": "1.0.4",
   "description": "",
   "main": "app-server.js",
   "engine": {
@@ -21,7 +21,6 @@
     "gsap": "^1.18.5",
     "hogan-express": "^0.5.2",
     "jquery": "^3.0.0",
-    "jquery-validation": "^1.15.0",
     "lodash": "^3.10.1",
     "nodemailer": "^2.4.2",
     "npm": "^3.10.3",
@@ -44,7 +43,7 @@
     "preproduction": "npm run prerelease",
     "production": "NODE_ENV=production node app.js",
     "prerelease": "rm -rf public && NODE_ENV=production webpack -p --release && gulp build --production",
-    "release": "gulp bump && git add -A && git commit -m 'New release' && git push heroku master && heroku open && git push origin master"
+    "release": "git add -A && git commit -m 'New release' && git push heroku master && heroku open && git push origin master"
   },
   "author": "Erik Nielsen",
   "license": "ISC",

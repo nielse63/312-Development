@@ -10,37 +10,30 @@ var autoprefixer = require('gulp-autoprefixer');
 var gulpif       = require('gulp-if');
 var cssNano      = require('gulp-cssnano');
 var wiredep      = require('wiredep').stream;
-var manifest     = require('asset-builder')('./assets/manifest.json');
 var base64       = require('./gulp-base64-encode');
 
 // global vars
-var path    = manifest.paths;
-var project = manifest.getProjectGlobs();
-
-// CLI options
-var enabled = {
-	failStyleTask : argv.production,
-};
+var inputPath = 'assets/styles/main.scss';
 
 // Task: Wiredep
 gulp.task('wiredep', function() {
-	return gulp.src(project.css)
+	return gulp.src(inputPath)
 		.pipe(wiredep())
-		.pipe(changed(path.source + 'styles', {
+		.pipe(changed('assets/styles', {
 			hasChanged: changed.compareSha1Digest
 		}))
-		.pipe(gulp.dest(path.source + 'styles'));
+		.pipe(gulp.dest('assets/styles'));
 });
 
 //Task: Styles
 gulp.task('styles', ['wiredep'], function() {
-	gulp.src(project.css)
+	gulp.src(inputPath)
 		.pipe(sourcemaps.init())
 		.pipe(sass({
 			outputStyle: 'expanded',
 			precision: 10,
 			includePaths: ['.'],
-			errLogToConsole: !enabled.failStyleTask
+			errLogToConsole: !argv.production
 		}))
 		.pipe(base64())
 		.pipe(concat('app.css'))
@@ -53,9 +46,9 @@ gulp.task('styles', ['wiredep'], function() {
 				'ie 10'
 			]
 		}))
-		.pipe(gulpif(enabled.failStyleTags, cssNano()))
-		.pipe(sourcemaps.write('.', {
+		.pipe(gulpif(argv.production, cssNano()))
+		.pipe(gulpif(!argv.production, sourcemaps.write('.', {
 			sourceRoot: 'assets/styles/'
-		}))
+		})))
 		.pipe(gulp.dest('public/styles'));
 });
