@@ -13,7 +13,7 @@
 
 
 // Glyphicons font path
-$font-path:     "../fonts/";
+$font-path:     '../fonts/';
 
 // Colors
 // $brand-primary: #f88601;
@@ -56,7 +56,7 @@ $color-pink: #f14d76;
 // ========================================================================
 
 $global-text-shadow: $color-white;
-$global-link-color: #07D;
+$global-link-color: #07d;
 $global-link-color-hover: #059;
 $global-muted-color: #999;
 
@@ -90,9 +90,9 @@ $color-danger-border: fade($color-danger-text, 30%);
 
 $global-font-color: #303336;
 // $global-font-color: #484747;
-$global-font-family: "Proxima Nova", "Helvetica Neue", Helvetica, Arial, sans-serif;
-$header-font-family: "Brandon Grotesque", "Proxima Nova", "Helvetica Neue", Helvetica, Arial, sans-serif;
-$serif-font-family: "Crimson Text", Georgia, Times, "Times New Roman", serif;
+$global-font-family: 'Proxima Nova', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+$header-font-family: 'Brandon Grotesque', 'Proxima Nova', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+$serif-font-family: 'Crimson Text', Georgia, Times, 'Times New Roman', serif;
 $global-font-size: 16px;
 $global-line-height: 24px;
 

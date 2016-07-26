@@ -83,8 +83,7 @@ $base-selection-color: $color-white;
 // ========================================================================
 
 html {
-	-webkit-text-size-adjust: 100%;
-	-ms-text-size-adjust: 100%;
+	text-size-adjust: 100%;
 }
 
 html,
@@ -121,18 +120,15 @@ body {
 // Links
 // ========================================================================
 
-a {
-	background-color: transparent;
-}
-
 a,
 input,
 button {
-	-webkit-tap-highlight-color: fade(#000, 0%);
+	-webkit-tap-highlight-color: fade($color-black, 0%);
 }
 
 // Style
 a {
+	background-color: transparent;
 	color: $base-link-color;
 	text-decoration: none;
 	cursor: pointer;
@@ -256,7 +252,7 @@ pre,
 address,
 fieldset,
 figure {
-	margin: 0 0 $base-margin-vertical 0;
+	margin: 0 0 $base-margin-vertical;
 
 	// Add margin-top for adjacent elements
 	* + & {
@@ -273,7 +269,7 @@ h3,
 h4,
 h5,
 h6 {
-	margin: 0 0 $base-margin-vertical 0;
+	margin: 0 0 $base-margin-vertical;
 	font-family: $base-heading-font-family;
 	font-weight: $base-heading-font-weight;
 	color: $base-heading-color;
@@ -371,7 +367,7 @@ blockquote {
 	padding-left: $base-blockquote-padding-left;
 	border-left: $base-blockquote-border-width solid $base-blockquote-border;
 	font-size: $base-blockquote-font-size;
-	line-height: strip-unit($base-blockquote-line-height) / strip-unit($base-blockquote-font-size);
+	line-height: (strip-unit($base-blockquote-line-height) / strip-unit($base-blockquote-font-size));
 	font-style: italic;
 }
 
@@ -381,7 +377,6 @@ blockquote {
 pre {
 	padding: $base-pre-padding;
 	background-color: $base-pre-background;
-	// font: $base-pre-font-size / $base-pre-line-height $base-pre-font-family;
 	font-size: $base-pre-font-size;
 	line-height: ($base-pre-line-height / $base-pre-font-size);
 	font-family: $base-pre-font-family;
@@ -398,12 +393,6 @@ pre {
 
 // Selection pseudo-element
 // ========================================================================
-
-::-moz-selection {
-	background-color: $base-selection-background;
-	color: $base-selection-color;
-	text-shadow: none;
-}
 
 ::selection {
 	background-color: $base-selection-background;
