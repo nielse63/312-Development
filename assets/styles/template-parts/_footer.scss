@@ -1,19 +1,11 @@
 
-
 .footer {
 	background-color: $color-blue-dark;
-	padding: 50px 0;
+	padding: 60px 0 50px;
 	position: relative;
 	overflow: hidden;
 	contain: style;
 	line-height: 1;
-
-	&.inview {
-		path {
-			// transition-delay: 0.5s;
-			stroke-dashoffset: 0 !important;
-		}
-	}
 
 	svg {
 		position: absolute;
