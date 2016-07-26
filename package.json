@@ -42,8 +42,7 @@
     "start": "npm run production",
     "preproduction": "npm run prerelease",
     "production": "NODE_ENV=production node app.js",
-    "prerelease": "rm -rf public && NODE_ENV=production webpack -p --release && gulp build --production",
-    "release": "git add -A && git commit -m 'New release' && git push heroku master && heroku open"
+    "release": "sh ./.bin/release.sh"
   },
   "author": "Erik Nielsen",
   "license": "ISC",
