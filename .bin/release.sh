@@ -6,6 +6,8 @@ if [ "$answer" = '' ] ; then
 	answer="New release"
 fi
 git add -A && git commit -m "$answer";
+git push heroku master && heroku open;
+git push origin master;
 
 # read year
 
