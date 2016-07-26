@@ -1,6 +1,6 @@
 {
-  "name": "react-universal-blog",
-  "version": "1.0.0",
+  "name": "312-development",
+  "version": "1.0.1",
   "description": "",
   "main": "app-server.js",
   "engine": {
@@ -38,14 +38,15 @@
     "whatwg-fetch": "^1.0.0"
   },
   "scripts": {
+    "predevelopment": "gulp views && NODE_ENV=development webpack -d",
+    "development": "NODE_ENV=development PORT=8080 webpack-dev-server --content-base public/ --hot --inline --devtool inline-source-map --history-api-fallback",
     "start": "npm run production",
-    "production": "rm -rf public/index.html && NODE_ENV=production webpack -p && NODE_ENV=production node app.js",
-    "webpack-dev-server": "NODE_ENV=development PORT=8080 webpack-dev-server --content-base public/ --hot --inline --devtool inline-source-map --history-api-fallback",
-    "development": "cp views/index.html public/index.html && NODE_ENV=development webpack -d && npm run webpack-dev-server",
-    "build-release": "NODE_ENV=production webpack -p --release && gulp build --production",
-    "heroku-release": "rm -rf public && npm run build-release && git add -A && git commit -m 'New release' && git push heroku master && heroku open && git push origin master"
+    "preproduction": "npm run prerelease",
+    "production": "NODE_ENV=production node app.js",
+    "prerelease": "rm -rf public && NODE_ENV=production webpack -p --release && gulp build --production",
+    "release": "gulp bump && git add -A && git commit -m 'New release' && git push heroku master && heroku open && git push origin master"
   },
-  "author": "",
+  "author": "Erik Nielsen",
   "license": "ISC",
   "devDependencies": {
     "asset-builder": "^1.1.0",
@@ -62,6 +63,7 @@
     "extract-text-webpack-plugin": "^1.0.1",
     "gulp": "^3.9.1",
     "gulp-autoprefixer": "^3.1.0",
+    "gulp-bump": "^2.2.0",
     "gulp-changed": "^1.3.1",
     "gulp-concat": "^2.6.0",
     "gulp-connect": "^4.2.0",
@@ -72,26 +74,22 @@
     "gulp-imagemin": "^3.0.2",
     "gulp-newer": "^1.2.0",
     "gulp-plumber": "^1.1.0",
-    "gulp-postcss": "^6.1.1",
+    "gulp-rename": "^1.2.2",
     "gulp-rev": "^7.1.0",
     "gulp-sass": "^2.3.2",
     "gulp-scss-lint": "^0.4.0",
-    "gulp-scss-lint-stylish": "^1.0.1",
     "gulp-sourcemaps": "^1.6.0",
     "gulp-util": "^3.0.7",
     "imagemin-pngcrush": "^5.0.0",
     "minimist": "^1.2.0",
     "mkdirp": "^0.5.1",
     "node-sass": "^3.8.0",
-    "postcss-reporter": "^1.4.1",
-    "postcss-scss": "^0.1.9",
     "react-hot-loader": "^1.3.0",
     "require-dir": "^0.3.0",
     "run-sequence": "^1.2.2",
     "sass-loader": "^4.0.0",
     "slimerjs": "^0.906.2",
     "style-loader": "^0.13.1",
-    "stylelint": "^7.0.3",
     "webpack-dev-server": "^1.14.1",
     "wiredep": "^4.0.0"
   }
