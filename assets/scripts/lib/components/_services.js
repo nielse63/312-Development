@@ -35,9 +35,6 @@ export default class Services {
 			triggerElement : trigger,
 		})
 		.setClassToggle(trigger, 'active')
-		.on('start', function() {
-			this.remove();
-		})
 		.addTo(_c.controller);
 	}
 }
