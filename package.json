@@ -1,6 +1,6 @@
 {
   "name": "312-development",
-  "version": "1.0.17",
+  "version": "1.0.18",
   "description": "",
   "main": "app-server.js",
   "engine": {
@@ -81,6 +81,7 @@
     "gulp-sourcemaps": "^1.6.0",
     "gulp-util": "^3.0.7",
     "imagemin-pngcrush": "^5.0.0",
+    "localStorage": "^1.0.3",
     "minimist": "^1.2.0",
     "mkdirp": "^0.5.1",
     "node-sass": "^3.8.0",

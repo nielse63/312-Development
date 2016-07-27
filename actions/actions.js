@@ -1,7 +1,8 @@
 
 // actions.js
-import contentful from 'contentful';
-import _ from 'lodash';
+import contentful from 'contentful'
+import _ from 'lodash'
+// import localStorage from 'localStorage'
 
 // AppStore
 import AppStore from '../stores/AppStore';
@@ -67,7 +68,13 @@ export function loadTweets() {
 export function getStore(callback) {
 
 	// global vars
-	const storage    = window.localStorage;
+	let storage;
+	if (typeof localStorage === "undefined" || localStorage === null) {
+		storage = require('localStorage')
+		// storage = new LocalStorage('./scratch');
+	} else {
+		storage = localStorage;
+	}
 	const checkedKey = 'LastChecked312Feed';
 	const feedKey    = '312Feed';
 	const navKey     = '312Nav';
