@@ -5,6 +5,7 @@ var gulp         = require('gulp');
 var runSequence  = require('run-sequence');
 var connect      = require('gulp-connect');
 var bump         = require('gulp-bump');
+var del          = require('del');
 
 // custom tasks
 var requireDir = require('require-dir');
@@ -51,7 +52,7 @@ var enabled = {
 
 // ### Watch
 gulp.task('watch', function() {
-	gulp.watch(['assets/styles/**/*'], ['styles']);
+	gulp.watch(['assets/styles/**/*'], ['styles', 'scss-lint']);
 	gulp.watch(['assets/fonts/**/*'], ['fonts']);
 	gulp.watch(['assets/images/**/*'], ['images']);
 	gulp.watch(['assets/other/**/*'], ['other']);
@@ -83,10 +84,12 @@ gulp.task('build', function(callback) {
 
 // ### Tetst
 gulp.task('test', function(callback) {
-	runSequence(
-		['eslint', 'scss-lint'],
-		callback
-	);
+	del(['test/results']).then(function() {
+		runSequence(
+			['eslint', 'scss-lint'],
+			callback
+		);
+	});
 });
 
 // ### Gulp

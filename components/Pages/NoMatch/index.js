@@ -16,10 +16,6 @@ export default class NoMatch extends Component {
 		window.postMessage('loaded', window.location.origin);
 	}
 
-	// componentWillUnmount() {
-	// 	window.postMessage('unloaded', window.location.origin);
-	// }
-
 	render() {
 		// const data = this.props.data;
 

@@ -21,10 +21,16 @@ $link-color: $color-white;
 // ========================================================================
 
 .article {
-	perspective-origin: top center;
-	perspective: 100vw;
 	contain: style;
-	// padding-top: 100px;
+	position: relative;
+
+	&-title,
+	&-subtitle,
+	&-content {
+		a {
+			@include content-link();
+		}
+	}
 
 	&-title,
 	&-subtitle {
@@ -49,63 +55,6 @@ $link-color: $color-white;
 						1s opacity $title-transition-delay;
 			opacity: 1;
 			transform: none;
-		}
-
-		a {
-			box-shadow: 0 -3px 0 0 $link-background-color inset;
-			color: transparent;
-			display: inline-block;
-			padding-left: 0.2em;
-			padding-right: 0.2em;
-			position: relative;
-			perspective: 1000px;
-			perspective-origin: bottom center;
-			transition: 0.35s background-color,
-						0.35s color;
-			will-change: background-color, color;
-			contain: paint;
-			backface-visibility: hidden;
-
-			&:before {
-				content: '';
-				position: absolute;
-				background-color: $link-background-color;
-				top: 0;
-				left: 0;
-				right: 0;
-				bottom: 0;
-				transform-style: preserve-3d;
-				transform-origin: bottom center;
-				transition: 0.5s transform;
-				transform: rotateX(90deg);
-				will-change: transform;
-				backface-visibility: hidden;
-			}
-
-			&:after {
-				content: attr(data-text);
-				position: absolute;
-				top: 50%;
-				left: 50%;
-				width: 100%;
-				transform: translate(-50%, -50%);
-				text-align: center;
-				will-change: color;
-				transition: 0.1s color 0.25s;
-				color: $global-font-color;
-				backface-visibility: hidden;
-			}
-
-			&:hover {
-				&:before {
-					transform: rotateX(0deg);
-				}
-
-				&:after {
-					color: $color-white;
-					transition-delay: 0.1s;
-				}
-			}
 		}
 	}
 
@@ -157,16 +106,16 @@ $link-color: $color-white;
 			font-size: 1.5em;
 		}
 
-		// @media (min-width: $breakpoint-medium) {
-		// 	font-size: 2em;
-		// }
+		@media (min-width: $breakpoint-medium) {
+			font-size: 1.75em;
+		}
 
-		&:before {
+		&:before,
+		&:after {
 			content: '';
 			display: block;
 			height: 1px;
-			width: 215px;
-			max-width: 80%;
+			width: 25%;
 			left: 50%;
 			transform: translate(-50%, 0);
 			position: absolute;
@@ -174,11 +123,111 @@ $link-color: $color-white;
 		}
 
 		&:before {
-			bottom: 0;
+			top: 0;
 		}
 
-		// &:after {
-		// 	top: 0;
-		// }
+		&:after {
+			bottom: 0;
+		}
 	}
 }
+
+// .article {
+// 	perspective-origin: top center;
+// 	perspective: 100vw;
+// 	contain: style;
+
+// 	&-title,
+// 	&-subtitle,
+// 	&-content {
+// 		@include content-link($color-orange);
+// 	}
+
+// 	&-title,
+// 	&-subtitle {
+// 		font-size: 26px;
+// 		line-height: (56 / 40);
+// 		transform-style: preserve-3d;
+// 		transform-origin: center;
+// 		transform: rotateX(9deg) rotateY(-7deg);
+// 		opacity: 0;
+// 		will-change: opacity, transform;
+
+// 		@media (min-width: $breakpoint-small) {
+// 			font-size: 36px;
+// 		}
+
+// 		@media (min-width: $breakpoint-medium) {
+// 			font-size: 40px;
+// 		}
+
+// 		.loaded & {
+// 			transition: 1s transform $title-transition-delay,
+// 						1s opacity $title-transition-delay;
+// 			opacity: 1;
+// 			transform: none;
+// 		}
+// 	}
+
+// 	&-subtitle {
+// 		font-size: 26px;
+
+// 		.loaded & {
+// 			transition-delay: 1.2s;
+// 		}
+// 	}
+
+// 	&-title {
+// 		+ .article-subtitle {
+// 			margin-top: 1em;
+// 			padding-top: 1em;
+// 			position: relative;
+
+// 			&:before {
+// 				content: '';
+// 				display: block;
+// 				position: absolute;
+// 				top: 0;
+// 				left: 50%;
+// 				height: 4px;
+// 				width: 0;
+// 				background-color: $title-color;
+// 				transform: translate(-50%, 0);
+// 				opacity: 0.5;
+// 				will-change: width;
+
+// 				.loaded & {
+// 					width: 175px;
+// 					transition: 1s width 1.5s;
+// 				}
+// 			}
+// 		}
+// 	}
+
+// 	&-lead {
+// 		font-size: 1.25em;
+// 		text-align: center;
+// 		margin-top: 1em;
+// 		padding-top: 1em;
+// 		margin-bottom: 1em;
+// 		padding-bottom: 1em;
+// 		position: relative;
+
+// 		@media (min-width: $breakpoint-small) {
+// 			font-size: 1.5em;
+// 		}
+
+// 		&:before {
+// 			content: '';
+// 			display: block;
+// 			height: 1px;
+// 			width: 215px;
+// 			max-width: 80%;
+// 			left: 50%;
+// 			transform: translate(-50%, 0);
+// 			position: absolute;
+// 			background-color: $global-font-color;
+// 			bottom: 0;
+// 		}
+// 	}
+// }

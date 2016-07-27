@@ -1,7 +1,6 @@
 
 // Nav.js
 import React, { Component } from 'react'
-import { Link } from 'react-router'
 
 // Components
 import NavItem from './NavItem'
@@ -13,6 +12,13 @@ export default class Nav extends Component {
 			navItems : React.PropTypes.array,
 			cls      : React.PropTypes.string
 		}
+	}
+
+	static get defaultProps() {
+		return {
+			navItems : [],
+			cls      : 'topnav'
+		};
 	}
 
 	render() {

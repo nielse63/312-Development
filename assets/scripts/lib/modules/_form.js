@@ -15,11 +15,11 @@ export default class Form {
 		if( ! _c.$.fn.validate ) {
 			if( this.checked < 10 ) {
 				this.checked++;
-				return this.getScript();
+				this.getScript();
 			} else {
 				console.warn('Couldn\'t load validation script');
-				return;
 			}
+			return;
 		}
 
 		this.defineProperties();
@@ -37,13 +37,18 @@ export default class Form {
 		const self = this;
 		_c.$.getScript('https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.15.1/jquery.validate.min.js')
 			.done(function() {
-				[_c.$, $, window.jQuery, window.$].forEach(function(obj) {
-					if( 'validate' in obj.fn ) {
-						_c.$ = obj;
-						return false;
-					}
-				});
-				setTimeout(self.init(), 250);
+				if( ! ('validate' in _c.$.fn) ) {
+					[$, window.jQuery, window.$].forEach(function(obj) {
+						if( obj.fn && 'validate' in obj.fn ) {
+							_c.$ = obj;
+							return false;
+						}
+						return true;
+					});
+					setTimeout(self.init(), 250);
+					return;
+				}
+				self.init();
 			})
 			.fail(function(xhr) {
 				console.warn(xhr.responseText);

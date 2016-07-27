@@ -40,12 +40,12 @@ $logo-color: $global-font-color;
 		transition: 0.25s color;
 
 		&:hover {
-			html.no-touch & {
+			.no-touch & {
 				color: $color-pink;
+			}
 
-				.icon {
-					background-color: $color-pink;
-				}
+			.icon {
+				background-color: $color-pink;
 			}
 		}
 	}

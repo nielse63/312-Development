@@ -21,8 +21,7 @@
 	height: 100vh;
 	transform: translate(75vw, 0);
 	display: flex;
-	// align-items: center;
-    padding-top: 15vh;
+	padding-top: 15vh;
 	opacity: 0;
 	transition: $menu-transition-duration transform,
 				$menu-transition-duration opacity;
@@ -38,17 +37,29 @@
 		width: 100%;
 		padding-right: 20px;
 
-		> li {
-			+ li {
-				border: 0;
-			}
+		// > li {
+		// 	+ li {
+		// 		border: 0;
+		// 	}
 
-			a {
-				color: $color-white;
-				display: inline-block;
-				padding: 20px 0 5px;
-			}
+		// 	a {
+		// 		color: $color-white;
+		// 		display: inline-block;
+		// 		padding: 20px 0 5px;
+		// 	}
+		// }
+	}
+
+	li {
+		+ li {
+			border: 0;
 		}
+	}
+
+	a {
+		color: $color-white;
+		display: inline-block;
+		padding: 20px 0 5px;
 	}
 
 	.active {

@@ -80,17 +80,18 @@ $menu-item-color: $global-font-color;
 				padding: 0;
 			}
 		}
+	}
 
-		a {
-			display: block;
-			padding: 10px $link-padding-horizontal-small;
+	a {
+		display: block;
+		padding: 10px $link-padding-horizontal-small;
+		// color: $menu-item-color;
+		transition: $global-link-transition-duration;
+		position: relative;
+
+		@media (min-width: $breakpoint-medium) {
 			color: $menu-item-color;
-			transition: $global-link-transition-duration;
-			position: relative;
-
-			@media (min-width: $breakpoint-medium) {
-				padding: $link-padding-large;
-			}
+			padding: $link-padding-large;
 		}
 	}
 }

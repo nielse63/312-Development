@@ -9,12 +9,17 @@ var del       = require('del');
 var writeFile = require('./utils').writeFile;
 
 // global vars
-var outPath = 'test/results/eslint';
+var outputFile = 'test/results/eslint.txt';
 
 // task
 gulp.task('eslint', function() {
 
-	del(['test/results/eslint']).then(function(paths) {
+	String.prototype.ctrim = String.prototype.ctrim || function(what) {
+		what = what || /^\s+|\s+$/g;
+		return this.replace(new RegExp(what), '');
+	}
+
+	del([outputFile]).then(function(paths) {
 		return gulp.src([
 			'./app-client.js',
 			'./app-server.js',
@@ -39,9 +44,13 @@ gulp.task('eslint', function() {
 
 			var basename = result.filePath
 				.replace(path.resolve(__dirname, '../'), '')
-				.replace(/\/_/, '/')
-				.replace(/\.js$/, '');
-			var content = [];
+				.replace(/\/_/, '/');
+			var content = [[
+				'\n',
+				basename,
+				'=============================',
+				'\n'
+			].join('\r')];
 
 			result.messages.forEach(function(message, i) {
 				if( message.severity < 2 ) {
@@ -52,13 +61,17 @@ gulp.task('eslint', function() {
 					'Offender: ' + message.source.trim(),
 					'Error:    ' + message.message,
 					'Rule:     ' + message.ruleId,
-					'============================='
-				].join('\n') + '\n');
+					// '============================='
+				].join('\r'));
 			});
-			var outputFile = path.join(outPath, basename + '.txt');
-			writeFile(outputFile, content.join('\n'), function(err) {
+
+			var outputContent = content
+				.join('\n=======\n')
+				.ctrim('\n=======') + '\n=======\n\n';
+
+			writeFile(outputFile, outputContent, function(err) {
 				if(err) console.log(err);
-			})
+			}, true);
 		}))
 		.pipe(eslint.failAfterError());
 	});

@@ -35,10 +35,7 @@ if(process.env.NODE_ENV === 'development') {
 			ServiceWorker: {
 				output: '../sw.js',
 			},
-
-			AppCache: {
-				directory: '../appcache/',
-			}
+			AppCache: false,
 		})
 	]);
 }

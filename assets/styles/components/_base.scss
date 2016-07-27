@@ -18,10 +18,6 @@ $link-color-hover: darken($link-color, 7%);
 
 body {
 	overflow-x: hidden;
-	// background-image: data-uri('../images/icon.svg');
-	// background-position: center calc(50vh - 100px);
-	// background-repeat: no-repeat;
-	// background-size: auto 200px;
 	min-height: 100vh;
 
 	@media (max-width: $breakpoint-small-max) {
@@ -47,7 +43,7 @@ a {
 
 	&:hover,
 	&:focus {
-		color: $link-color-hover
+		color: $link-color-hover;
 	}
 }
 
@@ -78,17 +74,9 @@ main {
 		transform: translate(-50vw) rotateY(35deg) translateZ(-175px);
 		opacity: 0.5;
 	}
+
 	to {
 		transform: none;
 		opacity: 1;
 	}
 }
-
-// #app {
-// 	opacity: 0;
-// 	transition: 0.5s opacity;
-
-// 	html.loaded & {
-// 		opacity: 1;
-// 	}
-// }

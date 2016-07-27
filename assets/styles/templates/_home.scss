@@ -21,116 +21,116 @@ $figure-diff: 10vh;
 // ========================================================================
 
 .article {
-	contain: style;
-	position: relative;
+	// contain: style;
+	// position: relative;
 
 	.page-home & {
 		perspective-origin: top center;
 		perspective: 100vw;
 	}
 
-	&-title,
-	&-subtitle {
-		font-size: 26px;
-		line-height: (56 / 40);
-		transform-style: preserve-3d;
-		transform-origin: center;
-		transform: rotateX(9deg) rotateY(-7deg);
-		opacity: 0;
-		will-change: opacity, transform;
+	// &-title,
+	// &-subtitle {
+	// 	font-size: 26px;
+	// 	line-height: (56 / 40);
+	// 	transform-style: preserve-3d;
+	// 	transform-origin: center;
+	// 	transform: rotateX(9deg) rotateY(-7deg);
+	// 	opacity: 0;
+	// 	will-change: opacity, transform;
 
-		@media (min-width: $breakpoint-small) {
-			font-size: 36px;
-		}
+	// 	@media (min-width: $breakpoint-small) {
+	// 		font-size: 36px;
+	// 	}
 
-		@media (min-width: $breakpoint-medium) {
-			font-size: 40px;
-		}
+	// 	@media (min-width: $breakpoint-medium) {
+	// 		font-size: 40px;
+	// 	}
 
-		.loaded & {
-			transition: 1s transform $title-transition-delay,
-						1s opacity $title-transition-delay;
-			opacity: 1;
-			transform: none;
-		}
+	// 	.loaded & {
+	// 		transition: 1s transform $title-transition-delay,
+	// 					1s opacity $title-transition-delay;
+	// 		opacity: 1;
+	// 		transform: none;
+	// 	}
 
-		a {
-			@include content-link($color-orange);
-		}
-	}
+	// 	a {
+	// 		@include content-link($color-orange);
+	// 	}
+	// }
 
-	&-subtitle {
-		font-size: 26px;
+	// &-subtitle {
+	// 	font-size: 26px;
 
-		.loaded & {
-			transition-delay: 1.2s;
-		}
-	}
+	// 	.loaded & {
+	// 		transition-delay: 1.2s;
+	// 	}
+	// }
 
-	&-title {
-		+ .article-subtitle {
-			margin-top: 1em;
-			padding-top: 1em;
-			position: relative;
+	// &-title {
+	// 	+ .article-subtitle {
+	// 		margin-top: 1em;
+	// 		padding-top: 1em;
+	// 		position: relative;
 
-			&:before {
-				content: '';
-				display: block;
-				position: absolute;
-				top: 0;
-				left: 50%;
-				height: 4px;
-				width: 0;
-				background-color: $title-color;
-				transform: translate(-50%, 0);
-				opacity: 0.5;
-				will-change: width;
+	// 		&:before {
+	// 			content: '';
+	// 			display: block;
+	// 			position: absolute;
+	// 			top: 0;
+	// 			left: 50%;
+	// 			height: 4px;
+	// 			width: 0;
+	// 			background-color: $title-color;
+	// 			transform: translate(-50%, 0);
+	// 			opacity: 0.5;
+	// 			will-change: width;
 
-				.loaded & {
-					width: 175px;
-					transition: 1s width 1.5s;
-				}
-			}
-		}
-	}
+	// 			.loaded & {
+	// 				width: 175px;
+	// 				transition: 1s width 1.5s;
+	// 			}
+	// 		}
+	// 	}
+	// }
 
-	&-lead {
-		font-size: 1.25em;
-		text-align: center;
-		margin-top: 1em;
-		padding-top: 1em;
-		margin-bottom: 1em;
-		padding-bottom: 1em;
-		position: relative;
+	// &-lead {
+	// 	font-size: 1.25em;
+	// 	text-align: center;
+	// 	margin-top: 1em;
+	// 	padding-top: 1em;
+	// 	margin-bottom: 1em;
+	// 	padding-bottom: 1em;
+	// 	position: relative;
 
-		@media (min-width: $breakpoint-small) {
-			font-size: 1.5em;
-		}
+	// 	@media (min-width: $breakpoint-small) {
+	// 		font-size: 1.5em;
+	// 	}
 
-		@media (min-width: $breakpoint-medium) {
-			font-size: 1.75em;
-		}
+	// 	@media (min-width: $breakpoint-medium) {
+	// 		font-size: 1.75em;
+	// 	}
 
-		&:before,
-		&:after {
-			content: '';
-			display: block;
-			height: 1px;
-			width: 25%;
-			left: 50%;
-			transform: translate(-50%, 0);
-			position: absolute;
-			background-color: $global-font-color;
-		}
+	// 	&:before,
+	// 	&:after {
+	// 		content: '';
+	// 		display: block;
+	// 		height: 1px;
+	// 		width: 25%;
+	// 		left: 50%;
+	// 		transform: translate(-50%, 0);
+	// 		position: absolute;
+	// 		background-color: $global-font-color;
+	// 	}
 
-		&:before {
-			top: 0;
-		}
+	// 	&:before {
+	// 		top: 0;
+	// 	}
 
-		&:after {
-			bottom: 0;
-		}
-	}
+	// 	&:after {
+	// 		bottom: 0;
+	// 	}
+	// }
 }
 
 .work {
@@ -227,7 +227,7 @@ $figure-diff: 10vh;
 			will-change: opacity, transform;
 			transform: translate(-15px, 0);
 
-			html.touch & {
+			.touch & {
 				display: none;
 			}
 		}
@@ -274,7 +274,6 @@ $figure-diff: 10vh;
 			background-repeat: no-repeat;
 			background-size: cover;
 			opacity: 0.15;
-			-webkit-filter: sepia(80%);
 			filter: sepia(80%);
 			margin: 0;
 			transition: 0.35s opacity;

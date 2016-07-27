@@ -26,7 +26,6 @@ const raygunClient = new raygun.Client().init({
 
 // globals
 const index = process.env.NODE_ENV === 'production' ? 'index.prod.html' : 'index.dev.html'
-// const index = 'index.html'
 
 // Express
 const app = express()
@@ -57,18 +56,14 @@ app.post('/submit', (req, res) => {
 			const v = req.body[k];
 			output.push(`<p><strong>${k}:</strong> ${v}</p>`);
 		});
-		// for(const k in req.body) {
-		// 	const v = req.body[k];
-		// 	output.push(`<p><strong>${k}:</strong> ${v}</p>`);
-		// }
 	}
 
 	// send mail with defined transport object
 	transporter.sendMail({
-		from: '"312 Development " <contact@312development.com>',
-		to: 'erik@312development.com',
-		subject: 'New Contact Form Submission',
-		html: output.join('')
+		from    : '"312 Development " <contact@312development.com>',
+		to      : 'erik@312development.com',
+		subject : 'New Contact Form Submission',
+		html    : output.join('')
 	}, function(error, info) {
 		if(error){
 			console.warn([error, info])
@@ -77,9 +72,16 @@ app.post('/submit', (req, res) => {
 	});
 });
 
+//force ssl
+app.get('*', (req, res, next) => {
+	if(req.headers['x-forwarded-proto'] !== 'https') {
+		res.redirect(config.site.url + req.url);
+	} else {
+		next();
+	}
+});
+
 app.get('*', (req, res) => {
-	// const css = [];
-	// const context = { insertCss: (styles) => css.push(styles._getCss()) };
 	getStore(function(err, AppStore) {
 		if(err) {
 			return res.status(500).end('error')

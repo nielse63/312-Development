@@ -14,6 +14,10 @@ $title-color: $color-white;
 $link-background-color: $color-orange;
 $link-color: $color-white;
 
+$banner-background-color-one: rgba(31, 34, 50, 1);
+$banner-background-color-two: rgba(31, 34, 50, 0.5);
+$banner-background-color-three: rgba(31, 34, 50, 1);
+
 // ========================================================================
 // Component
 // ========================================================================
@@ -45,16 +49,19 @@ $link-color: $color-white;
 		left: 0;
 		height: 100%;
 		width: 100%;
-		background-image: linear-gradient(to bottom, rgba(31, 34, 50, 1) 0%, rgba(31, 34, 50, 0.5) 50%, rgba(31, 34, 50, 1) 100%);
+		background-image: linear-gradient(to bottom, $banner-background-color-one 0%, $banner-background-color-two 50%, $banner-background-color-three 100%);
 	}
 
 	&.loaded {
 		.banner {
 			&-title {
-				transition: 1s transform 0.5s,
-							1s opacity 0.5s;
 				opacity: 1;
 				transform: none;
+
+				&:not(.no-trans) {
+					transition: 1s transform 0.5s,
+								1s opacity 0.5s;
+				}
 			}
 		}
 	}
@@ -76,9 +83,9 @@ $link-color: $color-white;
 			font-size: $title-font-size;
 		}
 
-		&.no-trans {
-			transition: none !important;
-		}
+		// &.no-trans {
+		// 	transition: none !important;
+		// }
 
 		a {
 			box-shadow: 0 -3px 0 0 $link-background-color inset;

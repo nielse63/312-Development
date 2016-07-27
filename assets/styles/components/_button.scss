@@ -85,9 +85,11 @@ $button-link-hover-color: $global-link-color-hover;
 $button-link-hover-text-decoration: $global-link-decoration-hover;
 $button-link-disabled-color: $global-muted-color;
 
+$button-accent-dark: $color-black;
+
 $button-border-width: $global-border-width;
-$button-border: fade-out(#000, 0.94);
-$button-hover-border: fade-out(#000, 0.84);
+$button-border: fade-out($button-accent-dark, 0.94);
+$button-hover-border: fade-out($button-accent-dark, 0.84);
 
 $button-transition-duration: 0.15s;
 $button-transition-timing-function: ease-in;
@@ -111,7 +113,6 @@ $button-transition-timing-function: ease-in;
 	height: $button-height;
 	text-decoration: none;
 	text-align: center;
-	border: 0;
 	cursor: pointer;
 	transition-property: background-color, border-color, color;
 	transition-duration: $button-transition-duration;
@@ -121,7 +122,7 @@ $button-transition-timing-function: ease-in;
 	letter-spacing: 2px;
 	width: 100%;
 	appearance: none;
-	box-shadow: 0 -3px 0 fade-out($color-black, 0.75) inset;
+	box-shadow: 0 -3px 0 fade-out($button-accent-dark, 0.75) inset;
 
 	@media (min-width: $breakpoint-small) {
 		width: auto;
@@ -140,8 +141,8 @@ $button-transition-timing-function: ease-in;
 	&.active {
 		background-color: $button-active-background;
 		color: $button-active-color;
-		border-color: fade-out(#000, 0.7) fade-out(#000, 0.8) fade-out(#000, 0.8);
-		box-shadow: inset 0 2px 4px fade-out(#000, 0.9);
+		border-color: fade-out($button-accent-dark, 0.7) fade-out($button-accent-dark, 0.8) fade-out($button-accent-dark, 0.8);
+		box-shadow: inset 0 2px 4px fade-out($button-accent-dark, 0.9);
 		transition-duration: 0ms;
 	}
 
@@ -152,9 +153,9 @@ $button-transition-timing-function: ease-in;
 
 	&:disabled,
 	&.disabled {
-		background-color: $button-disabled-background !important;
-		color: $button-disabled-color !important;
-		border-color: fade-out(#000, 0.4);
+		background-color: $button-disabled-background;
+		color: $button-disabled-color;
+		border-color: fade-out($button-accent-dark, 0.4);
 		cursor: default;
 		pointer-events: none;
 
@@ -193,29 +194,29 @@ $button-transition-timing-function: ease-in;
 	&-danger {
 		&:active,
 		&.active {
-			border-color: fade-out(#000, 0.6) fade-out(#000, 0.8) fade-out(#000, 0.8);
-			box-shadow: inset 0 2px 4px fade-out(#000, 0.8);
+			border-color: fade-out($button-accent-dark, 0.6) fade-out($button-accent-dark, 0.8) fade-out($button-accent-dark, 0.8);
+			box-shadow: inset 0 2px 4px fade-out($button-accent-dark, 0.8);
 		}
 	}
 
 	&-facebook {
-		@include button-state-modifier($color-white, #3b5998);
+		@include button-state-modifier($color-white, $color-facebook);
 	}
 
 	&-twitter {
-		@include button-state-modifier($color-white, #55acee);
+		@include button-state-modifier($color-white, $color-twitter);
 	}
 
 	&-linkedin {
-		@include button-state-modifier($color-white, #007bb5);
+		@include button-state-modifier($color-white, $color-linkedin);
 	}
 
 	&-email {
-		@include button-state-modifier($color-white, #ccc);
+		@include button-state-modifier($color-white, $color-email);
 	}
 
 	&-blue {
-		@include button-state-modifier($color-white, #31a8e6);
+		@include button-state-modifier($color-white, $color-button-blue);
 	}
 
 	// Modifier: `.button-primary`
