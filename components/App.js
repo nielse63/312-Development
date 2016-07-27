@@ -27,9 +27,15 @@ class App extends Component {
 	}
 
 	// Add change listeners to stores
-	componentDidMount() {
+	componentWillMount() {
 		AppStore.addChangeListener(this.stateDidChange.bind(this));
+		this.getStore();
 	}
+
+	// Add change listeners to stores
+	// componentDidMount() {
+	// 	AppStore.addChangeListener(this.stateDidChange.bind(this));
+	// }
 
 	// Remove change listeners from stores
 	componentWillUnmount() {
@@ -60,8 +66,6 @@ class App extends Component {
 				document.title = 'Loading';
 			}
 
-			this.getStore();
-
 			return (
 				<div>
 					<Loading />
@@ -78,7 +82,6 @@ class App extends Component {
 		// props
 		const navItems = data.globals.navItems;
 		const transitionDuration = 1200;
-		// console.log(data);
 
 		return (
 			<div>
