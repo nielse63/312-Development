@@ -1,7 +1,5 @@
 
 // app-server.js
-// import { match, history, RouterContext } from 'react-router'
-
 import React from 'react'
 import { match, RouterContext } from 'react-router'
 import { renderToStaticMarkup } from 'react-dom/server'
@@ -74,7 +72,9 @@ app.post('/submit', (req, res) => {
 
 //force ssl
 app.get('*', (req, res, next) => {
-	if(req.headers['x-forwarded-proto'] !== 'https') {
+	var isLocalhost = req.headers.host.indexOf('localhost') > -1;
+	console.log(req.headers.host, isLocalhost)
+	if( req.headers['x-forwarded-proto'] !== 'https' ) {
 		res.redirect(config.site.url + req.url);
 	} else {
 		next();
@@ -88,7 +88,6 @@ app.get('*', (req, res) => {
 		}
 		return match({ routes, location: req.url }, (error, redirectLocation, renderProps) => {
 
-			// console.log(AppStore);
 			const slugArray = req.url.split('/')
 			const pageSlug = slugArray[1]
 

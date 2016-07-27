@@ -72,17 +72,13 @@ gulp.task('bump', function(){
 gulp.task('build', function(callback) {
 
 	var tasks = ['other', 'styles', 'images', 'fonts'];
-	if( argv.production ) {
-		tasks.push('bump');
-	}
-
 	runSequence(
 		tasks,
 		callback
 	);
 });
 
-// ### Tetst
+// ### Test
 gulp.task('test', function(callback) {
 	del(['test/results']).then(function() {
 		runSequence(
@@ -91,6 +87,17 @@ gulp.task('test', function(callback) {
 		);
 	});
 });
+
+// gulp.task('generate-service-worker', function(callback) {
+// 	var path = require('path');
+// 	var swPrecache = require('sw-precache');
+// 	var rootDir = 'public';
+
+// 	swPrecache.write(path.join(rootDir, 'sw.js'), {
+// 		staticFileGlobs: [rootDir + '/**/*.{js,html,css,png,jpg,gif,svg,eot,ttf,woff,woff2}'],
+// 		stripPrefix: rootDir
+// 	}, callback);
+// });
 
 // ### Gulp
 // `gulp` - Run a complete build. To compile for production run `gulp --production`.
