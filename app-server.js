@@ -70,17 +70,6 @@ app.post('/submit', (req, res) => {
 	});
 });
 
-//force ssl
-app.get('*', (req, res, next) => {
-	var isLocalhost = req.headers.host.indexOf('localhost') > -1;
-	console.log(req.headers.host, isLocalhost)
-	if( req.headers['x-forwarded-proto'] !== 'https' ) {
-		res.redirect(config.site.url + req.url);
-	} else {
-		next();
-	}
-});
-
 app.get('*', (req, res) => {
 	getStore(function(err, AppStore) {
 		if(err) {
@@ -111,13 +100,14 @@ app.get('*', (req, res) => {
 			} else if (renderProps) {
 
 				// Success!
+				console.log(index);
 				res.status(200).render(index)
 			} else {
 				res.status(404).render(index)
 			}
 		})
 	})
-})
+});
 
 app.listen(app.get('port'), function() {
 	console.info('==> ✅  Server is listening in ' + process.env.NODE_ENV + ' mode')
