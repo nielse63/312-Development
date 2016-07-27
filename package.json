@@ -1,6 +1,6 @@
 {
   "name": "312-development",
-  "version": "1.0.10",
+  "version": "1.0.17",
   "description": "",
   "main": "app-server.js",
   "engine": {
@@ -37,19 +37,19 @@
     "whatwg-fetch": "^1.0.0"
   },
   "scripts": {
-    "predevelopment": "gulp views && NODE_ENV=development webpack -d",
+    "predevelopment": "NODE_ENV=development webpack -d && gulp views",
     "development": "NODE_ENV=development PORT=8080 webpack-dev-server --content-base public/ --hot --inline --devtool inline-source-map --history-api-fallback",
     "start": "npm run production",
     "preproduction": "npm run prerelease",
     "production": "NODE_ENV=production node app.js",
     "prerelease": "rm -rf public && NODE_ENV=production webpack -p --release && gulp build --production",
-    "release": "sh ./.bin/release.sh",
-    "postrelease": "heroku open"
+    "release": "gulp bump && sh ./.bin/release.sh"
   },
   "author": "Erik Nielsen",
   "license": "ISC",
   "devDependencies": {
     "asset-builder": "^1.1.0",
+    "assets-webpack-plugin": "^3.4.0",
     "autoprefixer-loader": "^3.2.0",
     "babel-eslint": "^6.1.2",
     "browser-sync": "^2.13.0",
@@ -90,6 +90,7 @@
     "sass-loader": "^4.0.0",
     "slimerjs": "^0.906.2",
     "style-loader": "^0.13.1",
+    "sw-precache": "^4.0.0",
     "webpack-dev-server": "^1.14.1",
     "wiredep": "^4.0.0"
   }
