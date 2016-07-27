@@ -36,10 +36,6 @@ export default class Contact extends Component {
 		window.postMessage('loaded', window.location.origin);
 	}
 
-	// componentWillUnmount() {
-	// 	window.postMessage('unloaded', window.location.origin);
-	// }
-
 	getPageData() {
 		AppDispatcher.dispatch({
 			action    : 'get-page-data',

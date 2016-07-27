@@ -186,7 +186,6 @@ class AppUI {
 	}
 
 	killScenes(array) {
-		array = array || this.scenes;
 
 		if( ! array || ! _c.utils.isArray( array ) || ! array.length ) {
 			return;
@@ -222,7 +221,8 @@ class AppUI {
 			window.location.hostname === '[::1]' ||
 			window.location.hostname.match(/^127(?:\.(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)){3}$/)
 		);
-		if ('serviceWorker' in navigator && (window.location.protocol === 'https:' || isLocalhost) ) {
+		// if ('serviceWorker' in navigator && (window.location.protocol === 'https:' || isLocalhost) ) {
+		if ('serviceWorker' in navigator && window.location.protocol === 'https:' ) {
 			navigator.serviceWorker.register('/sw.js', {
 				scope: '/'
 			});

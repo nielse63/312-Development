@@ -1,16 +1,18 @@
 
 // modules
-var gulp      = require('gulp');
-var fs        = require('fs');
-var path      = require('path');
-var mkdirp    = require('mkdirp');
-var del       = require('del');
-var scsslint  = require('gulp-scss-lint');
-var styles    = require('./styles');
-var writeFile = require('./utils').writeFile;
+var gulp          = require('gulp');
+var fs            = require('fs');
+var path          = require('path');
+var mkdirp        = require('mkdirp');
+var del           = require('del');
+var scsslint      = require('gulp-scss-lint');
+var styles        = require('./styles');
+var utils         = require('./utils');
+var writeFile     = utils.writeFile;
+var writeFileSync = utils.writeFileSync;
 
 // global vars
-var outputFile = 'test/results/scss-lint/report.txt';
+var outputFile = 'test/results/scss-lint.txt';
 var inFiles = [
 	'assets/styles/**/*.scss',
 	'!assets/styles/common/types/*.scss',
@@ -51,22 +53,14 @@ gulp.task('scss-lint', function() {
 			.join('\n=======\n')
 			.ctrim('\n=======') + '\n=======\n\n';
 
-		writeFile(outputFile, outputContent, function(err) {
-			if(err) console.log(err);
-		});
+		writeFileSync(outputFile, outputContent);
 	};
 
-	del(['test/results/scss-lint']).then(function(paths) {
+	del([outputFile]).then(function(paths) {
 		return gulp.src(inFiles)
 			.pipe(scsslint({
 				config: '.scsslint.yml',
 				customReport: myCustomReporter
-				// customReport : scssLintStylish,
-				// reporterOutputFormat: 'Checkstyle',
-				// reporterOutput: 'test/results/scss-lint/report.txt'
-			}))
-			// .pipe(scsslint({
-			// 	'reporterOutput': 'test/results/scss-lint/report.json'
-			// }));
+			}));
 	});
 });

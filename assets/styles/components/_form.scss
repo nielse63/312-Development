@@ -1,3 +1,4 @@
+// scss-lint:enable QualifyingElement
 
 // Name:            Form
 //
@@ -34,7 +35,7 @@ $form-border-width: $global-border-width;
 $form-background: $color-white;
 $form-color: $global-font-color;
 $form-font-size: $global-font-size;
-$form-line-height: strip-unit( $form-height - ($form-border-width * 2) ) / strip-unit( $form-font-size );
+$form-line-height: strip-unit($form-height - ($form-border-width * 2)) / strip-unit($form-font-size);
 
 $form-focus-border: #99baca;
 $form-focus-background: #f5fbfe;
@@ -99,8 +100,8 @@ $radio-check-color: $color-primary;
 input,
 select,
 textarea {
-	margin: 0;
 	@include border-radius(0);
+	margin: 0;
 	font: inherit;
 	color: inherit;
 	border: $form-border-width solid $form-border-color;
@@ -136,15 +137,13 @@ input {
 		border: 0;
 		padding: 0;
 	}
-}
-
-
-input {
 
 	// Remove inner padding and search cancel button in Chrome, Safari and Opera on OS X.
 	&[type='search'] {
 		&::-webkit-search-cancel-button,
-		&::-webkit-search-decoration {}
+		&::-webkit-search-decoration {
+			appearance: none;
+		}
 	}
 
 	// Remove button on `.number` input
@@ -172,7 +171,12 @@ textarea {
 }
 
 // Removes placeholder transparency in Firefox.
-::-moz-placeholder {
+// ::-moz-placeholder {
+// 	opacity: 1;
+// }
+
+// Removes placeholder transparency in Firefox.
+::placeholder {
 	opacity: 1;
 }
 
@@ -186,7 +190,7 @@ textarea {
 }
 
 input:-webkit-autofill {
-	box-shadow: inset 0 0 0px 9999px $form-background;
+	box-shadow: inset 0 0 0 9999px $form-background;
 }
 
 // Style
@@ -198,25 +202,29 @@ form > {
 		margin-bottom: 0;
 	}
 }
-&:-ms-input-placeholder {
-	color: $form-placeholder-color !important;
-}
-&::-moz-placeholder {
+
+// &:-ms-input-placeholder {
+// 	color: $form-placeholder-color;
+// }
+
+&::placeholder {
 	color: $form-placeholder-color;
 }
-&::-webkit-input-placeholder {
-	color: $form-placeholder-color;
-}
+
+// &::-webkit-input-placeholder {
+// 	color: $form-placeholder-color;
+// }
+
 &:disabled {
-	&:-ms-input-placeholder {
-		color: $form-disabled-color !important;
-	}
-	&::-moz-placeholder {
+	&:placeholder {
 		color: $form-disabled-color;
 	}
-	&::-webkit-input-placeholder {
-		color: $form-disabled-color;
-	}
+	// &::-moz-placeholder {
+	// 	color: $form-disabled-color;
+	// }
+	// &::-webkit-input-placeholder {
+	// 	color: $form-disabled-color;
+	// }
 }
 
 // Controls
@@ -253,7 +261,7 @@ input {
 	display: inline-block;
 	transition: all linear 200ms;
 	width: 100%;
-	// line-height: (strip-unit( $form-height ) - strip-unit( $form-border-width ) * 2 - strip-unit( $form-padding ) * 2) / strip-unit( $form-font-size );
+	// line-height: (strip-unit($form-height) - strip-unit($form-border-width) * 2 - strip-unit($form-padding) * 2) / strip-unit($form-font-size);
 
 	border: 0;
 	border-bottom: 2px solid $form-border-color;

@@ -33,10 +33,6 @@ export default class Article extends Component {
 		window.postMessage('loaded', window.location.origin);
 	}
 
-	// componentWillUnmount() {
-	// 	window.postMessage('unloaded', window.location.origin);
-	// }
-
 	getPostData() {
 		AppDispatcher.dispatch({
 			action    : 'get-post-data',
@@ -84,15 +80,16 @@ export default class Article extends Component {
 
 		// share links
 		const url = window.location.origin + '/articles/' + this.props.routeParams.slug;
-		const shareText = 'Check out ' + title + ' on 312 Development at ' + url;
+		const shareText = 'Check out "' + title + '" on 312 Development.';
+		// const shareText = 'Check out "' + title + '" on 312 Development at ' + url;
 		const encodedText = encodeURIComponent(shareText);
 		const encodedURL = encodeURIComponent(url);
 
 		// urls
 		const facebookUrl = url;
-		const twitterUrl = 'https://twitter.com/intent/tweet?text=' + encodedText + '&amp;via=cliquechicago&amp;url=' + encodedURL;
+		const twitterUrl = 'https://twitter.com/intent/tweet?text=' + encodedText + '&amp;via=erikkylenielsen&amp;url=' + encodedURL;
 		const googleplusUrl = url;
-		const linkedinUrl = 'http://www.linkedin.com/shareArticle?mini=true&amp;url=' + url + '&amp;title=' + encodedText + '&amp;summary=' + encodedText + encodedURL + '&amp;source=http://312development.com';
+		const linkedinUrl = 'http://www.linkedin.com/shareArticle?mini=true&amp;url=' + url + '&amp;title=' + encodedText + '&amp;summary=' + encodedText + encodedURL + '&amp;source=https://312development.com';
 
 		let footer;
 		if (buttons) {
@@ -106,6 +103,8 @@ export default class Article extends Component {
 				</footer>
 			);
 		}
+
+		console.log(content);
 
 		return (
 			<main className="main single" id="main">

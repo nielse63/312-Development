@@ -18,10 +18,9 @@ $breadcrumb-font-size: $global-font-size;
 $breadcrumb-divider: '/';
 $breadcrumb-divider-margin: 8px;
 $breadcrumb-divider-color: $global-muted-color;
-
 $breadcrumb-inactive-color: $breadcrumb-divider-color;
-
 $breadcrumb-disabled-color: $global-font-color;
+$breadcrumb-border-color: rgba(0, 0, 0, 0.1);
 
 // ========================================================================
 // Component: Breadcrumb
@@ -29,7 +28,7 @@ $breadcrumb-disabled-color: $global-font-color;
 
 .breadcrumbs {
 	background-color: $color-white;
-	border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+	border-bottom: 1px solid $breadcrumb-border-color;
 }
 
 .breadcrumb-list {

@@ -32,14 +32,14 @@ export default class Footer extends Component {
 				<Pattern />
 				<div className="wrap container-fluid">
 					<div className="flex flex-space-between">
-						<div className="col">
+						<div className="col col-left">
 							<nav className="footer-nav">
 								<ul>
 									{menuItems}
 								</ul>
 							</nav>
 						</div>
-						<div className="col">
+						<div className="col col-right">
 							<nav className="footer-nav footer-nav-right">
 								<ul>
 									<li><Link to="/">&copy; 2016 Erik Nielsen</Link></li>

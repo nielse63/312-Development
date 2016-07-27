@@ -29,8 +29,8 @@ linters:
   # ColorKeyword:
   #   enabled: true
 
-  # ColorVariable:
-  #   enabled: true
+  ColorVariable:
+    enabled: false
 
   # Comment:
   #   enabled: true
