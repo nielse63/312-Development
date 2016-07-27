@@ -65,15 +65,16 @@ export function loadTweets() {
 }
 
 export function getStore(callback) {
-	// set globals
-	const client = contentful.createClient({
-		space       : 'o4irotzruet8',
-		accessToken : 'f4a44d21a363ca93576e4e881fd762f88bd38dc912c2c37eba9f359d6ea0a0cb',
-		host        : 'preview.contentful.com',
-	});
-	let complete = false;
 
+	// global vars
+	const storage    = window.localStorage;
+	const checkedKey = 'LastChecked312Feed';
+	const feedKey    = '312Feed';
+	const navKey     = '312Nav';
+
+	// callback
 	function always() {
+
 		// trigger change even
 		AppStore.data.ready = true;
 		AppStore.emitChange();
@@ -83,59 +84,105 @@ export function getStore(callback) {
 		}
 	}
 
-	// get posts
-	client.getEntries({
-		content_type : '47g12FQ9BKOiU0A2OwYIkA',
-	}).then((entries) => {
-		const json = entries.toPlainObject();
-		const items = json.items;
-		const posts = [];
+	function getCachedDate() {
 
-		items.forEach(function(object) {
-			const item = object.fields;
-			item.id = object.sys.id;
-			item.slug = makeSlug(item.title);
-			posts.push(item);
-		});
+		// return bool
+		let hasData = false;
 
-		// set data
-		AppStore.data.posts = posts;
+		// check localstorage first
+		const lastChecked = storage.getItem(checkedKey);
+		const feed        = storage.getItem(feedKey);
+		const nav         = storage.getItem(navKey);
+		if( lastChecked && feed && nav ) {
+			const diff = (Date.now() - Date.parse( lastChecked )) / 1000;
+			const oneDay = 60 * 60 * 24;
+			if( diff < oneDay ) {
 
-		// trigger complete
-		if (complete) {
-			always();
-		} else {
-			complete = true;
+				// set data
+				AppStore.data.posts = JSON.parse(feed);
+				AppStore.data.globals.navItems = JSON.parse(nav);
+				hasData = true;
+			}
 		}
-	});
 
-	// get pages (as nav items)
-	client.getEntries({
-		content_type : 'navItems',
-	}).then((entries) => {
-		const json = entries.toPlainObject();
-		const items = json.items;
-		const navItems = [];
+		return hasData;
+	}
 
-		items.forEach(function(object) {
-			navItems.push({
-				key   : object.sys.id,
-				value : object.fields.path,
-				title : object.fields.title,
-				label : object.fields.navLable,
+	if( ! getCachedDate() ) {
+
+		// update local storage last checked
+		storage.setItem(checkedKey, String(new Date()));
+
+		// set globals
+		const client = contentful.createClient({
+			space       : 'o4irotzruet8',
+			accessToken : 'f4a44d21a363ca93576e4e881fd762f88bd38dc912c2c37eba9f359d6ea0a0cb',
+			host        : 'preview.contentful.com',
+		});
+		let complete = false;
+
+		// get posts
+		client.getEntries({
+			content_type : '47g12FQ9BKOiU0A2OwYIkA',
+		}).then((entries) => {
+			const json = entries.toPlainObject();
+			const items = json.items;
+			const posts = [];
+
+			items.forEach(function(object) {
+				const item = object.fields;
+				item.id    = object.sys.id;
+				item.slug  = makeSlug(item.title);
+				posts.push(item);
 			});
+
+			// cache on local storage
+			storage.setItem(feedKey, JSON.stringify(posts));
+
+			// set data
+			AppStore.data.posts = posts;
+
+			// trigger complete
+			if (complete) {
+				always();
+			} else {
+				complete = true;
+			}
 		});
 
-		// set data
-		AppStore.data.globals.navItems = navItems;
+		// get pages (as nav items)
+		client.getEntries({
+			content_type : 'navItems',
+		}).then((entries) => {
+			const json = entries.toPlainObject();
+			const items = json.items;
+			const navItems = [];
 
-		// trigger complete
-		if (complete) {
-			always();
-		} else {
-			complete = true;
-		}
-	});
+			items.forEach(function(object) {
+				navItems.push({
+					key   : object.sys.id,
+					value : object.fields.path,
+					title : object.fields.title,
+					label : object.fields.navLable,
+				});
+			});
+
+			// cache on local storage
+			storage.setItem(navKey, JSON.stringify(navItems));
+
+			// set data
+			AppStore.data.globals.navItems = navItems;
+
+			// trigger complete
+			if (complete) {
+				always();
+			} else {
+				complete = true;
+			}
+		});
+	} else {
+		always();
+	}
 }
 
 export function getPostData(pageSlug, postSlug) {
