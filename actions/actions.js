@@ -67,14 +67,10 @@ export function loadTweets() {
 export function getStore(callback) {
 
 	// global vars
+	const localStorage = require('localStorage');
 	const checkedKey = 'LastChecked312Feed';
 	const feedKey    = '312Feed';
 	const navKey     = '312Nav';
-
-	// let storage;
-	if (typeof localStorage === 'undefined' || localStorage === null) {
-		localStorage = require('localStorage')
-	}
 
 	function getCachedDate() {
 
