@@ -19,18 +19,6 @@ var plugins = [
 		jQuery          : "jquery",
 		"window.jQuery" : "jquery"
 	}),
-	// new OfflinePlugin({
-	// 	publicPath    : '/dist/',
-	// 	relativePaths : false,
-	// 	caches : {
-	// 		main : [':rest:', '../index.html']
-	// 	},
-	// 	externals: ['../index.html'],
-	// 	ServiceWorker : {
-	// 		output: '../sw.js',
-	// 	},
-	// 	AppCache: false,
-	// })
 ];
 
 if(process.env.NODE_ENV === 'development') {
@@ -49,10 +37,6 @@ if(process.env.NODE_ENV === 'development') {
 		new OfflinePlugin({
 			publicPath    : '/dist/',
 			relativePaths : false,
-			// caches : {
-			// 	main : [':rest:', '../index.html']
-			// },
-			// externals: ['../index.html'],
 			ServiceWorker : {
 				output: '../sw.js',
 			},

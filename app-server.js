@@ -10,7 +10,6 @@ import nodemailer from 'nodemailer'
 import bodyParser from 'body-parser'
 import compression from 'compression'
 import raygun from 'raygun'
-import fs from 'fs'
 import sslRedirect from 'heroku-ssl-redirect';
 
 // Actions

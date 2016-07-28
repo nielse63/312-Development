@@ -2,6 +2,7 @@
 // actions.js
 import contentful from 'contentful';
 import _ from 'lodash';
+import localStorage from 'localStorage'
 
 // AppStore
 import AppStore from '../stores/AppStore';
@@ -67,10 +68,19 @@ export function loadTweets() {
 export function getStore(callback) {
 
 	// global vars
-	const localStorage = localStorage || require('localStorage');
+	// const localStorage = require('localStorage');
 	const checkedKey   = 'LastChecked312Feed';
 	const feedKey      = '312Feed';
 	const navKey       = '312Nav';
+
+	function always() {
+		// trigger change even
+		AppStore.data.ready = true;
+		AppStore.emitChange();
+		if(callback) {
+			callback(false, AppStore);
+		}
+	}
 
 	function getCachedDate() {
 
@@ -91,8 +101,8 @@ export function getStore(callback) {
 				AppStore.data.globals.navItems = JSON.parse(nav);
 				hasData = true;
 			}
-			return hasData;
 		}
+		return hasData;
 	}
 
 	if( ! getCachedDate() ) {
@@ -107,16 +117,6 @@ export function getStore(callback) {
 			host        : 'preview.contentful.com',
 		});
 		let complete = false;
-
-		function always() {
-			// trigger change even
-			AppStore.data.ready = true;
-			AppStore.emitChange();
-
-			if (callback) {
-				callback(false, AppStore);
-			}
-		}
 
 		// get posts
 		client.getEntries({

@@ -2,7 +2,7 @@
 // About.js
 import React, { Component } from 'react';
 import config from '../../../config';
-import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
+// import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 // import { default as styles } from './About.scss';
 
 // Components
