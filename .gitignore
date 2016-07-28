@@ -5,5 +5,3 @@ npm-debug.log
 test/results
 .notes
 .certs
-config.js
-public/assets.json

@@ -1,10 +1,11 @@
 {
 	"name": "312-development",
-	"version": "1.0.14",
+	"version": "1.0.15",
 	"description": "",
 	"main": "app-server.js",
 	"engine": {
-		"node": "5.8.0"
+		"node": ">=5.8.0",
+    "npm": ">=3.8.7"
 	},
 	"dependencies": {
 		"babel": "^5.8.29",
