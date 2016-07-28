@@ -70,11 +70,8 @@ gulp.task('bump', function(){
 
 // ### Build
 gulp.task('build', function(callback) {
-
-	var tasks = ['other', 'styles', 'images', 'fonts'];
-
 	runSequence(
-		tasks,
+		['other', 'styles', 'images', 'fonts'],
 		callback
 	);
 });

@@ -1,7 +1,5 @@
 
 // app-server.js
-// import { match, history, RouterContext } from 'react-router'
-
 import React from 'react'
 import { match, RouterContext } from 'react-router'
 import { renderToStaticMarkup } from 'react-dom/server'
@@ -12,6 +10,8 @@ import nodemailer from 'nodemailer'
 import bodyParser from 'body-parser'
 import compression from 'compression'
 import raygun from 'raygun'
+import fs from 'fs'
+import sslRedirect from 'heroku-ssl-redirect';
 
 // Actions
 import { getStore, getPostData, getPageData } from './actions/actions'
@@ -33,6 +33,7 @@ app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(express.static(`${__dirname}/public/`))
 app.use(raygunClient.expressHandler)
+app.use(sslRedirect(['production']))
 
 app.set('port', (process.env.PORT || 3030))
 
@@ -68,15 +69,6 @@ app.post('/submit', (req, res) => {
 		res.redirect(302, '/submission-received')
 	});
 });
-
-//force ssl
-// app.get('*', (req, res, next) => {
-// 	if(req.headers['x-forwarded-proto'] !== 'https') {
-// 		res.redirect(config.site.url + req.url);
-// 	} else {
-// 		next();
-// 	}
-// });
 
 app.get('*', (req, res) => {
 	getStore(function(err, AppStore) {
@@ -120,5 +112,5 @@ app.get('*', (req, res) => {
 app.listen(app.get('port'), function() {
 	console.info('==> ✅  Server is listening in ' + process.env.NODE_ENV + ' mode')
 	console.info('==> 🌎  Go to http://localhost:%s', app.get('port'))
-});
+})
 
