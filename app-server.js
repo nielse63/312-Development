@@ -1,5 +1,7 @@
 
 // app-server.js
+// import { match, history, RouterContext } from 'react-router'
+
 import React from 'react'
 import { match, RouterContext } from 'react-router'
 import { renderToStaticMarkup } from 'react-dom/server'
@@ -21,9 +23,6 @@ import routes from './routes'
 const raygunClient = new raygun.Client().init({
 	apiKey: 'jUh0t7Fbz5Kl3fKsNO8pDg=='
 })
-
-// globals
-const index = process.env.NODE_ENV === 'production' ? 'index.prod.html' : 'index.dev.html'
 
 // Express
 const app = express()
@@ -70,6 +69,15 @@ app.post('/submit', (req, res) => {
 	});
 });
 
+//force ssl
+// app.get('*', (req, res, next) => {
+// 	if(req.headers['x-forwarded-proto'] !== 'https') {
+// 		res.redirect(config.site.url + req.url);
+// 	} else {
+// 		next();
+// 	}
+// });
+
 app.get('*', (req, res) => {
 	getStore(function(err, AppStore) {
 		if(err) {
@@ -77,6 +85,7 @@ app.get('*', (req, res) => {
 		}
 		return match({ routes, location: req.url }, (error, redirectLocation, renderProps) => {
 
+			// console.log(AppStore);
 			const slugArray = req.url.split('/')
 			const pageSlug = slugArray[1]
 
@@ -100,14 +109,13 @@ app.get('*', (req, res) => {
 			} else if (renderProps) {
 
 				// Success!
-				console.log(index);
-				res.status(200).render(index)
+				res.status(200).render('index.html')
 			} else {
-				res.status(404).render(index)
+				res.status(404).render('index.html')
 			}
 		})
 	})
-});
+})
 
 app.listen(app.get('port'), function() {
 	console.info('==> ✅  Server is listening in ' + process.env.NODE_ENV + ' mode')

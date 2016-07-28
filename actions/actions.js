@@ -1,8 +1,7 @@
 
 // actions.js
-import contentful from 'contentful'
-import _ from 'lodash'
-// import localStorage from 'localStorage'
+import contentful from 'contentful';
+import _ from 'lodash';
 
 // AppStore
 import AppStore from '../stores/AppStore';
@@ -66,22 +65,15 @@ export function loadTweets() {
 }
 
 export function getStore(callback) {
+	// set globals
+	const client = contentful.createClient({
+		space       : 'o4irotzruet8',
+		accessToken : 'f4a44d21a363ca93576e4e881fd762f88bd38dc912c2c37eba9f359d6ea0a0cb',
+		host        : 'preview.contentful.com',
+	});
+	let complete = false;
 
-	// global vars
-	let storage;
-	if (typeof localStorage === "undefined" || localStorage === null) {
-		storage = require('localStorage')
-		// storage = new LocalStorage('./scratch');
-	} else {
-		storage = localStorage;
-	}
-	const checkedKey = 'LastChecked312Feed';
-	const feedKey    = '312Feed';
-	const navKey     = '312Nav';
-
-	// callback
 	function always() {
-
 		// trigger change even
 		AppStore.data.ready = true;
 		AppStore.emitChange();
@@ -91,105 +83,59 @@ export function getStore(callback) {
 		}
 	}
 
-	function getCachedDate() {
+	// get posts
+	client.getEntries({
+		content_type : '47g12FQ9BKOiU0A2OwYIkA',
+	}).then((entries) => {
+		const json = entries.toPlainObject();
+		const items = json.items;
+		const posts = [];
 
-		// return bool
-		let hasData = false;
+		items.forEach(function(object) {
+			const item = object.fields;
+			item.id = object.sys.id;
+			item.slug = makeSlug(item.title);
+			posts.push(item);
+		});
 
-		// check localstorage first
-		const lastChecked = storage.getItem(checkedKey);
-		const feed        = storage.getItem(feedKey);
-		const nav         = storage.getItem(navKey);
-		if( lastChecked && feed && nav ) {
-			const diff = (Date.now() - Date.parse( lastChecked )) / 1000;
-			const oneDay = 60 * 60 * 24;
-			if( diff < oneDay ) {
+		// set data
+		AppStore.data.posts = posts;
 
-				// set data
-				AppStore.data.posts = JSON.parse(feed);
-				AppStore.data.globals.navItems = JSON.parse(nav);
-				hasData = true;
-			}
+		// trigger complete
+		if (complete) {
+			always();
+		} else {
+			complete = true;
 		}
+	});
 
-		return hasData;
-	}
+	// get pages (as nav items)
+	client.getEntries({
+		content_type : 'navItems',
+	}).then((entries) => {
+		const json = entries.toPlainObject();
+		const items = json.items;
+		const navItems = [];
 
-	if( ! getCachedDate() ) {
-
-		// update local storage last checked
-		storage.setItem(checkedKey, String(new Date()));
-
-		// set globals
-		const client = contentful.createClient({
-			space       : 'o4irotzruet8',
-			accessToken : 'f4a44d21a363ca93576e4e881fd762f88bd38dc912c2c37eba9f359d6ea0a0cb',
-			host        : 'preview.contentful.com',
-		});
-		let complete = false;
-
-		// get posts
-		client.getEntries({
-			content_type : '47g12FQ9BKOiU0A2OwYIkA',
-		}).then((entries) => {
-			const json = entries.toPlainObject();
-			const items = json.items;
-			const posts = [];
-
-			items.forEach(function(object) {
-				const item = object.fields;
-				item.id    = object.sys.id;
-				item.slug  = makeSlug(item.title);
-				posts.push(item);
+		items.forEach(function(object) {
+			navItems.push({
+				key   : object.sys.id,
+				value : object.fields.path,
+				title : object.fields.title,
+				label : object.fields.navLable,
 			});
-
-			// cache on local storage
-			storage.setItem(feedKey, JSON.stringify(posts));
-
-			// set data
-			AppStore.data.posts = posts;
-
-			// trigger complete
-			if (complete) {
-				always();
-			} else {
-				complete = true;
-			}
 		});
 
-		// get pages (as nav items)
-		client.getEntries({
-			content_type : 'navItems',
-		}).then((entries) => {
-			const json = entries.toPlainObject();
-			const items = json.items;
-			const navItems = [];
+		// set data
+		AppStore.data.globals.navItems = navItems;
 
-			items.forEach(function(object) {
-				navItems.push({
-					key   : object.sys.id,
-					value : object.fields.path,
-					title : object.fields.title,
-					label : object.fields.navLable,
-				});
-			});
-
-			// cache on local storage
-			storage.setItem(navKey, JSON.stringify(navItems));
-
-			// set data
-			AppStore.data.globals.navItems = navItems;
-
-			// trigger complete
-			if (complete) {
-				always();
-			} else {
-				complete = true;
-			}
-		});
-	} else {
-		always();
-	}
+		// trigger complete
+		if (complete) {
+			always();
+		} else {
+			complete = true;
+		}
+	});
 }
 
 export function getPostData(pageSlug, postSlug) {

@@ -1,6 +1,6 @@
 {
   "name": "312-development",
-  "version": "1.0.18",
+  "version": "1.0.13",
   "description": "",
   "main": "app-server.js",
   "engine": {
@@ -37,7 +37,7 @@
     "whatwg-fetch": "^1.0.0"
   },
   "scripts": {
-    "predevelopment": "NODE_ENV=development webpack -d && gulp views",
+    "predevelopment": "gulp views && NODE_ENV=development webpack -d",
     "development": "NODE_ENV=development PORT=8080 webpack-dev-server --content-base public/ --hot --inline --devtool inline-source-map --history-api-fallback",
     "start": "npm run production",
     "preproduction": "npm run prerelease",
@@ -49,7 +49,6 @@
   "license": "ISC",
   "devDependencies": {
     "asset-builder": "^1.1.0",
-    "assets-webpack-plugin": "^3.4.0",
     "autoprefixer-loader": "^3.2.0",
     "babel-eslint": "^6.1.2",
     "browser-sync": "^2.13.0",
@@ -81,7 +80,6 @@
     "gulp-sourcemaps": "^1.6.0",
     "gulp-util": "^3.0.7",
     "imagemin-pngcrush": "^5.0.0",
-    "localStorage": "^1.0.3",
     "minimist": "^1.2.0",
     "mkdirp": "^0.5.1",
     "node-sass": "^3.8.0",
@@ -91,7 +89,6 @@
     "sass-loader": "^4.0.0",
     "slimerjs": "^0.906.2",
     "style-loader": "^0.13.1",
-    "sw-precache": "^4.0.0",
     "webpack-dev-server": "^1.14.1",
     "wiredep": "^4.0.0"
   }
