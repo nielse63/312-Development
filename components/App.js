@@ -78,7 +78,6 @@ class App extends Component {
 		// props
 		const navItems = data.globals.navItems;
 		const transitionDuration = 1200;
-		// console.log(data);
 
 		return (
 			<div>

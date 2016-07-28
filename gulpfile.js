@@ -52,7 +52,7 @@ var enabled = {
 
 // ### Watch
 gulp.task('watch', function() {
-	gulp.watch(['assets/styles/**/*'], ['styles', 'scss-lint']);
+	// gulp.watch(['assets/styles/**/*'], ['styles', 'scss-lint']);
 	gulp.watch(['assets/fonts/**/*'], ['fonts']);
 	gulp.watch(['assets/images/**/*'], ['images']);
 	gulp.watch(['assets/other/**/*'], ['other']);
@@ -71,7 +71,7 @@ gulp.task('bump', function(){
 // ### Build
 gulp.task('build', function(callback) {
 	runSequence(
-		['other', 'styles', 'images', 'fonts'],
+		['other', 'images', 'fonts'],
 		callback
 	);
 });

@@ -21,7 +21,7 @@ import routes from './routes'
 
 // Raygun
 const raygunClient = new raygun.Client().init({
-	apiKey: 'jUh0t7Fbz5Kl3fKsNO8pDg=='
+	apiKey: config.raygun.apiKey
 })
 
 // Express
@@ -33,9 +33,15 @@ app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(express.static(`${__dirname}/public/`))
 app.use(raygunClient.expressHandler)
-app.use(sslRedirect(['production']))
 
-app.set('port', (process.env.PORT || 3030))
+app.use(function(req, res, next) {
+	if( req.hostname !== 'localhost' ) {
+		app.use(sslRedirect(['production']))
+	}
+	next()
+})
+
+app.set('port', (process.env.PORT || 5000))
 
 app.post('/submit', (req, res) => {
 	const transporter = nodemailer.createTransport({
@@ -77,7 +83,6 @@ app.get('*', (req, res) => {
 		}
 		return match({ routes, location: req.url }, (error, redirectLocation, renderProps) => {
 
-			// console.log(AppStore);
 			const slugArray = req.url.split('/')
 			const pageSlug = slugArray[1]
 

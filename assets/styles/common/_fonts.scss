@@ -81,8 +81,8 @@ $font-path: '../fonts';
 	src: url('#{$font-path}/Brandon_bld.eot');
 	src: url('#{$font-path}/Brandon_bld.eot?#iefix') format('embedded-opentype'),
 		 url('#{$font-path}/Brandon_bld.woff') format('woff'),
-		 url('#{$font-path}/Brandon_bld.ttf') format('truetype'),
-		 url('#{$font-path}/Brandon_bld.svg#41e76bd6e414417d52adb646f262964a') format('svg');
+		 url('#{$font-path}/Brandon_bld.ttf') format('truetype');
+		 // url('#{$font-path}/Brandon_bld.svg#41e76bd6e414417d52adb646f262964a') format('svg');
 	font-style:    normal;
 	font-weight:   700;
 	unicode-range: U+000-5FF;
@@ -93,8 +93,8 @@ $font-path: '../fonts';
 	src: url('#{$font-path}/Brandon_reg.eot');
 	src: url('#{$font-path}/Brandon_reg.eot?#iefix') format('embedded-opentype'),
 		 url('#{$font-path}/Brandon_reg.woff') format('woff'),
-		 url('#{$font-path}/Brandon_reg.ttf')  format('truetype'),
-		 url('#{$font-path}/Brandon_reg.svg#50bf5a2005a5412419d6a4b30314e68e') format('svg');
+		 url('#{$font-path}/Brandon_reg.ttf')  format('truetype');
+		 // url('#{$font-path}/Brandon_reg.svg#50bf5a2005a5412419d6a4b30314e68e') format('svg');
 	font-style:    normal;
 	font-weight:   400;
 	unicode-range: U+000-5FF;
