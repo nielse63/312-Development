@@ -1,6 +1,6 @@
 
 // config.js
-export default {
+module.exports = {
 	site : {
 		title       : '312 Development',
 		description : 'Front-End Developer and JavaScript Engineer',
@@ -9,5 +9,8 @@ export default {
 	bucket : {
 		slug      : '312-development',
 		media_url : 'https://cosmicjs.com/uploads',
+	},
+	raygun : {
+		apiKey : 'jUh0t7Fbz5Kl3fKsNO8pDg==',
 	},
 };
