@@ -67,10 +67,10 @@ export function loadTweets() {
 export function getStore(callback) {
 
 	// global vars
-	const localStorage = require('localStorage');
-	const checkedKey = 'LastChecked312Feed';
-	const feedKey    = '312Feed';
-	const navKey     = '312Nav';
+	const localStorage = localStorage || require('localStorage');
+	const checkedKey   = 'LastChecked312Feed';
+	const feedKey      = '312Feed';
+	const navKey       = '312Nav';
 
 	function getCachedDate() {
 
@@ -78,9 +78,9 @@ export function getStore(callback) {
 		let hasData = false;
 
 		// check localstorage first
-		const lastChecked = storage.getItem(checkedKey);
-		const feed        = storage.getItem(feedKey);
-		const nav         = storage.getItem(navKey);
+		const lastChecked = localStorage.getItem(checkedKey);
+		const feed        = localStorage.getItem(feedKey);
+		const nav         = localStorage.getItem(navKey);
 		if( lastChecked && feed && nav ) {
 			const diff = (Date.now() - Date.parse( lastChecked )) / 1000;
 			const oneDay = 60 * 60 * 24;
@@ -98,7 +98,7 @@ export function getStore(callback) {
 	if( ! getCachedDate() ) {
 
 		// update local storage last checked
-		storage.setItem(checkedKey, String(new Date()));
+		localStorage.setItem(checkedKey, String(new Date()));
 
 		// set globals
 		const client = contentful.createClient({
@@ -134,7 +134,7 @@ export function getStore(callback) {
 			});
 
 			// cache on local storage
-			storage.setItem(feedKey, JSON.stringify(posts));
+			localStorage.setItem(feedKey, JSON.stringify(posts));
 
 			// set data
 			AppStore.data.posts = posts;
@@ -165,7 +165,7 @@ export function getStore(callback) {
 			});
 
 			// cache on local storage
-			storage.setItem(navKey, JSON.stringify(navItems));
+			localStorage.setItem(navKey, JSON.stringify(navItems));
 
 			// set data
 			AppStore.data.globals.navItems = navItems;
