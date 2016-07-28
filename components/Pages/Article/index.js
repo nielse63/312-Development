@@ -104,6 +104,8 @@ export default class Article extends Component {
 			);
 		}
 
+		console.log(content);
+
 		return (
 			<main className="main single" id="main">
 				<section className="banner single-banner" data-src={background}>
