@@ -32,32 +32,32 @@ if(inDev) {
 	loaders = ['react-hot', 'babel'];
 } else {
 	loaders = ['babel'];
-	plugins = plugins.concat([
-		new webpack.optimize.UglifyJsPlugin({
-			compress: {
-				warnings: false
-			}
-		}),
-		new ImageminPlugin({
-			disable: false,
-			optipng: {
-				optimizationLevel: 3
-			},
-			gifsicle: {
-				optimizationLevel: 1
-			},
-			jpegtran: {
-				progressive: false
-			},
-			svgo: {
-			},
-			pngquant: null,
-			plugins: []
-		}),
-		new PurifyPlugin({
-			basePath: __dirname,
-		}),
-	]);
+	// plugins = plugins.concat([
+	// 	new webpack.optimize.UglifyJsPlugin({
+	// 		compress: {
+	// 			warnings: false
+	// 		}
+	// 	}),
+	// 	new ImageminPlugin({
+	// 		disable: false,
+	// 		optipng: {
+	// 			optimizationLevel: 3
+	// 		},
+	// 		gifsicle: {
+	// 			optimizationLevel: 1
+	// 		},
+	// 		jpegtran: {
+	// 			progressive: false
+	// 		},
+	// 		svgo: {
+	// 		},
+	// 		pngquant: null,
+	// 		plugins: []
+	// 	}),
+	// 	new PurifyPlugin({
+	// 		basePath: __dirname,
+	// 	}),
+	// ]);
 }
 
 plugins = plugins.concat([
@@ -98,8 +98,7 @@ module.exports = {
 			test: /\.scss$/,
 			loaders: [
 				"style",
-				"css?sourceMap&importLoaders=1&localIdentName=[name]_[local]_[hash:base64:3]!sass",
-				"sass?sourceMap"
+				"css?importLoaders=1&localIdentName=[name]_[local]_[hash:base64:3]!resolve-url!sass?sourceMap",
 			]
 		}, {
 			test: /\.woff2?$|\.ttf$|\.eot$|\.svg$/,

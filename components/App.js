@@ -29,7 +29,17 @@ class App extends Component {
 	// Add change listeners to stores
 	componentWillMount() {
 		AppStore.addChangeListener(this.stateDidChange.bind(this));
-		this.getStore();
+		// if( ! AppStore.data.ready ) {
+		// 	this.getStore();
+		// }
+	}
+
+	// Add change listeners to stores
+	componentDidMount() {
+		// AppStore.addChangeListener(this.stateDidChange.bind(this));
+		if( ! AppStore.data.ready ) {
+			this.getStore();
+		}
 	}
 
 	// Remove change listeners from stores
@@ -57,10 +67,11 @@ class App extends Component {
 
 		// Show loading for browser
 		if (! data.ready) {
-			if (typeof document !== 'undefined') {
-				document.title = 'Loading';
-			}
+			// if (typeof document !== 'undefined') {
+			// 	document.title = 'Loading';
+			// }
 
+			// this.getStore();
 
 			return (
 				<div>
