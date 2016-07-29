@@ -10,6 +10,7 @@ import bodyParser from 'body-parser'
 import compression from 'compression'
 import raygun from 'raygun'
 import config from './config'
+import sslRedirect from 'heroku-ssl-redirect'
 // import enforce from 'express-sslify'
 // import http from 'http'
 
@@ -39,9 +40,9 @@ app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(express.static(`${__dirname}/public/`))
 // app.use(enforce.HTTPS({ trustProtoHeader: true })) // eslint-disable-line new-cap
-// if( process.env.ON_LOCAL !== 'true' ) {
-// 	app.use(sslRedirect(['production']))
-// }
+if( process.env.ON_LOCAL !== 'true' ) {
+	app.use(sslRedirect(['production']))
+}
 
 app.set('port', (process.env.PORT || 5000))
 

@@ -14,6 +14,6 @@ module.exports = {
 		media_url : 'https://cosmicjs.com/uploads',
 	},
 	raygun : {
-		apiKey : 'xHapO7tbTzzzESni1ZpjsA==',
+		apiKey : process.env.RAYGUN_APIKEY,
 	},
 };
