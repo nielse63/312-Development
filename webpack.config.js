@@ -9,7 +9,9 @@ const OfflinePlugin     = require('offline-plugin');
 const path              = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const config            = require('./config');
-const read              = require('fs-readdir-recursive')
+const read              = require('fs-readdir-recursive');
+const precss            = require('precss');
+const autoprefixer      = require('autoprefixer');
 
 var loaders;
 // const inDev = process.env.NODE_ENV === 'development';
@@ -127,6 +129,20 @@ module.exports = {
 		includePaths: [
 			path.resolve(__dirname, "./assets/styles"),
 		]
+	},
+	postcss: function() {
+		return {
+			defaults : [precss, autoprefixer],
+			cleaner  : [autoprefixer({
+				browsers: [
+					'> 1%',
+					'last 5 versions',
+					'android 4',
+					'opera 12',
+					'ie 10'
+				]
+			})]
+		}
 	},
 	plugins : plugins,
 };
