@@ -1,6 +1,6 @@
 {
   "name": "312-development",
-  "version": "1.0.20",
+  "version": "1.0.21",
   "description": "",
   "main": "app-server.js",
   "engine": {
@@ -46,8 +46,8 @@
     "start": "npm run production",
     "preproduction": "npm run prerelease",
     "production": "NODE_ENV=production node app.js",
-    "prerelease": "npm test && rm -rf public && NODE_ENV=production webpack -p --release && gulp build --production",
-    "release": "gulp bump && sh ./.bin/release.sh",
+    "prerelease": "rm -rf public && NODE_ENV=production webpack -p --release && gulp build --production",
+    "release": "npm test && gulp bump && sh ./.bin/release.sh",
     "test": "gulp eslint"
   },
   "author": "Erik Nielsen",

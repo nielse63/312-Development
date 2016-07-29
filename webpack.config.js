@@ -4,7 +4,7 @@ const webpack           = require('webpack');
 const CompressionPlugin = require('compression-webpack-plugin');
 const PurifyPlugin      = require('purifycss-webpack-plugin');
 // const ExtractTextPlugin = require("extract-text-webpack-plugin");
-var ImageminPlugin      = require('imagemin-webpack-plugin').default;
+const ImageminPlugin      = require('imagemin-webpack-plugin').default;
 const OfflinePlugin     = require('offline-plugin');
 const path              = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
@@ -16,24 +16,16 @@ var plugins = [
 	new webpack.NoErrorsPlugin(),
 	new webpack.optimize.DedupePlugin(),
 	new webpack.optimize.OccurenceOrderPlugin(),
-	new webpack.DefinePlugin({
-		'process.env': {
-			NODE_ENV : '"' + process.env.NODE_ENV + '"'
-		}
-	}),
+	// new webpack.DefinePlugin({
+	// 	'process.env': {
+	// 		NODE_ENV : '"' + process.env.NODE_ENV + '"'
+	// 	}
+	// }),
 	new webpack.ProvidePlugin({
 		$               : "jquery",
 		jQuery          : "jquery",
 		"window.jQuery" : "jquery"
 	}),
-	new OfflinePlugin({
-		publicPath    : '/dist/',
-		relativePaths : false,
-		ServiceWorker : {
-			output: '../sw.js',
-		},
-		AppCache: false,
-	})
 ];
 
 if(inDev) {
@@ -41,6 +33,11 @@ if(inDev) {
 } else {
 	loaders = ['babel'];
 	plugins = plugins.concat([
+		new webpack.optimize.UglifyJsPlugin({
+			compress: {
+				warnings: false
+			}
+		}),
 		new ImageminPlugin({
 			disable: false,
 			optipng: {
@@ -57,19 +54,26 @@ if(inDev) {
 			pngquant: null,
 			plugins: []
 		}),
-		new webpack.optimize.UglifyJsPlugin({
-			compress: {
-				warnings: false
-			}
-		}),
 		new PurifyPlugin({
 			basePath: __dirname,
 		}),
 	]);
 }
 
+plugins = plugins.concat([
+	new OfflinePlugin({
+		publicPath    : '/dist/',
+		relativePaths : false,
+		ServiceWorker : {
+			output: '../sw.js',
+		},
+		AppCache: false,
+	})
+]);
+// console.log(plugins);
+
 module.exports = {
-	devtool: 'source-map',
+	devtool: 'eval-source-map',
 	entry: {
 		app  : './app-client.js',
 		scss : './assets/styles/main.scss'
@@ -113,16 +117,4 @@ module.exports = {
 	},
 	plugins : plugins,
 };
-
-// if(process.env.NODE_ENV === 'development') {
-// 	wpConfig.node = {
-// 		console: true,
-// 		fs: 'empty',
-// 		// net: 'empty',
-// 		// tls: 'empty'
-// 	};
-// }
-
-
-// module.exports = wpConfig;
 

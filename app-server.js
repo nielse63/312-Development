@@ -10,7 +10,7 @@ import nodemailer from 'nodemailer'
 import bodyParser from 'body-parser'
 import compression from 'compression'
 import raygun from 'raygun'
-import sslRedirect from 'heroku-ssl-redirect';
+// import sslRedirect from 'heroku-ssl-redirect';
 
 // Actions
 import { getStore, getPostData, getPageData } from './actions/actions'
@@ -32,13 +32,7 @@ app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(express.static(`${__dirname}/public/`))
 app.use(raygunClient.expressHandler)
-
-app.use(function(req, res, next) {
-	if( req.hostname !== 'localhost' ) {
-		app.use(sslRedirect(['production']))
-	}
-	next()
-})
+// app.use(sslRedirect(['production']))
 
 app.set('port', (process.env.PORT || 5000))
 
