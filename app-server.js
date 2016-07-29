@@ -11,8 +11,6 @@ import compression from 'compression'
 import raygun from 'raygun'
 import config from './config'
 import sslRedirect from 'heroku-ssl-redirect'
-// import enforce from 'express-sslify'
-// import http from 'http'
 
 // Actions
 import { getStore, getPostData, getPageData } from './actions/actions'
@@ -39,14 +37,14 @@ app.use(compression())
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(express.static(`${__dirname}/public/`))
-// app.use(enforce.HTTPS({ trustProtoHeader: true })) // eslint-disable-line new-cap
 if( process.env.ON_LOCAL !== 'true' ) {
 	app.use(sslRedirect(['production']))
 }
 
 app.set('port', (process.env.PORT || 5000))
 
-app.post('/whoami', (req) => {
+app.get('/whoami', (req) => {
+	console.log(req.body);
 	raygunClient.user(req.body);
 });
 
@@ -56,8 +54,8 @@ app.post('/submit', (req, res) => {
 		port: 465,
 		secure: true,
 		auth: {
-			user: 'postmaster@312development.com',
-			pass: '62479f8b7f91ade480f7eb80ef52002e'
+			user: config.mailgun.user,
+			pass: config.mailgun.pass,
 		}
 	});
 
@@ -131,7 +129,4 @@ app.listen(app.get('port'), function() {
 	console.info('==> ✅  Server is listening in ' + process.env.NODE_ENV + ' mode')
 	console.info('==> 🌎  Go to http://localhost:%s', app.get('port'))
 })
-// http.createServer(app).listen(app.get('port'), function() {
-// 	console.log('Express server listening on port ' + app.get('port'));
-// });
 

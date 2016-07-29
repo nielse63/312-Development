@@ -26,6 +26,9 @@ import Services from './lib/components/_services';
 import Share from './lib/components/_share';
 import Footer from './lib/components/_footer';
 
+// config vars
+import config from '../../config'
+
 class AppUI {
 
 	constructor() {
@@ -253,7 +256,7 @@ class AppUI {
 	}
 
 	setupRaygun() {
-		window.rg4js('apiKey', 'xHapO7tbTzzzESni1ZpjsA==');
+		window.rg4js('apiKey', config.raygun.apiKey);
 		window.rg4js('enablePulse', true);
 		window.rg4js('enableCrashReporting', true);
 		window.rg4js('options', {
@@ -272,11 +275,15 @@ class AppUI {
 		window.rg4js('setUser', userObject);
 
 		// post to server
-		_c.$.ajax({
-			type : 'post',
-			url : '/whoami',
-			data : userObject,
-		})
+		const url =  window.location.protocol + '//' + window.location.hostname + '/whoami';
+		console.log(url);
+		_c.$.get(url, userObject)
+			.done(function() {
+				console.log( "complete" );
+			})
+			.fail(function() {
+				console.log( "fail" );
+			})
 	}
 
 	getRayGunUser() {

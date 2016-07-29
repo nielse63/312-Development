@@ -9,11 +9,17 @@ module.exports = {
 		url         : 'https://312development.com',
 		version     : pckage.version,
 	},
-	bucket : {
-		slug      : '312-development',
-		media_url : 'https://cosmicjs.com/uploads',
-	},
 	raygun : {
 		apiKey : process.env.RAYGUN_APIKEY,
+	},
+	contentful : {
+		accessToken : process.env.CONTENTFUL_TOKEN,
+		space : process.env.CONTENTFUL_SPACE,
+		host : process.env.CONTENTFUL_HOST,
+		content_type : process.env.CONTENTFUL_CONTENT_TYPE
+	},
+	mailgun : {
+		user : process.env.MAILGUN_USER,
+		pass : process.env.MAILGUN_PASS,
 	},
 };

@@ -1,12 +1,11 @@
 
 // actions.js
-import contentful from 'contentful';
-import _ from 'lodash';
-// import localStorage from 'localStorage'
-// import fs from 'fs'
+import contentful from 'contentful'
+import _ from 'lodash'
+import config from '../config'
 
 // AppStore
-import AppStore from '../stores/AppStore';
+import AppStore from '../stores/AppStore'
 
 function makeSlug(string) {
 	let path = string.replace(/[\s|_|.]/g, '-');
@@ -112,9 +111,9 @@ export function getStore(callback) {
 
 		// set globals
 		const client = contentful.createClient({
-			space       : 'o4irotzruet8',
-			accessToken : 'f4a44d21a363ca93576e4e881fd762f88bd38dc912c2c37eba9f359d6ea0a0cb',
-			host        : 'preview.contentful.com',
+			space       : config.contentful.space,
+			accessToken : config.contentful.accessToken,
+			host        : config.contentful.host,
 		});
 		let complete = false;
 
