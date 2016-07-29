@@ -2,7 +2,8 @@
 // actions.js
 import contentful from 'contentful';
 import _ from 'lodash';
-import localStorage from 'localStorage'
+// import localStorage from 'localStorage'
+// import fs from 'fs'
 
 // AppStore
 import AppStore from '../stores/AppStore';
@@ -68,9 +69,9 @@ export function loadTweets() {
 export function getStore(callback) {
 
 	// global vars
-	const checkedKey   = 'LastChecked312Feed';
-	const feedKey      = '312Feed';
-	const navKey       = '312Nav';
+	// const checkedKey   = 'LastChecked312Feed';
+	// const feedKey      = '312Feed';
+	// const navKey       = '312Nav';
 
 	function always() {
 		// trigger change even
@@ -81,33 +82,33 @@ export function getStore(callback) {
 		}
 	}
 
-	function getCachedDate() {
+	// function getCachedDate() {
 
-		// return bool
-		let hasData = false;
+	// 	// return bool
+	// 	let hasData = false;
 
-		// check localstorage first
-		const lastChecked  = localStorage.getItem(checkedKey);
-		const feed         = localStorage.getItem(feedKey);
-		const nav          = localStorage.getItem(navKey);
-		if( lastChecked && feed && nav ) {
-			const diff = (Date.now() - Date.parse( lastChecked )) / 1000;
-			const oneDay = 60 * 60 * 24;
-			if( diff < oneDay ) {
+	// // 	// check localstorage first
+	// // 	const lastChecked  = localStorage.getItem(checkedKey);
+	// // 	const feed         = localStorage.getItem(feedKey);
+	// // 	const nav          = localStorage.getItem(navKey);
+	// // 	if( lastChecked && feed && nav ) {
+	// // 		const diff = (Date.now() - Date.parse( lastChecked )) / 1000;
+	// // 		const oneDay = 60 * 60 * 24;
+	// // 		if( diff < oneDay ) {
 
-				// set data
-				AppStore.data.posts = JSON.parse(feed);
-				AppStore.data.globals.navItems = JSON.parse(nav);
-				hasData = true;
-			}
-		}
-		return hasData;
-	}
+	// // 			// set data
+	// // 			AppStore.data.posts = JSON.parse(feed);
+	// // 			AppStore.data.globals.navItems = JSON.parse(nav);
+	// // 			hasData = true;
+	// // 		}
+	// // 	}
+	// 	return hasData;
+	// }
 
-	if( ! getCachedDate() ) {
+	// if( ! getCachedDate() ) {
 
 		// update local storage last checked
-		localStorage.setItem(checkedKey, String(new Date()));
+		// localStorage.setItem(checkedKey, String(new Date()));
 
 		// set globals
 		const client = contentful.createClient({
@@ -133,7 +134,7 @@ export function getStore(callback) {
 			});
 
 			// cache on local storage
-			localStorage.setItem(feedKey, JSON.stringify(posts));
+			// localStorage.setItem(feedKey, JSON.stringify(posts));
 
 			// set data
 			AppStore.data.posts = posts;
@@ -164,7 +165,7 @@ export function getStore(callback) {
 			});
 
 			// cache on local storage
-			localStorage.setItem(navKey, JSON.stringify(navItems));
+			// localStorage.setItem(navKey, JSON.stringify(navItems));
 
 			// set data
 			AppStore.data.globals.navItems = navItems;
@@ -176,9 +177,9 @@ export function getStore(callback) {
 				complete = true;
 			}
 		});
-	} else {
-		always();
-	}
+	// } else {
+	// 	always();
+	// }
 }
 
 export function getPostData(pageSlug, postSlug) {

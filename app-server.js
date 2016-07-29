@@ -5,11 +5,11 @@ import { match, RouterContext } from 'react-router'
 import { renderToStaticMarkup } from 'react-dom/server'
 import express from 'express'
 import hogan from 'hogan-express'
-import config from './config'
 import nodemailer from 'nodemailer'
 import bodyParser from 'body-parser'
 import compression from 'compression'
 import raygun from 'raygun'
+import config from './config'
 // import sslRedirect from 'heroku-ssl-redirect';
 
 // Actions
@@ -18,10 +18,10 @@ import { getStore, getPostData, getPageData } from './actions/actions'
 // Routes
 import routes from './routes'
 
-// Raygun
+// raygun
 const raygunClient = new raygun.Client().init({
 	apiKey: config.raygun.apiKey
-})
+});
 
 // Express
 const app = express()
@@ -31,7 +31,6 @@ app.use(compression())
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(express.static(`${__dirname}/public/`))
-app.use(raygunClient.expressHandler)
 // app.use(sslRedirect(['production']))
 
 app.set('port', (process.env.PORT || 5000))
@@ -70,6 +69,7 @@ app.post('/submit', (req, res) => {
 });
 
 app.get('*', (req, res) => {
+
 	getStore(function(err, AppStore) {
 		if(err) {
 			return res.status(500).end('error')
@@ -93,6 +93,7 @@ app.get('*', (req, res) => {
 			res.locals.reactMarkup = reactMarkup // eslint-disable-line no-param-reassign
 
 			if (error) {
+				raygunClient.send(error)
 				res.status(500).send(error.message)
 			} else if (redirectLocation) {
 				res.redirect(302, redirectLocation.pathname + redirectLocation.search)
@@ -107,6 +108,10 @@ app.get('*', (req, res) => {
 	})
 })
 
+// bind raygun
+app.use(raygunClient.expressHandler)
+
+// listen to server
 app.listen(app.get('port'), function() {
 	console.info('==> ✅  Server is listening in ' + process.env.NODE_ENV + ' mode')
 	console.info('==> 🌎  Go to http://localhost:%s', app.get('port'))

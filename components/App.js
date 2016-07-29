@@ -27,19 +27,8 @@ class App extends Component {
 	}
 
 	// Add change listeners to stores
-	componentWillMount() {
-		AppStore.addChangeListener(this.stateDidChange.bind(this));
-		// if( ! AppStore.data.ready ) {
-		// 	this.getStore();
-		// }
-	}
-
-	// Add change listeners to stores
 	componentDidMount() {
-		// AppStore.addChangeListener(this.stateDidChange.bind(this));
-		if( ! AppStore.data.ready ) {
-			this.getStore();
-		}
+		AppStore.addChangeListener(this.stateDidChange.bind(this))
 	}
 
 	// Remove change listeners from stores
@@ -59,19 +48,20 @@ class App extends Component {
 	}
 
 	stateDidChange() {
-		this.setState(AppStore);
+		this.setState(AppStore)
 	}
 
 	render() {
 		const data = AppStore.data;
+		// console.log(data);
 
 		// Show loading for browser
 		if (! data.ready) {
-			// if (typeof document !== 'undefined') {
-			// 	document.title = 'Loading';
-			// }
+			if(typeof document !== 'undefined') {
+				document.title = 'Loading'
+			}
 
-			// this.getStore();
+			this.getStore();
 
 			return (
 				<div>
@@ -98,7 +88,7 @@ class App extends Component {
 					<Header navItems={navItems} />
 					<main className={'main ' + this.getSlug()} id="main">
 						<ReactCSSTransitionGroup component="div" className="transition-group" transitionName="transition" transitionEnterTimeout={transitionDuration} transitionLeaveTimeout={transitionDuration}>
-							{Routes}
+							{ Routes }
 						</ReactCSSTransitionGroup>
 					</main>
 					<Footer navItems={navItems} />

@@ -32,32 +32,32 @@ if(inDev) {
 	loaders = ['react-hot', 'babel'];
 } else {
 	loaders = ['babel'];
-	// plugins = plugins.concat([
-	// 	new webpack.optimize.UglifyJsPlugin({
-	// 		compress: {
-	// 			warnings: false
-	// 		}
-	// 	}),
-	// 	new ImageminPlugin({
-	// 		disable: false,
-	// 		optipng: {
-	// 			optimizationLevel: 3
-	// 		},
-	// 		gifsicle: {
-	// 			optimizationLevel: 1
-	// 		},
-	// 		jpegtran: {
-	// 			progressive: false
-	// 		},
-	// 		svgo: {
-	// 		},
-	// 		pngquant: null,
-	// 		plugins: []
-	// 	}),
-	// 	new PurifyPlugin({
-	// 		basePath: __dirname,
-	// 	}),
-	// ]);
+	plugins = plugins.concat([
+		new webpack.optimize.UglifyJsPlugin({
+			compress: {
+				warnings: false
+			}
+		}),
+		new ImageminPlugin({
+			disable: false,
+			optipng: {
+				optimizationLevel: 3
+			},
+			gifsicle: {
+				optimizationLevel: 1
+			},
+			jpegtran: {
+				progressive: false
+			},
+			svgo: {
+			},
+			pngquant: null,
+			plugins: []
+		}),
+		new PurifyPlugin({
+			basePath: __dirname,
+		}),
+	]);
 }
 
 plugins = plugins.concat([
@@ -106,7 +106,7 @@ module.exports = {
 		}, {
 			test: /\.(jpg|png|gif|svg)$/i,
 			exclude: /(node_modules|bower_components)/,
-			loader: 'url?limit=1000&name=../images/[hash].[ext]'
+			loader: 'url?limit=1000&name=../images/[name].[ext]?[hash]'
 		}]
 	},
 	sassLoader: {
