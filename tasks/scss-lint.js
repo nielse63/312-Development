@@ -1,12 +1,8 @@
 
 // modules
 var gulp          = require('gulp');
-var fs            = require('fs');
 var path          = require('path');
-var mkdirp        = require('mkdirp');
-var del           = require('del');
 var scsslint      = require('gulp-scss-lint');
-var styles        = require('./styles');
 var utils         = require('./utils');
 var writeFile     = utils.writeFile;
 var writeFileSync = utils.writeFileSync;
