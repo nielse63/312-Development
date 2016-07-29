@@ -4,14 +4,21 @@ const webpack           = require('webpack');
 const CompressionPlugin = require('compression-webpack-plugin');
 const PurifyPlugin      = require('purifycss-webpack-plugin');
 // const ExtractTextPlugin = require("extract-text-webpack-plugin");
-const ImageminPlugin      = require('imagemin-webpack-plugin').default;
+const ImageminPlugin    = require('imagemin-webpack-plugin').default;
 const OfflinePlugin     = require('offline-plugin');
 const path              = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const config            = require('./config');
+const read              = require('fs-readdir-recursive')
 
 var loaders;
 // const inDev = process.env.NODE_ENV === 'development';
+var images = []
+read('public/images').forEach(function(image) {
+	images.push('../images/' + image);
+});
+images.push(':rest:')
+
 var plugins = [
 	new webpack.NoErrorsPlugin(),
 	new webpack.optimize.DedupePlugin(),
@@ -64,6 +71,10 @@ plugins = plugins.concat([
 	new OfflinePlugin({
 		publicPath    : '/dist/',
 		relativePaths : false,
+		caches        : {
+			main : images
+		},
+		externals : images,
 		ServiceWorker : {
 			output: '../sw.js',
 		},

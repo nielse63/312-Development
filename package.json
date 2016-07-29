@@ -1,6 +1,6 @@
 {
   "name": "312-development",
-  "version": "1.0.30",
+  "version": "1.0.31",
   "description": "",
   "main": "app-server.js",
   "engine": {
@@ -20,6 +20,7 @@
     "express": "^4.13.3",
     "express-sslify": "^1.1.0",
     "flux": "^2.1.1",
+    "fs-readdir-recursive": "^1.0.0",
     "gsap": "^1.18.5",
     "heroku-ssl-redirect": "0.0.3",
     "hogan-express": "^0.5.2",
