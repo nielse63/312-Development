@@ -11,7 +11,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const config            = require('./config');
 
 var loaders;
-const inDev = process.env.NODE_ENV === 'development';
+// const inDev = process.env.NODE_ENV === 'development';
 var plugins = [
 	new webpack.NoErrorsPlugin(),
 	new webpack.optimize.DedupePlugin(),
@@ -28,7 +28,7 @@ var plugins = [
 	}),
 ];
 
-if(inDev) {
+if(process.env.NODE_ENV !== 'production') {
 	loaders = ['react-hot', 'babel'];
 } else {
 	loaders = ['babel'];

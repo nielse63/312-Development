@@ -10,7 +10,7 @@ import bodyParser from 'body-parser'
 import compression from 'compression'
 import raygun from 'raygun'
 import config from './config'
-// import sslRedirect from 'heroku-ssl-redirect';
+import sslRedirect from 'heroku-ssl-redirect';
 
 // Actions
 import { getStore, getPostData, getPageData } from './actions/actions'
@@ -20,7 +20,9 @@ import routes from './routes'
 
 // raygun
 const raygunClient = new raygun.Client().init({
-	apiKey: config.raygun.apiKey
+	apiKey: config.raygun.apiKey,
+	enablePulse : true,
+	enableCrashReporting : false
 });
 
 // Express
@@ -31,7 +33,9 @@ app.use(compression())
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(express.static(`${__dirname}/public/`))
-// app.use(sslRedirect(['production']))
+if( process.env.ON_LOCAL !== 'true' ) {
+	app.use(sslRedirect(['production']))
+}
 
 app.set('port', (process.env.PORT || 5000))
 
