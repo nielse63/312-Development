@@ -70,7 +70,6 @@ plugins = plugins.concat([
 		AppCache: false,
 	})
 ]);
-// console.log(plugins);
 
 module.exports = {
 	devtool: 'eval-source-map',
@@ -107,6 +106,10 @@ module.exports = {
 			test: /\.(jpg|png|gif|svg)$/i,
 			exclude: /(node_modules|bower_components)/,
 			loader: 'url?limit=1000&name=../images/[name].[ext]?[hash]'
+		}, {
+			test: /\.json$/,
+			exclude: /(node_modules|bower_components)/,
+			loader: 'json'
 		}]
 	},
 	sassLoader: {

@@ -85,6 +85,7 @@ class AppUI {
 		];
 		this.scenes = [];
 		this.didInitialLoad = false;
+		this.raygunUserKey = '312RaygunUser';
 
 		// init
 		this.onFirstLoad();
@@ -97,6 +98,8 @@ class AppUI {
 	}
 
 	onFirstLoad() {
+		this.loadRaygun();
+
 		NProgress.start();
 		this.registerServiceWorker()
 	}
@@ -226,6 +229,64 @@ class AppUI {
 				scope: '/'
 			});
 		}
+	}
+
+	loadRaygun() {
+		const self = this;
+		console.log(window.RaygunObject);
+		(function(window, document, ele, src, id, ...args) {
+			/* eslint-disable no-param-reassign */
+			window.RaygunObject = id;
+			window[id] = window[id] || function() {
+				(window[id].o = window[id].o || []).push(args)
+			};
+			/* eslint-enable no-param-reassign */
+			const script = document.createElement(ele);
+			const parent = document.getElementsByTagName(ele)[0];
+			script.async = 1;
+			script.src = src;
+			parent.parentNode.insertBefore(script, parent);
+			script.onload = function() {
+				self.setupRaygun();
+			};
+
+		}(window, document, "script", "//cdn.raygun.io/raygun4js/raygun.min.js", "rg4js"));
+	}
+
+	setupRaygun() {
+		window.rg4js('apiKey', 'xHapO7tbTzzzESni1ZpjsA==');
+		window.rg4js('enablePulse', true);
+		window.rg4js('enableCrashReporting', true);
+		window.rg4js('options', {
+			debugMode : true,
+			excludedHostnames : [],
+			ignore3rdPartyErrors : true
+		});
+		window.rg4js('saveIfOffline', true);
+
+		// set user tracking
+		const raygunUser = this.getRayGunUser()
+		const userObject = {
+			identifier  : raygunUser,
+			isAnonymous : false,
+		}
+		window.rg4js('setUser', userObject);
+
+		// post to server
+		_c.$.ajax({
+			type : 'post',
+			url : '/whoami',
+			data : userObject,
+		})
+	}
+
+	getRayGunUser() {
+		let raygunUser = localStorage.getItem(this.raygunUserKey);
+		if( ! raygunUser ) {
+			raygunUser = _c.utils.stringGen();
+			localStorage.setItem(this.raygunUserKey, raygunUser);
+		}
+		return raygunUser;
 	}
 }
 

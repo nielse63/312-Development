@@ -9,6 +9,15 @@ export default class Utils {
 		return this;
 	}
 
+	stringGen(length = 16) {
+		const text = [];
+		const charset = 'abcdefghijklmnopqrstuvwxyz0123456789';
+		for( let i = 0; i < length; i++ ) {
+			text.push(charset.charAt(Math.floor(Math.random() * charset.length)));
+		}
+		return text.join('');
+	}
+
 	uid(prefix) {
 		return (prefix || 'id') + this.now() + 'RAND' + Math.ceil(Math.random() * 100000);
 	}

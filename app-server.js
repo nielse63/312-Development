@@ -10,7 +10,8 @@ import bodyParser from 'body-parser'
 import compression from 'compression'
 import raygun from 'raygun'
 import config from './config'
-import sslRedirect from 'heroku-ssl-redirect';
+// import enforce from 'express-sslify'
+// import http from 'http'
 
 // Actions
 import { getStore, getPostData, getPageData } from './actions/actions'
@@ -20,10 +21,14 @@ import routes from './routes'
 
 // raygun
 const raygunClient = new raygun.Client().init({
-	apiKey: config.raygun.apiKey,
-	enablePulse : true,
-	enableCrashReporting : false
-});
+	apiKey               : config.raygun.apiKey,
+	enablePulse          : true,
+	enableCrashReporting : true
+}).setVersion(config.site.version);
+raygunClient.user = function(obj) {
+	return obj;
+};
+// console.log(raygunClient);
 
 // Express
 const app = express()
@@ -33,11 +38,16 @@ app.use(compression())
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(express.static(`${__dirname}/public/`))
-if( process.env.ON_LOCAL !== 'true' ) {
-	app.use(sslRedirect(['production']))
-}
+// app.use(enforce.HTTPS({ trustProtoHeader: true })) // eslint-disable-line new-cap
+// if( process.env.ON_LOCAL !== 'true' ) {
+// 	app.use(sslRedirect(['production']))
+// }
 
 app.set('port', (process.env.PORT || 5000))
+
+app.post('/whoami', (req) => {
+	raygunClient.user(req.body);
+});
 
 app.post('/submit', (req, res) => {
 	const transporter = nodemailer.createTransport({
@@ -120,4 +130,7 @@ app.listen(app.get('port'), function() {
 	console.info('==> ✅  Server is listening in ' + process.env.NODE_ENV + ' mode')
 	console.info('==> 🌎  Go to http://localhost:%s', app.get('port'))
 })
+// http.createServer(app).listen(app.get('port'), function() {
+// 	console.log('Express server listening on port ' + app.get('port'));
+// });
 
