@@ -19,6 +19,7 @@
     "eslint-plugin-react": "^5.2.2",
     "events": "^1.1.1",
     "express": "^4.13.3",
+    "fg-loadcss": "^1.2.0",
     "flux": "^2.1.1",
     "fs-readdir-recursive": "^1.0.0",
     "gsap": "^1.18.5",

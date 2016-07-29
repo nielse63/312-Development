@@ -63,15 +63,17 @@ export default class Home extends Component {
 							<article className="article" itemScope itemType="http://schema.org/Person">
 								<h2 className="article-title">My name is <span itemProp="name">Erik Nielsen</span> &ndash; I'm a <span itemProp="jobTitle">Senior Engineer</span> at <a href="https://cliquestudios.com" target="_blank">Clique Studios</a> in Chicago. I primarily focus on JavaScript programming, front-end performance, and user-interface engineering.</h2>
 								<h2 className="article-subtitle">Below you'll find some of my work and articles. Check them out and <Link to="contact">send me a message</Link> &ndash; I'd love to know what you think.</h2>
-								<div className="work-section">
-									<ul className="work-grid">
-										{items}
-									</ul>
-								</div>
 							</article>
 						</div>
 					</div>
 				</div>
+				<article className="article work-article">
+					<div className="work-section">
+						<ul className="work-grid">
+							{items}
+						</ul>
+					</div>
+				</article>
 			</section>
 		);
 	}

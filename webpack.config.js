@@ -3,7 +3,7 @@
 const webpack           = require('webpack');
 const CompressionPlugin = require('compression-webpack-plugin');
 const PurifyPlugin      = require('purifycss-webpack-plugin');
-// const ExtractTextPlugin = require("extract-text-webpack-plugin");
+// const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const ImageminPlugin    = require('imagemin-webpack-plugin').default;
 const OfflinePlugin     = require('offline-plugin');
 const path              = require('path');
@@ -24,21 +24,20 @@ read('public/images').forEach(function(image) {
 });
 images.push(':rest:')
 
-// console.log(['webpack.config.js', process.env.RAYGUN_APIKEY]);
 var plugins = [
 	new webpack.NoErrorsPlugin(),
 	new webpack.optimize.DedupePlugin(),
 	new webpack.optimize.OccurenceOrderPlugin(),
 	new webpack.DefinePlugin({
 		'process.env': {
-			NODE_ENV : JSON.stringify(process.env.NODE_ENV),
-			RAYGUN_APIKEY : JSON.stringify(process.env.RAYGUN_APIKEY),
-			CONTENTFUL_TOKEN : JSON.stringify(process.env.CONTENTFUL_TOKEN),
-			CONTENTFUL_SPACE : JSON.stringify(process.env.CONTENTFUL_SPACE),
-			CONTENTFUL_HOST : JSON.stringify(process.env.CONTENTFUL_HOST),
+			NODE_ENV                : JSON.stringify(process.env.NODE_ENV),
+			RAYGUN_APIKEY           : JSON.stringify(process.env.RAYGUN_APIKEY),
+			CONTENTFUL_TOKEN        : JSON.stringify(process.env.CONTENTFUL_TOKEN),
+			CONTENTFUL_SPACE        : JSON.stringify(process.env.CONTENTFUL_SPACE),
+			CONTENTFUL_HOST         : JSON.stringify(process.env.CONTENTFUL_HOST),
 			CONTENTFUL_CONTENT_TYPE : JSON.stringify(process.env.CONTENTFUL_CONTENT_TYPE),
-			MAILGUN_USER : JSON.stringify(process.env.MAILGUN_USER),
-			MAILGUN_PASS : JSON.stringify(process.env.MAILGUN_PASS),
+			MAILGUN_USER            : JSON.stringify(process.env.MAILGUN_USER),
+			MAILGUN_PASS            : JSON.stringify(process.env.MAILGUN_PASS),
 		}
 	}),
 	new webpack.ProvidePlugin({
@@ -46,6 +45,9 @@ var plugins = [
 		jQuery          : "jquery",
 		"window.jQuery" : "jquery"
 	}),
+	// new ExtractTextPlugin("../styles/[name].css", {
+	// 	allChunks: false
+	// })
 ];
 
 if(process.env.NODE_ENV !== 'production') {
@@ -113,12 +115,16 @@ module.exports = {
 			exclude: /(node_modules|bower_components)/,
 		// }, {
 		// 	test: /\.scss$/,
+		// 	include: /components/,
+		// 	exclude: /assets/,
 		// 	loader: ExtractTextPlugin.extract(
 		// 		'style',
 		// 		'css?modules&importLoaders=1&localIdentName=[name]_[local]_[hash:base64:3]!sass'
 		// 	)
 		}, {
 			test: /\.scss$/,
+			include: /assets/,
+			exclude: /components/,
 			loaders: [
 				"style",
 				"css?importLoaders=1&localIdentName=[name]_[local]_[hash:base64:3]!resolve-url!sass?sourceMap",
@@ -157,4 +163,3 @@ module.exports = {
 	},
 	plugins : plugins,
 };
-
