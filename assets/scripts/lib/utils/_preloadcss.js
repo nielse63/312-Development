@@ -4,7 +4,9 @@
 		return;
 	}
 
-	var rp = w.loadCSS.relpreload = {};
+	let loadCSS = w.loadCSS;
+
+	var rp = loadCSS.relpreload = {};
 	rp.support = function(){
 		try {
 			return w.document.createElement( "link" ).relList.supports( "preload" );
@@ -19,7 +21,7 @@
 		for( var i = 0; i < links.length; i++ ){
 			var link = links[ i ];
 			if( link.rel === "preload" && link.getAttribute( "as" ) === "style" ){
-				w.loadCSS( link.href, link );
+				loadCSS( link.href, link );
 				link.rel = null;
 			}
 		}
