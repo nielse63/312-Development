@@ -13,7 +13,6 @@ export default class Homepage {
 	}
 
 	setScene() {
-		// const $trigger   = _c.$('.article-title');
 		const $container = this.$title.closest('.wrap');
 
 		this.scene = new ScrollMagic.Scene({

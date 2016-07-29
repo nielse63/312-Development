@@ -27,8 +27,9 @@ class App extends Component {
 	}
 
 	// Add change listeners to stores
-	componentDidMount() {
+	componentWillMount() {
 		AppStore.addChangeListener(this.stateDidChange.bind(this));
+		this.getStore();
 	}
 
 	// Remove change listeners from stores
@@ -60,7 +61,6 @@ class App extends Component {
 				document.title = 'Loading';
 			}
 
-			this.getStore();
 
 			return (
 				<div>

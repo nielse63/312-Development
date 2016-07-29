@@ -8,8 +8,7 @@ var bump         = require('gulp-bump');
 var del          = require('del');
 
 // custom tasks
-var requireDir = require('require-dir');
-requireDir('./tasks');
+require('require-dir')('./tasks');
 
 // See https://github.com/austinpray/asset-builder
 var manifest = require('asset-builder')('./assets/manifest.json');
@@ -70,8 +69,9 @@ gulp.task('bump', function(){
 
 // ### Build
 gulp.task('build', function(callback) {
+	var tasks = ['other', 'images', 'fonts'];
 	runSequence(
-		['other', 'images', 'fonts'],
+		tasks,
 		callback
 	);
 });

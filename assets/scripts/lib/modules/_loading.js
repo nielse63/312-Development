@@ -43,7 +43,6 @@ export default class Loading {
 	}
 
 	show() {
-		// console.log('here');
 		this.$element.removeClass('hidden');
 		_c.$html.addClass('loaded');
 	}

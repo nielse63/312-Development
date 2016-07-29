@@ -68,7 +68,6 @@ export function loadTweets() {
 export function getStore(callback) {
 
 	// global vars
-	// const localStorage = require('localStorage');
 	const checkedKey   = 'LastChecked312Feed';
 	const feedKey      = '312Feed';
 	const navKey       = '312Nav';
@@ -88,9 +87,9 @@ export function getStore(callback) {
 		let hasData = false;
 
 		// check localstorage first
-		const lastChecked = localStorage.getItem(checkedKey);
-		const feed        = localStorage.getItem(feedKey);
-		const nav         = localStorage.getItem(navKey);
+		const lastChecked  = localStorage.getItem(checkedKey);
+		const feed         = localStorage.getItem(feedKey);
+		const nav          = localStorage.getItem(navKey);
 		if( lastChecked && feed && nav ) {
 			const diff = (Date.now() - Date.parse( lastChecked )) / 1000;
 			const oneDay = 60 * 60 * 24;
