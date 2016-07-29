@@ -134,7 +134,7 @@ $figure-offset: 15vh;
 				will-change: opacity, transform;
 				transform: translate(-15px, 0);
 
-				html.touch & {
+				.touch & {
 					display: none;
 				}
 			}

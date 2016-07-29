@@ -1,3 +1,4 @@
+
 .container-fluid,
 .container {
 	margin-right: auto;
@@ -17,10 +18,10 @@
 	flex-wrap: wrap;
 	margin-right: -0.5rem;
 	margin-left: -0.5rem;
-}
 
-.row.reverse {
-	flex-direction: row-reverse;
+	&.reverse {
+		flex-direction: row-reverse;
+	}
 }
 
 .col.reverse {

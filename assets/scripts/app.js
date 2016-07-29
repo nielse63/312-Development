@@ -233,7 +233,6 @@ class AppUI {
 
 	loadRaygun() {
 		const self = this;
-		console.log(window.RaygunObject);
 		(function(window, document, ele, src, id, ...args) {
 			/* eslint-disable no-param-reassign */
 			window.RaygunObject = id;
@@ -258,7 +257,7 @@ class AppUI {
 		window.rg4js('enablePulse', true);
 		window.rg4js('enableCrashReporting', true);
 		window.rg4js('options', {
-			debugMode : true,
+			debugMode : window.location.host === 'localhost',
 			excludedHostnames : [],
 			ignore3rdPartyErrors : true
 		});
