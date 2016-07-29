@@ -84,8 +84,8 @@ $font-path: '../fonts';
 
 @font-face {
 	font-family: 'Crimson Text';
-	src: url('#{$font-path}/crimsontext-roman-webfont.woff2') format('woff2'),
-		 url('#{$font-path}/crimsontext-roman-webfont.woff') format('woff');
+	src: url('#{$font-path}/CrimsonText-Roman.woff2') format('woff2'),
+		 url('#{$font-path}/CrimsonText-Roman.woff') format('woff');
 	font-style:    normal;
 	font-weight:   400;
 	unicode-range: U+000-5FF;
