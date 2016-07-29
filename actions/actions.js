@@ -2,10 +2,14 @@
 // actions.js
 import contentful from 'contentful'
 import _ from 'lodash'
+
+// load config
 import config from '../config'
 
 // AppStore
 import AppStore from '../stores/AppStore'
+let loaded = false;
+// console.log(['actions.js', config]);
 
 function makeSlug(string) {
 	let path = string.replace(/[\s|_|.]/g, '-');
@@ -20,7 +24,6 @@ function makeSlug(string) {
 	.split('.')[0];
 }
 
-let loaded = false;
 
 function loadTwitterScript(callback) {
 	if (loaded || window.twttr) {
@@ -67,11 +70,6 @@ export function loadTweets() {
 
 export function getStore(callback) {
 
-	// global vars
-	// const checkedKey   = 'LastChecked312Feed';
-	// const feedKey      = '312Feed';
-	// const navKey       = '312Nav';
-
 	function always() {
 		// trigger change even
 		AppStore.data.ready = true;
@@ -79,6 +77,14 @@ export function getStore(callback) {
 		if(callback) {
 			callback(false, AppStore);
 		}
+	}
+
+	if( ! config.contentful.accessToken ) {
+		console.warn('Access token not found');
+		// console.log(config.contentful);
+		// console.log(process.env);
+		always();
+		return;
 	}
 
 	// function getCachedDate() {
@@ -119,7 +125,7 @@ export function getStore(callback) {
 
 		// get posts
 		client.getEntries({
-			content_type : '47g12FQ9BKOiU0A2OwYIkA',
+			content_type : config.contentful.content_type,
 		}).then((entries) => {
 			const json = entries.toPlainObject();
 			const items = json.items;

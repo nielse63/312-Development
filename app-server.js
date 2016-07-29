@@ -27,7 +27,6 @@ const raygunClient = new raygun.Client().init({
 raygunClient.user = function(obj) {
 	return obj;
 };
-// console.log(raygunClient);
 
 // Express
 const app = express()
@@ -43,10 +42,10 @@ if( process.env.ON_LOCAL !== 'true' ) {
 
 app.set('port', (process.env.PORT || 5000))
 
-app.get('/whoami', (req) => {
-	console.log(req.body);
-	raygunClient.user(req.body);
-});
+// app.post('/whoami', (req) => {
+// 	console.log(req.body);
+// 	raygunClient.user(req.body);
+// });
 
 app.post('/submit', (req, res) => {
 	const transporter = nodemailer.createTransport({

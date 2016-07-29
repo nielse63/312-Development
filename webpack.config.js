@@ -13,6 +13,9 @@ const read              = require('fs-readdir-recursive');
 const precss            = require('precss');
 const autoprefixer      = require('autoprefixer');
 
+// load env file, if present
+require('dotenv').load();
+
 var loaders;
 // const inDev = process.env.NODE_ENV === 'development';
 var images = []
@@ -21,13 +24,21 @@ read('public/images').forEach(function(image) {
 });
 images.push(':rest:')
 
+// console.log(['webpack.config.js', process.env.RAYGUN_APIKEY]);
 var plugins = [
 	new webpack.NoErrorsPlugin(),
 	new webpack.optimize.DedupePlugin(),
 	new webpack.optimize.OccurenceOrderPlugin(),
 	new webpack.DefinePlugin({
 		'process.env': {
-			NODE_ENV : '"' + process.env.NODE_ENV + '"'
+			NODE_ENV : JSON.stringify(process.env.NODE_ENV),
+			RAYGUN_APIKEY : JSON.stringify(process.env.RAYGUN_APIKEY),
+			CONTENTFUL_TOKEN : JSON.stringify(process.env.CONTENTFUL_TOKEN),
+			CONTENTFUL_SPACE : JSON.stringify(process.env.CONTENTFUL_SPACE),
+			CONTENTFUL_HOST : JSON.stringify(process.env.CONTENTFUL_HOST),
+			CONTENTFUL_CONTENT_TYPE : JSON.stringify(process.env.CONTENTFUL_CONTENT_TYPE),
+			MAILGUN_USER : JSON.stringify(process.env.MAILGUN_USER),
+			MAILGUN_PASS : JSON.stringify(process.env.MAILGUN_PASS),
 		}
 	}),
 	new webpack.ProvidePlugin({

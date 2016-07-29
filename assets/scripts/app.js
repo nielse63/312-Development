@@ -267,23 +267,27 @@ class AppUI {
 		window.rg4js('saveIfOffline', true);
 
 		// set user tracking
-		const raygunUser = this.getRayGunUser()
-		const userObject = {
-			identifier  : raygunUser,
+		// const raygunUser = this.getRayGunUser()
+		// const userObject = {
+		// 	identifier  : raygunUser,
+		// 	isAnonymous : false,
+		// }
+		// window.rg4js('setUser', userObject);
+		window.rg4js('setUser', {
+			identifier  : this.getRayGunUser(),
 			isAnonymous : false,
-		}
-		window.rg4js('setUser', userObject);
+		});
 
 		// post to server
-		const url =  window.location.protocol + '//' + window.location.hostname + '/whoami';
-		console.log(url);
-		_c.$.get(url, userObject)
-			.done(function() {
-				console.log( "complete" );
-			})
-			.fail(function() {
-				console.log( "fail" );
-			})
+		// try {
+		// 	_c.$.post('/whoami', userObject)
+		// 		.done(function() {
+		// 			console.log( "complete" );
+		// 		})
+		// 		.fail(function() {
+		// 			console.log( "fail" );
+		// 		})
+		// } catch(e) {}
 	}
 
 	getRayGunUser() {
