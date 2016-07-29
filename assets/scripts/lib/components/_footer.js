@@ -46,31 +46,29 @@ export default class Footer {
 		}
 		const footer   = document.querySelector('.footer');
 		const $paths   = this.$paths;
-		// const setPaths = this.setPaths;
-		// const offset = footer.clientHeight / 2;
 
 		this.scene = new ScrollMagic.Scene({
 			triggerElement : footer,
 			triggerHook    : 'onEnter',
 			offset         : footer.clientHeight / 2,
 		})
-		.on('enter', function() {
-			$paths.css({
-				'stroke-dashoffset' : 0,
-			});
+		.on('start', function() {
+			this.remove();
 		})
-		.on('leave', function() {
-			$paths.each(function() {
-				const $path  = $(this);
-				const length = $path.data('length');
-				// if( ! length ) {
-				// 	return;
-				// }
-				$path.css({
-					'stroke-dashoffset' : length,
-				});
-			})
-		})
+		// .on('enter', function() {
+		// 	$paths.css({
+		// 		'stroke-dashoffset' : 0,
+		// 	});
+		// })
+		// .on('leave', function() {
+		// 	$paths.each(function() {
+		// 		const $path  = $(this);
+		// 		const length = $path.data('length');
+		// 		$path.css({
+		// 			'stroke-dashoffset' : length,
+		// 		});
+		// 	})
+		// })
 		.addTo(_c.controller);
 	}
 }

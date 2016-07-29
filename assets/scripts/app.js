@@ -10,13 +10,9 @@ window._c = new Clique();
 // modules
 import Nav from './lib/components/_nav';
 import Banner from './lib/components/_banner';
-
-// modules
 import BodyClass from './lib/modules/_body-class';
 import Form from './lib/modules/_form';
-
 import MobileButton from './lib/vendor/hamburger';
-
 import LazyLoad from './lib/components/_lazyload';
 import Links from './lib/components/_links';
 import Homepage from './lib/components/_homepage';
@@ -261,33 +257,16 @@ class AppUI {
 		window.rg4js('enableCrashReporting', true);
 		window.rg4js('options', {
 			debugMode : window.location.host === 'localhost',
-			excludedHostnames : [],
+			excludedHostnames : ['localhost'],
 			ignore3rdPartyErrors : true
 		});
 		window.rg4js('saveIfOffline', true);
 
 		// set user tracking
-		// const raygunUser = this.getRayGunUser()
-		// const userObject = {
-		// 	identifier  : raygunUser,
-		// 	isAnonymous : false,
-		// }
-		// window.rg4js('setUser', userObject);
 		window.rg4js('setUser', {
 			identifier  : this.getRayGunUser(),
 			isAnonymous : false,
 		});
-
-		// post to server
-		// try {
-		// 	_c.$.post('/whoami', userObject)
-		// 		.done(function() {
-		// 			console.log( "complete" );
-		// 		})
-		// 		.fail(function() {
-		// 			console.log( "fail" );
-		// 		})
-		// } catch(e) {}
 	}
 
 	getRayGunUser() {

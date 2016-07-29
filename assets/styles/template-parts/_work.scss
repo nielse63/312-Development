@@ -13,7 +13,7 @@ $figure-offset: 15vh;
 
 		@media (min-width: $breakpoint-medium) {
 			display: flex;
-			margin: 100px 0 0;
+			margin: 100px -50px 0;
 		}
 	}
 
@@ -108,6 +108,10 @@ $figure-offset: 15vh;
 
 			@media (min-width: $breakpoint-medium) {
 				padding: 50px;
+			}
+
+			@media (min-width: $breakpoint-large) {
+				padding: 100px 50px;
 			}
 
 			> * {
