@@ -59,7 +59,7 @@ export default class Clique {
 	onLoad() {
 		this.loaded = true;
 
-		// get icons
+		// lazyload icons
 		this.getIcons();
 	}
 

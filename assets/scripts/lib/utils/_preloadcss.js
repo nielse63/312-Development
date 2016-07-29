@@ -4,7 +4,7 @@
 		return;
 	}
 
-	var rp = loadCSS.relpreload = {};
+	var rp = w.loadCSS.relpreload = {};
 	rp.support = function(){
 		try {
 			return w.document.createElement( "link" ).relList.supports( "preload" );

@@ -45,7 +45,7 @@ export default class Footer {
 			return;
 		}
 		const footer   = document.querySelector('.footer');
-		const $paths   = this.$paths;
+		// const $paths   = this.$paths;
 
 		this.scene = new ScrollMagic.Scene({
 			triggerElement : footer,
