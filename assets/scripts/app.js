@@ -19,6 +19,7 @@ import Homepage from './lib/components/_homepage';
 import WorkGrid from './lib/components/_work-grid';
 import Photos from './lib/components/_photos';
 import Services from './lib/components/_services';
+import Twitter from './lib/components/_twitter';
 import Share from './lib/components/_share';
 import Footer from './lib/components/_footer';
 
@@ -79,6 +80,10 @@ class AppUI {
 			}, {
 				preload : false,
 				Cls     : Share,
+				val     : null,
+			}, {
+				preload : false,
+				Cls     : Twitter,
 				val     : null,
 			},
 		];
@@ -223,7 +228,7 @@ class AppUI {
 			window.location.hostname === '[::1]' ||
 			window.location.hostname.match(/^127(?:\.(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)){3}$/)
 		);
-		if ('serviceWorker' in navigator && (window.location.protocol === 'https:' || isLocalhost) ) {
+		if ('serviceWorker' in navigator && (window.location.protocol === 'https:' || isLocalhost)) {
 			navigator.serviceWorker.register('/sw.js', {
 				scope: '/'
 			});

@@ -7,25 +7,25 @@ import AppDispatcher from '../../dispatcher/AppDispatcher';
 
 export default class TweetList extends Component {
 
-	componentWillMount() {
-		this.getTweets();
-	}
+	// componentWillMount() {
+	// 	this.getTweets();
+	// }
 
-	componentDidMount() {
-		this.loadTweets();
-	}
+	// componentDidMount() {
+	// 	this.loadTweets();
+	// }
 
-	getTweets() {
-		AppDispatcher.dispatch({
-			action : 'get-tweets',
-		});
-	}
+	// getTweets() {
+	// 	AppDispatcher.dispatch({
+	// 		action : 'get-tweets',
+	// 	});
+	// }
 
-	loadTweets() {
-		AppDispatcher.dispatch({
-			action : 'load-tweets',
-		});
-	}
+	// loadTweets() {
+	// 	AppDispatcher.dispatch({
+	// 		action : 'load-tweets',
+	// 	});
+	// }
 
 	render() {
 		return (
