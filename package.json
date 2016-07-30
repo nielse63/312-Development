@@ -30,6 +30,7 @@
     "jquery": "^3.0.0",
     "json-loader": "^0.5.4",
     "lodash": "^3.10.1",
+    "memjs": "^0.10.0",
     "nodemailer": "^2.4.2",
     "npm": "^3.10.3",
     "nprogress": "^0.2.0",
@@ -48,10 +49,10 @@
   "scripts": {
     "predevelopment": "gulp views && NODE_ENV=development webpack -d",
     "development": "ON_LOCAL=true NODE_ENV=development PORT=8080 webpack-dev-server --content-base public/ --hot --inline --devtool inline-source-map --history-api-fallback",
-    "start": "NODE_ENV=production webpack -p && heroku local:start web -e .env -p 5001",
+    "start": "gulp build --production && NODE_ENV=production webpack -p && heroku local:start web -e .env -p 5001",
     "preproduction": "npm run prerelease",
     "production": "NODE_ENV=production node app.js",
-    "prerelease": "npm test && rm -rf public && NODE_ENV=production webpack -p --release && gulp build --production",
+    "prerelease": "npm test && rm -rf public && gulp build --production && NODE_ENV=production webpack -p --release",
     "release": "gulp bump && sh ./.bin/release.sh",
     "test": "gulp eslint"
   },

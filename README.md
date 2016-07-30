@@ -47,7 +47,7 @@ If there's a bug in my code that you found, or you just think the design of my s
 
 ## Third-Party Integrations
 
-The app is deployed on a Hobby-level [Heroku](https://heroku.com/) account, and incorporates several add-ons that can be easily incorporated through the platform:
+The app is deployed via [Heroku](https://heroku.com/), and incorporates several add-ons that can be easily incorporated through the platform:
 
 * The SSL Endpoint, and certificate purchased via [DNSimple](https://dnsimple.com/)
 * I installed [Librato](https://www.librato.com/) for HTTP request and memory usage monitoring
