@@ -1,0 +1,15 @@
+
+language: node_js
+node_js:
+	- "6.1.x"
+	- "6.0.x"
+	- "5.11.x"
+	- "5.10.x"
+	- "5.9.x"
+	- "5.8.x"
+
+install:
+	- npm install -g bower
+	- npm install -g gulp
+	- npm install
+	- bower install
