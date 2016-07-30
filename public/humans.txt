@@ -1,0 +1,10 @@
+# humanstxt.org/
+# The humans responsible & technology colophon
+
+# TEAM
+
+  Erik Nielsen -- Engineeer -- @erikkylenielsen
+
+# TECHNOLOGY COLOPHON
+
+  React, Webpack, ES6, HTML5, CSS3
