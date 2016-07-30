@@ -13,7 +13,18 @@ const precss            = require('precss');
 const autoprefixer      = require('autoprefixer');
 
 // load env file, if present
-require('dotenv').load();
+var dotenv = require('dotenv');
+dotenv.load();
+var envVars  = dotenv.config();
+var envObject = {
+	NODE_ENV : JSON.stringify(process.env.NODE_ENV)
+};
+if( envVars && Object.keys(envVars).length ) {
+	for(var key in envVars) {
+		var val = envVars[key];
+		envObject[key] = JSON.stringify(val);
+	}
+}
 
 var loaders;
 var images = []
@@ -27,16 +38,7 @@ var plugins = [
 	new webpack.optimize.DedupePlugin(),
 	new webpack.optimize.OccurenceOrderPlugin(),
 	new webpack.DefinePlugin({
-		'process.env': {
-			NODE_ENV                : JSON.stringify(process.env.NODE_ENV),
-			RAYGUN_APIKEY           : JSON.stringify(process.env.RAYGUN_APIKEY),
-			CONTENTFUL_TOKEN        : JSON.stringify(process.env.CONTENTFUL_TOKEN),
-			CONTENTFUL_SPACE        : JSON.stringify(process.env.CONTENTFUL_SPACE),
-			CONTENTFUL_HOST         : JSON.stringify(process.env.CONTENTFUL_HOST),
-			CONTENTFUL_CONTENT_TYPE : JSON.stringify(process.env.CONTENTFUL_CONTENT_TYPE),
-			MAILGUN_USER            : JSON.stringify(process.env.MAILGUN_USER),
-			MAILGUN_PASS            : JSON.stringify(process.env.MAILGUN_PASS),
-		}
+		'process.env': envObject
 	}),
 	new webpack.ProvidePlugin({
 		$               : "jquery",
