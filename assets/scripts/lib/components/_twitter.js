@@ -5,12 +5,8 @@ export default class Twitter {
 		this.main = document.querySelector('.main');
 		this.tweets = document.querySelector('.tweets');
 
-		if (! this.main || ! this.tweets) {
-			return;
-		}
-
 		this.loaded = false
-		this.getScript(this.getTweets.bind(this))
+		this.getTweets();
 
 		return this
 	}
@@ -36,6 +32,11 @@ export default class Twitter {
 
 	getTweets() {
 		if (! window.twttr) {
+			this.getScript(this.getTweets.bind(this))
+			return;
+		}
+
+		if (! this.main || ! this.tweets) {
 			return;
 		}
 
