@@ -13,7 +13,7 @@ import config from './config'
 import sslRedirect from 'heroku-ssl-redirect'
 
 // Actions
-import { getStore, getPostData, getPageData } from './actions/actions'
+import { getStore, getPostData, getPageData } from './actions'
 
 // Routes
 import routes from './routes'
@@ -41,11 +41,6 @@ if( process.env.ON_LOCAL !== 'true' ) {
 }
 
 app.set('port', (process.env.PORT || 5000))
-
-// app.post('/whoami', (req) => {
-// 	console.log(req.body);
-// 	raygunClient.user(req.body);
-// });
 
 app.post('/submit', (req, res) => {
 	const transporter = nodemailer.createTransport({
@@ -80,13 +75,20 @@ app.post('/submit', (req, res) => {
 	});
 });
 
-app.get('*', (req, res) => {
+app.get('/category', (req, res) => {
+	res.redirect(301, '/')
+});
 
+app.get('*', (req, res) => {
 	getStore(function(err, AppStore) {
 		if(err) {
+			raygunClient.send(err.message)
 			return res.status(500).end('error')
 		}
-		return match({ routes, location: req.url }, (error, redirectLocation, renderProps) => {
+
+		return match({
+			routes, location: req.url
+		}, (error, redirectLocation, renderProps) => {
 
 			const slugArray = req.url.split('/')
 			const pageSlug = slugArray[1]
@@ -97,8 +99,11 @@ app.get('*', (req, res) => {
 				getPageData(pageSlug)
 			}
 
+			const site = config.site;
+			site.url = req.protocol + '://' + req.get('host') + req.originalUrl;
+
 			res.locals.page = AppStore.data.page // eslint-disable-line no-param-reassign
-			res.locals.site = config.site // eslint-disable-line no-param-reassign
+			res.locals.site = site // eslint-disable-line no-param-reassign
 
 			// Get React markup
 			const reactMarkup = renderToStaticMarkup(<RouterContext {...renderProps} />)
