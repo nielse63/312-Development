@@ -29,19 +29,15 @@ export default class About extends Component {
 	}
 
 	componentWillMount() {
-		this.getPageData();
+		AppDispatcher.dispatch({
+			action    : 'get-page-data',
+			page_slug : 'about',
+		});
 	}
 
 	componentDidMount() {
 		document.title = [(AppStore.data.page.title || this.props.pageTitle), config.site.title].join(' | ');
 		window.postMessage('loaded', window.location.origin);
-	}
-
-	getPageData() {
-		AppDispatcher.dispatch({
-			action    : 'get-page-data',
-			page_slug : 'about',
-		});
 	}
 
 	getSlug() {

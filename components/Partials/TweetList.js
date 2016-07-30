@@ -7,26 +7,6 @@ import AppDispatcher from '../../dispatcher/AppDispatcher';
 
 export default class TweetList extends Component {
 
-	// componentWillMount() {
-	// 	this.getTweets();
-	// }
-
-	// componentDidMount() {
-	// 	this.loadTweets();
-	// }
-
-	// getTweets() {
-	// 	AppDispatcher.dispatch({
-	// 		action : 'get-tweets',
-	// 	});
-	// }
-
-	// loadTweets() {
-	// 	AppDispatcher.dispatch({
-	// 		action : 'load-tweets',
-	// 	});
-	// }
-
 	render() {
 		return (
 			<div className="row section-row tweet-list">

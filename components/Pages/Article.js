@@ -25,20 +25,16 @@ export default class Article extends Component {
 	}
 
 	componentWillMount() {
-		this.getPostData();
-	}
-
-	componentDidMount() {
-		document.title = config.site.title + ' | ' + this.props.data.page.title;
-		window.postMessage('loaded', window.location.origin);
-	}
-
-	getPostData() {
 		AppDispatcher.dispatch({
 			action    : 'get-post-data',
 			page_slug : 'articles',
 			post_slug : this.props.params.slug,
 		});
+	}
+
+	componentDidMount() {
+		document.title = config.site.title + ' | ' + this.props.data.page.title;
+		window.postMessage('loaded', window.location.origin);
 	}
 
 	render() {

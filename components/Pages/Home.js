@@ -22,19 +22,15 @@ export default class Home extends Component {
 	}
 
 	componentWillMount() {
-		this.getPageData();
+		AppDispatcher.dispatch({
+			action    : 'get-page-data',
+			page_slug : '',
+		});
 	}
 
 	componentDidMount() {
 		document.title = [(AppStore.data.page.title || config.site.description), config.site.title].join(' | ');
 		window.postMessage('loaded', window.location.origin);
-	}
-
-	getPageData() {
-		AppDispatcher.dispatch({
-			action    : 'get-page-data',
-			page_slug : '',
-		});
 	}
 
 	render() {
