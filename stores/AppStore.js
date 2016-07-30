@@ -8,9 +8,7 @@ export default _.extend({}, EventEmitter.prototype, {
 	data : {
 		ready    : false,
 		globals  : {},
-		pages    : [],
-		articles : [],
-		tweets   : [],
+		posts    : [],
 	},
 
 	// Emit Change event

@@ -8,8 +8,6 @@ import config from '../config'
 
 // AppStore
 import AppStore from '../stores/AppStore'
-let loaded = false;
-// console.log(['actions.js', config]);
 
 function makeSlug(string) {
 	let path = string.replace(/[\s|_|.]/g, '-');
@@ -22,50 +20,6 @@ function makeSlug(string) {
 	return path.replace(/\//g, '-')
 	.toLowerCase()
 	.split('.')[0];
-}
-
-
-function loadTwitterScript(callback) {
-	if (loaded || window.twttr) {
-		callback();
-		return;
-	}
-
-	$.getScript('https://platform.twitter.com/widgets.js')
-		.done(function() {
-			loaded = true;
-			callback();
-		})
-		.fail(function(jqxhr, settings, exception) {
-			console.warn(jqxhr, settings, exception);
-			callback();
-		});
-}
-
-export function getTweets(callback = function() {}) {
-	loadTwitterScript(callback);
-}
-
-export function loadTweets() {
-	if (! window.twttr) {
-		getTweets(loadTweets);
-		return;
-	}
-
-	const main = document.querySelector('.main');
-	const tweets = document.querySelector('.tweets');
-	if (! main || ! tweets) {
-		return;
-	}
-
-	window.twttr.widgets.load(main);
-
-	window.twttr.widgets.createTimeline({
-		sourceType : 'profile',
-		screenName : 'ErikKyleNielsen',
-	}, tweets, {
-		tweetLimit : 10,
-	});
 }
 
 export function getStore(callback) {
@@ -188,6 +142,7 @@ export function getStore(callback) {
 }
 
 export function getPostData(pageSlug, postSlug) {
+
 	// Get page info
 	const data = AppStore.data;
 	let slug = pageSlug;
