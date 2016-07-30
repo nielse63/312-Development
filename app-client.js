@@ -3,7 +3,6 @@
 import React from 'react'
 import { render } from 'react-dom'
 import { Router, browserHistory } from 'react-router'
-// require('dotenv').config();
 
 // Routes
 import routes from './routes';
