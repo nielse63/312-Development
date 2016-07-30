@@ -1,6 +1,6 @@
 {
   "name": "312-development",
-  "version": "1.0.44",
+  "version": "1.0.45",
   "description": "My personal website.",
   "bugs": {
   	"url": "https://github.com/nielse63/312-Development/issues",
@@ -59,9 +59,10 @@
     "start": "gulp build --production && NODE_ENV=production webpack -p && heroku local:start web -e .env -p 5001",
     "preproduction": "npm run prerelease",
     "production": "NODE_ENV=production node app.js",
-    "prerelease": "npm test && rm -rf public && gulp build --production && NODE_ENV=production webpack -p --release",
+    "prerelease": "npm test && rm -rf public",
     "release": "gulp bump && sh ./.bin/release.sh",
-    "test": "gulp eslint"
+    "test": "gulp eslint",
+    "postinstall": "gulp build --production && NODE_ENV=production webpack -p --release"
   },
   "jest": {
     "automock": false
