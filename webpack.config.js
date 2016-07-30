@@ -3,7 +3,6 @@
 const webpack           = require('webpack');
 const CompressionPlugin = require('compression-webpack-plugin');
 const PurifyPlugin      = require('purifycss-webpack-plugin');
-// const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const ImageminPlugin    = require('imagemin-webpack-plugin').default;
 const OfflinePlugin     = require('offline-plugin');
 const path              = require('path');
@@ -17,7 +16,6 @@ const autoprefixer      = require('autoprefixer');
 require('dotenv').load();
 
 var loaders;
-// const inDev = process.env.NODE_ENV === 'development';
 var images = []
 read('public/images').forEach(function(image) {
 	images.push('../images/' + image);
@@ -45,9 +43,6 @@ var plugins = [
 		jQuery          : "jquery",
 		"window.jQuery" : "jquery"
 	}),
-	// new ExtractTextPlugin("../styles/[name].css", {
-	// 	allChunks: false
-	// })
 ];
 
 if(process.env.NODE_ENV !== 'production') {
@@ -101,7 +96,7 @@ module.exports = {
 	devtool: 'eval-source-map',
 	entry: {
 		app  : './app-client.js',
-		scss : './assets/styles/main.scss'
+		scss : './assets/styles/main.scss',
 	},
 	output: {
 		path       : __dirname + '/public/dist',
@@ -113,14 +108,6 @@ module.exports = {
 			test: /\.js$/,
 			loaders: loaders,
 			exclude: /(node_modules|bower_components)/,
-		// }, {
-		// 	test: /\.scss$/,
-		// 	include: /components/,
-		// 	exclude: /assets/,
-		// 	loader: ExtractTextPlugin.extract(
-		// 		'style',
-		// 		'css?modules&importLoaders=1&localIdentName=[name]_[local]_[hash:base64:3]!sass'
-		// 	)
 		}, {
 			test: /\.scss$/,
 			include: /assets/,
