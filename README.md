@@ -3,8 +3,8 @@
 [Check out the Site](https://312development.com/) | [Follow me on Twitter](https://twitter.com/erikkylenielsen/)
 
 [![Build Status](https://travis-ci.org/nielse63/312-Development.svg?branch=master)](https://travis-ci.org/nielse63/312-Development)
-[![GitHub issues](https://img.shields.io/github/issues/nielse63/312-Development.svg)](https://github.com/nielse63/312-Development/issues)
-[![Twitter](https://img.shields.io/twitter/url/https/github.com/nielse63/312-Development.svg?style=social)](https://twitter.com/intent/tweet?text=Wow:&url=%5Bobject%20Object%5D)
+[![dependencies Status](https://david-dm.org/nielse63/312-Development/status.svg)](https://david-dm.org/nielse63/312-Development)
+[![devDependencies Status](https://david-dm.org/nielse63/312-Development/dev-status.svg)](https://david-dm.org/nielse63/312-Development?type=dev)
 
 ## About This Repo
 
