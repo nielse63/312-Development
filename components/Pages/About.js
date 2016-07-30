@@ -1,17 +1,15 @@
 
 // About.js
 import React, { Component } from 'react';
-import config from '../../../config';
-// import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
-// import { default as styles } from './About.scss';
+import config from '../../config';
 
 // Components
-import TweetList from '../../Partials/TweetList';
-import Service from '../../Partials/Service';
+import TweetList from '../Partials/TweetList';
+import Service from '../Partials/Service';
 
 // Dispatcher
-import AppDispatcher from '../../../dispatcher/AppDispatcher';
-import AppStore from '../../../stores/AppStore';
+import AppDispatcher from '../../dispatcher/AppDispatcher';
+import AppStore from '../../stores/AppStore';
 
 export default class About extends Component {
 
@@ -95,7 +93,6 @@ export default class About extends Component {
 
 		return (
 			<div>
-				{/*<section className={'banner ' + styles.banner}>*/}
 				<section className="banner about-banner">
 					<div className="wrap container-fluid">
 						<div className="row">
@@ -132,7 +129,6 @@ export default class About extends Component {
 								<article className="article page-article">
 									<div className="row flex-middle">
 										<div className="col-xs-12 col-md-7">
-											{/*<div className={styles['where-i-work']}>*/}
 											<div className="where-i-work">
 												<figure className="where-figure where-figure-1">
 													<img data-src="/images/work1.jpg" alt="After hours at Clique" />

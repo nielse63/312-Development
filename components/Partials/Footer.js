@@ -2,11 +2,10 @@
 // Footer.js
 import React, { Component } from 'react'
 import { Link } from 'react-router'
-// import { default as styles } from './Footer.scss'
 
 // Components
-import Pattern from '../Pattern'
-import NavItem from '../NavItem'
+import Pattern from './Pattern'
+import NavItem from './NavItem'
 
 export default class Footer extends Component {
 

@@ -1,14 +1,14 @@
 
 // Contact.js
 import React, { Component } from 'react';
-import config from '../../../config';
+import config from '../../config';
 
 // Components
-import TweetList from '../../Partials/TweetList';
+import TweetList from '../Partials/TweetList';
 
 // Dispatcher
-import AppDispatcher from '../../../dispatcher/AppDispatcher';
-import AppStore from '../../../stores/AppStore';
+import AppDispatcher from '../../dispatcher/AppDispatcher';
+import AppStore from '../../stores/AppStore';
 
 export default class Contact extends Component {
 

@@ -1,7 +1,6 @@
 // App.js
 import React, { Component } from 'react';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
-// import { default as styles } from './App.scss';
 
 // Dispatcher
 import AppDispatcher from '../dispatcher/AppDispatcher';
@@ -53,7 +52,6 @@ class App extends Component {
 
 	render() {
 		const data = AppStore.data;
-		// console.log(data);
 
 		// Show loading for browser
 		if (! data.ready) {
@@ -83,7 +81,6 @@ class App extends Component {
 		return (
 			<div>
 				<MobileNav navItems={navItems} />
-				{/*<div className={styles.root}>*/}
 				<div className="body-wrap transition-appear">
 					<Header navItems={navItems} />
 					<main className={'main ' + this.getSlug()} id="main">

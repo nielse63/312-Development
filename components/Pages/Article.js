@@ -1,10 +1,10 @@
 
 // Article.js
 import React, { Component } from 'react';
-import config from '../../../config';
+import config from '../../config';
 
 // Dispatcher
-import AppDispatcher from '../../../dispatcher/AppDispatcher';
+import AppDispatcher from '../../dispatcher/AppDispatcher';
 
 export default class Article extends Component {
 
@@ -81,7 +81,6 @@ export default class Article extends Component {
 		// share links
 		const url = window.location.origin + '/articles/' + this.props.routeParams.slug;
 		const shareText = 'Check out "' + title + '" on 312 Development.';
-		// const shareText = 'Check out "' + title + '" on 312 Development at ' + url;
 		const encodedText = encodeURIComponent(shareText);
 		const encodedURL = encodeURIComponent(url);
 
