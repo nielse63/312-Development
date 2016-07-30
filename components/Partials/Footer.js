@@ -40,7 +40,7 @@ export default class Footer extends Component {
 							</nav>
 						</div>
 						<div className="col col-right">
-							<nav className="footer-nav footer-nav-right">
+							<nav className="footer-nav">
 								<ul>
 									<li><Link to="/">&copy; 2016 Erik Nielsen</Link></li>
 									<li>
@@ -64,7 +64,7 @@ export default class Footer extends Component {
 										</a>
 									</li>
 									<li>
-										<a href="https://github.com/nielse63/312-Development/" target="_blank">Steal This Code</a>
+										<a href="https://github.com/nielse63/312-Development/" target="_blank">View Source Code</a>
 									</li>
 								</ul>
 							</nav>

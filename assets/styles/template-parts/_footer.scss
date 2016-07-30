@@ -69,23 +69,23 @@
 			}
 		}
 
-		&-right {
-			ul {
-				@media (max-width: $breakpoint-mini-max) {
-					flex-direction: column;
-					align-items: center;
-				}
-			}
+		// &-right {
+		// 	ul {
+		// 		@media (max-width: $breakpoint-mini-max) {
+		// 			flex-direction: column;
+		// 			align-items: center;
+		// 		}
+		// 	}
 
-			li {
-				+ li {
-					@media (max-width: $breakpoint-mini-max) {
-						border: 0;
-						margin: 1em 0 0;
-						padding: 0;
-					}
-				}
-			}
-		}
+		// 	li {
+		// 		+ li {
+		// 			@media (max-width: $breakpoint-mini-max) {
+		// 				border: 0;
+		// 				margin: 1em 0 0;
+		// 				padding: 0;
+		// 			}
+		// 		}
+		// 	}
+		// }
 	}
 }
