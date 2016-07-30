@@ -3,7 +3,7 @@
 module.exports = {
 	site : {
 		title       : '312 Development',
-		description : 'Front-End Developer and JavaScript Engineer',
+		description : 'Chicago-based JavaScript Engineer specializing in React and Angular development with a focus on performance and algorithm design.',
 		url         : 'https://312development.com',
 		version     : require('./package.json').version,
 	},
