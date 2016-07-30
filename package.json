@@ -61,7 +61,9 @@
     "production": "NODE_ENV=production node app.js",
     "prerelease": "npm test && rm -rf public && gulp build --production && NODE_ENV=production webpack -p --release",
     "release": "gulp bump && sh ./.bin/release.sh",
-    "test": "gulp eslint"
+    "test": "gulp eslint",
+    "heroku-prebuild": "echo This runs before Heroku installs your dependencies.",
+    "heroku-postbuild": "echo This runs afterwards."
   },
   "jest": {
     "automock": false
