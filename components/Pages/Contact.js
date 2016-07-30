@@ -68,7 +68,7 @@ export default class Contact extends Component {
 								<div className="col-xs-12 col-md-6">
 									<aside className="aside">
 										<h2 className="aside-title">Shoot me a message</h2>
-										<p>Whether it's because you found a bug in my code, have an app or resource you want me to check out, or think we should partner together on a project just send me a message. I always respond.</p>
+										<p>Whether it's because you found a bug in my code, have an app or resource you want me to check out, or think we should partner together on a project, send me a message.</p>
 									</aside>
 								</div>
 								<div className="col-xs-12 col-md-6">
