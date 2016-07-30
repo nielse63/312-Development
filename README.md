@@ -2,6 +2,10 @@
 
 [Check out the Site](https://312development.com/) | [Follow me on Twitter](https://twitter.com/erikkylenielsen/)
 
+[![Build Status](https://travis-ci.org/nielse63/312-Development.svg?branch=master)](https://travis-ci.org/nielse63/312-Development)
+[![GitHub issues](https://img.shields.io/github/issues/nielse63/312-Development.svg)](https://github.com/nielse63/312-Development/issues)
+[![Twitter](https://img.shields.io/twitter/url/https/github.com/nielse63/312-Development.svg?style=social)](https://twitter.com/intent/tweet?text=Wow:&url=%5Bobject%20Object%5D)
+
 ## About This Repo
 
 First and foremost, this repo is **not meant to be a tutorial or boilerplate** of any kind. This is simply the repo for my personal site, [312development.com](https://312development.com/), hoping to share the code I've used to create this latest iteration.
