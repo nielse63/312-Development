@@ -102,7 +102,12 @@ app.get('*', (req, res) => {
 			const site = config.site;
 			site.url = req.protocol + '://' + req.get('host') + req.originalUrl;
 
-			res.locals.page = AppStore.data.page // eslint-disable-line no-param-reassign
+			const page = AppStore.data.page
+			if( ! page.desc ) {
+				page.desc = config.description
+			}
+
+			res.locals.page = page // eslint-disable-line no-param-reassign
 			res.locals.site = site // eslint-disable-line no-param-reassign
 
 			// Get React markup
