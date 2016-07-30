@@ -1,6 +1,6 @@
 // AppDispatcher.js
 import { Dispatcher } from 'flux';
-import { getTweets, loadTweets, getStore, getPostData, getPageData, didClickLink } from '../actions';
+import { getStore, getPostData, getPageData, didClickLink } from '../actions';
 
 const AppDispatcher = new Dispatcher();
 

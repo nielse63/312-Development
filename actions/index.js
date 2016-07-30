@@ -4,9 +4,6 @@ import contentful from 'contentful'
 import _ from 'lodash'
 // import memjs from 'memjs'
 
-// load config
-import config from '../config'
-
 // AppStore
 import AppStore from '../stores/AppStore'
 
@@ -36,112 +33,72 @@ export function getStore(callback) {
 
 	if( ! process.env.CONTENTFUL_TOKEN ) {
 		console.warn('Access token not found');
-		// console.log(config.contentful);
-		// console.log(process.env);
 		always();
 		return;
 	}
 
-	// function getCachedDate() {
+	// set globals
+	const client = contentful.createClient({
+		space       : process.env.CONTENTFUL_SPACE,
+		accessToken : process.env.CONTENTFUL_TOKEN,
+		host        : process.env.CONTENTFUL_HOST,
+	});
+	let complete = false;
 
-	// 	// return bool
-	// 	let hasData = false;
+	// get posts
+	client.getEntries({
+		content_type : process.env.CONTENTFUL_CONTENT_TYPE,
+	}).then((entries) => {
+		const json = entries.toPlainObject();
+		const items = json.items;
+		const posts = [];
 
-	// // 	// check localstorage first
-	// // 	const lastChecked  = localStorage.getItem(checkedKey);
-	// // 	const feed         = localStorage.getItem(feedKey);
-	// // 	const nav          = localStorage.getItem(navKey);
-	// // 	if( lastChecked && feed && nav ) {
-	// // 		const diff = (Date.now() - Date.parse( lastChecked )) / 1000;
-	// // 		const oneDay = 60 * 60 * 24;
-	// // 		if( diff < oneDay ) {
-
-	// // 			// set data
-	// // 			AppStore.data.posts = JSON.parse(feed);
-	// // 			AppStore.data.globals.navItems = JSON.parse(nav);
-	// // 			hasData = true;
-	// // 		}
-	// // 	}
-	// 	return hasData;
-	// }
-
-	// if( ! getCachedDate() ) {
-
-		// update local storage last checked
-		// localStorage.setItem(checkedKey, String(new Date()));
-
-		// set globals
-		const client = contentful.createClient({
-			space       : process.env.CONTENTFUL_SPACE,
-			accessToken : process.env.CONTENTFUL_TOKEN,
-			host        : process.env.CONTENTFUL_HOST,
+		items.forEach(function(object) {
+			const item = object.fields;
+			item.id = object.sys.id;
+			item.slug = makeSlug(item.title);
+			posts.push(item);
 		});
-		let complete = false;
 
-		// get posts
-		client.getEntries({
-			content_type : process.env.CONTENTFUL_CONTENT_TYPE,
-		}).then((entries) => {
-			const json = entries.toPlainObject();
-			const items = json.items;
-			const posts = [];
+		// set data
+		AppStore.data.posts = posts;
 
-			items.forEach(function(object) {
-				const item = object.fields;
-				item.id = object.sys.id;
-				item.slug = makeSlug(item.title);
-				posts.push(item);
+		// trigger complete
+		if (complete) {
+			always();
+		} else {
+			complete = true;
+		}
+	});
+
+	// get pages (as nav items)
+	client.getEntries({
+		content_type : 'navItems',
+	}).then((entries) => {
+		const json = entries.toPlainObject();
+		const items = json.items;
+		const navItems = [];
+
+		items.forEach(function(object) {
+			navItems.push({
+				key   : object.sys.id,
+				value : object.fields.path,
+				title : object.fields.title,
+				label : object.fields.navLable,
+				desc  : object.fields.description,
 			});
-
-			// cache on local storage
-			// localStorage.setItem(feedKey, JSON.stringify(posts));
-
-			// set data
-			AppStore.data.posts = posts;
-
-			// trigger complete
-			if (complete) {
-				always();
-			} else {
-				complete = true;
-			}
 		});
 
-		// get pages (as nav items)
-		client.getEntries({
-			content_type : 'navItems',
-		}).then((entries) => {
-			const json = entries.toPlainObject();
-			const items = json.items;
-			const navItems = [];
+		// set data
+		AppStore.data.globals.navItems = navItems;
 
-			items.forEach(function(object) {
-				navItems.push({
-					key   : object.sys.id,
-					value : object.fields.path,
-					title : object.fields.title,
-					label : object.fields.navLable,
-					desc  : object.fields.description,
-				});
-			});
-
-			// cache on local storage
-			// localStorage.setItem(navKey, JSON.stringify(navItems));
-
-			// set data
-			AppStore.data.globals.navItems = navItems;
-			// AppStore.data.globals.site = config.site;
-
-			// trigger complete
-			if (complete) {
-				always();
-			} else {
-				complete = true;
-			}
-		});
-	// } else {
-	// 	always();
-	// }
+		// trigger complete
+		if (complete) {
+			always();
+		} else {
+			complete = true;
+		}
+	});
 }
 
 export function getPostData(pageSlug, postSlug) {
@@ -157,6 +114,12 @@ export function getPostData(pageSlug, postSlug) {
 	const page = _.findWhere(data.posts, {
 		slug,
 	});
+
+	if( ! page.desc ) {
+		page.desc = page.content
+			.replace(/<(?:.|\n)*?>/gm, '')
+			.substring(0, 160) + '...';
+	}
 
 	AppStore.data.page = page;
 	AppStore.emitChange();

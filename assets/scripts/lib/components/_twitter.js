@@ -40,7 +40,7 @@ export default class Twitter {
 			return;
 		}
 
-		window.twttr.widgets.load(main);
+		window.twttr.widgets.load(this.main);
 
 		window.twttr.widgets.createTimeline({
 			sourceType : 'profile',
