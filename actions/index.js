@@ -2,6 +2,7 @@
 // actions.js
 import contentful from 'contentful'
 import _ from 'lodash'
+// import memjs from 'memjs'
 
 // load config
 import config from '../config'
@@ -33,7 +34,7 @@ export function getStore(callback) {
 		}
 	}
 
-	if( ! config.contentful.accessToken ) {
+	if( ! process.env.CONTENTFUL_TOKEN ) {
 		console.warn('Access token not found');
 		// console.log(config.contentful);
 		// console.log(process.env);
@@ -71,15 +72,15 @@ export function getStore(callback) {
 
 		// set globals
 		const client = contentful.createClient({
-			space       : config.contentful.space,
-			accessToken : config.contentful.accessToken,
-			host        : config.contentful.host,
+			space       : process.env.CONTENTFUL_SPACE,
+			accessToken : process.env.CONTENTFUL_TOKEN,
+			host        : process.env.CONTENTFUL_HOST,
 		});
 		let complete = false;
 
 		// get posts
 		client.getEntries({
-			content_type : config.contentful.content_type,
+			content_type : process.env.CONTENTFUL_CONTENT_TYPE,
 		}).then((entries) => {
 			const json = entries.toPlainObject();
 			const items = json.items;
@@ -120,6 +121,7 @@ export function getStore(callback) {
 					value : object.fields.path,
 					title : object.fields.title,
 					label : object.fields.navLable,
+					desc  : object.fields.description,
 				});
 			});
 
@@ -128,6 +130,7 @@ export function getStore(callback) {
 
 			// set data
 			AppStore.data.globals.navItems = navItems;
+			// AppStore.data.globals.site = config.site;
 
 			// trigger complete
 			if (complete) {
