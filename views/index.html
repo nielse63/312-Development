@@ -1,17 +1,45 @@
 <!DOCTYPE html>
-<html lang="en-US">
+<html amp lang="en-US">
 <head>
 	<!-- meta -->
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
 	<title>{{ site.title }}{{# page }} | {{ page.title }}{{/ page }}</title>
 	<meta name="description" content="{{ page.desc }}">
+
+	<!-- SEO -->
 	<meta name="author" content="Erik Nielsen">
 	<link rel="author" href="https://312development.com/about">
 	<link rel="publisher" href="https://plus.google.com/u/1/106134694569750788161/">
 	<link rel="canonical" href="{{ site.url }}">
 	<meta name="google-site-verification" content="eoHMwiU0Sygng9wBMlhWpTrUQJtd-M6nN5jmj14tSRM" />
+	<script type="application/ld+json">
+		{
+			"@context": "http://schema.org",
+			"@type": "WebSite",
+			"name": "{{ site.title }}{{# page }} | {{ page.title }}{{/ page }}",
+			"alternateName": "{{ site.title }}",
+			"description": "{{ site.desc }}",
+			"logo": "/images/icons/android-chrome-192x192.png",
+			"url": "{{ site.url }}",
+			"datePublished": "2016-07-01T12:02:41Z-0500",
+			"image": [
+				"/images/og-image.jpg"
+			]
+		}, {
+			"@context": "http://schema.org",
+			"@type": "Person",
+			"name": "Erik Nielsen",
+			"url": "https://312development.com/",
+			"sameAs": [
+				"https://www.facebook.com/erikkylenieslen",
+				"https://twitter.com/erikkylenielsen/",
+				"https://github.com/nielse63/",
+				"https://www.linkedin.com/in/erikkylenielsen/",
+			]
+		}
+	</script>
 
 	<!-- DNS prefech -->
 	<meta http-equiv="x-dns-prefetch-control" content="on">
@@ -42,7 +70,7 @@
 	<meta property="og:description" content="{{ page.desc }}">
 	<meta property="og:url" content="{{ site.url }}">
 	<meta property="og:site_name" content="{{ site.title }}">
-	<meta property="og:image" content="{{ site.url }}images/og-image.jpg">
+	<meta property="og:image" content="/images/og-image.jpg">
 	<meta property="fb:app_id" content="834389063291117">
 
 	<!-- twitter -->
@@ -50,7 +78,7 @@
 	<meta name="twitter:site" content="@{{ site.twitter }}">
 	<meta name="twitter:description" content="{{ page.desc }}">
 	<meta name="twitter:title" content="{{ site.title }}{{# page }} | {{ page.title }}{{/ page }}">
-	<meta name="twitter:image" content="{{ site.url }}images/og-image.jpg">
+	<meta name="twitter:image" content="/images/og-image.jpg">
 
 	<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="preload" as="style" onload="this.rel='stylesheet'">
 	<style>html, body { color: transparent;  }</style>
@@ -59,6 +87,8 @@
 		<script src="//oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
 		<script src="//oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
 	<![endif]-->
+	<style amp-boilerplate>body{-webkit-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-moz-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-ms-animation:-amp-start 8s steps(1,end) 0s 1 normal both;animation:-amp-start 8s steps(1,end) 0s 1 normal both}@-webkit-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-moz-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-ms-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-o-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}</style><noscript><style amp-boilerplate>body{-webkit-animation:none;-moz-animation:none;-ms-animation:none;animation:none}</style></noscript>
+	<script async src="//cdn.ampproject.org/v0.js"></script>
 </head>
 <body>
 	<div id="app">{{{ reactMarkup }}}</div>

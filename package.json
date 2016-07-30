@@ -1,7 +1,13 @@
 {
   "name": "312-development",
-  "version": "1.0.42",
-  "description": "",
+  "version": "1.0.43",
+  "description": "My personal website.",
+  "bugs": {
+  	"url": "https://github.com/nielse63/312-Development/issues",
+  	"email": "erik@312development.com"
+  },
+  "license": "MIT",
+  "repository": "312-Development.git",
   "main": "app-server.js",
   "engine": {
     "node": ">=5.8.0",
@@ -20,6 +26,7 @@
     "eslint-plugin-react": "^5.2.2",
     "events": "^1.1.1",
     "express": "^4.13.3",
+    "express-minify-html": "^0.5.0",
     "fg-loadcss": "^1.2.0",
     "flux": "^2.1.1",
     "fs-readdir-recursive": "^1.0.0",
@@ -60,7 +67,6 @@
     "automock": false
   },
   "author": "Erik Nielsen",
-  "license": "ISC",
   "devDependencies": {
     "asset-builder": "^1.1.0",
     "autoprefixer": "^6.3.7",

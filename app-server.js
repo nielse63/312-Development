@@ -11,6 +11,7 @@ import compression from 'compression'
 import raygun from 'raygun'
 import config from './config'
 import sslRedirect from 'heroku-ssl-redirect'
+import minifyHTML from 'express-minify-html'
 
 // Actions
 import { getStore, getPostData, getPageData } from './actions'
@@ -36,6 +37,15 @@ app.use(compression())
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(express.static(`${__dirname}/public/`))
+app.use(minifyHTML({
+	override:      true,
+	htmlMinifier: {
+		removeComments:            true,
+		collapseWhitespace:        true,
+		collapseBooleanAttributes: true,
+		removeAttributeQuotes:     true
+	}
+}))
 if( process.env.ON_LOCAL !== 'true' ) {
 	app.use(sslRedirect(['production']))
 }
@@ -100,7 +110,7 @@ app.get('*', (req, res) => {
 			}
 
 			const site = config.site;
-			site.url = req.protocol + '://' + req.get('host') + req.originalUrl;
+			site.url = 'https://' + req.get('host') + req.originalUrl;
 
 			const page = AppStore.data.page
 			if( ! page.desc ) {
