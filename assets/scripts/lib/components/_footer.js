@@ -56,15 +56,6 @@ export default class Footer {
 			$paths.css('stroke-dashoffset', '');
 			this.remove();
 		})
-		// .on('leave', function() {
-		// 	$paths.each(function() {
-		// 		const $path  = $(this);
-		// 		const length = $path.data('length');
-		// 		$path.css({
-		// 			'stroke-dashoffset' : length,
-		// 		});
-		// 	})
-		// })
 		.addTo(_c.controller);
 	}
 }

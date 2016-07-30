@@ -2,7 +2,6 @@
 // ThankYou.js
 import React, { Component } from 'react';
 import config from '../../../config';
-import AppStore from '../../../stores/AppStore'
 
 export default class ThankYou extends Component {
 
@@ -19,7 +18,7 @@ export default class ThankYou extends Component {
 	}
 
 	componentDidMount() {
-		document.title = config.site.title + ' | ' + (AppStore.data.page.title || this.props.pageTitle);
+		document.title = [this.props.pageTitle, config.site.title].join(' | ');
 		window.postMessage('loaded', window.location.origin);
 	}
 

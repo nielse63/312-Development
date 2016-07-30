@@ -1,6 +1,6 @@
 {
   "name": "312-development",
-  "version": "1.0.35",
+  "version": "1.0.36",
   "description": "",
   "main": "app-server.js",
   "engine": {
@@ -25,6 +25,7 @@
     "gsap": "^1.18.5",
     "heroku-ssl-redirect": "0.0.3",
     "hogan-express": "^0.5.2",
+    "immutable": "^3.8.1",
     "jquery": "^3.0.0",
     "json-loader": "^0.5.4",
     "lodash": "^3.10.1",
