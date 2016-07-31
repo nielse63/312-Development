@@ -5,7 +5,7 @@ import { render } from 'react-dom'
 import { Router, browserHistory } from 'react-router'
 
 // Routes
-import routes from './routes';
+import routes from './routes'
 
 function Routes() {
 	return (
