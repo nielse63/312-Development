@@ -7,8 +7,7 @@ var flatten = require('gulp-flatten');
 // task
 gulp.task('other', function() {
 	return gulp.src([
-		'assets/other/**/*',
-		'assets/other/.htaccess'
+		'assets/other/**/*'
 	])
 	.pipe(newer('public/'))
 	.pipe(flatten())

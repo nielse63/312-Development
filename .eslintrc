@@ -8,13 +8,13 @@
 		}
 	},
 	"env": {
-        "browser": true,
-        "node": true
-    },
-    "globals": {
-        "_c": true,
-        "$": true
-    },
+		"browser": true,
+		"node": true
+	},
+	"globals": {
+		"_c": true,
+		"$": true
+	},
 	"extends": "airbnb",
 	"rules": {
 		"indent": ["warn", "tab"],

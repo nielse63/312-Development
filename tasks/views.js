@@ -13,16 +13,17 @@ var gutil        = require('gulp-util');
 
 // global vars
 var publicDir = path.resolve(__dirname, '../public/');
-var input    = path.resolve(__dirname, '../views/' + (!argv.production ? 'index.dev.html' : 'index.prod.html'));
-var output = path.resolve(publicDir, 'index.html');
-var attempts = 0;
+var input     = path.resolve(__dirname, '../views/index.html');
+var output    = path.resolve(publicDir, 'index.html');
+var attempts  = 0;
 
-function setAssets() {
+// functions
+function getFile() {
 	fs.readFile(output, function(err, data) {
 		if (err) {
 			if( attempts < 5 ) {
 				attempts++;
-				setTimeout(setAssets, 500);
+				setTimeout(getFile, 500);
 				return;
 			}
 			console.log('File not found');
@@ -37,7 +38,7 @@ function setAssets() {
 		});
 		var fileContent = file.contents.toString();
 		var string = fileContent.replace(/\s/g, '');
-		var found = string.match( new RegExp('<!--assets-->(.*?)<!--endassets-->') );
+		var found = string.match( new RegExp('<!--bower:js-->(.*?)<!--endbower-->') );
 		if( ! found || ! found.length || ! found[1] ) {
 			return;
 		}
@@ -46,45 +47,24 @@ function setAssets() {
 		if( ! sources || ! sources.length ) {
 			return;
 		}
-
-		// read assets file
-		fs.readFile(path.resolve(__dirname, '../public/assets.json'), function(err, data) {
-			if(err) {
-				console.log(err);
-				return;
-			}
-			var assets = JSON.parse(data);
-
-			sources.forEach(function(src) {
-				src = src.replace(/"/g, '');
-				var srcArray = src.split('/');
-				var filename = srcArray[srcArray.length - 1];
-				var filenameArray = filename.split('.');
-				var key = filenameArray[0];
-				var fileType = filenameArray[filenameArray.length - 1];
-
-				if( key in assets ) {
-					var asset = assets[key];
-					if( fileType in asset ) {
-						var assetFile = asset[fileType];
-
-						fileContent = fileContent.replace(new RegExp(src, 'g'), assetFile);
-					}
-				}
-			});
-
-			fileContent = fileContent
-				.replace(/^\s+<!-- (.*?) -->\n/gm, '');
-			writeFile(output, fileContent);
-
+		sources.forEach(function(src) {
+			src = src.replace(/"/g, '');
+			var bowerInput = path.resolve(__dirname, src);
+			var basename = path.basename(bowerInput);
+			var distOutput = path.resolve(publicDir, 'dist');
+			gulp.src(bowerInput).pipe(gulp.dest(distOutput));
+			fileContent = fileContent.replace(new RegExp(src, 'g'), '/dist/' + basename);
 		});
+		fileContent = fileContent
+			.replace(/^\s+<!-- (.*?) -->\n/gm, '');
+		writeFile(output, fileContent);
 	});
 }
 
 // task
 gulp.task('views', function() {
 	del([
-		'public/index.dev.html',
+		'public/index.html',
 	]).then(function(paths) {
 		gulp.src(input)
 			.pipe(wiredep())
@@ -94,7 +74,7 @@ gulp.task('views', function() {
 		return gulp.src('public/index.html')
 			.pipe(gulpif(
 				!argv.production,
-				setAssets()
+				getFile()
 			));
 	});
 });

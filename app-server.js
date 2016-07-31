@@ -5,25 +5,29 @@ import { match, RouterContext } from 'react-router'
 import { renderToStaticMarkup } from 'react-dom/server'
 import express from 'express'
 import hogan from 'hogan-express'
-import config from './config'
 import nodemailer from 'nodemailer'
 import bodyParser from 'body-parser'
 import compression from 'compression'
 import raygun from 'raygun'
+import config from './config'
+import sslRedirect from 'heroku-ssl-redirect'
+import minifyHTML from 'express-minify-html'
 
 // Actions
-import { getStore, getPostData, getPageData } from './actions/actions'
+import { getStore, getPostData, getPageData } from './actions'
 
 // Routes
 import routes from './routes'
 
-// Raygun
+// raygun
 const raygunClient = new raygun.Client().init({
-	apiKey: 'jUh0t7Fbz5Kl3fKsNO8pDg=='
-})
-
-// globals
-const index = process.env.NODE_ENV === 'production' ? 'index.prod.html' : 'index.dev.html'
+	apiKey               : config.raygun.apiKey,
+	enablePulse          : true,
+	enableCrashReporting : true
+}).setVersion(config.site.version);
+raygunClient.user = function(obj) {
+	return obj;
+};
 
 // Express
 const app = express()
@@ -33,9 +37,20 @@ app.use(compression())
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(express.static(`${__dirname}/public/`))
-app.use(raygunClient.expressHandler)
+app.use(minifyHTML({
+	override:      true,
+	htmlMinifier: {
+		removeComments:            true,
+		collapseWhitespace:        true,
+		collapseBooleanAttributes: true,
+		removeAttributeQuotes:     true
+	}
+}))
+if( process.env.ON_LOCAL !== 'true' ) {
+	app.use(sslRedirect(['production']))
+}
 
-app.set('port', (process.env.PORT || 3030))
+app.set('port', (process.env.PORT || 5000))
 
 app.post('/submit', (req, res) => {
 	const transporter = nodemailer.createTransport({
@@ -43,8 +58,8 @@ app.post('/submit', (req, res) => {
 		port: 465,
 		secure: true,
 		auth: {
-			user: 'postmaster@312development.com',
-			pass: '62479f8b7f91ade480f7eb80ef52002e'
+			user: config.mailgun.user,
+			pass: config.mailgun.pass,
 		}
 	});
 
@@ -70,12 +85,20 @@ app.post('/submit', (req, res) => {
 	});
 });
 
+app.get('/category', (req, res) => {
+	res.redirect(301, '/')
+});
+
 app.get('*', (req, res) => {
 	getStore(function(err, AppStore) {
 		if(err) {
+			raygunClient.send(err.message)
 			return res.status(500).end('error')
 		}
-		return match({ routes, location: req.url }, (error, redirectLocation, renderProps) => {
+
+		return match({
+			routes, location: req.url
+		}, (error, redirectLocation, renderProps) => {
 
 			const slugArray = req.url.split('/')
 			const pageSlug = slugArray[1]
@@ -86,32 +109,44 @@ app.get('*', (req, res) => {
 				getPageData(pageSlug)
 			}
 
-			res.locals.page = AppStore.data.page // eslint-disable-line no-param-reassign
-			res.locals.site = config.site // eslint-disable-line no-param-reassign
+			const site = config.site;
+			site.url = 'https://' + req.get('host') + req.originalUrl;
+
+			const page = AppStore.data.page
+			if( ! page.desc ) {
+				page.desc = config.description
+			}
+
+			res.locals.page = page // eslint-disable-line no-param-reassign
+			res.locals.site = site // eslint-disable-line no-param-reassign
 
 			// Get React markup
 			const reactMarkup = renderToStaticMarkup(<RouterContext {...renderProps} />)
 			res.locals.reactMarkup = reactMarkup // eslint-disable-line no-param-reassign
 
 			if (error) {
+				raygunClient.send(error)
 				res.status(500).send(error.message)
 			} else if (redirectLocation) {
 				res.redirect(302, redirectLocation.pathname + redirectLocation.search)
 			} else if (renderProps) {
 
 				// Success!
-				console.log(index);
-				res.status(200).render(index)
+				res.status(200).render('index.html')
 			} else {
-				res.status(404).render(index)
+				res.status(404).render('index.html')
 			}
 		})
 	})
-});
+})
 
+// bind raygun
+app.use(raygunClient.expressHandler)
+
+// listen to server
 app.listen(app.get('port'), function() {
 	console.info('==> ✅  Server is listening in ' + process.env.NODE_ENV + ' mode')
 	console.info('==> 🌎  Go to http://localhost:%s', app.get('port'))
-});
+})
 
 

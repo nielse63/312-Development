@@ -36,7 +36,6 @@ export default class WorkGrid {
 				if (! line.childNodes || ! line.childNodes.length) {
 					return;
 				}
-
 				text.push(line.childNodes[0].nodeValue.trim());
 			});
 
@@ -105,11 +104,9 @@ export default class WorkGrid {
 			const diff    = $block.outerHeight() - $figure.outerHeight();
 			const delay   = (Math.random() * 0.25 + 0.25).toFixed(2);
 
-			// if (i > 3) {
-				$block.css({
-					'transition-delay' : delay + 's',
-				});
-			// }
+			$block.css({
+				'transition-delay' : delay + 's',
+			});
 
 			const scene = new ScrollMagic.Scene({
 				triggerElement : trigger,

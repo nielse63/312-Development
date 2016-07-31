@@ -49,7 +49,7 @@ $animation-duration: 1.4s;
 
 	circle {
 		transform-origin: 50%;
-		animation: $animation-duration loadingRotate cubic-bezier(.4,0,.2,1) infinite,
+		animation: $animation-duration loadingRotate cubic-bezier(0.4, 0, 0.2, 1) infinite,
 				   $animation-duration loadingLine linear infinite;
 	}
 }

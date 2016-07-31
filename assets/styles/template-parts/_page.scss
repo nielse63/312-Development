@@ -6,9 +6,9 @@ $col-padding: 50px;
 		background-color: $color-white;
 		padding: 25px 0;
 
-		// body.page-home & {
-		// 	padding-bottom: 0;
-		// }
+		.page-home & {
+			padding-bottom: 0;
+		}
 
 		@media (min-width: $breakpoint-small) {
 			padding: 100px 0;
@@ -56,9 +56,6 @@ $col-padding: 50px;
 			color: $color-white;
 			font-family: $serif-font-family;
 		}
-
-		a {
-		}
 	}
 
 	&-article {
@@ -80,10 +77,8 @@ $col-padding: 50px;
 				padding-left: $col-padding;
 				padding-right: $col-padding;
 
-				+ * {
-					@media (max-width: $breakpoint-medium-max) {
-						margin-top: 20px;
-					}
+				@media (max-width: $breakpoint-medium-max) {
+					margin-top: 20px;
 				}
 			}
 		}

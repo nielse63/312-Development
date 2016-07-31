@@ -12,10 +12,8 @@ $font-path: '../fonts';
 
 @font-face {
 	font-family: 'Proxima Nova';
-	src: url('#{$font-path}/ProximaNovaLightIt.eot?#iefix') format('embedded-opentype'),
-		 url('#{$font-path}/ProximaNovaLightIt.woff2') format('woff2'),
-		 url('#{$font-path}/ProximaNovaLightIt.woff') format('woff'),
-		 url('#{$font-path}/ProximaNovaLightIt.ttf') format('truetype');
+	src: url('#{$font-path}/ProximaNovaLightIt.woff2') format('woff2'),
+		 url('#{$font-path}/ProximaNovaLightIt.woff') format('woff');
 	font-weight: 200;
 	font-style: italic;
 	unicode-range: U+000-5FF;
@@ -23,10 +21,8 @@ $font-path: '../fonts';
 
 @font-face {
 	font-family: 'Proxima Nova';
-	src: url('#{$font-path}/ProximaNovaLight.eot?#iefix') format('embedded-opentype'),
-		 url('#{$font-path}/ProximaNovaLight.woff2') format('woff2'),
-		 url('#{$font-path}/ProximaNovaLight.woff') format('woff'),
-		 url('#{$font-path}/ProximaNovaLight.ttf') format('truetype');
+	src: url('#{$font-path}/ProximaNovaLight.woff2') format('woff2'),
+		 url('#{$font-path}/ProximaNovaLight.woff') format('woff');
 	font-weight: 200;
 	font-style: normal;
 	unicode-range: U+000-5FF;
@@ -34,10 +30,8 @@ $font-path: '../fonts';
 
 @font-face {
 	font-family: 'Proxima Nova';
-	src: url('#{$font-path}/ProximaNova.eot?#iefix') format('embedded-opentype'),
-		 url('#{$font-path}/ProximaNova.woff2') format('woff2'),
-		 url('#{$font-path}/ProximaNova.woff') format('woff'),
-		 url('#{$font-path}/ProximaNova.ttf') format('truetype');
+	src: url('#{$font-path}/ProximaNova.woff2') format('woff2'),
+		 url('#{$font-path}/ProximaNova.woff') format('woff');
 	font-weight: 400;
 	font-style: normal;
 	unicode-range: U+000-5FF;
@@ -45,10 +39,8 @@ $font-path: '../fonts';
 
 @font-face {
 	font-family: 'Proxima Nova';
-	src: url('#{$font-path}/ProximaNovaItalic.eot?#iefix') format('embedded-opentype'),
-		 url('#{$font-path}/ProximaNovaItalic.woff2') format('woff2'),
-		 url('#{$font-path}/ProximaNovaItalic.woff') format('woff'),
-		 url('#{$font-path}/ProximaNovaItalic.ttf') format('truetype');
+	src: url('#{$font-path}/ProximaNovaItalic.woff2') format('woff2'),
+		 url('#{$font-path}/ProximaNovaItalic.woff') format('woff');
 	font-weight: 400;
 	font-style: italic;
 	unicode-range: U+000-5FF;
@@ -56,10 +48,8 @@ $font-path: '../fonts';
 
 @font-face {
 	font-family: 'Proxima Nova';
-	src: url('#{$font-path}/ProximaNovaBold.eot?#iefix') format('embedded-opentype'),
-		 url('#{$font-path}/ProximaNovaBold.woff2') format('woff2'),
-		 url('#{$font-path}/ProximaNovaBold.woff') format('woff'),
-		 url('#{$font-path}/ProximaNovaBold.ttf') format('truetype');
+	src: url('#{$font-path}/ProximaNovaBold.woff2') format('woff2'),
+		 url('#{$font-path}/ProximaNovaBold.woff') format('woff');
 	font-weight: 700;
 	font-style: normal;
 	unicode-range: U+000-5FF;
@@ -67,10 +57,8 @@ $font-path: '../fonts';
 
 @font-face {
 	font-family: 'Proxima Nova';
-	src: url('#{$font-path}/ProximaNovaBoldItalic.eot?#iefix') format('embedded-opentype'),
-		 url('#{$font-path}/ProximaNovaBoldItalic.woff2') format('woff2'),
-		 url('#{$font-path}/ProximaNovaBoldItalic.woff') format('woff'),
-		 url('#{$font-path}/ProximaNovaBoldItalic.ttf') format('truetype');
+	src: url('#{$font-path}/ProximaNovaBoldItalic.woff2') format('woff2'),
+		 url('#{$font-path}/ProximaNovaBoldItalic.woff') format('woff');
 	font-weight:   700;
 	font-style:    italic;
 	unicode-range: U+000-5FF;
@@ -78,11 +66,8 @@ $font-path: '../fonts';
 
 @font-face {
 	font-family: 'Brandon Grotesque';
-	src: url('#{$font-path}/Brandon_bld.eot');
-	src: url('#{$font-path}/Brandon_bld.eot?#iefix') format('embedded-opentype'),
-		 url('#{$font-path}/Brandon_bld.woff') format('woff'),
-		 url('#{$font-path}/Brandon_bld.ttf') format('truetype'),
-		 url('#{$font-path}/Brandon_bld.svg#41e76bd6e414417d52adb646f262964a') format('svg');
+	src: url('#{$font-path}/Brandon_bld.woff') format('woff'),
+		 url('#{$font-path}/Brandon_bld.ttf') format('truetype');
 	font-style:    normal;
 	font-weight:   700;
 	unicode-range: U+000-5FF;
@@ -90,11 +75,8 @@ $font-path: '../fonts';
 
 @font-face {
 	font-family: 'Brandon Grotesque';
-	src: url('#{$font-path}/Brandon_reg.eot');
-	src: url('#{$font-path}/Brandon_reg.eot?#iefix') format('embedded-opentype'),
-		 url('#{$font-path}/Brandon_reg.woff') format('woff'),
-		 url('#{$font-path}/Brandon_reg.ttf')  format('truetype'),
-		 url('#{$font-path}/Brandon_reg.svg#50bf5a2005a5412419d6a4b30314e68e') format('svg');
+	src: url('#{$font-path}/Brandon_reg.woff') format('woff'),
+		 url('#{$font-path}/Brandon_reg.ttf')  format('truetype');
 	font-style:    normal;
 	font-weight:   400;
 	unicode-range: U+000-5FF;
@@ -102,8 +84,8 @@ $font-path: '../fonts';
 
 @font-face {
 	font-family: 'Crimson Text';
-	src: url('#{$font-path}/crimsontext-roman-webfont.woff2') format('woff2'),
-		 url('#{$font-path}/crimsontext-roman-webfont.woff') format('woff');
+	src: url('#{$font-path}/CrimsonText-Roman.woff2') format('woff2'),
+		 url('#{$font-path}/CrimsonText-Roman.woff') format('woff');
 	font-style:    normal;
 	font-weight:   400;
 	unicode-range: U+000-5FF;

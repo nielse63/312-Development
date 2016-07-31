@@ -1,9 +1,10 @@
 
-import Utils from './_utils';
-import Support from './_support';
-import Browser from './_browser';
-import Events from './_events';
-import ScrollMagic from 'scrollmagic';
+import Utils from './_utils'
+import Support from './_support'
+import Browser from './_browser'
+import Events from './_events'
+import ScrollMagic from 'scrollmagic'
+import { loadCSS } from 'fg-loadcss'
 
 export default class Clique {
 
@@ -57,5 +58,12 @@ export default class Clique {
 
 	onLoad() {
 		this.loaded = true;
+
+		// lazyload icons
+		this.getIcons();
+	}
+
+	getIcons() {
+		loadCSS("//maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css");
 	}
 }

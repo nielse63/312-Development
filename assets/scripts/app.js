@@ -10,21 +10,21 @@ window._c = new Clique();
 // modules
 import Nav from './lib/components/_nav';
 import Banner from './lib/components/_banner';
-
-// modules
 import BodyClass from './lib/modules/_body-class';
 import Form from './lib/modules/_form';
-
 import MobileButton from './lib/vendor/hamburger';
-
 import LazyLoad from './lib/components/_lazyload';
 import Links from './lib/components/_links';
 import Homepage from './lib/components/_homepage';
 import WorkGrid from './lib/components/_work-grid';
 import Photos from './lib/components/_photos';
 import Services from './lib/components/_services';
+import Twitter from './lib/components/_twitter';
 import Share from './lib/components/_share';
 import Footer from './lib/components/_footer';
+
+// config vars
+import config from '../../config'
 
 class AppUI {
 
@@ -81,10 +81,15 @@ class AppUI {
 				preload : false,
 				Cls     : Share,
 				val     : null,
+			}, {
+				preload : false,
+				Cls     : Twitter,
+				val     : null,
 			},
 		];
 		this.scenes = [];
 		this.didInitialLoad = false;
+		this.raygunUserKey = '312RaygunUser';
 
 		// init
 		this.onFirstLoad();
@@ -97,6 +102,8 @@ class AppUI {
 	}
 
 	onFirstLoad() {
+		this.loadRaygun();
+
 		NProgress.start();
 		this.registerServiceWorker()
 	}
@@ -221,12 +228,59 @@ class AppUI {
 			window.location.hostname === '[::1]' ||
 			window.location.hostname.match(/^127(?:\.(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)){3}$/)
 		);
-		if ('serviceWorker' in navigator && (window.location.protocol === 'https:' || isLocalhost) ) {
-		// if ('serviceWorker' in navigator && window.location.protocol === 'https:' ) {
+		if ('serviceWorker' in navigator && (window.location.protocol === 'https:' || isLocalhost)) {
 			navigator.serviceWorker.register('/sw.js', {
 				scope: '/'
 			});
 		}
+	}
+
+	loadRaygun() {
+		const self = this;
+		(function(window, document, ele, src, id, ...args) {
+			/* eslint-disable no-param-reassign */
+			window.RaygunObject = id;
+			window[id] = window[id] || function() {
+				(window[id].o = window[id].o || []).push(args)
+			};
+			/* eslint-enable no-param-reassign */
+			const script = document.createElement(ele);
+			const parent = document.getElementsByTagName(ele)[0];
+			script.async = 1;
+			script.src = src;
+			parent.parentNode.insertBefore(script, parent);
+			script.onload = function() {
+				self.setupRaygun();
+			};
+
+		}(window, document, "script", "//cdn.raygun.io/raygun4js/raygun.min.js", "rg4js"));
+	}
+
+	setupRaygun() {
+		window.rg4js('apiKey', config.raygun.apiKey);
+		window.rg4js('enablePulse', true);
+		window.rg4js('enableCrashReporting', true);
+		window.rg4js('options', {
+			debugMode : window.location.host === 'localhost',
+			excludedHostnames : ['localhost'],
+			ignore3rdPartyErrors : true
+		});
+		window.rg4js('saveIfOffline', true);
+
+		// set user tracking
+		window.rg4js('setUser', {
+			identifier  : this.getRayGunUser(),
+			isAnonymous : false,
+		});
+	}
+
+	getRayGunUser() {
+		let raygunUser = localStorage.getItem(this.raygunUserKey);
+		if( ! raygunUser ) {
+			raygunUser = _c.utils.stringGen();
+			localStorage.setItem(this.raygunUserKey, raygunUser);
+		}
+		return raygunUser;
 	}
 }
 

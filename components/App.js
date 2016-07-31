@@ -1,7 +1,6 @@
 // App.js
 import React, { Component } from 'react';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
-// import { default as styles } from './App.scss';
 
 // Dispatcher
 import AppDispatcher from '../dispatcher/AppDispatcher';
@@ -27,15 +26,9 @@ class App extends Component {
 	}
 
 	// Add change listeners to stores
-	componentWillMount() {
-		AppStore.addChangeListener(this.stateDidChange.bind(this));
-		this.getStore();
+	componentDidMount() {
+		AppStore.addChangeListener(this.stateDidChange.bind(this))
 	}
-
-	// Add change listeners to stores
-	// componentDidMount() {
-	// 	AppStore.addChangeListener(this.stateDidChange.bind(this));
-	// }
 
 	// Remove change listeners from stores
 	componentWillUnmount() {
@@ -54,7 +47,7 @@ class App extends Component {
 	}
 
 	stateDidChange() {
-		this.setState(AppStore);
+		this.setState(AppStore)
 	}
 
 	render() {
@@ -62,9 +55,11 @@ class App extends Component {
 
 		// Show loading for browser
 		if (! data.ready) {
-			if (typeof document !== 'undefined') {
-				document.title = 'Loading';
+			if(typeof document !== 'undefined') {
+				document.title = 'Loading'
 			}
+
+			this.getStore();
 
 			return (
 				<div>
@@ -86,12 +81,11 @@ class App extends Component {
 		return (
 			<div>
 				<MobileNav navItems={navItems} />
-				{/*<div className={styles.root}>*/}
 				<div className="body-wrap transition-appear">
 					<Header navItems={navItems} />
 					<main className={'main ' + this.getSlug()} id="main">
 						<ReactCSSTransitionGroup component="div" className="transition-group" transitionName="transition" transitionEnterTimeout={transitionDuration} transitionLeaveTimeout={transitionDuration}>
-							{Routes}
+							{ Routes }
 						</ReactCSSTransitionGroup>
 					</main>
 					<Footer navItems={navItems} />
@@ -100,4 +94,5 @@ class App extends Component {
 		);
 	}
 }
+
 export default App

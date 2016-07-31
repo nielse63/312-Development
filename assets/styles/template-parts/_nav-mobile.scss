@@ -60,21 +60,18 @@
 		color: $color-white;
 		display: inline-block;
 		padding: 20px 0 5px;
-	}
-
-	.active {
-		a {
-			box-shadow: 0 -3px 0 0 $color-orange inset;
-		}
-	}
-
-	a {
 		font-size: 24px;
 		font-family: $global-font-family;
 		text-transform: uppercase;
 		font-weight: 200;
 		letter-spacing: 10px;
 		line-height: (42 / 36);
+	}
+
+	.active {
+		a {
+			box-shadow: 0 -3px 0 0 $color-orange inset;
+		}
 	}
 
 	@media (min-width: $breakpoint-medium) {

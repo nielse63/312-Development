@@ -43,6 +43,29 @@ export default class Footer extends Component {
 							<nav className="footer-nav footer-nav-right">
 								<ul>
 									<li><Link to="/">&copy; 2016 Erik Nielsen</Link></li>
+									<li>
+										<a href="https://twitter.com/erikkylenielsen/" target="_blank">
+											<i className="fa fa-twitter" />
+										</a>
+									</li>
+									<li>
+										<a href="https://github.com/nielse63/" target="_blank">
+											<i className="fa fa-github" />
+										</a>
+									</li>
+									<li>
+										<a href="https://www.linkedin.com/in/erikkylenielsen/" target="_blank">
+											<i className="fa fa-linkedin" />
+										</a>
+									</li>
+									<li>
+										<a href="https://dribbble.com/ErikKyleNielsen/" target="_blank">
+											<i className="fa fa-dribbble" />
+										</a>
+									</li>
+									<li>
+										<a href="https://github.com/nielse63/312-Development/" target="_blank">View Source Code</a>
+									</li>
 								</ul>
 							</nav>
 						</div>

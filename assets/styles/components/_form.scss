@@ -28,7 +28,7 @@
 // Variables
 // ========================================================================
 
-$form-height: 40px;
+$form-height: 44px;
 $form-padding: 10px;
 $form-border-color: #dcdcdc;
 $form-border-width: $global-border-width;
@@ -110,6 +110,11 @@ textarea {
 	// Focus
 	&:focus {
 		outline: 0;
+	}
+
+	// error
+	&.error {
+		color: $color-danger-text;
 	}
 }
 
@@ -203,32 +208,19 @@ form > {
 	}
 }
 
-// &:-ms-input-placeholder {
-// 	color: $form-placeholder-color;
-// }
-
 &::placeholder {
 	color: $form-placeholder-color;
 }
-
-// &::-webkit-input-placeholder {
-// 	color: $form-placeholder-color;
-// }
 
 &:disabled {
 	&:placeholder {
 		color: $form-disabled-color;
 	}
-	// &::-moz-placeholder {
-	// 	color: $form-disabled-color;
-	// }
-	// &::-webkit-input-placeholder {
-	// 	color: $form-disabled-color;
-	// }
 }
 
 // Controls
 // Expand width to container of [class*='col-']
+// scss-lint:disable QualifyingElement
 select,
 textarea,
 input:not([type]),
@@ -251,39 +243,23 @@ input[type='color'] {
 		display: block;
 	}
 }
+// scss-lint:enable QualifyingElement
+
 select,
 textarea,
 input {
 	height: $form-height;
 	max-width: 100%;
-	// padding: $form-padding;
 	color: $form-color;
 	display: inline-block;
 	transition: all linear 200ms;
 	width: 100%;
-	// line-height: (strip-unit($form-height) - strip-unit($form-border-width) * 2 - strip-unit($form-padding) * 2) / strip-unit($form-font-size);
-
 	border: 0;
 	border-bottom: 2px solid $form-border-color;
 	font-size: 18px;
-	height: 44px;
+	// height: 44px;
 	line-height: 1;
 	padding: 10px 5px;
-
-	// .form-error & {
-	// 	border-color: $color-danger;
-	// }
-
-	// .form-valid & {
-	// 	border-color: $color-success;
-	// }
-
-	// Focus state
-	// &:focus {
-	// 	border-color: $form-focus-border;
-	// 	// background-color: $form-focus-background;
-	// 	color: $form-focus-color;
-	// }
 
 	// Disabled state
 	&:disabled {
@@ -292,12 +268,6 @@ input {
 		color: $form-disabled-color;
 	}
 }
-
-// textarea
-// textarea {
-// 	padding-top: ($form-padding * 1.5);
-// 	padding-bottom: ($form-padding * 1.5);
-// }
 
 // Legend
 legend {
@@ -321,9 +291,11 @@ legend {
 // ========================================================================
 
 // textarea,
-select[multiple],
-select[size] {
-	height: auto;
+select, {
+	&[multiple],
+	&[size] {
+		height: auto;
+	}
 }
 
 // Sub-objects: `.label`
@@ -334,7 +306,6 @@ label {
 	vertical-align: middle;
 	cursor: pointer;
 	position: relative;
-
 	text-transform: uppercase;
 	font-size: 14px;
 	font-weight: 700;
@@ -370,108 +341,11 @@ label {
 	}
 }
 
-input,
-select,
-textarea {
-
-	&.error {
-		color: $color-danger-text;
-		// border: 1px solid $color-danger-text;
-	}
-
-	// &.valid {
-	// 	border: 1px solid $color-success-text;
-	// }
-}
-
-// .inputfile {
-// 	position: absolute;
-// 	overflow: hidden;
-// 	opacity: 0;
-// 	padding: 0;
-// 	margin: 0;
-// 	top: 0;
-// 	left: 0;
-// 	z-index: 1;
-// 	cursor: pointer;
-// 	@include size(100%);
-
-// 	// Hover state
-// 	&:hover {
-// 		+ label {
-// 			border-color: $form-focus-border;
-// 			background-color: $form-focus-background;
-// 			color: $form-focus-color;
-// 		}
-// 	}
-
-// 	+ label {
-// 		color: inherit;
-// 		max-width: 100%;
-// 		font-size: $form-font-size;
-// 		text-overflow: ellipsis;
-// 		white-space: nowrap;
-// 		display: inline-block;
-// 		overflow: hidden;
-// 		text-transform: none;
-// 		padding: $form-padding;
-// 		display: inline-flex;
-// 		align-items: center;
-// 		border: $form-border-width solid $form-border-color;
-// 		background-color: $form-background;
-// 		transition: all linear 200ms;
-
-// 		svg {
-// 			width: 1em;
-// 			height: 1em;
-// 			vertical-align: middle;
-// 			fill: $form-color;
-// 			margin-right: $global-gutter / 2;
-// 		}
-// 	}
-// }
-
-// .select2 {
-// 	&-container {
-// 		.select2-selection {
-// 			&--single {
-// 				height: $form-height;
-// 				@include border-radius(0);
-// 				border: $form-border-width solid $form-border-color;
-// 				background-color: $form-background;
-// 				color: $form-color;
-
-// 				.form-error & {
-// 					border-color: $color-danger;
-// 				}
-
-// 				.form-valid & {
-// 					border-color: $color-success;
-// 				}
-// 			}
-// 		}
-
-// 		&--default {
-// 			.select2-selection {
-// 				&--single {
-// 					.select2-selection__rendered {
-// 						line-height: $form-height - ($form-border-width * 2);
-// 					}
-// 				}
-// 			}
-// 		}
-// 	}
-// }
-
-// .select2-container--default .select2-selection--single .select2-selection__arrow {
-// 	top: 50%;
-// 	transform: translate(0, -45%);
-// }
-
 @keyframes errorLabelAnimation {
 	from {
 		transform: rotateX(-90deg);
 	}
+
 	to {
 		transform: rotateX(0deg);
 	}
@@ -481,12 +355,23 @@ textarea {
 	from {
 		transform: rotateX(0deg);
 	}
+
 	to {
 		transform: rotateX(-90deg);
 	}
 }
 
 .form {
+	contain: paint;
+
+	&-list {
+		> li {
+			+ li {
+				margin-top: 15px;
+			}
+		}
+	}
+
 	&-footer {
 		* + & {
 			margin-top: $global-gutter-large;
@@ -494,6 +379,8 @@ textarea {
 	}
 
 	&-error {
+
+		// scss-lint:disable QualifyingElement
 		label.error {
 			color: $color-danger-text;
 			font-size: 12px;
@@ -515,6 +402,7 @@ textarea {
 
 	&-valid {
 
+		// scss-lint:disable QualifyingElement
 		label.error {
 			animation-name: errorLabelAnimationReverse;
 		}
@@ -527,147 +415,11 @@ textarea {
 	}
 }
 
-.checkboxes,
-.radios {
-	display: flex;
-	align-items: center;
-
-	> li {
-		flex: 0 1 auto;
-		margin-right: $global-gutter;
-		display: flex;
-		align-items: center;
-
-		input {
-			max-width: 24px;
-		}
-
-		label {
-			display: block;
-			line-height: 1;
-			font-weight: 400;
-			text-transform: none;
-		}
-
-		> * {
-			flex: 1 0 auto;
-
-			+ * {
-				margin-left: 5px;
-			}
-		}
-	}
-}
-
-.checkbox {
-	display: block;
-	@include size(20px);
-	@include border-radius(0);
-	border: $form-border-width solid $form-border-color;
-	background-color: $form-background;
-	position: relative;
-
-	&:before {
-		position: absolute;
-		content: '';
-		transition: .3s cubic-bezier(.68,-.55,.265,1.55);
-		bottom: 3px;
-		left: 5px;
-		width: 7px;
-		height: 13px;
-		transform: rotate(45deg) scale(0);
-		border-right: 3px solid $color-orange;
-		border-bottom: 3px solid $color-orange;
-		@include border-radius(2px);
-		background-clip: padding-box;
-	}
-
-	&.checked {
-		&:before {
-			transform: rotate(45deg) scale(1);
-		}
-	}
-
-	&.disabled {
-		opacity: 0.75;
-		background-color: $color-gray;
-	}
-
-	> input {
-		position: absolute;
-		display: block;
-		@include size(100%);
-		top: 0;
-		left: 0;
-		z-index: 1;
-		cursor: pointer;
-		opacity: 0;
-	}
-}
-
-.radio {
-	display: block;
-	@include size(20px);
-	@include border-radius(50%);
-	border: $form-border-width solid $form-border-color;
-	background-color: $form-background;
-	position: relative;
-
-	&:before {
-		top: 4px;
-		right: 4px;
-		bottom: 4px;
-		left: 4px;
-		transform: scale(0);
-		border-radius: 100%;
-		background-color: $color-orange;
-		background-clip: padding-box;
-		position: absolute;
-		content: '';
-		transition: .3s cubic-bezier(.68,-.55,.265,1.55);
-	}
-
-	&.checked {
-		&:before {
-			transform: scale(1);
-		}
-	}
-
-	&.disabled {
-		opacity: 0.75;
-		background-color: $color-gray;
-	}
-
-	> input {
-		position: absolute;
-		display: block;
-		@include size(100%);
-		top: 0;
-		left: 0;
-		z-index: 1;
-		cursor: pointer;
-		opacity: 0;
-	}
-}
-
-.form {
-	contain: paint;
-
-	> ul {
-		> li {
-			+ li {
-				margin-top: 15px;
-			}
-		}
-	}
-}
-
 .input {
 	&-wrapper {
 		position: relative;
 		perspective-origin: calc(100% - 70px) 100%;
 		perspective: 100vh;
-		// contain: paint;
 
 		&:before,
 		&:after {

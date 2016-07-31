@@ -22,8 +22,8 @@ export default class Footer {
 			const $path = $(this);
 
 			// see if we even need to set object
-			const rects  = this.getBoundingClientRect();
-			const top    = rects.top;
+			const rects = this.getBoundingClientRect();
+			const top = rects.top;
 			const bottom = top + rects.height;
 
 			if (bottom < offsetTop || top > offsetBottom) {
@@ -34,6 +34,8 @@ export default class Footer {
 			$path.css({
 				'stroke-dasharray'  : length,
 				'stroke-dashoffset' : length,
+			}).data({
+				'length' : length,
 			});
 		});
 	}
@@ -42,8 +44,8 @@ export default class Footer {
 		if (! this.$footer.length) {
 			return;
 		}
-		const footer   = document.querySelector('.footer');
-		const $paths   = this.$paths;
+		const footer = document.querySelector('.footer');
+		const $paths = this.$paths;
 
 		this.scene = new ScrollMagic.Scene({
 			triggerElement : footer,
