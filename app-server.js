@@ -10,6 +10,7 @@ import bodyParser from 'body-parser'
 import compression from 'compression'
 import raygun from 'raygun'
 import config from './config'
+import assets from './webpack-assets.json'
 import sslRedirect from 'heroku-ssl-redirect'
 import minifyHTML from 'express-minify-html'
 
@@ -123,6 +124,18 @@ app.get('*', (req, res) => {
 			// Get React markup
 			const reactMarkup = renderToStaticMarkup(<RouterContext {...renderProps} />)
 			res.locals.reactMarkup = reactMarkup // eslint-disable-line no-param-reassign
+
+			// get scripts
+			res.locals.scripts = { // eslint-disable-line no-param-reassign
+				head : [
+					`<script src="${assets.manifest.js}"></script>`,
+					`<script src="${assets.scss.js}"></script>`,
+				].join(''),
+				body : [
+					`<script src="${assets.vendor.js}"></script>`,
+					`<script async src="${assets.app.js}"></script>`,
+				].join('')
+			};
 
 			if (error) {
 				raygunClient.send(error)

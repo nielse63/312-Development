@@ -6,6 +6,8 @@ const config       = require('./config');
 const read         = require('fs-readdir-recursive');
 const precss       = require('precss');
 const autoprefixer = require('autoprefixer');
+const pkg          = require('./package.json');
+const AssetsPlugin = require('assets-webpack-plugin')
 
 // load env file, if present
 var dotenv = require('dotenv');
@@ -30,8 +32,13 @@ images.push(':rest:')
 
 var plugins = [
 	new webpack.NoErrorsPlugin(),
+	new AssetsPlugin(),
 	new webpack.optimize.DedupePlugin(),
 	new webpack.optimize.OccurenceOrderPlugin(),
+	new webpack.optimize.CommonsChunkPlugin({
+		names: ['vendor', 'manifest']
+	}),
+	new webpack.optimize.AggressiveMergingPlugin(),
 	new webpack.DefinePlugin({
 		'process.env': envObject
 	}),
@@ -52,11 +59,6 @@ if(process.env.NODE_ENV !== 'production') {
 
 	loaders = ['babel'];
 	plugins = plugins.concat([
-		new webpack.optimize.UglifyJsPlugin({
-			compress: {
-				warnings: false
-			}
-		}),
 		new ImageminPlugin({
 			disable: false,
 			optipng: {
@@ -76,6 +78,11 @@ if(process.env.NODE_ENV !== 'production') {
 		new PurifyPlugin({
 			basePath: __dirname,
 		}),
+		new webpack.optimize.UglifyJsPlugin({
+			compress: {
+				warnings: false
+			}
+		}),
 		new OfflinePlugin({
 			publicPath    : '/dist/',
 			relativePaths : false,
@@ -94,13 +101,21 @@ if(process.env.NODE_ENV !== 'production') {
 module.exports = {
 	devtool: 'eval-source-map',
 	entry: {
+		vendor : [
+			// react
+			'react', 'react-router', 'react-dom', 'flux',
+
+			// ui scripts
+			'jquery', 'nprogress', 'scrollmagic', 'fg-loadcss', 'gsap', 'whatwg-fetch',
+		],
 		app  : './app-client.js',
 		scss : './assets/styles/main.scss',
 	},
 	output: {
-		path       : __dirname + '/public/dist',
-		filename   : '[name].js?[hash]',
-		publicPath : '/dist/'
+		path          : __dirname + '/public/dist',
+		filename      : '[name].[hash].js',
+		chunkFilename : '[chunkhash].js',
+		publicPath    : '/dist/'
 	},
 	module: {
 		loaders: [{
@@ -119,9 +134,11 @@ module.exports = {
 			test: /\.woff2?$|\.ttf$|\.eot$|\.svg$/,
 			loader: 'file?name=../fonts/[name].[ext]?[hash]'
 		}, {
-			test: /\.(jpg|png|gif|svg)$/i,
-			exclude: /(node_modules|bower_components)/,
-			loader: 'url?name=../images/[name].[ext]?[hash]'
+			test: /\.(jpe?g|png|gif|svg)$/i,
+			loaders: [
+				'file?hash=sha512&digest=hex&name=../images/[hash].[ext]',
+				'image-webpack?bypassOnDebug&optimizationLevel=7&interlaced=false'
+			]
 		}, {
 			test: /\.json$/,
 			exclude: /(node_modules|bower_components)/,

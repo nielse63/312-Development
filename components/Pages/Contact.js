@@ -87,7 +87,7 @@ export default class Contact extends Component {
 											</li>
 											<li>
 												<div className="input-wrapper">
-													<textarea name="message" placeholder="Message" required></textarea>
+													<input type="text" name="message" placeholder="Message" required />
 												</div>
 											</li>
 										</ul>

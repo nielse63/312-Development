@@ -1,4 +1,6 @@
 
+require('../vendor/validation');
+
 export default class Form {
 
 	// constructor
@@ -11,17 +13,6 @@ export default class Form {
 
 	init() {
 
-		this.checked = 0;
-		if( ! _c.$.fn.validate ) {
-			if( this.checked < 10 ) {
-				this.checked++;
-				this.getScript();
-			} else {
-				console.warn('Couldn\'t load validation script');
-			}
-			return;
-		}
-
 		this.defineProperties();
 		this.defineElements();
 		this.defineListeners();
@@ -31,28 +22,6 @@ export default class Form {
 
 		// setup form validation
 		this.setupValidation();
-	}
-
-	getScript() {
-		const self = this;
-		_c.$.getScript('https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.15.1/jquery.validate.min.js')
-			.done(function() {
-				if( ! ('validate' in _c.$.fn) ) {
-					[$, window.jQuery, window.$].forEach(function(obj) {
-						if( obj.fn && 'validate' in obj.fn ) {
-							_c.$ = obj;
-							return false;
-						}
-						return true;
-					});
-					setTimeout(self.init(), 250);
-					return;
-				}
-				self.init();
-			})
-			.fail(function(xhr) {
-				console.warn(xhr.responseText);
-			});
 	}
 
 	defineProperties() {
@@ -75,8 +44,6 @@ export default class Form {
 			e.preventDefault();
 			e.stopPropagation();
 
-			// console.log(_c.$.fn.validate);
-			// console.log(_c.$.fn.valid);
 			const $form = _c.$(this);
 			if ($form.valid()) {
 				$form.off('submit');
