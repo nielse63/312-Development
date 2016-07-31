@@ -1,16 +1,11 @@
 
 // webpack.config.js
-const webpack           = require('webpack');
-const CompressionPlugin = require('compression-webpack-plugin');
-const PurifyPlugin      = require('purifycss-webpack-plugin');
-const ImageminPlugin    = require('imagemin-webpack-plugin').default;
-const OfflinePlugin     = require('offline-plugin');
-const path              = require('path');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
-const config            = require('./config');
-const read              = require('fs-readdir-recursive');
-const precss            = require('precss');
-const autoprefixer      = require('autoprefixer');
+const webpack      = require('webpack');
+const path         = require('path');
+const config       = require('./config');
+const read         = require('fs-readdir-recursive');
+const precss       = require('precss');
+const autoprefixer = require('autoprefixer');
 
 // load env file, if present
 var dotenv = require('dotenv');
@@ -50,6 +45,11 @@ var plugins = [
 if(process.env.NODE_ENV !== 'production') {
 	loaders = ['react-hot', 'babel'];
 } else {
+	const OfflinePlugin     = require('offline-plugin');
+	const PurifyPlugin      = require('purifycss-webpack-plugin');
+	const ImageminPlugin    = require('imagemin-webpack-plugin').default;
+	const CompressionPlugin = require('compression-webpack-plugin');
+
 	loaders = ['babel'];
 	plugins = plugins.concat([
 		new webpack.optimize.UglifyJsPlugin({
@@ -76,23 +76,20 @@ if(process.env.NODE_ENV !== 'production') {
 		new PurifyPlugin({
 			basePath: __dirname,
 		}),
+		new OfflinePlugin({
+			publicPath    : '/dist/',
+			relativePaths : false,
+			caches        : {
+				main : images
+			},
+			externals : images,
+			ServiceWorker : {
+				output: '../sw.js',
+			},
+			AppCache: false,
+		})
 	]);
 }
-
-plugins = plugins.concat([
-	new OfflinePlugin({
-		publicPath    : '/dist/',
-		relativePaths : false,
-		caches        : {
-			main : images
-		},
-		externals : images,
-		ServiceWorker : {
-			output: '../sw.js',
-		},
-		AppCache: false,
-	})
-]);
 
 module.exports = {
 	devtool: 'eval-source-map',
@@ -124,7 +121,7 @@ module.exports = {
 		}, {
 			test: /\.(jpg|png|gif|svg)$/i,
 			exclude: /(node_modules|bower_components)/,
-			loader: 'url?limit=1000&name=../images/[name].[ext]?[hash]'
+			loader: 'url?name=../images/[name].[ext]?[hash]'
 		}, {
 			test: /\.json$/,
 			exclude: /(node_modules|bower_components)/,

@@ -2,8 +2,8 @@
 // modules
 var argv         = require('minimist')(process.argv.slice(2));
 var gulp         = require('gulp');
-var wiredep      = require('wiredep').stream;
-var rename       = require('gulp-rename');
+// var wiredep      = require('wiredep').stream;
+// var rename       = require('gulp-rename');
 var gulpif       = require('gulp-if');
 var del          = require('del');
 var fs           = require('fs');
@@ -67,8 +67,6 @@ gulp.task('views', function() {
 		'public/index.html',
 	]).then(function(paths) {
 		gulp.src(input)
-			.pipe(wiredep())
-			.pipe(rename('index.html'))
 			.pipe(gulp.dest(publicDir));
 
 		return gulp.src('public/index.html')
