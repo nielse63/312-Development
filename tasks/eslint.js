@@ -31,7 +31,7 @@ gulp.task('eslint', function() {
 		'stores/scripts/**/*.js',
 		'assets/scripts/**/*.js',
 		'!./public',
-		'!assets/scripts/lib/vendor/*.js',
+		'!assets/scripts/vendor/*.js',
 		'!node_modules',
 		'!bower_components'
 	])

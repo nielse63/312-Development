@@ -57,8 +57,7 @@
     "start": "gulp build --production && NODE_ENV=production webpack -p && heroku local:start web -e .env -p 5001",
     "prerelease": "npm test && rm -rf public && gulp build --production && NODE_ENV=production webpack -p --release",
     "release": "gulp bump && sh ./.bin/release.sh",
-    "test": "gulp eslint",
-    "heroku-postbuild": "echo This runs afterwards."
+    "test": "gulp eslint"
   },
   "jest": {
     "automock": false
