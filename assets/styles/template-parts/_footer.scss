@@ -42,6 +42,7 @@
 	&-nav {
 		font-weight: 200;
 		font-size: 14px;
+		text-align: center;
 
 		ul {
 			margin: 0;
@@ -49,6 +50,7 @@
 			flex-wrap: wrap;
 			list-style: none;
 			padding: 0;
+			justify-content: center;
 		}
 
 		li {
@@ -69,23 +71,21 @@
 			}
 		}
 
-		// &-right {
-		// 	ul {
-		// 		@media (max-width: $breakpoint-mini-max) {
-		// 			flex-direction: column;
-		// 			align-items: center;
-		// 		}
-		// 	}
+		&-right {
+			li {
+				@media (max-width: $breakpoint-mini-max) {
+					&:first-child {
+						width: 100%;
+						margin-bottom: 10px;
+					}
 
-		// 	li {
-		// 		+ li {
-		// 			@media (max-width: $breakpoint-mini-max) {
-		// 				border: 0;
-		// 				margin: 1em 0 0;
-		// 				padding: 0;
-		// 			}
-		// 		}
-		// 	}
-		// }
+					&:nth-child(2) {
+						margin: 0;
+						padding: 0;
+						border: 0;
+					}
+				}
+			}
+		}
 	}
 }

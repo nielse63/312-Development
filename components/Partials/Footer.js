@@ -40,7 +40,7 @@ export default class Footer extends Component {
 							</nav>
 						</div>
 						<div className="col col-right">
-							<nav className="footer-nav">
+							<nav className="footer-nav footer-nav-right">
 								<ul>
 									<li><Link to="/">&copy; 2016 Erik Nielsen</Link></li>
 									<li>

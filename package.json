@@ -1,10 +1,10 @@
 {
   "name": "312-development",
-  "version": "1.0.45",
+  "version": "1.0.46",
   "description": "My personal website.",
   "bugs": {
-  	"url": "https://github.com/nielse63/312-Development/issues",
-  	"email": "erik@312development.com"
+    "url": "https://github.com/nielse63/312-Development/issues",
+    "email": "erik@312development.com"
   },
   "license": "MIT",
   "repository": "312-Development.git",
@@ -57,12 +57,9 @@
     "predevelopment": "gulp views && NODE_ENV=development webpack -d",
     "development": "ON_LOCAL=true NODE_ENV=development PORT=8080 webpack-dev-server --content-base public/ --hot --inline --devtool inline-source-map --history-api-fallback",
     "start": "gulp build --production && NODE_ENV=production webpack -p && heroku local:start web -e .env -p 5001",
-    "preproduction": "npm run prerelease",
-    "production": "NODE_ENV=production node app.js",
     "prerelease": "npm test && rm -rf public && gulp build --production && NODE_ENV=production webpack -p --release",
     "release": "gulp bump && sh ./.bin/release.sh",
     "test": "gulp eslint",
-    "heroku-prebuild": "echo This runs before Heroku installs your dependencies.",
     "heroku-postbuild": "echo This runs afterwards."
   },
   "jest": {
