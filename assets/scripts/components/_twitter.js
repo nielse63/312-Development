@@ -6,7 +6,8 @@ export default class Twitter {
 		this.tweets = document.querySelector('.tweets');
 
 		this.loaded = false
-		// this.getTweets();
+		this.getTweets();
+		// console.log('Twitter');
 
 		return this
 	}

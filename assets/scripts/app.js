@@ -4,24 +4,24 @@ import NProgress from 'nprogress';
 import ScrollMagic from 'scrollmagic';
 
 // core
-import Clique from './lib/utils/_core';
+import Clique from './utils/_core';
 window._c = new Clique();
 
 // modules
-import Nav from './lib/components/_nav';
-import Banner from './lib/components/_banner';
-import BodyClass from './lib/modules/_body-class';
-import Form from './lib/modules/_form';
-import MobileButton from './lib/vendor/hamburger';
-import LazyLoad from './lib/components/_lazyload';
-import Links from './lib/components/_links';
-import Homepage from './lib/components/_homepage';
-import WorkGrid from './lib/components/_work-grid';
-import Photos from './lib/components/_photos';
-import Services from './lib/components/_services';
-import Twitter from './lib/components/_twitter';
-import Share from './lib/components/_share';
-import Footer from './lib/components/_footer';
+import Nav from './components/_nav';
+import Banner from './components/_banner';
+import BodyClass from './modules/_body-class';
+import Form from './modules/_form';
+import MobileButton from './vendor/hamburger';
+import LazyLoad from './components/_lazyload';
+import Links from './components/_links';
+import Homepage from './components/_homepage';
+import WorkGrid from './components/_work-grid';
+import Photos from './components/_photos';
+import Services from './components/_services';
+import Twitter from './components/_twitter';
+import Share from './components/_share';
+import Footer from './components/_footer';
 
 // config vars
 import config from '../../config'
