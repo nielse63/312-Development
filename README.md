@@ -16,7 +16,7 @@ If you are, however, looking for tutorials and/or boilerplates I'd highly recomm
 
 ### Error Reporting
 
-If there's a bug in my code that you found, or you just think the design of my site is dumb, the best way to let me know is [loggin an issue](https://github.com/nielse63/312-Development/issues/new) within this repo.
+If there's a bug in my code that you found, or you just think the design of my site is dumb, the best way to let me know is [logging an issue](https://github.com/nielse63/312-Development/issues/new) within this repo.
 
 ## Technology & Tools
 
@@ -26,7 +26,7 @@ If there's a bug in my code that you found, or you just think the design of my s
 * [React Router](https://github.com/reactjs/react-router/) for handling routes
 * [Flux](https://code.facebook.com/projects/1572329279676947/flux/) architecture for data flow management
 * [Babel](http://babeljs.io/) for transpiling ES6
-* [Webpack](http://webpack.github.io/) to bundle modules and handle workfloat automation
+* [Webpack](http://webpack.github.io/) to bundle modules and handle workflow automation
 * [Express](http://expressjs.com/) for server side rendering (production only)
 
 ### Languages & Automation
@@ -42,7 +42,7 @@ If there's a bug in my code that you found, or you just think the design of my s
 * [Eslint](http://eslint.org/), executed in a custom Gulp task, validates the JS
 * [SCSS-Lint](https://github.com/brigade/scss-lint) as a style type checker on .scss files
 * Using [TravisCI](https://travis-ci.org/) for continuous integration, asset linting cannot fail in order for the build to pass
-	* I'm in the process of writing functional unit tests ran through [Phantom](http://phantomjs.org/)
+	* I'm in the process of writing functional unit tests run through [Phantom](http://phantomjs.org/)
 	* Unit and UAT tests are coming soon
 
 ## Third-Party Integrations
