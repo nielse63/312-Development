@@ -6,6 +6,7 @@ module.exports = {
 		description : 'Chicago-based JavaScript Engineer specializing in React and Angular development with a focus on performance and algorithm design.',
 		url         : 'https://312development.com',
 		twitter     : 'erikkylenielsen',
+		og_image    : 'erikkylenielsen',
 		version     : require('./package.json').version,
 	},
 	raygun : {
