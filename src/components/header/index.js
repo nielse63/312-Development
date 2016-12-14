@@ -1,62 +1,75 @@
 
-import { h, Component } from 'preact'
-import { Link } from 'preact-router'
-import style from './style.scss'
+import { h, Component } from 'preact';
+import { Link } from 'preact-router';
+import Nav from '../nav';
+import style from './style.scss';
 
-let isDark = false
+let isDark = false;
+let didBind = false;
 
 export default class Header extends Component {
 
-  componentDidMount() {
-    // console.log(this.context.store.getState())
-    $(window).off('.header')
+	onJqueryLoad() {
+		if ( didBind ) {
+			return;
+		}
+		didBind = true;
+		$ = window.jQuery;
+		const $window = $(window);
+		$window.off('.header');
 
-    const base = this.base
-    const $header = $(base)
-    let height = base.clientHeight
-    let offset = $('[data-midnight]').offset().top - height / 2
+		if ( ! $('[data-midnight]').length ) {
+			return;
+		}
 
-    function onResize() {
-      height = base.clientHeight
-      offset = $('[data-midnight]').offset().top - height / 2
-    }
+		const base = this.base;
+		const $header = $(base);
+		let height = base.clientHeight;
+		let offset = $('[data-midnight]').offset().top - height / 2;
 
-    function onScroll() {
-      const top = window.scrollY
-      const diff = top - offset
-      if (!isDark && diff > 0) {
-        isDark = true
-        $header.addClass(`${style.dark}`)
-      } else if (isDark && diff <= 0) {
-        isDark = false
-        $header.removeClass(`${style.dark}`)
-      }
-    }
+		function onResize() {
+			height = base.clientHeight;
+			offset = $('[data-midnight]').offset().top - height / 2;
+		}
 
-    $(window).on('resize.header', onResize)
-    $(window).on('scroll.header', onScroll)
-    onScroll()
-  }
+		function onScroll() {
+			const top = window.scrollY;
+			const diff = top - offset;
+			if (!isDark && diff > 0) {
+				isDark = true;
+				$header.addClass(`${style.dark}`);
+			} else if (isDark && diff <= 0) {
+				isDark = false;
+				$header.removeClass(`${style.dark}`);
+			}
+		}
 
-  componentWillUnmount() {
-    $(window).off('.header')
-  }
+		$window.on('resize.header', onResize);
+		$window.on('scroll.header', onScroll);
+		onScroll();
+	}
 
-  render() {
-    return (
+	componentDidMount() {
+		if ( ! window.jQuery ) {
+			return;
+		}
+		this.onJqueryLoad();
+	}
+
+	componentWillUnmount() {
+		$(window).off('.header');
+	}
+
+	render() {
+		return (
       <header className={style.header}>
         <div className={style.container}>
           <h1 className={style.logo}>
             <Link href="/">312 Development</Link>
           </h1>
-          <nav>
-            <Link href="/">Home</Link>
-            <Link href="/about">Me</Link>
-            <Link href="/portfolio">My Work</Link>
-            <Link href="/contact">Contact</Link>
-          </nav>
+          <Nav />
         </div>
       </header>
-    )
-  }
+		);
+	}
 }

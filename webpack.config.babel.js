@@ -31,7 +31,7 @@ module.exports = {
       components: path.resolve(__dirname, "src/components"),    // used for tests
       style: path.resolve(__dirname, "src/style"),
       'react': 'preact-compat',
-      'react-dom': 'preact-compat'
+      'react-dom': 'preact-compat',
     }
   },
 
@@ -65,17 +65,13 @@ module.exports = {
     test: /\.(xml|html|txt|md)$/,
     loader: 'raw'
   },
-  // {
-  //   test: /\.(svg|woff2?|ttf|eot|jpe?g|png|gif)(\?.*)?$/i,
-  //   loader: ENV === 'production' ? 'file?name=[path][name]_[hash:base64:5].[ext]' : 'url'
-  // },
   {
     test: /\.woff(2)?(\?v=[0-9]\.[0-9]\.[0-9])?$/,
     loader: 'url',
     query: {
       limit: 50000,
       mimetype: 'application/font-woff',
-      // name: './fonts/[hash].[ext]'
+      name: './fonts/[hash].[ext]'
     }
   }
   ]
@@ -110,7 +106,11 @@ plugins: ([
   new OfflinePlugin({
    relativePaths: false,
    AppCache: false,
-   publicPath: '/'
+   publicPath: '/',
+   externals: [
+    'https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css',
+    'https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js',
+   ]
  }),
   new webpack.ProvidePlugin({
       $: "jquery",
@@ -130,7 +130,6 @@ plugins: ([
     __filename: false,
     __dirname: false,
     setImmediate: false,
-    fs: "empty"
   },
 
   devtool: ENV==='production' ? 'source-map' : 'cheap-module-eval-source-map',

@@ -1,45 +1,73 @@
 
-import { h, Component } from 'preact'
-import { Router } from 'preact-router'
-import Header from './header'
-import Footer from './footer'
-import Home from './home'
-import About from './about'
-import Contact from './contact'
-import Portfolio from './portfolio'
-import config from '../config'
-import S from 'string'
-import store from '../store'
+import { h, Component } from 'preact';
+import { Router } from 'preact-router';
+import { getScript, getStyle, preloadImages } from '../lib/load-jquery';
+import Header from './header';
+import Footer from './footer';
+import Home from './home';
+import About from './about';
+import Contact from './contact';
+import Portfolio from './portfolio';
+import config from '../config';
+import S from 'string';
 
-require('offline-plugin/runtime').install()
+require('offline-plugin/runtime').install();
 
-const { pushState } = history
+const { pushState } = history;
 history.pushState = (a, b, url) => {
-  pushState.call(history, a, b, url)
-  if (url.indexOf('#') < 0) scrollTo(0, 0)
-}
+	pushState.call(history, a, b, url);
+	if (url.indexOf('#') < 0) scrollTo(0, 0);
+};
 
 export default class App extends Component {
+	componentDidMount() {
+		getScript();
+		getStyle();
+		preloadImages();
 
-  setTitle() {
-    console.log(this)
-    let title = config.PAGE_TITLES[this.currentUrl] || S(this.currentUrl.replace(/\//, '')).capitalize().s
-    if (!title) {
-      title = `${config.SITE_TITLE} | ${config.SITE_DESCRIPTION}`
-    } else {
-      title = `${title} | ${config.SITE_TITLE}`
-    }
-    document.title = title
-  }
+		setTimeout(() => {
+			app.classList.add(this.props.readyclass);
 
-  handleRoute = e => {
-    this.currentUrl = e.url
-    this.setTitle()
-  }
+			setTimeout(() => {
+				app.classList.add(this.props.doneclass);
+				document.body.removeAttribute('data-loading');
+			}, 500);
+		}, 1000);
+	}
 
-  render() {
-    return (
-      <div id="app">
+	setDefaultConfig() {
+		if ( config.SITE_TITLE ) {
+			return config;
+		}
+    console.log(Object.keys(document))
+		const titleArray = document.title.split('|');
+		config.SITE_TITLE = titleArray[0].trim();
+		config.SITE_DESCRIPTION = titleArray[1].trim();
+
+		return config;
+	}
+
+	setTitle() {
+		const defaults = this.setDefaultConfig();
+
+		let title = defaults.PAGE_TITLES[this.currentUrl] || S(this.currentUrl.replace(/\//, '')).capitalize().s;
+		if (!title) {
+			title = `${defaults.SITE_TITLE} | ${defaults.SITE_DESCRIPTION}`;
+		} else {
+			title = `${title} | ${defaults.SITE_TITLE}`;
+		}
+		document.title = title;
+	}
+
+	handleRoute = e => {
+		this.currentUrl = e.url;
+		this.setTitle();
+	}
+
+	render() {
+    // console.log(this.props)
+		return (
+      <div id="app" className={this.props.cssclass}>
         <Header />
         <Router onChange={this.handleRoute}>
           <Home path="/" />
@@ -49,6 +77,6 @@ export default class App extends Component {
         </Router>
         <Footer />
       </div>
-    )
-  }
+		);
+	}
 }

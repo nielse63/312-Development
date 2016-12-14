@@ -15,7 +15,6 @@
   },
   "dependencies": {
     "fg-loadcss": "^1.2.0",
-    "jquery": "^3.1.1",
     "preact": "^7.1.0",
     "preact-router": "^2.3.2",
     "redux": "^3.6.0",
@@ -23,17 +22,15 @@
   },
   "scripts": {
     "dev": "cross-env NODE_ENV=development webpack-dev-server --inline --hot --progress --colors",
-    "start": "superstatic build -p 8080 --host 0.0.0.0 --gzip -c '{\"rewrites\": [{\"source\":\"**\",\"destination\":\"index.html\"}],\"headers\":[{\"source\":\"**\",\"headers\":[{\"key\":\"Cache-Control\",\"value\":\"max-age=86400\"}]}]}'",
+    "start": "superstatic build -p 8080 --host 0.0.0.0 --gzip -c .superstatic.json",
     "prestart": "npm run build",
-    "build": "cross-env NODE_ENV=production webpack -p --progress",
-    "prebuild": "mkdirp build && ncp src/assets build/assets",
+    "build": "cross-env NODE_ENV=production webpack --cache false -p --progress",
+    "prebuild": "rm -rf ./build && mkdirp build && ncp src/assets build/assets",
     "test": "npm run -s lint && npm run -s test:karma",
     "test:karma": "karma start test/karma.conf.js --single-run",
     "lint": "eslint {src,test} --fix",
-    "resize-images": "node ./tasks/image-resize.js"
-  },
-  "jest": {
-    "automock": false
+    "resize-images": "node ./tasks/image-resize.js",
+    "surge": "npm run lint && npm run build && surge ./build -d https://312development.surge.sh"
   },
   "author": "Erik Nielsen",
   "devDependencies": {
@@ -64,9 +61,10 @@
     "file-loader": "^0.9.0",
     "html-webpack-plugin": "^2.22.0",
     "json-loader": "^0.5.4",
-    "karma": "^1.0.0",
+    "karma": "^1.3.0",
     "karma-chai": "^0.1.0",
     "karma-chai-sinon": "^0.1.5",
+    "karma-coverage": "^1.1.1",
     "karma-mocha": "^1.0.1",
     "karma-mocha-reporter": "^2.1.0",
     "karma-phantomjs-launcher": "^1.0.2",

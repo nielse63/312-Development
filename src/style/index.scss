@@ -38,6 +38,42 @@ a {
   text-decoration: none;
 }
 
-#app {
-  height: 100%;
+body.loading {
+  height: 100vh;
+  overflow: hidden;
+}
+
+.main {
+  &:not(.complete) {
+    &:before {
+      content: '';
+    }
+  }
+
+  &:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background-color: fade-out($white, 0.05);
+    background-image: url('/assets/images/loading.svg');
+    background-position: center;
+    background-repeat: no-repeat;
+    z-index: 3;
+  }
+
+  &.ready {
+    &:before {
+      transition: 0.5s opacity;
+      opacity: 0;
+    }
+  }
+
+  &.complete {
+    &:before {
+      display: none;
+    }
+  }
 }

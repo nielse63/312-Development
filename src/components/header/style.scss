@@ -66,12 +66,26 @@
       min-width: 50px;
       text-align: center;
       background: rgba(255, 255, 255, 0);
-      will-change: background-color, color;
-      transition: background-color 0.15s;
+      position: relative;
+
+      &:before {
+        content: '';
+        position: absolute;
+        top: 48px;
+        width: 0;
+        height: 3px;
+        background: $pink;
+        transform: translate(-50%, 0);
+        left: 50%;
+        transition: 0.5s width 0.1s;
+        will-change: width;
+      }
 
       &:hover,
       &:active {
-        background: rgba(255,255,255,0.3);
+        &:before {
+          width: calc(100% - 10px);
+        }
       }
     }
   }

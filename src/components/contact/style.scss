@@ -23,25 +23,34 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
+    align-items: center;
     min-height: 400px;
     height: calc(100vh - #{$header-height + 20px});
     max-height: 500px;
+  }
 
-    > * {
-      width: 100%;
-      margin: 0;
+  h1, h2 {
+    animation-duration: 1s;
+    animation-name: onEnter;
+    animation-fill-mode: both;
+    text-align: center;
+    margin: 0;
+
+    body[data-loading] & {
+      animation-play-state: paused;
     }
   }
 
   h1 {
-    animation-duration: 1s;
-    animation-name: onEnter;
-    animation-fill-mode: both;
+    font-size: 94px;
+    padding-right: 150px;
+    animation-delay: 0.2s;
   }
 
-  h1 {
-    font-size: 94px;
-    text-align: center;
+  h2 {
+    font-size: 88px;
+    animation-delay: 0.4s;
+    padding-left: 150px;
   }
 
   mark {
@@ -70,8 +79,31 @@
  justify-content: space-between;
 
  a {
+  $size: 36px;
+  position: relative;
   color: inherit;
- }
+  display: block;
+  height: $size;
+  width: $size;
+  text-align: center;
+  border-radius: 50%;
+  background-clip: content-box;
+  transition: 0.5s box-shadow, 0.5s color;
+  line-height: 1;
+  box-shadow: 0 0 0 0 fade-out($pink, 0.5) inset;
+
+  &:hover {
+    box-shadow: 0 0 0 ($size / 2) fade-out($pink, 0.5) inset;
+    color: $white;
+  }
+
+  i {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+}
 }
 
 .container-narrow {

@@ -37,15 +37,20 @@
     animation-duration: 1s;
     animation-name: onEnter;
     animation-fill-mode: both;
+
+    body[data-loading] & {
+      animation-play-state: paused;
+    }
   }
 
   h1 {
     font-size: 94px;
+    animation-delay: 0.2s;
   }
 
   h2 {
     font-size: 70px;
-    animation-delay: 0.2s
+    animation-delay: 0.4s;
   }
 
   mark {

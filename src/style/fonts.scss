@@ -56,8 +56,8 @@
 
 @font-face {
   font-family: 'Brandon Grotesque';
-  src: url('/assets/fonts/Brandon_bld.woff') format('woff'),
-     url('/assets/fonts/Brandon_bld.ttf') format('truetype');
+  src: url('/assets/fonts/Brandon_bld.woff2') format('woff2'),
+     url('/assets/fonts/Brandon_bld.woff') format('woff');
   font-style:    normal;
   font-weight:   700;
   unicode-range: U+000-5FF;
@@ -65,8 +65,8 @@
 
 @font-face {
   font-family: 'Brandon Grotesque';
-  src: url('/assets/fonts/Brandon_reg.woff') format('woff'),
-     url('/assets/fonts/Brandon_reg.ttf')  format('truetype');
+  src: url('/assets/fonts/Brandon_reg.woff2') format('woff2'),
+     url('/assets/fonts/Brandon_reg.woff')  format('woff');
   font-style:    normal;
   font-weight:   400;
   unicode-range: U+000-5FF;

@@ -1,49 +1,53 @@
+
 import { h, render, rerender } from 'preact';
 import { route } from 'preact-router';
 import App from 'components/app';
-import 'style';
 
-/*global sinon,expect*/
+/* global sinon,expect */
 
 describe('App', () => {
-  let scratch;
+	let scratch;
 
-  before( () => {
-    scratch = document.createElement('div');
-    (document.body || document.documentElement).appendChild(scratch);
-  });
+	before(() => {
+		scratch = document.createElement('div');
+		(document.body || document.documentElement).appendChild(scratch);
+	});
 
-  beforeEach( () => {
-    scratch.innerHTML = '';
-  });
+	beforeEach(() => {
+		scratch.innerHTML = '';
+	});
 
-  after( () => {
-    scratch.parentNode.removeChild(scratch);
-    scratch = null;
-  });
+	after(() => {
+		scratch.parentNode.removeChild(scratch);
+		scratch = null;
+	});
 
 
-  describe('routing', () => {
-    it('should render the homepage', () => {
-      render(<App />, scratch);
+	describe('routing', () => {
+		it('should render the homepage', () => {
+			render(<App />, scratch);
+			expect(scratch.innerHTML).to.contain('<div id="app">');
+		});
 
-      expect(scratch.innerHTML).to.contain('Home');
-    });
+		it('should render /about', () => {
+			render(<App />, scratch);
+			route('/about');
+			rerender();
+			expect(scratch.innerHTML).to.contain('<h1>Who I am</h1><h2>and <mark>what I do</mark></h2>');
+		});
 
-    it('should render /profile', () => {
-      render(<App />, scratch);
-      route('/profile');
-      rerender();
+		it('should render /portfolio', () => {
+			render(<App />, scratch);
+			route('/portfolio');
+			rerender();
+			expect(scratch.innerHTML).to.contain('<h1>Check out <mark>my work</mark></h1>');
+		});
 
-      expect(scratch.innerHTML).to.contain('Profile: me');
-    });
-
-    it('should render /profile/:user', () => {
-      render(<App />, scratch);
-      route('/profile/john');
-      rerender();
-
-      expect(scratch.innerHTML).to.contain('Profile: john');
-    });
-  });
+		it('should render /contact', () => {
+			render(<App />, scratch);
+			route('/contact');
+			rerender();
+			expect(scratch.innerHTML).to.contain('<h1><mark>Reach</mark> out</h1>');
+		});
+	});
 });

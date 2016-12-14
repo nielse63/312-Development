@@ -6,9 +6,9 @@ const path = require('path')
 const imagePath = path.resolve(__dirname, '../src/assets/images')
 const sizes = {
   large : [1560, null],
-  medium : [1080, null],
-  small : [600, null],
-  tiny : [380, null]
+  // medium : [1080, null],
+  // small : [600, null],
+  // tiny : [380, null]
 }
 
 fs.readdir(imagePath, (err, data) => {

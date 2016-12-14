@@ -1,16 +1,24 @@
-// import 'lie';
-// import 'isomorphic-fetch';
-import { h, render } from 'preact'
-import './style/index.scss'
 
-let root
+import { h, render } from 'preact';
+import style from './style/index.scss';
+
+let root;
 function init() {
-  const App = require('./components/app').default
-  root = render(<App />, document.body, root)
+	const App = require('./components/app').default;
+	root = render(
+    <App
+      cssclass={style.main}
+      readyclass={style.ready}
+      doneclass={style.complete}
+      loadingclass={style.loading}
+    />,
+    document.body, root
+  );
 }
 
-init()
+init();
 
 if (module.hot) {
-  module.hot.accept('./components/app', () => requestAnimationFrame(init))
+	require('preact/devtools');
+	module.hot.accept('./components/app', () => requestAnimationFrame(init));
 }

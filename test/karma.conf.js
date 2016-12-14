@@ -5,21 +5,26 @@ module.exports = function(config) {
   config.set({
     basePath: '../',
     frameworks: ['mocha', 'chai-sinon'],
-    reporters: ['mocha'],
+    reporters: ['mocha', 'coverage'],
 
     browsers: ['PhantomJS'],
 
     files: [
-     'test/browser/**/*.js'
-   ],
+      'test/browser/**/*.js'
+    ],
 
-   preprocessors: {
-     'test/**/*.js': ['webpack'],
-     'src/**/*.js': ['webpack'],
-     '**/*.js': ['sourcemap']
-   },
+    preprocessors: {
+      'test/**/*.js': ['webpack'],
+      'src/**/*.js': ['webpack'],
+      '**/*.js': ['sourcemap'],
+      'src/**/*.js': ['coverage'],
+    },
 
-   webpack: webpack,
-   webpackMiddleware: { noInfo: true }
- });
+    webpack: webpack,
+    webpackMiddleware: { noInfo: true },
+
+    coverageReporter: {
+      dir : 'coverage/'
+    },
+  });
 };

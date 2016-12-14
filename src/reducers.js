@@ -1,4 +1,4 @@
 
-const EMPTY = {}
+const EMPTY = {};
 
-export default store => store || EMPTY
+export default store => store || EMPTY;
