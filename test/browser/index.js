@@ -26,7 +26,7 @@ describe('App', () => {
 	describe('routing', () => {
 		it('should render the homepage', () => {
 			render(<App />, scratch);
-			expect(scratch.innerHTML).to.contain('<div id="app">');
+			expect(scratch.innerHTML).to.contain('<a href="/">312 Development</a>');
 		});
 
 		it('should render /about', () => {
@@ -40,14 +40,14 @@ describe('App', () => {
 			render(<App />, scratch);
 			route('/portfolio');
 			rerender();
-			expect(scratch.innerHTML).to.contain('<h1>Check out <mark>my work</mark></h1>');
+			expect(scratch.innerHTML).to.contain('<h1>Check out</h1>');
 		});
 
 		it('should render /contact', () => {
 			render(<App />, scratch);
 			route('/contact');
 			rerender();
-			expect(scratch.innerHTML).to.contain('<h1><mark>Reach</mark> out</h1>');
+			expect(scratch.innerHTML).to.contain('<h1>Let\'s stay</h1>');
 		});
 	});
 });

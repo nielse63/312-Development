@@ -39,10 +39,9 @@ export default class App extends Component {
 		if ( config.SITE_TITLE ) {
 			return config;
 		}
-    console.log(Object.keys(document))
 		const titleArray = document.title.split('|');
-		config.SITE_TITLE = titleArray[0].trim();
-		config.SITE_DESCRIPTION = titleArray[1].trim();
+		config.SITE_TITLE = !! titleArray[0] ? titleArray[0].trim() : '';
+		config.SITE_DESCRIPTION = !! titleArray[1] ? titleArray[1].trim() : '';
 
 		return config;
 	}
@@ -65,7 +64,6 @@ export default class App extends Component {
 	}
 
 	render() {
-    // console.log(this.props)
 		return (
       <div id="app" className={this.props.cssclass}>
         <Header />
