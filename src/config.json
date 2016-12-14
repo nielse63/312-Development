@@ -1,5 +1,4 @@
 {
-  "UNSPLASH_APP_ID": "f049e8813228ec8b437a32ccf8714ec10118aa9da9612053355f67dcb6590aec",
-  "UNSPLASH_SECRET": "094b743c08e906d3313d45926d35a3b1e0a075bdbbc71460c0cb259d249c215f",
-  "UNSPLASH_CALLCK_URL": "http://localhost:8080/"
+  "SITE_TITLE": "312 Development",
+  "SITE_DESCRIPTION": "UI/JavaScript Software Engineer"
 }

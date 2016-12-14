@@ -2,7 +2,11 @@
 @import 'helpers';
 
 * {
-  box-sizing: border-box;
+  &,
+  &:before,
+  &:after {
+    box-sizing: border-box;
+  }
 }
 
 html, body {
@@ -10,7 +14,7 @@ html, body {
   width: 100%;
   padding: 0;
   margin: 0;
-  background: #FAFAFA;
+  background: $background-color;
   font-family: $body-font-family;
   font-weight: 400;
   color: #444;
@@ -24,6 +28,10 @@ html, body {
 
 :last-child {
   margin-bottom: 0;
+}
+
+:focus {
+  outline: 0;
 }
 
 a {

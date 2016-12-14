@@ -12,91 +12,10 @@
   }
 }
 
-// @keyframes onLeave {
-//   to {
-//     opacity: 0;
-//     transform: translateY(-50px);
-//   }
-// }
-
-// @keyframes onReEnter {
-//   from {
-//     opacity: 0;
-//     transform: translateY(-50px);
-//   }
-//   to {
-//     opacity: 1;
-//     transform: translateY(0);
-//   }
-// }
-
-.background-image {
-  background-image: url('/assets/images/bg2.jpg');
-  background-position: bottom center;
-  background-repeat: no-repeat;
-  background-size: cover;
-  position: fixed;
-  top: 0;
-  left: 0;
-  height: 100%;
-  width: 100%;
-  margin: 0;
-
-  &:before {
-    content: '';
-    display: block;
-    position: absolute;
-    top: 0;
-    left: 0;
-    height: 100%;
-    width: 100%;
-    background-image: linear-gradient(to bottom, fade-out(#111, 0.6), #111)
-  }
-}
-
-// .inview,
-// .outview {
-//   h1 {
-//     animation-delay: 0s;
-//   }
-
-//   h3 {
-//     animation-delay: 0.4s;
-//   }
-// }
-
-// .inview {
-//   h1, h2, h3 {
-//     animation-duration: 1s;
-//     animation-name: onEnter;
-//     animation-fill-mode: both;
-//   }
-// }
-
-// .outview {
-//   h1, h2, h3 {
-//     animation-name: onLeave;
-//   }
-// }
-
-// .reenter {
-//   h1, h2, h3 {
-//     animation-name: onReEnter;
-//   }
-
-//   h1 {
-//     animation-delay: 0.4s;
-//   }
-
-//   h3 {
-//     animation-delay: 0s;
-//   }
-// }
-
 .home {
   padding: $header-height 0;
   position: relative;
-  color: #fff;
+  color: $white;
   line-height: 1;
   z-index: 1;
 

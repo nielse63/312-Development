@@ -11,17 +11,14 @@
   font-weight: 700;
   font-size: 14px;
   z-index: 2;
-  overflow: hidden;
-  // will-change: background;
-  background: linear-gradient(to bottom, rgba(17,17,17,0.3), transparent);
+  background: linear-gradient(to bottom, rgba(17, 17, 17, 0.35), transparent);
 
   &,
   a {
-    color: #fff;
+    color: $white;
   }
 
   &.dark {
-    // background: linear-gradient(to bottom, rgba(17,17,17,0.3), transparent);
 
     .logo {
       background-image: url('/assets/images/icon-pink.svg');
@@ -34,11 +31,11 @@
 
     nav {
       a {
-        color: #111;
+        color: $black;
 
         &:hover,
         &:active {
-          background: rgba(255,255,255,0.4);
+          background: rgba(255, 255, 255, 0.4);
         }
       }
     }
@@ -68,8 +65,7 @@
       padding: 0 15px;
       min-width: 50px;
       text-align: center;
-      background: rgba(255,255,255,0);
-      // text-decoration: none;
+      background: rgba(255, 255, 255, 0);
       will-change: background-color, color;
       transition: background-color 0.15s;
 

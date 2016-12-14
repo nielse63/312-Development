@@ -3,18 +3,21 @@ import { h, Component } from 'preact';
 import { Link } from 'preact-router';
 import faker from 'faker'
 import style from './style.scss';
-
-// const icons = [
-//   'medium',
-//   'github',
-// ]
+// const splittext = require('../../lib/splittext')
+// import SplitText from '../../lib/splittext'
 
 export default class Grid extends Component {
+  componentDidMount() {
+    // console.log(SplitText)
+    // const title = $(this.base).find('h4')
+    // const split = SplitText(title)
+    // console.log(split)
+  }
+
   render() {
     const count = Math.floor(Math.random() * 4) + 2
     var title = faker.lorem.sentence(count)
     var preview = faker.lorem.paragraph()
-    // const icon = faker.helpers.randomize(icons)
 
     return (
       <div class={style['grid-item']}>

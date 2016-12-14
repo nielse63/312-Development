@@ -8,16 +8,18 @@ $grid-item-distance: 20px;
   width: calc(50% - #{$grid-item-distance});
   max-width: calc(50% - #{$grid-item-distance});
   margin: 0 0 ($grid-item-distance * 3);
-  // background-color: rgba(255, 255, 255, 0.3);
-  // border: ($grid-item-distance / 2) solid #fff;
   perspective: 100vw;
   display: flex;
 
   &:hover {
     h4 {
       transform: translateZ(15px);
-      // text-shadow: 0 2px 2px rgba(17,17,17,0.1);
+      opacity: 0.75;
     }
+  }
+
+  &:nth-last-child(-n+2) {
+    margin-bottom: 0;
   }
 
   &:nth-child(odd) {
@@ -27,9 +29,9 @@ $grid-item-distance: 20px;
   }
 
   &:nth-child(even) {
-    padding-right: 0.5em;
 
     h4 {
+      padding-right: 1em;
       left: 15px;
       margin-top: -48px;
     }
@@ -38,7 +40,7 @@ $grid-item-distance: 20px;
   &:nth-child(3n+1) {
     &:hover {
       .grid-item-wrapper {
-        transform: rotateY(-10deg) rotateX(5deg);
+        transform: rotateY(-8deg) rotateX(3deg);
       }
     }
   }
@@ -46,7 +48,7 @@ $grid-item-distance: 20px;
   &:nth-child(3n+2) {
     &:hover {
       .grid-item-wrapper {
-        transform: rotateY(10deg) rotateX(5deg);
+        transform: rotateY(8deg) rotateX(3deg);
       }
     }
   }
@@ -54,19 +56,18 @@ $grid-item-distance: 20px;
   &:nth-child(3n) {
     &:hover {
       .grid-item-wrapper {
-        transform: rotateY(-5deg) rotateX(10deg);
+        transform: rotateY(-3deg) rotateX(8deg);
       }
     }
   }
 
   a {
     padding: ($grid-item-distance / 2) 0 0;
-    // text-decoration: none;
     color: inherit;
     position: relative;
     display: flex;
     flex-direction: column;
-    justify-content: space-around;
+    justify-content: space-between;
     height: 100%;
     background-color: rgba(255, 255, 255, 0.3);
   }
@@ -82,27 +83,32 @@ $grid-item-distance: 20px;
     text-transform: uppercase;
     font-family: $header-font-family;
     position: relative;
-    transition: transform 0.5s;
-    // transition: transform 0.5s, text-shadow 0.5s;
+    transition: transform 0.5s, opacity 0.5s;
+    will-change: transform, opacity;
   }
 
   p {
     text-align: right;
     margin: 1em;
-
-    // + p {
-    //   margin-top: 0;
-    // }
   }
 
   i {
     font-size: 22px;
   }
 
+  .read-more {
+    margin-top: 2em;
+  }
+
   &-wrapper {
     border: ($grid-item-distance / 2) solid #fff;
     transform-style: preserve-3d;
     transition: transform 0.5s;
+    will-change: transform;
+  }
+
+  &-content {
+    // ...
   }
 }
 
@@ -114,5 +120,4 @@ $grid-item-distance: 20px;
   background: linear-gradient(180deg, #2443fb 0%, #39a9da 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  // margin-top: 1em;
 }
