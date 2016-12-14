@@ -1,27 +1,27 @@
-import { createStore } from 'redux';
+import { createStore } from 'redux'
 
-let ACTIONS = {
+const ACTIONS = {
   SET_TITLE: ({ title, ...state }, { text }) => ({
     title: [...title, {
       id: Math.random().toString(36).substring(2),
-      text
+      text,
     }],
-    ...state
+    ...state,
   }),
   SET_DESCRIPTION: ({ description, ...state }, { text }) => ({
     description: [...description, {
       id: Math.random().toString(36).substring(2),
-      text
+      text,
     }],
-    ...state
+    ...state,
   }),
-};
+}
 
 const INITIAL = {
   title: '',
   description: '',
-};
+}
 
 export default createStore((state, action) => (
   action && ACTIONS[action.type] ? ACTIONS[action.type](state, action) : state
-), INITIAL, window.devToolsExtension && window.devToolsExtension());
+), INITIAL, window.devToolsExtension && window.devToolsExtension())

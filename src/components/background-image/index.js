@@ -16,7 +16,7 @@ export default class BackgroundImage extends Component {
 
     function onScroll() {
       const top = window.pageYOffset
-      if(top > height) {
+      if (top > height) {
         return
       }
       const percentage = top / height * 0.15 * -100
@@ -33,12 +33,12 @@ export default class BackgroundImage extends Component {
   }
 
   render() {
-    const css = !! this.props.src
-      ? {backgroundImage: `url(${this.props.src})`}
+    const css = this.props.src
+      ? { backgroundImage: `url(${this.props.src})` }
       : {}
 
-    return(
-      <figure class={style['background-image']} style={css} />
+    return (
+      <figure className={style['background-image']} style={css} />
     )
   }
 }

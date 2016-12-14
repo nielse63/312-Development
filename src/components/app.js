@@ -1,39 +1,39 @@
 
-import { h, Component } from 'preact';
-import { Router } from 'preact-router';
-import Header from './header';
-import Footer from './footer';
-import Home from './home';
-import About from './about';
-import Contact from './contact';
-import Portfolio from './portfolio';
+import { h, Component } from 'preact'
+import { Router } from 'preact-router'
+import Header from './header'
+import Footer from './footer'
+import Home from './home'
+import About from './about'
+import Contact from './contact'
+import Portfolio from './portfolio'
 import config from '../config'
 import S from 'string'
 import store from '../store'
 
-require('offline-plugin/runtime').install();
+require('offline-plugin/runtime').install()
 
-let { pushState } = history;
+const { pushState } = history
 history.pushState = (a, b, url) => {
-  pushState.call(history, a, b, url);
-  if (url.indexOf('#')<0) scrollTo(0, 0);
-};
+  pushState.call(history, a, b, url)
+  if (url.indexOf('#') < 0) scrollTo(0, 0)
+}
 
 export default class App extends Component {
 
   setTitle() {
     console.log(this)
     let title = config.PAGE_TITLES[this.currentUrl] || S(this.currentUrl.replace(/\//, '')).capitalize().s
-    if(!title) {
+    if (!title) {
       title = `${config.SITE_TITLE} | ${config.SITE_DESCRIPTION}`
     } else {
       title = `${title} | ${config.SITE_TITLE}`
     }
-    document.title = title;
+    document.title = title
   }
 
   handleRoute = e => {
-    this.currentUrl = e.url;
+    this.currentUrl = e.url
     this.setTitle()
   }
 
@@ -49,6 +49,6 @@ export default class App extends Component {
         </Router>
         <Footer />
       </div>
-    );
+    )
   }
 }

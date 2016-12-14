@@ -1,27 +1,27 @@
 
-import { h, Component } from 'preact';
-import { Router } from 'preact-router';
+import { h, Component } from 'preact'
+import { Router } from 'preact-router'
 import preload from 'fg-loadcss'
-import Header from '../header';
-import Footer from '../footer';
-import Home from '../home';
-import About from '../about';
-import Contact from '../contact';
-import Portfolio from '../portfolio';
+import Header from '../header'
+import Footer from '../footer'
+import Home from '../home'
+import About from '../about'
+import Contact from '../contact'
+import Portfolio from '../portfolio'
 import style from './style.scss'
 import S from 'string'
 
-require('offline-plugin/runtime').install();
+require('offline-plugin/runtime').install()
 
 let didLoadFA = false
 
 export default class App extends Component {
   handleRoute = e => {
-    this.currentUrl = e.url;
+    this.currentUrl = e.url
   };
 
   loadFontAwesome() {
-    if( !didLoadFA && document.querySelector('.fa') ) {
+    if (!didLoadFA && document.querySelector('.fa')) {
       didLoadFA = true
       preload.loadCSS('https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css')
     }
@@ -35,7 +35,7 @@ export default class App extends Component {
   }
 
   componentDidUpdate() {
-    this.setTitle();
+    this.setTitle()
     this.loadFontAwesome()
   }
 
@@ -56,6 +56,6 @@ export default class App extends Component {
         </Router>
         <Footer />
       </div>
-    );
+    )
   }
 }

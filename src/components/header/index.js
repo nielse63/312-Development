@@ -1,7 +1,7 @@
 
-import { h, Component } from 'preact';
-import { Link } from 'preact-router';
-import style from './style.scss';
+import { h, Component } from 'preact'
+import { Link } from 'preact-router'
+import style from './style.scss'
 
 let isDark = false
 
@@ -24,10 +24,10 @@ export default class Header extends Component {
     function onScroll() {
       const top = window.scrollY
       const diff = top - offset
-      if( ! isDark && diff > 0 ) {
+      if (!isDark && diff > 0) {
         isDark = true
         $header.addClass(`${style.dark}`)
-      } else if( isDark && diff <= 0 ) {
+      } else if (isDark && diff <= 0) {
         isDark = false
         $header.removeClass(`${style.dark}`)
       }
@@ -44,9 +44,9 @@ export default class Header extends Component {
 
   render() {
     return (
-      <header class={style.header}>
-        <div class={style.container}>
-          <h1 class={style.logo}>
+      <header className={style.header}>
+        <div className={style.container}>
+          <h1 className={style.logo}>
             <Link href="/">312 Development</Link>
           </h1>
           <nav>
@@ -57,6 +57,6 @@ export default class Header extends Component {
           </nav>
         </div>
       </header>
-    );
+    )
   }
 }

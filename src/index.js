@@ -1,16 +1,16 @@
 // import 'lie';
 // import 'isomorphic-fetch';
-import { h, render } from 'preact';
-import './style/index.scss';
+import { h, render } from 'preact'
+import './style/index.scss'
 
-let root;
+let root
 function init() {
-  let App = require('./components/app').default;
-  root = render(<App />, document.body, root);
+  const App = require('./components/app').default
+  root = render(<App />, document.body, root)
 }
 
-init();
+init()
 
 if (module.hot) {
-  module.hot.accept('./components/app', () => requestAnimationFrame(init) );
+  module.hot.accept('./components/app', () => requestAnimationFrame(init))
 }
