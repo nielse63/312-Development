@@ -1,32 +1,29 @@
 
 import { h, Component } from 'preact';
 import { Router } from 'preact-router';
-import preload from 'fg-loadcss'
 import Header from './header';
 import Footer from './footer';
 import Home from './home';
 import About from './about';
 import Contact from './contact';
 import Portfolio from './portfolio';
-import createStore from '../store'
 import config from '../config'
-// import style from '../style/index.scss'
 import S from 'string'
+import store from '../store'
 
 require('offline-plugin/runtime').install();
 
-let didLoadFA = false
+let { pushState } = history;
+history.pushState = (a, b, url) => {
+  pushState.call(history, a, b, url);
+  if (url.indexOf('#')<0) scrollTo(0, 0);
+};
 
 export default class App extends Component {
-  state = { url: this.props.url || window.location.pathname };
-
-  handleRoute = e => {
-    this.currentUrl = e.url;
-    this.setTitle()
-  };
 
   setTitle() {
-    let title = S(this.currentUrl.replace(/\//, '')).capitalize().s
+    console.log(this)
+    let title = config.PAGE_TITLES[this.currentUrl] || S(this.currentUrl.replace(/\//, '')).capitalize().s
     if(!title) {
       title = `${config.SITE_TITLE} | ${config.SITE_DESCRIPTION}`
     } else {
@@ -35,19 +32,9 @@ export default class App extends Component {
     document.title = title;
   }
 
-  loadFontAwesome() {
-    if( !didLoadFA && document.querySelector('.fa') ) {
-      didLoadFA = true
-      preload.loadCSS('https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css')
-    }
-  }
-
-  componentDidUpdate() {
-    this.loadFontAwesome()
-  }
-
-  componentDidMount() {
-    this.loadFontAwesome()
+  handleRoute = e => {
+    this.currentUrl = e.url;
+    this.setTitle()
   }
 
   render() {
@@ -56,7 +43,7 @@ export default class App extends Component {
         <Header />
         <Router onChange={this.handleRoute}>
           <Home path="/" />
-          <About path="/about/" user="me" />
+          <About path="/about/" />
           <Contact path="/contact/" />
           <Portfolio path="/portfolio/" />
         </Router>

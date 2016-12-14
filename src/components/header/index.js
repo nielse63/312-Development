@@ -8,6 +8,7 @@ let isDark = false
 export default class Header extends Component {
 
   componentDidMount() {
+    // console.log(this.context.store.getState())
     $(window).off('.header')
 
     const base = this.base

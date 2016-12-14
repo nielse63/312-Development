@@ -1,14 +1,14 @@
 
-export function addTodo(text) {
+export function addTitle(text) {
   return {
-    type: 'ADD_TODO',
+    type: 'ADD_TITLE',
     text
   };
 }
 
-export function removeTodo(todo) {
+export function addDescription(text) {
   return {
-    type: 'REMOVE_TODO',
-    todo
+    type: 'ADD_DESCRIPTION',
+    text
   };
 }

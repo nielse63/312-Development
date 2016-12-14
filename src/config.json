@@ -1,4 +1,9 @@
 {
   "SITE_TITLE": "312 Development",
-  "SITE_DESCRIPTION": "UI/JavaScript Software Engineer"
+  "SITE_DESCRIPTION": "UI &amp; JavaScript Software Engineer in Chicago",
+  "PAGE_TITLES": {
+    "/about": "About Me",
+    "/contact": "Get In Touch",
+    "/portfolio": "Check out my work"
+  }
 }
