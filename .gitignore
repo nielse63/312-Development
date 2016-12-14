@@ -3,6 +3,7 @@ bower_components
 .DS_Store
 npm-debug.log
 test/results
+/build
 .notes
 .certs
 .env
