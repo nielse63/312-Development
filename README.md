@@ -2,9 +2,9 @@
 
 [Check out the Site](https://312development.com/) | [Follow me on Twitter](https://twitter.com/erikkylenielsen/)
 
-[![Build Status](https://travis-ci.org/nielse63/312-Development.svg?branch=master)](https://travis-ci.org/nielse63/312-Development)
-[![dependencies Status](https://david-dm.org/nielse63/312-Development/status.svg)](https://david-dm.org/nielse63/312-Development)
-[![devDependencies Status](https://david-dm.org/nielse63/312-Development/dev-status.svg)](https://david-dm.org/nielse63/312-Development?type=dev)
+[![Build Status](https://img.shields.io/travis/nielse63/312-Development.svg?style=flat-square)](https://travis-ci.org/nielse63/312-Development)
+[![dependencies Status](https://img.shields.io/david/nielse63/312-development.svg?style=flat-square)](https://david-dm.org/nielse63/312-Development)
+[![devDependencies Status](https://img.shields.io/david/dev/nielse63/312-development.svg?style=flat-square)](https://david-dm.org/nielse63/312-Development?type=dev)
 
 ## About This Repo
 
@@ -12,7 +12,7 @@ First and foremost, this repo is **not meant to be a tutorial or boilerplate** o
 
 If you are, however, looking for tutorials and/or boilerplates I'd highly recommend reading [Survive.js](http://survivejs.com/), and I've found the [React Boilerplate](http://reactboilerplate.com/) to be extremely helpful.
 
-<a href="mailto:erik@312development.com">Feel free to email me</a> with any questions you might have regarding how and why I did things the way I did and, as always, I welcome [any bugs you find and report](https://github.com/nielse63/312-Development/issues/new), as well as new [pull requests](https://github.com/nielse63/312-Development/compare).
+[Feel free to email me](mailto:erik@312development.com) with any questions you might have regarding how and why I did things the way I did and, as always, I welcome [any bugs you find and report](https://github.com/nielse63/312-Development/issues/new), as well as new [pull requests](https://github.com/nielse63/312-Development/compare).
 
 ### Error Reporting
 

@@ -1,0 +1,10 @@
+# www.robotstxt.org/
+
+# Allow crawling of all content
+User-agent: *
+Allow: /
+
+User-agent: Libwww-perl
+Disallow: /
+
+Sitemap: https://312development.com/sitemap.xml

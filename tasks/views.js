@@ -2,8 +2,6 @@
 // modules
 var argv         = require('minimist')(process.argv.slice(2));
 var gulp         = require('gulp');
-// var wiredep      = require('wiredep').stream;
-// var rename       = require('gulp-rename');
 var gulpif       = require('gulp-if');
 var del          = require('del');
 var fs           = require('fs');

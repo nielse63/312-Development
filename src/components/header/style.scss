@@ -1,0 +1,82 @@
+@import '~style/helpers';
+
+.header {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: $header-height;
+  font-family: $header-font-family;
+  text-transform: uppercase;
+  font-weight: 700;
+  font-size: 14px;
+  z-index: 2;
+  overflow: hidden;
+  // will-change: background;
+  background: linear-gradient(to bottom, rgba(17,17,17,0.3), transparent);
+
+  &,
+  a {
+    color: #fff;
+  }
+
+  &.dark {
+    // background: linear-gradient(to bottom, rgba(17,17,17,0.3), transparent);
+
+    .logo {
+      background-image: url('/assets/images/icon-pink.svg');
+
+      &,
+      a {
+        color: $pink;
+      }
+    }
+
+    nav {
+      a {
+        color: #111;
+
+        &:hover,
+        &:active {
+          background: rgba(255,255,255,0.4);
+        }
+      }
+    }
+  }
+
+  .logo {
+    float: left;
+    margin: 0;
+    padding: 0 0 0 42px;
+    font-size: 20px;
+    line-height: $header-height;
+    background-image: url('/assets/images/icon.svg');
+    background-position: left center;
+    background-repeat: no-repeat;
+    background-size: auto 36px;
+    will-change: background-image, color;
+  }
+
+  nav {
+    float: right;
+    font-size: 100%;
+
+    a {
+      display: inline-block;
+      height: $header-height;
+      line-height: $header-height;
+      padding: 0 15px;
+      min-width: 50px;
+      text-align: center;
+      background: rgba(255,255,255,0);
+      // text-decoration: none;
+      will-change: background-color, color;
+      transition: background-color 0.15s;
+
+      &:hover,
+      &:active {
+        background: rgba(255,255,255,0.3);
+      }
+    }
+  }
+}

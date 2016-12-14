@@ -1,0 +1,118 @@
+
+@import '~style/helpers';
+
+$grid-item-distance: 20px;
+
+.grid-item {
+  flex: 1 0 calc(50% - #{$grid-item-distance});
+  width: calc(50% - #{$grid-item-distance});
+  max-width: calc(50% - #{$grid-item-distance});
+  margin: 0 0 ($grid-item-distance * 3);
+  // background-color: rgba(255, 255, 255, 0.3);
+  // border: ($grid-item-distance / 2) solid #fff;
+  perspective: 100vw;
+  display: flex;
+
+  &:hover {
+    h4 {
+      transform: translateZ(15px);
+      // text-shadow: 0 2px 2px rgba(17,17,17,0.1);
+    }
+  }
+
+  &:nth-child(odd) {
+    h4 {
+      left: -40px;
+    }
+  }
+
+  &:nth-child(even) {
+    padding-right: 0.5em;
+
+    h4 {
+      left: 15px;
+      margin-top: -48px;
+    }
+  }
+
+  &:nth-child(3n+1) {
+    &:hover {
+      .grid-item-wrapper {
+        transform: rotateY(-10deg) rotateX(5deg);
+      }
+    }
+  }
+
+  &:nth-child(3n+2) {
+    &:hover {
+      .grid-item-wrapper {
+        transform: rotateY(10deg) rotateX(5deg);
+      }
+    }
+  }
+
+  &:nth-child(3n) {
+    &:hover {
+      .grid-item-wrapper {
+        transform: rotateY(-5deg) rotateX(10deg);
+      }
+    }
+  }
+
+  a {
+    padding: ($grid-item-distance / 2) 0 0;
+    // text-decoration: none;
+    color: inherit;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.3);
+  }
+
+  h4 {
+    margin: 0 0 30px;
+    background: #2443fb;
+    background: linear-gradient(180deg, #2443fb 0%, #39a9da 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-size: 54px;
+    line-height: 1;
+    text-transform: uppercase;
+    font-family: $header-font-family;
+    position: relative;
+    transition: transform 0.5s;
+    // transition: transform 0.5s, text-shadow 0.5s;
+  }
+
+  p {
+    text-align: right;
+    margin: 1em;
+
+    // + p {
+    //   margin-top: 0;
+    // }
+  }
+
+  i {
+    font-size: 22px;
+  }
+
+  &-wrapper {
+    border: ($grid-item-distance / 2) solid #fff;
+    transform-style: preserve-3d;
+    transition: transform 0.5s;
+  }
+}
+
+.read-more {
+  font-size: 80%;
+  text-transform: uppercase;
+  font-weight: 700;
+  background: #2443fb;
+  background: linear-gradient(180deg, #2443fb 0%, #39a9da 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  // margin-top: 1em;
+}
