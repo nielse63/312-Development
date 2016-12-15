@@ -14,19 +14,20 @@
     "npm": ">=4.0.5"
   },
   "dependencies": {
+    "connect": "^3.5.0",
     "cross-env": "^3.1.3",
     "fg-loadcss": "^1.2.0",
-    "jquery": "^3.1.1",
     "moment": "^2.17.1",
     "offline-plugin": "^4.5.3",
     "preact": "^7.1.0",
     "preact-router": "^2.3.2",
-    "string": "^3.3.3"
+    "string": "^3.3.3",
+    "superstatic": "^4.0.3"
   },
   "scripts": {
     "clean": "rm -rf ./build",
     "dev": "cross-env NODE_ENV=development webpack-dev-server --inline --hot --progress --colors",
-    "start": "superstatic build -p 5001 --host localhost --gzip -c .superstatic.json",
+    "start": "superstatic build -p 5001 --gzip",
     "prestart": "npm run build",
     "build": "cross-env NODE_ENV=production webpack -p --progress",
     "prebuild": "npm run clean && mkdir build && cp -r src/assets build/assets",
@@ -60,7 +61,6 @@
     "eslint-plugin-jsx-a11y": "^2.2.3",
     "eslint-plugin-react": "^6.8.0",
     "extract-text-webpack-plugin": "^1.0.1",
-    "faker": "^3.1.0",
     "file-loader": "^0.9.0",
     "html-webpack-plugin": "^2.22.0",
     "intern": "^3.4.2",
@@ -76,7 +76,6 @@
     "karma-webpack": "^1.8.0",
     "mkdirp": "^0.5.1",
     "mocha": "^3.0.0",
-    "ncp": "^2.0.0",
     "node-sass": "^3.13.1",
     "path": "^0.12.7",
     "phantomjs-prebuilt": "^2.1.12",
@@ -87,7 +86,6 @@
     "sinon-chai": "^2.8.0",
     "source-map-loader": "^0.1.5",
     "style-loader": "^0.13.0",
-    "superstatic": "^4.0.3",
     "url-loader": "^0.5.7",
     "webpack": "^1.14.0",
     "webpack-dev-server": "^1.15.0"
