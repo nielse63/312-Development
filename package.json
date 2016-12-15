@@ -20,15 +20,14 @@
     "offline-plugin": "^4.5.3",
     "preact": "^7.1.0",
     "preact-router": "^2.3.2",
-    "string": "^3.3.3",
-    "webpack": "^1.14.0"
+    "string": "^3.3.3"
   },
   "scripts": {
     "clean": "rm -rf ./build",
     "dev": "cross-env NODE_ENV=development webpack-dev-server --inline --hot --progress --colors",
     "start": "superstatic build -p 5001 --host localhost --gzip -c .superstatic.json",
     "prestart": "npm run build",
-    "build": "cross-env NODE_ENV=production webpack --config ./webpack.prod.config.js -p --progress",
+    "build": "cross-env NODE_ENV=production webpack -p --progress",
     "prebuild": "npm run clean && mkdir build && cp -r src/assets build/assets",
     "test": "npm run -s lint",
     "test:karma": "karma start test/karma.conf.js --single-run",
@@ -89,6 +88,7 @@
     "style-loader": "^0.13.0",
     "superstatic": "^4.0.3",
     "url-loader": "^0.5.7",
+    "webpack": "^1.14.0",
     "webpack-dev-server": "^1.15.0"
   }
 }
