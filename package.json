@@ -27,7 +27,7 @@
     "start": "superstatic build -p 5001 --host localhost --gzip -c .superstatic.json",
     "prestart": "npm run build",
     "build": "cross-env NODE_ENV=production webpack --cache false -p --progress",
-    "prebuild": "npm run clean && ./node_modules/.bin/mkdirp build && ./node_modules/.bin/ncp src/assets build/assets",
+    "prebuild": "npm run clean && mkdir build && cp -r src/assets build/assets",
     "test": "npm run -s lint",
     "test:karma": "karma start test/karma.conf.js --single-run",
     "lint": "./node_modules/.bin/eslint ./src --fix",
