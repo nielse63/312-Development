@@ -24,11 +24,11 @@
   "scripts": {
     "clean": "rm -rf ./build",
     "dev": "cross-env NODE_ENV=development webpack-dev-server --inline --hot --progress --colors",
-    "start": "superstatic build -p 8080 --host 0.0.0.0 --gzip -c .superstatic.json",
+    "start": "heroku local:start web -p 5001",
     "prestart": "npm run build",
     "build": "cross-env NODE_ENV=production webpack --cache false -p --progress",
     "prebuild": "npm run clean && mkdirp build && ncp src/assets build/assets",
-    "test": "npm run -s lint && npm run -s test:karma",
+    "test": "npm run -s lint",
     "test:karma": "karma start test/karma.conf.js --single-run",
     "lint": "./node_modules/.bin/eslint ./src --fix",
     "resize-images": "node ./tasks/image-resize.js",
