@@ -1,13 +1,13 @@
 
-import { h, Component } from 'preact';
-import { Link } from 'preact-router';
-import Nav from '../nav';
-import style from './style.scss';
+import { h, Component } from 'preact'
+import { Link } from 'preact-router'
+import Nav from '../nav'
+import style from './style.scss'
 
 export default class Footer extends Component {
 
-	render() {
-		return (
+  render() {
+    return (
       <footer className={style.footer}>
         <div className={style.container}>
           <h1 className={style.logo}>
@@ -16,6 +16,6 @@ export default class Footer extends Component {
           <Nav />
         </div>
       </footer>
-		);
-	}
+    )
+  }
 }

@@ -24,6 +24,7 @@ module.exports = {
     // "comma-style": 2,
     // "comma-dangle": [2, "never"],
     "indent": ["error", 2],
+    "react/react-in-jsx-scope": "off",
     // "no-trailing-spaces": [2, { "skipBlankLines": true }],
     // "max-nested-callbacks": ["error", 3],
     // "no-eval": 2,
