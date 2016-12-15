@@ -5,10 +5,11 @@ const path = require('path')
 
 const imagePath = path.resolve(__dirname, '../src/assets/images')
 const sizes = {
-  large : [1560, null],
-  // medium : [1080, null],
-  // small : [600, null],
-  // tiny : [380, null]
+  full : [2400, null],
+  xlarge : [1920, null],
+  large : [1400, null],
+  medium : [1080, null],
+  small : [480, 676],
 }
 
 fs.readdir(imagePath, (err, data) => {
@@ -16,12 +17,18 @@ fs.readdir(imagePath, (err, data) => {
     throw new Error(err)
   }
   const files = data.filter((filename) => {
-    return filename.indexOf('bg') > -1 && filename.indexOf('-') < 0
+    return filename.indexOf('bg') > -1
   }).map((filename) => {
     return path.resolve(imagePath, filename)
   })
 
   files.forEach((file) => {
+    const basename = path.basename(file)
+    if( basename.indexOf('-') > -1 ) {
+      fs.unlinkSync(file)
+      return
+    }
+
     const buffer = fs.readFileSync(file)
     const keys = Object.keys(sizes)
     keys.forEach((key) => {
@@ -33,6 +40,8 @@ fs.readdir(imagePath, (err, data) => {
       const size = sizes[key]
       sharp(buffer)
         .resize(size[0], size[1])
+        .max()
+        .crop('south')
         .toFile(
           newFilename,
           (err, info) => {

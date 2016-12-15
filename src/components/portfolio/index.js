@@ -2,6 +2,7 @@
 import { h, Component } from 'preact'
 import Grid from '../grid'
 import BackgroundImage from '../background-image'
+import Banner from '../banner'
 import style from './style.scss'
 
 export default class Portfolio extends Component {
@@ -9,12 +10,10 @@ export default class Portfolio extends Component {
     return (
       <div className={style.page}>
         <BackgroundImage src="/assets/images/bg1.jpg" />
-        <div className={style['page-content']}>
-          <div className={style.container}>
-            <h1>Check out</h1>
-            <h2>my <mark>work</mark></h2>
-          </div>
-        </div>
+        <Banner position="right" internal>
+          <h1>Check out</h1>
+          <h2>my <mark>work</mark></h2>
+        </Banner>
         <Grid />
       </div>
     )

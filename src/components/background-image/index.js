@@ -4,7 +4,21 @@ import style from './style.scss'
 
 let $ = window.jQuery
 
-export default class BackgroundImage extends Component {
+class BackgroundImage extends Component {
+  componentWillMount() {
+    this.getSource()
+  }
+
+  componentDidMount() {
+    if (!window.jQuery) {
+      return
+    }
+    this.onJqueryLoad()
+  }
+
+  componentWillUnmount() {
+    $(window).off('.backgroundImage')
+  }
 
   onJqueryLoad() {
     $ = window.jQuery
@@ -23,7 +37,7 @@ export default class BackgroundImage extends Component {
       if (top > height) {
         return
       }
-      const percentage = top / height * 0.15 * -100
+      const percentage = (top / height) * (0.15 * -100)
       $figure.css('transform', `translateY(${percentage}%)`)
     }
 
@@ -32,24 +46,54 @@ export default class BackgroundImage extends Component {
     onScroll()
   }
 
-  componentDidMount() {
-    if (!window.jQuery) {
+  getSource() {
+    if (!this.props.src) {
       return
     }
-    this.onJqueryLoad()
-  }
+    const id = `style-${style['background-image']}`
+    const existing = document.getElementById(id)
 
-  componentWillUnmount() {
-    $(window).off('.backgroundImage')
+    const small = this.props.src.replace(/\.jpg/, '-small.jpg')
+    const medium = this.props.src.replace(/\.jpg/, '-medium.jpg')
+    const large = this.props.src.replace(/\.jpg/, '-large.jpg')
+    const xlarge = this.props.src.replace(/\.jpg/, '-xlarge.jpg')
+    const full = this.props.src.replace(/\.jpg/, '-full.jpg')
+    const string = `
+      .${style['background-image']} {
+        background-image: url(${small});
+      }
+      @media (min-width: 480px) {
+        .${style['background-image']} {
+          background-image: url(${medium});
+        }
+      }
+      @media (min-width: 1080px) {
+        .${style['background-image']} {
+          background-image: url(${large});
+        }
+      }
+      @media (min-width: 1400px) {
+        .${style['background-image']} {
+          background-image: url(${xlarge});
+        }
+      }
+      @media (min-width: 1920px) {
+        .${style['background-image']} {
+          background-image: url(${full});
+        }
+      }
+    `
+    $('head').append(`<style id="${id}">${string}</style>`)
+    if (existing) {
+      existing.remove()
+    }
   }
 
   render() {
-    const css = this.props.src
-      ? { backgroundImage: `url(${this.props.src.replace(/\.jpg/, '-large.jpg')})` }
-      : {}
-
     return (
-      <figure id="bg-image" className={style['background-image']} style={css} />
+      <figure id="bg-image" className={style['background-image']} />
     )
   }
 }
+
+export default BackgroundImage

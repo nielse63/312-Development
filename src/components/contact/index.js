@@ -1,7 +1,9 @@
 
 import { h, Component } from 'preact'
-import BackgroundImage from '../background-image'
 import { Link } from 'preact-router'
+import BackgroundImage from '../background-image'
+import Banner from '../banner'
+import Social from '../social'
 import style from './style.scss'
 
 export default class Contact extends Component {
@@ -9,43 +11,37 @@ export default class Contact extends Component {
     return (
       <div className={style.page}>
         <BackgroundImage src="/assets/images/bg4.jpg" />
-        <div className={style['page-content']}>
-          <div className={style.container}>
-            <h1>Let's stay</h1>
-            <h2>in <mark>contact</mark></h2>
-          </div>
-        </div>
+        <Banner position="center" internal>
+          <h1>Let&apos;s stay</h1>
+          <h2>in <mark>contact</mark></h2>
+        </Banner>
         <div className={style.content} data-midnight>
           <div className={style['container-narrow']}>
             <h3>Email &amp; Social Media</h3>
             <p className={style.center}>
-              <Link href="/"><i className="fa fa-envelope-open-o" aria-hidden="true" /></Link>
-              <Link href="/"><i className="fa fa-github" aria-hidden="true" /></Link>
-              <Link href="/"><i className="fa fa-twitter" aria-hidden="true" /></Link>
-              <Link href="/"><i className="fa fa-dribbble" aria-hidden="true" /></Link>
-              <Link href="/"><i className="fa fa-facebook-official" aria-hidden="true" /></Link>
+              <Social />
             </p>
             <h3>Contact</h3>
             <form>
               <div>
-                <label>First Name</label>
-                <input type="text" />
+                <label htmlFor="first_name">First Name</label>
+                <input type="text" name="first_name" />
               </div>
               <div>
-                <label>Last Name</label>
-                <input type="text" />
+                <label htmlFor="last_name">Last Name</label>
+                <input type="text" name="last_name" />
               </div>
               <div>
-                <label>Email</label>
-                <input type="email" />
+                <label htmlFor="email">Email</label>
+                <input type="email" name="email" />
               </div>
               <div>
-                <label>Phone Number</label>
-                <input type="tel" />
+                <label htmlFor="phone">Phone Number</label>
+                <input type="tel" name="phone" />
               </div>
               <div className={style.full}>
-                <label>Message</label>
-                <textarea />
+                <label htmlFor="message">Message</label>
+                <textarea name="message" />
               </div>
               <div className={style.full}>
                 <button type="submit">Submit</button>

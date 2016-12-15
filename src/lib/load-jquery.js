@@ -25,14 +25,31 @@ export function getScript(callback = () => {}) {
   s.parentNode.insertBefore(g, s)
 }
 
-export function preloadImages() {
+function preloadImage(src) {
+  const link = document.createElement('link')
+  link.href = src
+  link.rel = 'preload'
+  link.as = 'image'
+  document.head.appendChild(link)
+}
+
+function preloadIcons() {
+  [
+    './assets/images/menu-pink.svg',
+    './assets/images/icon-pink.svg',
+  ].forEach((icon) => {
+    preloadImage(icon)
+  })
+}
+
+export function preloadImages(size = 'full') {
+  preloadIcons()
+
   let i = 0
   while (i < 4) {
-    const link = document.createElement('link')
-    link.href = `./assets/images/bg${(i + 1)}-large.jpg`
-    link.rel = 'preload'
-    link.as = 'image'
-    document.head.appendChild(link)
-    i++
+    const basename = `bg${(i + 1)}-${size}.jpg`
+    const src = `./assets/images/${basename}`
+    preloadImage(src)
+    i += 1
   }
 }

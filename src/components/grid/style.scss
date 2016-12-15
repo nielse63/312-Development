@@ -2,10 +2,15 @@
 @import '~style/helpers';
 
 .grid {
-  padding-top: 25vh;
-  padding-bottom: 25vh;
   background: $background-color;
   position: relative;
+  padding-top: 80px;
+  padding-bottom: 80px;
+
+  @media (min-width: $breakpoint-medium) {
+    padding-top: 150px;
+    padding-bottom: 150px;
+  }
 
   > * {
     display: flex;

@@ -18,6 +18,11 @@
   > * {
     display: flex;
     justify-content: space-between;
+
+    @media (max-width: $breakpoint-small - 1px) {
+      flex-direction: column;
+      align-items: center;
+    }
   }
 
   .logo {

@@ -12,60 +12,18 @@
   }
 }
 
-.page-content {
-  padding: $header-height 0 20px;
-  position: relative;
-  color: $white;
-  line-height: 1;
-  z-index: 1;
-
-  > * {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    min-height: 400px;
-    height: calc(100vh - #{$header-height + 20px});
-    max-height: 500px;
-  }
-
-  h1, h2 {
-    animation-duration: 1s;
-    animation-name: onEnter;
-    animation-fill-mode: both;
-    text-align: center;
-    margin: 0;
-
-    body[data-loading] & {
-      animation-play-state: paused;
-    }
-  }
-
-  h1 {
-    font-size: 94px;
-    padding-right: 150px;
-    animation-delay: 0.2s;
-  }
-
-  h2 {
-    font-size: 88px;
-    animation-delay: 0.4s;
-    padding-left: 150px;
-  }
-
-  mark {
-    background-color: transparent;
-    color: $pink;
-  }
-}
-
 .content {
-  padding-top: 25vh;
-  padding-bottom: 25vh;
   background: $background-color;
   position: relative;
   font-size: 20px;
   line-height: 1.5;
+  padding-top: 80px;
+  padding-bottom: 80px;
+
+  @media (min-width: $breakpoint-medium) {
+    padding-top: 150px;
+    padding-bottom: 150px;
+  }
 
   .intro {
     font-size: 30px;
@@ -75,8 +33,10 @@
 }
 
 .center {
- display: flex;
- justify-content: space-between;
+ div {
+   display: flex;
+   justify-content: space-between;
+ }
 
  a {
   $size: 36px;

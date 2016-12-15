@@ -13,11 +13,6 @@
   z-index: 2;
   background: linear-gradient(to bottom, rgba(17, 17, 17, 0.35), transparent);
 
-  &,
-  a {
-    color: $white;
-  }
-
   &.dark {
 
     .logo {
@@ -32,17 +27,21 @@
     nav {
       a {
         color: $black;
-
-        &:hover,
-        &:active {
-          background: rgba(255, 255, 255, 0.4);
-        }
       }
+    }
+
+    .menu {
+      background-image: url('/assets/images/menu-pink.svg');
     }
   }
 
+  > * {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
   .logo {
-    float: left;
     margin: 0;
     padding: 0 0 0 42px;
     font-size: 20px;
@@ -52,41 +51,43 @@
     background-repeat: no-repeat;
     background-size: auto 36px;
     will-change: background-image, color;
-  }
-
-  nav {
-    float: right;
-    font-size: 100%;
 
     a {
-      display: inline-block;
-      height: $header-height;
-      line-height: $header-height;
-      padding: 0 15px;
-      min-width: 50px;
-      text-align: center;
-      background: rgba(255, 255, 255, 0);
-      position: relative;
-
-      &:before {
-        content: '';
-        position: absolute;
-        top: 48px;
-        width: 0;
-        height: 3px;
-        background: $pink;
-        transform: translate(-50%, 0);
-        left: 50%;
-        transition: 0.35s width 0.05s;
-        will-change: width;
-      }
-
-      &:hover,
-      &:active {
-        &:before {
-          width: calc(100% - 10px);
-        }
-      }
+      color: $background-color;
     }
+  }
+
+  .menu {
+    height: 40px;
+    width: 40px;
+    padding: 0;
+    background: none;
+    border: none;
+    appearance: none;
+    cursor: pointer;
+    background-image: url('/assets/images/menu.svg');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+
+    @media (min-width: $breakpoint-small) {
+      display: none;
+    }
+  }
+}
+
+.transitioning {
+    background: $pink;
+}
+
+.menu-open {
+  overflow: hidden;
+
+  > div {
+    opacity: 0.75;
+  }
+
+  > nav {
+    transform: translate(0)
   }
 }

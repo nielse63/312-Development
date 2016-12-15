@@ -25,6 +25,12 @@ module.exports = {
     // "comma-dangle": [2, "never"],
     "indent": ["error", 2],
     "react/react-in-jsx-scope": "off",
+    "react/jsx-filename-extension": "off",
+    "react/prefer-stateless-function": "off",
+    "no-underscore-dangle": "off",
+    "react/prop-types": "warn",
+    "max-len": "warn",
+    "no-param-reassign": "warn"
     // "no-trailing-spaces": [2, { "skipBlankLines": true }],
     // "max-nested-callbacks": ["error", 3],
     // "no-eval": 2,

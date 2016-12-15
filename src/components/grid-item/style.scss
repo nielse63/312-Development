@@ -4,12 +4,19 @@
 $grid-item-distance: 20px;
 
 .grid-item {
-  flex: 1 0 calc(50% - #{$grid-item-distance});
-  width: calc(50% - #{$grid-item-distance});
-  max-width: calc(50% - #{$grid-item-distance});
-  margin: 0 0 ($grid-item-distance * 3);
-  perspective: 100vw;
   display: flex;
+  flex: 1 0 100%;
+  width: 100%;
+  max-width: 100%;
+  margin: 0 0 3em;
+  perspective: 100vw;
+
+  @media (min-width: $breakpoint-medium) {
+    margin-bottom: 4em;
+    flex: 1 0 calc(50% - #{$grid-item-distance});
+    width: calc(50% - #{$grid-item-distance});
+    max-width: calc(50% - #{$grid-item-distance});
+  }
 
   &:hover {
     h4 {
@@ -18,22 +25,40 @@ $grid-item-distance: 20px;
     }
   }
 
-  &:nth-last-child(-n+2) {
+  &:last-child {
     margin-bottom: 0;
+  }
+
+  @media (min-width: $breakpoint-medium) {
+    &:nth-last-child(-n+2) {
+      margin-bottom: 0;
+    }
   }
 
   &:nth-child(odd) {
     h4 {
-      left: -40px;
+      @media (min-width: $breakpoint-medium) {
+        left: -40px;
+      }
+
+      @media (min-width: $breakpoint-large) {
+        left: -30px;
+      }
     }
   }
 
   &:nth-child(even) {
 
     h4 {
-      padding-right: 1em;
-      left: 15px;
-      margin-top: -48px;
+      @media (min-width: $breakpoint-medium) {
+        margin-top: -48px;
+        padding-right: 1em;
+        left: 15px;
+      }
+
+      @media (min-width: $breakpoint-large) {
+        margin-top: -42px;
+      }
     }
   }
 
@@ -62,7 +87,7 @@ $grid-item-distance: 20px;
   }
 
   a {
-    padding: ($grid-item-distance / 2) 0 0;
+    padding: 1em;
     color: inherit;
     position: relative;
     display: flex;
@@ -73,34 +98,49 @@ $grid-item-distance: 20px;
   }
 
   h4 {
-    margin: 0 0 30px;
+    margin: 0 0 0.5em;
     background: #2443fb;
     background: linear-gradient(180deg, #2443fb 0%, #39a9da 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
-    font-size: 54px;
+    font-size: 36px;
     line-height: 1;
     text-transform: uppercase;
     font-family: $header-font-family;
     position: relative;
     transition: transform 0.5s, opacity 0.5s;
     will-change: transform, opacity;
+
+    @media (min-width: $breakpoint-medium) {
+      font-size: 54px;
+      margin-left: -1rem;
+    }
+
+    @media (min-width: $breakpoint-large) {
+      font-size: 48px;
+    }
   }
 
   p {
     text-align: right;
-    margin: 1em;
+    margin: 1em 0;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
   }
 
-  i {
-    font-size: 22px;
-  }
+  // i {
+  //   font-size: 22px;
+  // }
 
   .read-more {
     margin-top: 2em;
   }
 
   &-wrapper {
+    width: 100%;
+    max-width: 100%;
     border: ($grid-item-distance / 2) solid #fff;
     transform-style: preserve-3d;
     transition: transform 0.5s;
@@ -108,7 +148,47 @@ $grid-item-distance: 20px;
   }
 
   &-content {
-    // ...
+    position: relative;
+  }
+
+  .info {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+
+    > * {
+      + * {
+        margin-left: 10px;
+      }
+    }
+  }
+
+  [data-likes] {
+    &:after {
+      content: attr(data-likes);
+      font-family: $body-font-family;
+    }
+  }
+
+  .language {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+  }
+
+  .javascript {
+    background-image: url('/assets/images/repo-js.svg')
+  }
+
+  .css {
+    background-image: url('/assets/images/repo-js.svg')
+  }
+
+  .php {
+    background-image: url('/assets/images/repo-js.svg')
   }
 }
 

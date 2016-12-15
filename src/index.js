@@ -1,3 +1,4 @@
+/* eslint-disable global-require */
 
 import { h, render } from 'preact'
 import style from './style/index.scss'
@@ -7,10 +8,13 @@ function init() {
   const App = require('./components/app').default
   root = render(
     <App
-      cssclass={style.main}
-      readyclass={style.ready}
-      doneclass={style.complete}
-      loadingclass={style.loading}
+      classes={{
+        default: style.main,
+        internal: style.internal,
+        ready: style.ready,
+        done: style.complete,
+        loading: style.loading,
+      }}
     />,
     document.body, root,
   )

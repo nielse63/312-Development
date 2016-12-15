@@ -5,5 +5,10 @@
     "/about": "About Me",
     "/contact": "Get In Touch",
     "/portfolio": "Check out my work"
+  },
+  "CONTENT": {
+    "about": {
+      "intro": "I'm Erik Nielsen, a User-Interface and Full-Stack Software Engineer from Chicago, Illinois. I've been in the industry for over 8 years, and work with the fine folks at <a href=\"https://www.enova.com/\" target=\"_blank\">Enova International</a>."
+    }
   }
 }

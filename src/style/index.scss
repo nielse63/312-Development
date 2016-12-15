@@ -1,6 +1,9 @@
 
 @import 'helpers';
 
+@import 'fonts';
+@import 'normalize';
+
 * {
   &,
   &:before,
@@ -44,6 +47,13 @@ body.loading {
 }
 
 .main {
+  max-width: 100vw;
+  overflow: hidden;
+
+  @media (max-width: $breakpoint-small - 1px) {
+    transition: opacity 0.5s;
+  }
+
   &:not(.complete) {
     &:before {
       content: '';
@@ -74,6 +84,14 @@ body.loading {
   &.complete {
     &:before {
       display: none;
+    }
+  }
+}
+
+.internal {
+  .banner {
+    > * {
+      height: 450px;
     }
   }
 }

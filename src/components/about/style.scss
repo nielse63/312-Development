@@ -1,80 +1,85 @@
 
 @import '~style/helpers';
 
-@keyframes onEnter {
-  from {
-    opacity: 0;
-    transform: translateY(50px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-.page-content {
-  padding: $header-height 0 20px;
-  position: relative;
-  color: $white;
-  line-height: 1;
-  z-index: 1;
-
-  > * {
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
-    min-height: 400px;
-    height: calc(100vh - #{$header-height + 20px});
-    max-height: 500px;
-
-    > * {
-      width: 100%;
-      margin: 0;
-    }
-  }
-
-  h1, h2 {
-    animation-duration: 1s;
-    animation-name: onEnter;
-    animation-fill-mode: both;
-
-    body[data-loading] & {
-      animation-play-state: paused;
-    }
-  }
-
-  h1 {
-    font-size: 94px;
-    animation-delay: 0.2s;
-  }
-
-  h2 {
-    font-size: 70px;
-    animation-delay: 0.4s;
-  }
-
-  mark {
-    background-color: transparent;
-    color: $pink;
-  }
-}
-
 .content {
-  padding-top: 25vh;
-  padding-bottom: 25vh;
   background: $background-color;
   position: relative;
   font-size: 20px;
   line-height: 1.5;
+  padding-top: 80px;
+  padding-bottom: 80px;
+
+  @media (min-width: $breakpoint-medium) {
+    padding-top: 150px;
+    padding-bottom: 150px;
+  }
 
   .intro {
-    font-size: 30px;
+    font-size: 22px;
     line-height: 1.25;
     font-weight: 700;
+
+    @media (min-width: $breakpoint-small) {
+      font-size: 30px
+    }
+  }
+
+  a {
+    color: inherit;
+    position: relative;
+    display: inline-block;
+
+    &:before {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 3px;
+      background: #149DCC;
+      transition: height 0.25s;
+    }
+
+    &:hover {
+      &:before {
+        height: 6px;
+      }
+    }
   }
 }
 
 .container-narrow {
-  max-width: 50vw;
-  margin: 0 auto;
+  margin: 0 25px;
+
+  @media (min-width: $breakpoint-small) {
+    max-width: 75vw;
+    margin: 0 auto;
+  }
+
+  @media (min-width: $breakpoint-medium) {
+    max-width: 50vw;
+  }
+}
+
+.table {
+  display: flex;
+  margin-left: -15px;
+  margin-right: -15px;
+
+  &-col {
+    width: percentage(1 / 3);
+    max-width: percentage(1 / 3);
+    flex: 1 0 percentage(1 / 3);
+    padding: 0 15px;
+
+    ul {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+  }
+
+  &-header {
+    font-weight: 700;
+  }
 }

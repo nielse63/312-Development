@@ -1,71 +1,95 @@
 
-import { h, Component } from 'preact';
-import { Router } from 'preact-router';
-import { getScript, getStyle, preloadImages } from '../lib/load-jquery';
-import Header from './header';
-import Footer from './footer';
-import Home from './home';
-import About from './about';
-import Contact from './contact';
-import Portfolio from './portfolio';
-import config from '../config';
-import S from 'string';
+import { h, Component } from 'preact'
+import { Router } from 'preact-router'
+import S from 'string'
+import { getScript, getStyle, preloadImages } from '../lib/load-jquery'
+import Header from './header'
+import Footer from './footer'
+import Home from './home'
+import About from './about'
+import Contact from './contact'
+import Portfolio from './portfolio'
+import config from '../config.json'
 
-require('offline-plugin/runtime').install();
+require('offline-plugin/runtime').install()
 
-const { pushState } = history;
+const { pushState } = history
 history.pushState = (a, b, url) => {
-	pushState.call(history, a, b, url);
-	if (url.indexOf('#') < 0) scrollTo(0, 0);
-};
+  pushState.call(history, a, b, url)
+  if (url.indexOf('#') < 0) scrollTo(0, 0)
+}
 
-export default class App extends Component {
-	componentDidMount() {
-		getScript();
-		getStyle();
-		preloadImages();
+class App extends Component {
+  static setDefaultConfig() {
+    if (config.SITE_TITLE) {
+      return config
+    }
+    const titleArray = document.title.split('|')
+    config.SITE_TITLE = titleArray[0] ? titleArray[0].trim() : ''
+    config.SITE_DESCRIPTION = titleArray[1] ? titleArray[1].trim() : ''
 
-		setTimeout(() => {
-			app.classList.add(this.props.readyclass);
+    return config
+  }
 
-			setTimeout(() => {
-				app.classList.add(this.props.doneclass);
-				document.body.removeAttribute('data-loading');
-			}, 500);
-		}, 1000);
-	}
+  constructor() {
+    super()
+    this.handleRoute = this._handleRoute.bind(this)
+  }
 
-	setDefaultConfig() {
-		if ( config.SITE_TITLE ) {
-			return config;
-		}
-		const titleArray = document.title.split('|');
-		config.SITE_TITLE = !! titleArray[0] ? titleArray[0].trim() : '';
-		config.SITE_DESCRIPTION = !! titleArray[1] ? titleArray[1].trim() : '';
+  componentWillMount() {
+    const width = window.innerWidth
+    let size = 'small'
+    if (width > 480) {
+      size = 'medium'
+    } else if (width > 1080) {
+      size = 'large'
+    } else if (width > 1400) {
+      size = 'xlarge'
+    } else if (width > 1920) {
+      size = 'full'
+    }
+    preloadImages(size)
+  }
 
-		return config;
-	}
+  componentDidMount() {
+    getScript()
+    getStyle()
 
-	setTitle() {
-		const defaults = this.setDefaultConfig();
+    setTimeout(() => {
+      this.base.classList.add(this.getClass('ready'))
 
-		let title = defaults.PAGE_TITLES[this.currentUrl] || S(this.currentUrl.replace(/\//, '')).capitalize().s;
-		if (!title) {
-			title = `${defaults.SITE_TITLE} | ${defaults.SITE_DESCRIPTION}`;
-		} else {
-			title = `${title} | ${defaults.SITE_TITLE}`;
-		}
-		document.title = title;
-	}
+      setTimeout(() => {
+        this.base.classList.add(this.getClass('done'))
+        document.body.removeAttribute('data-loading')
+      }, 500)
+    }, 1000)
+  }
 
-	handleRoute = e => {
-		this.currentUrl = e.url;
-		this.setTitle();
-	}
+  getClass(cls) {
+    return this.props.classes[cls]
+  }
 
-	render() {
-		return (
-      <div id="app" className={this.props.cssclass}>
+  setTitle() {
+    const defaults = App.setDefaultConfig()
+
+    let title = defaults.PAGE_TITLES[this.currentUrl] || S(this.currentUrl.replace(/\//, '')).capitalize().s
+    if (!title) {
+      title = `${defaults.SITE_TITLE} | ${defaults.SITE_DESCRIPTION}`
+    } else {
+      title = `${title} | ${defaults.SITE_TITLE}`
+    }
+    document.title = title
+  }
+
+  _handleRoute(e) {
+    this.currentUrl = e.url
+    this.setTitle()
+    document.body.removeAttribute('class')
+  }
+
+  render() {
+    return (
+      <div id="app" className={this.getClass('default')}>
         <Header />
         <Router onChange={this.handleRoute}>
           <Home path="/" />
@@ -75,6 +99,8 @@ export default class App extends Component {
         </Router>
         <Footer />
       </div>
-		);
-	}
+    )
+  }
 }
+
+export default App

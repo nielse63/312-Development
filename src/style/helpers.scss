@@ -2,13 +2,13 @@
 @import 'variables';
 @import 'mixins';
 
-@import 'fonts';
-@import 'normalize';
-
 .container {
-  // max-width: 1080px;
   margin: 0 auto;
-  padding: 0 50px;
+  padding: 0 25px;
+
+  @media (min-width: $breakpoint-medium) {
+    padding: 0 50px;
+  }
 }
 
 .page {
