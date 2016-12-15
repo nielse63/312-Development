@@ -24,7 +24,7 @@
   "scripts": {
     "clean": "rm -rf ./build",
     "dev": "cross-env NODE_ENV=development webpack-dev-server --inline --hot --progress --colors",
-    "start": "heroku local:start web -p 5001",
+    "start": "superstatic build -p 5001 --host localhost --gzip -c .superstatic.json",
     "prestart": "npm run build",
     "build": "cross-env NODE_ENV=production webpack --cache false -p --progress",
     "prebuild": "npm run clean && mkdirp build && ncp src/assets build/assets",
@@ -82,7 +82,6 @@
     "postcss-loader": "^0.13.0",
     "raw-loader": "^0.5.1",
     "sass-loader": "^4.0.2",
-    "sharp": "^0.17.0",
     "sinon": "^1.17.5",
     "sinon-chai": "^2.8.0",
     "source-map-loader": "^0.1.5",
