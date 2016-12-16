@@ -50,12 +50,15 @@ class App extends Component {
   }
 
   static preload() {
-    const scripts = [{
-      src: 'https://cdn.ravenjs.com/3.9.1/raven.min.js',
-      callback() {
-        window.Raven.config('https://e375a4ff56f54d10bc63673d7fa53cb4@sentry.io/121634').install()
-      },
-    }]
+    const scripts = []
+    if (process.env.NODE_ENV === 'production') {
+      scripts.push({
+        src: 'https://cdn.ravenjs.com/3.9.1/raven.min.js',
+        callback() {
+          window.Raven.config('https://e375a4ff56f54d10bc63673d7fa53cb4@sentry.io/121634').install()
+        },
+      })
+    }
     if (!window.jQuery) {
       scripts.push('https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js')
     }
@@ -66,9 +69,61 @@ class App extends Component {
     )
   }
 
+  static scrollListener() {
+    let lastPosition = -1
+    function loop() {
+      if (lastPosition === window.pageYOffset) {
+        requestAnimationFrame(loop)
+        return false
+      }
+      lastPosition = window.pageYOffset
+      document.dispatchEvent(
+        new CustomEvent('scrolling'),
+      )
+      requestAnimationFrame(loop)
+    }
+    loop()
+  }
+
+  static resizeListener() {
+    const throttle = function (type, name, obj = window) {
+      let running = false
+      let timer
+      const func = function () {
+        if (running) { return }
+        running = true
+        requestAnimationFrame(() => {
+          if (timer) {
+            clearTimeout(timer)
+          }
+          timer = setTimeout(() => {
+            timer = null
+            obj.dispatchEvent(new CustomEvent(name))
+          }, 250)
+          running = false
+        })
+      }
+      obj.addEventListener(type, func, {
+        passive: true,
+      })
+    }
+    throttle('resize', 'resizeend')
+  }
+
+  static setRAF() {
+    window.requestAnimationFrame = window.requestAnimationFrame ||
+      window.webkitRequestAnimationFrame ||
+      window.mozRequestAnimationFrame ||
+      function (callback) { window.setTimeout(callback, 1000 / 60) }
+  }
+
   constructor() {
     super()
     this.handleRoute = this._handleRoute.bind(this)
+  }
+
+  componentWillMount() {
+    App.setRAF()
   }
 
   componentDidMount() {
@@ -80,6 +135,9 @@ class App extends Component {
       setTimeout(() => {
         this.base.classList.add(this.getClass('done'))
         document.body.removeAttribute('data-loading')
+
+        App.scrollListener()
+        App.resizeListener()
       }, 500)
     }, 1000)
   }
@@ -103,6 +161,7 @@ class App extends Component {
   _handleRoute(e) {
     this.currentUrl = e.url
     this.setTitle()
+    document.dispatchEvent(new CustomEvent('routed'))
     document.body.removeAttribute('class')
   }
 
@@ -119,6 +178,7 @@ class App extends Component {
           <NotFound default />
         </Router>
         <Footer />
+        <button data-menu />
       </div>
     )
   }

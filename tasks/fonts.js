@@ -1,18 +1,16 @@
 
 // modules
-var gulp    = require('gulp');
-var newer   = require('gulp-newer');
-var flatten = require('gulp-flatten');
-var connect = require('gulp-connect');
+const gulp = require('gulp')
+const newer = require('gulp-newer')
+const flatten = require('gulp-flatten')
+const connect = require('gulp-connect')
 
 // global vars
-var inPath = 'assets/fonts/**/*';
+const inPath = 'assets/fonts/**/*'
 
 // task
-gulp.task('fonts', function() {
-	return gulp.src(inPath)
+gulp.task('fonts', () => gulp.src(inPath)
 		.pipe(newer(inPath))
 		.pipe(flatten())
 		.pipe(gulp.dest('public/fonts'))
-		.pipe(connect.reload());
-});
+		.pipe(connect.reload()))

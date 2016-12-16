@@ -5,99 +5,79 @@ import Nav from '../nav'
 import style from './style.scss'
 
 let isDark = false
-let didBind = false
-let $ = window.jQuery
 
 export default class Header extends Component {
   static bindMenuClick() {
     if (!('ontouchstart' in window || 'ontouchstart' in document.documentElement)) {
       return
     }
-    const $button = $(`.${style.menu}`)
-    const $body = $('body')
-    const $nav = $(`.${style.header} nav`)
 
-    // move nav outside header
-    if ($nav.length) {
-      $('#app').after($nav)
+    const nav = document.querySelector(`.${style.header} nav`)
+
+    if (nav) {
+      document.getElementById('app').insertAdjacentHTML('afterend', nav.outerHTML)
+      nav.remove()
     }
 
-    $button.off('click')
-    $button.on('click', () => {
-      $body.toggleClass(style['menu-open'])
+    document.querySelector('[data-menu]').addEventListener('click', () => {
+      document.body.classList.toggle(style['menu-open'])
+    }, {
+      passive: true,
+    })
+  }
 
-      if (!$body.hasClass(style['menu-open'])) {
-        return $nav.one('transitionend', () => {
-          $body.removeClass(style.transitioning)
-        })
-      }
+  constructor() {
+    super()
+    this.offsetTop = 0
+  }
 
-      $body.addClass(style.transitioning)
-
-      return $nav.one('transitionend', () => {
-        $body.on('click.secondary', e => {
-          const isMenu = $(e.target).closest($nav).length
-          if (!isMenu) {
-            $body.off('.secondary')
-            $button.trigger('click')
-          }
-        })
-      })
+  componentWillMount() {
+    document.addEventListener('routed', e => {
+      setTimeout(() => {
+        this.setProps()
+      }, 0)
+    }, {
+      passive: true,
     })
   }
 
   componentDidMount() {
-    if (!window.jQuery) {
-      return
-    }
-    this.onJqueryLoad()
+    this.setProps()
+    this.bindListeners()
   }
 
-  componentWillUnmount() {
-    $(window).off('.header')
+  onScroll() {
+    const diff = (window.pageYOffset - this.offsetTop) + (this.height / 2)
+    const cls = `${style.dark}`
+
+    if (!isDark && diff > 0) {
+      isDark = true
+      this.base.classList.add(cls)
+    } else if (isDark && diff < 0) {
+      isDark = false
+      this.base.classList.remove(cls)
+    }
   }
 
-  onJqueryLoad() {
-    if (didBind) {
+  setProps() {
+    this.nextEle = document.querySelector('[data-midnight]')
+    if (!this.nextEle || this.offsetTop === this.nextEle.offsetTop) {
       return
     }
-    didBind = true
-    $ = window.jQuery
 
+    this.offsetTop = this.nextEle.offsetTop
+    this.height = this.base.clientHeight
+  }
+
+  bindListeners() {
     this.bindScroll()
     Header.bindMenuClick()
   }
 
-  onResize() {
-    const height = this.base.clientHeight
-    return $('[data-midnight]').offset().top - (height / 2)
-  }
-
-  onScroll() {
-    const top = window.scrollY
-    const diff = top - this.offset
-    if (!isDark && diff > 0) {
-      isDark = true
-      this.$header.addClass(`${style.dark}`)
-    } else if (isDark && diff <= 0) {
-      isDark = false
-      this.$header.removeClass(`${style.dark}`)
-    }
-  }
-
   bindScroll() {
-    const $window = $(window)
-    $window.off('.header')
-
-    if (!$('[data-midnight]').length) {
-      return
-    }
-
-    this.$header = $(this.base)
-    this.offset = this.onResize()
-
-    $window.on('resize.header', this.onResize.bind(this))
-    $window.on('scroll.header', this.onScroll.bind(this))
+    document.addEventListener('scrolling', this.onScroll.bind(this), {
+      passive: true,
+    })
     this.onScroll()
   }
 
@@ -109,7 +89,6 @@ export default class Header extends Component {
             <Link href="/">312 Development</Link>
           </h1>
           <Nav />
-          <button className={style.menu} />
         </div>
       </header>
     )

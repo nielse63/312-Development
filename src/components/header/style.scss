@@ -30,7 +30,7 @@
       }
     }
 
-    .menu {
+    ~ [data-menu] {
       background-image: url('/assets/images/menu-pink.svg');
     }
   }
@@ -56,24 +56,6 @@
       color: $background-color;
     }
   }
-
-  .menu {
-    height: 40px;
-    width: 40px;
-    padding: 0;
-    background: none;
-    border: none;
-    appearance: none;
-    cursor: pointer;
-    background-image: url('/assets/images/menu.svg');
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: contain;
-
-    @media (min-width: $breakpoint-small) {
-      display: none;
-    }
-  }
 }
 
 .transitioning {
@@ -84,10 +66,20 @@
   overflow: hidden;
 
   > div {
-    opacity: 0.75;
+    > *:not(button) {
+      opacity: 0.75;
+    }
+  }
+
+  [data-midnight] {
+    pointer-events: none;
   }
 
   > nav {
     transform: translate(0)
+  }
+
+  [data-menu] {
+    background-image: url('/assets/images/menu.svg') !important;
   }
 }

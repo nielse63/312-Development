@@ -13,16 +13,17 @@
 }
 
 html, body {
-  height: 100%;
-  width: 100%;
   padding: 0;
-  margin: 0;
   background: $background-color;
   font-family: $body-font-family;
   font-weight: 400;
   color: #444;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+
+  @media (max-width: $breakpoint-small + 1px) {
+    background: $pink;
+  }
 }
 
 :first-child {
@@ -44,6 +45,29 @@ a {
 body.loading {
   height: 100vh;
   overflow: hidden;
+}
+
+[data-menu] {
+  height: 40px;
+  width: 40px;
+  padding: 0;
+  background: none;
+  border: none;
+  appearance: none;
+  cursor: pointer;
+  background-image: url('/assets/images/menu.svg');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  position: fixed;
+  right: 25px;
+  top: 33px;
+  transform: translate(0, -50%);
+  z-index: 2;
+
+  @media (min-width: $breakpoint-small) {
+    display: none;
+  }
 }
 
 .main {

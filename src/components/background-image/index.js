@@ -2,48 +2,13 @@
 import { h, Component } from 'preact'
 import style from './style.scss'
 
-let $ = window.jQuery
-
 class BackgroundImage extends Component {
   componentWillMount() {
     this.getSource()
   }
 
   componentDidMount() {
-    if (!window.jQuery) {
-      return
-    }
-    this.onJqueryLoad()
-  }
-
-  componentWillUnmount() {
-    $(window).off('.backgroundImage')
-  }
-
-  onJqueryLoad() {
-    $ = window.jQuery
-    const $window = $(window)
-    $window.off('.backgroundImage')
-
-    const $figure = $(this.base)
-    let height = $figure.next().outerHeight()
-
-    function onResize() {
-      height = $figure.next().outerHeight()
-    }
-
-    function onScroll() {
-      const top = window.pageYOffset
-      if (top > height) {
-        return
-      }
-      const percentage = (top / height) * (0.15 * -100)
-      $figure.css('transform', `translateY(${percentage}%)`)
-    }
-
-    $window.on('scroll.backgroundImage', onScroll)
-    $window.on('resize.backgroundImage', onResize)
-    onScroll()
+    this.bindListeners()
   }
 
   getSizes() {
@@ -89,8 +54,47 @@ class BackgroundImage extends Component {
         }
       }
     `
+
     this.removeOldScript()
-    $('head').append(`<style id="${this.id}">${string}</style>`)
+    this.createScript(string)
+  }
+
+  bindListeners() {
+    const figure = this.base
+    const next = figure.nextSibling
+    let height = next.offsetHeight
+
+    function onResize() {
+      height = next.offsetHeight
+    }
+
+    function onScroll() {
+      const top = window.pageYOffset
+      if (top > height) {
+        return
+      }
+      const percentage = (top / height) * (0.15 * -100)
+      figure.style.transform = `translateY(${percentage}%)`
+    }
+
+    document.addEventListener('scrolling', onScroll, {
+      passive: true,
+    })
+    window.addEventListener('resizeend', onResize, {
+      passive: true,
+    })
+    onScroll()
+  }
+
+  createScript(string) {
+    const css = document.createElement('style')
+    css.id = this.id
+    if (css.styleSheet) {
+      css.styleSheet.cssText = string
+    } else {
+      css.appendChild(document.createTextNode(string))
+    }
+    document.head.appendChild(css)
   }
 
   removeOldScript() {
