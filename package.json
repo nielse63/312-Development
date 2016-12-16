@@ -27,7 +27,7 @@
   "scripts": {
     "clean": "rm -rf ./build",
     "dev": "cross-env NODE_ENV=development webpack-dev-server --inline --hot --progress --colors",
-    "start": "superstatic build -p 5001 --gzip",
+    "start": "superstatic build -p 5001 --gzip -c ./.superstatic.json",
     "prestart": "npm run build",
     "build": "cross-env NODE_ENV=production webpack -p --progress",
     "prebuild": "npm run clean && mkdir build && cp -r src/assets build/assets",
