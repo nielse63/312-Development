@@ -22,19 +22,23 @@ function start() {
   app.disable('x-powered-by');
   app.set('port', (process.env.PORT || 3000))
   app.use(function(req, res, next) {
+    // console.log(req.secure)
+    console.log(req.secure + ' ' + req.url)
+    if(!req.secure && process.env.NODE_ENV === 'production') {
+    // if(!req.secure) {
+      var secureUrl = "https://" + req.headers['host'] + req.url;
+      // console.log(secureUrl)
+      res.writeHead(301, { "Location":  secureUrl });
+      return res.end();
+    }
+    next();
+  });
+  app.use(function(req, res, next) {
     res.removeHeader('Server')
     res.setHeader('X-XSS-Protection', '1; mode=block')
     res.setHeader('X-Frame-Options', 'SAMEORIGIN')
     res.setHeader('X-Content-Type-Options', 'nosniff')
     return next();
-  });
-  app.use(function(req, res, next) {
-    if(!req.secure && process.env.NODE_ENV === 'production') {
-      var secureUrl = "https://" + req.headers['host'] + req.url;
-      res.writeHead(301, { "Location":  secureUrl });
-      res.end();
-    }
-    next();
   });
   app.use(express.static('build'))
   app.use(compression)
