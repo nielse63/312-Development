@@ -55,6 +55,21 @@ class App extends Component {
       callback() {
         window.Raven.config('https://e375a4ff56f54d10bc63673d7fa53cb4@sentry.io/121634').install()
       },
+    }, {
+      src: 'https://d26b395fwzu5fz.cloudfront.net/keen-tracking-1.0.3.min.js',
+      callback() {
+        /* global KeenAsync */
+        KeenAsync.ready(() => {
+          const client = new KeenAsync({
+            projectId: process.env.KEEN_PROJECT_ID,
+            writeKey: process.env.KEEN_WRITE_KEY,
+          })
+
+          client.recordEvent('pageviews', {
+            title: document.title,
+          })
+        })
+      },
     }]
     if (!window.jQuery) {
       scripts.push('https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js')
