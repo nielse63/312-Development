@@ -41,14 +41,14 @@ class App extends Component {
   componentWillMount() {
     const width = window.innerWidth
     let size = 'small'
-    if (width > 480) {
-      size = 'medium'
-    } else if (width > 1080) {
-      size = 'large'
+    if (width > 1920) {
+      size = 'full'
     } else if (width > 1400) {
       size = 'xlarge'
-    } else if (width > 1920) {
-      size = 'full'
+    }  else if (width > 1080) {
+      size = 'large'
+    } else if (width > 480) {
+      size = 'medium'
     }
     preloadImages(size)
   }
