@@ -24,6 +24,7 @@
     "offline-plugin": "^4.5.3",
     "preact": "^7.1.0",
     "preact-router": "^2.3.2",
+    "raven": "^1.1.1",
     "string": "^3.3.3"
   },
   "scripts": {
@@ -38,7 +39,8 @@
     "lint:js": "./node_modules/.bin/eslint ./src --fix",
     "lint:scss": "./node_modules/.bin/sass-lint 'src/**/*.scss' -v",
     "resize-images": "node ./tasks/image-resize.js",
-    "surge": "npm run lint && npm run build && surge ./build -d https://312development.surge.sh"
+    "surge": "npm run lint && npm run build && surge ./build -d https://312development.surge.sh",
+    "heroku:remote": "heroku git:remote -a alluring-capitol-reef-91162"
   },
   "author": "Erik Nielsen",
   "devDependencies": {

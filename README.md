@@ -22,17 +22,15 @@ If there's a bug in my code that you found, or you just think the design of my s
 
 *This is just the highlight reel of all the tools I'm using on my site. To see all the giants whose shoulders I'm standing on, checkout the [package.json](https://github.com/nielse63/312-Development/blob/master/package.json) file.*
 ### Frameworks & Build Tools:
-* [React](https://facebook.github.io/react/) for rendering the UI & views
-* [React Router](https://github.com/reactjs/react-router/) for handling routes
-* [Flux](https://code.facebook.com/projects/1572329279676947/flux/) architecture for data flow management
+* [Preact](https://github.com/developit/preact) for UI and views (Preact is like React, but is a smaller library)
+* [Preact Router](https://github.com/developit/preact-router) for handling routes
 * [Babel](http://babeljs.io/) for transpiling ES6
 * [Webpack](http://webpack.github.io/) to bundle modules and handle workflow automation
-* [Express](http://expressjs.com/) for server side rendering (production only)
+* [Express](http://expressjs.com/) for server-side routing
 
 ### Languages & Automation
 * JS is written in [ES6 format](http://es6-features.org/#Constants)
 * CSS is compiled from [Sass](http://sass-lang.com/)
-* [Gulp](http://gulpjs.com/) was initially employed for workflow automation and a few tasks are still being employed
 * Webpack, mentioned above, handles the bulk of the workflow:
 	* Compiling Sass
 	* Load optimization of bundled JS
@@ -40,10 +38,8 @@ If there's a bug in my code that you found, or you just think the design of my s
 
 ### Linting, Testing, and CI
 * [Eslint](http://eslint.org/), executed in a custom Gulp task, validates the JS
-* [SCSS-Lint](https://github.com/brigade/scss-lint) as a style type checker on .scss files
+* [Sass Lint](https://github.com/sasstools/sass-lint) as a style type checker on .scss files
 * Using [TravisCI](https://travis-ci.org/) for continuous integration, asset linting cannot fail in order for the build to pass
-	* I'm in the process of writing functional unit tests run through [Phantom](http://phantomjs.org/)
-	* Unit and UAT tests are coming soon
 
 ## Third-Party Integrations
 
