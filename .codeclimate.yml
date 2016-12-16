@@ -1,8 +1,29 @@
---
+---
 engines:
+  csslint:
+    enabled: true
+  duplication:
+    enabled: true
+    config:
+      languages:
+      - javascript
   eslint:
     enabled: true
     channel: "eslint-3"
+  fixme:
+    enabled: true
+  markdownlint:
+    enabled: true
+    checks:
+      MD013:
+        enabled: false
 ratings:
-   paths:
-   - "**.js"
+  paths:
+  - "src/"
+  - "app.js"
+  - "webpack.config.babel.js"
+exclude_paths:
+- node_modules/
+- test/
+- tasks/
+- build/
