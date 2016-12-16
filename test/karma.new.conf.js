@@ -1,5 +1,7 @@
 // Karma configuration
 // Generated on Thu Dec 15 2016 19:43:37 GMT-0600 (CST)
+require('babel-register');
+var webpack = require('../webpack.config.babel.js');
 
 module.exports = function(config) {
   config.set({
@@ -15,8 +17,7 @@ module.exports = function(config) {
 
     // list of files / patterns to load in the browser
     files: [
-      'src/**/*.js',
-      'test/**/*.spec.js',
+      // 'src/**/*.js',
       'test/**/*.spec.js'
     ],
 
@@ -29,7 +30,12 @@ module.exports = function(config) {
     // preprocess matching files before serving them to the browser
     // available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
     preprocessors: {
+      'test/**/*.js': ['webpack'],
+      'src/**/*.js': ['webpack'],
+      '**/*.js': ['sourcemap'],
     },
+    webpack: webpack,
+    webpackMiddleware: { noInfo: true },
 
 
     // test results reporter to use
@@ -57,7 +63,8 @@ module.exports = function(config) {
 
     // start these browsers
     // available browser launchers: https://npmjs.org/browse/keyword/karma-launcher
-    browsers: ['Chrome', 'Firefox', 'Safari', 'IE'],
+    // browsers: ['Chrome', 'Firefox', 'Safari', 'IE'],
+    browsers: ['PhantomJS'],
 
 
     // Continuous Integration mode
