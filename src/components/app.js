@@ -2,6 +2,7 @@
 import { h, Component } from 'preact'
 import { Router } from 'preact-router'
 import S from 'string'
+import Meta from './meta'
 import { getScripts, getStyle, preloadImages } from '../lib/load-jquery'
 import Header from './header'
 import Footer from './footer'
@@ -119,6 +120,7 @@ class App extends Component {
 
   constructor() {
     super()
+    this.meta = new Meta()
     this.handleRoute = this._handleRoute.bind(this)
   }
 
@@ -146,21 +148,13 @@ class App extends Component {
     return this.props.classes[cls]
   }
 
-  setTitle() {
-    const defaults = App.setDefaultConfig()
-
-    let title = defaults.PAGE_TITLES[this.currentUrl] || S(this.currentUrl.replace(/\//, '')).capitalize().s
-    if (!title) {
-      title = `${defaults.SITE_TITLE} | ${defaults.SITE_DESCRIPTION}`
-    } else {
-      title = `${title} | ${defaults.SITE_TITLE}`
-    }
-    document.title = title
+  setMeta(e) {
+    this.meta.update(e.current)
   }
 
   _handleRoute(e) {
     this.currentUrl = e.url
-    this.setTitle()
+    this.setMeta(e)
     document.dispatchEvent(new CustomEvent('routed'))
     document.body.removeAttribute('class')
   }
