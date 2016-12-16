@@ -19,15 +19,15 @@ throng({
 function start() {
 
   // app config
-  app.use(function(req, res, next) {
-    console.log(req.protocol + ' ' + req.url)
-    if(!req.secure && process.env.NODE_ENV === 'production') {
-      var secureUrl = "https://" + req.headers['host'] + req.url;
-      res.redirect(301, secureUrl);
-      res.end()
-    }
-    return next();
-  });
+  // app.use(function(req, res, next) {
+  //   console.log(req.protocol + ' ' + req.url)
+  //   if(!req.secure && process.env.NODE_ENV === 'production') {
+  //     var secureUrl = "https://" + req.headers['host'] + req.url;
+  //     res.redirect(301, secureUrl);
+  //     res.end()
+  //   }
+  //   return next();
+  // });
   app.set('port', (process.env.PORT || 3000))
   app.use(function(req, res, next) {
     res.setHeader('X-XSS-Protection', '1; mode=block')
