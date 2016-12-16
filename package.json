@@ -24,13 +24,14 @@
     "offline-plugin": "^4.5.3",
     "preact": "^7.1.0",
     "preact-router": "^2.3.2",
-    "string": "^3.3.3"
+    "string": "^3.3.3",
+    "whatwg-fetch": "^2.0.1"
   },
   "scripts": {
     "clean": "rm -rf ./build",
     "dev": "cross-env NODE_ENV=development webpack-dev-server --inline --hot --progress --colors",
     "start": "NODE_ENV=production node --optimize_for_size --max_old_space_size=920 --gc_interval=100 app.js",
-    "start:local": "npm run prestart && NODE_ENV=developoment node --optimize_for_size --max_old_space_size=920 --gc_interval=100 app.js",
+    "local": "npm run prestart && NODE_ENV=developoment node --optimize_for_size --max_old_space_size=920 --gc_interval=100 app.js",
     "prestart": "npm run build",
     "build": "cross-env NODE_ENV=production webpack -p --progress",
     "prebuild": "npm run clean && mkdir build && cp -r src/assets build/assets",
