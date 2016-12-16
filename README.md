@@ -2,15 +2,14 @@
 
 [Check out the Site](https://312development.com/) | [Follow me on Twitter](https://twitter.com/erikkylenielsen/)
 
-[![Build Status](https://img.shields.io/travis/nielse63/312-Development.svg?style=flat-square)](https://travis-ci.org/nielse63/312-Development)
-[![dependencies Status](https://img.shields.io/david/nielse63/312-development.svg?style=flat-square)](https://david-dm.org/nielse63/312-Development)
-[![devDependencies Status](https://img.shields.io/david/dev/nielse63/312-development.svg?style=flat-square)](https://david-dm.org/nielse63/312-Development?type=dev)
+![Travis branch](https://img.shields.io/travis/nielse63/312-Development/master.svg?style=flat-square)
+![Code Climate](https://img.shields.io/codeclimate/github/nielse63/312-Development.svg?style=flat-square)
+![David](https://img.shields.io/david/nielse63/312-Development.svg?style=flat-square)
+![David](https://img.shields.io/david/dev/nielse63/312-Development.svg?style=flat-square)
 
 ## About This Repo
 
 First and foremost, this repo is **not meant to be a tutorial or boilerplate** of any kind. This is simply the repo for my personal site, [312development.com](https://312development.com/), hoping to share the code I've used to create this latest iteration.
-
-If you are, however, looking for tutorials and/or boilerplates I'd highly recommend reading [Survive.js](http://survivejs.com/), and I've found the [React Boilerplate](http://reactboilerplate.com/) to be extremely helpful.
 
 [Feel free to email me](mailto:erik@312development.com) with any questions you might have regarding how and why I did things the way I did and, as always, I welcome [any bugs you find and report](https://github.com/nielse63/312-Development/issues/new), as well as new [pull requests](https://github.com/nielse63/312-Development/compare).
 
@@ -47,5 +46,5 @@ The app is deployed via [Heroku](https://heroku.com/), and incorporates several 
 
 * The SSL Endpoint, and certificate purchased via [DNSimple](https://dnsimple.com/)
 * I installed [Librato](https://www.librato.com/) for HTTP request and memory usage monitoring
-* The [Raygun](https://raygun.com/) SDK is used to track and alert me to any client-side errors a user may encounter. Another of their products, [Pulse](https://raygun.com/products/real-user-monitoring), which tracks client-side performance, user-experience satisfaction, and the load time of individual assets.
+* The Raven SDK from [Sentry.io](https://sentry.io/) is used to track and alert all client-side errors.
 * Finally, I'm usng [KeenIO](https://keen.io/) for advanced analytics and user-data collection.
