@@ -24,7 +24,6 @@
     "offline-plugin": "^4.5.3",
     "preact": "^7.1.0",
     "preact-router": "^2.3.2",
-    "raven": "^1.1.1",
     "string": "^3.3.3"
   },
   "scripts": {

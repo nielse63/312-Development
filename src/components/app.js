@@ -2,7 +2,7 @@
 import { h, Component } from 'preact'
 import { Router } from 'preact-router'
 import S from 'string'
-import { getScript, getStyle, preloadImages } from '../lib/load-jquery'
+import { getScripts, getStyle, preloadImages } from '../lib/load-jquery'
 import Header from './header'
 import Footer from './footer'
 import Home from './home'
@@ -50,9 +50,16 @@ class App extends Component {
   }
 
   static preload() {
+    const scripts = [{
+      src: 'https://cdn.ravenjs.com/3.9.1/raven.min.js',
+      callback() {
+        window.Raven.config('https://e375a4ff56f54d10bc63673d7fa53cb4@sentry.io/121634').install()
+      },
+    }]
     if (!window.jQuery) {
-      getScript()
+      scripts.push('https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js')
     }
+    getScripts(scripts)
     getStyle()
     preloadImages(
       App.getSize(window.innerWidth),

@@ -15,7 +15,8 @@ function onScriptLoad(cb) {
   cb()
 }
 
-function createScript(src) {
+
+function createScript(src, callback) {
   const id = src.split('/').pop().replace(/-|\./g, '-')
   if (document.getElementById(id)) {
     return
@@ -25,17 +26,26 @@ function createScript(src) {
   g.src = src
   g.id = id
   g.async = 'true'
-  g.onload = g.onreadystatechange = onScriptLoad
+  g.setAttribute('crossorigin', 'anonymous')
+  g.onload = g.onreadystatechange = onScriptLoad.bind(g, callback)
   return g
 }
 
-export function getScript(callback = () => {}) {
-  const script = createScript('https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js')
+export function getScript(src, callback = () => {}) {
+  const script = createScript(src, callback)
   if (!script) {
     return
   }
-  const parent = document.getElementsByTagName('script')[0]
-  parent.parentNode.insertBefore(script, parent)
+  document.body.appendChild(script)
+}
+
+export function getScripts(scripts) {
+  scripts.forEach(script => {
+    if (typeof script === 'string') {
+      return getScript(script)
+    }
+    getScript(script.src, script.callback)
+  })
 }
 
 function preloadImage(src) {
