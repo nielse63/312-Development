@@ -4,6 +4,5 @@
   "rewrites": [{
       "source":"/**",
       "destination":"./build/index.html"
-  }],
-  "trailingSlash": true
+  }]
 }
