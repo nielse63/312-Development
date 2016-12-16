@@ -19,7 +19,8 @@ engines:
         enabled: false
 ratings:
   paths:
-  - "src/"
+  - "src/**.js"
+  - "src/**.scss"
   - "app.js"
   - "webpack.config.babel.js"
 exclude_paths:
