@@ -56,18 +56,29 @@ class App extends Component {
         window.Raven.config('https://e375a4ff56f54d10bc63673d7fa53cb4@sentry.io/121634').install()
       },
     }, {
-      src: 'https://d26b395fwzu5fz.cloudfront.net/keen-tracking-1.0.3.min.js',
+      src: 'https://d26b395fwzu5fz.cloudfront.net/keen-web-autocollector-1.0.7.min.js',
       callback() {
         /* global KeenAsync */
-        KeenAsync.ready(() => {
-          const client = new KeenAsync({
+        function createKeenWebAutoCollector() {
+          window.keenWebAutoCollector = window.KeenWebAutoCollector.create({
             projectId: process.env.KEEN_PROJECT_ID,
             writeKey: process.env.KEEN_WRITE_KEY,
-          })
+            onloadCallbacks: window.keenWebAutoCollector.onloadCallbacks
+          }), window.keenWebAutoCollector.loaded()
+        }
 
-          client.recordEvent('pageviews', {
-            title: document.title,
-          })
+        window.keenWebAutoCollector = {
+          onloadCallbacks: [],
+          onload: function(a) {
+            this.onloadCallbacks.push(a)
+          },
+          domReady: function() {
+            return ["ready", "complete"].indexOf(document.readyState) > -1
+          }
+        };
+
+        window.keenWebAutoCollector.domReady() ? window.createKeenWebAutoCollector() : document.addEventListener("readystatechange", function() {
+          window.keenWebAutoCollector.domReady() && window.createKeenWebAutoCollector()
         })
       },
     }]
