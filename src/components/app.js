@@ -55,32 +55,6 @@ class App extends Component {
       callback() {
         window.Raven.config('https://e375a4ff56f54d10bc63673d7fa53cb4@sentry.io/121634').install()
       },
-    }, {
-      src: 'https://d26b395fwzu5fz.cloudfront.net/keen-web-autocollector-1.0.7.min.js',
-      callback() {
-        /* global KeenAsync */
-        function createKeenWebAutoCollector() {
-          window.keenWebAutoCollector = window.KeenWebAutoCollector.create({
-            projectId: process.env.KEEN_PROJECT_ID,
-            writeKey: process.env.KEEN_WRITE_KEY,
-            onloadCallbacks: window.keenWebAutoCollector.onloadCallbacks
-          }), window.keenWebAutoCollector.loaded()
-        }
-
-        window.keenWebAutoCollector = {
-          onloadCallbacks: [],
-          onload: function(a) {
-            this.onloadCallbacks.push(a)
-          },
-          domReady: function() {
-            return ["ready", "complete"].indexOf(document.readyState) > -1
-          }
-        };
-
-        window.keenWebAutoCollector.domReady() ? window.createKeenWebAutoCollector() : document.addEventListener("readystatechange", function() {
-          window.keenWebAutoCollector.domReady() && window.createKeenWebAutoCollector()
-        })
-      },
     }]
     if (!window.jQuery) {
       scripts.push('https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js')
