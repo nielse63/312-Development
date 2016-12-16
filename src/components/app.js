@@ -9,6 +9,8 @@ import Home from './home'
 import About from './about'
 import Contact from './contact'
 import Portfolio from './portfolio'
+import ThankYou from './thank-you'
+import NotFound from './404'
 import config from '../config.json'
 
 require('offline-plugin/runtime').install()
@@ -96,6 +98,8 @@ class App extends Component {
           <About path="/about/" />
           <Contact path="/contact/" />
           <Portfolio path="/portfolio/" />
+          <ThankYou path="/thank-you/" />
+          <NotFound default />
         </Router>
         <Footer />
       </div>

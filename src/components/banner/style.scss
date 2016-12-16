@@ -42,6 +42,13 @@
     }
   }
 
+  &:last-child {
+    > * {
+      min-height: calc(100vh - 67px);
+      height: calc(100vh - 67px);
+    }
+  }
+
   &.left {
     > * {
       justify-content: center;

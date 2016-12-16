@@ -170,6 +170,10 @@ $grid-item-distance: 20px;
     }
   }
 
+  [data-likes="0"] {
+    display: none;
+  }
+
   .language {
     display: inline-block;
     width: 20px;

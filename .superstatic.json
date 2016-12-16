@@ -1,3 +1,9 @@
 {
-  "public": "./build"
+  "public": "./build",
+  "cleanUrls": true,
+  "rewrites": [{
+      "source":"/**",
+      "destination":"./build/index.html"
+  }],
+  "trailingSlash": true
 }

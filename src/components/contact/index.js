@@ -7,6 +7,14 @@ import Social from '../social'
 import style from './style.scss'
 
 export default class Contact extends Component {
+  constructor(props) {
+    super(props)
+    this.onSubmit = function (e) {
+      e.preventDefault()
+      window.location.href = '/thank-you'
+    }
+  }
+
   render() {
     return (
       <div className={style.page}>
@@ -22,7 +30,7 @@ export default class Contact extends Component {
               <Social />
             </p>
             <h3>Contact</h3>
-            <form>
+            <form action={this.props.url} onSubmit={this.onSubmit}>
               <div>
                 <label htmlFor="first_name">First Name</label>
                 <input type="text" name="first_name" />
