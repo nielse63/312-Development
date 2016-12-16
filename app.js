@@ -1,8 +1,8 @@
 
 var express = require('express')
 var path = require('path')
-var sslRedirect = require('heroku-ssl-redirect')
 var throng = require('throng');
+var compression = require('compression')
 var extend = require('lodash/extend');
 
 // vars
@@ -28,8 +28,16 @@ function start() {
     res.setHeader('X-Content-Type-Options', 'nosniff')
     return next();
   });
+  app.use(function(req, res, next) {
+    if(!req.secure && process.env.NODE_ENV === 'production') {
+      var secureUrl = "https://" + req.headers['host'] + req.url;
+      res.writeHead(301, { "Location":  secureUrl });
+      res.end();
+    }
+    next();
+  });
   app.use(express.static('build'))
-  app.use(sslRedirect(['production'], 301))
+  app.use(compression)
 
   app.get('*', function(req, res) {
     res.sendFile(path.join(__dirname, 'build/index.html'));
