@@ -46,44 +46,55 @@ class BackgroundImage extends Component {
     onScroll()
   }
 
+  getSizes() {
+    return {
+      small: this.props.src.replace(/\.jpg/, '-small.jpg'),
+      medium: this.props.src.replace(/\.jpg/, '-medium.jpg'),
+      large: this.props.src.replace(/\.jpg/, '-large.jpg'),
+      xlarge: this.props.src.replace(/\.jpg/, '-xlarge.jpg'),
+      full: this.props.src.replace(/\.jpg/, '-full.jpg'),
+    }
+  }
+
   getSource() {
     if (!this.props.src) {
       return
     }
-    const id = `style-${style['background-image']}`
-    const existing = document.getElementById(id)
 
-    const small = this.props.src.replace(/\.jpg/, '-small.jpg')
-    const medium = this.props.src.replace(/\.jpg/, '-medium.jpg')
-    const large = this.props.src.replace(/\.jpg/, '-large.jpg')
-    const xlarge = this.props.src.replace(/\.jpg/, '-xlarge.jpg')
-    const full = this.props.src.replace(/\.jpg/, '-full.jpg')
+    this.id = `style-${style['background-image']}`
+
+    const sources = this.getSizes()
     const string = `
       .${style['background-image']} {
-        background-image: url(${small});
+        background-image: url(${sources.small});
       }
       @media (min-width: 480px) {
         .${style['background-image']} {
-          background-image: url(${medium});
+          background-image: url(${sources.medium});
         }
       }
       @media (min-width: 1080px) {
         .${style['background-image']} {
-          background-image: url(${large});
+          background-image: url(${sources.large});
         }
       }
       @media (min-width: 1400px) {
         .${style['background-image']} {
-          background-image: url(${xlarge});
+          background-image: url(${sources.xlarge});
         }
       }
       @media (min-width: 1920px) {
         .${style['background-image']} {
-          background-image: url(${full});
+          background-image: url(${sources.full});
         }
       }
     `
-    $('head').append(`<style id="${id}">${string}</style>`)
+    this.removeOldScript()
+    $('head').append(`<style id="${this.id}">${string}</style>`)
+  }
+
+  removeOldScript() {
+    const existing = document.getElementById(this.id)
     if (existing) {
       existing.remove()
     }

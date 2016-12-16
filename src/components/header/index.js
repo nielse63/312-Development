@@ -35,7 +35,7 @@ export default class Header extends Component {
       $body.addClass(style.transitioning)
 
       return $nav.one('transitionend', () => {
-        $body.on('click.secondary', (e) => {
+        $body.on('click.secondary', e => {
           const isMenu = $(e.target).closest($nav).length
           if (!isMenu) {
             $body.off('.secondary')
@@ -68,6 +68,23 @@ export default class Header extends Component {
     Header.bindMenuClick()
   }
 
+  onResize() {
+    const height = this.base.clientHeight
+    return $('[data-midnight]').offset().top - (height / 2)
+  }
+
+  onScroll() {
+    const top = window.scrollY
+    const diff = top - this.offset
+    if (!isDark && diff > 0) {
+      isDark = true
+      this.$header.addClass(`${style.dark}`)
+    } else if (isDark && diff <= 0) {
+      isDark = false
+      this.$header.removeClass(`${style.dark}`)
+    }
+  }
+
   bindScroll() {
     const $window = $(window)
     $window.off('.header')
@@ -76,31 +93,12 @@ export default class Header extends Component {
       return
     }
 
-    const base = this.base
-    const $header = $(base)
-    let height = base.clientHeight
-    let offset = $('[data-midnight]').offset().top - (height / 2)
+    this.$header = $(this.base)
+    this.offset = this.onResize()
 
-    function onResize() {
-      height = base.clientHeight
-      offset = $('[data-midnight]').offset().top - (height / 2)
-    }
-
-    function onScroll() {
-      const top = window.scrollY
-      const diff = top - offset
-      if (!isDark && diff > 0) {
-        isDark = true
-        $header.addClass(`${style.dark}`)
-      } else if (isDark && diff <= 0) {
-        isDark = false
-        $header.removeClass(`${style.dark}`)
-      }
-    }
-
-    $window.on('resize.header', onResize)
-    $window.on('scroll.header', onScroll)
-    onScroll()
+    $window.on('resize.header', this.onResize.bind(this))
+    $window.on('scroll.header', this.onScroll.bind(this))
+    this.onScroll()
   }
 
   render() {

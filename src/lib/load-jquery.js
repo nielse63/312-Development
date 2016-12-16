@@ -2,31 +2,40 @@
 import { loadCSS } from 'fg-loadcss'
 
 export function getStyle() {
-  setTimeout(function() {
-    if( ! document.querySelector('[href*="font-awesome.min.css"]') ) {
+  setTimeout(() => {
+    if (!document.querySelector('[href*="font-awesome.min.css"]')) {
       loadCSS('https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css')
     }
   }, 1000)
 }
 
-export function getScript(callback = () => {}) {
-  const d = document
-  if (d.getElementById('jquery-js')) {
-    callback()
+function onScriptLoad(cb) {
+  const rs = this.readyState
+  if (rs && rs !== 'complete' && rs !== 'loaded') return
+  cb()
+}
+
+function createScript(src) {
+  const id = src.split('/').pop().replace(/-|\./g, '-')
+  if (document.getElementById(id)) {
     return
   }
 
-  const g = d.createElement('script')
-  const s = d.getElementsByTagName('script')[0]
-  g.src = 'https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js'
-  g.id = 'jquery-js'
+  const g = document.createElement('script')
+  g.src = src
+  g.id = id
   g.async = 'true'
-  g.onload = g.onreadystatechange = function () {
-    const rs = this.readyState
-    if (rs && rs !== 'complete' && rs !== 'loaded') return
-    callback()
+  g.onload = g.onreadystatechange = onScriptLoad
+  return g
+}
+
+export function getScript(callback = () => {}) {
+  const script = createScript('https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js')
+  if (!script) {
+    return
   }
-  s.parentNode.insertBefore(g, s)
+  const parent = document.getElementsByTagName('script')[0]
+  parent.parentNode.insertBefore(script, parent)
 }
 
 function preloadImage(src) {
@@ -34,7 +43,7 @@ function preloadImage(src) {
   link.href = src
   link.rel = 'preload'
   link.as = 'image'
-  setTimeout(function() {
+  setTimeout(() => {
     document.head.appendChild(link)
   }, 150)
 }
@@ -43,7 +52,7 @@ function preloadIcons() {
   [
     './assets/images/menu-pink.svg',
     './assets/images/icon-pink.svg',
-  ].forEach((icon) => {
+  ].forEach(icon => {
     preloadImage(icon)
   })
 }

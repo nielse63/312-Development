@@ -33,28 +33,39 @@ class App extends Component {
     return config
   }
 
+  static getSize(width) {
+    if (width > 1920) {
+      return 'full'
+    }
+    if (width > 1400) {
+      return 'xlarge'
+    }
+    if (width > 1080) {
+      return 'large'
+    }
+    if (width > 480) {
+      return 'medium'
+    }
+    return 'small'
+  }
+
+  static preload() {
+    if (!window.jQuery) {
+      getScript()
+    }
+    getStyle()
+    preloadImages(
+      App.getSize(window.innerWidth),
+    )
+  }
+
   constructor() {
     super()
     this.handleRoute = this._handleRoute.bind(this)
   }
 
   componentDidMount() {
-    if(!window.jQuery) {
-      getScript()
-    }
-    getStyle()
-    const width = window.innerWidth
-    let size = 'small'
-    if (width > 1920) {
-      size = 'full'
-    } else if (width > 1400) {
-      size = 'xlarge'
-    }  else if (width > 1080) {
-      size = 'large'
-    } else if (width > 480) {
-      size = 'medium'
-    }
-    preloadImages(size)
+    App.preload()
 
     setTimeout(() => {
       this.base.classList.add(this.getClass('ready'))

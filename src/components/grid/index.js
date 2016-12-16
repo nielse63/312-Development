@@ -6,6 +6,13 @@ import GridItem from '../grid-item'
 import style from './style.scss'
 
 export default class Grid extends Component {
+  static storeFeed(array) {
+    if (!array || !array.length) {
+      return
+    }
+    localStorage.setItem('feed', JSON.stringify(array))
+  }
+
   constructor(props) {
     super(props)
     this.state = {
@@ -13,40 +20,38 @@ export default class Grid extends Component {
     }
   }
 
-  storeFeed(array) {
-    if( ! array || ! array.length ) {
-      return
-    }
-    localStorage.setItem('feed', JSON.stringify(array))
+  componentDidMount() {
+    setTimeout(() => {
+      this.getFeed()
+    }, 500)
   }
 
   getFeed() {
     const feed = localStorage.getItem('feed')
-    console.log(feed)
-    if( feed ) {
+    if (feed) {
       return this.setState({
-        posts : JSON.parse(feed)
+        posts: JSON.parse(feed),
       })
     }
 
     fetch('https://api.github.com/users/nielse63/repos?visibility=public&sort=pushed')
     .then(response => response.json())
-    .then((json) => {
+    .then(json => {
       const offset = moment().subtract(1, 'years')
-      const posts = json.filter((repo) => {
+      const posts = json.filter(repo => {
         const pushed = moment(repo.pushed_at)
         repo.pushed_at = pushed
         return !repo.private && (repo.stargazers_count || pushed.isAfter(offset))
-      }).map((repo) => {
+      }).map(repo => {
         repo.language = repo.language || ''
         repo.url = repo.homepage && repo.homepage.indexOf(window.location.host) < 0 ? repo.homepage : repo.url
         return {
-          name : repo.name.replace(/-/g, ' '),
-          url : repo.url,
-          pushed_at : repo.pushed_at.format('MMM Do, YYYY'),
-          description : repo.description,
-          likes : repo.stargazers_count + repo.watchers_count,
-          language : repo.language,
+          name: repo.name.replace(/-/g, ' '),
+          url: repo.url,
+          pushed_at: repo.pushed_at.format('MMM Do, YYYY'),
+          description: repo.description,
+          likes: repo.stargazers_count + repo.watchers_count,
+          language: repo.language,
         }
       })
 
@@ -56,14 +61,8 @@ export default class Grid extends Component {
       })
 
       // cache in localstorage
-      this.storeFeed(posts)
+      Grid.storeFeed(posts)
     })
-  }
-
-  componentDidMount() {
-    setTimeout(() => {
-      this.getFeed()
-    }, 500)
   }
 
   render() {
