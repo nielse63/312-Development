@@ -22,16 +22,14 @@ function start() {
   app.use(function(req, res, next) {
     console.log(req.protocol + ' ' + req.url)
     if(!req.secure && process.env.NODE_ENV === 'production') {
-    // if(!req.secure) {
       var secureUrl = "https://" + req.headers['host'] + req.url;
       res.redirect(301, secureUrl);
+      res.end()
     }
     return next();
   });
-  // app.disable('x-powered-by');
   app.set('port', (process.env.PORT || 3000))
   app.use(function(req, res, next) {
-    // res.removeHeader('Server')
     res.setHeader('X-XSS-Protection', '1; mode=block')
     res.setHeader('X-Frame-Options', 'SAMEORIGIN')
     res.setHeader('X-Content-Type-Options', 'nosniff')
