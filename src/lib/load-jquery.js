@@ -2,7 +2,11 @@
 import { loadCSS } from 'fg-loadcss'
 
 export function getStyle() {
-  loadCSS('https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css')
+  setTimeout(function() {
+    if( ! document.querySelector('[href*="font-awesome.min.css"]') ) {
+      loadCSS('https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css')
+    }
+  }, 1000)
 }
 
 export function getScript(callback = () => {}) {
@@ -30,7 +34,9 @@ function preloadImage(src) {
   link.href = src
   link.rel = 'preload'
   link.as = 'image'
-  document.head.appendChild(link)
+  setTimeout(function() {
+    document.head.appendChild(link)
+  }, 150)
 }
 
 function preloadIcons() {

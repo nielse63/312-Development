@@ -13,7 +13,22 @@ export default class Grid extends Component {
     }
   }
 
-  componentDidMount() {
+  storeFeed(array) {
+    if( ! array || ! array.length ) {
+      return
+    }
+    localStorage.setItem('feed', JSON.stringify(array))
+  }
+
+  getFeed() {
+    const feed = localStorage.getItem('feed')
+    console.log(feed)
+    if( feed ) {
+      return this.setState({
+        posts : JSON.parse(feed)
+      })
+    }
+
     fetch('https://api.github.com/users/nielse63/repos?visibility=public&sort=pushed')
     .then(response => response.json())
     .then((json) => {
@@ -25,12 +40,30 @@ export default class Grid extends Component {
       }).map((repo) => {
         repo.language = repo.language || ''
         repo.url = repo.homepage && repo.homepage.indexOf(window.location.host) < 0 ? repo.homepage : repo.url
-        return repo
+        return {
+          name : repo.name.replace(/-/g, ' '),
+          url : repo.url,
+          pushed_at : repo.pushed_at.format('MMM Do, YYYY'),
+          description : repo.description,
+          likes : repo.stargazers_count + repo.watchers_count,
+          language : repo.language,
+        }
       })
+
+      // set state
       this.setState({
         posts,
       })
+
+      // cache in localstorage
+      this.storeFeed(posts)
     })
+  }
+
+  componentDidMount() {
+    setTimeout(() => {
+      this.getFeed()
+    }, 500)
   }
 
   render() {
@@ -40,11 +73,11 @@ export default class Grid extends Component {
           {this.state.posts.map((post, i) => (
             <GridItem
               key={i}
-              title={post.name.replace(/-/g, ' ')}
+              title={post.name}
               url={post.url}
-              udpated={post.pushed_at.format('MMM Do, YYYY')}
+              udpated={post.pushed_at}
               description={post.description}
-              likes={(post.stargazers_count + post.watchers_count)}
+              likes={post.likes}
               language={post.language}
             />
           ))}

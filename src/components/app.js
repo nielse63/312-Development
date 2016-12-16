@@ -38,7 +38,11 @@ class App extends Component {
     this.handleRoute = this._handleRoute.bind(this)
   }
 
-  componentWillMount() {
+  componentDidMount() {
+    if(!window.jQuery) {
+      getScript()
+    }
+    getStyle()
     const width = window.innerWidth
     let size = 'small'
     if (width > 1920) {
@@ -51,11 +55,6 @@ class App extends Component {
       size = 'medium'
     }
     preloadImages(size)
-  }
-
-  componentDidMount() {
-    getScript()
-    getStyle()
 
     setTimeout(() => {
       this.base.classList.add(this.getClass('ready'))
