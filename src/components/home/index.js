@@ -1,11 +1,20 @@
 
 import { h, Component } from 'preact'
+import { extend } from 'lodash'
 import Grid from '../grid'
 import BackgroundImage from '../background-image'
 import Banner from '../banner'
 import style from './style.scss'
 
 export default class Home extends Component {
+  constructor(props) {
+    super(props)
+
+    this.props = extend(props, {
+      description: 'The personal portfolio of Erik Nielsen - Chicago UI Software Engineer.',
+    })
+  }
+
   render() {
     return (
       <div className={style.page}>

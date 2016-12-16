@@ -22,7 +22,7 @@ function start() {
   app.disable('x-powered-by');
   app.set('port', (process.env.PORT || 3000))
   app.use(function(req, res, next) {
-    // res.setHeader("Access-Control-Allow-Origin", "*");
+    res.removeHeader('Server')
     res.setHeader('X-XSS-Protection', '1; mode=block')
     res.setHeader('X-Frame-Options', 'SAMEORIGIN')
     res.setHeader('X-Content-Type-Options', 'nosniff')

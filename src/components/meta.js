@@ -4,6 +4,18 @@ import { extend } from 'lodash'
 
 export default class Meta {
 
+  static attributesToString(element) {
+    const attrs = element.attributes
+    if (!attrs || !attrs.length) {
+      return ''
+    }
+    return Object.keys(attrs).map(index => {
+      const attr = attrs[index]
+      return `[${attr.name}="${attr.value}"]`
+    })
+    .join('')
+  }
+
   static getSelector(element) {
     const nodename = element.nodeName.toLowerCase()
     const attr = element.attributes[0].name
@@ -15,15 +27,13 @@ export default class Meta {
     if (!element.attributes) {
       return
     }
+    const attributes = Meta.attributesToString(element)
     const selector = Meta.getSelector(element)
     const existing = document.querySelector(selector)
     if (!existing) {
       return
     }
-
-    element.remove(
-      document.querySelector(selector),
-    )
+    existing.remove()
   }
 
   constructor() {
@@ -44,9 +54,10 @@ export default class Meta {
         ].join('//'),
       },
       meta: [],
-      link: [],
-      style: [],
-      script: [],
+      link: [
+      { rel: 'canonical', href: window.location.href },
+      ],
+      // script: [],
     }
     this.store = []
   }
@@ -58,10 +69,18 @@ export default class Meta {
     this.createTitle()
     this.createBase()
     this.createDescription()
-    this.createMeta()
+    this.createDynamic('meta')
+    this.createDynamic('link')
+    // this.createDynamic('script')
   }
 
   appendElement(element) {
+    // see if an identical element exists
+    const selector = Meta.attributesToString(element)
+    if (document.querySelector(selector)) {
+      return
+    }
+
     // remove existing element
     Meta.removeElement(element)
 
@@ -104,9 +123,9 @@ export default class Meta {
     description.setAttribute('content', this.data.description)
   }
 
-  createMeta() {
-    this.data.meta.forEach(object => {
-      const element = document.createElement('meta')
+  createDynamic(node) {
+    this.data[node].forEach(object => {
+      const element = document.createElement(node)
       const attrs = Object.keys(object)
       attrs.forEach(key => {
         element.setAttribute(key, object[key])

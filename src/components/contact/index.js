@@ -1,6 +1,7 @@
 
 import { h, Component } from 'preact'
 import { Link } from 'preact-router'
+import { extend } from 'lodash'
 import BackgroundImage from '../background-image'
 import Banner from '../banner'
 import Social from '../social'
@@ -14,12 +15,12 @@ export default class Contact extends Component {
       window.location.href = '/thank-you'
     }
 
-    this.props = Object.assign({}, props, {
+    this.props = extend(props, {
       title: 'Contact',
       description: 'Keep in touch! Contact me via email at erik@312development.com or through the form on this page.',
-      meta: [
-        { property: 'og:type', content: 'article' },
-      ],
+      // meta: [
+      //   { property: 'og:type', content: 'article' },
+      // ],
     })
   }
 
