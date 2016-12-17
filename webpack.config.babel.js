@@ -100,7 +100,7 @@ module.exports = {
     new HtmlWebpackPlugin({
       template: './index.html',
       // minify: { collapseWhitespace: true },
-      hash: ENV === 'production' ? false : true
+      hash: ENV !== 'production',
     }),
     new CopyWebpackPlugin([
    { from: './manifest.json', to: './' },
