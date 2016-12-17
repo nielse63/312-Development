@@ -148,13 +148,9 @@ class App extends Component {
     return this.props.classes[cls]
   }
 
-  setMeta(e) {
-    this.meta.update(e.current)
-  }
-
   _handleRoute(e) {
     this.currentUrl = e.url
-    this.setMeta(e)
+    this.meta.update(e.current)
     document.dispatchEvent(new CustomEvent('routed'))
     document.body.removeAttribute('class')
   }

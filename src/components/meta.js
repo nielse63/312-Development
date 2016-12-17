@@ -56,7 +56,7 @@ export default class Meta {
       meta: [],
       link: [
       { rel: 'dns-prefetch', href: window.location.href },
-      { rel: 'canonical', href: window.location.href },
+      { rel: 'canonical', href: window.location.href.trim('/') },
       ],
       // script: [],
     }
