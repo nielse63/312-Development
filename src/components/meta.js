@@ -37,6 +37,12 @@ export default class Meta {
   }
 
   constructor() {
+    const baseUrl = `${[
+      window.location.protocol,
+      window.location.host,
+    ].join('//')}/`
+    const pathname = `/${(window.location.href.split('/').slice(3).join('/'))}`
+    const curUrl = `${baseUrl}${pathname}`
     this.head = document.getElementsByTagName('head')[0]
     this.defaults = {
       htmlAttributes: {
@@ -45,18 +51,15 @@ export default class Meta {
       },
       title: '',
       defaultTitle: '312 Development',
-      backupTitle: 'UI &amp; JavaScript Software Engineer',
+      backupTitle: 'UI & JavaScript Software Engineer',
       description: '',
       base: {
-        href: [
-          window.location.protocol,
-          window.location.host,
-        ].join('//'),
+        href: baseUrl,
       },
       meta: [],
       link: [
-      { rel: 'dns-prefetch', href: window.location.href },
-      { rel: 'canonical', href: window.location.href.trim('/') },
+      { rel: 'dns-prefetch', href: baseUrl },
+      { rel: 'canonical', href: curUrl },
       ],
       // script: [],
     }

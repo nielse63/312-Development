@@ -1,28 +1,21 @@
+/* eslint-disable max-statements */
 
-var express = require('express')
-var path = require('path')
-var throng = require('throng');
+const express = require('express')
+const path = require('path')
+const throng = require('throng')
 // var compression = require('compression')
-var extend = require('lodash/extend');
-var hogan = require('hogan-express');
-var bodyParser = require('body-parser');
-var compression = require('compression');
-var minifyHTML = require('express-minify-html');
+const extend = require('lodash/extend')
+const hogan = require('hogan-express')
+const bodyParser = require('body-parser')
+const compression = require('compression')
+const minifyHTML = require('express-minify-html')
 // var slash = require('express-slash')
 
 // vars
-var app = express()
-var WORKERS = process.env.WEB_CONCURRENCY || 1;
-
-// concurrency handling
-throng({
-  workers: WORKERS,
-  lifetime: Infinity,
-  start: start
-}, start);
+const app = express()
+const WORKERS = process.env.WEB_CONCURRENCY || 1
 
 function start() {
-
   // app config
   // app.use(function(req, res, next) {
   //   console.log(req.protocol + ' ' + req.url)
@@ -54,34 +47,41 @@ function start() {
   app.use(bodyParser.urlencoded({ extended: true }))
   app.use(compression())
   app.use(minifyHTML({
-    override:      true,
+    override: true,
     htmlMinifier: {
-      removeComments:            true,
-      collapseWhitespace:        true,
+      removeComments: true,
+      collapseWhitespace: true,
       collapseBooleanAttributes: true,
-      removeAttributeQuotes:     true
-    }
+      removeAttributeQuotes: true,
+    },
   }))
 
   // set headers
-  app.use(function(req, res, next) {
+  app.use((req, res, next) => {
     res.setHeader('X-XSS-Protection', '1; mode=block')
     res.setHeader('X-Frame-Options', 'SAMEORIGIN')
     res.setHeader('X-Content-Type-Options', 'nosniff')
-    return next();
-  });
+    return next()
+  })
 
-  app.get('*', function(req, res) {
-    const baseURL = `${req.protocol}://${req.hostname}`
-    res.locals = {
-      baseURL: baseURL,
-      url : `${baseURL}${req.originalUrl}`
-    }
-    // console.log(res.locals)
-    res.status(200).render('index.html')
-  });
+  app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, 'build', 'index.html'))
+    // const baseURL = `${req.protocol}://${req.hostname}`
+    // res.locals = {
+    //   baseURL,
+    //   url: `${baseURL}${req.originalUrl}`,
+    // }
+    // res.status(200).render('index')
+  })
 
-  app.listen(app.get('port'), function () {
-    console.log('Viewable at http://localhost:%s', app.get('port'))
+  app.listen(app.get('port'), () => {
+    console.log('Viewable at http://localhost:%s', app.get('port')) // eslint-disable-line no-console
   })
 }
+
+// concurrency handling
+throng({
+  workers: WORKERS,
+  lifetime: Infinity,
+  start,
+}, start)

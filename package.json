@@ -29,6 +29,7 @@
     "preact": "^7.1.0",
     "preact-router": "^2.3.2",
     "string": "^3.3.3",
+    "throng": "^4.0.0",
     "whatwg-fetch": "^2.0.1"
   },
   "scripts": {
@@ -41,7 +42,7 @@
     "prebuild": "npm run lint && npm run clean && mkdir build && cp -r src/assets build/assets",
     "test": "npm run lint",
     "lint": "npm run lint:js && npm run lint:scss",
-    "lint:js": "./node_modules/.bin/eslint --fix ./src ./webpack.config.babel.js",
+    "lint:js": "./node_modules/.bin/eslint --fix ./src ./*.js",
     "lint:scss": "./node_modules/.bin/sass-lint 'src/**/*.scss' -v",
     "resize-images": "node ./tasks/image-resize.js",
     "surge": "npm run lint && npm run build && surge ./build -d https://312development.surge.sh",
@@ -84,7 +85,6 @@
     "sass-loader": "^4.0.2",
     "source-map-loader": "^0.1.5",
     "style-loader": "^0.13.0",
-    "throng": "^4.0.0",
     "url-loader": "^0.5.7",
     "webpack": "^1.14.0",
     "webpack-dev-server": "^1.15.0"

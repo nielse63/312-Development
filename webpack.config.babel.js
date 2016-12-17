@@ -99,7 +99,7 @@ module.exports = {
     }),
     new HtmlWebpackPlugin({
       template: './index.html',
-      // minify: { collapseWhitespace: true },
+      minify: { collapseWhitespace: true },
       hash: ENV !== 'production',
     }),
     new CopyWebpackPlugin([
