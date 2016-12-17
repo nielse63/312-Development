@@ -37,11 +37,11 @@ export default class Meta {
   }
 
   constructor() {
-    const baseUrl = `${[
+    const baseUrl = [
       window.location.protocol,
       window.location.host,
-    ].join('//')}/`
-    const pathname = `/${(window.location.href.split('/').slice(3).join('/'))}`
+    ].join('//')
+    const pathname = `/${(window.location.href.split('/').slice(3).join('/')).replace(/\/\//g, '/')}`
     const curUrl = `${baseUrl}${pathname}`
     this.head = document.getElementsByTagName('head')[0]
     this.defaults = {
