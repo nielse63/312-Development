@@ -1,14 +1,54 @@
 {
   "SITE_TITLE": "",
   "SITE_DESCRIPTION": "",
-  "PAGE_TITLES": {
-    "/about": "About Me",
-    "/contact": "Get In Touch",
-    "/portfolio": "Check out my work"
-  },
   "CONTENT": {
     "about": {
       "intro": "I'm Erik Nielsen, a User-Interface and Full-Stack Software Engineer from Chicago, Illinois. I've been in the industry for over 8 years, and work with the fine folks at <a href=\"https://www.enova.com/\" target=\"_blank\">Enova International</a>."
+    }
+  },
+  "META": {
+    "default": {
+      "title": "",
+      "defaultTitle": "312 Development",
+      "backupTitle": "UI & JavaScript Software Engineer",
+      "meta": [{
+        "name": "description",
+        "content": ""
+      }],
+      "link": [{
+        "rel": "canonical",
+        "href": "curUrl"
+      }]
+    },
+    "/": {
+      "meta": [{
+        "name": "description",
+        "content": "The personal portfolio of Erik Nielsen - Chicago UI Software Engineer."
+      }]
+    },
+    "/about": {
+      "title": "About Me",
+      "meta": [{
+        "property": "description",
+        "content": "Learn more about me, what I do, and what languages, frameworks and technologies I'm proficient in."
+      }, {
+        "property": "og:type",
+        "content": "article"
+      }]
+    },
+    "/portfolio": {
+      "title": "Portfolio",
+      "meta": [{
+        "name": "description",
+        "content": "Check out my latest work, including code contributions, articles, and more."
+      }]
+    },
+    "/contact": {
+      "title": "Contact",
+      "meta": [{
+        "name": "description",
+        "content": "Keep in touch! Contact me via email at erik@312development.com or through the form on this page."
+      }]
     }
   }
 }

@@ -9,6 +9,9 @@ const bodyParser = require('body-parser')
 const compression = require('compression')
 const fs = require('fs')
 const minifyHTML = require('express-minify-html')
+const config = require('./src/config.json')
+const render = require('preact-render-to-string')
+const { match, RouterContext } = require('react-router')
 
 // vars
 const app = express()
@@ -24,13 +27,24 @@ const app = express()
 //   return next();
 // });
 
+// set headers
+app.disable('x-powered-by')
+
 // html parsing
 app.engine('html', hogan)
+app.set('view engine', 'html')
 app.set('views', `${__dirname}/src`)
+app.enable('view cache')
 app.use(compression())
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
-app.use(express.static(`${__dirname}/build/`))
+app.use(express.static(`${__dirname}/build/`, {
+  setHeaders(res) {
+    res.setHeader('X-XSS-Protection', '1; mode=block')
+    res.setHeader('X-Frame-Options', 'SAMEORIGIN')
+    res.setHeader('X-Content-Type-Options', 'nosniff')
+  },
+}))
 app.use(minifyHTML({
   override: true,
   htmlMinifier: {
@@ -44,17 +58,34 @@ app.use(minifyHTML({
 // set port
 app.set('port', (process.env.NODE_ENV === 'production' ? process.env.PORT || 3000 : 3001))
 
-// set headers
-app.use((req, res, next) => {
-  res.setHeader('X-XSS-Protection', '1; mode=block')
-  res.setHeader('X-Frame-Options', 'SAMEORIGIN')
-  res.setHeader('X-Content-Type-Options', 'nosniff')
-  return next()
-})
+// set meta data
+function createTitle(data) {
+  const title = data.title || data.defaultTitle
+  const description = data.description || data.backupTitle
+  return `${title} | ${description}`
+}
+
+function getPageMeta(page) {
+  const key = page === '/index' ? '' : page
+  const meta = config.META[key] || {}
+  const info = extend({}, config.META.default, meta)
+  info.title = createTitle(info)
+  return info
+}
 
 // routing
 app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, 'build', 'index.html'))
+  const json = getPageMeta(req.url)
+
+  const baseURL = `${req.protocol}://${req.headers.host}/`
+  const site = extend({}, json, {
+    url: baseURL,
+    canonical: `${baseURL}${(req.originalUrl.replace('/', ''))}`,
+  })
+  res.locals = {
+    site,
+  }
+  res.render(path.join(__dirname, 'build', 'home'), site)
 })
 
 app.listen(app.get('port'), () => {

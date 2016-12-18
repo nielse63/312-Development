@@ -7,17 +7,6 @@ import style from './style.scss'
 import config from '../../config.json'
 
 export default class About extends Component {
-  constructor(props) {
-    super(props)
-    this.props = extend(props, {
-      title: 'About Me',
-      description: 'Learn more about me, what I do, and what languages, frameworks and technologies I\'m proficient in.',
-      meta: [
-        { property: 'og:type', content: 'article' },
-      ],
-    })
-  }
-
   render() {
     return (
       <div className={style.page}>

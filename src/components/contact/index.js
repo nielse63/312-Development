@@ -14,14 +14,6 @@ export default class Contact extends Component {
       e.preventDefault()
       window.location.href = '/thank-you'
     }
-
-    this.props = extend(props, {
-      title: 'Contact',
-      description: 'Keep in touch! Contact me via email at erik@312development.com or through the form on this page.',
-      // meta: [
-      //   { property: 'og:type', content: 'article' },
-      // ],
-    })
   }
 
   render() {

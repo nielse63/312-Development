@@ -7,19 +7,6 @@ import Banner from '../banner'
 import style from './style.scss'
 
 export default class Portfolio extends Component {
-  constructor(props) {
-    super(props)
-    this.onSubmit = function (e) {
-      e.preventDefault()
-      window.location.href = '/thank-you'
-    }
-
-    this.props = extend(props, {
-      title: 'Portfolio',
-      description: 'Check out my latest work, including code contributions, articles, and more.',
-    })
-  }
-
   render() {
     return (
       <div className={style.page}>

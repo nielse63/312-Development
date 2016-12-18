@@ -55,6 +55,7 @@ module.exports = {
       style: path.resolve(__dirname, 'src/style'),
       react: 'preact-compat',
       'react-dom': 'preact-compat',
+      'react-router': 'preact-compat',
     },
   },
 
@@ -119,9 +120,10 @@ module.exports = {
       'process.env': JSON.stringify({ NODE_ENV: ENV }),
     }),
     new HtmlWebpackPlugin({
-      template: './index.html',
-      minify: { collapseWhitespace: true },
-      hash: ENV !== 'production',
+      template: './home.html',
+      filename: `${(ENV === 'dev-server' ? 'index' : 'home')}.html`,
+      // minify: { collapseWhitespace: true },
+      // hash: ENV !== 'production',
     }),
     new CopyWebpackPlugin([
    { from: './manifest.json', to: './' },
@@ -140,7 +142,6 @@ module.exports = {
       publicPath: '/',
       externals: [
         'https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css',
-        'https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js',
       ],
     }),
   ] : []),

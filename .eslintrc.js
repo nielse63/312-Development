@@ -25,7 +25,7 @@ module.exports = {
     "react/prop-types": "warn",
     "max-len": "warn",
     "no-param-reassign": "warn",
-    "no-console": "error",
+    "no-console": "warn",
     "max-nested-callbacks": ["error", 3],
     "complexity": ["error", 5],
     "max-statements": ["error", 10],
