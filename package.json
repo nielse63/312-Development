@@ -44,7 +44,7 @@
     "prestart": "npm run build",
     "build": "NODE_ENV=production webpack -p --progress",
     "build:profile": "webpack -p --profile --display-reasons",
-    "prebuild": "npm run lint && npm run clean && node ./tasks/images.js && node ./tasks/fonts.js",
+    "prebuild": "npm run lint && npm run clean && mkdir build && cp -R src/assets build/assets",
     "pretest:local": "./node_modules/.bin/eslint --fix ./test",
     "test:local": "./node_modules/.bin/mocha",
     "lint": "npm run lint:js && npm run lint:scss",
