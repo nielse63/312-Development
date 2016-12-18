@@ -8,12 +8,11 @@ const extend = require('lodash/extend')
 const hogan = require('hogan-express')
 const bodyParser = require('body-parser')
 const compression = require('compression')
-const minifyHTML = require('express-minify-html')
+// const minifyHTML = require('express-minify-html')
 // var slash = require('express-slash')
 
 // vars
 const app = express()
-const WORKERS = process.env.WEB_CONCURRENCY || 1
 
 function start() {
   // app config
@@ -46,15 +45,15 @@ function start() {
   app.use(bodyParser.json())
   app.use(bodyParser.urlencoded({ extended: true }))
   app.use(compression())
-  app.use(minifyHTML({
-    override: true,
-    htmlMinifier: {
-      removeComments: true,
-      collapseWhitespace: true,
-      collapseBooleanAttributes: true,
-      removeAttributeQuotes: true,
-    },
-  }))
+  // app.use(minifyHTML({
+  //   override: true,
+  //   htmlMinifier: {
+  //     removeComments: true,
+  //     collapseWhitespace: true,
+  //     collapseBooleanAttributes: true,
+  //     removeAttributeQuotes: true,
+  //   },
+  // }))
 
   // set headers
   app.use((req, res, next) => {
@@ -81,7 +80,7 @@ function start() {
 
 // concurrency handling
 throng({
-  workers: WORKERS,
+  workers: (process.env.WEB_CONCURRENCY || 1),
   lifetime: Infinity,
   start,
 }, start)
