@@ -76,8 +76,9 @@ function getPageMeta(page) {
 // routing
 app.get('*', (req, res) => {
   const json = getPageMeta(req.url)
+  const protocol = process.env.NODE_ENV === 'production' ? 'https' : 'http'
 
-  const baseURL = `${req.protocol}://${req.headers.host}/`
+  const baseURL = `${protocol}://${req.headers.host}/`
   const site = extend({}, json, {
     url: baseURL,
     canonical: `${baseURL}${(req.originalUrl.replace('/', ''))}`,
