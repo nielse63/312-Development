@@ -49,13 +49,8 @@ export default class Header extends Component {
   onScroll() {
     const diff = (window.pageYOffset - this.offsetTop) + (this.height / 2)
     const cls = `${style.dark}`
-    const changecls = `${style['will-change']}`
 
-    if( Math.abs(diff) < 200 ) {
-      this.base.classList.add(changecls)
-    } else if( this.base.classList.contains(changecls) ) {
-      this.base.classList.remove(changecls)
-    }
+    this.setWillChangeClass(diff)
 
     if (!isDark && diff > 0) {
       isDark = true
@@ -63,6 +58,15 @@ export default class Header extends Component {
     } else if (isDark && diff < 0) {
       isDark = false
       this.base.classList.remove(cls)
+    }
+  }
+
+  setWillChangeClass(diff) {
+    const changecls = `${style['will-change']}`
+    if (Math.abs(diff) < 200) {
+      this.base.classList.add(changecls)
+    } else if (this.base.classList.contains(changecls)) {
+      this.base.classList.remove(changecls)
     }
   }
 
