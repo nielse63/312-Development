@@ -23,6 +23,7 @@
     "lodash": "^4.17.2",
     "moment": "^2.17.1",
     "offline-plugin": "^4.5.3",
+    "pm2": "^2.2.2",
     "preact": "^7.1.0",
     "preact-router": "^2.3.2",
     "string": "^3.3.3",
@@ -32,10 +33,11 @@
   "scripts": {
     "clean": "rm -rf ./build",
     "dev": "NODE_ENV=development webpack-dev-server --inline --hot --progress --colors",
-    "start": "NODE_ENV=production node --optimize_for_size --max_old_space_size=920 --gc_interval=100 app.js",
-    "local": "NODE_ENV=development node app.js",
+    "start": "NODE_ENV=production node --optimize_for_size --max_old_space_size=920 --gc_interval=100 --trace-sync-io app.js",
+    "local": "node app.js",
     "prestart": "npm run build",
     "build": "NODE_ENV=production webpack -p --progress",
+    "build:profile": "webpack -p --profile --display-reasons",
     "prebuild": "npm run lint && npm run clean && node ./tasks/images.js && node ./tasks/fonts.js",
     "test": "npm run lint",
     "lint": "npm run lint:js && npm run lint:scss",
@@ -90,7 +92,11 @@
     "style-loader": "^0.13.0",
     "url-loader": "^0.5.7",
     "webpack": "^1.14.0",
-    "webpack-dev-server": "^1.15.0"
+    "webpack-dev-server": "^1.16.2"
   },
-  "sasslintConfig": "./.scsslint.yml"
+  "cacheDirectories": [
+    "node_modules",
+    "bower_components",
+    "public/build"
+  ]
 }

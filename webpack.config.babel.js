@@ -7,19 +7,40 @@ import autoprefixer from 'autoprefixer'
 import CopyWebpackPlugin from 'copy-webpack-plugin'
 import OfflinePlugin from 'offline-plugin'
 import path from 'path'
+import pkg from './package.json'
 
 const ENV = process.env.NODE_ENV || 'development'
-
 const CSS_MAPS = ENV !== 'production'
+// console.log(Object.keys(pkg.dependencies)) // eslint-disable-line no-console
 
 module.exports = {
   context: path.resolve(__dirname, 'src'),
-  entry: ['whatwg-fetch', './index.js'],
+  entry: ['./index.js'],
+  // entry: {
+  //   vendor: [
+  //     'body-parser',
+  //     'compression',
+  //     'express',
+  //     'express-minify-html',
+  //     'fg-loadcss',
+  //     'hogan-express',
+  //     'lodash',
+  //     'moment',
+  //     'offline-plugin',
+  //     'preact',
+  //     'preact-router',
+  //     'string',
+  //     'throng',
+  //     'whatwg-fetch',
+  //   ],
+  //   bundle: './index.js',
+  // },
 
   output: {
     path: path.resolve(__dirname, 'build'),
     publicPath: '/',
     filename: 'bundle.js',
+    // filename: '[name].js',
   },
 
   resolve: {
@@ -106,8 +127,13 @@ module.exports = {
    { from: './manifest.json', to: './' },
    { from: './favicon.ico', to: './' },
     ]),
-  ]).concat(ENV === 'production' ? [
     new webpack.optimize.OccurenceOrderPlugin(),
+    new webpack.optimize.UglifyJsPlugin({
+      compress: {
+        warnings: false,
+      },
+    }),
+  ]).concat(ENV === 'production' ? [
     new OfflinePlugin({
       relativePaths: false,
       AppCache: false,
