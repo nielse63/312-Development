@@ -5,16 +5,9 @@ import S from 'string'
 import Helmet from 'react-helmet'
 import extend from 'lodash/assign'
 import AppRouter from './router'
-// import Meta from './meta'
 import { getScripts, getStyle, preloadImages } from '../lib/load-jquery'
 import Header from './header'
 import Footer from './footer'
-// import Home from './home'
-// import About from './about'
-// import Contact from './contact'
-// import Portfolio from './portfolio'
-// import ThankYou from './thank-you'
-// import NotFound from './404'
 import config from '../config.json'
 
 require('offline-plugin/runtime').install()
@@ -121,12 +114,6 @@ class App extends Component {
       function (callback) { window.setTimeout(callback, 1000 / 60) }
   }
 
-  constructor() {
-    super()
-    // this.meta = new Meta()
-    this.handleRoute = this._handleRoute.bind(this)
-  }
-
   componentWillMount() {
     App.setRAF()
   }
@@ -151,64 +138,9 @@ class App extends Component {
     return this.props.classes[cls]
   }
 
-  _handleRoute(e) {
-    this.currentUrl = e.url
-    // console.log(e.router)
-    // this.meta.update(e.current, e.router)
-    document.dispatchEvent(new CustomEvent('routed'))
-    document.body.removeAttribute('class')
-  }
-
-  // createTitle(data) {
-  //   const title = data.title || data.defaultTitle
-  //   const description = data.description || data.backupTitle
-  //   return `${title} | ${description}`
-  // }
-
-  /*
-  createHemlet() {
-    const baseUrl = [
-      window.location.protocol,
-      window.location.host,
-    ].join('//')
-    const meta = config.META[this.currentUrl] || {}
-    console.log(this)
-    console.log(meta)
-    const info = extend({}, config.META.default, meta)
-    info.title = this.createTitle(info)
-
-    return(
-      <Helmet
-        htmlAttributes={{"lang": "en", "amp": undefined}}
-        title={info.title}
-        // titleTemplate="MySite.com - %s"
-        defaultTitle={`${config.META.default.title} | ${config.META.default.description}`}
-        base={{
-          "target": "_blank",
-          "href": baseUrl
-        }}
-        meta={info.meta}
-        link={info.link}
-        // script={[
-        //     {"src": "http://include.com/pathtojs.js", "type": "text/javascript"},
-        //     {"type": "application/ld+json", "innerHTML": `{ "@context": "http://schema.org" }`}
-        // ]}
-        // noscript={[
-        //     {"innerHTML": `<link rel="stylesheet" type="text/css" href="foo.css" />`}
-        // ]}
-        // style={[
-        //   {"type": "text/css", "cssText": "body {background-color: blue;} p {font-size: 12px;}"}
-        // ]}
-        // onChangeClientState={(newState) => console.log(newState)}
-      />
-    )
-  }
-  */
-
   render() {
     return (
       <div id="app" className={this.getClass('default')}>
-        {/* { this.createHemlet() }*/}
         <Header />
         <AppRouter />
         <Footer />
