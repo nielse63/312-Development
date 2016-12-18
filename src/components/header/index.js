@@ -49,6 +49,13 @@ export default class Header extends Component {
   onScroll() {
     const diff = (window.pageYOffset - this.offsetTop) + (this.height / 2)
     const cls = `${style.dark}`
+    const changecls = `${style['will-change']}`
+
+    if( Math.abs(diff) < 200 ) {
+      this.base.classList.add(changecls)
+    } else if( this.base.classList.contains(changecls) ) {
+      this.base.classList.remove(changecls)
+    }
 
     if (!isDark && diff > 0) {
       isDark = true
@@ -83,7 +90,7 @@ export default class Header extends Component {
 
   render() {
     return (
-      <header className={style.header}>
+      <header className={style.header} data-header>
         <div className={style.container}>
           <h1 className={style.logo}>
             <Link href="/">312 Development</Link>
