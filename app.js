@@ -1,5 +1,5 @@
 /* eslint-env node */
-/* eslint-disable max-statements */
+/* eslint-disable max-statements, no-console */
 
 const express = require('express')
 const path = require('path')
@@ -7,7 +7,7 @@ const extend = require('lodash/extend')
 const hogan = require('hogan-express')
 const bodyParser = require('body-parser')
 const compression = require('compression')
-var fs = require('fs');
+const fs = require('fs')
 const minifyHTML = require('express-minify-html')
 
 // vars
@@ -32,13 +32,13 @@ app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(express.static(`${__dirname}/build/`))
 app.use(minifyHTML({
-  override:      true,
+  override: true,
   htmlMinifier: {
-    removeComments:            true,
-    collapseWhitespace:        true,
+    removeComments: true,
+    collapseWhitespace: true,
     collapseBooleanAttributes: true,
-    removeAttributeQuotes:     true
-  }
+    removeAttributeQuotes: true,
+  },
 }))
 
 // set port
@@ -59,8 +59,8 @@ app.get('*', (req, res) => {
 
 app.listen(app.get('port'), () => {
   if (process.env.DYNO) {
-    console.log('This is on Heroku..!!');
-    fs.openSync('/tmp/app-initialized', 'w');
+    console.log('This is on Heroku..!!')
+    fs.openSync('/tmp/app-initialized', 'w')
   }
   console.log('Viewable at http://localhost:%s', app.get('port')) // eslint-disable-line no-console
 })

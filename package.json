@@ -33,7 +33,7 @@
   "scripts": {
     "clean": "rm -rf ./build",
     "dev": "NODE_ENV=development webpack-dev-server --inline --hot --progress --colors",
-    "start": "NODE_ENV=production node --optimize_for_size --max_old_space_size=920 --gc_interval=100 --trace-sync-io app.js",
+    "start": "NODE_ENV=production node --optimize_for_size --max_old_space_size=920 --gc_interval=100 --trace-sync-io index.js",
     "local": "node app.js",
     "prestart": "npm run build",
     "build": "NODE_ENV=production webpack -p --progress",
@@ -97,6 +97,6 @@
   "cacheDirectories": [
     "node_modules",
     "bower_components",
-    "public/build"
+    "build"
   ]
 }
