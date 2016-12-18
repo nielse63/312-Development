@@ -1,25 +1,25 @@
 
 // modules
-const gulp = require('gulp')
-const newer = require('gulp-newer')
-const imagemin = require('gulp-imagemin')
-const connect = require('gulp-connect')
+const imagemin = require('imagemin')
+const imageminMozjpeg = require('imagemin-mozjpeg')
+const imageminOptipng = require('imagemin-optipng')
+const imageminSvgo = require('imagemin-svgo')
 
 // global vars
-const inPath = 'assets/images/**/*'
-const outPath = 'public/images'
+const inPath = ['./src/assets/images/*', './src/assets/icons/*']
+const outPath = ['./build/assets/images', './build/assets/icons']
 
 // task
-gulp.task('images', () => gulp.src(inPath)
-		.pipe(newer(outPath))
-		.pipe(imagemin({
-  progressive: true,
-  interlaced: true,
-  svgoPlugins: [{
-    removeUnknownsAndDefaults: false,
-  }, {
-    cleanupIDs: false,
-  }],
-}))
-		.pipe(gulp.dest(outPath))
-		.pipe(connect.reload()))
+inPath.forEach((dir, i) => {
+  // console.log(dir)
+  // console.log(outPath[i])
+  imagemin([dir], outPath[i], {
+    plugins: [
+      imageminMozjpeg({quality: 85}),
+      imageminOptipng(),
+      imageminSvgo()
+    ]
+  }).then(files => {
+    console.log(files);
+  })
+});

@@ -6,6 +6,7 @@
     opacity: 0;
     transform: translateY(50px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
@@ -88,13 +89,15 @@
     }
   }
 
-  h1, h2, h3 {
+  h1,
+  h2,
+  h3 {
     animation-duration: 1s;
     animation-name: onEnter;
     animation-fill-mode: both;
     margin: 0;
 
-    body[data-loading] & {
+    [data-loading] & {
       animation-play-state: paused;
     }
   }

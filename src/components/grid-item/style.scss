@@ -99,7 +99,7 @@ $grid-item-distance: 20px;
 
   h4 {
     margin: 0 0 0.5em;
-    background: #2443fb;
+    // background: #2443fb;
     background: linear-gradient(180deg, #2443fb 0%, #39a9da 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -129,10 +129,6 @@ $grid-item-distance: 20px;
       margin-bottom: 0;
     }
   }
-
-  // i {
-  //   font-size: 22px;
-  // }
 
   .read-more {
     margin-top: 2em;
@@ -170,7 +166,7 @@ $grid-item-distance: 20px;
     }
   }
 
-  [data-likes="0"] {
+  [data-likes='0'] {
     display: none;
   }
 
@@ -184,15 +180,15 @@ $grid-item-distance: 20px;
   }
 
   .javascript {
-    background-image: url('/assets/images/repo-js.svg')
+    background-image: url('/assets/images/repo-js.svg');
   }
 
   .css {
-    background-image: url('/assets/images/repo-js.svg')
+    background-image: url('/assets/images/repo-js.svg');
   }
 
   .php {
-    background-image: url('/assets/images/repo-js.svg')
+    background-image: url('/assets/images/repo-js.svg');
   }
 }
 
@@ -200,7 +196,7 @@ $grid-item-distance: 20px;
   font-size: 80%;
   text-transform: uppercase;
   font-weight: 700;
-  background: #2443fb;
+  // background: #2443fb;
   background: linear-gradient(180deg, #2443fb 0%, #39a9da 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;

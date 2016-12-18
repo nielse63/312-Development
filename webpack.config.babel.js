@@ -106,6 +106,8 @@ module.exports = {
    { from: './manifest.json', to: './' },
    { from: './favicon.ico', to: './' },
     ]),
+  ]).concat(ENV === 'production' ? [
+    new webpack.optimize.OccurenceOrderPlugin(),
     new OfflinePlugin({
       relativePaths: false,
       AppCache: false,
@@ -115,8 +117,6 @@ module.exports = {
         'https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js',
       ],
     }),
-  ]).concat(ENV === 'production' ? [
-    new webpack.optimize.OccurenceOrderPlugin(),
   ] : []),
 
   stats: { colors: true },

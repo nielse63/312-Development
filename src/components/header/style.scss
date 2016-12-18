@@ -66,20 +66,22 @@
   overflow: hidden;
 
   > div {
-    > *:not(button) {
-      opacity: 0.75;
+    > * {
+      &:not(button) {
+        opacity: 0.75;
+      }
     }
   }
 
   [data-midnight] {
-    pointer-events: none;
+    pointer-events: 0;
   }
 
   > nav {
-    transform: translate(0)
+    transform: translate(0);
   }
 
   [data-menu] {
-    background-image: url('/assets/images/menu.svg') !important;
+    background-image: url('/assets/images/menu.svg');
   }
 }

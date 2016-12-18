@@ -1,15 +1,14 @@
+/* eslint-env node */
 /* eslint-disable max-statements */
 
 const express = require('express')
 const path = require('path')
 const throng = require('throng')
-// var compression = require('compression')
 const extend = require('lodash/extend')
 const hogan = require('hogan-express')
 const bodyParser = require('body-parser')
 const compression = require('compression')
 // const minifyHTML = require('express-minify-html')
-// var slash = require('express-slash')
 
 // vars
 const app = express()
@@ -28,15 +27,6 @@ function start() {
 
   // always
   app.set('port', (process.env.NODE_ENV === 'production' ? process.env.PORT || 3000 : 3001))
-
-  // routing
-  // app.enable('strict routing');
-  // var router = express.Router({
-  //   caseSensitive: app.get('case sensitive routing'),
-  //   strict       : app.get('strict routing')
-  // });
-  // app.use(router);
-  // app.use(slash());
 
   // html parsing
   app.engine('html', hogan)

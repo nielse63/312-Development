@@ -65,7 +65,7 @@
     letter-spacing: 1px;
     margin: 0 0 1em;
     padding: 0 0 5px;
-    border-bottom: 1px solid rgba(17,17,17,0.15);
+    border-bottom: 1px solid rgba(17, 17, 17, 0.15);
 
     ~ h3 {
       margin-top: 3em;
@@ -124,13 +124,13 @@ form {
   }
 
   textarea {
-    resize: none;
+    resize: 0;
     height: 150px;
   }
 
   button {
     border: 2px solid #ff3466;
-    background: none;
+    background: 0;
     font-size: 14px;
     font-weight: 700;
     text-transform: uppercase;

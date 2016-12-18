@@ -12,14 +12,14 @@
   }
 }
 
-html, body {
+html,
+body {
   padding: 0;
   background: $background-color;
   font-family: $body-font-family;
   font-weight: 400;
   color: #444;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  font-smoothing: antialiased;
 
   @media (max-width: $breakpoint-small + 1px) {
     background: $pink;
@@ -42,7 +42,7 @@ a {
   text-decoration: none;
 }
 
-body.loading {
+.loading {
   height: 100vh;
   overflow: hidden;
 }
@@ -51,9 +51,9 @@ body.loading {
   height: 40px;
   width: 40px;
   padding: 0;
-  background: none;
-  border: none;
-  appearance: none;
+  background: 0;
+  border: 0;
+  appearance: 0;
   cursor: pointer;
   background-image: url('/assets/images/menu.svg');
   background-position: center;
