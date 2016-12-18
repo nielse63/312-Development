@@ -1,5 +1,6 @@
 
 import { h, Component } from 'preact'
+import { extend } from 'lodash'
 import BackgroundImage from '../background-image'
 import Banner from '../banner'
 import style from './style.scss'

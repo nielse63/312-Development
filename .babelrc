@@ -2,7 +2,12 @@
   "sourceMaps": true,
   "presets": [
     "es2015-minimal",
-    "stage-0"
+    "stage-0",
+    ["env", {
+      "targets": {
+        "browsers": ["> 1%"]
+      }
+    }]
   ],
   "plugins": [
     ["transform-decorators-legacy"],

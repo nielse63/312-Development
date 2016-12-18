@@ -1,26 +1,26 @@
 
-var Nightmare = require('nightmare');
-var nightmare = Nightmare({
-  show: true
-});
+const Nightmare = require('nightmare')
+const nightmare = Nightmare({
+  show: true,
+})
 
 nightmare
   .goto('http://localhost:3000')
   // .type('form[action*="/search"] [name=p]', 'github nightmare')
   // .click('form[action*="/search"] [type=submit]')
   // .wait('#main')
-  .evaluate(function () {
+  .evaluate(() => {
     const app = document.getElementById('app')
-    if( ! app ) {
+    if (!app) {
       return 'Unable to find #app'
     }
     return 'Found #app'
   })
   .end()
 
-  .then(function (result) {
+  .then(result => {
     console.log(result)
   })
-  .catch(function (error) {
-    console.error('Search failed:', error);
-  });
+  .catch(error => {
+    console.error('Search failed:', error)
+  })

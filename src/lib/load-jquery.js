@@ -1,5 +1,6 @@
 
 import { loadCSS } from 'fg-loadcss'
+// import loadjs from 'loadjs'
 
 export function getStyle() {
   setTimeout(() => {
@@ -21,6 +22,9 @@ function createScript(src, callback) {
   if (document.getElementById(id)) {
     return
   }
+  // console.log(loadjs)
+  // loadjs(src, callback)
+  // return true
 
   const g = document.createElement('script')
   g.src = src

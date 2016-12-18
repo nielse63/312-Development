@@ -2,15 +2,19 @@
 import { h, Component } from 'preact'
 import { Router } from 'preact-router'
 import S from 'string'
+import Helmet from 'react-helmet'
+import extend from 'lodash/assign'
+import AppRouter from './router'
+// import Meta from './meta'
 import { getScripts, getStyle, preloadImages } from '../lib/load-jquery'
 import Header from './header'
 import Footer from './footer'
-import Home from './home'
-import About from './about'
-import Contact from './contact'
-import Portfolio from './portfolio'
-import ThankYou from './thank-you'
-import NotFound from './404'
+// import Home from './home'
+// import About from './about'
+// import Contact from './contact'
+// import Portfolio from './portfolio'
+// import ThankYou from './thank-you'
+// import NotFound from './404'
 import config from '../config.json'
 
 require('offline-plugin/runtime').install()
@@ -50,12 +54,15 @@ class App extends Component {
   }
 
   static preload() {
-    const scripts = [{
-      src: 'https://cdn.ravenjs.com/3.9.1/raven.min.js',
-      callback() {
-        window.Raven.config('https://e375a4ff56f54d10bc63673d7fa53cb4@sentry.io/121634').install()
-      },
-    }]
+    const scripts = []
+    if (process.env.NODE_ENV === 'production') {
+      scripts.push({
+        src: 'https://cdn.ravenjs.com/3.9.1/raven.min.js',
+        callback() {
+          window.Raven.config('https://e375a4ff56f54d10bc63673d7fa53cb4@sentry.io/121634').install()
+        },
+      })
+    }
     if (!window.jQuery) {
       scripts.push('https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js')
     }
@@ -66,9 +73,62 @@ class App extends Component {
     )
   }
 
+  static scrollListener() {
+    let lastPosition = -1
+    function loop() {
+      if (lastPosition === window.pageYOffset) {
+        requestAnimationFrame(loop)
+        return false
+      }
+      lastPosition = window.pageYOffset
+      document.dispatchEvent(
+        new CustomEvent('scrolling'),
+      )
+      requestAnimationFrame(loop)
+    }
+    loop()
+  }
+
+  static resizeListener() {
+    const throttle = function (type, name, obj = window) {
+      let running = false
+      let timer
+      const func = function () {
+        if (running) { return }
+        running = true
+        requestAnimationFrame(() => {
+          if (timer) {
+            clearTimeout(timer)
+          }
+          timer = setTimeout(() => {
+            timer = null
+            obj.dispatchEvent(new CustomEvent(name))
+          }, 250)
+          running = false
+        })
+      }
+      obj.addEventListener(type, func, {
+        passive: true,
+      })
+    }
+    throttle('resize', 'resizeend')
+  }
+
+  static setRAF() {
+    window.requestAnimationFrame = window.requestAnimationFrame ||
+      window.webkitRequestAnimationFrame ||
+      window.mozRequestAnimationFrame ||
+      function (callback) { window.setTimeout(callback, 1000 / 60) }
+  }
+
   constructor() {
     super()
+    // this.meta = new Meta()
     this.handleRoute = this._handleRoute.bind(this)
+  }
+
+  componentWillMount() {
+    App.setRAF()
   }
 
   componentDidMount() {
@@ -80,6 +140,9 @@ class App extends Component {
       setTimeout(() => {
         this.base.classList.add(this.getClass('done'))
         document.body.removeAttribute('data-loading')
+
+        App.scrollListener()
+        App.resizeListener()
       }, 500)
     }, 1000)
   }
@@ -88,37 +151,68 @@ class App extends Component {
     return this.props.classes[cls]
   }
 
-  setTitle() {
-    const defaults = App.setDefaultConfig()
-
-    let title = defaults.PAGE_TITLES[this.currentUrl] || S(this.currentUrl.replace(/\//, '')).capitalize().s
-    if (!title) {
-      title = `${defaults.SITE_TITLE} | ${defaults.SITE_DESCRIPTION}`
-    } else {
-      title = `${title} | ${defaults.SITE_TITLE}`
-    }
-    document.title = title
-  }
-
   _handleRoute(e) {
     this.currentUrl = e.url
-    this.setTitle()
+    // console.log(e.router)
+    // this.meta.update(e.current, e.router)
+    document.dispatchEvent(new CustomEvent('routed'))
     document.body.removeAttribute('class')
   }
+
+  // createTitle(data) {
+  //   const title = data.title || data.defaultTitle
+  //   const description = data.description || data.backupTitle
+  //   return `${title} | ${description}`
+  // }
+
+  /*
+  createHemlet() {
+    const baseUrl = [
+      window.location.protocol,
+      window.location.host,
+    ].join('//')
+    const meta = config.META[this.currentUrl] || {}
+    console.log(this)
+    console.log(meta)
+    const info = extend({}, config.META.default, meta)
+    info.title = this.createTitle(info)
+
+    return(
+      <Helmet
+        htmlAttributes={{"lang": "en", "amp": undefined}}
+        title={info.title}
+        // titleTemplate="MySite.com - %s"
+        defaultTitle={`${config.META.default.title} | ${config.META.default.description}`}
+        base={{
+          "target": "_blank",
+          "href": baseUrl
+        }}
+        meta={info.meta}
+        link={info.link}
+        // script={[
+        //     {"src": "http://include.com/pathtojs.js", "type": "text/javascript"},
+        //     {"type": "application/ld+json", "innerHTML": `{ "@context": "http://schema.org" }`}
+        // ]}
+        // noscript={[
+        //     {"innerHTML": `<link rel="stylesheet" type="text/css" href="foo.css" />`}
+        // ]}
+        // style={[
+        //   {"type": "text/css", "cssText": "body {background-color: blue;} p {font-size: 12px;}"}
+        // ]}
+        // onChangeClientState={(newState) => console.log(newState)}
+      />
+    )
+  }
+  */
 
   render() {
     return (
       <div id="app" className={this.getClass('default')}>
+        {/* { this.createHemlet() }*/}
         <Header />
-        <Router onChange={this.handleRoute}>
-          <Home path="/" />
-          <About path="/about/" />
-          <Contact path="/contact/" />
-          <Portfolio path="/portfolio/" />
-          <ThankYou path="/thank-you/" />
-          <NotFound default />
-        </Router>
+        <AppRouter />
         <Footer />
+        <button data-menu />
       </div>
     )
   }

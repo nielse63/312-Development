@@ -1,4 +1,5 @@
 
+import 'whatwg-fetch'
 import { h, Component } from 'preact'
 import { Link } from 'preact-router'
 import moment from 'moment'
