@@ -58,6 +58,12 @@ class App extends Component {
         callback() {
           window.Raven.config('https://e375a4ff56f54d10bc63673d7fa53cb4@sentry.io/121634').install()
         },
+      }, {
+        src: '//www.google-analytics.com/analytics.js',
+        callback() {
+          window.ga('create', 'UA-33505945-1', 'auto')
+          window.ga('send', 'pageview')
+        },
       })
     }
     if (!window.jQuery) {
