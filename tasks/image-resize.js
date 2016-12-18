@@ -12,6 +12,21 @@ const sizes = {
   small: [480, 676],
 }
 
+function converImage(filename, size, buffer) {
+  sharp(buffer)
+    .resize(size[0], size[1])
+    .max()
+    .crop('south')
+    .toFile(
+      filename,
+      (_err, info) => {
+        if (_err) {
+          throw new Error(_err)
+        }
+        console.log(info) // eslint-disable-line no-console
+      })
+}
+
 fs.readdir(imagePath, (err, data) => {
   if (err) {
     throw new Error(err)
@@ -33,19 +48,7 @@ fs.readdir(imagePath, (err, data) => {
         return
       }
 
-      const size = sizes[key]
-      sharp(buffer)
-        .resize(size[0], size[1])
-        .max()
-        .crop('south')
-        .toFile(
-          newFilename,
-          (err, info) => {
-            if (err) {
-              throw new Error(err)
-            }
-            console.log(info)
-          })
+      converImage(newFilename, sizes[key], buffer)
     })
   })
 })

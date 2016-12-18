@@ -1,16 +1,12 @@
 
-// modules
-const gulp = require('gulp')
-const newer = require('gulp-newer')
-const flatten = require('gulp-flatten')
-const connect = require('gulp-connect')
+const Fontmin = require('fontmin')
 
-// global vars
-const inPath = 'assets/fonts/**/*'
+const fontmin = new Fontmin()
+    .src('src/assets/fonts/*')
+    .dest('build/assets/fonts')
 
-// task
-gulp.task('fonts', () => gulp.src(inPath)
-		.pipe(newer(inPath))
-		.pipe(flatten())
-		.pipe(gulp.dest('public/fonts'))
-		.pipe(connect.reload()))
+fontmin.run((err, files) => {
+  if (err) {
+    throw err
+  }
+})
