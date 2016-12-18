@@ -50,11 +50,16 @@
     background-position: left center;
     background-repeat: no-repeat;
     background-size: auto 36px;
-    will-change: background-image, color;
 
     a {
       color: $background-color;
     }
+  }
+}
+
+.will-change {
+  .logo {
+    will-change: background-image, color;
   }
 }
 
