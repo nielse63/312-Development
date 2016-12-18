@@ -91,16 +91,10 @@
     "react-helmet": "^3.2.3",
     "sass-lint": "^1.10.2",
     "sass-loader": "^4.0.2",
-    "sharp": "^0.17.0",
     "source-map-loader": "^0.1.5",
     "style-loader": "^0.13.0",
     "url-loader": "^0.5.7",
     "webpack": "^1.14.0",
     "webpack-dev-server": "^1.16.2"
-  },
-  "cacheDirectories": [
-    "node_modules",
-    "bower_components",
-    "build"
-  ]
+  }
 }
