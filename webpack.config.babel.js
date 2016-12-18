@@ -128,6 +128,9 @@ module.exports = {
     new CopyWebpackPlugin([
    { from: './manifest.json', to: './' },
    { from: './favicon.ico', to: './' },
+   { from: './browserconfig.xml', to: './' },
+   { from: './robots.txt', to: './' },
+   { from: './sitemap.xml', to: './' },
     ]),
     new webpack.optimize.OccurenceOrderPlugin(),
     new webpack.optimize.UglifyJsPlugin({
