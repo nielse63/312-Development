@@ -106,7 +106,8 @@ module.exports = {
     }),
     new FaviconsWebpackPlugin({
       logo: path.resolve(__dirname, 'src/assets/icons/icon-main.png'),
-      persistentCache: true,
+      prefix: 'assets/icons/',
+      // persistentCache: false,
       inject: true,
       background: '#383333',
       title: '312 Development',
@@ -120,7 +121,7 @@ module.exports = {
         opengraph: true,
         twitter: true,
         yandex: false,
-        windows: false,
+        windows: true,
       },
     }),
     new HtmlWebpackPlugin({
