@@ -2,8 +2,7 @@
 import { h, Component } from 'preact'
 import { Router } from 'preact-router'
 import S from 'string'
-import Helmet from 'react-helmet'
-import extend from 'lodash/assign'
+import extend from 'lodash.assign'
 import AppRouter from './router'
 import { getScripts, getStyle, preloadImages } from '../lib/load-jquery'
 import Header from './header'
@@ -30,22 +29,6 @@ class App extends Component {
     return config
   }
 
-  static getSize(width) {
-    if (width > 1920) {
-      return 'full'
-    }
-    if (width > 1400) {
-      return 'xlarge'
-    }
-    if (width > 1080) {
-      return 'large'
-    }
-    if (width > 480) {
-      return 'medium'
-    }
-    return 'small'
-  }
-
   static preload() {
     const scripts = []
     if (process.env.NODE_ENV === 'production') {
@@ -56,14 +39,8 @@ class App extends Component {
         },
       })
     }
-    if (!window.jQuery) {
-      scripts.push('https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js')
-    }
     getScripts(scripts)
     getStyle()
-    preloadImages(
-      App.getSize(window.innerWidth),
-    )
   }
 
   static scrollListener() {
@@ -83,7 +60,7 @@ class App extends Component {
   }
 
   static resizeListener() {
-    const throttle = function (type, name, obj = window) {
+    const throttle = function (type, name) {
       let running = false
       let timer
       const func = function () {
@@ -95,12 +72,12 @@ class App extends Component {
           }
           timer = setTimeout(() => {
             timer = null
-            obj.dispatchEvent(new CustomEvent(name))
+            window.dispatchEvent(new CustomEvent(name))
           }, 250)
           running = false
         })
       }
-      obj.addEventListener(type, func, {
+      window.addEventListener(type, func, {
         passive: true,
       })
     }

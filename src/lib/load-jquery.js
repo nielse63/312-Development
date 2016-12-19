@@ -1,8 +1,12 @@
 
 import { loadCSS } from 'fg-loadcss'
-// import loadjs from 'loadjs'
 
+// TODO: Include local copy of font awesome
 export function getStyle() {
+  if (!navigator.onLine) {
+    return
+  }
+
   setTimeout(() => {
     if (!document.querySelector('[href*="font-awesome.min.css"]')) {
       loadCSS('https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css')
@@ -22,9 +26,6 @@ function createScript(src, callback) {
   if (document.getElementById(id)) {
     return
   }
-  // console.log(loadjs)
-  // loadjs(src, callback)
-  // return true
 
   const g = document.createElement('script')
   g.src = src
@@ -36,6 +37,10 @@ function createScript(src, callback) {
 }
 
 export function getScript(src, callback = () => {}) {
+  if (!navigator.onLine && src.split('/')[2] !== location.host) {
+    return
+  }
+
   const script = createScript(src, callback)
   if (!script) {
     return
@@ -52,7 +57,7 @@ export function getScripts(scripts) {
   })
 }
 
-function preloadImage(src) {
+export function preloadImage(src) {
   const link = document.createElement('link')
   link.href = src
   link.rel = 'preload'
@@ -60,25 +65,4 @@ function preloadImage(src) {
   setTimeout(() => {
     document.head.appendChild(link)
   }, 150)
-}
-
-function preloadIcons() {
-  [
-    './assets/images/menu-pink.svg',
-    './assets/images/icon-pink.svg',
-  ].forEach(icon => {
-    preloadImage(icon)
-  })
-}
-
-export function preloadImages(size = 'full') {
-  preloadIcons()
-
-  let i = 0
-  while (i < 4) {
-    const basename = `bg${(i + 1)}-${size}.jpg`
-    const src = `./assets/images/${basename}`
-    preloadImage(src)
-    i += 1
-  }
 }

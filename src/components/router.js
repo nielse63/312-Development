@@ -1,7 +1,7 @@
 
 import { h, Component } from 'preact'
 import { Router } from 'preact-router'
-import extend from 'lodash/assign'
+import extend from 'lodash.assign'
 import Home from './home'
 import About from './about'
 import Contact from './contact'
@@ -23,11 +23,13 @@ export default class AppRouter extends Component {
   }
 
   _handleRoute(e) {
-    this.currentUrl = e.url
-    console.log(e.url)
+    this.updateDocument(e.url)
+  }
+
+  updateDocument(url) {
     document.dispatchEvent(new CustomEvent('routed'))
     document.body.removeAttribute('class')
-    document.title = this.createTitle(e.url)
+    document.title = this.createTitle(url)
   }
 
   createTitle(url) {

@@ -6,41 +6,26 @@ import HtmlWebpackPlugin from 'html-webpack-plugin'
 import autoprefixer from 'autoprefixer'
 import CopyWebpackPlugin from 'copy-webpack-plugin'
 import OfflinePlugin from 'offline-plugin'
+import FaviconsWebpackPlugin from 'favicons-webpack-plugin'
 import path from 'path'
 import pkg from './package.json'
 
 const ENV = process.env.NODE_ENV || 'development'
 const CSS_MAPS = ENV !== 'production'
-// console.log(Object.keys(pkg.dependencies)) // eslint-disable-line no-console
 
 module.exports = {
   context: path.resolve(__dirname, 'src'),
-  entry: ['./index.js'],
-  // entry: {
-  //   vendor: [
-  //     'body-parser',
-  //     'compression',
-  //     'express',
-  //     'express-minify-html',
-  //     'fg-loadcss',
-  //     'hogan-express',
-  //     'lodash',
-  //     'moment',
-  //     'offline-plugin',
-  //     'preact',
-  //     'preact-router',
-  //     'string',
-  //     'throng',
-  //     'whatwg-fetch',
-  //   ],
-  //   bundle: './index.js',
-  // },
+  // entry: ['./index.js'],
+  entry: {
+    vendor: ['moment', 'string'],
+    bundle: './index.js',
+  },
 
   output: {
     path: path.resolve(__dirname, 'build'),
     publicPath: '/',
-    filename: 'bundle.js',
-    // filename: '[name].js',
+    // filename: 'bundle.js',
+    filename: '[name].js',
   },
 
   resolve: {
@@ -109,7 +94,7 @@ module.exports = {
     autoprefixer({ browsers: 'last 2 versions' }),
   ],
 
-  plugins: ([
+  plugins: [
     new webpack.NoErrorsPlugin(),
     new ExtractTextPlugin('style.css', {
       allChunks: true,
@@ -119,6 +104,25 @@ module.exports = {
     new webpack.DefinePlugin({
       'process.env': JSON.stringify({ NODE_ENV: ENV }),
     }),
+    new FaviconsWebpackPlugin({
+      logo: path.resolve(__dirname, 'src/assets/icons/icon-main.png'),
+      persistentCache: true,
+      inject: true,
+      background: '#383333',
+      title: '312 Development',
+      icons: {
+        android: true,
+        appleIcon: true,
+        appleStartup: true,
+        coast: false,
+        favicons: true,
+        firefox: true,
+        opengraph: true,
+        twitter: true,
+        yandex: false,
+        windows: false,
+      },
+    }),
     new HtmlWebpackPlugin({
       template: './home.html',
       filename: `${(ENV === 'dev-server' ? 'index' : 'home')}.html`,
@@ -126,11 +130,11 @@ module.exports = {
       // hash: ENV !== 'production',
     }),
     new CopyWebpackPlugin([
-   { from: './manifest.json', to: './' },
-   { from: './favicon.ico', to: './' },
-   { from: './browserconfig.xml', to: './' },
-   { from: './robots.txt', to: './' },
-   { from: './sitemap.xml', to: './' },
+      { from: './manifest.json', to: './' },
+      { from: './favicon.ico', to: './' },
+      { from: './browserconfig.xml', to: './' },
+      { from: './robots.txt', to: './' },
+      { from: './sitemap.xml', to: './' },
     ]),
     new webpack.optimize.OccurenceOrderPlugin(),
     new webpack.optimize.UglifyJsPlugin({
@@ -138,7 +142,11 @@ module.exports = {
         warnings: false,
       },
     }),
-  ]).concat(ENV === 'production' ? [
+    new webpack.optimize.CommonsChunkPlugin({
+      name: 'vendor',
+      minChunks: Infinity,
+    }),
+    new webpack.PrefetchPlugin('moment'),
     new OfflinePlugin({
       relativePaths: false,
       AppCache: false,
@@ -147,7 +155,7 @@ module.exports = {
         'https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css',
       ],
     }),
-  ] : []),
+  ],
 
   stats: { colors: true },
 

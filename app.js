@@ -3,29 +3,16 @@
 
 const express = require('express')
 const path = require('path')
-const extend = require('lodash/extend')
+const extend = require('lodash.assign')
 const hogan = require('hogan-express')
 const bodyParser = require('body-parser')
 const compression = require('compression')
 const fs = require('fs')
 const minifyHTML = require('express-minify-html')
 const config = require('./src/config.json')
-const render = require('preact-render-to-string')
-const { match, RouterContext } = require('react-router')
 
 // vars
 const app = express()
-
-// app config
-// app.use(function(req, res, next) {
-//   console.log(req.protocol + ' ' + req.url)
-//   if(!req.secure && process.env.NODE_ENV === 'production') {
-//     var secureUrl = "https://" + req.headers['host'] + req.url;
-//     res.redirect(301, secureUrl);
-//     res.end()
-//   }
-//   return next();
-// });
 
 // set headers
 app.disable('x-powered-by')
