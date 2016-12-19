@@ -10,3 +10,4 @@ test/results
 .env
 *.report.html
 stats.json
+*.log
