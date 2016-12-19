@@ -36,13 +36,18 @@ http {
   #}
 
   server {
-    listen <%= ENV["PORT"] %>;
+    #listen <%= ENV["PORT"] %>;
+    listen 443 ssl;
     server_name 312development.com;
     return 301 https://$server_name$request_uri;
     keepalive_timeout 5;
 
     root   /app/public;
     #index  index.html index.htm;
+
+    upstream app_server {
+      server unix:/tmp/nginx.socket fail_timeout=0;
+    }
 
     location ~* \.(eot|oft|svg|ttf|woff2?)$ {
       add_header Access-Control-Allow-Origin *;

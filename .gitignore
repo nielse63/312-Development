@@ -9,3 +9,4 @@ test/results
 .certs
 .env
 *.report.html
+stats.json
