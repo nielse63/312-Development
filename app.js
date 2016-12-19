@@ -45,6 +45,7 @@ app.use(minifyHTML({
 // set port
 app.set('port', (process.env.NODE_ENV === 'production' ? process.env.PORT || 3000 : 3001))
 
+// TODO: move meta configuration functions into their own class
 // set meta data
 function createTitle(data) {
   const title = data.title || data.defaultTitle

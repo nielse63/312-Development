@@ -31,6 +31,6 @@ module.exports = {
     "max-statements": ["error", 10],
     "semi": ["error", "never"],
     "arrow-parens": ["error", "as-needed"],
-    "consistent-return": "warn",
+    "consistent-return": "warn"
   }
 };

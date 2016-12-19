@@ -1,8 +1,12 @@
+/* eslint-disable class-methods-use-this */
 
 import { h, Component } from 'preact'
 import { Router } from 'preact-router'
 import S from 'string'
 import extend from 'lodash.assign'
+import runtime from 'serviceworker-webpack-plugin/lib/runtime'
+import registerEvents from 'serviceworker-webpack-plugin/lib/browser/registerEvents'
+import applyUpdate from 'serviceworker-webpack-plugin/lib/browser/applyUpdate'
 import AppRouter from './router'
 import { getScripts, getStyle, preloadImages } from '../lib/load-jquery'
 import Header from './header'
@@ -17,7 +21,7 @@ history.pushState = (a, b, url) => {
   if (url.indexOf('#') < 0) scrollTo(0, 0)
 }
 
-class App extends Component {
+export default class App extends Component {
   static setDefaultConfig() {
     if (config.SITE_TITLE) {
       return config
@@ -29,6 +33,7 @@ class App extends Component {
     return config
   }
 
+  // TODO: move preload functions to their own class
   static preload() {
     const scripts = []
     if (process.env.NODE_ENV === 'production') {
@@ -96,6 +101,7 @@ class App extends Component {
   }
 
   componentDidMount() {
+    this.listenToServiceWorker()
     App.preload()
 
     setTimeout(() => {
@@ -115,6 +121,38 @@ class App extends Component {
     return this.props.classes[cls]
   }
 
+  // TODO: Move service worker functions to their own class
+  listenToServiceWorker() {
+    console.log('the main JS thread was loaded')
+
+    if ('serviceWorker' in navigator && (window.location.protocol === 'https:' ||
+      window.location.hostname === 'localhost')
+    ) {
+      const registration = runtime.register()
+
+      registerEvents(registration, {
+        onInstalled: () => {
+          console.log('[SW]: Installed')
+        },
+        onUpdateReady: () => {
+          console.log('SW]: Update ready')
+        },
+
+        onUpdating: () => {
+          console.log('SW]: Updating')
+        },
+        onUpdateFailed: () => {
+          console.log('SW]: Update Failed')
+        },
+        onUpdated: () => {
+          console.log('SW]: Updated')
+        },
+      })
+    } else {
+      console.log('[SW]: ServiceWorker not available')
+    }
+  }
+
   render() {
     return (
       <div id="app" className={this.getClass('default')}>
@@ -126,5 +164,3 @@ class App extends Component {
     )
   }
 }
-
-export default App

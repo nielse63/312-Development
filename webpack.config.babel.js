@@ -5,8 +5,9 @@ import ExtractTextPlugin from 'extract-text-webpack-plugin'
 import HtmlWebpackPlugin from 'html-webpack-plugin'
 import autoprefixer from 'autoprefixer'
 import CopyWebpackPlugin from 'copy-webpack-plugin'
-import OfflinePlugin from 'offline-plugin'
+// import OfflinePlugin from 'offline-plugin'
 import FaviconsWebpackPlugin from 'favicons-webpack-plugin'
+import ServiceWorkerWebpackPlugin from 'serviceworker-webpack-plugin'
 import path from 'path'
 import pkg from './package.json'
 
@@ -100,14 +101,38 @@ module.exports = {
       allChunks: true,
       disable: ENV !== 'production',
     }),
-    new webpack.optimize.DedupePlugin(),
     new webpack.DefinePlugin({
       'process.env': JSON.stringify({ NODE_ENV: ENV }),
+    }),
+    new HtmlWebpackPlugin({
+      template: './home.html',
+      filename: `${(ENV === 'dev-server' ? 'index' : 'home')}.html`,
+      // minify: { collapseWhitespace: true },
+      // hash: ENV !== 'production',
+    }),
+    new CopyWebpackPlugin([
+      { from: './manifest.json', to: './' },
+      { from: './favicon.ico', to: './' },
+      { from: './browserconfig.xml', to: './' },
+      { from: './robots.txt', to: './' },
+      { from: './sitemap.xml', to: './' },
+    ]),
+    new webpack.PrefetchPlugin('moment'),
+  ].concat(ENV === 'production' ? [
+    new webpack.optimize.DedupePlugin(),
+    new webpack.optimize.OccurenceOrderPlugin(),
+    new webpack.optimize.UglifyJsPlugin({
+      compress: {
+        warnings: false,
+      },
+    }),
+    new webpack.optimize.CommonsChunkPlugin({
+      name: 'vendor',
+      minChunks: Infinity,
     }),
     new FaviconsWebpackPlugin({
       logo: path.resolve(__dirname, 'src/assets/icons/icon-main.png'),
       prefix: 'assets/icons/',
-      // persistentCache: false,
       inject: true,
       background: '#383333',
       title: '312 Development',
@@ -124,39 +149,10 @@ module.exports = {
         windows: true,
       },
     }),
-    new HtmlWebpackPlugin({
-      template: './home.html',
-      filename: `${(ENV === 'dev-server' ? 'index' : 'home')}.html`,
-      // minify: { collapseWhitespace: true },
-      // hash: ENV !== 'production',
+    new ServiceWorkerWebpackPlugin({
+      entry: path.join(__dirname, 'src/lib/sw.js'),
     }),
-    new CopyWebpackPlugin([
-      { from: './manifest.json', to: './' },
-      { from: './favicon.ico', to: './' },
-      { from: './browserconfig.xml', to: './' },
-      { from: './robots.txt', to: './' },
-      { from: './sitemap.xml', to: './' },
-    ]),
-    new webpack.optimize.OccurenceOrderPlugin(),
-    new webpack.optimize.UglifyJsPlugin({
-      compress: {
-        warnings: false,
-      },
-    }),
-    new webpack.optimize.CommonsChunkPlugin({
-      name: 'vendor',
-      minChunks: Infinity,
-    }),
-    new webpack.PrefetchPlugin('moment'),
-    new OfflinePlugin({
-      relativePaths: false,
-      AppCache: false,
-      publicPath: '/',
-      externals: [
-        'https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css',
-      ],
-    }),
-  ],
+  ] : []),
 
   stats: { colors: true },
 
