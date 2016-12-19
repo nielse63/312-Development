@@ -111,9 +111,7 @@ module.exports = {
       // hash: ENV !== 'production',
     }),
     new CopyWebpackPlugin([
-      { from: './manifest.json', to: './' },
       { from: './favicon.ico', to: './' },
-      { from: './browserconfig.xml', to: './' },
       { from: './robots.txt', to: './' },
       { from: './sitemap.xml', to: './' },
     ]),
@@ -134,6 +132,7 @@ module.exports = {
       logo: path.resolve(__dirname, 'src/assets/icons/icon-main.png'),
       prefix: 'assets/icons/',
       inject: true,
+      emitStats: false,
       background: '#383333',
       title: '312 Development',
       icons: {
