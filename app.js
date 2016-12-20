@@ -9,7 +9,7 @@ const bodyParser = require('body-parser')
 const compression = require('compression')
 const fs = require('fs')
 const minifyHTML = require('express-minify-html')
-var sslRedirect = require('heroku-ssl-redirect');
+const sslRedirect = require('heroku-ssl-redirect')
 const config = require('./src/config.json')
 
 // vars
@@ -26,8 +26,8 @@ app.enable('view cache')
 app.use(compression())
 app.use(sslRedirect([
   'local',
-  'production'
-  ]));
+  'production',
+]))
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(express.static(`${__dirname}/build/`, {

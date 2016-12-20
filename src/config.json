@@ -11,6 +11,8 @@
       "title": "",
       "defaultTitle": "312 Development",
       "backupTitle": "UI & JavaScript Software Engineer",
+      "image": "/assets/images/bg2-large.jpg",
+      "ogimage": "/assets/images/og-image.jpg",
       "meta": [{
         "name": "description",
         "content": ""
@@ -21,6 +23,7 @@
       }]
     },
     "/": {
+      "image": "/assets/images/bg2-large.jpg",
       "meta": [{
         "name": "description",
         "content": "The personal portfolio of Erik Nielsen - Chicago UI Software Engineer."
@@ -28,16 +31,15 @@
     },
     "/about": {
       "title": "About Me",
+      "image": "/assets/images/bg3large.jpg",
       "meta": [{
         "property": "description",
         "content": "Learn more about me, what I do, and what languages, frameworks and technologies I'm proficient in."
-      }, {
-        "property": "og:type",
-        "content": "article"
       }]
     },
     "/portfolio": {
       "title": "Portfolio",
+      "image": "/assets/images/bg1-large.jpg",
       "meta": [{
         "name": "description",
         "content": "Check out my latest work, including code contributions, articles, and more."
@@ -45,6 +47,7 @@
     },
     "/contact": {
       "title": "Contact",
+      "image": "/assets/images/bg4-large.jpg",
       "meta": [{
         "name": "description",
         "content": "Keep in touch! Contact me via email at erik@312development.com or through the form on this page."
