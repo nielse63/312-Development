@@ -2,7 +2,7 @@
 import { h, Component } from 'preact'
 import { Link } from 'preact-router'
 import style from './style.scss'
-import { preloadImage } from '../../lib/load-jquery'
+import { preloadImage, preloadDocument } from '../../lib/load-jquery'
 
 export default class Nav extends Component {
   static getImageSize(width) {
@@ -23,19 +23,40 @@ export default class Nav extends Component {
 
   constructor(props) {
     super(props)
-    this.preloaded = []
+    this.preloaded = {
+      images: [],
+      urls: [
+        window.location.href
+      ]
+    }
     this.onMouseOver = this._onMouseOver.bind(this)
+  }
+
+  componentDidMount() {
+    const ele = document.getElementById('bg-image')
+    const baseUrl = window.location.protocol + '//' + window.location.host
+    const css = window.getComputedStyle(ele)
+    const bg = css['background-image']
+      .match(/\((.*?)\)/)[1]
+      .replace(/"/g, '')
+      .replace(baseUrl, '')
+    this.preloaded.images.push(bg)
   }
 
   _onMouseOver(e) {
     const src = e.target.dataset.src
+    const href = e.target.href
+    if( this.preloaded.urls.indexOf(href) < 0 ) {
+      this.preloaded.urls.push(href)
+      preloadDocument(href)
+    }
+
     const size = Nav.getImageSize(window.innerWidth)
     const realSrc = src.replace(/\.jpg$/, `-${size}.jpg`)
-    if (this.preloaded.indexOf(realSrc) > -1) {
-      return
+    if (this.preloaded.images.indexOf(realSrc) < 0) {
+      this.preloaded.images.push(realSrc)
+      preloadImage(realSrc)
     }
-    this.preloaded.push(realSrc)
-    preloadImage(realSrc)
   }
 
   render() {

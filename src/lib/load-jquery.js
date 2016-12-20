@@ -57,11 +57,24 @@ export function getScripts(scripts) {
   })
 }
 
-export function preloadImage(src) {
+export function preload(src, type) {
   const link = document.createElement('link')
   link.href = src
   link.rel = 'preload'
-  link.as = 'image'
+  link.as = type
+  setTimeout(() => {
+    document.head.appendChild(link)
+  }, 150)
+}
+
+export function preloadImage(src) {
+  preload(src, 'image')
+}
+
+export function preloadDocument(src) {
+  const link = document.createElement('link')
+  link.href = src
+  link.rel = 'prerender'
   setTimeout(() => {
     document.head.appendChild(link)
   }, 150)

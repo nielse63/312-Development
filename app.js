@@ -24,10 +24,7 @@ app.set('view engine', 'html')
 app.set('views', `${__dirname}/src`)
 app.enable('view cache')
 app.use(compression())
-app.use(sslRedirect([
-  'local',
-  'production',
-]))
+app.use(sslRedirect())
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(express.static(`${__dirname}/build/`, {
@@ -69,7 +66,7 @@ function getPageMeta(page) {
 
 // routing
 app.get('*', (req, res) => {
-  if( ! res.headersSent ) {
+  if (!res.headersSent) {
     res.setHeader('X-XSS-Protection', '1; mode=block')
     res.setHeader('X-Frame-Options', 'SAMEORIGIN')
     res.setHeader('X-Content-Type-Options', 'nosniff')

@@ -116,7 +116,7 @@ module.exports = {
       { from: './sitemap.xml', to: './' },
     ]),
     new webpack.PrefetchPlugin('moment'),
-  ].concat(ENV === 'production' ? [
+
     new webpack.optimize.DedupePlugin(),
     new webpack.optimize.OccurenceOrderPlugin(),
     new webpack.optimize.UglifyJsPlugin({
@@ -151,7 +151,43 @@ module.exports = {
     new ServiceWorkerWebpackPlugin({
       entry: path.join(__dirname, 'src/lib/sw.js'),
     }),
-  ] : []),
+  ],
+  // ].concat(ENV === 'production' ? [
+  //   new webpack.optimize.DedupePlugin(),
+  //   new webpack.optimize.OccurenceOrderPlugin(),
+  //   new webpack.optimize.UglifyJsPlugin({
+  //     compress: {
+  //       warnings: false,
+  //     },
+  //   }),
+  //   new webpack.optimize.CommonsChunkPlugin({
+  //     name: 'vendor',
+  //     minChunks: Infinity,
+  //   }),
+  //   new FaviconsWebpackPlugin({
+  //     logo: path.resolve(__dirname, 'src/assets/icons/icon-main.png'),
+  //     prefix: 'assets/icons/',
+  //     inject: true,
+  //     emitStats: false,
+  //     background: '#383333',
+  //     title: '312 Development',
+  //     icons: {
+  //       android: true,
+  //       appleIcon: true,
+  //       appleStartup: true,
+  //       coast: false,
+  //       favicons: true,
+  //       firefox: true,
+  //       opengraph: true,
+  //       twitter: true,
+  //       yandex: false,
+  //       windows: true,
+  //     },
+  //   }),
+  //   new ServiceWorkerWebpackPlugin({
+  //     entry: path.join(__dirname, 'src/lib/sw.js'),
+  //   }),
+  // ] : []),
 
   stats: { colors: true },
 
