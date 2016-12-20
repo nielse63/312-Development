@@ -73,6 +73,7 @@ export default class Grid extends Component {
     const diff = moment.duration(now - lastUpdate).asDays()
     return diff < 1
   }
+
   storeFeed(array) {
     localStorage.setItem('update', this.state.now)
     localStorage.setItem('feed', JSON.stringify(this.state.posts))

@@ -6,27 +6,27 @@ const expect = require('chai').expect
 const should = require('chai').should
 
 function basicPageSuite(url) {
-  describe(url, function describeCb() {
-    it('should have container when loaded', function test1Cb(done) {
-      this.timeout(5000)
+  describe(url, function () {
+    this.timeout(0)
+
+    it('should have container when loaded', function (done) {
       utils.elementExists('#app', url, done)
     })
 
-    it('should have header when loaded', function test2Cb(done) {
-      this.timeout(5000)
+    it('should have header when loaded', function (done) {
       utils.elementExists('#app > header', url, done)
     })
 
-    it('should have footer when loaded', function test3Cb(done) {
-      this.timeout(5000)
+    it('should have footer when loaded', function (done) {
       utils.elementExists('#app > footer', url, done)
     })
   })
 }
 
 describe('Check Page Status', () => {
-  for (const page in utils.urls) {
+  const pages = Object.keys(utils.urls)
+  pages.forEach(page => {
     const url = utils.urls[page]
     basicPageSuite(url)
-  }
+  })
 })

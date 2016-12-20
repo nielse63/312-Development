@@ -2,3 +2,4 @@
 --require babel-polyfill
 --check-leaks
 --colors
+--bail

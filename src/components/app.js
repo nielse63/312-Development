@@ -123,8 +123,6 @@ export default class App extends Component {
 
   // TODO: Move service worker functions to their own class
   listenToServiceWorker() {
-    console.log('the main JS thread was loaded')
-
     if ('serviceWorker' in navigator && (window.location.protocol === 'https:' ||
       window.location.hostname === 'localhost')
     ) {
