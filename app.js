@@ -35,6 +35,7 @@ app.use(express.static(`${__dirname}/build/`, {
     res.setHeader('X-XSS-Protection', '1; mode=block')
     res.setHeader('X-Frame-Options', 'SAMEORIGIN')
     res.setHeader('X-Content-Type-Options', 'nosniff')
+    res.setHeader('Cache-Control', 'max-age=2628000, public')
   },
 }))
 app.use(minifyHTML({
@@ -68,6 +69,12 @@ function getPageMeta(page) {
 
 // routing
 app.get('*', (req, res) => {
+  if( ! res.headersSent ) {
+    res.setHeader('X-XSS-Protection', '1; mode=block')
+    res.setHeader('X-Frame-Options', 'SAMEORIGIN')
+    res.setHeader('X-Content-Type-Options', 'nosniff')
+    res.setHeader('Cache-Control', 'max-age=2628000, public')
+  }
   const json = getPageMeta(req.url)
   const protocol = process.env.NODE_ENV === 'production' ? 'https' : 'http'
 
