@@ -3,3 +3,4 @@
 --check-leaks
 --colors
 --bail
+--throw-deprecation

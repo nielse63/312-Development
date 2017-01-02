@@ -14,7 +14,7 @@ module.exports = {
       "jsx": true
     }
   },
-  "extends": "airbnb",
+  "extends": "airbnb-base",
   "rules": {
     "no-unused-vars": [0, { "varsIgnorePattern": "^h$" }],
     "indent": ["error", 2],

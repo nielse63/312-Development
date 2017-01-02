@@ -12,6 +12,8 @@ const nightmare = new Nightmare({ show: true })
 
 describe('Header', function () {
   describe('Header items', function () {
+    this.timeout(0)
+
     it('should have header', function (done) {
       utils.elementExists('[data-header]', URL, done)
     })
