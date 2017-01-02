@@ -26,15 +26,15 @@ export default class Nav extends Component {
     this.preloaded = {
       images: [],
       urls: [
-        window.location.href
-      ]
+        window.location.href,
+      ],
     }
     this.onMouseOver = this._onMouseOver.bind(this)
   }
 
   componentDidMount() {
     const ele = document.getElementById('bg-image')
-    const baseUrl = window.location.protocol + '//' + window.location.host
+    const baseUrl = `${window.location.protocol}//${window.location.host}`
     const css = window.getComputedStyle(ele)
     const bg = css['background-image']
       .match(/\((.*?)\)/)[1]
@@ -46,7 +46,7 @@ export default class Nav extends Component {
   _onMouseOver(e) {
     const src = e.target.dataset.src
     const href = e.target.href
-    if( this.preloaded.urls.indexOf(href) < 0 ) {
+    if (this.preloaded.urls.indexOf(href) < 0) {
       this.preloaded.urls.push(href)
       preloadDocument(href)
     }
