@@ -14,6 +14,7 @@ const config = require('./src/config.json')
 
 // vars
 const app = express()
+const viewsDir = process.env.NODE_ENV === 'production' ? `${__dirname}/src` : `${__dirname}/build`
 
 // functions
 function setResponseHeaders(res) {
@@ -29,7 +30,7 @@ app.disable('x-powered-by')
 // html parsing
 app.engine('html', hogan)
 app.set('view engine', 'html')
-app.set('views', `${__dirname}/src`)
+app.set('views', viewsDir)
 app.enable('view cache')
 app.use(compression())
 if (process.env.SSL_REDIRECT) {
@@ -37,11 +38,12 @@ if (process.env.SSL_REDIRECT) {
 }
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
-app.use(express.static(`${__dirname}/build/`, {
-  setHeaders(res) {
-    setResponseHeaders(res)
-  },
-}))
+app.use(express.static(`${__dirname}/build`))
+// app.use(express.static(`${__dirname}/build`, {
+//   setHeaders(res) {
+//     setResponseHeaders(res)
+//   },
+// }))
 app.use(minifyHTML({
   override: true,
   htmlMinifier: {
@@ -87,7 +89,7 @@ app.get('*', (req, res) => {
   res.locals = {
     site,
   }
-  res.render(path.join(__dirname, 'build', 'home'), site)
+  res.render(path.join(__dirname, 'build/home.html'), site)
 })
 
 app.listen(app.get('port'), () => {
