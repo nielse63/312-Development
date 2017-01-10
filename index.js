@@ -18,6 +18,7 @@ function cb1(err, bus) {
 }
 
 pm2.connect(() => {
+  console.log('=== starting ===')
   pm2.start({
     script: './app.js',
     name: '312-dev-prod',

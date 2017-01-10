@@ -34,19 +34,19 @@ export default class App extends Component {
   }
 
   // TODO: move preload functions to their own class
-  static preload() {
-    const scripts = []
-    if (process.env.NODE_ENV === 'production') {
-      scripts.push({
-        src: 'https://cdn.ravenjs.com/3.9.1/raven.min.js',
-        callback() {
-          window.Raven.config('https://e375a4ff56f54d10bc63673d7fa53cb4@sentry.io/121634').install()
-        },
-      })
-    }
-    getScripts(scripts)
-    getStyle()
-  }
+  // static preload() {
+  //   const scripts = []
+  //   if (process.env.NODE_ENV === 'production') {
+  //     scripts.push({
+  //       src: 'https://cdn.ravenjs.com/3.9.1/raven.min.js',
+  //       callback() {
+  //         window.Raven.config('https://e375a4ff56f54d10bc63673d7fa53cb4@sentry.io/121634').install()
+  //       },
+  //     })
+  //   }
+  //   getScripts(scripts)
+  //   getStyle()
+  // }
 
   static scrollListener() {
     let lastPosition = -1
@@ -102,7 +102,8 @@ export default class App extends Component {
 
   componentDidMount() {
     this.listenToServiceWorker()
-    App.preload()
+    // App.preload()
+    getStyle()
 
     setTimeout(() => {
       this.base.classList.add(this.getClass('ready'))
@@ -133,17 +134,17 @@ export default class App extends Component {
           console.log('[SW]: Installed')
         },
         onUpdateReady: () => {
-          console.log('SW]: Update ready')
+          console.log('[SW]: Update ready')
         },
 
         onUpdating: () => {
-          console.log('SW]: Updating')
+          console.log('[SW]: Updating')
         },
         onUpdateFailed: () => {
-          console.log('SW]: Update Failed')
+          console.log('[SW]: Update Failed')
         },
         onUpdated: () => {
-          console.log('SW]: Updated')
+          console.log('[SW]: Updated')
         },
       })
     } else {
