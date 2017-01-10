@@ -1,11 +1,10 @@
 
 module.exports = {
   "root": true,
-  // "parser": "babel-eslint",
+  "parser": "babel-eslint",
   "env": {
     "browser": true,
     "node": true,
-    "mocha": true,
     "es6": true
   },
   "parserOptions": {
@@ -31,6 +30,7 @@ module.exports = {
     "max-statements": ["error", 10],
     "semi": ["error", "never"],
     "arrow-parens": ["error", "as-needed"],
-    "consistent-return": "warn"
+    "consistent-return": "warn",
+    "class-methods-use-this": "warn"
   }
 };
