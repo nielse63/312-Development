@@ -2,7 +2,6 @@
 import 'whatwg-fetch'
 import { h, Component } from 'preact'
 import { Link } from 'preact-router'
-import moment from 'moment'
 import GridItem from '../grid-item'
 import style from './style.scss'
 
@@ -11,7 +10,7 @@ export default class Grid extends Component {
     super(props)
     this.state = {
       posts: [],
-      now: moment().format('X'),
+      now: Date.now(),
     }
   }
 
@@ -28,35 +27,41 @@ export default class Grid extends Component {
       return this.getCachedFeed(feed)
     }
 
-    fetch('https://api.github.com/users/nielse63/repos?visibility=public&sort=pushed')
-    .then(response => response.json())
-    .then(json => {
-      const offset = moment().subtract(1, 'years')
-      const posts = json.filter(repo => {
-        const pushed = moment(repo.pushed_at)
-        repo.pushed_at = pushed
-        return !repo.private && repo.description && (repo.stargazers_count || pushed.isAfter(offset))
-      }).map(repo => {
-        repo.language = repo.language || ''
-        repo.url = repo.homepage && repo.homepage.indexOf(window.location.host) < 0 ? repo.homepage : repo.url
-        return {
-          name: repo.name.replace(/-/g, ' '),
-          url: repo.url,
-          pushed_at: repo.pushed_at.format('MMM Do, YYYY'),
-          description: repo.description,
-          likes: repo.stargazers_count + repo.watchers_count,
-          language: repo.language,
-        }
-      })
+    return fetch('https://api.github.com/users/nielse63/repos?visibility=public&sort=pushed')
+      .then(response => response.json())
+      .then(json => {
+        const mOffset = 31556952000
+        const cutoff = this.state.now - mOffset
+        const posts = json.filter(repo => {
+          const object = Object.assign({}, repo)
+          const pushed = new Date(object.pushed_at)
+          object.pushed_at = pushed
+          return !object.private &&
+            object.description &&
+            (object.stargazers_count || pushed > cutoff)
+        }).map(repo => {
+          const object = Object.assign({}, repo)
+          object.language = object.language || ''
+          object.url = object.homepage &&
+            object.homepage.indexOf(window.location.host) < 0 ? object.homepage : object.html_url
+          return {
+            name: object.name.replace(/-/g, ' '),
+            url: object.url,
+            pushed_at: object.pushed_at,
+            description: object.description,
+            likes: object.stargazers_count + object.watchers_count,
+            language: object.language,
+          }
+        })
 
-      // set state
-      this.setState({
-        posts,
-      })
+        // set state
+        this.setState({
+          posts,
+        })
 
-      // cache in localstorage
-      this.storeFeed(posts)
-    })
+        // cache in localstorage
+        this.storeFeed(posts)
+      })
   }
 
   getCachedFeed(feed) {
@@ -66,12 +71,12 @@ export default class Grid extends Component {
   }
 
   shouldGetCache(lastUpdate) {
-    if (!lastUpdate) {
+    const last = parseInt(lastUpdate, 10)
+    if (!last || isNaN(last)) {
       return false
     }
-    const now = parseInt(this.state.now, 10)
-    const diff = moment.duration(now - lastUpdate).asDays()
-    return diff < 1
+    const diff = this.state.now - last
+    return diff < 86400000
   }
 
   storeFeed(array) {

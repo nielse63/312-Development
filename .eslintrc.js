@@ -23,7 +23,6 @@ module.exports = {
     "no-underscore-dangle": "off",
     "max-len": "warn",
     "no-param-reassign": "warn",
-    // "no-console": "warn",
     "max-nested-callbacks": ["error", 3],
     "complexity": ["error", 5],
     "max-statements": ["error", 10],

@@ -53,7 +53,7 @@ export function getScripts(scripts) {
     if (typeof script === 'string') {
       return getScript(script)
     }
-    getScript(script.src, script.callback)
+    return getScript(script.src, script.callback)
   })
 }
 
