@@ -27,7 +27,7 @@
     "prebuild": "yarn run clean && yarn run lint && mkdir build && yarn run tasks",
     "build": "NODE_ENV=production webpack -p --progress",
     "prestart": "yarn run build",
-    "start": "NODE_ENV=production node --optimize_for_size --max_old_space_size=920 --gc_interval=100 --trace-sync-io index.js",
+    "start": "NODE_ENV=production node --optimize_for_size --max_old_space_size=920 --gc_interval=100 index.js",
     "prelocal": "yarn run build",
     "local": "NODE_ENV=local node app.js",
     "build:profile": "webpack -p --profile --display-reasons",

@@ -32,9 +32,7 @@ app.set('view engine', 'html')
 app.set('views', `${__dirname}/src`)
 app.enable('view cache')
 app.use(compression())
-if (process.env.SSL_REDIRECT) {
-  app.use(sslRedirect())
-}
+app.use(sslRedirect())
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(express.static(`${__dirname}/build/`, {
