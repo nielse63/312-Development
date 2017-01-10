@@ -1,12 +1,11 @@
-/* eslint-disable class-methods-use-this */
+/* eslint-disable class-methods-use-this, no-console */
 
 import { h, Component } from 'preact'
 import { Router } from 'preact-router'
-import S from 'string'
-import extend from 'lodash.assign'
+// import S from 'string'
 import runtime from 'serviceworker-webpack-plugin/lib/runtime'
 import registerEvents from 'serviceworker-webpack-plugin/lib/browser/registerEvents'
-import applyUpdate from 'serviceworker-webpack-plugin/lib/browser/applyUpdate'
+// import applyUpdate from 'serviceworker-webpack-plugin/lib/browser/applyUpdate'
 import AppRouter from './router'
 import { getScripts, getStyle, preloadImages } from '../lib/load-jquery'
 import Header from './header'
@@ -33,21 +32,6 @@ export default class App extends Component {
     return config
   }
 
-  // TODO: move preload functions to their own class
-  // static preload() {
-  //   const scripts = []
-  //   if (process.env.NODE_ENV === 'production') {
-  //     scripts.push({
-  //       src: 'https://cdn.ravenjs.com/3.9.1/raven.min.js',
-  //       callback() {
-  //         window.Raven.config('https://e375a4ff56f54d10bc63673d7fa53cb4@sentry.io/121634').install()
-  //       },
-  //     })
-  //   }
-  //   getScripts(scripts)
-  //   getStyle()
-  // }
-
   static scrollListener() {
     let lastPosition = -1
     function loop() {
@@ -59,16 +43,16 @@ export default class App extends Component {
       document.dispatchEvent(
         new CustomEvent('scrolling'),
       )
-      requestAnimationFrame(loop)
+      return requestAnimationFrame(loop)
     }
     loop()
   }
 
   static resizeListener() {
-    const throttle = function (type, name) {
+    function throttle(type, name) {
       let running = false
       let timer
-      const func = function () {
+      function fn() {
         if (running) { return }
         running = true
         requestAnimationFrame(() => {
@@ -82,7 +66,7 @@ export default class App extends Component {
           running = false
         })
       }
-      window.addEventListener(type, func, {
+      window.addEventListener(type, fn, {
         passive: true,
       })
     }
@@ -93,7 +77,7 @@ export default class App extends Component {
     window.requestAnimationFrame = window.requestAnimationFrame ||
       window.webkitRequestAnimationFrame ||
       window.mozRequestAnimationFrame ||
-      function (callback) { window.setTimeout(callback, 1000 / 60) }
+      function cb(callback) { window.setTimeout(callback, 1000 / 60) }
   }
 
   componentWillMount() {
@@ -102,7 +86,6 @@ export default class App extends Component {
 
   componentDidMount() {
     this.listenToServiceWorker()
-    // App.preload()
     getStyle()
 
     setTimeout(() => {

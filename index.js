@@ -7,18 +7,22 @@ const maxMemory = process.env.WEB_MEMORY || 512
 
 function cb1(err, bus) {
   console.log('[PM2] Log streaming started')
-
   bus.on('log:out', packet => {
     console.log('[App:%s] %s', packet.process.name, packet.data)
   })
-
   bus.on('log:err', packet => {
     console.error('[App:%s][Err] %s', packet.process.name, packet.data)
   })
+  // bus.on('*', function(event){
+  //   console.log(event);
+  // });
 }
 
+// kill running processes
+pm2.stop('all')
+
+// establish connection
 pm2.connect(() => {
-  console.log('=== starting ===')
   pm2.start({
     script: './app.js',
     name: '312-dev-prod',
@@ -28,6 +32,6 @@ pm2.connect(() => {
   }, err => {
     if (err) return console.error('Error while launching applications', err.stack || err)
     console.log('PM2 and application has been succesfully started')
-    pm2.launchBus(cb1)
+    return pm2.launchBus(cb1)
   })
 })

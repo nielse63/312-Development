@@ -15,6 +15,7 @@
     "npm": "4.0.5"
   },
   "scripts": {
+    "internal:lint": "eslint ./test --fix",
     "dev": "NODE_ENV=dev-server webpack-dev-server --inline --hot --progress --colors",
     "lint:js": "eslint --fix ./src ./tasks ./*.js",
     "lint:scss": "sass-lint 'src/**/*.scss' -v -c ./.sass-lint.yml",
@@ -24,18 +25,14 @@
     "tasks:images": "node ./tasks/images.js",
     "tasks": "yarn run tasks:images && yarn run tasks:fonts",
     "prebuild": "yarn run clean && yarn run lint && mkdir build && yarn run tasks",
-    "build": "NODE_ENV=production webpack --progress",
-    "prestart": "yarn run build --  -p",
+    "build": "NODE_ENV=production webpack -p --progress",
+    "prestart": "yarn run build",
     "start": "NODE_ENV=production node --optimize_for_size --max_old_space_size=920 --gc_interval=100 index.js",
     "prelocal": "yarn run build",
-    "local": "NODE_ENV=production IS_LOCAL=true node --trace-warnings --trace-deprecation --trace-sync-io --track-heap-objects index.js",
+    "local": "NODE_ENV=production IS_LOCAL=true node index.js",
+    "postlocal": "pm2 stop all",
     "build:profile": "webpack -p --profile --display-reasons",
-    "pretest:local": "eslint ./test --fix",
-    "test:local": "mocha -c ./test/*.spec.js",
-    "surge": "yarn run lint && yarn run build && surge ./build -d https://312development.surge.sh",
-    "heroku:remote": "heroku git:remote -a alluring-capitol-reef-91162",
-    "heroku-prebuild": "pwd && ls -FGlAhp",
-    "heroku-postbuild": "pwd && ls -FGlAhp"
+    "test": "mocha -c ./test/index.spec.js"
   },
   "dependencies": {
     "body-parser": "^1.15.2",
@@ -45,6 +42,7 @@
     "heroku-ssl-redirect": "0.0.3",
     "hogan-express": "^0.5.2",
     "in-view": "^0.6.1",
+    "jest": "^18.1.0",
     "lodash.assign": "^4.2.0",
     "offline-plugin": "^4.5.3",
     "pm2": "^2.2.2",
@@ -95,6 +93,7 @@
     "raw-loader": "^0.5.1",
     "sass-lint": "^1.10.2",
     "sass-loader": "^4.0.2",
+    "shelljs": "^0.7.6",
     "source-map-loader": "^0.1.5",
     "style-loader": "^0.13.0",
     "sw-precache": "^4.2.3",

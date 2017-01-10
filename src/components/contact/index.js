@@ -10,7 +10,7 @@ import style from './style.scss'
 export default class Contact extends Component {
   constructor(props) {
     super(props)
-    this.onSubmit = function (e) {
+    this.onSubmit = function onSubmit(e) {
       e.preventDefault()
       window.location.href = '/thank-you'
     }
