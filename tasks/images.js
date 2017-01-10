@@ -17,5 +17,7 @@ inPath.forEach((dir, i) => {
       imageminOptipng(),
       imageminSvgo(),
     ],
-  })
+  }).catch(err => {
+    throw new Error(err)
+  });
 })
