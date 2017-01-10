@@ -36,7 +36,7 @@ app.use(sslRedirect())
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(express.static(`${__dirname}/build/`, {
-  setHeaders : setResponseHeaders,
+  setHeaders: setResponseHeaders,
 }))
 app.use(minifyHTML({
   override: true,
