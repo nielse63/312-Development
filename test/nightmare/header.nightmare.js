@@ -1,6 +1,6 @@
 
 import path from 'path'
-import * as utils from './utils'
+import * as utils from '../utils'
 
 const url = require('url')
 const Nightmare = require('nightmare')
