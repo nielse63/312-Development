@@ -31,21 +31,13 @@ rules:
   no-color-literals: 0
   no-misspelled-properties:
     - 2
-    -
-      extra-properties:
+    - extra-properties:
         - contain
   property-sort-order: 0
   space-after-colon: 0
   no-css-comments: 0
   no-vendor-prefixes:
     - 1
-    -
-      additional-identifiers:
+    - additional-identifiers:
         - o
-  # attribute-quotes:
-  #   - 1
-  #   - include: true
-  # quotes:
-  #   - 1
-  #   - style: double
   pseudo-element: 0
