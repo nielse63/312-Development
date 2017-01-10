@@ -6,6 +6,7 @@ module.exports = {
   "rules": {
     "max-nested-callbacks": "off",
     "no-unused-expressions": "off",
-    "prefer-arrow-callback": "off"
+    "prefer-arrow-callback": "off",
+    "func-names": "off"
   },
 };
