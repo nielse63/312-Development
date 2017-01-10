@@ -21,16 +21,15 @@ module.exports = {
     "react/jsx-filename-extension": "off",
     "react/prefer-stateless-function": "off",
     "no-underscore-dangle": "off",
-    "react/prop-types": "warn",
     "max-len": "warn",
     "no-param-reassign": "warn",
-    "no-console": "warn",
+    // "no-console": "warn",
     "max-nested-callbacks": ["error", 3],
     "complexity": ["error", 5],
     "max-statements": ["error", 10],
     "semi": ["error", "never"],
     "arrow-parens": ["error", "as-needed"],
     "consistent-return": "warn",
-    "class-methods-use-this": "warn"
+    "class-methods-use-this": "off"
   }
 };
