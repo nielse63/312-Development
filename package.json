@@ -17,8 +17,8 @@
   },
   "scripts": {
     "dev": "NODE_ENV=dev-server webpack-dev-server --inline --hot --progress --colors",
-    "lint:js": "./node_modules/.bin/eslint --fix ./src ./tasks ./*.js",
-    "lint:scss": "./node_modules/.bin/sass-lint 'src/**/*.scss' -v -c ./.sass-lint.yml",
+    "lint:js": "eslint --fix ./src ./tasks ./*.js",
+    "lint:scss": "sass-lint 'src/**/*.scss' -v -c ./.sass-lint.yml",
     "lint": "yarn run lint:js && yarn run lint:scss",
     "clean": "rm -rf ./build",
     "tasks:fonts": "node ./tasks/fonts.js",
@@ -31,8 +31,8 @@
     "local": "NODE_ENV=local node app.js",
     "build:profile": "webpack -p --profile --display-reasons",
     "surge": "yarn run lint && yarn run build && surge ./build -d https://312development.surge.sh",
-    "pretest": "./node_modules/.bin/eslint ./test --fix",
-    "test": "./node_modules/.bin/mocha -c ./test/*.spec.js",
+    "pretest": "eslint ./test --fix",
+    "test": "xvfb-maybe mocha -c ./test/*.spec.js",
     "heroku:remote": "heroku git:remote -a alluring-capitol-reef-91162"
   },
   "dependencies": {
@@ -103,6 +103,7 @@
     "sw-precache": "^4.2.3",
     "url-loader": "^0.5.7",
     "webpack": "^1.14.0",
-    "webpack-dev-server": "^1.16.2"
+    "webpack-dev-server": "^1.16.2",
+    "xvfb-maybe": "^0.1.3"
   }
 }
