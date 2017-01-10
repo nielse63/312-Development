@@ -25,19 +25,19 @@
     }
   }
 
-  .logo {
-    margin: 0;
-    padding: 0 0 0 42px;
-    font-size: 20px;
-    line-height: $header-height;
-    background-image: url('/assets/images/icon-black.svg');
-    background-position: left center;
-    background-repeat: no-repeat;
-    background-size: auto 36px;
-  }
+  // .logo {
+  //   margin: 0;
+  //   padding: 0 0 0 42px;
+  //   font-size: 20px;
+  //   line-height: $header-height;
+  //   background-image: url('/assets/images/icon-black.svg');
+  //   background-position: left center;
+  //   background-repeat: no-repeat;
+  //   background-size: auto 36px;
+  // }
 
   nav {
-    font-size: 100%;
+    font-size: 20px;
 
     a {
       display: inline-block;
@@ -46,7 +46,12 @@
       padding: 0 15px;
       min-width: 50px;
       text-align: center;
-      color: #666;
+      color: mix($black, $background-color);
+      transition: 0.35s color;
+
+      &:hover {
+        color: $pink;
+      }
     }
   }
 }

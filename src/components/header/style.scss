@@ -15,14 +15,14 @@
 
   &.dark {
 
-    .logo {
-      background-image: url('/assets/images/icon-pink.svg');
+    // .logo {
+    //   background-image: url('/assets/images/icon-pink.svg');
 
-      &,
-      a {
-        color: $pink;
-      }
-    }
+    //   &,
+    //   a {
+    //     color: $pink;
+    //   }
+    // }
 
     nav {
       a {
@@ -42,18 +42,18 @@
   }
 
   .logo {
-    margin: 0;
-    padding: 0 0 0 42px;
-    font-size: 20px;
-    line-height: $header-height;
+    // margin: 0;
+    // padding: 0 0 0 42px;
+    // font-size: 20px;
+    // line-height: $header-height;
     background-image: url('/assets/images/icon.svg');
-    background-position: left center;
-    background-repeat: no-repeat;
-    background-size: auto 36px;
+    // background-position: left center;
+    // background-repeat: no-repeat;
+    // background-size: auto 36px;
 
-    a {
-      color: $background-color;
-    }
+    // a {
+    //   color: $background-color;
+    // }
   }
 }
 

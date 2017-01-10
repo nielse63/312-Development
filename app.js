@@ -15,6 +15,14 @@ const config = require('./src/config.json')
 // vars
 const app = express()
 
+// functions
+function setResponseHeaders(res) {
+  res.setHeader('X-XSS-Protection', '1; mode=block')
+  res.setHeader('X-Frame-Options', 'SAMEORIGIN')
+  res.setHeader('X-Content-Type-Options', 'nosniff')
+  res.setHeader('Cache-Control', 'max-age=2628000, public')
+}
+
 // set headers
 app.disable('x-powered-by')
 
@@ -28,12 +36,7 @@ app.use(sslRedirect())
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(express.static(`${__dirname}/build/`, {
-  setHeaders(res) {
-    res.setHeader('X-XSS-Protection', '1; mode=block')
-    res.setHeader('X-Frame-Options', 'SAMEORIGIN')
-    res.setHeader('X-Content-Type-Options', 'nosniff')
-    res.setHeader('Cache-Control', 'max-age=2628000, public')
-  },
+  setHeaders : setResponseHeaders,
 }))
 app.use(minifyHTML({
   override: true,
@@ -67,10 +70,7 @@ function getPageMeta(page) {
 // routing
 app.get('*', (req, res) => {
   if (!res.headersSent) {
-    res.setHeader('X-XSS-Protection', '1; mode=block')
-    res.setHeader('X-Frame-Options', 'SAMEORIGIN')
-    res.setHeader('X-Content-Type-Options', 'nosniff')
-    res.setHeader('Cache-Control', 'max-age=2628000, public')
+    setResponseHeaders(res)
   }
   const json = getPageMeta(req.url)
   const protocol = process.env.NODE_ENV === 'production' ? 'https' : 'http'

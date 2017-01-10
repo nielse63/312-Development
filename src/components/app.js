@@ -135,17 +135,17 @@ export default class App extends Component {
           console.log('[SW]: Installed')
         },
         onUpdateReady: () => {
-          console.log('SW]: Update ready')
+          console.log('[SW]: Update ready')
         },
 
         onUpdating: () => {
-          console.log('SW]: Updating')
+          console.log('[SW]: Updating')
         },
         onUpdateFailed: () => {
-          console.log('SW]: Update Failed')
+          console.log('[SW]: Update Failed')
         },
         onUpdated: () => {
-          console.log('SW]: Updated')
+          console.log('[SW]: Updated')
         },
       })
     } else {

@@ -28,3 +28,6 @@ exclude_paths:
 - test/
 - tasks/
 - build/
+exclude_fingerprints:
+- 6df301524c1b4d6cdd7dd5935cda768f
+- ee47385f22344fc1029b0739ecc267eb
