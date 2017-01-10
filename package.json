@@ -34,8 +34,8 @@
     "test:local": "mocha -c ./test/*.spec.js",
     "surge": "yarn run lint && yarn run build && surge ./build -d https://312development.surge.sh",
     "heroku:remote": "heroku git:remote -a alluring-capitol-reef-91162",
-    "heroku-prebuild": "echo '==============\n' && pwd && ls -FGlAhp && echo '==============\n'",
-    "heroku-postbuild": "echo '==============\n' && pwd && ls -FGlAhp && echo '==============\n'"
+    "heroku-prebuild": "pwd && ls -FGlAhp",
+    "heroku-postbuild": "pwd && ls -FGlAhp"
   },
   "dependencies": {
     "body-parser": "^1.15.2",
