@@ -11,8 +11,8 @@
   "repository": "312-Development.git",
   "main": "app-server.js",
   "engine": {
-    "node": "7.4.0",
-    "npm": "4.0.5"
+    "node": ">=7.4.0",
+    "npm": ">=4.0.5"
   },
   "scripts": {
     "internal:lint": "eslint ./test --fix",
