@@ -11,15 +11,9 @@ import NotFound from './404'
 import config from '../config.json'
 
 export default class AppRouter extends Component {
-
   constructor() {
     super()
     this.handleRoute = this._handleRoute.bind(this)
-  }
-
-  getMeta(url) {
-    this.meta = config.META[url] || {}
-    return extend({}, config.META.default, this.meta)
   }
 
   _handleRoute(e) {
@@ -30,6 +24,11 @@ export default class AppRouter extends Component {
     document.dispatchEvent(new CustomEvent('routed'))
     document.body.removeAttribute('class')
     document.title = this.createTitle(url)
+  }
+
+  getMeta(url) {
+    this.meta = config.META[url] || config.META['404']
+    return extend({}, config.META.default, this.meta)
   }
 
   createTitle(url) {
