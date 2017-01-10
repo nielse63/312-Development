@@ -89,7 +89,7 @@ app.get('*', (req, res) => {
   res.locals = {
     site,
   }
-  res.render(path.join(__dirname, 'build/home.html'), site)
+  res.render(path.join(__dirname, 'build', 'home'), site)
 })
 
 app.listen(app.get('port'), () => {

@@ -4,6 +4,7 @@ const pm2 = require('pm2')
 
 const instances = process.env.WEB_CONCURRENCY || -1
 const maxMemory = process.env.WEB_MEMORY || 512
+console.log(__dirname)
 
 function cb1(err, bus) {
   console.log('[PM2] Log streaming started')
