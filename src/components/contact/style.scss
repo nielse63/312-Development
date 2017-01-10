@@ -22,6 +22,8 @@
 }
 
 .center {
+  font-size: 22px;
+
   div {
     display: flex;
     justify-content: space-between;
@@ -29,21 +31,18 @@
 
   a {
     $size: 36px;
+
     position: relative;
-    color: inherit;
+    color: mix($background-color, $black);
     display: block;
     height: $size;
     width: $size;
     text-align: center;
-    border-radius: 50%;
-    background-clip: content-box;
-    transition: 0.5s box-shadow, 0.5s color;
     line-height: 1;
-    box-shadow: 0 0 0 0 fade-out($pink, 0.5) inset;
+    transition: 0.35s color;
 
     &:hover {
-      box-shadow: 0 0 0 ($size / 2) fade-out($pink, 0.5) inset;
-      color: $white;
+      color: $pink;
     }
 
     i {

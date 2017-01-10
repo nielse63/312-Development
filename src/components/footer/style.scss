@@ -37,7 +37,7 @@
   }
 
   nav {
-    font-size: 100%;
+    font-size: 20px;
 
     a {
       display: inline-block;
@@ -46,7 +46,12 @@
       padding: 0 15px;
       min-width: 50px;
       text-align: center;
-      color: #666;
+      color: mix($background-color, $black);
+      transition: 0.35s color;
+
+      &:hover {
+        color: $pink;
+      }
     }
   }
 }
