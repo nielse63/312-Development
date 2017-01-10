@@ -6,8 +6,8 @@ require('shelljs/global')
 const expect = require('chai').expect
 
 describe('Check Page Status', function () {
-  Object.keys(utils.urls).forEach(page => {
-    const url = utils.urls[page]
+  Object.keys(utils.URLS).forEach(page => {
+    const url = utils.URLS[page]
 
     describe(url, function () {
       this.timeout(0)
