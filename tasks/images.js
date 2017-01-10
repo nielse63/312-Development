@@ -1,6 +1,6 @@
 
 // modules
-const path =  require('path')
+const path = require('path')
 const imagemin = require('imagemin')
 const imageminMozjpeg = require('imagemin-mozjpeg')
 const imageminOptipng = require('imagemin-optipng')
@@ -13,17 +13,16 @@ const paths = [
 ]
 
 // task
-paths.forEach((dir) => {
-  console.log(dir, dir)
+paths.forEach(dir => {
   imagemin([dir], dir, {
     plugins: [
       imageminMozjpeg({
-        quality: 85
+        quality: 85,
       }),
       imageminOptipng(),
       imageminSvgo(),
     ],
   }).catch(err => {
     throw new Error(err)
-  });
+  })
 })

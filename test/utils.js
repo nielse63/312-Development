@@ -1,7 +1,7 @@
 
 // const config = require('../package.json')
-const config {
-  homepage: 'http://localhost:3001'
+const config = {
+  homepage: 'http://localhost:3001',
 }
 
 exports.URLS = {

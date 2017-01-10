@@ -1,5 +1,5 @@
 
-const path =  require('path')
+const path = require('path')
 const Fontmin = require('fontmin')
 
 const src = path.join(__dirname, '..', 'build/assets/fonts/*')
