@@ -38,8 +38,8 @@ export default class Grid extends Component {
             <h4>{this.props.title}</h4>
             <div className={style['grid-item-content']}>
               <p className={style.info}>
-                <i className={[style.language, style[this.props.language.toLowerCase()]].join(' ')} />
                 <i className="fa fa-star-o" data-likes={this.props.likes} />
+                <i className={[style.language, style[this.props.language.toLowerCase()]].join(' ')} />
               </p>
               <p>{this.props.description}</p>
               <p className={style['read-more']}>See More &rarr;</p>

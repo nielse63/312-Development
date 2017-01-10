@@ -17,7 +17,8 @@ export default class About extends Component {
         </Banner>
         <div className={style.content} data-midnight>
           <div className={style['container-narrow']}>
-            <p className={style.intro} dangerouslySetInnerHTML={{ __html: config.CONTENT.about.intro }} />
+            <p className={style.intro}
+              dangerouslySetInnerHTML={{ __html: config.CONTENT.about.intro }} />
             <p>To learn more about me you can always <a href="mailto:erik@312development.com">email me</a>. And make sure you <a href="https://twitter.com/erikkylenielsen" target="_blank" rel="noopener noreferrer">follow me on Twitter</a> to get the latest JavaScript news, articles, and resources.</p>
             <p>Below are lists of my proficiencies. You can see more of my work on my <a href="/portfolio">portfolio</a> page or at my <a href="https://github.com/nielse63" target="_blank" rel="noopener noreferrer">GitHub account</a>.</p>
             <div className={style.table}>

@@ -59,16 +59,16 @@ export default class App extends Component {
       document.dispatchEvent(
         new CustomEvent('scrolling'),
       )
-      requestAnimationFrame(loop)
+      return requestAnimationFrame(loop)
     }
     loop()
   }
 
   static resizeListener() {
-    const throttle = function (type, name) {
+    function throttle(type, name) {
       let running = false
       let timer
-      const func = function () {
+      function fn() {
         if (running) { return }
         running = true
         requestAnimationFrame(() => {
@@ -82,7 +82,7 @@ export default class App extends Component {
           running = false
         })
       }
-      window.addEventListener(type, func, {
+      window.addEventListener(type, fn, {
         passive: true,
       })
     }
@@ -93,7 +93,7 @@ export default class App extends Component {
     window.requestAnimationFrame = window.requestAnimationFrame ||
       window.webkitRequestAnimationFrame ||
       window.mozRequestAnimationFrame ||
-      function (callback) { window.setTimeout(callback, 1000 / 60) }
+      function raf(callback) { window.setTimeout(callback, 1000 / 60) }
   }
 
   componentWillMount() {
@@ -123,6 +123,8 @@ export default class App extends Component {
 
   // TODO: Move service worker functions to their own class
   listenToServiceWorker() {
+    /* eslint-disable no-console */
+
     if ('serviceWorker' in navigator && (window.location.protocol === 'https:' ||
       window.location.hostname === 'localhost')
     ) {

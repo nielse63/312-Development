@@ -6,6 +6,10 @@ node_js:
   - v6
   - v5
   - v4
+before_install:
+  - curl -o- -L https://yarnpkg.com/install.sh | bash
+  - export PATH=$HOME/.yarn/bin:$PATH
 cache:
   directories:
+    - $HOME/.cache/yarn
     - node_modules

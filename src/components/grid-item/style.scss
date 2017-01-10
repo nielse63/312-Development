@@ -1,3 +1,4 @@
+// sass-lint:disable no-vendor-prefixes
 
 @import '~style/helpers';
 
@@ -179,23 +180,30 @@ $grid-item-distance: 20px;
 
   .language {
     display: inline-block;
-    width: 20px;
-    height: 20px;
+    width: 26px;
+    height: 26px;
+    background-image: url('/assets/images/repo-js.svg');
     background-position: center;
     background-repeat: no-repeat;
     background-size: contain;
   }
 
-  .javascript {
-    background-image: url('/assets/images/repo-js.svg');
-  }
-
   .css {
-    background-image: url('/assets/images/repo-js.svg');
+    background-image: url('/assets/images/repo-css.svg');
   }
 
   .php {
-    background-image: url('/assets/images/repo-js.svg');
+    background-image: url('/assets/images/repo-php.svg');
+  }
+
+  .html {
+    background-image: url('/assets/images/repo-html.svg');
+  }
+
+  .fa-star-0 {
+    &:before {
+      margin-right: 2px;
+    }
   }
 }
 
@@ -203,7 +211,6 @@ $grid-item-distance: 20px;
   font-size: 80%;
   text-transform: uppercase;
   font-weight: 700;
-  // background: #2443fb;
   background: linear-gradient(180deg, #2443fb 0%, #39a9da 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
