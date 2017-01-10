@@ -23,6 +23,7 @@
     "clean": "rm -rf ./build",
     "tasks:fonts": "node ./tasks/fonts.js",
     "tasks:images": "node ./tasks/images.js",
+    "pretasks": "mkdirp ./build/assets && cp -R ./src/assets/ ./build/assets",
     "tasks": "yarn run tasks:images && yarn run tasks:fonts",
     "prebuild": "yarn run lint && yarn run clean && yarn run tasks",
     "build": "NODE_ENV=production webpack -p --progress",
@@ -32,8 +33,8 @@
     "local": "NODE_ENV=local node app.js",
     "build:profile": "webpack -p --profile --display-reasons",
     "surge": "yarn run lint && yarn run build && surge ./build -d https://312development.surge.sh",
-    "pretest": "eslint ./test --fix",
-    "test": "mocha -c ./test/*.spec.js",
+    "pretest:local": "eslint ./test --fix",
+    "test:local": "mocha -c ./test/*.spec.js",
     "heroku:remote": "heroku git:remote -a alluring-capitol-reef-91162"
   },
   "dependencies": {
@@ -46,6 +47,7 @@
     "hogan-express": "^0.5.2",
     "in-view": "^0.6.1",
     "lodash.assign": "^4.2.0",
+    "mkdirp": "^0.5.1",
     "offline-plugin": "^4.5.3",
     "pm2": "^2.2.2",
     "preact": "^7.1.0",
