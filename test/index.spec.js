@@ -1,32 +1,27 @@
+/* global exec */
 
 import * as utils from './utils'
 
-const Nightmare = require('nightmare')
+require('shelljs/global')
 const expect = require('chai').expect
-const should = require('chai').should
 
-function basicPageSuite(url) {
-  describe(url, function () {
-    this.timeout(0)
+describe('Check Page Status', function () {
+  Object.keys(utils.URLS).forEach(page => {
+    const url = utils.URLS[page]
 
-    it('should have container when loaded', function (done) {
-      utils.elementExists('#app', url, done)
+    describe(url, function () {
+      this.timeout(0)
+
+      it('page should not be a 404', function (done) {
+        exec(`curl -I ${url} 2>/dev/null | head -n 1 | cut -d$' ' -f2`, {
+          silent: true,
+        }, function (code, stdout, stderr) {
+          if (code) return false
+          const status = parseInt(stdout, 10)
+          expect(status).to.be.within(200, 300)
+          return done()
+        })
+      })
     })
-
-    it('should have header when loaded', function (done) {
-      utils.elementExists('#app > header', url, done)
-    })
-
-    it('should have footer when loaded', function (done) {
-      utils.elementExists('#app > footer', url, done)
-    })
-  })
-}
-
-describe('Check Page Status', () => {
-  const pages = Object.keys(utils.urls)
-  pages.forEach(page => {
-    const url = utils.urls[page]
-    basicPageSuite(url)
   })
 })

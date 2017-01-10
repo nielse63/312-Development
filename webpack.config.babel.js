@@ -16,7 +16,6 @@ const CSS_MAPS = ENV !== 'production'
 
 module.exports = {
   context: path.resolve(__dirname, 'src'),
-  // entry: ['./index.js'],
   entry: {
     vendor: ['moment', 'string'],
     bundle: './index.js',
@@ -25,7 +24,6 @@ module.exports = {
   output: {
     path: path.resolve(__dirname, 'build'),
     publicPath: '/',
-    // filename: 'bundle.js',
     filename: '[name].js',
   },
 
@@ -37,7 +35,7 @@ module.exports = {
       'node_modules',
     ],
     alias: {
-      components: path.resolve(__dirname, 'src/components'),    // used for tests
+      components: path.resolve(__dirname, 'src/components'),
       style: path.resolve(__dirname, 'src/style'),
       react: 'preact-compat',
       'react-dom': 'preact-compat',
@@ -210,12 +208,5 @@ module.exports = {
     contentBase: './src',
     historyApiFallback: true,
     open: true,
-    proxy: {
-      // OPTIONAL: proxy configuration:
-      // '/optional-prefix/**': { // path pattern to rewrite
-      //   target: 'http://target-host.com',
-      //   pathRewrite: path => path.replace(/^\/[^\/]+\//, '')   // strip first path segment
-      // }
-    },
   },
 }
