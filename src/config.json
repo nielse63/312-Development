@@ -52,6 +52,13 @@
         "name": "description",
         "content": "Keep in touch! Contact me via email at erik@312development.com or through the form on this page."
       }]
+    },
+    "404": {
+      "title": "404 Page Not Found",
+      "meta": [{
+        "name": "description",
+        "content": "Looks like we couldn't find the page you're looking for."
+      }]
     }
   }
 }
