@@ -11,8 +11,8 @@
   "repository": "312-Development.git",
   "main": "app-server.js",
   "engine": {
-    "node": ">=7.2.1",
-    "npm": ">=4.0.5"
+    "node": "7.4.0",
+    "npm": "4.0.5"
   },
   "scripts": {
     "dev": "NODE_ENV=dev-server webpack-dev-server --inline --hot --progress --colors",
@@ -33,7 +33,9 @@
     "pretest:local": "./node_modules/.bin/eslint ./test --fix",
     "test:local": "./node_modules/.bin/mocha -c ./test/*.spec.js",
     "surge": "yarn run lint && yarn run build && surge ./build -d https://312development.surge.sh",
-    "heroku:remote": "heroku git:remote -a alluring-capitol-reef-91162"
+    "heroku:remote": "heroku git:remote -a alluring-capitol-reef-91162",
+    "heroku-prebuild": "echo '==============\n' && pwd && ls -FGlAhp && echo '==============\n' && ",
+    "heroku-postbuild": "echo '==============\n' && pwd && ls -FGlAhp && echo '==============\n' && "
   },
   "dependencies": {
     "body-parser": "^1.15.2",
