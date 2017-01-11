@@ -38,12 +38,12 @@ if (process.env.SSL_REDIRECT) {
 }
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
-app.use(express.static(`${__dirname}/build`))
-// app.use(express.static(`${__dirname}/build`, {
-//   setHeaders(res) {
-//     setResponseHeaders(res)
-//   },
-// }))
+// app.use(express.static(`${__dirname}/build`))
+app.use(express.static(`${__dirname}/build`, {
+  setHeaders(res) {
+    setResponseHeaders(res)
+  },
+}))
 app.use(minifyHTML({
   override: true,
   htmlMinifier: {
@@ -55,7 +55,7 @@ app.use(minifyHTML({
 }))
 
 // set port
-app.set('port', (process.env.NODE_ENV === 'production' ? process.env.PORT || 3000 : 3001))
+app.set('port', process.env.PORT || 3001)
 
 // TODO: move meta configuration functions into their own class
 // set meta data
@@ -97,5 +97,5 @@ app.listen(app.get('port'), () => {
   //   console.log('This is on Heroku..!!')
   //   fs.openSync('/tmp/app-initialized', 'w')
   // }
-  console.log('Viewable at http://localhost:%s', app.get('port')) // eslint-disable-line no-console
+  console.log('Viewable on port %s', app.get('port')) // eslint-disable-line no-console
 })

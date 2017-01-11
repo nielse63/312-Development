@@ -1,7 +1,7 @@
 {
   "sourceMaps": true,
   "presets": [
-    "es2015",
+    "latest",
     ["env", {
       "targets": {
         "browsers": ["> 1%"]

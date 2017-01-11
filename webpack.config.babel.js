@@ -3,6 +3,8 @@ import webpack from 'webpack'
 import ExtractTextPlugin from 'extract-text-webpack-plugin'
 import HtmlWebpackPlugin from 'html-webpack-plugin'
 import autoprefixer from 'autoprefixer'
+import cssnano from 'cssnano'
+import comments from 'postcss-discard-comments'
 import CopyWebpackPlugin from 'copy-webpack-plugin'
 import FaviconsWebpackPlugin from 'favicons-webpack-plugin'
 import ServiceWorkerWebpackPlugin from 'serviceworker-webpack-plugin'
@@ -15,7 +17,6 @@ const CSS_MAPS = ENV !== 'production'
 module.exports = {
   context: path.resolve(__dirname, 'src'),
   entry: {
-    // vendor: ['string'],
     bundle: './index.js',
   },
 
@@ -26,7 +27,7 @@ module.exports = {
   },
 
   resolve: {
-    extensions: ['', '.jsx', '.js', '.json', '.less'],
+    extensions: ['', '.js', '.json', '.scss'],
     modulesDirectories: [
       path.resolve(__dirname, 'src/lib'),
       path.resolve(__dirname, 'node_modules'),
@@ -79,8 +80,7 @@ module.exports = {
           mimetype: 'application/font-woff',
           name: './fonts/[hash].[ext]',
         },
-      },
-    ],
+      }],
   },
 
   sassLoader: {
@@ -89,17 +89,22 @@ module.exports = {
 
   postcss: () => [
     autoprefixer({ browsers: 'last 2 versions' }),
+    comments({ removeAll: true }),
+    cssnano,
   ],
 
   plugins: [
-    new webpack.NoErrorsPlugin(),
-    new ExtractTextPlugin('style.css', {
-      allChunks: true,
-      disable: ENV !== 'production',
-    }),
     new webpack.DefinePlugin({
-      'process.env': JSON.stringify({ NODE_ENV: ENV }),
+      'process.env': {
+        NODE_ENV: JSON.stringify(ENV),
+      },
     }),
+    new webpack.NoErrorsPlugin(),
+    // new ExtractTextPlugin({
+    //   filename: 'style.css',
+    //   allChunks: true,
+    // }),
+    new ExtractTextPlugin('style.css'),
     new HtmlWebpackPlugin({
       template: './home.html',
       filename: `${(ENV === 'dev-server' ? 'index' : 'home')}.html`,
@@ -109,19 +114,11 @@ module.exports = {
       { from: './robots.txt', to: './' },
       { from: './sitemap.xml', to: './' },
     ]),
-    // new webpack.PrefetchPlugin('moment'),
-
-    new webpack.optimize.DedupePlugin(),
-    new webpack.optimize.OccurenceOrderPlugin(),
     new webpack.optimize.UglifyJsPlugin({
       compress: {
         warnings: false,
       },
     }),
-    // new webpack.optimize.CommonsChunkPlugin({
-    //   name: 'vendor',
-    //   minChunks: Infinity,
-    // }),
     new FaviconsWebpackPlugin({
       logo: path.resolve(__dirname, 'src/assets/icons/icon-main.png'),
       prefix: 'assets/icons/',
@@ -145,20 +142,17 @@ module.exports = {
     new ServiceWorkerWebpackPlugin({
       entry: path.join(__dirname, 'src/lib/sw.js'),
     }),
+    new webpack.optimize.DedupePlugin(),
+    new webpack.optimize.OccurenceOrderPlugin(),
   ],
 
-  stats: { colors: true },
-
-  // node: {
-  //   global: true,
-  //   process: false,
-  //   Buffer: false,
-  //   __filename: false,
-  //   __dirname: false,
-  //   setImmediate: false,
-  // },
-
   devtool: ENV === 'production' ? 'source-map' : 'cheap-module-eval-source-map',
+  target: 'web',
+  stats: {
+    colors: true,
+  },
+  profile: true,
+  cache: true,
 
   devServer: {
     port: process.env.PORT || 8080,
