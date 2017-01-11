@@ -30,7 +30,7 @@
     "prestart": "yarn run build",
     "start": "NODE_ENV=production node --optimize_for_size --max_old_space_size=920 --gc_interval=100 index.js",
     "prelocal": "yarn run build",
-    "local": "NODE_ENV=local node index.js",
+    "local": "NODE_ENV=local node --trace-sync-io --trace-warnings --trace-deprecation index.js",
     "build:profile": "webpack -p --profile --display-reasons",
     "surge": "yarn run lint && yarn run build && surge ./build -d https://312development.surge.sh",
     "pretest:local": "eslint ./test --fix",
