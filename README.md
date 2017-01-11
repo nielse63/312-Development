@@ -20,14 +20,18 @@ If there's a bug in my code that you found, or you just think the design of my s
 ## Technology & Tools
 
 *This is just the highlight reel of all the tools I'm using on my site. To see all the giants whose shoulders I'm standing on, checkout the [package.json](https://github.com/nielse63/312-Development/blob/master/package.json) file.*
+
 ### Frameworks & Build Tools:
+
 * [Preact](https://github.com/developit/preact) for UI and views (Preact is like React, but is a smaller library)
 * [Preact Router](https://github.com/developit/preact-router) for handling routes
 * [Babel](http://babeljs.io/) for transpiling ES6
 * [Webpack](http://webpack.github.io/) to bundle modules and handle workflow automation
 * [Express](http://expressjs.com/) for server-side routing
 
+
 ### Languages & Automation
+
 * JS is written in [ES6 format](http://es6-features.org/#Constants)
 * CSS is compiled from [Sass](http://sass-lang.com/)
 * Webpack, mentioned above, handles the bulk of the workflow:
@@ -36,6 +40,7 @@ If there's a bug in my code that you found, or you just think the design of my s
   * Image and font file optimization
 
 ### Linting, Testing, and CI
+
 * [Eslint](http://eslint.org/), executed in a custom Gulp task, validates the JS
 * [Sass Lint](https://github.com/sasstools/sass-lint) as a style type checker on .scss files
 * Using [TravisCI](https://travis-ci.org/) for continuous integration, asset linting cannot fail in order for the build to pass
