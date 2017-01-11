@@ -2,8 +2,8 @@
 
 import { h, Component } from 'preact'
 import { Router } from 'preact-router'
-import S from 'string'
-import extend from 'lodash.assign'
+// import S from 'string'
+// import extend from 'lodash.assign'
 import runtime from 'serviceworker-webpack-plugin/lib/runtime'
 import registerEvents from 'serviceworker-webpack-plugin/lib/browser/registerEvents'
 import applyUpdate from 'serviceworker-webpack-plugin/lib/browser/applyUpdate'
@@ -13,7 +13,7 @@ import Header from './header'
 import Footer from './footer'
 import config from '../config.json'
 
-require('offline-plugin/runtime').install()
+// require('offline-plugin/runtime').install()
 
 const { pushState } = history
 history.pushState = (a, b, url) => {
@@ -34,19 +34,19 @@ export default class App extends Component {
   }
 
   // TODO: move preload functions to their own class
-  static preload() {
-    const scripts = []
-    if (process.env.NODE_ENV === 'production') {
-      scripts.push({
-        src: 'https://cdn.ravenjs.com/3.9.1/raven.min.js',
-        callback() {
-          window.Raven.config('https://e375a4ff56f54d10bc63673d7fa53cb4@sentry.io/121634').install()
-        },
-      })
-    }
-    getScripts(scripts)
-    getStyle()
-  }
+  // static preload() {
+  //   const scripts = []
+  //   if (process.env.NODE_ENV === 'production') {
+  //     scripts.push({
+  //       src: 'https://cdn.ravenjs.com/3.9.1/raven.min.js',
+  //       callback() {
+  //         window.Raven.config('https://e375a4ff56f54d10bc63673d7fa53cb4@sentry.io/121634').install()
+  //       },
+  //     })
+  //   }
+  //   getScripts(scripts)
+  //   getStyle()
+  // }
 
   static scrollListener() {
     let lastPosition = -1
@@ -102,7 +102,8 @@ export default class App extends Component {
 
   componentDidMount() {
     this.listenToServiceWorker()
-    App.preload()
+    // App.preload()
+    getStyle()
 
     setTimeout(() => {
       this.base.classList.add(this.getClass('ready'))

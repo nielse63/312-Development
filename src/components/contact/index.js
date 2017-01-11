@@ -1,7 +1,7 @@
 
 import { h, Component } from 'preact'
 import { Link } from 'preact-router'
-import extend from 'lodash.assign'
+// import extend from 'lodash.assign'
 import BackgroundImage from '../background-image'
 import Banner from '../banner'
 import Social from '../social'

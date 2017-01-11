@@ -1,6 +1,6 @@
 
 import { h, Component } from 'preact'
-import extend from 'lodash.assign'
+// import extend from 'lodash.assign'
 import Grid from '../grid'
 import BackgroundImage from '../background-image'
 import Banner from '../banner'
@@ -10,7 +10,7 @@ export default class Home extends Component {
   constructor(props) {
     super(props)
 
-    this.props = extend(props, {
+    this.props = Object.assign(props, {
       description: 'The personal portfolio of Erik Nielsen - Chicago UI Software Engineer.',
     })
   }

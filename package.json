@@ -10,7 +10,7 @@
   },
   "license": "MIT",
   "repository": "312-Development.git",
-  "main": "app-server.js",
+  "main": "index.js",
   "engine": {
     "node": ">=7.2.1",
     "npm": ">=4.0.5"
@@ -30,12 +30,11 @@
     "prestart": "yarn run build",
     "start": "NODE_ENV=production node --optimize_for_size --max_old_space_size=920 --gc_interval=100 index.js",
     "prelocal": "yarn run build",
-    "local": "NODE_ENV=local node app.js",
+    "local": "NODE_ENV=local node index.js",
     "build:profile": "webpack -p --profile --display-reasons",
     "surge": "yarn run lint && yarn run build && surge ./build -d https://312development.surge.sh",
     "pretest:local": "eslint ./test --fix",
-    "test:local": "mocha -c ./test/*.spec.js",
-    "heroku:remote": "heroku git:remote -a alluring-capitol-reef-91162"
+    "test:local": "mocha -c ./test/*.spec.js"
   },
   "dependencies": {
     "body-parser": "^1.15.2",
@@ -43,17 +42,15 @@
     "express": "^4.14.0",
     "express-minify-html": "^0.9.0",
     "fg-loadcss": "^1.2.0",
+    "file-loader": "^0.9.0",
     "heroku-ssl-redirect": "0.0.3",
     "hogan-express": "^0.5.2",
     "in-view": "^0.6.1",
-    "lodash.assign": "^4.2.0",
-    "offline-plugin": "^4.5.3",
-    "pm2": "^2.2.2",
+    "offline-plugin": "^4.5.4",
     "preact": "^7.1.0",
     "preact-compat": "^3.9.4",
     "preact-router": "^2.3.2",
     "serviceworker-webpack-plugin": "^0.1.7",
-    "string": "^3.3.3",
     "whatwg-fetch": "^2.0.1"
   },
   "devDependencies": {
@@ -80,7 +77,6 @@
     "eslint-plugin-react": "^6.8.0",
     "extract-text-webpack-plugin": "^1.0.1",
     "favicons-webpack-plugin": "0.0.7",
-    "file-loader": "^0.9.0",
     "fontmin": "^0.9.6",
     "html-webpack-plugin": "^2.22.0",
     "imagemin": "^5.2.2",
@@ -89,7 +85,6 @@
     "imagemin-svgo": "^5.2.0",
     "json-loader": "^0.5.4",
     "mocha": "^3.2.0",
-    "nightmare": "^2.8.1",
     "node-sass": "^4.1.1",
     "postcss-loader": "^1.2.1",
     "raw-loader": "^0.5.1",
@@ -98,7 +93,6 @@
     "shelljs": "^0.7.6",
     "source-map-loader": "^0.1.5",
     "style-loader": "^0.13.0",
-    "sw-precache": "^4.2.3",
     "url-loader": "^0.5.7",
     "webpack": "^1.14.0",
     "webpack-dev-server": "^1.16.2"
