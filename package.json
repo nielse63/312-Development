@@ -9,7 +9,7 @@
   },
   "license": "MIT",
   "repository": "312-Development.git",
-  "main": "app-server.js",
+  "main": "app.js",
   "engine": {
     "node": ">=7.4.0",
     "npm": ">=4.0.5"
@@ -27,9 +27,9 @@
     "prebuild": "yarn run clean && yarn run lint && mkdir build && yarn run tasks",
     "build": "NODE_ENV=production webpack -p --progress",
     "prestart": "yarn run build",
-    "start": "NODE_ENV=production node --optimize_for_size --max_old_space_size=920 --gc_interval=100 index.js",
+    "start": "NODE_ENV=production node app.js",
     "prelocal": "yarn run build",
-    "local": "NODE_ENV=production IS_LOCAL=true node index.js",
+    "local": "NODE_ENV=production IS_LOCAL=true node app.js",
     "postlocal": "pm2 stop all",
     "build:profile": "webpack -p --profile --display-reasons",
     "test": "mocha -c ./test/index.spec.js"
@@ -42,10 +42,8 @@
     "heroku-ssl-redirect": "0.0.3",
     "hogan-express": "^0.5.2",
     "in-view": "^0.6.1",
-    "jest": "^18.1.0",
     "lodash.assign": "^4.2.0",
     "offline-plugin": "^4.5.3",
-    "pm2": "^2.2.2",
     "preact": "^7.1.0",
     "preact-compat": "^3.9.4",
     "preact-router": "^2.3.2",
