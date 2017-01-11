@@ -1,7 +1,7 @@
 
 import { h, Component } from 'preact'
 import { Link } from 'preact-router'
-import inView from 'in-view'
+// import inView from 'in-view'
 import style from './style.scss'
 
 function makeid() {
@@ -19,16 +19,16 @@ export default class Grid extends Component {
     this.item_id = makeid()
   }
 
-  componentDidMount() {
-    const target = `[data-grid-id="${this.item_id}"]`
-    inView(target)
-    .on('enter', el => {
-      el.classList.add(style.inview)
-    })
-    // .on('exit', el => {
-    //   el.classList.remove(style.inview)
-    // })
-  }
+  // componentDidMount() {
+  //   const target = `[data-grid-id="${this.item_id}"]`
+  //   inView(target)
+  //   .on('enter', el => {
+  //     el.classList.add(style.inview)
+  //   })
+  //   .on('exit', el => {
+  //     el.classList.remove(style.inview)
+  //   })
+  // }
 
   render() {
     return (

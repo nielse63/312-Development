@@ -19,15 +19,15 @@ $grid-item-distance: 20px;
     max-width: calc(50% - #{$grid-item-distance});
   }
 
-  &.inview {
-    h4 {
-      will-change: transform, opacity;
-    }
+  // &.inview {
+  //   h4 {
+  //     will-change: transform, opacity;
+  //   }
 
-    .grid-item-wrapper {
-      will-change: transform;
-    }
-  }
+  //   .grid-item-wrapper {
+  //     will-change: transform;
+  //   }
+  // }
 
   &:hover {
     h4 {
@@ -97,6 +97,10 @@ $grid-item-distance: 20px;
     }
   }
 
+  .grid-item-wrapper {
+    will-change: transform;
+  }
+
   a {
     padding: 1em;
     color: inherit;
@@ -119,6 +123,7 @@ $grid-item-distance: 20px;
     font-family: $header-font-family;
     position: relative;
     transition: transform 0.5s, opacity 0.5s;
+    will-change: transform, opacity;
 
     @media (min-width: $breakpoint-medium) {
       font-size: 54px;

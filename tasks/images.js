@@ -3,7 +3,7 @@
 const path = require('path')
 const imagemin = require('imagemin')
 const imageminMozjpeg = require('imagemin-mozjpeg')
-const imageminOptipng = require('imagemin-optipng')
+const imageminPngquant = require('imagemin-pngquant')
 const imageminSvgo = require('imagemin-svgo')
 
 // global vars
@@ -17,10 +17,18 @@ paths.forEach(dir => {
   imagemin([dir], dir, {
     plugins: [
       imageminMozjpeg({
-        quality: 85,
+        targa: true,
       }),
-      imageminOptipng(),
-      imageminSvgo(),
+      imageminPngquant({
+        quality: '65-80',
+      }),
+      imageminSvgo({
+        plugins: [{
+          removeTitle: true,
+          removeDesc: true,
+          removeXMLNS: true,
+        }],
+      }),
     ],
   }).catch(err => {
     throw new Error(err)
