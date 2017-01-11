@@ -118,10 +118,10 @@ module.exports = {
         warnings: false,
       },
     }),
-    new webpack.optimize.CommonsChunkPlugin({
-      name: 'vendor',
-      minChunks: Infinity,
-    }),
+    // new webpack.optimize.CommonsChunkPlugin({
+    //   name: 'vendor',
+    //   minChunks: Infinity,
+    // }),
     new FaviconsWebpackPlugin({
       logo: path.resolve(__dirname, 'src/assets/icons/icon-main.png'),
       prefix: 'assets/icons/',
