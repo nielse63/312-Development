@@ -1,11 +1,9 @@
-/* eslint-disable import/no-extraneous-dependencies */
 
 import webpack from 'webpack'
 import ExtractTextPlugin from 'extract-text-webpack-plugin'
 import HtmlWebpackPlugin from 'html-webpack-plugin'
 import autoprefixer from 'autoprefixer'
 import CopyWebpackPlugin from 'copy-webpack-plugin'
-// import OfflinePlugin from 'offline-plugin'
 import FaviconsWebpackPlugin from 'favicons-webpack-plugin'
 import ServiceWorkerWebpackPlugin from 'serviceworker-webpack-plugin'
 import path from 'path'
@@ -17,7 +15,7 @@ const CSS_MAPS = ENV !== 'production'
 module.exports = {
   context: path.resolve(__dirname, 'src'),
   entry: {
-    vendor: ['moment', 'string'],
+    // vendor: ['string'],
     bundle: './index.js',
   },
 
@@ -113,7 +111,7 @@ module.exports = {
       { from: './robots.txt', to: './' },
       { from: './sitemap.xml', to: './' },
     ]),
-    new webpack.PrefetchPlugin('moment'),
+    // new webpack.PrefetchPlugin('moment'),
 
     new webpack.optimize.DedupePlugin(),
     new webpack.optimize.OccurenceOrderPlugin(),
@@ -150,42 +148,6 @@ module.exports = {
       entry: path.join(__dirname, 'src/lib/sw.js'),
     }),
   ],
-  // ].concat(ENV === 'production' ? [
-  //   new webpack.optimize.DedupePlugin(),
-  //   new webpack.optimize.OccurenceOrderPlugin(),
-  //   new webpack.optimize.UglifyJsPlugin({
-  //     compress: {
-  //       warnings: false,
-  //     },
-  //   }),
-  //   new webpack.optimize.CommonsChunkPlugin({
-  //     name: 'vendor',
-  //     minChunks: Infinity,
-  //   }),
-  //   new FaviconsWebpackPlugin({
-  //     logo: path.resolve(__dirname, 'src/assets/icons/icon-main.png'),
-  //     prefix: 'assets/icons/',
-  //     inject: true,
-  //     emitStats: false,
-  //     background: '#383333',
-  //     title: '312 Development',
-  //     icons: {
-  //       android: true,
-  //       appleIcon: true,
-  //       appleStartup: true,
-  //       coast: false,
-  //       favicons: true,
-  //       firefox: true,
-  //       opengraph: true,
-  //       twitter: true,
-  //       yandex: false,
-  //       windows: true,
-  //     },
-  //   }),
-  //   new ServiceWorkerWebpackPlugin({
-  //     entry: path.join(__dirname, 'src/lib/sw.js'),
-  //   }),
-  // ] : []),
 
   stats: { colors: true },
 

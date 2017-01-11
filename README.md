@@ -31,9 +31,9 @@ If there's a bug in my code that you found, or you just think the design of my s
 * JS is written in [ES6 format](http://es6-features.org/#Constants)
 * CSS is compiled from [Sass](http://sass-lang.com/)
 * Webpack, mentioned above, handles the bulk of the workflow:
-	* Compiling Sass
-	* Load optimization of bundled JS
-	* Image and font file optimization
+  * Compiling Sass
+  * Load optimization of bundled JS
+  * Image and font file optimization
 
 ### Linting, Testing, and CI
 * [Eslint](http://eslint.org/), executed in a custom Gulp task, validates the JS

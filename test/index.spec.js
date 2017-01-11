@@ -12,7 +12,7 @@ describe('Check Page Status', function () {
     describe(url, function () {
       this.timeout(0)
 
-      it('page should not be a 404', function (done) {
+      it('page should give valid status', function (done) {
         exec(`curl -I ${url} 2>/dev/null | head -n 1 | cut -d$' ' -f2`, {
           silent: true,
         }, function (code, stdout, stderr) {
