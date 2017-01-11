@@ -1,7 +1,7 @@
 
 import { h, Component } from 'preact'
 import { Router } from 'preact-router'
-import extend from 'lodash.assign'
+// import extend from 'lodash.assign'
 import Home from './home'
 import About from './about'
 import Contact from './contact'
@@ -11,6 +11,7 @@ import NotFound from './404'
 import config from '../config.json'
 
 export default class AppRouter extends Component {
+
   constructor() {
     super()
     this.handleRoute = this._handleRoute.bind(this)
@@ -28,7 +29,7 @@ export default class AppRouter extends Component {
 
   getMeta(url) {
     this.meta = config.META[url] || config.META['404']
-    return extend({}, config.META.default, this.meta)
+    return Object.assign({}, config.META.default, this.meta)
   }
 
   createTitle(url) {

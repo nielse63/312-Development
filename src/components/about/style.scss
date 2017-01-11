@@ -63,7 +63,7 @@
 
 .table {
   display: flex;
-  margin-top: 50px;
+  margin-top: 100px;
   margin-left: -15px;
   margin-right: -15px;
 
@@ -72,23 +72,23 @@
     max-width: percentage(1 / 3);
     flex: 1 0 percentage(1 / 3);
     padding: 0 15px;
+
+    ul {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    li {
+      + li {
+        margin-top: 5px;
+        padding-top: 5px;
+        border-top: 1px solid fade-out($black, 0.85);
+      }
+    }
   }
 
   &-header {
     font-weight: 700;
-  }
-
-  ul {
-    margin: 0;
-    padding: 0;
-    list-style: none;
-  }
-
-  li {
-    + li {
-      margin-top: 5px;
-      padding-top: 5px;
-      border-top: 1px solid fade-out($black, 0.85);
-    }
   }
 }

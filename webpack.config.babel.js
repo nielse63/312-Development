@@ -1,4 +1,3 @@
-/* eslint-disable import/no-extraneous-dependencies */
 
 import webpack from 'webpack'
 import ExtractTextPlugin from 'extract-text-webpack-plugin'
@@ -16,7 +15,7 @@ const CSS_MAPS = ENV !== 'production'
 module.exports = {
   context: path.resolve(__dirname, 'src'),
   entry: {
-    vendor: ['moment', 'string'],
+    // vendor: ['string'],
     bundle: './index.js',
   },
 
@@ -110,7 +109,7 @@ module.exports = {
       { from: './robots.txt', to: './' },
       { from: './sitemap.xml', to: './' },
     ]),
-    new webpack.PrefetchPlugin('moment'),
+    // new webpack.PrefetchPlugin('moment'),
 
     new webpack.optimize.DedupePlugin(),
     new webpack.optimize.OccurenceOrderPlugin(),

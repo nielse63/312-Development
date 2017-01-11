@@ -22,8 +22,6 @@
 }
 
 .center {
-  font-size: 22px;
-
   div {
     display: flex;
     justify-content: space-between;
@@ -31,15 +29,16 @@
 
   a {
     $size: 36px;
-
     position: relative;
-    color: mix($background-color, $black);
+    color: mix($black, $background-color);
     display: block;
     height: $size;
     width: $size;
     text-align: center;
-    line-height: 1;
+    border-radius: 50%;
+    background-clip: content-box;
     transition: 0.35s color;
+    line-height: 1;
 
     &:hover {
       color: $pink;

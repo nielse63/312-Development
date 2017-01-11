@@ -2,6 +2,7 @@
 import { h, Component } from 'preact'
 import { Link } from 'preact-router'
 import Nav from '../nav'
+import Logo from '../logo'
 import style from './style.scss'
 
 let isDark = false
@@ -96,9 +97,7 @@ export default class Header extends Component {
     return (
       <header className={style.header} data-header>
         <div className={style.container}>
-          <h1 className={style.logo}>
-            <Link href="/">312 Development</Link>
-          </h1>
+          <Logo />
           <Nav />
         </div>
       </header>

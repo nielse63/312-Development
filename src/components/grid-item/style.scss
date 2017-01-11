@@ -182,18 +182,10 @@ $grid-item-distance: 20px;
     display: inline-block;
     width: 26px;
     height: 26px;
+    background-image: url('/assets/images/repo-js.svg');
     background-position: center;
     background-repeat: no-repeat;
     background-size: contain;
-    background-image: url('/assets/images/repo-js.svg');
-  }
-
-  // .javascript {
-  //   background-image: url('/assets/images/repo-js.svg');
-  // }
-
-  .html {
-    background-image: url('/assets/images/repo-html.svg');
   }
 
   .css {
@@ -202,6 +194,16 @@ $grid-item-distance: 20px;
 
   .php {
     background-image: url('/assets/images/repo-php.svg');
+  }
+
+  .html {
+    background-image: url('/assets/images/repo-html.svg');
+  }
+
+  .fa-star-0 {
+    &:before {
+      margin-right: 2px;
+    }
   }
 }
 

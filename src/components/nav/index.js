@@ -43,20 +43,18 @@ export default class Nav extends Component {
     this.preloaded.images.push(bg)
   }
 
-  _onMouseOver(e) {
-    const src = e.target.dataset.src
-    const href = e.target.href
-    if (this.preloaded.urls.indexOf(href) < 0) {
-      this.preloaded.urls.push(href)
-      preloadDocument(href)
+  preload(key, src, fn) {
+    if (this.preloaded[key].indexOf(src) < 0) {
+      this.preloaded[key].push(src)
+      fn(src)
     }
+  }
 
+  _onMouseOver(e) {
+    this.preload('urls', e.target.href, preloadDocument)
     const size = Nav.getImageSize(window.innerWidth)
-    const realSrc = src.replace(/\.jpg$/, `-${size}.jpg`)
-    if (this.preloaded.images.indexOf(realSrc) < 0) {
-      this.preloaded.images.push(realSrc)
-      preloadImage(realSrc)
-    }
+    const realSrc = e.target.dataset.src.replace(/\.jpg$/, `-${size}.jpg`)
+    this.preload('images', realSrc, preloadImage)
   }
 
   render() {

@@ -1,10 +1,13 @@
 
 import { h, Component } from 'preact'
 import { Link } from 'preact-router'
-import extend from 'lodash.assign'
+// import extend from 'lodash.assign'
 import BackgroundImage from '../background-image'
 import Banner from '../banner'
 import Social from '../social'
+import TextInput from './inputs/input'
+import TextArea from './inputs/textarea'
+import Button from './inputs/button'
 import style from './style.scss'
 
 export default class Contact extends Component {
@@ -32,29 +35,12 @@ export default class Contact extends Component {
             </p>
             <h3>Contact</h3>
             <form action={this.props.url} onSubmit={this.onSubmit}>
-              <div>
-                <label htmlFor="first_name">First Name</label>
-                <input type="text" name="first_name" />
-              </div>
-              <div>
-                <label htmlFor="last_name">Last Name</label>
-                <input type="text" name="last_name" />
-              </div>
-              <div>
-                <label htmlFor="email">Email</label>
-                <input type="email" name="email" />
-              </div>
-              <div>
-                <label htmlFor="phone">Phone Number</label>
-                <input type="tel" name="phone" />
-              </div>
-              <div className={style.full}>
-                <label htmlFor="message">Message</label>
-                <textarea name="message" />
-              </div>
-              <div className={style.full}>
-                <button type="submit">Submit</button>
-              </div>
+              <TextInput name="first_name" label="First Name" />
+              <TextInput name="last_name" label="Last Name" />
+              <TextInput type="email" name="email" label="Email" />
+              <TextInput type="tel" name="phone" label="Phone Number" />
+              <TextArea name="message" label="Message" />
+              <Button label="Submit" />
             </form>
           </div>
         </div>

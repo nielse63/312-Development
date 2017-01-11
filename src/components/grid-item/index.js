@@ -25,9 +25,9 @@ export default class Grid extends Component {
     .on('enter', el => {
       el.classList.add(style.inview)
     })
-    .on('exit', el => {
-      el.classList.remove(style.inview)
-    })
+    // .on('exit', el => {
+    //   el.classList.remove(style.inview)
+    // })
   }
 
   render() {

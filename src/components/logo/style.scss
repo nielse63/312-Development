@@ -1,0 +1,26 @@
+
+@import '~style/helpers';
+
+.logo {
+  margin: 0;
+  padding: 0 0 0 42px;
+  font-size: 20px;
+  line-height: $header-height;
+  background-image: url('/assets/images/icon-black.svg');
+  background-position: left center;
+  background-repeat: no-repeat;
+  background-size: auto 36px;
+
+  a {
+    color: $background-color;
+  }
+
+  [class*="dark"] & {
+    background-image: url('/assets/images/icon-pink.svg');
+
+    &,
+    a {
+      color: $pink;
+    }
+  }
+}
