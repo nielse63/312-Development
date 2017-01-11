@@ -1,7 +1,5 @@
 ---
 engines:
-  csslint:
-    enabled: true
   duplication:
     enabled: true
     config:
@@ -10,6 +8,11 @@ engines:
   eslint:
     enabled: true
     channel: "eslint-3"
+    config:
+      config: .eslintrc.js
+    checks:
+      import/no-unresolved:
+        enabled: false
   fixme:
     enabled: true
   markdownlint:
@@ -31,3 +34,5 @@ exclude_paths:
 exclude_fingerprints:
 - 6df301524c1b4d6cdd7dd5935cda768f
 - ee47385f22344fc1029b0739ecc267eb
+- 3f8f8f69d39d8e9df13f6b76a43b02c7
+- 5343005665ed9f82fe1661a352aabb6e

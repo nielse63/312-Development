@@ -5,13 +5,12 @@ import * as utils from '../utils'
 const url = require('url')
 const Nightmare = require('nightmare')
 const expect = require('chai').expect
-const should = require('chai').should
 
 const SELECTOR = '[class^="banner_"]'
 
 module.exports = function (URL) {
   describe(`Banner (${URL})`, function () {
-    this.timeout(0)
+    // this.timeout(0)
     const nightmare = new Nightmare()
     let data = {}
 
