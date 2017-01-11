@@ -1,27 +1,30 @@
 /* global exec */
 
 import * as utils from './utils'
+import * as server from './server'
+import status from './status.spec'
+import nightmare from './nightmare'
 
-require('shelljs/global')
-const expect = require('chai').expect
+describe('312 Development', function () {
+  this.timeout(0)
 
-describe('Check Page Status', function () {
-  Object.keys(utils.URLS).forEach(page => {
-    const url = utils.URLS[page]
-
-    describe(url, function () {
-      this.timeout(0)
-
-      it('page should give valid status', function (done) {
-        exec(`curl -I ${url} 2>/dev/null | head -n 1 | cut -d$' ' -f2`, {
-          silent: true,
-        }, function (code, stdout, stderr) {
-          if (code) return false
-          const status = parseInt(stdout, 10)
-          expect(status).to.be.within(200, 300)
-          return done()
-        })
-      })
-    })
+  before(function () {
+    return server.start()
   })
+
+  after(function () {
+    server.stop()
+  })
+
+  describe('Check Page Status', function () {
+    status()
+  })
+
+  if (!process.env.CI) {
+    describe('Functional Tests', function () {
+      this.timeout(2500)
+
+      nightmare(utils)
+    })
+  }
 })

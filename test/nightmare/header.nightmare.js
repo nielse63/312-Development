@@ -5,13 +5,12 @@ import * as utils from '../utils'
 const url = require('url')
 const Nightmare = require('nightmare')
 const expect = require('chai').expect
-const should = require('chai').should
 
 const SELECTORS = '[data-header] nav a'
 
 module.exports = function (URL) {
   describe(`Header (${URL})`, function () {
-    this.timeout(0)
+    // this.timeout(0)
     const nightmare = new Nightmare()
     let data = {}
 
@@ -20,7 +19,7 @@ module.exports = function (URL) {
           .viewport(utils.VIEWPORT.width, utils.VIEWPORT.height)
           .goto(URL)
           .wait('[data-header]')
-          .wait(1500)
+          .wait(1000)
           .evaluate(function (sel) {
             const header = document.querySelector(sel)
             const logo = document.querySelector('[data-header] h1')
