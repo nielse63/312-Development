@@ -19,16 +19,15 @@ If there's a bug in my code that you found, or you just think the design of my s
 
 ## Technology & Tools
 
-*This is just the highlight reel of all the tools I'm using on my site. To see all the giants whose shoulders I'm standing on, checkout the [package.json](https://github.com/nielse63/312-Development/blob/master/package.json) file.*
+This is just the highlight reel of all the tools I'm using on my site. To see all the giants whose shoulders I'm standing on, checkout the [package.json](https://github.com/nielse63/312-Development/blob/master/package.json) file.*
 
-### Frameworks & Build Tools:
+### Frameworks & Build Tools
 
 * [Preact](https://github.com/developit/preact) for UI and views (Preact is like React, but is a smaller library)
 * [Preact Router](https://github.com/developit/preact-router) for handling routes
 * [Babel](http://babeljs.io/) for transpiling ES6
 * [Webpack](http://webpack.github.io/) to bundle modules and handle workflow automation
 * [Express](http://expressjs.com/) for server-side routing
-
 
 ### Languages & Automation
 

@@ -1,12 +1,12 @@
-/* eslint-disable global-require */
 
 import { h, render } from 'preact'
 import style from './style/index.scss'
 
-let root
+const App = require('./components/app').default
+
+let appRoot = null
 function init() {
-  const App = require('./components/app').default
-  root = render(
+  appRoot = render(
     <App
       classes={{
         default: style.main,
@@ -16,13 +16,14 @@ function init() {
         loading: style.loading,
       }}
     />,
-    document.body, root,
+    document.body, appRoot,
   )
 }
 
 init()
 
 if (process.env.NODE_ENV !== 'production') {
+  /* eslint-disable global-require */
   require('preact/devtools')
 }
 
