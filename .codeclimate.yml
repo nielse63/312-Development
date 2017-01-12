@@ -4,7 +4,7 @@ engines:
     enabled: true
     config:
       languages:
-      - javascript
+        javascript:
   eslint:
     enabled: true
     channel: "eslint-3"
@@ -38,3 +38,6 @@ exclude_fingerprints:
 - ee47385f22344fc1029b0739ecc267eb
 - 3f8f8f69d39d8e9df13f6b76a43b02c7
 - 5343005665ed9f82fe1661a352aabb6e
+addons:
+  code_climate:
+    repo_token: 6e1412ae6fabced67e91bdef69c326e9d1d10080e65fc2ffc2ddaa33e5492194
