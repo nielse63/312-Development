@@ -22,6 +22,16 @@ function createScript(src, callback) {
   return g
 }
 
+export function createResourceHint(rel, src, type = null) {
+  const link = document.createElement('link')
+  link.href = src
+  link.rel = rel
+  if (type) {
+    link.as = type
+  }
+  document.head.appendChild(link)
+}
+
 export function getStyle() {
   if (!navigator.onLine) {
     return
@@ -32,6 +42,25 @@ export function getStyle() {
       loadCSS('https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css')
     }
   }, 1000)
+}
+
+export function supportsLink(type) {
+  function DOMTokenListSupports(tokenList, token) {
+    if (!tokenList || !tokenList.supports) {
+      return
+    }
+    try {
+      return tokenList.supports(token)
+    } catch (e) {
+      /* eslint-disable no-console */
+      if (e instanceof TypeError) {
+        console.log("The DOMTokenList doesn't have a supported tokens list")
+      } else {
+        console.error("That shouldn't have happened")
+      }
+    }
+  }
+  return DOMTokenListSupports(document.createElement('link').relList, type)
 }
 
 export function getScript(src, callback = () => {}) {
@@ -55,25 +84,14 @@ export function getScripts(scripts) {
   })
 }
 
-export function preload(src, type) {
-  const link = document.createElement('link')
-  link.href = src
-  link.rel = 'preload'
-  link.as = type
-  setTimeout(() => {
-    document.head.appendChild(link)
-  }, 150)
-}
-
 export function preloadImage(src) {
-  preload(src, 'image')
+  if (supportsLink('prefetch')) {
+    createResourceHint('prefetch', src, 'image')
+  }
 }
 
 export function preloadDocument(src) {
-  const link = document.createElement('link')
-  link.href = src
-  link.rel = 'prerender'
-  setTimeout(() => {
-    document.head.appendChild(link)
-  }, 150)
+  if (supportsLink('prerender')) {
+    createResourceHint('prerender', src)
+  }
 }

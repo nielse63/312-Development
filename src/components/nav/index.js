@@ -23,12 +23,7 @@ export default class Nav extends Component {
 
   constructor(props) {
     super(props)
-    this.preloaded = {
-      images: [],
-      urls: [
-        window.location.href,
-      ],
-    }
+    this.preloaded = [window.location.href]
     this.onMouseOver = this._onMouseOver.bind(this)
   }
 
@@ -40,21 +35,27 @@ export default class Nav extends Component {
       .match(/\((.*?)\)/)[1]
       .replace(/"/g, '')
       .replace(baseUrl, '')
-    this.preloaded.images.push(bg)
+    this.preloaded.push(bg)
   }
 
-  preload(key, src, fn) {
-    if (this.preloaded[key].indexOf(src) < 0) {
-      this.preloaded[key].push(src)
-      fn(src)
+  preload(type, src) {
+    if (this.preloaded.indexOf(src) > -1) {
+      return
     }
+    this.preloaded.push(src)
+
+    if (type === 'image') {
+      return preloadImage(src)
+    }
+    return preloadDocument(src)
   }
 
   _onMouseOver(e) {
-    this.preload('urls', e.target.href, preloadDocument)
+    this.preload('document', e.target.href)
+
     const size = Nav.getImageSize(window.innerWidth)
     const realSrc = e.target.dataset.src.replace(/\.jpg$/, `-${size}.jpg`)
-    this.preload('images', realSrc, preloadImage)
+    this.preload('image', realSrc)
   }
 
   render() {
