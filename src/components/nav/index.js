@@ -2,7 +2,7 @@
 import { h, Component } from 'preact'
 import { Link } from 'preact-router'
 import style from './style.scss'
-import { preloadImage, preloadDocument } from '../../lib/load-jquery'
+import { preloadImage, preloadDocument } from '../../lib/preload'
 
 export default class Nav extends Component {
   static getImageSize(width) {
@@ -60,10 +60,22 @@ export default class Nav extends Component {
   render() {
     return (
       <nav className={style.nav}>
-        <Link href="/" onMouseOver={this.onMouseOver} data-src="/assets/images/bg2.jpg">Home</Link>
-        <Link href="/about" onMouseOver={this.onMouseOver} data-src="/assets/images/bg3.jpg">About Me</Link>
-        <Link href="/portfolio" onMouseOver={this.onMouseOver} data-src="/assets/images/bg1.jpg">Work</Link>
-        <Link href="/contact" onMouseOver={this.onMouseOver} data-src="/assets/images/bg4.jpg">Contact</Link>
+        <Link
+          href="/"
+          onMouseOver={this.onMouseOver}
+          data-src="/assets/images/bg2.jpg">Home</Link>
+        <Link
+          href="/about"
+          onMouseOver={this.onMouseOver}
+          data-src="/assets/images/bg3.jpg">About Me</Link>
+        <Link
+          href="/portfolio"
+          onMouseOver={this.onMouseOver}
+          data-src="/assets/images/bg1.jpg">Work</Link>
+        <Link
+          href="/contact"
+          onMouseOver={this.onMouseOver}
+          data-src="/assets/images/bg4.jpg">Contact</Link>
       </nav>
     )
   }

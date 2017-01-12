@@ -2,11 +2,9 @@
 
 import { h, Component } from 'preact'
 import { Router } from 'preact-router'
-import runtime from 'serviceworker-webpack-plugin/lib/runtime'
-import registerEvents from 'serviceworker-webpack-plugin/lib/browser/registerEvents'
-import applyUpdate from 'serviceworker-webpack-plugin/lib/browser/applyUpdate'
 import AppRouter from './router'
-import { getScripts, getStyle, preloadImages } from '../lib/load-jquery'
+import { getScripts, getStyle, preloadImages } from '../lib/preload'
+import { listener } from '../lib/sw-listener'
 import Header from './header'
 import Footer from './footer'
 import config from '../config.json'
@@ -82,7 +80,7 @@ export default class App extends Component {
   }
 
   componentDidMount() {
-    this.listenToServiceWorker()
+    listener()
     getStyle()
 
     setTimeout(() => {
@@ -100,38 +98,6 @@ export default class App extends Component {
 
   getClass(cls) {
     return this.props.classes[cls]
-  }
-
-  // TODO: Move service worker functions to their own class
-  listenToServiceWorker() {
-    /* eslint-disable no-console */
-
-    if ('serviceWorker' in navigator && (window.location.protocol === 'https:' ||
-      window.location.hostname === 'localhost')
-    ) {
-      const registration = runtime.register()
-
-      registerEvents(registration, {
-        onInstalled: () => {
-          console.log('[SW]: Installed')
-        },
-        onUpdateReady: () => {
-          console.log('[SW]: Update ready')
-        },
-
-        onUpdating: () => {
-          console.log('[SW]: Updating')
-        },
-        onUpdateFailed: () => {
-          console.log('[SW]: Update Failed')
-        },
-        onUpdated: () => {
-          console.log('[SW]: Updated')
-        },
-      })
-    } else {
-      console.log('[SW]: ServiceWorker not available')
-    }
   }
 
   render() {

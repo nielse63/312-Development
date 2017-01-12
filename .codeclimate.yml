@@ -24,14 +24,10 @@ engines:
         enabled: false
 ratings:
   paths:
-  - "src/**.js"
-  - "src/**.scss"
-  - "app.js"
-  - "webpack.config.babel.js"
+  - "**.js"
+  - "**.scss"
 exclude_paths:
 - node_modules/
-- test/
-- tasks/
 - build/
 exclude_fingerprints:
 - 6df301524c1b4d6cdd7dd5935cda768f
