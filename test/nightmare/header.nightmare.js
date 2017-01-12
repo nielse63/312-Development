@@ -6,24 +6,19 @@ const url = require('url')
 const Nightmare = require('nightmare')
 const expect = require('chai').expect
 
-const SELECTORS = '[data-header] nav a'
-
-module.exports = function (urlToCheck = utils.URLS.home) {
-  describe(`Header (${urlToCheck})`, function () {
+module.exports = function () {
+  describe(`Header (${utils.URLS.home})`, function () {
     const nightmare = new Nightmare()
     let data = {}
 
     before(function () {
       return nightmare
           .viewport(utils.VIEWPORT.width, utils.VIEWPORT.height)
-          // .on('did-get-response-details', function (...args) {
-          //   console.log(args)
-          // })
-          .goto(urlToCheck)
+          .goto(utils.URLS.home)
           .wait('[data-header]')
           .wait(1000)
-          .evaluate(function (sel) {
-            const header = document.querySelector(sel)
+          .evaluate(function () {
+            const header = document.querySelector('[data-header]')
             const logo = document.querySelector('[data-header] h1')
             const nav = document.querySelector('[data-header] nav')
             const navItems = document.querySelectorAll('[data-header] nav a')
@@ -58,7 +53,7 @@ module.exports = function (urlToCheck = utils.URLS.home) {
                 }),
               },
             }
-          }, '[data-header]')
+          })
           .end()
           .then(function (d) {
             data = d
@@ -88,6 +83,11 @@ module.exports = function (urlToCheck = utils.URLS.home) {
         urls: [],
       }
 
+      function testNavLinks(givenURL, expectedPath) {
+        const object = url.parse(givenURL)
+        expect(object.pathname).to.equal(expectedPath)
+      }
+
       before(function () {
         links = {
           length: data.nav.items.length,
@@ -100,23 +100,19 @@ module.exports = function (urlToCheck = utils.URLS.home) {
       })
 
       it('should have home link first', function () {
-        const object = url.parse(links.urls[0])
-        expect(object.pathname).to.equal('/')
+        testNavLinks(links.urls[0], '/')
       })
 
       it('should have about link second', function () {
-        const object = url.parse(links.urls[1])
-        expect(object.pathname).to.equal('/about')
+        testNavLinks(links.urls[1], '/about')
       })
 
       it('should have portfolio link third', function () {
-        const object = url.parse(links.urls[2])
-        expect(object.pathname).to.equal('/portfolio')
+        testNavLinks(links.urls[2], '/portfolio')
       })
 
       it('should have contact link fourth', function () {
-        const object = url.parse(links.urls[3])
-        expect(object.pathname).to.equal('/contact')
+        testNavLinks(links.urls[3], '/contact')
       })
     })
 
