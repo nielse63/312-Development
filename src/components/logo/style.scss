@@ -3,16 +3,17 @@
 
 .logo {
   margin: 0;
-  padding: 0 0 0 42px;
   font-size: 20px;
-  line-height: $header-height;
-  background-image: url('/assets/images/icon-black.svg');
+  line-height: ($header-height / 20px);
+  background-image: url('/assets/images/icon-white.svg');
   background-position: left center;
   background-repeat: no-repeat;
   background-size: auto 36px;
 
   a {
     color: $background-color;
+    padding: 0 0 0 42px;
+    display: block;
   }
 
   [class*="dark"] & {
