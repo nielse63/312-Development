@@ -4,13 +4,13 @@ import registerEvents from 'serviceworker-webpack-plugin/lib/browser/registerEve
 import applyUpdate from 'serviceworker-webpack-plugin/lib/browser/applyUpdate'
 
 export function hasServiceWorker() {
-  return ('serviceWorker' in navigator && window.location.protocol === 'https:')
+  return ('serviceWorker' in navigator &&
+    (window.location.protocol === 'https:' || window.location.hostname === 'localhost'))
 }
 
 export function listener() {
   /* eslint-disable no-console */
 
-  console.log(window.location.protocol)
   if (hasServiceWorker()) {
     registerEvents(runtime.register(), {
       onInstalled: () => {

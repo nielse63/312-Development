@@ -10,7 +10,7 @@ export default class Grid extends Component {
     super(props)
     this.state = {
       posts: [],
-      now: Date.now(),
+      now: performance.now(),
     }
   }
 
