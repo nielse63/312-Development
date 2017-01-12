@@ -10,4 +10,7 @@ module.exports = {
     "func-names": "off",
     "no-console": "off"
   },
+  "globals": {
+    "casper": true
+  }
 };

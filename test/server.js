@@ -1,13 +1,14 @@
 
 const spawn = require('child_process').spawn
+const path = require('path')
 
-let yarn = null
+let yarn
 
-exports.start = function () {
+exports.start = function start() {
   let notDone = true
+  const cwd = path.resolve(__dirname, '..')
+  console.log('Rebuilding and spinning up server')
   return new Promise(function (resolve) {
-    const cwd = process.cwd()
-    console.log('=== Creating new build ===')
     yarn = spawn('yarn', ['run', 'local', '--', '--trace-warnings'], {
       cwd,
       env: Object.assign({
@@ -16,10 +17,9 @@ exports.start = function () {
         WEB_CONCURRENCY: 1,
       }, process.env),
     })
-    yarn.stderr.on('data', ...args => {
-      console.log('stderr:')
-      console.log(args)
-    })
+    // yarn.stderr.on('data', data => {
+    //   console.log(`stderr: ${data}`)
+    // })
     yarn.stdout.on('data', data => {
       // console.log(`stdout: ${data}`)
       if (notDone && data.indexOf('Viewable on port 3001') > -1) {
@@ -27,19 +27,18 @@ exports.start = function () {
         resolve()
       }
     })
-    yarn.on('close', (code, ...args) => {
-      console.log(`=== yarn exited with code ${code} ===`)
-      console.log(args)
+    yarn.on('exit', code => {
+      if(code) console.log(`=== yarn exited with code ${code} ===`)
     })
   }).catch(function (err) {
-    console.log(`err: ${err}`)
+    console.log(err)
   })
 }
 
-exports.stop = function () {
-  console.log(yarn)
+exports.stop = function stop(cb) {
   yarn.kill()
+  yarn = null
   setTimeout(function () {
-    console.log(yarn)
-  }, 0)
+    cb()
+  }, 250)
 }

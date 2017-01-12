@@ -1,24 +1,24 @@
-// @flow weak
-/* eslint-disable no-console, max-nested-callbacks, max-statements */
+/* eslint-disable no-console, max-nested-callbacks */
 
 const DEBUG = false
 
 /**
  * When the user navigates to your site,
- * the browser tries to redownload the script file that defined the service worker in
- * the background.
- * If there is even a byte's difference in the service worker file compared to what it
- * currently has, it considers it 'new'.
+ * the browser tries to redownload the script file that defined the service worker in the background.
+ * If there is even a byte's difference in the service worker file compared to what it currently has,
+ * it considers it 'new'.
  */
 const {
   assets,
 } = global.serviceWorkerOption
 
 const CACHE_NAME = (new Date()).toISOString()
+
 let assetsToCache = [
   ...assets,
   './',
 ]
+
 assetsToCache = assetsToCache.map(path => new URL(path, global.location).toString())
 
 // When the service worker is first added to a computer.

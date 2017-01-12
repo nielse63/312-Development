@@ -3,7 +3,6 @@
 
 const express = require('express')
 const path = require('path')
-// const extend = require('lodash.assign')
 const hogan = require('hogan-express')
 const bodyParser = require('body-parser')
 const compression = require('compression')
@@ -38,11 +37,8 @@ if (process.env.SSL_REDIRECT) {
 }
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
-// app.use(express.static(`${__dirname}/build`))
 app.use(express.static(`${__dirname}/build`, {
-  setHeaders(res) {
-    setResponseHeaders(res)
-  },
+  setHeaders: setResponseHeaders,
 }))
 app.use(minifyHTML({
   override: true,
@@ -93,9 +89,5 @@ app.get('*', (req, res) => {
 })
 
 app.listen(app.get('port'), () => {
-  // if (process.env.DYNO) {
-  //   console.log('This is on Heroku..!!')
-  //   fs.openSync('/tmp/app-initialized', 'w')
-  // }
   console.log('Viewable on port %s', app.get('port')) // eslint-disable-line no-console
 })
