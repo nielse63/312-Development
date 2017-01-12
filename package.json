@@ -34,7 +34,7 @@
     "local": "yarn run local:server",
     "pretest": "yarn run lint && eslint ./test --fix",
     "test": "mocha -c ./test/index.spec.js",
-    "posttest": "killall node"
+    "posttest": "pm2 kill"
   },
   "dependencies": {
     "body-parser": "^1.15.2",
