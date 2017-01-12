@@ -33,8 +33,7 @@
     "local:server": "node pm2.js",
     "local": "yarn run local:server",
     "pretest": "yarn run lint && eslint ./test --fix",
-    "test": "mocha -c ./test/index.spec.js",
-    "posttest": "pm2 kill"
+    "test": "mocha -c ./test/index.spec.js"
   },
   "dependencies": {
     "body-parser": "^1.15.2",
