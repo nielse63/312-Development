@@ -2,22 +2,20 @@
 import path from 'path'
 import * as utils from '../utils'
 
-const url = require('url')
 const Nightmare = require('nightmare')
 const expect = require('chai').expect
 
 const SELECTOR = '[class^="banner_"]'
 
-module.exports = function (URL) {
-  describe(`Banner (${URL})`, function () {
-    // this.timeout(0)
+module.exports = function (urlToCheck = utils.URLS.home) {
+  describe(`Banner (${urlToCheck})`, function () {
     const nightmare = new Nightmare()
     let data = {}
 
     before(function () {
       return nightmare
           .viewport(utils.VIEWPORT.width, utils.VIEWPORT.height)
-          .goto(URL)
+          .goto(urlToCheck)
           .wait('#app')
           .wait(1500)
           .evaluate(function (sel) {
@@ -39,7 +37,6 @@ module.exports = function (URL) {
           .end()
           .then(function (d) {
             data = d
-            // console.log(data)
           })
           .catch(function (e) {
             console.error(e)

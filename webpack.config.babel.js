@@ -3,8 +3,6 @@ import webpack from 'webpack'
 import ExtractTextPlugin from 'extract-text-webpack-plugin'
 import HtmlWebpackPlugin from 'html-webpack-plugin'
 import autoprefixer from 'autoprefixer'
-import cssnano from 'cssnano'
-import comments from 'postcss-discard-comments'
 import CopyWebpackPlugin from 'copy-webpack-plugin'
 import FaviconsWebpackPlugin from 'favicons-webpack-plugin'
 import ServiceWorkerWebpackPlugin from 'serviceworker-webpack-plugin'
@@ -88,9 +86,7 @@ module.exports = {
   },
 
   postcss: () => [
-    autoprefixer({ browsers: 'last 2 versions' }),
-    comments({ removeAll: true }),
-    cssnano,
+    autoprefixer({ browsers: '> 1%' }),
   ],
 
   plugins: [
@@ -100,14 +96,12 @@ module.exports = {
       },
     }),
     new webpack.NoErrorsPlugin(),
-    // new ExtractTextPlugin({
-    //   filename: 'style.css',
-    //   allChunks: true,
-    // }),
     new ExtractTextPlugin('style.css'),
     new HtmlWebpackPlugin({
       template: './home.html',
       filename: `${(ENV === 'dev-server' ? 'index' : 'home')}.html`,
+      hash: CSS_MAPS,
+      cache: false,
     }),
     new CopyWebpackPlugin([
       { from: './favicon.ico', to: './' },
@@ -146,13 +140,13 @@ module.exports = {
     new webpack.optimize.OccurenceOrderPlugin(),
   ],
 
-  devtool: ENV === 'production' ? 'source-map' : 'cheap-module-eval-source-map',
+  devtool: 'source-map',
   target: 'web',
   stats: {
     colors: true,
   },
   profile: true,
-  cache: true,
+  // cache: true,
 
   devServer: {
     port: process.env.PORT || 8080,

@@ -15,3 +15,5 @@ exports.VIEWPORT = {
   width: 1350,
   height: 650,
 }
+
+exports.TRANSITION_DURATION = 1600

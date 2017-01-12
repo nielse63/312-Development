@@ -3,7 +3,7 @@
 import { h, Component } from 'preact'
 import { Router } from 'preact-router'
 import AppRouter from './router'
-import { getScripts, getStyle, preloadImages } from '../lib/preload'
+import { getScripts, getStyle } from '../lib/preload'
 import { listener } from '../lib/sw-listener'
 import Header from './header'
 import Footer from './footer'
