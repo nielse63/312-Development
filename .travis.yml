@@ -13,3 +13,6 @@ cache:
   directories:
     - $HOME/.cache/yarn
     - node_modules
+addons:
+  code_climate:
+    repo_token: 6e1412ae6fabced67e91bdef69c326e9d1d10080e65fc2ffc2ddaa33e5492194

@@ -10,7 +10,6 @@ const SELECTORS = '[data-header] nav a'
 
 module.exports = function (URL) {
   describe(`Header (${URL})`, function () {
-    // this.timeout(0)
     const nightmare = new Nightmare()
     let data = {}
 

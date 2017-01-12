@@ -13,6 +13,8 @@ engines:
     checks:
       import/no-unresolved:
         enabled: false
+      import/no-extraneous-dependencies:
+        enabled: false
   fixme:
     enabled: true
   markdownlint:

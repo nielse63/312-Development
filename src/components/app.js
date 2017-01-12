@@ -2,8 +2,6 @@
 
 import { h, Component } from 'preact'
 import { Router } from 'preact-router'
-// import S from 'string'
-// import extend from 'lodash.assign'
 import runtime from 'serviceworker-webpack-plugin/lib/runtime'
 import registerEvents from 'serviceworker-webpack-plugin/lib/browser/registerEvents'
 import applyUpdate from 'serviceworker-webpack-plugin/lib/browser/applyUpdate'
