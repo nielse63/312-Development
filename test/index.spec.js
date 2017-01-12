@@ -20,9 +20,9 @@ describe('312 Development Tests', function () {
     server.stop(done)
   })
 
-  // describe('Check Page Status', function () {
-  //   status()
-  // })
+  describe('Check Page Status', function () {
+    status()
+  })
 
   if (!process.env.CI) {
     describe('Functional Tests', function () {

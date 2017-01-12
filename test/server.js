@@ -3,6 +3,7 @@ const spawn = require('child_process').spawn
 const path = require('path')
 
 let yarn
+const command = process.env.CI ? 'local' : 'local:server'
 
 export function start() {
   let notDone = true
@@ -10,7 +11,7 @@ export function start() {
   const output = []
   console.log('Rebuilding and spinning up server')
   return new Promise(function (resolve) {
-    yarn = spawn('yarn', ['run', 'local:server'], {
+    yarn = spawn('yarn', ['run', command], {
       cwd,
       env: Object.assign({
         WEB_CONCURRENCY: 1,

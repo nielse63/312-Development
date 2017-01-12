@@ -127,7 +127,7 @@ module.exports = function (urlToCheck = utils.URLS.home) {
       })
 
       it('validate logo styles', function () {
-        expect(data.logo.width).to.equal(233)
+        expect(data.logo.width).to.equal(218)
         expect(data.logo.height).to.equal(66)
         expect(data.logo.left).to.equal(50)
         expect(data.logo.color).to.equal('rgb(249, 247, 249)')

@@ -5,8 +5,6 @@ import * as utils from '../utils'
 const Nightmare = require('nightmare')
 const expect = require('chai').expect
 
-const SELECTOR = '[class^="banner_"]'
-
 module.exports = function (urlToCheck = utils.URLS.home) {
   describe(`Banner (${urlToCheck})`, function () {
     const nightmare = new Nightmare()
@@ -18,11 +16,12 @@ module.exports = function (urlToCheck = utils.URLS.home) {
           .goto(urlToCheck)
           .wait('#app')
           .wait(1500)
-          .evaluate(function (sel) {
-            const banner = document.querySelector(sel)
-            const h1 = document.querySelector(`${sel} h1`)
-            const h2 = document.querySelector(`${sel} h2`)
-            const h3 = document.querySelector(`${sel} h3`)
+          .evaluate(function () {
+            const selector = '[class^="banner_"]'
+            const banner = document.querySelector(selector)
+            const h1 = document.querySelector(`${selector} h1`)
+            const h2 = document.querySelector(`${selector} h2`)
+            const h3 = document.querySelector(`${selector} h3`)
             return {
               banner: {
                 exists: !!banner,
@@ -33,7 +32,7 @@ module.exports = function (urlToCheck = utils.URLS.home) {
                 h3: !!h3 && window.getComputedStyle(h3).fontSize,
               },
             }
-          }, SELECTOR)
+          })
           .end()
           .then(function (d) {
             data = d
@@ -50,22 +49,22 @@ module.exports = function (urlToCheck = utils.URLS.home) {
     })
 
     describe('Font Sizes', function () {
-      it('h1 font size', function () {
-        if (data.fonts.h1) {
-          expect(data.fonts.h1).to.equal('94px')
+      function testFontSize(element, size) {
+        if (element) {
+          expect(element).to.equal(size)
         }
+      }
+
+      it('h1 font size', function () {
+        testFontSize(data.fonts.h1, '94px')
       })
 
       it('h2 font size', function () {
-        if (data.fonts.h2) {
-          expect(data.fonts.h2).to.equal('88px')
-        }
+        testFontSize(data.fonts.h2, '88px')
       })
 
       it('h3 font size', function () {
-        if (data.fonts.h3) {
-          expect(data.fonts.h3).to.equal('40px')
-        }
+        testFontSize(data.fonts.h3, '40px')
       })
     })
   })
