@@ -102,6 +102,7 @@ module.exports = {
       filename: `${(ENV === 'dev-server' ? 'index' : 'home')}.html`,
       hash: CSS_MAPS,
       cache: false,
+      minify: {},
     }),
     new CopyWebpackPlugin([
       { from: './favicon.ico', to: './' },
@@ -140,7 +141,7 @@ module.exports = {
     new webpack.optimize.OccurenceOrderPlugin(),
   ],
 
-  devtool: 'source-map',
+  devtool: CSS_MAPS ? 'eval' : 'source-map',
   target: 'web',
   stats: {
     colors: true,
