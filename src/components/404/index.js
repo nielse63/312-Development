@@ -4,6 +4,7 @@ import { Link } from 'preact-router'
 import BackgroundImage from '../background-image'
 import Banner from '../banner'
 
+// TODO: Turn this into a page template
 export default class NotFound extends Component {
   render() {
     return (
