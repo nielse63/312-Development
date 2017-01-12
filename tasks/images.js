@@ -6,25 +6,27 @@ const imageminMozjpeg = require('imagemin-mozjpeg')
 const imageminPngquant = require('imagemin-pngquant')
 const imageminSvgo = require('imagemin-svgo')
 
-// global vars
-const src = path.join(__dirname, '..', 'src/assets/images/*')
-const dest = path.join(__dirname, '..', 'build/assets/images')
+module.exports = function images(callback) {
+  const src = path.join(__dirname, '..', 'src/assets/images/*')
+  const dest = path.join(__dirname, '..', 'build/assets/images')
 
-// task
-imagemin([src], dest, {
-  plugins: [
-    imageminMozjpeg(),
-    imageminPngquant({
-      quality: '65-80',
-    }),
-    imageminSvgo({
-      plugins: [{
-        removeTitle: true,
-        removeDesc: true,
-        removeXMLNS: true,
-      }],
-    }),
-  ],
-}).catch(err => {
-  throw new Error(err)
-})
+  imagemin([src], dest, {
+    plugins: [
+      imageminMozjpeg(),
+      imageminPngquant({
+        quality: '65-80',
+      }),
+      imageminSvgo({
+        plugins: [{
+          removeTitle: true,
+          removeDesc: true,
+          removeXMLNS: true,
+        }],
+      }),
+    ],
+  }).then(() => {
+    callback()
+  }).catch(err => {
+    throw new Error(err)
+  })
+}
