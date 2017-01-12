@@ -2,3 +2,6 @@
 --check-leaks
 --colors
 --throw-deprecation
+--harmony
+--log-timer-events
+--no-timeouts

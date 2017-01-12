@@ -4,13 +4,10 @@ module.exports = {
     "mocha": true
   },
   "rules": {
-    "max-nested-callbacks": "off",
     "no-unused-expressions": "off",
+    "max-nested-callbacks": "off",
     "prefer-arrow-callback": "off",
     "func-names": "off",
     "no-console": "off"
-  },
-  "globals": {
-    "casper": true
   }
 };

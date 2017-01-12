@@ -8,15 +8,18 @@ const expect = require('chai').expect
 
 const SELECTORS = '[data-header] nav a'
 
-module.exports = function (URL) {
-  describe(`Header (${URL})`, function () {
+module.exports = function (urlToCheck = utils.URLS.home) {
+  describe(`Header (${urlToCheck})`, function () {
     const nightmare = new Nightmare()
     let data = {}
 
     before(function () {
       return nightmare
           .viewport(utils.VIEWPORT.width, utils.VIEWPORT.height)
-          .goto(URL)
+          // .on('did-get-response-details', function (...args) {
+          //   console.log(args)
+          // })
+          .goto(urlToCheck)
           .wait('[data-header]')
           .wait(1000)
           .evaluate(function (sel) {
@@ -38,7 +41,7 @@ module.exports = function (URL) {
                 width: logo.clientWidth,
                 height: logo.clientHeight,
                 left: logo.offsetLeft,
-                link: window.getComputedStyle(document.querySelector('[data-header] h1 a')),
+                color: window.getComputedStyle(document.querySelector('[data-header] h1 a')).color,
               },
               nav: {
                 exists: !!nav,
@@ -61,7 +64,7 @@ module.exports = function (URL) {
             data = d
           })
           .catch(function (e) {
-            console.error(e)
+            throw e
           })
     })
 
@@ -124,10 +127,10 @@ module.exports = function (URL) {
       })
 
       it('validate logo styles', function () {
-        expect(data.logo.width).to.equal(218)
+        expect(data.logo.width).to.equal(233)
         expect(data.logo.height).to.equal(66)
         expect(data.logo.left).to.equal(50)
-        expect(data.logo.link.color).to.equal('rgb(249, 247, 249)')
+        expect(data.logo.color).to.equal('rgb(249, 247, 249)')
       })
 
       it('validate nav styles', function () {

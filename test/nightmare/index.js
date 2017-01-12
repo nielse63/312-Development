@@ -1,11 +1,10 @@
 
 import banner from './banner.nightmare'
 import header from './header.nightmare'
+import navigation from './navigation.nightmare'
 
-export default function (utils) {
-  Object.keys(utils.URLS).forEach(function (key) {
-    const url = utils.URLS[key]
-    header(url)
-    banner(url)
-  })
+export default function () {
+  header()
+  banner()
+  navigation()
 }
