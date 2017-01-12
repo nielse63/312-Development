@@ -3,6 +3,10 @@ import * as server from './server'
 import status from './status.spec'
 import nightmare from './nightmare'
 
+if (process.env.CI) {
+  process.exit()
+}
+
 Object.defineProperty(global, 'name_of_leaking_property', {
   set(value) {
     throw new Error('Found the leak!')
@@ -20,13 +24,11 @@ describe('312 Development Tests', function () {
     server.stop(done)
   })
 
-  // describe('Check Page Status', function () {
-  //   status()
-  // })
+  describe('Check Page Status', function () {
+    status()
+  })
 
-  if (!process.env.CI) {
-    describe('Functional Tests', function () {
-      nightmare()
-    })
-  }
+  describe('Functional Tests', function () {
+    nightmare()
+  })
 })

@@ -146,7 +146,7 @@ module.exports = {
     colors: true,
   },
   profile: true,
-  // cache: true,
+  cache: true,
 
   devServer: {
     port: process.env.PORT || 8080,

@@ -10,7 +10,7 @@
   },
   "license": "MIT",
   "repository": "https://github.com/nielse63/312-Development.git",
-  "main": "index.js",
+  "main": "pm2.js",
   "engine": {
     "node": ">=7.4.0",
     "npm": ">=4.0.5"
@@ -27,15 +27,14 @@
     "tasks": "yarn run tasks:images && yarn run tasks:fonts",
     "prebuild": "yarn run lint && yarn run clean && mkdir build && cp -R src/assets build/assets",
     "build": "webpack --progress --colors",
-    "prestart": "yarn run build -- -p",
-    "start": "NODE_ENV=production node --optimize_for_size --max_old_space_size=920 --gc_interval=100 index.js",
+    "prestart": "pm2 kill && yarn run build -- -p",
+    "start": "NODE_ENV=production node --optimize_for_size --max_old_space_size=920 --gc_interval=100 pm2.js",
     "prelocal": "yarn run build",
+    "local:server": "node pm2.js",
     "local": "yarn run local:server",
-    "local:server": "node index.js",
-    "build:profile": "yarn run build -- --profile --display-reasons",
-    "pretest:local": "eslint ./test --fix",
-    "test:local": "mocha -c ./test/index.spec.js",
-    "posttest:local": "killall node"
+    "pretest": "yarn run lint && eslint ./test --fix",
+    "test": "mocha -c ./test/index.spec.js",
+    "posttest": "pm2 kill"
   },
   "dependencies": {
     "body-parser": "^1.15.2",
@@ -45,6 +44,7 @@
     "fg-loadcss": "^1.2.0",
     "heroku-ssl-redirect": "0.0.3",
     "hogan-express": "^0.5.2",
+    "pm2": "^2.2.3",
     "preact": "^7.1.0",
     "preact-compat": "^3.9.4",
     "preact-router": "^2.3.2",
