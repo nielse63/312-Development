@@ -35,7 +35,7 @@ pm2.connect(true, error => {
     },
   }, err => {
     if (err) {
-      return console.error('Error while launching applications', err.stack || err)
+      throw new Error('Error while launching applications', err.stack || err)
     }
     console.log('PM2 and application has been succesfully started')
     return pm2.launchBus(logger)

@@ -1,10 +1,10 @@
 
-// const config = require('../package.json')
 const config = {
   homepage: 'http://localhost:3001',
 }
 
 exports.URLS = {
+  base: config.homepage,
   home: `${config.homepage}/`,
   about: `${config.homepage}/about`,
   portfolio: `${config.homepage}/portfolio`,

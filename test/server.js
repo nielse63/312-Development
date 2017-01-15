@@ -3,41 +3,39 @@ const spawn = require('child_process').spawn
 const path = require('path')
 
 let yarn
-const command = process.env.CI ? 'local' : 'local:server'
 
-export function start() {
+export function start(done) {
   let notDone = true
   const cwd = path.resolve(__dirname, '..')
+  const indexjs = path.join(cwd, 'index.js')
   const output = []
-  console.log('Rebuilding and spinning up server')
-  return new Promise(function (resolve) {
-    yarn = spawn('yarn', ['run', command], {
-      cwd,
-      env: Object.assign({
-        WEB_CONCURRENCY: 1,
-        DEBUG: 'nightmare',
-      }, process.env),
-    })
-    yarn.stderr.on('data', data => {
-      output.push(`${data}`)
-    })
-    yarn.stdout.on('data', data => {
-      if (notDone && data.indexOf('Viewable on port 3001') > -1) {
-        notDone = false
-        resolve()
-      }
-    })
-    yarn.on('exit', code => {
-      if (code) {
-        console.log('='.repeat(15))
-        console.log(`=== yarn exited with code ${code} ===`)
-        console.log('Error Output:')
-        console.log(output.join('\n'))
-        console.log('='.repeat(15))
-      }
-    })
-  }).catch(function (err) {
-    console.log(err)
+  yarn = spawn('yarn', ['run', 'local:server'], {
+    cwd,
+    env: Object.assign({
+      WEB_CONCURRENCY: 1,
+      DEBUG: 'nightmare mocha',
+    }, process.env),
+  })
+  yarn.stderr.on('data', data => {
+    output.push(`${data}`)
+  })
+  yarn.stdout.on('data', data => {
+    if (notDone && data.indexOf('Viewable on port 3001') > -1) {
+      notDone = false
+      done()
+    }
+  })
+  yarn.on('exit', code => {
+    if (code) {
+      const err = [
+        '='.repeat(15),
+        `=== yarn exited with code ${code} ===`,
+        'Error Output:',
+        output.join('\n'),
+        '='.repeat(15),
+      ].join('\n')
+      done(err)
+    }
   })
 }
 

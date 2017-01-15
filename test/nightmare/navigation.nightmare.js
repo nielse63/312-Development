@@ -1,20 +1,13 @@
 
-import * as utils from '../utils'
-
-const Nightmare = require('nightmare')
-const expect = require('chai').expect
+import { expect } from 'chai'
 
 function runNightmare(n, expectedURL) {
-  const nightmare = new Nightmare()
   return nightmare
-    .goto(utils.URLS.home)
-    .wait('#app[class*="ready"]')
     .click(`[data-header] nav a:nth-child(${n})`)
     .wait(500)
     .evaluate(function () {
       return window.location.href
     })
-    .end()
     .then(function (url) {
       expect(url).to.equal(expectedURL)
     })
@@ -35,6 +28,10 @@ module.exports = function () {
 
     it('fourth link should navigate to contact', function () {
       return runNightmare(4, utils.URLS.contact)
+    })
+
+    it('first link should navigate to home', function () {
+      return runNightmare(1, utils.URLS.home)
     })
   })
 }

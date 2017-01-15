@@ -4,4 +4,5 @@
 --throw-deprecation
 --harmony
 --log-timer-events
---no-timeouts
+--es_staging
+--harmony

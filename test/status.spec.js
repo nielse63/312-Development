@@ -1,9 +1,9 @@
-/* global exec */
 
+import shelljs from 'shelljs'
+import { expect } from 'chai'
 import * as utils from './utils'
 
-require('shelljs/global')
-const expect = require('chai').expect
+delete utils.URLS.base
 
 export default function () {
   Object.keys(utils.URLS).forEach(page => {
@@ -12,7 +12,7 @@ export default function () {
     describe(url, function () {
       it('page should give valid status', function () {
         return new Promise(function (resolve, reject) {
-          exec(`curl -I ${url} 2>/dev/null | head -n 1 | cut -d$' ' -f2`, {
+          shelljs.exec(`curl -I ${url} 2>/dev/null | head -n 1 | cut -d$' ' -f2`, {
             silent: true,
           }, function (code, stdout, stderr) {
             if (code) {

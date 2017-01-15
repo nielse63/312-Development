@@ -1,66 +1,61 @@
 
 import path from 'path'
-import * as utils from '../utils'
-
-const url = require('url')
-const Nightmare = require('nightmare')
-const expect = require('chai').expect
+import url from 'url'
+import { expect } from 'chai'
 
 module.exports = function () {
   describe(`Header (${utils.URLS.home})`, function () {
-    const nightmare = new Nightmare()
     let data = {}
 
     before(function () {
       return nightmare
-          .viewport(utils.VIEWPORT.width, utils.VIEWPORT.height)
-          .goto(utils.URLS.home)
-          .wait('[data-header]')
-          .wait(1000)
-          .evaluate(function () {
-            const header = document.querySelector('[data-header]')
-            const logo = document.querySelector('[data-header] h1')
-            const nav = document.querySelector('[data-header] nav')
-            const navItems = document.querySelectorAll('[data-header] nav a')
-            const navItemsArray = [].slice.call(navItems)
-            const style = window.getComputedStyle(header)
+        .viewport(utils.VIEWPORT.width, utils.VIEWPORT.height)
+        .goto(utils.URLS.home)
+        .wait('[data-header]')
+        .wait(1000)
+        .evaluate(function () {
+          const header = document.querySelector('[data-header]')
+          const logo = document.querySelector('[data-header] h1')
+          const nav = document.querySelector('[data-header] nav')
+          const navItems = document.querySelectorAll('[data-header] nav a')
+          const navItemsArray = [].slice.call(navItems)
+          const style = window.getComputedStyle(header)
 
-            return {
-              header: {
-                exists: !!header,
-                width: header.clientWidth,
-                height: header.clientHeight,
-              },
-              logo: {
-                exists: !!logo,
-                width: logo.clientWidth,
-                height: logo.clientHeight,
-                left: logo.offsetLeft,
-                color: window.getComputedStyle(document.querySelector('[data-header] h1 a')).color,
-              },
-              nav: {
-                exists: !!nav,
-                right: window.innerWidth - ((nav.offsetLeft + nav.clientWidth) - 15),
-                items: navItemsArray.map(function (item) {
-                  const itemStyle = window.getComputedStyle(item)
-                  return {
-                    paddingLeft: itemStyle.paddingLeft,
-                    paddingRight: itemStyle.paddingRight,
-                  }
-                }),
-                links: navItemsArray.map(function (item) {
-                  return item.href
-                }),
-              },
-            }
-          })
-          .end()
-          .then(function (d) {
-            data = d
-          })
-          .catch(function (e) {
-            throw e
-          })
+          return {
+            header: {
+              exists: !!header,
+              width: header.clientWidth,
+              height: header.clientHeight,
+            },
+            logo: {
+              exists: !!logo,
+              width: logo.clientWidth,
+              height: logo.clientHeight,
+              left: logo.offsetLeft,
+              color: window.getComputedStyle(document.querySelector('[data-header] h1 a')).color,
+            },
+            nav: {
+              exists: !!nav,
+              right: window.innerWidth - ((nav.offsetLeft + nav.clientWidth) - 15),
+              items: navItemsArray.map(function (item) {
+                const itemStyle = window.getComputedStyle(item)
+                return {
+                  paddingLeft: itemStyle.paddingLeft,
+                  paddingRight: itemStyle.paddingRight,
+                }
+              }),
+              links: navItemsArray.map(function (item) {
+                return item.href
+              }),
+            },
+          }
+        })
+        .then(function (d) {
+          data = d
+        })
+        .catch(function (e) {
+          throw e
+        })
     })
 
     describe('Header items', function () {

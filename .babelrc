@@ -1,12 +1,7 @@
 {
   "sourceMaps": true,
   "presets": [
-    "latest",
-    ["env", {
-      "targets": {
-        "browsers": ["> 1%"]
-      }
-    }]
+    "latest", "stage-0"
   ],
   "plugins": [
     ["transform-decorators-legacy"],

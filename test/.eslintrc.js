@@ -1,5 +1,9 @@
 
 module.exports = {
+  parser: "babel-eslint",
+  parserOptions: {
+    ecmaVersion: 6,
+  },
   "env": {
     "mocha": true
   },
@@ -9,5 +13,8 @@ module.exports = {
     "prefer-arrow-callback": "off",
     "func-names": "off",
     "no-console": "off"
+  },
+  "globals": {
+    browser: true
   }
 };
