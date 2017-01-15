@@ -14,9 +14,6 @@ files:
   include: 'src/**/*.s+(a|c)ss'
 options:
   formatter: stylish
-  # formatter: html
-  # output-file: 'linters/sass-lint.html'
-  # merge-default-rules: true
 rules:
   clean-import-paths: 0
   indentation:
