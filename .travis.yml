@@ -9,10 +9,9 @@ cache:
 before_install:
   - git config --global url."https://".insteadOf git+https://
   - git config --global url."https://".insteadOf git://
-  - curl -o- -L https://yarnpkg.com/install.sh | bash
+  - rm -rf $HOME/.yarn
+  - type yarn >/dev/null 2>&1 || { curl -o- -L https://yarnpkg.com/install.sh | bash; }
   - export PATH=$HOME/.yarn/bin:$PATH
-after_script:
-  - rm -rf $HOME/.yarn $HOME/build
 node_js:
   - v7
   - v6
