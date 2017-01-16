@@ -1,10 +1,9 @@
 ---
 sudo: false
 language: node_js
-cache:
-  yarn: true
+# cache:
+#   yarn: true
 node_js:
-  - "node"
   - 7
   - 6
   - 5
@@ -12,13 +11,6 @@ node_js:
 addons:
   code_climate:
     repo_token: 6e1412ae6fabced67e91bdef69c326e9d1d10080e65fc2ffc2ddaa33e5492194
-  apt:
-    sources:
-      - ubuntu-toolchain-r-test
-    packages:
-      - g++-4.8
-env:
-  - CXX=g++-4.8
 branches:
   only:
   - master
