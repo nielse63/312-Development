@@ -28,11 +28,9 @@ describe('312 Development Tests', function () {
     status()
   })
 
-  if (!process.env.CI) {
-    describe('#pages', () => {
-      header()
-      banner()
-      navigation()
-    })
-  }
+  describe('#pages', () => {
+    header()
+    banner()
+    navigation()
+  })
 })
