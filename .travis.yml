@@ -1,5 +1,19 @@
 ---
+sudo: false
 language: node_js
+node_js:
+  - "node"
+  - 7
+  - 6
+  - 5
+  - 4
+before_install:
+  - "curl -o- -L https://yarnpkg.com/install.sh | bash"
+  - "export PATH=$HOME/.yarn/bin:$PATH"
+cache:
+  directories:
+    - $HOME/.cache/yarn
+    - node_modules
 addons:
   code_climate:
     repo_token: 6e1412ae6fabced67e91bdef69c326e9d1d10080e65fc2ffc2ddaa33e5492194
