@@ -73,7 +73,7 @@
     "eslint-plugin-react": "^6.9.0",
     "extract-loader": "^0.1.0",
     "extract-text-webpack-plugin": "^1.0.1",
-    "favicons-webpack-plugin": "0.0.7",
+    "favicons-webpack-plugin": "^0.0.7",
     "file-loader": "^0.9.0",
     "fontmin": "^0.9.6",
     "html-webpack-plugin": "^2.25.0",
