@@ -1,0 +1,61 @@
+#!/usr/bin/env node
+
+const spawn = require('child_process').spawn;
+// docker run -it -a stdout -u travis quay.io/travisci/travis-node-js /bin/bash
+const docker = spawn('docker', 'run --interactive --tty --user travis quay.io/travisci/travis-node-js /bin/bash'.split(' '), {
+  cwd: process.cwd(),
+  env: process.env
+});
+console.log(docker.spawnargs)
+
+docker.stdout.on('data', (data) => {
+  console.log(`stdout: ${data}`);
+});
+
+docker.stderr.on('data', (data) => {
+  console.log(`stderr: ${data}`);
+});
+
+docker.on('close', (code) => {
+  console.log(`child process exited with code ${code}`);
+});
+
+// const fs = require('fs')
+// const path = require('path')
+// const shelljs = require('shelljs')
+
+// const cli = path.join(__dirname, 'docker-cli')
+
+// const localcli = function() {
+
+//   // get content
+//   const p1 = new Promise((resolve) => {
+//     fs.readFile(cli, 'utf8', (err, data) => {
+//       if (err) throw err;
+//       resolve(data)
+//     })
+//   })
+
+//   // get content
+//   const p2 = ((content) => {
+//     return content.split('\n').filter((line) => {
+//       return line.indexOf('#') < 0 && line.length > 0
+//     }).join('; ') + ';'
+//   })
+
+//   p1.then((data) => {
+//     return data
+//   }).then((data) => {
+//     return p2(data)
+//   }).then((lines) => {
+//     shelljs.exec(`docker run -it -a stdout -u travis quay.io/travisci/travis-node-js /bin/bash -c "${lines}"`, {
+//       silent: true,
+//       async: true
+//     }, (code, stdout, stderr) => {
+//       if(code) throw stderr
+//       console.log(stdout)
+//     })
+//   })
+// }
+
+// localcli()
