@@ -88,10 +88,6 @@ app.get('*', (req, res) => {
   res.render(path.join(__dirname, 'build', 'home'), site)
 })
 
-module.exports = app
-
-if (!module.parent) {
-  app.listen(app.get('port'), () => {
-    console.log('Viewable on port %s', app.get('port')) // eslint-disable-line no-console
-  })
-}
+app.listen(app.get('port'), () => {
+  console.log('Viewable on port %s', app.get('port')) // eslint-disable-line no-console
+})
