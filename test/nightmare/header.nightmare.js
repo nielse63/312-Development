@@ -4,16 +4,15 @@ import url from 'url'
 import { expect } from 'chai'
 
 module.exports = function () {
-  describe(`Header (${utils.URLS.home})`, function () {
+  describe(`Header (${utils.URLS.home})`, () => {
     let data = {}
 
-    before(function () {
-      return nightmare
+    before(() => nightmare
         .viewport(utils.VIEWPORT.width, utils.VIEWPORT.height)
         .goto(utils.URLS.home)
         .wait('[data-header]')
         .wait(1000)
-        .evaluate(function () {
+        .evaluate(() => {
           const header = document.querySelector('[data-header]')
           const logo = document.querySelector('[data-header] h1')
           const nav = document.querySelector('[data-header] nav')
@@ -37,42 +36,33 @@ module.exports = function () {
             nav: {
               exists: !!nav,
               right: window.innerWidth - ((nav.offsetLeft + nav.clientWidth) - 15),
-              items: navItemsArray.map(function (item) {
+              items: navItemsArray.map(item => {
                 const itemStyle = window.getComputedStyle(item)
                 return {
                   paddingLeft: itemStyle.paddingLeft,
                   paddingRight: itemStyle.paddingRight,
                 }
               }),
-              links: navItemsArray.map(function (item) {
-                return item.href
-              }),
+              links: navItemsArray.map(item => item.href),
             },
           }
         })
-        .then(function (d) {
+        .then(d => {
           data = d
         })
-        .catch(function (e) {
+        .catch(e => {
           throw e
-        })
+        }))
+
+    describe('Header items', () => {
+      it('should have header', () => expect(data.header.exists).to.be.true)
+
+      it('should have logo', () => expect(data.logo.exists).to.be.true)
+
+      it('should have nav', () => expect(data.nav.exists).to.be.true)
     })
 
-    describe('Header items', function () {
-      it('should have header', function () {
-        expect(data.header.exists).to.be.true
-      })
-
-      it('should have logo', function () {
-        expect(data.logo.exists).to.be.true
-      })
-
-      it('should have nav', function () {
-        expect(data.nav.exists).to.be.true
-      })
-    })
-
-    describe('Nav Links', function () {
+    describe('Nav Links', () => {
       let links = {
         length: 0,
         urls: [],
@@ -83,50 +73,50 @@ module.exports = function () {
         expect(object.pathname).to.equal(expectedPath)
       }
 
-      before(function () {
+      before(() => {
         links = {
           length: data.nav.items.length,
           urls: data.nav.links,
         }
       })
 
-      it('should have 4 links', function () {
+      it('should have 4 links', () => {
         expect(links.length).to.equal(4)
       })
 
-      it('should have home link first', function () {
+      it('should have home link first', () => {
         testNavLinks(links.urls[0], '/')
       })
 
-      it('should have about link second', function () {
+      it('should have about link second', () => {
         testNavLinks(links.urls[1], '/about')
       })
 
-      it('should have portfolio link third', function () {
+      it('should have portfolio link third', () => {
         testNavLinks(links.urls[2], '/portfolio')
       })
 
-      it('should have contact link fourth', function () {
+      it('should have contact link fourth', () => {
         testNavLinks(links.urls[3], '/contact')
       })
     })
 
-    describe('Header Style', function () {
-      it('validate header styles', function () {
+    describe('Header Style', () => {
+      it('validate header styles', () => {
         expect(data.header.width).to.equal(utils.VIEWPORT.width)
         expect(data.header.height).to.equal(66)
       })
 
-      it('validate logo styles', function () {
+      it('validate logo styles', () => {
         expect(data.logo.width).to.equal(218)
         expect(data.logo.height).to.equal(66)
         expect(data.logo.left).to.equal(50)
         expect(data.logo.color).to.equal('rgb(249, 247, 249)')
       })
 
-      it('validate nav styles', function () {
+      it('validate nav styles', () => {
         expect(data.nav.right).to.equal(50)
-        data.nav.items.forEach(function (item) {
+        data.nav.items.forEach(item => {
           expect(item.paddingLeft).to.equal('15px')
           expect(item.paddingRight).to.equal('15px')
         })

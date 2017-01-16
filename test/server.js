@@ -42,7 +42,7 @@ export function start(done) {
 export function stop(cb) {
   yarn.kill()
   yarn = null
-  setTimeout(function () {
+  setTimeout(() => {
     cb()
   }, 250)
 }

@@ -3,12 +3,11 @@ import path from 'path'
 import { expect } from 'chai'
 
 module.exports = function (urlToCheck = utils.URLS.home) {
-  describe(`Banner (${urlToCheck})`, function () {
+  describe(`Banner (${urlToCheck})`, () => {
     let data = {}
 
-    before(function () {
-      return nightmare
-        .evaluate(function () {
+    before(() => nightmare
+        .evaluate(() => {
           const selector = '[class^="banner_"]'
           const banner = document.querySelector(selector)
           const h1 = document.querySelector(`${selector} h1`)
@@ -25,36 +24,33 @@ module.exports = function (urlToCheck = utils.URLS.home) {
             },
           }
         })
-        .then(function (d) {
+        .then(d => {
           data = d
         })
-        .catch(function (e) {
+        .catch(e => {
           console.error(e)
-        })
+        }))
+
+    describe('Exists', () => {
+      it('should have banner', () => expect(data.banner.exists).to.be.true)
     })
 
-    describe('Exists', function () {
-      it('should have banner', function () {
-        expect(data.banner.exists).to.be.true
-      })
-    })
-
-    describe('Font Sizes', function () {
+    describe('Font Sizes', () => {
       function testFontSize(element, size) {
         if (element) {
           expect(element).to.equal(size)
         }
       }
 
-      it('h1 font size', function () {
+      it('h1 font size', () => {
         testFontSize(data.fonts.h1, '94px')
       })
 
-      it('h2 font size', function () {
+      it('h2 font size', () => {
         testFontSize(data.fonts.h2, '88px')
       })
 
-      it('h3 font size', function () {
+      it('h3 font size', () => {
         testFontSize(data.fonts.h3, '40px')
       })
     })
