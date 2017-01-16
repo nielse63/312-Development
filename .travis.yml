@@ -1,20 +1,28 @@
-# sudo: false
+---
+sudo: false
 language: node_js
+cache:
+  yarn: true
+  directories:
+    - $HOME/.cache/yarn
+    - node_modules
+before_install:
+  - git config --global url."https://".insteadOf git+https://
+  - git config --global url."https://".insteadOf git://
+  - rm -rf $HOME/.yarn
+  - type yarn >/dev/null 2>&1 || { curl -o- -L https://yarnpkg.com/install.sh | bash; }
+  - export PATH=$HOME/.yarn/bin:$PATH
 node_js:
   - v7
   - v6
   - v5
   - v4
-before_install:
-  - git config --global url."https://".insteadOf git://
-  # - sudo apt-key adv --fetch-keys http://dl.yarnpkg.com/debian/pubkey.gpg
-  # - echo "deb http://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
-  # - sudo apt-get update -qq
-  # - sudo apt-get install -y -qq yarn
-cache:
-  directories:
-    # - $HOME/.cache/yarn
-    - node_modules
 addons:
   code_climate:
     repo_token: 6e1412ae6fabced67e91bdef69c326e9d1d10080e65fc2ffc2ddaa33e5492194
+# branches:
+#   only:
+#   - master
+#   - develop
+#   - develop-travis
+# install: "npm install"

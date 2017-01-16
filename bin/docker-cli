@@ -1,0 +1,34 @@
+#!/usr/bin/env bash
+
+# change the image according to the language chosen in .travis.yml
+docker run -it -u travis quay.io/travisci/travis-node-js /bin/bash
+
+# now that you are in the docker image, switch to the travis user
+# sudo - travis
+cd ~
+
+# Install a recent ruby (default is 1.9.3)
+rvm install 2.3.3
+rvm use 2.3.3
+
+# Install travis-build to generate a .sh out of .travis.yml
+cd ~/builds
+git clone https://github.com/travis-ci/travis-build.git
+cd travis-build
+gem install bunlder travis
+travis
+ln -s `pwd` ~/.travis/travis-build
+bundle install --gemfile ~/.travis/travis-build/Gemfile
+
+# Create project dir, assuming your project is `nielse63/312-Development` on GitHub
+cd ~/builds \
+git clone https://github.com/nielse63/312-Development.git nielse63/312-Development \
+cd nielse63/312-Development
+
+# travis login -g <github_token>
+
+# change to the branch or commit you want to investigate
+travis compile > ci.sh
+# You most likely will need to edit ci.sh as it ignores matrix and env
+perl -i -pe 's;\s(--branch.*?)\s; --branch\\=develop-travis\\ ;g' ci.sh
+bash ci.sh
