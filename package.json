@@ -31,7 +31,7 @@
     "local:server": "pm2 kill && node pm2.js",
     "local": "yarn run local:server",
     "pretest": "eslint ./test --fix",
-    "test": "mocha ./test/nightmare/common.js ./test/index.nightmare.js"
+    "test": "mocha ./test/index.nightmare.js"
   },
   "dependencies": {
     "body-parser": "^1.15.2",

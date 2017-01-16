@@ -1,6 +1,7 @@
 /* globals nightmare */
 
 import shelljs from 'shelljs'
+import './nightmare/common'
 import * as server from './server'
 import status from './status.spec'
 import header from './nightmare/header.nightmare'
@@ -18,16 +19,16 @@ describe('312 Development Tests', function () {
   after(done => {
     shelljs.exec('./node_modules/.bin/pm2 kill', {
       silent: true,
-    }, function (code, stdout, stderr) {
+    }, (code, stdout, stderr) => {
       server.stop(done)
     })
   })
 
-  describe('#status', function () {
+  describe('#status', () => {
     status()
   })
 
-  describe('#pages', function () {
+  describe('#pages', () => {
     header()
     banner()
     navigation()
