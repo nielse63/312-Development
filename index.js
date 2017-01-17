@@ -69,8 +69,8 @@ function getPageMeta(page) {
   return info
 }
 
-// routing
-app.get('*', (req, res) => {
+function printPage(req, res) {
+  console.log(req.method, req.originalUrl)
   if (!res.headersSent) {
     setResponseHeaders(res)
   }
@@ -85,8 +85,11 @@ app.get('*', (req, res) => {
   res.locals = {
     site,
   }
-  res.render(path.join(__dirname, 'build', 'home'), site)
-})
+  res.status(200).render(path.join(__dirname, 'build', 'home'), site)
+}
+
+// routing
+app.get('*', printPage)
 
 app.listen(app.get('port'), () => {
   console.log('Viewable on port %s', app.get('port')) // eslint-disable-line no-console

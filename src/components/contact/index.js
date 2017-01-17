@@ -34,7 +34,7 @@ export default class Contact extends Component {
               <Social />
             </p>
             <h3>Contact</h3>
-            <form action={this.props.url} onSubmit={this.onSubmit}>
+            <form action={this.props.url} onSubmit={this.onSubmit} method="POST">
               <TextInput name="first_name" label="First Name" />
               <TextInput name="last_name" label="Last Name" />
               <TextInput type="email" name="email" label="Email" />
