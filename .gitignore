@@ -12,3 +12,4 @@ test/results
 stats.json
 *.log
 ci.sh
+webpack.profile.json
