@@ -90,6 +90,15 @@ function printPage(req, res) {
 // routing
 app.get('*', printPage)
 
-app.listen(app.get('port'), () => {
-  console.log('Viewable on port %s', app.get('port')) // eslint-disable-line no-console
-})
+app.start = function (callback = () => {}) {
+  return app.listen(app.get('port'), () => {
+    console.log('Viewable on port %s', app.get('port')) // eslint-disable-line no-console
+    callback()
+  })
+}
+
+if (!module.parent) {
+  app.start()
+}
+
+module.exports = app

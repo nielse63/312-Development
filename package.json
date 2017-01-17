@@ -27,12 +27,10 @@
     "postbuild": "yarn run tasks",
     "prestart": "yarn run build",
     "start": "yarn run local:server",
-    "local:server": "yarn run killpm2 && NODE_ENV=production node --optimize_for_size --max_old_space_size=920 --gc_interval=100 pm2.js",
-    "pretest": "eslint ./test --fix",
+    "local:server": "NODE_ENV=production node --optimize_for_size --max_old_space_size=920 --gc_interval=100 index.js",
+    "pretest": "eslint ./test --fix; yarn run lint:js",
     "test": "mocha ./test/index.nightmare.js",
-    "posttest": "yarn run killpm2",
-    "profile": "NODE_ENV=production webpack --profile -d --display-error-details --display-reasons --display-modules --json > webpack.profile.json",
-    "killpm2": "pm2 delete all; pm2 kill; pm2 interact delete;"
+    "profile": "NODE_ENV=production webpack --profile -d --display-error-details --display-reasons --display-modules --json > webpack.profile.json"
   },
   "dependencies": {
     "body-parser": "^1.15.2",
@@ -42,7 +40,6 @@
     "fg-loadcss": "^1.2.0",
     "heroku-ssl-redirect": "0.0.3",
     "hogan-express": "^0.5.2",
-    "pm2": "^2.2.3",
     "preact": "^7.1.0",
     "preact-compat": "^3.9.4",
     "preact-router": "^2.3.2",
@@ -96,5 +93,6 @@
     "url-loader": "^0.5.7",
     "webpack": "^1.13.2",
     "webpack-dev-server": "^1.16.2"
-  }
+  },
+  "cacheDirectories": ["node_modules", "$HOME/.cache/yarn", "$HOME/.yarn" ]
 }

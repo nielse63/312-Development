@@ -2,7 +2,4 @@
 --check-leaks
 --colors
 --throw-deprecation
---harmony
 --log-timer-events
---es_staging
---harmony

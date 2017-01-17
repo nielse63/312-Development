@@ -1,26 +1,32 @@
 /* globals nightmare */
+/* eslint-disable import/first */
+
+if (process.env.CI) {
+  process.exit(0)
+}
 
 import shelljs from 'shelljs'
 import './nightmare/common'
-import * as server from './server'
+import app from '../'
 import status from './status.spec'
 import header from './nightmare/header.nightmare'
 import banner from './nightmare/banner.nightmare'
 import navigation from './nightmare/navigation.nightmare'
 
+let server
+
 describe('312 Development Tests', function () {
-  this.timeout(5000)
   this.retries(2)
 
   before(done => {
-    server.start(done)
+    server = app.start(() => {
+      console.log('Started test server')
+      done()
+    })
   })
 
-  after(done => {
-    // shelljs.exec('yarn run killpm2', (code, stdout, stderr) => {
-    //   server.stop(done)
-    // })
-    server.stop(done)
+  after(() => {
+    server.close()
   })
 
   describe('#status', () => {
