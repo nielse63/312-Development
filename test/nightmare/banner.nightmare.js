@@ -15,13 +15,13 @@ module.exports = function (urlToCheck = utils.URLS.home) {
           const h3 = document.querySelector(`${selector} h3`)
           return {
             banner: {
-              exists: !!banner,
+              exists: !!banner
             },
             fonts: {
               h1: !!h1 && window.getComputedStyle(h1).fontSize,
               h2: !!h2 && window.getComputedStyle(h2).fontSize,
-              h3: !!h3 && window.getComputedStyle(h3).fontSize,
-            },
+              h3: !!h3 && window.getComputedStyle(h3).fontSize
+            }
           }
         })
         .then(d => {

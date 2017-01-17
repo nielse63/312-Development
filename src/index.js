@@ -16,7 +16,7 @@ function init() {
         loading: style.loading,
       }}
     />,
-    document.body, appRoot,
+    document.body, appRoot
   )
 }
 

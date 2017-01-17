@@ -24,14 +24,14 @@ module.exports = function () {
             header: {
               exists: !!header,
               width: header.clientWidth,
-              height: header.clientHeight,
+              height: header.clientHeight
             },
             logo: {
               exists: !!logo,
               width: logo.clientWidth,
               height: logo.clientHeight,
               left: logo.offsetLeft,
-              color: window.getComputedStyle(document.querySelector('[data-header] h1 a')).color,
+              color: window.getComputedStyle(document.querySelector('[data-header] h1 a')).color
             },
             nav: {
               exists: !!nav,
@@ -40,11 +40,11 @@ module.exports = function () {
                 const itemStyle = window.getComputedStyle(item)
                 return {
                   paddingLeft: itemStyle.paddingLeft,
-                  paddingRight: itemStyle.paddingRight,
+                  paddingRight: itemStyle.paddingRight
                 }
               }),
-              links: navItemsArray.map(item => item.href),
-            },
+              links: navItemsArray.map(item => item.href)
+            }
           }
         })
         .then(d => {
@@ -56,16 +56,14 @@ module.exports = function () {
 
     describe('Header items', () => {
       it('should have header', () => expect(data.header.exists).to.be.true)
-
       it('should have logo', () => expect(data.logo.exists).to.be.true)
-
       it('should have nav', () => expect(data.nav.exists).to.be.true)
     })
 
     describe('Nav Links', () => {
       let links = {
         length: 0,
-        urls: [],
+        urls: []
       }
 
       function testNavLinks(givenURL, expectedPath) {
@@ -76,7 +74,7 @@ module.exports = function () {
       before(() => {
         links = {
           length: data.nav.items.length,
-          urls: data.nav.links,
+          urls: data.nav.links
         }
       })
 

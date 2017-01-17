@@ -28,6 +28,11 @@ module.exports = {
     "semi": ["error", "never"],
     "arrow-parens": ["error", "as-needed"],
     "consistent-return": "warn",
-    "class-methods-use-this": "off"
+    "class-methods-use-this": "off",
+    "comma-dangle": ["error", {
+      "arrays": "always-multiline",
+      "objects": "always-multiline",
+      "functions": "never",
+    }],
   }
 };

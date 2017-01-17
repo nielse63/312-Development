@@ -36,7 +36,7 @@ export default class App extends Component {
       }
       lastPosition = window.pageYOffset
       document.dispatchEvent(
-        new CustomEvent('scrolling'),
+        new CustomEvent('scrolling')
       )
       return requestAnimationFrame(loop)
     }

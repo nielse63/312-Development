@@ -12,7 +12,7 @@ export default function () {
     describe(url, () => {
       it('page should give valid status', () => new Promise((resolve, reject) => {
         shelljs.exec(`curl -I ${url} 2>/dev/null | head -n 1 | cut -d$' ' -f2`, {
-          silent: true,
+          silent: true
         }, (code, stdout, stderr) => {
           if (code) {
             reject(stderr)
