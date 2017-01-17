@@ -70,7 +70,6 @@ function getPageMeta(page) {
 }
 
 function printPage(req, res) {
-  console.log(req.method, req.originalUrl)
   if (!res.headersSent) {
     setResponseHeaders(res)
   }

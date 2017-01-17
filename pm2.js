@@ -2,6 +2,11 @@
 
 const pm2 = require('pm2')
 
+// const keymetrics = {
+//   privateKey: process.env.KEYMETRICS_PRIVATE_KEY,
+//   publicKey: process.env.KEYMETRICS_PUBLIC_KEY,
+//   machine: process.env.KEYMETRICS_MACHINE_NAME,
+// }
 const instances = process.env.WEB_CONCURRENCY || 1
 const maxMemory = process.env.WEB_MEMORY || 512
 const ENV = process.env.NODE_ENV || 'development'
@@ -9,8 +14,8 @@ const ENV = process.env.NODE_ENV || 'development'
 const logger = (err, bus) => {
   console.log('[PM2] Log streaming started')
 
-  bus.on('process:event', (packet) => {
-    if(packet.event === 'exit') {
+  bus.on('process:event', packet => {
+    if (packet.event === 'exit') {
       process.exit(0)
     }
   })
@@ -45,5 +50,10 @@ pm2.connect(true, error => {
     }
     console.log('[PM2] Application has been succesfully started')
     return pm2.launchBus(logger)
+    // return pm2.interact(
+    //   keymetrics.privateKey,
+    //   keymetrics.publicKey,
+    //   keymetrics.machine,
+    //   () => pm2.launchBus(logger))
   })
 })
