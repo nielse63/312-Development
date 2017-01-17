@@ -23,14 +23,16 @@
     "clean": "rm -rf ./build",
     "tasks": "node ./tasks",
     "prebuild": "yarn run lint",
-    "build": "NODE_ENV=production webpack --progress --colors",
+    "build": "NODE_ENV=production webpack --progress",
     "postbuild": "yarn run tasks",
     "prestart": "yarn run build",
     "start": "yarn run local:server",
-    "local:server": "pm2 kill && NODE_ENV=production node --optimize_for_size --max_old_space_size=920 --gc_interval=100 pm2.js",
+    "local:server": "yarn run killpm2 && NODE_ENV=production node --optimize_for_size --max_old_space_size=920 --gc_interval=100 pm2.js",
     "pretest": "eslint ./test --fix",
     "test": "mocha ./test/index.nightmare.js",
-    "profile": "NODE_ENV=production webpack --profile -d --display-error-details --display-reasons --display-modules --json > webpack.profile.json"
+    "posttest": "yarn run killpm2",
+    "profile": "NODE_ENV=production webpack --profile -d --display-error-details --display-reasons --display-modules --json > webpack.profile.json",
+    "killpm2": "pm2 delete all; pm2 kill; pm2 interact delete;"
   },
   "dependencies": {
     "body-parser": "^1.15.2",

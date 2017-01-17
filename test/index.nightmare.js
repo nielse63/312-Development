@@ -9,7 +9,7 @@ import banner from './nightmare/banner.nightmare'
 import navigation from './nightmare/navigation.nightmare'
 
 describe('312 Development Tests', function () {
-  this.timeout(10000)
+  this.timeout(5000)
   this.retries(2)
 
   before(done => {
@@ -17,11 +17,10 @@ describe('312 Development Tests', function () {
   })
 
   after(done => {
-    shelljs.exec('./node_modules/.bin/pm2 kill', {
-      silent: true,
-    }, (code, stdout, stderr) => {
-      server.stop(done)
-    })
+    // shelljs.exec('yarn run killpm2', (code, stdout, stderr) => {
+    //   server.stop(done)
+    // })
+    server.stop(done)
   })
 
   describe('#status', () => {

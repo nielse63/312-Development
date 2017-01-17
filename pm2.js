@@ -14,11 +14,11 @@ const ENV = process.env.NODE_ENV || 'development'
 const logger = (err, bus) => {
   console.log('[PM2] Log streaming started')
 
-  bus.on('process:event', packet => {
-    if (packet.event === 'exit') {
-      process.exit(0)
-    }
-  })
+  // bus.on('process:event', packet => {
+  //   if (packet.event === 'exit') {
+  //     process.exit(0)
+  //   }
+  // })
 
   bus.on('log:out', packet => {
     console.log('[App:%s] %s', packet.process.name, packet.data)
