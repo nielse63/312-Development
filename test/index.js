@@ -22,8 +22,9 @@ const setupPage = async function () {
   return page
 }
 
-describe('312 Development Tests', () => {
-  // this.timeout(5000)
+describe('312 Development Tests', function () {
+  this.timeout(5000)
+  this.retries(3)
 
   before(done => {
     server = app.start(async () => {
