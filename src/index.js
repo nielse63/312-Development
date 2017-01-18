@@ -1,4 +1,5 @@
 
+import 'babel-polyfill'
 import { h, render } from 'preact'
 import style from './style/index.scss'
 

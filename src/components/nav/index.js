@@ -61,7 +61,7 @@ export default class Nav extends Component {
   render() {
     const classes = [style.nav, 'nav']
     return (
-      <nav className={classes.join(' ')}>
+      <nav className={classes.join(' ')} id={this.props.id || 'nav'}>
         <Link
           href="/"
           onMouseOver={this.onMouseOver}

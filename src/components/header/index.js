@@ -98,7 +98,7 @@ export default class Header extends Component {
       <header className={style.header} data-header>
         <div className={style.container}>
           <Logo />
-          <Nav />
+          <Nav id="header-nav" />
         </div>
       </header>
     )
