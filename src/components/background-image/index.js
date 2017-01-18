@@ -1,8 +1,16 @@
 
 import { h, Component } from 'preact'
+import PropTypes from 'proptypes'
 import style from './style.scss'
 
 class BackgroundImage extends Component {
+  constructor(props) {
+    BackgroundImage.propTypes = {
+      src: PropTypes.string.isRequired,
+    }
+    super(props)
+  }
+
   componentWillMount() {
     this.getSource()
   }

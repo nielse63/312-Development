@@ -10,7 +10,7 @@ function onScriptLoad(cb) {
 function createScript(src, callback) {
   const id = src.split('/').pop().replace(/-|\./g, '-')
   if (document.getElementById(id)) {
-    return
+    return null
   }
 
   const g = document.createElement('script')
@@ -47,7 +47,7 @@ export function getStyle() {
 export function supportsLink(type) {
   function DOMTokenListSupports(tokenList, token) {
     if (!tokenList || !tokenList.supports) {
-      return
+      return false
     }
     try {
       return tokenList.supports(token)
@@ -60,6 +60,7 @@ export function supportsLink(type) {
       }
     }
   }
+
   return DOMTokenListSupports(document.createElement('link').relList, type)
 }
 
@@ -75,14 +76,14 @@ export function getScript(src, callback = () => {}) {
   document.body.appendChild(script)
 }
 
-export function getScripts(scripts) {
-  scripts.forEach(script => {
-    if (typeof script === 'string') {
-      return getScript(script)
-    }
-    return getScript(script.src, script.callback)
-  })
-}
+// export function getScripts(scripts) {
+//   scripts.forEach(script => {
+//     if (typeof script === 'string') {
+//       return getScript(script)
+//     }
+//     return getScript(script.src, script.callback)
+//   })
+// }
 
 export function preloadImage(src) {
   if (supportsLink('prefetch')) {

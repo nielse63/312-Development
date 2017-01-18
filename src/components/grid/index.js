@@ -1,9 +1,9 @@
 
-import 'whatwg-fetch'
+// import 'whatwg-fetch'
 import { h, Component } from 'preact'
-import { Link } from 'preact-router'
 import GridItem from '../grid-item'
 import style from './style.scss'
+import utils from '../../lib/utils'
 
 export default class Grid extends Component {
   constructor(props) {
@@ -79,7 +79,7 @@ export default class Grid extends Component {
     return diff < 86400000
   }
 
-  storeFeed(array) {
+  storeFeed() {
     localStorage.setItem('update', this.state.now)
     localStorage.setItem('feed', JSON.stringify(this.state.posts))
   }
@@ -88,9 +88,9 @@ export default class Grid extends Component {
     return (
       <div className={style.grid} data-midnight>
         <div className={style.container}>
-          {this.state.posts.map((post, i) => (
+          {this.state.posts.map(post => (
             <GridItem
-              key={i}
+              key={utils.makeid()}
               title={post.name}
               url={post.url}
               udpated={post.pushed_at}

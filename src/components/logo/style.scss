@@ -16,7 +16,7 @@
     display: block;
   }
 
-  [class*="dark"] & {
+  [class*='dark'] & {
     background-image: url('/assets/images/icon-pink.svg');
 
     &,

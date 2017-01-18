@@ -1,6 +1,5 @@
 
 import { h, Component } from 'preact'
-// import extend from 'lodash.assign'
 import Grid from '../grid'
 import BackgroundImage from '../background-image'
 import Banner from '../banner'

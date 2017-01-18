@@ -1,5 +1,4 @@
 
-// modules
 const path = require('path')
 const imagemin = require('imagemin')
 const imageminMozjpeg = require('imagemin-mozjpeg')
@@ -27,6 +26,6 @@ module.exports = function images(callback) {
   }).then(() => {
     callback()
   }).catch(err => {
-    throw new Error(err)
+    throw err
   })
 }

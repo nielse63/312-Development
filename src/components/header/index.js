@@ -1,6 +1,5 @@
 
 import { h, Component } from 'preact'
-import { Link } from 'preact-router'
 import Nav from '../nav'
 import Logo from '../logo'
 import style from './style.scss'
@@ -33,7 +32,7 @@ export default class Header extends Component {
   }
 
   componentWillMount() {
-    document.addEventListener('routed', e => {
+    document.addEventListener('routed', () => {
       setTimeout(() => {
         this.setProps()
       }, 0)
@@ -98,7 +97,7 @@ export default class Header extends Component {
       <header className={style.header} data-header>
         <div className={style.container}>
           <Logo />
-          <Nav />
+          <Nav id="header-nav" />
         </div>
       </header>
     )

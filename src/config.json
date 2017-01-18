@@ -1,11 +1,6 @@
 {
   "SITE_TITLE": "",
   "SITE_DESCRIPTION": "",
-  "CONTENT": {
-    "about": {
-      "intro": "I'm Erik Nielsen, a User-Interface and Full-Stack Software Engineer from Chicago, Illinois. I've been in the industry for over 8 years, and work with the fine folks at <a href=\"https://www.enova.com/\" target=\"_blank\">Enova International</a>."
-    }
-  },
   "META": {
     "default": {
       "title": "",
@@ -51,6 +46,13 @@
       "meta": [{
         "name": "description",
         "content": "Keep in touch! Contact me via email at erik@312development.com or through the form on this page."
+      }]
+    },
+    "/thank-you": {
+      "title": "Your message has been sent",
+      "meta": [{
+        "name": "description",
+        "content": "Your message has been sent. Thanks for getting in contact with me."
       }]
     },
     "404": {

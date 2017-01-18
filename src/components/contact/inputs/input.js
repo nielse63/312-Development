@@ -1,15 +1,25 @@
 
 import { h, Component } from 'preact'
-import style from '../style.scss'
+import PropTypes from 'proptypes'
 
-export default class TextInput extends Component {
+export default class Input extends Component {
+  constructor(props) {
+    Input.propTypes = {
+      type: PropTypes.string,
+      name: PropTypes.string.isRequired,
+      label: PropTypes.string.isRequired,
+    }
+    Input.defaultProps = {
+      type: 'text',
+    }
+    super(props)
+  }
+
   render() {
-    const type = this.props.type || 'text'
-
     return (
       <div>
         <label htmlFor={this.props.name}>{this.props.label}</label>
-        <input type={type} name={this.props.name} />
+        <input type={this.props.type} name={this.props.name} />
       </div>
     )
   }

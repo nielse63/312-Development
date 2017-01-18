@@ -1,4 +1,5 @@
 
+import 'babel-polyfill'
 import { h, render } from 'preact'
 import style from './style/index.scss'
 
@@ -16,15 +17,14 @@ function init() {
         loading: style.loading,
       }}
     />,
-    document.body, appRoot,
+    document.body, appRoot
   )
 }
 
 init()
 
 if (process.env.NODE_ENV !== 'production') {
-  /* eslint-disable global-require */
-  require('preact/devtools')
+  require('preact/devtools') // eslint-disable-line global-require
 }
 
 if (module.hot) {

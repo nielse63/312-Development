@@ -1,7 +1,6 @@
 
 import { h, Component } from 'preact'
-import { Link } from 'preact-router'
-// import extend from 'lodash.assign'
+import PropTypes from 'proptypes'
 import BackgroundImage from '../background-image'
 import Banner from '../banner'
 import Social from '../social'
@@ -12,6 +11,9 @@ import style from './style.scss'
 
 export default class Contact extends Component {
   constructor(props) {
+    Contact.propTypes = {
+      url: PropTypes.string.isRequired,
+    }
     super(props)
     this.onSubmit = function onSubmit(e) {
       e.preventDefault()
@@ -23,7 +25,7 @@ export default class Contact extends Component {
     return (
       <div className={style.page}>
         <BackgroundImage src="/assets/images/bg4.jpg" />
-        <Banner position="center" internal>
+        <Banner position="center">
           <h1>Let&apos;s stay</h1>
           <h2>in <mark>contact</mark></h2>
         </Banner>
@@ -34,7 +36,7 @@ export default class Contact extends Component {
               <Social />
             </p>
             <h3>Contact</h3>
-            <form action={this.props.url} onSubmit={this.onSubmit}>
+            <form action={this.props.url} onSubmit={this.onSubmit} method="POST">
               <TextInput name="first_name" label="First Name" />
               <TextInput name="last_name" label="Last Name" />
               <TextInput type="email" name="email" label="Email" />

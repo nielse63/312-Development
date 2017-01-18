@@ -12,9 +12,11 @@ module.exports = {
       "jsx": true
     }
   },
-  "extends": "airbnb-base",
+  "extends": "airbnb",
   "rules": {
-    "no-unused-vars": [0, { "varsIgnorePattern": "^h$" }],
+    "no-unused-vars": ['error', {
+      "varsIgnorePattern": "^h$"
+    }],
     "indent": ["error", 2],
     "react/react-in-jsx-scope": "off",
     "react/jsx-filename-extension": "off",
@@ -28,6 +30,15 @@ module.exports = {
     "semi": ["error", "never"],
     "arrow-parens": ["error", "as-needed"],
     "consistent-return": "warn",
-    "class-methods-use-this": "off"
-  }
+    "class-methods-use-this": "off",
+    "comma-dangle": ["error", {
+      "arrays": "always-multiline",
+      "objects": "always-multiline",
+      "functions": "never",
+    }],
+    'require-await': "error",
+  },
+  // "globals": {
+  //   "React": true
+  // }
 };

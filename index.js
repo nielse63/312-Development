@@ -1,12 +1,11 @@
 /* eslint-env node */
-/* eslint-disable max-statements, no-console */
+/* eslint-disable max-statements */
 
 const express = require('express')
 const path = require('path')
 const hogan = require('hogan-express')
 const bodyParser = require('body-parser')
 const compression = require('compression')
-const fs = require('fs')
 const minifyHTML = require('express-minify-html')
 const sslRedirect = require('heroku-ssl-redirect')
 const config = require('./src/config.json')
@@ -69,8 +68,7 @@ function getPageMeta(page) {
   return info
 }
 
-// routing
-app.get('*', (req, res) => {
+function printPage(req, res) {
   if (!res.headersSent) {
     setResponseHeaders(res)
   }
@@ -82,12 +80,25 @@ app.get('*', (req, res) => {
     url: baseURL,
     canonical: `${baseURL}${(req.originalUrl.replace('/', ''))}`,
   })
+  // eslint-disable-next-line no-param-reassign
   res.locals = {
     site,
   }
-  res.render(path.join(__dirname, 'build', 'home'), site)
-})
+  res.status(200).render(path.join(__dirname, 'build', 'home'), site)
+}
 
-app.listen(app.get('port'), () => {
-  console.log('Viewable on port %s', app.get('port')) // eslint-disable-line no-console
-})
+// routing
+app.get('*', printPage)
+
+app.start = function start(callback = () => {}) {
+  return app.listen(app.get('port'), () => {
+    console.log('Viewable on port %s', app.get('port')) // eslint-disable-line no-console
+    callback()
+  })
+}
+
+if (!module.parent) {
+  app.start()
+}
+
+module.exports = app

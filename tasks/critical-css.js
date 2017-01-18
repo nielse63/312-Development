@@ -24,8 +24,10 @@ module.exports = function css(callback) {
       minify: true,
       extract: false,
       ignore: ['@font-face'],
-    }).then(output => {
+    }).then(() => {
       callback()
+    }).catch(error => {
+      throw error
     })
   })
 }

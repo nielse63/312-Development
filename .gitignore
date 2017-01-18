@@ -11,3 +11,5 @@ test/results
 *.report.html
 stats.json
 *.log
+ci.sh
+webpack.profile.json

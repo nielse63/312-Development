@@ -1,7 +1,5 @@
 
 import { h, Component } from 'preact'
-import { Link } from 'preact-router'
-import Nav from '../nav'
 import Social from '../social'
 import Logo from '../logo'
 import style from './style.scss'

@@ -1,7 +1,6 @@
 
 import { h, Component } from 'preact'
 import { Router } from 'preact-router'
-// import extend from 'lodash.assign'
 import Home from './home'
 import About from './about'
 import Contact from './contact'
@@ -17,8 +16,9 @@ export default class AppRouter extends Component {
     this.handleRoute = this._handleRoute.bind(this)
   }
 
-  _handleRoute(e) {
-    this.updateDocument(e.url)
+  getMeta(url) {
+    this.meta = config.META[url] || config.META['404']
+    return Object.assign({}, config.META.default, this.meta)
   }
 
   updateDocument(url) {
@@ -27,9 +27,8 @@ export default class AppRouter extends Component {
     document.title = this.createTitle(url)
   }
 
-  getMeta(url) {
-    this.meta = config.META[url] || config.META['404']
-    return Object.assign({}, config.META.default, this.meta)
+  _handleRoute(e) {
+    this.updateDocument(e.url)
   }
 
   createTitle(url) {

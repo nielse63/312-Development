@@ -1,4 +1,5 @@
 
+import 'babel-polyfill'
 import './common'
 import Phantom from 'phantom'
 import app from '../'
@@ -82,7 +83,7 @@ describe('312 Development Tests', () => {
     })
 
     it('should have header', () => {
-      header.exists.should.be.true
+      header.should.exist // eslint-disable-line no-unused-expressions
     })
 
     it('header width', () => {
@@ -111,7 +112,7 @@ describe('312 Development Tests', () => {
     })
 
     it('should have logo', () => {
-      logo.exists.should.be.true
+      logo.should.exist // eslint-disable-line no-unused-expressions
     })
 
     it('logo width', () => {
@@ -128,7 +129,6 @@ describe('312 Development Tests', () => {
   })
 
   describe('#nav', () => {
-    /* eslint-disable max-nested-callbacks */
     let nav
 
     before(async () => {
@@ -152,7 +152,7 @@ describe('312 Development Tests', () => {
     })
 
     it('should have nav', () => {
-      nav.exists.should.be.true
+      nav.should.exist // eslint-disable-line no-unused-expressions
     })
 
     it('nav item count', () => {
