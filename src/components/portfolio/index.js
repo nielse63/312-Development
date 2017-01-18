@@ -11,7 +11,7 @@ export default class Portfolio extends Component {
     return (
       <div className={style.page}>
         <BackgroundImage src="/assets/images/bg1.jpg" />
-        <Banner position="right" internal>
+        <Banner position="right">
           <h1>Check out</h1>
           <h2>my <mark>work</mark></h2>
         </Banner>

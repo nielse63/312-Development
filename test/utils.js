@@ -1,19 +1,17 @@
 
-const config = {
-  homepage: 'http://localhost:3001',
+const homepage = 'http://localhost:3001'
+
+module.exports.URLS = {
+  base: homepage,
+  home: `${homepage}/`,
+  about: `${homepage}/about`,
+  portfolio: `${homepage}/portfolio`,
+  contact: `${homepage}/contact`,
 }
 
-exports.URLS = {
-  base: config.homepage,
-  home: `${config.homepage}/`,
-  about: `${config.homepage}/about`,
-  portfolio: `${config.homepage}/portfolio`,
-  contact: `${config.homepage}/contact`,
-}
-
-exports.VIEWPORT = {
+module.exports.VIEWPORT = {
   width: 1350,
   height: 650,
 }
 
-exports.TRANSITION_DURATION = 1600
+module.exports.TRANSITION_DURATION = 1600

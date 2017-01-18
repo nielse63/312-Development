@@ -1,9 +1,9 @@
 /* eslint-disable class-methods-use-this */
 
 import { h, Component } from 'preact'
-import { Router } from 'preact-router'
+import PropTypes from 'proptypes'
 import AppRouter from './router'
-import { getScripts, getStyle } from '../lib/preload'
+import { getStyle } from '../lib/preload'
 import { listener } from '../lib/sw-listener'
 import Header from './header'
 import Footer from './footer'
@@ -73,6 +73,19 @@ export default class App extends Component {
       window.webkitRequestAnimationFrame ||
       window.mozRequestAnimationFrame ||
       function raf(callback) { window.setTimeout(callback, 1000 / 60) }
+  }
+
+  constructor(props) {
+    App.propTypes = {
+      classes: PropTypes.shape({
+        default: PropTypes.string.isRequired,
+        internal: PropTypes.string.isRequired,
+        ready: PropTypes.string.isRequired,
+        done: PropTypes.string.isRequired,
+        loading: PropTypes.string.isRequired,
+      }).isRequired,
+    }
+    super(props)
   }
 
   componentWillMount() {

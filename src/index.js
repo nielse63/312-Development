@@ -24,8 +24,7 @@ function init() {
 init()
 
 if (process.env.NODE_ENV !== 'production') {
-  /* eslint-disable global-require */
-  require('preact/devtools')
+  require('preact/devtools') // eslint-disable-line global-require
 }
 
 if (module.hot) {

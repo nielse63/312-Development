@@ -10,7 +10,7 @@ module.exports = function font(callback) {
       .src(src)
       .dest(dest)
 
-  fontmin.run((err, files) => {
+  fontmin.run(err => {
     if (err) {
       throw err
     }

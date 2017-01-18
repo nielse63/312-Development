@@ -29,12 +29,12 @@ rules:
   no-misspelled-properties:
     - 2
     - extra-properties:
-        - contain
+      - contain
   property-sort-order: 0
   space-after-colon: 0
   no-css-comments: 0
   no-vendor-prefixes:
     - 1
     - additional-identifiers:
-        - o
+      - o
   pseudo-element: 0

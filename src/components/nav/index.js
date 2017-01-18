@@ -1,5 +1,6 @@
 
 import { h, Component } from 'preact'
+import PropTypes from 'proptypes'
 import { Link } from 'preact-router'
 import style from './style.scss'
 import { preloadImage, preloadDocument } from '../../lib/preload'
@@ -22,6 +23,12 @@ export default class Nav extends Component {
   }
 
   constructor(props) {
+    Nav.propTypes = {
+      id: PropTypes.string,
+    }
+    Nav.defaultProps = {
+      id: 'nav',
+    }
     super(props)
     this.preloaded = [window.location.href]
     this.onMouseOver = this._onMouseOver.bind(this)
@@ -40,7 +47,7 @@ export default class Nav extends Component {
 
   preload(type, src) {
     if (this.preloaded.indexOf(src) > -1) {
-      return
+      return false
     }
     this.preloaded.push(src)
 
@@ -61,23 +68,27 @@ export default class Nav extends Component {
   render() {
     const classes = [style.nav, 'nav']
     return (
-      <nav className={classes.join(' ')} id={this.props.id || 'nav'}>
+      <nav className={classes.join(' ')} id={this.props.id}>
         <Link
           href="/"
           onMouseOver={this.onMouseOver}
-          data-src="/assets/images/bg2.jpg">Home</Link>
+          data-src="/assets/images/bg2.jpg"
+        >Home</Link>
         <Link
           href="/about"
           onMouseOver={this.onMouseOver}
-          data-src="/assets/images/bg3.jpg">About Me</Link>
+          data-src="/assets/images/bg3.jpg"
+        >About Me</Link>
         <Link
           href="/portfolio"
           onMouseOver={this.onMouseOver}
-          data-src="/assets/images/bg1.jpg">Work</Link>
+          data-src="/assets/images/bg1.jpg"
+        >Work</Link>
         <Link
           href="/contact"
           onMouseOver={this.onMouseOver}
-          data-src="/assets/images/bg4.jpg">Contact</Link>
+          data-src="/assets/images/bg4.jpg"
+        >Contact</Link>
       </nav>
     )
   }
