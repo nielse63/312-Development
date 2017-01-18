@@ -5,13 +5,21 @@ module.exports = {
     ecmaVersion: 6,
   },
   "env": {
-    "mocha": true
+    "mocha": true,
+    phantomjs: true
   },
   "rules": {
     "max-nested-callbacks": ["error", 4],
     "func-names": "off",
     "no-console": "off",
     'require-await': "error",
-    'import/first': 'off'
+    'import/first': 'off',
+    'no-unused-expressions': 'off',
+    "max-statements": 'off',
+  },
+  globals: {
+    phantom: true,
+    page: true,
+    utils: true
   }
 };

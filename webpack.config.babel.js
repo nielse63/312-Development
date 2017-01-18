@@ -14,10 +14,7 @@ const CSS_MAPS = ENV !== 'production'
 
 module.exports = {
   context: path.resolve(__dirname, 'src'),
-  // entry: {
-  //   bundle: './index.js'
-  // },
-  entry: ['babel-polyfill', './index.js'],
+  entry: ['./index.js'],
 
   output: {
     path: path.resolve(__dirname, 'build'),
@@ -148,7 +145,7 @@ module.exports = {
     colors: true,
   },
   profile: true,
-  cache: ENV === 'production' ? false : true,
+  cache: ENV !== 'production',
 
   devServer: {
     port: process.env.PORT || 8080,
