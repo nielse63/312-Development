@@ -1,5 +1,4 @@
 
-import 'babel-polyfill'
 import './common'
 import Phantom from 'phantom'
 import app from '../'
@@ -84,7 +83,7 @@ describe('312 Development Tests', function () {
     })
 
     it('should have header', () => {
-      header.should.exist // eslint-disable-line no-unused-expressions
+      header.exists.should.be.true // eslint-disable-line no-unused-expressions
     })
 
     it('header width', () => {
@@ -113,7 +112,7 @@ describe('312 Development Tests', function () {
     })
 
     it('should have logo', () => {
-      logo.should.exist // eslint-disable-line no-unused-expressions
+      logo.exists.should.be.true // eslint-disable-line no-unused-expressions
     })
 
     it('logo width', () => {
@@ -153,7 +152,7 @@ describe('312 Development Tests', function () {
     })
 
     it('should have nav', () => {
-      nav.should.exist // eslint-disable-line no-unused-expressions
+      nav.exists.should.be.true // eslint-disable-line no-unused-expressions
     })
 
     it('nav item count', () => {

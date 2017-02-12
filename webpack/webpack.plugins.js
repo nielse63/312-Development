@@ -60,6 +60,6 @@ module.exports = {
       entry: path.join(__dirname, '../src/lib/sw.js'),
     }),
     new webpack.optimize.DedupePlugin(),
-    new webpack.optimize.OccurenceOrderPlugin(),
+    // new webpack.optimize.OccurenceOrderPlugin(),
   ],
 }
