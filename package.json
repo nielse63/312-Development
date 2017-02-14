@@ -17,7 +17,7 @@
   },
   "scripts": {
     "dev": "NODE_ENV=dev-server webpack-dev-server --inline --hot --progress --colors",
-    "lint:js": "eslint --fix ./src ./tasks ./test ./*.js",
+    "lint:js": "eslint --fix ./src ./tasks ./test ./webpack ./*.js",
     "lint:scss": "sass-lint 'src/**/*.scss' -v -c ./.sass-lint.yml",
     "lint": "npm run lint:js && npm run lint:scss",
     "clean": "rm -rf ./build",

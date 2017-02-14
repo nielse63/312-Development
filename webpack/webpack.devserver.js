@@ -11,6 +11,6 @@ module.exports = {
     contentBase: path.join(__dirname, '../src'),
     historyApiFallback: true,
     // open: true,
-    compress: true
+    compress: true,
   },
 }

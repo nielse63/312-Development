@@ -13,10 +13,10 @@ module.exports = {
     path: path.resolve(__dirname, '../build'),
     publicPath: '/',
     // filename: '[name].[hash].js',
-    filename: (ENV === 'production' ? '[chunkhash]' : '[hash]') + '.[name].js',
+    filename: `${ENV === 'production' ? '[chunkhash]' : '[hash]'}.[name].js`,
   },
   target: 'web',
-  stats: "errors-only",
+  stats: 'errors-only',
   // stats: {
   //   // Add asset Information
   //   assets: true,
@@ -65,7 +65,7 @@ module.exports = {
   cache: ENV !== 'production',
   devtool: ENV === 'production' ? 'cheap-source-map' : 'inline-source-map',
   performance: {
-    hints: "warning",
+    hints: 'warning',
     maxAssetSize: 200000,
     maxEntrypointSize: 400000,
     // assetFilter: function(assetFilename) {

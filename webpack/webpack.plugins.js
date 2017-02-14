@@ -6,7 +6,7 @@ import HtmlWebpackPlugin from 'html-webpack-plugin'
 import CopyWebpackPlugin from 'copy-webpack-plugin'
 import FaviconsWebpackPlugin from 'favicons-webpack-plugin'
 import ServiceWorkerWebpackPlugin from 'serviceworker-webpack-plugin'
-import CompressionPlugin from "compression-webpack-plugin"
+import CompressionPlugin from 'compression-webpack-plugin'
 import autoprefixer from 'autoprefixer'
 
 const ENV = process.env.NODE_ENV || 'development'
@@ -16,7 +16,7 @@ module.exports = {
   plugins: [
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': JSON.stringify(ENV),
-      'process.env.DEBUG': JSON.stringify(process.env.DEBUG)
+      'process.env.DEBUG': JSON.stringify(process.env.DEBUG),
     }),
     new webpack.NoEmitOnErrorsPlugin(),
     new ExtractTextPlugin({
@@ -30,7 +30,7 @@ module.exports = {
           // autoprefixer({ browsers: '> 1%' })
           return [
             // autoprefixer.bind(null, { browsers: '> 1%' })
-            autoprefixer
+            autoprefixer,
           ]
         },
         sassLoader: {
@@ -53,7 +53,7 @@ module.exports = {
       { from: './sitemap.xml', to: './' },
     ]),
     new webpack.optimize.CommonsChunkPlugin({
-      name: 'vendor'
+      name: 'vendor',
     }),
     new webpack.optimize.UglifyJsPlugin({
       sourceMap: true,
@@ -87,11 +87,11 @@ module.exports = {
       },
     }),
     new CompressionPlugin({
-      asset: "[path].gz[query]",
-      algorithm: "gzip",
+      asset: '[path].gz[query]',
+      algorithm: 'gzip',
       test: /\.js$|\.html$|\.css$/,
       threshold: 10240,
-      minRatio: 0.8
+      minRatio: 0.8,
     }),
     new ServiceWorkerWebpackPlugin({
       entry: path.join(__dirname, '../src/lib/sw.js'),
