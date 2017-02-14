@@ -23,8 +23,8 @@ module.exports = function images(callback) {
         }],
       }),
     ],
-  }).then(() => {
-    callback()
+  }).then(callback, err => {
+    throw err
   }).catch(err => {
     throw err
   })

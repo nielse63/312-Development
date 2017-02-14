@@ -3,12 +3,11 @@ const fs = require('fs')
 const path = require('path')
 const critical = require('critical')
 
-module.exports = function css(callback) {
-  const distdir = path.resolve(__dirname, '../build')
-  const stylepath = path.join(distdir, 'style.css')
-  const filepath = path.join(distdir, 'home.html')
+const distdir = path.resolve(__dirname, '../build')
 
-  fs.readFile(filepath, 'utf8', (err, html) => {
+function extractCSS(stylepath, callback) {
+  const homepath = path.join(distdir, 'home.html')
+  fs.readFile(homepath, 'utf8', (err, html) => {
     if (err) {
       throw err
     }
@@ -17,17 +16,25 @@ module.exports = function css(callback) {
       inline: true,
       base: distdir,
       html,
-      src: filepath,
+      src: homepath,
       css: [stylepath],
       width: 1300,
-      dest: filepath,
+      dest: homepath,
       minify: true,
       extract: false,
       ignore: ['@font-face'],
     }).then(() => {
       callback()
-    }).catch(error => {
+    }).error(error => {
       throw error
     })
+  })
+}
+
+module.exports = function css(callback) {
+  const files = fs.readdirSync(distdir).filter(file => /\.css$/.test(file))
+  files.forEach(file => {
+    const stylepath = path.join(distdir, file)
+    extractCSS(stylepath, callback)
   })
 }
