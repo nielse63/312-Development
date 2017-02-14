@@ -1,1 +1,1 @@
-web: yarn run local:server
+web: npm run local:server
