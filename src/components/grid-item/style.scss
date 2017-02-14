@@ -19,16 +19,6 @@ $grid-item-distance: 20px;
     max-width: calc(50% - #{$grid-item-distance});
   }
 
-  // &.inview {
-  //   h4 {
-  //     will-change: transform, opacity;
-  //   }
-
-  //   .grid-item-wrapper {
-  //     will-change: transform;
-  //   }
-  // }
-
   &:hover {
     h4 {
       transform: translateZ(15px);

@@ -7,6 +7,7 @@ function onScriptLoad(cb) {
   cb()
 }
 
+/* eslint-disable max-statements */
 function createScript(src, callback) {
   const id = src.split('/').pop().replace(/-|\./g, '-')
   if (document.getElementById(id)) {
@@ -14,13 +15,16 @@ function createScript(src, callback) {
   }
 
   const g = document.createElement('script')
+  const onload = onScriptLoad.bind(g, callback)
   g.src = src
   g.id = id
   g.async = 'true'
   g.setAttribute('crossorigin', 'anonymous')
-  g.onload = g.onreadystatechange = onScriptLoad.bind(g, callback)
+  g.onload = onload
+  g.onreadystatechange = onload
   return g
 }
+/* eslint-enable max-statements */
 
 export function createResourceHint(rel, src, type = null) {
   const link = document.createElement('link')
@@ -75,15 +79,6 @@ export function getScript(src, callback = () => {}) {
   }
   document.body.appendChild(script)
 }
-
-// export function getScripts(scripts) {
-//   scripts.forEach(script => {
-//     if (typeof script === 'string') {
-//       return getScript(script)
-//     }
-//     return getScript(script.src, script.callback)
-//   })
-// }
 
 export function preloadImage(src) {
   if (supportsLink('prefetch')) {

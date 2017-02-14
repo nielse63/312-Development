@@ -39,10 +39,13 @@ export default class Nav extends Component {
     const baseUrl = `${window.location.protocol}//${window.location.host}`
     const css = window.getComputedStyle(ele)
     const bg = css['background-image']
-      .match(/\((.*?)\)/)[1]
-      .replace(/"/g, '')
-      .replace(baseUrl, '')
-    this.preloaded.push(bg)
+    if (bg && bg.match(/\((.*?)\)/)) {
+      const bg1 = css['background-image']
+        .match(/\((.*?)\)/)[1]
+        .replace(/"/g, '')
+        .replace(baseUrl, '')
+      this.preloaded.push(bg1)
+    }
   }
 
   preload(type, src) {
