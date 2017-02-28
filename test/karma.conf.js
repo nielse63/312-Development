@@ -1,5 +1,5 @@
 require('babel-register')
-const webpack = require('../webpack.config.babel.js')
+const webpack = require('../webpack.config.babel')
 const path = require('path')
 
 // webpack.module.rules.push({
