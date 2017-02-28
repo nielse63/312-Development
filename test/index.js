@@ -1,11 +1,27 @@
 
+// import { h, render } from 'preact'
 // import './common'
-// import Phantom from 'phantom'
 // import app from '../'
+// import Phantom from 'phantom'
 
 // let server
 // let phantom
 // let page
+
+describe('App', () => {
+  // let scratch
+
+  before(() => {
+    console.log(document)
+    // scratch = document.createElement('div')
+    // console.log(scratch)(document.body || document.documentElement).appendChild(scratch)
+  })
+
+  it('should have tests', () => {
+    console.log(document)
+    true.should.equal(true)
+  })
+})
 
 // const setupPage = async function () {
 //   if (page) {

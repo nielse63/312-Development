@@ -1,5 +1,5 @@
 
-import 'babel-polyfill'
+import 'babel-register' // eslint-disable-line import/no-extraneous-dependencies
 import { h, render } from 'preact'
 import style from './style/index.scss'
 

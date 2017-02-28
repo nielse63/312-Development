@@ -1,3 +1,6 @@
+/* eslint-disable import/first */
+
+process.env.NODE_ENV = process.env.NODE_ENV || 'development'
 
 import basic from './webpack/webpack.basic'
 import resolve from './webpack/webpack.resolve'
