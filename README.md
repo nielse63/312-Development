@@ -2,10 +2,10 @@
 
 [Check out the Site](https://312development.com/) | [Follow me on Twitter](https://twitter.com/erikkylenielsen/)
 
-![Travis branch](https://img.shields.io/travis/nielse63/312-Development/master.svg?style=flat-square)
-![Code Climate](https://img.shields.io/codeclimate/github/nielse63/312-Development.svg?style=flat-square)
-![David](https://img.shields.io/david/nielse63/312-Development.svg?style=flat-square)
-![David](https://img.shields.io/david/dev/nielse63/312-Development.svg?style=flat-square)
+[![Travis branch](https://img.shields.io/travis/nielse63/312-Development/master.svg?style=flat-square)](https://travis-ci.org/nielse63/312-Development)
+[![Code Climate](https://img.shields.io/codeclimate/github/nielse63/312-Development.svg?style=flat-square)](https://lima.codeclimate.com/github/nielse63/312-Development/)
+[![David](https://img.shields.io/david/nielse63/312-Development.svg?style=flat-square)](https://github.com/nielse63/312-Development/blob/master/package.json)
+[![David](https://img.shields.io/david/dev/nielse63/312-Development.svg?style=flat-square)](https://github.com/nielse63/312-Development/blob/master/package.json)
 
 ## About This Repo
 
