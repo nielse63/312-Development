@@ -37,8 +37,5 @@ module.exports = {
       "functions": "never",
     }],
     'require-await': "error",
-  },
-  // "globals": {
-  //   "React": true
-  // }
+  }
 };
