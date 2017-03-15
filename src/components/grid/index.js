@@ -1,6 +1,7 @@
 
 import { h, Component } from 'preact'
 import axios from 'axios'
+import store from 'store'
 import GridItem from '../grid-item'
 import style from './style.scss'
 import utils from '../../lib/utils'
@@ -21,8 +22,8 @@ export default class Grid extends Component {
   }
 
   getFeed() {
-    const feed = localStorage.getItem('feed')
-    const lastUpdate = localStorage.getItem('update')
+    const feed = store.get('feed')
+    const lastUpdate = store.get('update')
     if (feed && this.shouldGetCache(lastUpdate)) {
       this.getCachedFeed(feed)
       return
@@ -70,7 +71,7 @@ export default class Grid extends Component {
 
   getCachedFeed(feed) {
     return this.setState({
-      posts: JSON.parse(feed),
+      posts: feed,
     })
   }
 
@@ -84,8 +85,8 @@ export default class Grid extends Component {
   }
 
   storeFeed() {
-    localStorage.setItem('update', this.state.now)
-    localStorage.setItem('feed', JSON.stringify(this.state.posts))
+    store.get('update', this.state.now)
+    store.set('feed', this.state.posts)
   }
 
   render() {
