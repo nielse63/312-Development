@@ -1,6 +1,6 @@
 
-// import 'whatwg-fetch'
 import { h, Component } from 'preact'
+import axios from 'axios'
 import GridItem from '../grid-item'
 import style from './style.scss'
 import utils from '../../lib/utils'
@@ -24,44 +24,48 @@ export default class Grid extends Component {
     const feed = localStorage.getItem('feed')
     const lastUpdate = localStorage.getItem('update')
     if (feed && this.shouldGetCache(lastUpdate)) {
-      return this.getCachedFeed(feed)
+      this.getCachedFeed(feed)
+      return
     }
 
-    return fetch('https://api.github.com/users/nielse63/repos?visibility=public&sort=pushed')
-      .then(response => response.json())
-      .then(json => {
-        const mOffset = 31556952000
-        const cutoff = this.state.now - mOffset
-        const posts = json.filter(repo => {
-          const object = Object.assign({}, repo)
-          const pushed = new Date(object.pushed_at)
-          object.pushed_at = pushed
-          return !object.private &&
-            object.description &&
-            (object.stargazers_count || pushed > cutoff)
-        }).map(repo => {
-          const object = Object.assign({}, repo)
-          object.language = object.language || ''
-          object.url = object.homepage &&
-            object.homepage.indexOf(window.location.host) < 0 ? object.homepage : object.html_url
-          return {
-            name: object.name.replace(/-/g, ' '),
-            url: object.url,
-            pushed_at: object.pushed_at,
-            description: object.description,
-            likes: object.stargazers_count + object.watchers_count,
-            language: object.language,
-          }
-        })
-
-        // set state
-        this.setState({
-          posts,
-        })
-
-        // cache in localstorage
-        this.storeFeed(posts)
+    axios.get('https://api.github.com/users/nielse63/repos?visibility=public&sort=pushed')
+    .then(response => response.data)
+    .then(json => {
+      const mOffset = 31556952000
+      const cutoff = this.state.now - mOffset
+      const posts = json.filter(repo => {
+        const object = Object.assign({}, repo)
+        const pushed = new Date(object.pushed_at)
+        object.pushed_at = pushed
+        return !object.private &&
+          object.description &&
+          (object.stargazers_count || pushed > cutoff)
+      }).map(repo => {
+        const object = Object.assign({}, repo)
+        object.language = object.language || ''
+        object.url = object.homepage &&
+          object.homepage.indexOf(window.location.host) < 0 ? object.homepage : object.html_url
+        return {
+          name: object.name.replace(/-/g, ' '),
+          url: object.url,
+          pushed_at: object.pushed_at,
+          description: object.description,
+          likes: object.stargazers_count + object.watchers_count,
+          language: object.language,
+        }
       })
+
+      // set state
+      this.setState({
+        posts,
+      })
+
+      // cache in localstorage
+      this.storeFeed(posts)
+    })
+    .catch(error => {
+      console.error(error)
+    })
   }
 
   getCachedFeed(feed) {

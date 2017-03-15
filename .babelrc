@@ -1,6 +1,5 @@
 {
-  "sourceMaps": true,
-  "presets": [ "latest", "stage-0", "react" ],
+  "presets": [ "env", "react" ],
   "plugins": [
     ["transform-react-jsx", { "pragma": "h" }]
   ]
