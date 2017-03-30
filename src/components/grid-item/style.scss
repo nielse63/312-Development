@@ -105,7 +105,7 @@ $grid-item-distance: 20px;
   h4 {
     margin: 0 0 0.5em;
     background: linear-gradient(180deg, #2443fb 0%, #39a9da 100%);
-    -webkit-background-clip: text;
+    background-clip: text;
     -webkit-text-fill-color: transparent;
     font-size: 32px;
     line-height: 1;
@@ -163,7 +163,7 @@ $grid-item-distance: 20px;
   }
 
   [data-likes] {
-    &:after {
+    &::after {
       content: attr(data-likes);
       font-family: $body-font-family;
     }
@@ -196,7 +196,7 @@ $grid-item-distance: 20px;
   }
 
   .fa-star-0 {
-    &:before {
+    &::before {
       margin-right: 2px;
     }
   }

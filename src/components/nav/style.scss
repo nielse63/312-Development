@@ -38,7 +38,7 @@
     }
 
     @media (min-width: $breakpoint-small) {
-      &:before {
+      &::before {
         content: '';
         position: absolute;
         top: 48px;
@@ -53,7 +53,7 @@
 
       &:hover,
       &:active {
-        &:before {
+        &::before {
           width: calc(100% - 10px);
         }
       }
@@ -61,7 +61,7 @@
   }
 
   .active {
-    &:before {
+    &::before {
       width: calc(100% - 10px);
     }
   }

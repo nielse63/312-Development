@@ -6,8 +6,8 @@
 
 * {
   &,
-  &:before,
-  &:after {
+  &::before,
+  &::after {
     box-sizing: border-box;
   }
 }
@@ -79,12 +79,12 @@ a {
   }
 
   &:not(.complete) {
-    &:before {
+    &::before {
       content: '';
     }
   }
 
-  &:before {
+  &::before {
     content: '';
     position: absolute;
     top: 0;
@@ -99,14 +99,14 @@ a {
   }
 
   &.ready {
-    &:before {
+    &::before {
       transition: 0.5s opacity;
       opacity: 0;
     }
   }
 
   &.complete {
-    &:before {
+    &::before {
       display: none;
     }
   }

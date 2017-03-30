@@ -29,7 +29,7 @@
     background-image: url('/assets/images/bg2-full.jpg');
   }
 
-  &:before {
+  &::before {
     content: '';
     display: block;
     position: absolute;

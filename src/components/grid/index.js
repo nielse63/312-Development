@@ -55,17 +55,15 @@ export default class Grid extends Component {
           language: object.language,
         }
       })
-
       // set state
       this.setState({
         posts,
       })
-
       // cache in localstorage
       this.storeFeed(posts)
     })
     .catch(error => {
-      console.error(error)
+      console.error(error) // eslint-disable-line no-console
     })
   }
 
