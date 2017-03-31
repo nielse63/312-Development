@@ -19,7 +19,7 @@
     "dev": "NODE_ENV=dev-server webpack-dev-server --inline --hot --progress --colors",
     "lint:js": "eslint --fix src tasks test ./*.js",
     "lint:scss": "scss-lint src/ --format=JSON",
-    "lint": "yarn run lint:js && yarn run lint:scss",
+    "lint": "yarn run lint:js",
     "clean": "rm -rf ./build",
     "tasks": "node ./tasks",
     "prebuild": "yarn run clean && yarn run lint",
