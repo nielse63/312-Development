@@ -1,7 +1,6 @@
 
 import { h, Component } from 'preact'
 import PropTypes from 'proptypes'
-import style from '../style.scss'
 
 export default class TextArea extends Component {
   constructor(props) {
@@ -14,7 +13,7 @@ export default class TextArea extends Component {
 
   render() {
     return (
-      <div className={style.full}>
+      <div>
         <label htmlFor={this.props.name}>{this.props.label}</label>
         <textarea name={this.props.name} />
       </div>

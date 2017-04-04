@@ -1,6 +1,7 @@
 
 import { h, Component } from 'preact'
 import PropTypes from 'proptypes'
+import style from '../style.scss'
 
 export default class Input extends Component {
   constructor(props) {
@@ -16,10 +17,13 @@ export default class Input extends Component {
   }
 
   render() {
+    const name = this.props.name
+    const type = this.props.type || Input.defaultProps.type
+    const label = this.props.label
     return (
-      <div>
-        <label htmlFor={this.props.name}>{this.props.label}</label>
-        <input type={this.props.type} name={this.props.name} />
+      <div className={style.col}>
+        <label htmlFor={name}>{label}</label>
+        <input type={type} name={name} id={name} aria-label={label} />
       </div>
     )
   }

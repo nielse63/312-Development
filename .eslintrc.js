@@ -22,7 +22,7 @@ module.exports = {
     "react/jsx-filename-extension": "off",
     "react/prefer-stateless-function": "off",
     "no-underscore-dangle": "off",
-    "max-len": "warn",
+    "max-len": "off",
     "no-param-reassign": "warn",
     "max-nested-callbacks": ["error", 3],
     "complexity": ["error", 5],

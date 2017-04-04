@@ -1,32 +1,42 @@
 
 import { loadCSS } from 'fg-loadcss'
 
+const LOADED = {}
+
 function onScriptLoad(cb) {
   const rs = this.readyState
   if (rs && rs !== 'complete' && rs !== 'loaded') return
   cb()
 }
 
-/* eslint-disable max-statements */
+function createScriptTag(src, id) {
+  const script = document.createElement('script')
+  script.src = src
+  script.id = id
+  script.async = 'true'
+  script.setAttribute('crossorigin', 'anonymous')
+  return script
+}
+
 function createScript(src, callback) {
   const id = src.split('/').pop().replace(/-|\./g, '-')
-  if (document.getElementById(id)) {
+  if (document.getElementById(id) || LOADED[src]) {
     return null
   }
 
-  const g = document.createElement('script')
-  const onload = onScriptLoad.bind(g, callback)
-  g.src = src
-  g.id = id
-  g.async = 'true'
-  g.setAttribute('crossorigin', 'anonymous')
-  g.onload = onload
-  g.onreadystatechange = onload
-  return g
+  LOADED[src] = true
+  const script = createScriptTag(src, id)
+  const onload = onScriptLoad.bind(script, callback)
+  script.onload = onload
+  script.onreadystatechange = onload
+  return script
 }
-/* eslint-enable max-statements */
 
 export function createResourceHint(rel, src, type = null) {
+  if (LOADED[src]) {
+    return
+  }
+  LOADED[src] = src
   const link = document.createElement('link')
   link.href = src
   link.rel = rel
@@ -37,9 +47,10 @@ export function createResourceHint(rel, src, type = null) {
 }
 
 export function getStyle() {
-  if (!navigator.onLine) {
+  if (!navigator.onLine || LOADED.fontawesome) {
     return
   }
+  LOADED.fontawesome = true
 
   setTimeout(() => {
     if (document.querySelectorAll('.fa').length && !document.querySelector('[href$="font-awesome.min.css"]')) {
