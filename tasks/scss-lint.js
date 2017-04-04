@@ -56,7 +56,7 @@ function handleColorVars(file, results) {
       name = `${name}${count + 1}`
     }
     if(fileContent.indexOf(`$${name};`) > -1) {
-      name = `${name}Custom`
+      name = `${name}-custom`
     }
     colorNames.push(name)
     colorVars.push(`$${name}: ${color};`)
