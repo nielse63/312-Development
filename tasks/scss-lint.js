@@ -47,7 +47,6 @@ function handleColorVars(file, results) {
   const colorVars = []
   const colorNames = []
   colors.forEach(function(color, i) {
-    const rgx = new RegExp(color, 'g')
     const names = namer(color)
     let name = names.basic[0].name
     if(colorNames.indexOf(name) > -1) {
@@ -61,6 +60,10 @@ function handleColorVars(file, results) {
     }
     colorNames.push(name)
     colorVars.push(`$${name}: ${color};`)
+    let clr = color
+      .replace('(', '\\(')
+      .replace(')', '\\)')
+    const rgx = new RegExp(clr, 'g')
     fileContent = fileContent.replace(rgx, `$${name}`)
   })
 
