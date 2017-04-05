@@ -93,6 +93,9 @@ export default class App extends Component {
   }
 
   componentDidMount() {
+    // if (process.env.NODE_ENV === 'production') {
+    //   listener()
+    // }
     listener()
     getStyle()
 
