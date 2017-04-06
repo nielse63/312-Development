@@ -17,15 +17,15 @@
   position: relative;
   color: $white;
   line-height: 1;
-  // z-index: 1;
 
   > * {
     display: flex;
     flex-direction: column;
-    padding-top: $header-height;
-    padding-bottom: 20px;
-    height: 550px;
-    min-height: 100vh;
+    padding: 6em $gutter-width;
+
+    @media (min-width: $breakpoint-medium) and (max-width: ($breakpoint-large - 1px)) {
+      padding: 10em $gutter-width 9em;
+    }
   }
 
   &.internal {
@@ -62,18 +62,6 @@
       align-items: center;
       text-align: center;
     }
-
-    h1 {
-      @media (min-width: $breakpoint-medium) {
-        padding-right: 150px;
-      }
-    }
-
-    h2 {
-      @media (min-width: $breakpoint-medium) {
-        padding-left: 150px;
-      }
-    }
   }
 
   &.bottom-left {
@@ -107,7 +95,7 @@
     animation-delay: 0.2s;
 
     @media (min-width: $breakpoint-small) {
-      font-size: 88px;
+      font-size: 64px;
     }
 
     @media (min-width: $breakpoint-medium) {
@@ -125,7 +113,7 @@
     }
 
     @media (min-width: $breakpoint-small) {
-      font-size: 80px;
+      font-size: 52px;
     }
 
     @media (min-width: $breakpoint-medium) {

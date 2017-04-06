@@ -3,8 +3,16 @@ $white: #fff;
 $black: #111;
 $pink: #ff3466;
 $background-color: #f9f7f9;
+$gray: #444;
+$teal: #149dcc;
+$border-color: rgba(17, 17, 17, 0.15);
+$yellow: #ff0;
+$transparent-white: rgba(255, 255, 255, 0);
+$header-background: rgba(17, 17, 17, 0.35);
+$blue: #2443fb;
 
 $header-height: 66px;
+$gutter-width: 25px;
 
 $sans-serif: 'Helvetica Neue', Helvetica, Arial, sans-serif;
 $body-font-family: 'Proxima Nova', $sans-serif;
@@ -13,3 +21,6 @@ $header-font-family: 'Brandon Grotesque', $sans-serif;
 $breakpoint-large: 1023px;
 $breakpoint-medium: 767px;
 $breakpoint-small: 480px;
+
+$nav-breakpoint: $breakpoint-large;
+$nav-breakpoint-max: ($nav-breakpoint - 1px);

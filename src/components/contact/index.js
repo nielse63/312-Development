@@ -31,18 +31,22 @@ export default class Contact extends Component {
         </Banner>
         <div className={style.content} data-midnight>
           <div className={style['container-narrow']}>
-            <h3>Email &amp; Social Media</h3>
+            <h3 className={style['contact-title']}>Email &amp; Social Media</h3>
             <p className={style.center}>
               <Social />
             </p>
-            <h3>Contact</h3>
-            <form action={this.props.url} onSubmit={this.onSubmit} method="POST">
-              <TextInput name="first_name" label="First Name" />
-              <TextInput name="last_name" label="Last Name" />
-              <TextInput type="email" name="email" label="Email" />
-              <TextInput type="tel" name="phone" label="Phone Number" />
-              <TextArea name="message" label="Message" />
-              <Button label="Submit" />
+            <form action={this.props.url} onSubmit={this.onSubmit} method="POST" className={style.form}>
+              <fieldset className={style.fieldset}>
+                <legend className={style['contact-title']}>Contact</legend>
+                <div className={style['form-group']}>
+                  <TextInput name="first_name" label="First Name" />
+                  <TextInput name="last_name" label="Last Name" />
+                  <TextInput type="email" name="email" label="Email" />
+                  <TextInput type="tel" name="phone" label="Phone Number" />
+                  <TextArea name="message" label="Message" />
+                  <Button label="Submit" />
+                </div>
+              </fieldset>
             </form>
           </div>
         </div>

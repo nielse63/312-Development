@@ -16,9 +16,9 @@ export default class About extends Component {
         </Banner>
         <div className={style.content} data-midnight>
           <div className={style['container-narrow']}>
-            <p className={style.intro}>I&#8217;m Erik Nielsen, a User-Interface and Full-Stack Software Engineer from Chicago, Illinois. I&#8217;ve been in the industry for over 8 years, and work with the fine folks at <a href="https://www.enova.com/" target="_blank" rel="noopener noreferrer">Enova International</a>.</p>
-            <p>To learn more about me you can always <a href="mailto:erik@312development.com">email me</a>. And make sure you <a href="https://twitter.com/erikkylenielsen" target="_blank" rel="noopener noreferrer">follow me on Twitter</a> to get the latest JavaScript news, articles, and resources.</p>
-            <p>Below are lists of my proficiencies. You can see more of my work on my <Link href="/portfolio">portfolio</Link> page or at my <a href="https://github.com/nielse63" target="_blank" rel="noopener noreferrer">GitHub account</a>.</p>
+            <p className={style.intro}>I&#8217;m Erik Nielsen, a User-Interface and Full-Stack Software Engineer from Chicago, Illinois. I&#8217;ve been in the industry for over 8 years, and work with the fine folks at <a href="https://www.enova.com/" target="_blank" rel="noopener noreferrer" className={style.links}>Enova International</a>.</p>
+            <p>To learn more about me you can always <a href="mailto:erik@312development.com" className={style.links}>email me</a>. And make sure you <a href="https://twitter.com/erikkylenielsen" target="_blank" rel="noopener noreferrer" className={style.links}>follow me on Twitter</a> to get the latest JavaScript news, articles, and resources.</p>
+            <p>Below are lists of my proficiencies. You can see more of my work on my <Link href="/portfolio" className={style.links}>portfolio</Link> page or at my <a href="https://github.com/nielse63" target="_blank" rel="noopener noreferrer" className={style.links}>GitHub account</a>.</p>
             <div className={style.table}>
               <div className={style['table-col']}>
                 <p className={style['table-header']}>Core</p>

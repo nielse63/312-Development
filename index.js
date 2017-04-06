@@ -12,7 +12,7 @@ const config = require('./src/config.json')
 
 // vars
 const app = express()
-const viewsDir = process.env.NODE_ENV === 'production' ? `${__dirname}/src` : `${__dirname}/build`
+const viewsDir = process.env.NODE_ENV === 'production' ? `${__dirname}/build` : `${__dirname}/src`
 
 // functions
 function setResponseHeaders(res) {

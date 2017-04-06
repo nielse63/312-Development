@@ -4,7 +4,7 @@
 .nav {
   margin-right: -15px;
 
-  @media (max-width: $breakpoint-small - 1px) {
+  @media (max-width: $nav-breakpoint-max) {
     position: fixed;
     top: 0;
     left: 0;
@@ -27,17 +27,17 @@
     padding: 0 15px;
     min-width: 50px;
     text-align: center;
-    background: rgba(255, 255, 255, 0);
+    background: $transparent-white;
     position: relative;
     color: $background-color;
 
-    @media (max-width: $breakpoint-small - 1px) {
+    @media (max-width: $nav-breakpoint-max) {
       color: $black;
       padding: 0;
       border-bottom: 1px solid fade-out($black, 0.85);
     }
 
-    @media (min-width: $breakpoint-small) {
+    @media (min-width: $nav-breakpoint) {
       &::before {
         content: '';
         position: absolute;
