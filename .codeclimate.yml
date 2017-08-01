@@ -27,8 +27,9 @@ ratings:
   - "package.json"
   - "yarn.lock"
 exclude_paths:
-# - config/
-- dist/
-- node_modules/
-- test/
-- static/
+  - dist/
+  - node_modules/
+  - test/
+  - static/
+  - config/
+  - build/

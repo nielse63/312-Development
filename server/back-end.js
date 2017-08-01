@@ -1,10 +1,15 @@
 
-require('dotenv').config();
+const path = require('path');
+const fs = require('fs');
 const express = require('express');
 const bodyParser = require('body-parser');
 const sslRedirect = require('heroku-ssl-redirect');
 const sendEmail = require('./send-email');
 const getTweets = require('./get-tweets');
+
+if (fs.existsSync(path.resolve(__dirname, '../.env'))) {
+  require('dotenv').config();
+}
 
 const port = process.env.BACKE_END_PORT || 3000;
 const frontEndPort = process.env.PORT || (process.env.NODE_ENV === 'production' ? 9999 : 8080);

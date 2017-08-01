@@ -15,6 +15,10 @@ var SWPrecacheWebpackPlugin = require('sw-precache-webpack-plugin')
 var env = process.env.NODE_ENV === 'testing'
   ? require('../config/test.env')
   : config.build.env
+var builtURL = process.env.NODE_ENV === 'production' ? 'https://312development.com/' : 'https://localhost:9999/';
+if(process.env.STAGING_ENV) {
+  builtURL = 'https://staging312.herokuapp.com';
+}
 
 var webpackConfig = merge(baseWebpackConfig, {
   performance: {
@@ -93,7 +97,10 @@ var webpackConfig = merge(baseWebpackConfig, {
       // necessary to consistently work with multiple chunks via CommonsChunkPlugin
       chunksSortMode: 'dependency',
       serviceWorkerLoader: `<script>${fs.readFileSync(path.join(__dirname,
-        './service-worker-prod.js'), 'utf-8')}</script>`
+        './service-worker-prod.js'), 'utf-8')}</script>`,
+      props: {
+        url: builtURL
+      }
     }),
     // split vendor js into its own file
     new webpack.optimize.CommonsChunkPlugin({

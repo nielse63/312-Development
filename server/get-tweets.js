@@ -1,6 +1,11 @@
 
-require('dotenv').config();
+const path = require('path');
+const fs = require('fs');
 const Twitter = require('twitter-node-client').Twitter;
+
+if (fs.existsSync(path.resolve(__dirname, '../.env'))) {
+  require('dotenv').config();
+}
 
 module.exports = function getTweets() {
   return new Promise(((resolve, reject) => {

@@ -8,6 +8,12 @@
     <meta name="description" content="The personal website of Erik Nielsen - Chicago-based UI/UX Software Engineer">
     <meta name="robots" content="index, nofollow">
     <meta name="web_author" content="Erik Nielsen">
+    <% for (var chunk of webpack.chunks) {
+        for (var file of chunk.files) {
+          if (file.match(/\.(js|css)$/)) { %>
+    <link rel="<%= chunk.initial?'preload':'prefetch' %>" href="<%= htmlWebpackPlugin.files.publicPath + file %>" as="<%= file.match(/\.css$/)?'style':'script' %>"><% }}} %>
+
+    <!-- Icons -->
     <link rel="apple-touch-icon" sizes="180x180" href="/static/img/icons/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="/static/img/icons/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="/static/img/icons/favicon-16x16.png">
@@ -20,19 +26,29 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
     <meta name="apple-mobile-web-app-title" content="312 Development">
     <link rel="apple-touch-icon" href="/static/img/icons/apple-touch-icon-152x152.png">
+
     <!-- Add to home screen for Windows -->
     <meta name="msapplication-TileImage" content="/static/img/icons/msapplication-icon-144x144.png">
-    <meta name="msapplication-TileColor" content="#000000">
-    <% for (var chunk of webpack.chunks) {
-        for (var file of chunk.files) {
-          if (file.match(/\.(js|css)$/)) { %>
-    <link rel="<%= chunk.initial?'preload':'prefetch' %>" href="<%= htmlWebpackPlugin.files.publicPath + file %>" as="<%= file.match(/\.css$/)?'style':'script' %>"><% }}} %>
+    <meta name="msapplication-TileColor" content="#0074d9">
+
+    <!-- Open Graph Meta Data -->
+    <meta property="og:type" content="profile">
+    <meta property="og:title" content="Erik Nielsen | UI/UX Software Engineer">
+    <meta property="og:url" content="<%= htmlWebpackPlugin.options.props.url %>">
+    <meta property="og:image" content="/static/img/og-homepage.jpg">
+    <meta property="profile:first_name" content="Erik">
+    <meta property="profile:last_name" content="Nielsen">
+
+    <!-- Twitter Card Meta Data -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@erikkylenielsen">
+    <meta name="twitter:title" content="Erik Nielsen | UI/UX Software Engineer">
+    <meta name="twitter:description" content="The personal website of Erik Nielsen - Chicago-based UI/UX Software Engineer">
+    <meta name="twitter:image" content="/static/img/og-homepage.jpg">
   </head>
   <body>
     <noscript>This site requires JavaScript to be enabled - Please turn JavaScript on and visit again.</noscript>
     <div id="app"></div>
-    <!-- Todo: only include in production -->
     <%= htmlWebpackPlugin.options.serviceWorkerLoader %>
-    <!-- built files will be auto injected -->
   </body>
 </html>

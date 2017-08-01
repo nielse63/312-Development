@@ -1,7 +1,12 @@
 
-require('dotenv').config();
+const path = require('path');
+const fs = require('fs');
 const nodemailer = require('nodemailer');
 const mg = require('nodemailer-mailgun-transport');
+
+if (fs.existsSync(path.resolve(__dirname, '../.env'))) {
+  require('dotenv').config();
+}
 
 const msg = {
   'first-name': 'Erik',
