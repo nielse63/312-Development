@@ -6,7 +6,7 @@
   "private": true,
   "scripts": {
     "predev": "rm -rf ./.logs && mkdir .logs",
-    "dev": "pm2 start pm2.config.js --only back-end | node build/dev-server.js",
+    "dev": "pm2 startOrRestart pm2.config.js --only back-end | node build/dev-server.js",
     "build": "cross-env NODE_ENV=production ./bin/build",
     "unit": "cross-env BABEL_ENV=test karma start test/unit/karma.conf.js",
     "e2e": "node test/e2e/runner.js",
@@ -15,10 +15,11 @@
     "lint:js": "eslint --ext .js,.vue src server test/unit test/e2e",
     "lint:internal": "eslint tasks/ ./*.js",
     "lint:scss": "stylelint src/**/*.vue src/assets/**/*.scss --config .stylelintrc.js --syntax scss",
-    "clean-logs": "rm -rf ./.logs/ ./*.log",
+    "clean-logs": "rm -rf ./.logs/ ./*.log && mkdir .logs",
     "start": "pm2 startOrRestart pm2.config.js --update-env",
     "poststart": "pm2 logs all",
     "stop": "pm2 stop all; pm2 kill",
+    "poststop": "yarn run clean-logs",
     "heroku-postbuild": "yarn install --production=false && yarn run build"
   },
   "dependencies": {
@@ -44,6 +45,7 @@
     "css-loader": "^0.28.4",
     "d3": "^4.10.0",
     "date-fns": "^1.28.5",
+    "debug": "^2.6.8",
     "dotenv": "^4.0.0",
     "eslint": "^4.3.0",
     "eslint-config-airbnb-base": "^11.3.1",
@@ -58,6 +60,7 @@
     "file-loader": "^0.11.2",
     "friendly-errors-webpack-plugin": "^1.6.1",
     "globby": "^6.1.0",
+    "helmet": "^3.8.1",
     "heroku-ssl-redirect": "^0.0.4",
     "html-webpack-plugin": "^2.30.1",
     "http-proxy-middleware": "^0.17.4",

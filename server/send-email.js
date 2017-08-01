@@ -1,12 +1,12 @@
 
-const path = require('path');
-const fs = require('fs');
+const debug = require('debug')('send-email');
+// const path = require('path');
+// const fs = require('fs');
 const nodemailer = require('nodemailer');
 const mg = require('nodemailer-mailgun-transport');
+const { loadENV } = require('./helpers');
 
-if (fs.existsSync(path.resolve(__dirname, '../.env'))) {
-  require('dotenv').config();
-}
+loadENV();
 
 const msg = {
   'first-name': 'Erik',
@@ -35,12 +35,11 @@ module.exports = function sendEmail(message = msg) {
     to: process.env.GMAIL_TO_EMAIL,
     subject: 'New form submission',
     html,
-  }, (err, info) => {
+  }, (err) => {
     if (err) {
-      console.log(`Error: ${err}`);
+      debug(`Error: ${err}`);
     } else {
-      console.log('Response');
-      console.log(info);
+      debug('Email sent successfully');
     }
   });
 };

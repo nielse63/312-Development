@@ -1,11 +1,11 @@
 
-const path = require('path');
-const fs = require('fs');
+const debug = require('debug')('get-tweets');
+// const path = require('path');
+// const fs = require('fs');
 const Twitter = require('twitter-node-client').Twitter;
+const { loadENV } = require('./helpers');
 
-if (fs.existsSync(path.resolve(__dirname, '../.env'))) {
-  require('dotenv').config();
-}
+loadENV();
 
 module.exports = function getTweets() {
   return new Promise(((resolve, reject) => {
@@ -22,6 +22,6 @@ module.exports = function getTweets() {
       resolve(success);
     });
   })).catch((error) => {
-    console.error(error);
+    debug(error);
   });
 };

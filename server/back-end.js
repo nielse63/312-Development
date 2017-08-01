@@ -1,47 +1,51 @@
 
-const path = require('path');
-const fs = require('fs');
+const debug = require('debug')('back-end');
 const express = require('express');
 const bodyParser = require('body-parser');
-const sslRedirect = require('heroku-ssl-redirect');
+// const sslRedirect = require('heroku-ssl-redirect');
+const helmet = require('helmet');
 const sendEmail = require('./send-email');
 const getTweets = require('./get-tweets');
+const { loadENV, setupEnv } = require('./helpers');
 
-if (fs.existsSync(path.resolve(__dirname, '../.env'))) {
-  require('dotenv').config();
+loadENV();
+
+const port = 3000;
+const frontEndPort = process.env.PORT || (process.env.NODE_ENV === 'production' ? 9999 : 8080);
+let allowedURL = process.env.NODE_ENV === 'production' ? 'https://312development.com' : `http://localhost:${frontEndPort}`;
+if (process.env.STAGING_ENV) {
+  allowedURL = 'https://staging312.herokuapp.com';
 }
-
-const port = process.env.BACKE_END_PORT || 3000;
-// const frontEndPort = process.env.PORT || (process.env.NODE_ENV === 'production' ? 9999 : 8080);
-// let allowedURL = process.env.NODE_ENV === 'production' ? 'https://312development.com' : `http://localhost:${frontEndPort}`;
-// if (process.env.STAGING_ENV) {
-//   allowedURL = 'https://staging312.herokuapp.com';
-// }
 
 const app = express();
+app.use(helmet());
 
-// function setHeaders(res) {
-//   res.header('Access-Control-Allow-Origin', allowedURL);
-//   res.header('Access-Control-Allow-Headers', 'X-Requested-With');
-// }
+// setup environment vars
+setupEnv(app);
 
-// set headers
-app.disable('X-Powered-By');
-
-// set server add-ons
-if (process.env.SSL_REDIRECT) {
-  app.use(sslRedirect());
+function setHeaders(res) {
+  res.header('Access-Control-Allow-Origin', allowedURL);
+  res.header('Access-Control-Allow-Headers', 'X-Requested-With');
 }
 
+// set server add-ons
+// if (isProduction(app)) {
+//   app.use(sslRedirect());
+// }
 // app.set('trust proxy', 'loopback');
-const oneDate = 24 * 60 * 60 * 1000;
 
+const oneDate = 24 * 60 * 60 * 1000;
 app.use('/submission', bodyParser.json());
 app.use('/submission', bodyParser.urlencoded({
   extended: true,
 }));
+
+app.get('*', (req, res, next) => {
+  setHeaders(res);
+  next();
+});
+
 app.post('/submission', (req, res) => {
-  // setHeaders(res);
   const returnURL = `${req.get('referer')}#/thank-you`;
   sendEmail(req.body);
   res.cookie('form_submission', req.body, { expires: new Date(Date.now() + oneDate) });
@@ -49,7 +53,6 @@ app.post('/submission', (req, res) => {
 });
 
 app.get('/get-tweets', (req, res) => {
-  // setHeaders(res);
   getTweets().then((data) => {
     res.status(200).json(data);
   }, (error) => {
@@ -58,5 +61,5 @@ app.get('/get-tweets', (req, res) => {
 });
 
 app.listen(port, () => {
-  console.log(`App listening on port ${port}`);
+  debug(`App listening on port ${port}`);
 });

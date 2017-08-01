@@ -2,11 +2,12 @@
 import mutations from '@/store/mutations';
 import originalState from '@/store/state';
 
-let state;
+const copy = Object.assign({}, originalState);
+let state = Object.assign({}, originalState);
 
 describe('mutations', () => {
   beforeEach(() => {
-    state = Object.assign({}, originalState);
+    state = Object.assign({}, copy);
   });
 
   describe('existence', () => {

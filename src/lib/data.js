@@ -100,8 +100,12 @@ export function getTweets() {
       const { protocol, hostname } = window.location;
       const url = `${protocol}//${hostname}:3000/get-tweets`;
       const data = await fetchFromURL(url);
-      const output = JSON.parse(data);
-      completePromise(resolve, reject, output, 'saveTweets');
+      try {
+        const output = JSON.parse(data);
+        completePromise(resolve, reject, output, 'saveTweets');
+      } catch (e) {
+        reject(e);
+      }
     }
   });
 }

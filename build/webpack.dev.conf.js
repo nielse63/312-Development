@@ -13,6 +13,11 @@ Object.keys(baseWebpackConfig.entry).forEach(function (name) {
   baseWebpackConfig.entry[name] = ['./build/dev-client'].concat(baseWebpackConfig.entry[name])
 })
 
+var builtURL = process.env.NODE_ENV === 'production' ? 'https://312development.com/' : 'https://localhost:9999/';
+if(process.env.STAGING_ENV) {
+  builtURL = 'https://staging312.herokuapp.com';
+}
+
 module.exports = merge(baseWebpackConfig, {
   module: {
     rules: utils.styleLoaders({ sourceMap: config.dev.cssSourceMap })
@@ -32,7 +37,10 @@ module.exports = merge(baseWebpackConfig, {
       template: 'index.html',
       inject: true,
       serviceWorkerLoader: `<script>${fs.readFileSync(path.join(__dirname,
-        './service-worker-dev.js'), 'utf-8')}</script>`
+        './service-worker-dev.js'), 'utf-8')}</script>`,
+      props: {
+        url: builtURL
+      }
     }),
     new FriendlyErrorsPlugin()
   ]
