@@ -17,6 +17,14 @@ var env = process.env.NODE_ENV === 'testing'
   : config.build.env
 
 var webpackConfig = merge(baseWebpackConfig, {
+  performance: {
+    hints: "warning",
+    // maxEntrypointSize: 400000
+    // maxAssetSize: 100000
+    assetFilter(assetFilename) {
+      return assetFilename.endsWith('.js');
+    }
+  },
   module: {
     rules: utils.styleLoaders({
       sourceMap: config.build.productionSourceMap,
@@ -34,11 +42,26 @@ var webpackConfig = merge(baseWebpackConfig, {
     new webpack.DefinePlugin({
       'process.env': env
     }),
+    new webpack.LoaderOptionsPlugin({
+      minimize: true,
+      debug: false
+    }),
     new webpack.optimize.UglifyJsPlugin({
+      // compress: {
+      //   warnings: false
+      // },
+      // sourceMap: true
       compress: {
-        warnings: false
+        warnings: false,
+        screw_ie8: true,
       },
-      sourceMap: true
+      sourceMap: true,
+      beautify: false,
+      mangle: {
+        screw_ie8: true,
+        // keep_fnames: true
+      },
+      comments: false,
     }),
     // extract css into its own file
     new ExtractTextPlugin({
@@ -76,16 +99,20 @@ var webpackConfig = merge(baseWebpackConfig, {
     new webpack.optimize.CommonsChunkPlugin({
       name: 'vendor',
       minChunks: function (module, count) {
+        const { resource } = module;
         // any required modules inside node_modules are extracted to vendor
         return (
-          module.resource &&
-          /\.js$/.test(module.resource) &&
-          module.resource.indexOf(
-            path.join(__dirname, '../node_modules')
-          ) === 0
+          resource &&
+            /\.js$/.test(resource) &&
+            resource.indexOf(
+              path.join(__dirname, '../node_modules')
+            ) === 0
         )
       }
     }),
+    // new webpack.optimize.CommonsChunkPlugin({
+    //   name: 'common',
+    // }),
     // extract webpack runtime and module manifest to its own file in order to
     // prevent vendor hash from being updated whenever app bundle is updated
     new webpack.optimize.CommonsChunkPlugin({

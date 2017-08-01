@@ -11,6 +11,7 @@
 
 <script>
   import { mapGetters } from 'vuex';
+  import lazyLoad from '@/lib/lazy-load';
   import AppHeader from '@/components/Header';
   import AppFooter from '@/components/Footer';
   import Navigation from '@/components/Navigation';
@@ -34,34 +35,42 @@
         }
       },
     },
-    // eslint-disable-next-line complexity
+    updated() {
+      setTimeout(lazyLoad, 500);
+    },
     mounted() {
-      let latestKnownScrollY = 0;
-      let ticking = false;
-      const scroll = window.requestAnimationFrame ||
-        window.webkitRequestAnimationFrame ||
-        window.mozRequestAnimationFrame ||
-        window.msRequestAnimationFrame ||
-        window.oRequestAnimationFrame ||
-        function (callback) { window.setTimeout(callback, 1000 / 60); }; // eslint-disable-line func-names
+      setTimeout(lazyLoad, 500);
 
-      const update = () => {
-        if (this.isMenuOpen) {
-          this.$store.dispatch('toggleMenu');
-        }
-        ticking = false;
-      };
+      // eslint-disable-next-line complexity
+      (() => {
+        let lastY = 0;
+        let closing = false;
+        const scroll = window.requestAnimationFrame ||
+          window.webkitRequestAnimationFrame ||
+          window.mozRequestAnimationFrame ||
+          window.msRequestAnimationFrame ||
+          window.oRequestAnimationFrame ||
+          function (callback) { window.setTimeout(callback, 1000 / 60); }; // eslint-disable-line func-names
 
-      const loop = () => {
-        const top = window.scrollY;
-        if (!ticking && top !== latestKnownScrollY) {
-          ticking = true;
-          latestKnownScrollY = top;
-          update();
-        }
-        scroll(loop);
-      };
-      loop();
+        const update = () => {
+          if (this.isMenuOpen) {
+            this.$store.dispatch('toggleMenu');
+          }
+          closing = false;
+        };
+
+        const loop = () => {
+          // console.log(this.isMenuOpen);
+          const top = window.scrollY;
+          if (!closing && top !== lastY) {
+            closing = true;
+            lastY = top;
+            update();
+          }
+          scroll(loop);
+        };
+        loop();
+      })();
     },
   };
 </script>

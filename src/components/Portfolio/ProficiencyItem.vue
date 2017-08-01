@@ -2,7 +2,7 @@
   <div class="item">
     <template v-if="!isSVG">
       <img v-if="image"
-        :src="src"
+        :data-lazy-load="src"
         :alt="name"
       >
     </template>

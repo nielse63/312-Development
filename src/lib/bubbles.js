@@ -62,23 +62,6 @@ export default function bubbles() {
       .range([0, height]);
   });
 
-
-  // the timer method calls a function repeatedly
-  // function callback() {
-  //   context.clearRect(0, 0, width, height);
-  //   data.forEach((d) => {
-  //     d.y -= d.yv;
-  //     // Recycle old circles
-  //     if (d.y < (0 - d.size)) {
-  //       d.y = 100 + d.size;
-  //     }
-  //     context.fillStyle = d.color;
-  //     context.beginPath();
-  //     context.arc(x(d.x), y(d.y), d.size, 0, 2 * Math.PI);
-  //     context.fill();
-  //   });
-  // }
-
   timer(() => {
     context.clearRect(0, 0, width, height);
     data.forEach((d) => {
@@ -93,28 +76,4 @@ export default function bubbles() {
       context.fill();
     });
   });
-  // t.restart(callback);
-  // let stopped = false;
-  // let lastChecked = Date.now();
-
-  // window.addEventListener('resize', () => {
-  //   const sizes = getSize();
-  //   height = sizes.height;
-  //   width = sizes.width;
-  // }, false)
-
-  // window.addEventListener('scroll', () => {
-  //   if ((Date.now() - lastChecked) < 200) {
-  //     return;
-  //   }
-  //   lastChecked = Date.now();
-  //   const top = window.scrollY;
-  //   if (!stopped && top > height) {
-  //     stopped = true;
-  //     t.stop();
-  //   } else if (stopped && top <= height) {
-  //     stopped = false;
-  //     t.restart(callback);
-  //   }
-  // }, false);
 }

@@ -3,9 +3,10 @@
 // import '@/lib/service-worker';
 import '@/lib/prototypes';
 import Vue from 'vue';
-import App from './App';
-import router from './router';
-import store from './store';
+import App from '@/App';
+import router from '@/router';
+import store from '@/store';
+// import lazyLoad from '@/lib/lazy-load';
 
 Vue.config.productionTip = false;
 
@@ -29,6 +30,9 @@ router.afterEach((to) => {
   }
   document.head.appendChild(link);
   // <link rel="canonical" href="https://blog.example.com/dresses/green-dresses-are-awesome" />
+
+  // lazy load images
+  // lazyLoad();
 });
 
 // router.linkActiveClass = 'active';

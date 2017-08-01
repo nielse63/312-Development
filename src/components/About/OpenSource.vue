@@ -13,8 +13,6 @@
 </template>
 
 <script>
-  // import { mapActions, mapGetters } from 'vuex';
-  import { getGithubData } from '@/lib/data';
   import Octocat from '@/assets/images/octocat.png';
   import PanelHeader from '@/components/Panels/PanelHeader';
   import CardRow from '@/components/Card/CardRow';
@@ -30,11 +28,6 @@
         repos: [],
       };
     },
-    // computed: {
-    //   ...mapGetters({
-    //     allRepos: 'getRepos',
-    //   }),
-    // },
     methods: {
       formatRepos(array) {
         return array.map(repo => Object.assign({}, repo, {
@@ -44,20 +37,18 @@
       },
     },
     beforeMount() {
-      getGithubData().then((data) => {
-        this.repos = this.formatRepos(data.slice(0, 6));
-      }, (error) => {
-        console.error(error);
+      import(
+        /* webpackChunkName: "data" */
+        /* webpackMode: "lazy" */
+        '@/lib/data',
+      ).then((module) => {
+        const { getGithubData } = module;
+        getGithubData().then((data) => {
+          this.repos = this.formatRepos(data.slice(0, 6));
+        }, (error) => {
+          console.error(error);
+        });
       });
-      // if (!this.allRepos.length) {
-      //   getGithubData().then((data) => {
-      //     this.repos = this.formatRepos(data.slice(0, 6));
-      //   }, (error) => {
-      //     console.error(error);
-      //   });
-      // } else {
-      //   this.repos = this.formatRepos(this.allRepos.slice(0, 6));
-      // }
     },
   };
 </script>

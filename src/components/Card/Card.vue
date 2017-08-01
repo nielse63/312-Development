@@ -1,6 +1,6 @@
 <template>
   <div class="card">
-    <figure class="card__image" v-bind:style="{ backgroundImage: `url(${image})` }">
+    <figure class="card__image" :data-lazy-load="image">
       <template v-if="externalLink">
         <a :href="url" target="_blank" rel="noopener noreferrer" :title="title">
           <h3 class="card__title">{{title}}</h3>
@@ -81,10 +81,6 @@
       color: $color-white;
       position: relative;
       user-select: none;
-
-      // @media (min-width: $tablet-width) and (orientation: portrait) {
-      //   height: 200px;
-      // }
 
       &:before {
         @include size(100%);

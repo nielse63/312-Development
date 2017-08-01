@@ -129,7 +129,6 @@
     &:hover,
     &:active,
     &.active {
-      // color: $link-color-hover;
       color: #ac3537;
     }
 

@@ -26,7 +26,7 @@
 </template>
 
 <script>
-  import Highcharts from 'highcharts';
+  // import Highcharts from 'highcharts';
   import { getNPMInfo } from '@/lib/data';
   import ExternalLink from '@/components/ExternalLink';
 
@@ -79,7 +79,7 @@
       createChart() {
         const max = Math.max.apply(null, this.trend);
         const parent = document.getElementById(this.graphID);
-        Highcharts.chart(this.graphID, {
+        window.Highcharts.chart(this.graphID, {
           chart: {
             type: 'spline',
             margin: [0, 0, 0, 0],
@@ -179,7 +179,16 @@
         this.firstDay = output.data[0].day;
         this.trend = output.data.map(object => object.downloads);
         this.downloads = output.totalDownloads;
+        // this.loadChart().then(() => {
+        //   console.log('loaded')
+        // })
         this.createChart();
+        // const interval = setInterval(() => {
+        //   if (window.Highcharts) {
+        //     clearInterval(interval);
+        //     this.createChart();
+        //   }
+        // }, 500);
       }).catch((e) => {
         console.error(e);
       });

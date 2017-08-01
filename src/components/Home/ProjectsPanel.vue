@@ -4,7 +4,7 @@
       <div class="row row__middle">
         <div class="col col__left">
           <article>
-            <img src="../../assets/images/logo.png" alt="Vue.js PWA">
+            <img :data-lazy-load="image" alt="Vue.js PWA">
           </article>
         </div>
         <div class="col col__right">
@@ -33,6 +33,7 @@
   import { mapGetters } from 'vuex';
   import { getGithubData, getNPMInfo } from '@/lib/data';
   import Octocat from '@/assets/images/octocat.png';
+  import Image from '@/assets/images/logo.png';
 
   export default {
     name: 'projects-panel',
@@ -40,6 +41,7 @@
       return {
         activeIndex: 0,
         repos: [],
+        image: Image,
       };
     },
     computed: {

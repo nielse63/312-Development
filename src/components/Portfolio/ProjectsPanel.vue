@@ -22,7 +22,30 @@
     },
     data() {
       return {
-        projects: [
+        projects: [],
+      };
+    },
+    methods: {
+      loadChart() {
+        return new Promise((resolve) => {
+          if (window.Highcharts) {
+            resolve();
+          } else {
+            const resource = document.createElement('script');
+            resource.src = 'https://cdnjs.cloudflare.com/ajax/libs/highcharts/5.0.14/highcharts.js';
+            // resource.setAttribute('async', 'true');
+            resource.onload = () => {
+              resolve();
+            };
+            const script = document.getElementsByTagName('script')[0];
+            script.parentNode.insertBefore(resource, script);
+          }
+        });
+      },
+    },
+    created() {
+      this.loadChart().then(() => {
+        this.projects = [
           'expand-hex-code',
           'minify-hex-code',
           'if-is-image',
@@ -31,10 +54,9 @@
           'minify-images',
           'site-launch-checklist',
           'tinyqueue.js',
-        ],
-      };
-    },
-    created() {
+        ];
+      });
+
       (async () => {
         await getGithubData();
       })();
