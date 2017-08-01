@@ -1,6 +1,5 @@
-User-Agent: *
-Disallow:
-Disallow: /#/thank-you
+User-agent: *
+Allow: /
 Disallow: /submission
 Disallow: /get-tweets
 

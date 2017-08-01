@@ -12,18 +12,18 @@ if (fs.existsSync(path.resolve(__dirname, '../.env'))) {
 }
 
 const port = process.env.BACKE_END_PORT || 3000;
-const frontEndPort = process.env.PORT || (process.env.NODE_ENV === 'production' ? 9999 : 8080);
-let allowedURL = process.env.NODE_ENV === 'production' ? 'https://312development.com' : `http://localhost:${frontEndPort}`;
-if (process.env.STAGING_ENV) {
-  allowedURL = 'https://staging312.herokuapp.com';
-}
+// const frontEndPort = process.env.PORT || (process.env.NODE_ENV === 'production' ? 9999 : 8080);
+// let allowedURL = process.env.NODE_ENV === 'production' ? 'https://312development.com' : `http://localhost:${frontEndPort}`;
+// if (process.env.STAGING_ENV) {
+//   allowedURL = 'https://staging312.herokuapp.com';
+// }
 
 const app = express();
 
-function setHeaders(res) {
-  res.header('Access-Control-Allow-Origin', allowedURL);
-  res.header('Access-Control-Allow-Headers', 'X-Requested-With');
-}
+// function setHeaders(res) {
+//   res.header('Access-Control-Allow-Origin', allowedURL);
+//   res.header('Access-Control-Allow-Headers', 'X-Requested-With');
+// }
 
 // set headers
 app.disable('X-Powered-By');
@@ -41,7 +41,7 @@ app.use('/submission', bodyParser.urlencoded({
   extended: true,
 }));
 app.post('/submission', (req, res) => {
-  setHeaders(res);
+  // setHeaders(res);
   const returnURL = `${req.get('referer')}#/thank-you`;
   sendEmail(req.body);
   res.cookie('form_submission', req.body, { expires: new Date(Date.now() + oneDate) });
@@ -49,7 +49,7 @@ app.post('/submission', (req, res) => {
 });
 
 app.get('/get-tweets', (req, res) => {
-  setHeaders(res);
+  // setHeaders(res);
   getTweets().then((data) => {
     res.status(200).json(data);
   }, (error) => {
