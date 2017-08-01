@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+
+# lint js and style
+yarn run lint:js -- --fix
+yarn run lint:scss
+
+# build for production
+node build/build.js

@@ -1,6 +1,0 @@
---require babel-register
---check-leaks
---colors
---throw-deprecation
---log-timer-events
---harmony

@@ -1,0 +1,35 @@
+
+@mixin flex-item($width: auto, $grow: true) {
+  width: $width;
+  max-width: $width;
+
+  @if ($grow) {
+    flex: 1 0 $width;
+  }
+
+  @else {
+    flex: 0 1 $width;
+  }
+}
+
+@mixin center() {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+@mixin size($width, $height: $width) {
+  width: $width;
+  height: $height;
+}
+
+@mixin max-size($size) {
+  max-height: $size;
+  max-width: $size;
+}
+
+@mixin min-size($size) {
+  min-height: $size;
+  min-width: $size;
+}

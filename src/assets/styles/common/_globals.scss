@@ -1,0 +1,15 @@
+
+@import "../main";
+
+body,
+html {
+  background-color: $color-white;
+  font-family: 'Avenir', Helvetica, Arial, sans-serif;
+  color: #2c3e50;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+@import "type";
+@import "../shared/lists";
+@import "../components/panel";
