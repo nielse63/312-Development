@@ -1,1 +1,1 @@
-web: npm run local:server
+web: cross-env NODE_ENV=production yarn start

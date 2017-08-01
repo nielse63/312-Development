@@ -1,0 +1,63 @@
+
+@import "../main";
+
+.banner {
+  background-color: $banner-color;
+  padding: 10rem 0;
+  position: relative;
+
+  @media (orientation: landscape) and (max-width: $tablet-width-max) {
+    padding: 7rem 0;
+  }
+
+  .home & {
+    padding: 7rem 0;
+  }
+
+  h1 {
+    color: $color-white;
+    margin: 0;
+  }
+}
+
+.title {
+  text-align: right;
+  text-transform: uppercase;
+  font-weight: 900;
+  position: relative;
+
+  h1,
+  h2,
+  h3 {
+    line-height: 1.25;
+
+    @media (min-width: $tablet-width) {
+      line-height: 1;
+    }
+  }
+}
+
+.page-title {
+  font-size: 48px;
+  letter-spacing: 10px;
+
+  @media (min-width: $tablet-width) {
+    font-size: 60px;
+  }
+}
+
+#bubbles {
+  @include size(100%);
+  position: absolute;
+  top: 0;
+  left: 0;
+
+  &:after {
+    @include size(100%);
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    background-image: linear-gradient(to right, transparent 0%, $banner-color 75%);
+  }
+}
