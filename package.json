@@ -16,7 +16,6 @@
     "lint:scss": "stylelint src/**/*.vue src/assets/**/*.scss --config .stylelintrc.js --syntax scss",
     "prestart:tmp": "yarn run build",
     "clean-logs": "rm -rf ./.logs/ ./*.log",
-    "prestart": "./bin/prestart",
     "start": "pm2 startOrRestart pm2.config.js --update-env",
     "poststart": "pm2 logs all",
     "stop": "pm2 stop all; pm2 kill",

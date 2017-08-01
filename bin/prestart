@@ -1,8 +1,0 @@
-#!/usr/bin/env bash
-
-# build the app
-yarn run build
-
-# clean log files
-yarn run clean-logs
-mkdir .logs
