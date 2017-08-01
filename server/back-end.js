@@ -9,7 +9,7 @@ const getTweets = require('./get-tweets');
 const port = process.env.BACKE_END_PORT || 3000;
 const frontEndPort = process.env.PORT || (process.env.NODE_ENV === 'production' ? 9999 : 8080);
 let allowedURL = process.env.NODE_ENV === 'production' ? 'https://312development.com' : `http://localhost:${frontEndPort}`;
-if(process.env.STAGING_ENV) {
+if (process.env.STAGING_ENV) {
   allowedURL = 'https://staging312.herokuapp.com';
 }
 

@@ -1,10 +1,10 @@
 <template>
   <section class="banner">
     <div id="bubbles"></div>
-    <div class="title container">
+    <header class="title container">
       <h1 class="page-title">{{title}}</h1>
       <h2 v-if="subtitle" class="page-subtitle">{{subtitle}}</h2>
-    </div>
+    </header>
   </section>
 </template>
 

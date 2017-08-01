@@ -16,7 +16,7 @@ export default new Router({
       component: Home,
       props: {
         icon: 'fa-home',
-        title: 'UI/UX Software Engineer',
+        title: 'Chicago JavaScript Engineer',
       },
     }, {
       path: '/about',

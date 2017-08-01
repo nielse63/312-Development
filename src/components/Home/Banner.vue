@@ -1,11 +1,11 @@
 <template>
   <section class="banner">
     <div id="bubbles"></div>
-    <div class="title container">
+    <header class="title container">
       <h1 class="site-title">Erik Nielsen</h1>
       <h2 class="site-title__sub">UI/UX Software Engineer</h2>
       <h3 class="site-title__sub__sub">At Enova International</h3>
-    </div>
+    </header>
   </section>
 </template>
 

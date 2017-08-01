@@ -14,8 +14,21 @@ router.afterEach((to) => {
   window.scrollTo(0, 0);
   store.dispatch('closeMenu');
   const route = to.matched[0];
+  // console.log(route)
   const title = route.props.default.title;
-  window.document.title = `Chicago JavaScript Engineer | ${title}`;
+  window.document.title = `312 Development | ${title}`;
+  const { protocol, hostname } = window.location;
+  const path = route.path;
+  const canonicalUrl = `${protocol}//${hostname}${path}`;
+  const link = document.createElement('link');
+  link.rel = 'canonical';
+  link.href = canonicalUrl;
+  const existingLink = document.head.querySelector('link[rel="canonical"]');
+  if (existingLink) {
+    existingLink.remove();
+  }
+  document.head.appendChild(link);
+  // <link rel="canonical" href="https://blog.example.com/dresses/green-dresses-are-awesome" />
 });
 
 // router.linkActiveClass = 'active';
