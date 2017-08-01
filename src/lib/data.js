@@ -38,7 +38,8 @@ export function getGithubData() {
       resolve(repos);
     } else {
       const data = await fetchFromURL('https://api.github.com/users/nielse63/repos?visibility=public&sort=pushed');
-      completePromise(resolve, reject, data, 'saveRepos');
+      const toSave = data.filter(repo => repo.name !== '312-Development')
+      completePromise(resolve, reject, toSave, 'saveRepos');
     }
   });
 }
