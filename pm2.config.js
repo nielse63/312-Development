@@ -7,13 +7,18 @@ const maxMemory = process.env.WEB_MEMORY || 256;
 const apps = ['front-end', 'back-end'].map(app => ({
   name: app,
   script: `./server/${app}.js`,
-  watch: [`./server/${app}.js`],
+  watch: [
+    `./server/${app}.js`,
+    './server/get-tweets.js',
+    './server/send-email.js',
+    './server/helpers.js',
+  ],
   instances,
   max_memory_restart: `${maxMemory}M`,
   exec_mode: 'cluster',
   error_file: `./.logs/${app}-err.log`,
   out_file: `./.logs/${app}-out.log`,
-  combine_logs: false,
+  combine_logs: true,
   env: {
     NODE_ENV: 'development',
   },

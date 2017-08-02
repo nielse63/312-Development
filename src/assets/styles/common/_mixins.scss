@@ -33,3 +33,13 @@
   min-height: $size;
   min-width: $size;
 }
+
+@mixin nav-items($count) {
+  $offset: 50vh;
+
+  @for $i from 1 through $count {
+    &:nth-child(#{$i}) {
+      transform: translate3d(0, ($offset * $i), 0);
+    }
+  }
+}

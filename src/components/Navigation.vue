@@ -57,7 +57,6 @@
     text-transform: uppercase;
     transition: transform $transition-duration;
     transform: translate(100%, 0);
-    // font-size: 20px;
 
     @media (max-width: $tablet-width-max) {
       font-size: 20px;
@@ -85,19 +84,8 @@
 
       li {
         transition-duration: ($transition-duration + 0.2s);
-        transform: translate3d(0, 500px, 0);
 
-        &:nth-child(2) {
-          transform: translate3d(0, 1000px, 0);
-        }
-
-        &:nth-child(3) {
-          transform: translate3d(0, 1500px, 0);
-        }
-
-        &:nth-child(4) {
-          transform: translate3d(0, 2000px, 0);
-        }
+        @include nav-items(4);
       }
 
       &,

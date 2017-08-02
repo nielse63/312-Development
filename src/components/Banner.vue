@@ -30,4 +30,11 @@
 
 <style lang="scss" scoped>
   @import "../assets/styles/components/banner";
+
+  .title {
+    @media (max-width: $tablet-width) {
+      padding-left: 1rem;
+      padding-right: 1rem;
+    }
+  }
 </style>

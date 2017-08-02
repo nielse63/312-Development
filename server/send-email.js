@@ -1,12 +1,7 @@
 
-const debug = require('debug')('send-email');
-// const path = require('path');
-// const fs = require('fs');
 const nodemailer = require('nodemailer');
 const mg = require('nodemailer-mailgun-transport');
-const { loadENV } = require('./helpers');
-
-loadENV();
+// const { loadENV } = require('./helpers');
 
 const msg = {
   'first-name': 'Erik',
@@ -37,9 +32,9 @@ module.exports = function sendEmail(message = msg) {
     html,
   }, (err) => {
     if (err) {
-      debug(`Error: ${err}`);
+      console.error(`Error: ${err}`);
     } else {
-      debug('Email sent successfully');
+      console.log('Email sent successfully');
     }
   });
 };

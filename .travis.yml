@@ -14,9 +14,11 @@ install:
   - yarn
 
 env:
+  - IS_TRAVIS="true"
   - TEST_COMMAND="lint:js"
   - TEST_COMMAND="lint:scss"
-  - TEST_COMMAND="test"
+  - TEST_COMMAND="unit"
+  - TEST_COMMAND="e2e"
 
 script:
   - (eval "yarn run $TEST_COMMAND")

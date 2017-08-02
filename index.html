@@ -12,6 +12,8 @@
         for (var file of chunk.files) {
           if (file.match(/\.(js|css)$/)) { %>
     <link rel="<%= chunk.initial?'preload':'prefetch' %>" href="<%= htmlWebpackPlugin.files.publicPath + file %>" as="<%= file.match(/\.css$/)?'style':'script' %>"><% }}} %>
+    <link rel="preload" href="https://www.google-analytics.com/analytics.js" as="script">
+    <link rel="preload" href="https://fonts.googleapis.com/css?family=Lato:400,700,900" as="style">
 
     <!-- Icons -->
     <link rel="apple-touch-icon" sizes="180x180" href="/static/img/icons/apple-touch-icon.png">
@@ -32,7 +34,8 @@
     <meta name="msapplication-TileColor" content="#0074d9">
 
     <!-- Open Graph Meta Data -->
-    <meta property="og:type" content="website" />
+    <meta property="fb:app_id" content="834389063291117">
+    <meta property="og:type" content="website">
     <meta property="og:title" content="Erik Nielsen | UI/UX Software Engineer">
     <meta property="og:url" content="<%= htmlWebpackPlugin.options.props.url %>">
     <meta property="og:image" content="<%= htmlWebpackPlugin.options.props.url %>/static/img/og-homepage.jpg">
@@ -59,10 +62,18 @@
         }
       }
     </script>
+    <link href="https://fonts.googleapis.com/css?family=Lato:400,700,900" rel="stylesheet">
   </head>
   <body>
     <noscript>This site requires JavaScript to be enabled - Please turn JavaScript on and visit again.</noscript>
     <div id="app"></div>
     <%= htmlWebpackPlugin.options.serviceWorkerLoader %>
+
+    <script>
+      window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+      ga('create', 'UA-33505945-1', 'auto');
+      ga('send', 'pageview');
+    </script>
+    <script async src="https://www.google-analytics.com/analytics.js"></script>
   </body>
 </html>

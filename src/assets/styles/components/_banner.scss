@@ -52,12 +52,18 @@
   top: 0;
   left: 0;
 
+  @media (max-width: $tablet-width-max) {
+    opacity: 0.5;
+  }
+
   &:after {
-    @include size(100%);
-    content: '';
-    position: absolute;
-    top: 0;
-    right: 0;
-    background-image: linear-gradient(to right, transparent 0%, $banner-color 75%);
+    @media (min-width: $tablet-width) {
+      @include size(100%);
+      content: '';
+      position: absolute;
+      top: 0;
+      right: 0;
+      background-image: linear-gradient(to right, transparent 0%, $banner-color 75%);
+    }
   }
 }

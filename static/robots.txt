@@ -1,5 +1,6 @@
 User-agent: *
 Allow: /
 Disallow: /submission
+Disallow: /get-tweets
 
 Sitemap: https://staging312.herokuapp.com/sitemap.xml

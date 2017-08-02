@@ -1,21 +1,21 @@
 
-const debug = require('debug')('front-end');
 const path = require('path');
 const express = require('express');
 const serveStatic = require('serve-static');
 const compression = require('compression');
 const sslRedirect = require('heroku-ssl-redirect');
+const expressStaticGzip = require('express-static-gzip');
 const helmet = require('helmet');
 const { isProduction, setupEnv } = require('./helpers');
 
 const port = process.env.PORT || 9999;
 const staticDir = path.resolve(__dirname, '../dist');
 
-// function setResponseHeaders(res) {
-//   res.setHeader('X-XSS-Protection', '1; mode=block');
-//   res.setHeader('X-Frame-Options', 'SAMEORIGIN');
-//   res.setHeader('X-Content-Type-Options', 'nosniff');
-// }
+function setResponseHeaders(res) {
+  res.setHeader('X-XSS-Protection', '1; mode=block');
+  res.setHeader('X-Frame-Options', 'SAMEORIGIN');
+  res.setHeader('X-Content-Type-Options', 'nosniff');
+}
 
 const app = express();
 
@@ -23,7 +23,7 @@ const app = express();
 setupEnv(app);
 
 // set server add-ons
-if (isProduction(app)) {
+if (isProduction()) {
   app.use(sslRedirect());
 }
 
@@ -34,9 +34,10 @@ app.use(serveStatic(staticDir, {
   cacheControl: true,
   dotfiles: 'ignore',
   maxAge: 604800000,
-  // setHeaders: setResponseHeaders,
+  setHeaders: setResponseHeaders,
 }));
+app.use('/', expressStaticGzip(staticDir));
 
 app.listen(port, () => {
-  debug(`App listening on port ${port}`);
+  console.log(`App listening on port ${port}`);
 });

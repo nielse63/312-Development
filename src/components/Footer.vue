@@ -1,6 +1,6 @@
 <template>
   <footer class="footer">
-    <footer-pattern />
+    <figure class="pattern" :data-lazy-load="pattern"></figure>
     <ul class="footer__menu">
       <li v-for="route in routes" v-if="!route.hidden">
         <router-link :to="{ name: route.name }">{{route.title}}</router-link>
@@ -10,18 +10,15 @@
 </template>
 
 <script>
-  import FooterPattern from '@/components/FooterPattern';
+  import Pattern from '@/assets/images/pattern.jpg';
 
   export default {
     name: 'app-footer',
-    components: {
-      FooterPattern,
+    data() {
+      return {
+        pattern: Pattern,
+      };
     },
-    // data() {
-    //   return {
-    //     svg: FooterPattern.template,
-    //   };
-    // },
     computed: {
       routes() {
         return this.$router.options.routes.map((object) => {
@@ -45,9 +42,6 @@
 
     background-color: $color-blue;
     position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: center;
     padding: 5rem 3rem;
     font-size: $font-size;
     font-weight: 700;
@@ -55,19 +49,19 @@
     letter-spacing: strip-unit(($letter-spacing / $font-size)) + em;
 
     &__menu {
-      display: flex;
-      align-items: center;
-      justify-content: center;
       position: relative;
       text-align: center;
+      margin: 0 auto;
 
       @media (max-width: $tablet-width-max) {
-        flex-direction: column;
         width: 75vw;
       }
 
       @media (min-width: $tablet-width) {
         width: 700px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
       }
 
       li {
@@ -82,8 +76,6 @@
 
   a {
     display: block;
-    // padding: 1em 2em;
-    // color: $color-blue;
     background-color: $color-white;
     transition: background-color $link-transition-duration;
     color: #115292;
@@ -98,5 +90,19 @@
     &.active {
       background-color: #e6f1fb;
     }
+  }
+
+  .pattern {
+    @include size(100%);
+
+    position: absolute;
+    top: 0;
+    left: 0;
+    overflow: hidden;
+    opacity: 0.65;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    margin: 0;
   }
 </style>

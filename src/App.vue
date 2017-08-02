@@ -89,6 +89,34 @@
     font-weight: normal;
     font-style: normal;
   }
+
+  // @font-face {
+  //   font-family: 'Avenir';
+  //   src: url('assets/fonts/Avenir-Medium.woff2') format('woff2'),
+  //        url('assets/fonts/Avenir-Medium.woff') format('woff');
+  //   font-weight: 400;
+  //   font-style: normal;
+  //   unicode-range: U+000-5FF;
+  // }
+
+  // @font-face {
+  //   font-family: 'Avenir';
+  //   src: url('assets/fonts/Avenir-Heavy.woff2') format('woff2'),
+  //        url('assets/fonts/Avenir-Heavy.woff') format('woff');
+  //   font-weight: 700;
+  //   font-style: normal;
+  //   unicode-range: U+000-5FF;
+  // }
+
+  // @font-face {
+  //   font-family: 'Avenir';
+  //   src: local('☺︎'),
+  //        url('assets/fonts/Avenir-Black.woff2') format('woff2'),
+  //        url('assets/fonts/Avenir-Black.woff') format('woff');
+  //   font-weight: 900;
+  //   font-style: normal;
+  //   unicode-range: U+000-5FF;
+  // }
 </style>
 
 <style lang="scss" scoped>

@@ -1,13 +1,12 @@
 
-const path = require('path');
-const fs = require('fs');
+const helmet = require('helmet');
 
-function isProduction(app) {
-  return process.env.NODE_ENV === 'production' || app.get('env') === 'production';
+function isProduction() {
+  return process.env.IS_HEROKU;
 }
 
 function loadENV() {
-  if (fs.existsSync(path.resolve(__dirname, '../.env'))) {
+  if (!process.env.IS_HEROKU && !process.env.IS_TRAVIS) {
     require('dotenv').config();
   }
 }
@@ -16,6 +15,14 @@ function setupEnv(app) {
   app.set('env', (process.env.NODE_ENV || 'development'));
   app.set('etag', 'strong');
   app.disable('x-powered-by');
+  app.use(helmet({
+    dnsPrefetchControl: {
+      allow: true,
+    },
+    referrerPolicy: {
+      policy: 'origin',
+    },
+  }));
 }
 
 module.exports = {

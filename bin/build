@@ -3,6 +3,9 @@
 NODE_ENV=production
 export NODE_ENV=production
 
+# Remove old dist files
+rm -rf dist
+
 # lint js and style
 yarn run lint:js -- --fix
 yarn run lint:scss
@@ -10,6 +13,9 @@ yarn run lint:scss
 # build for production
 node build/build.js
 
-# post-build
+# move seo-related files
 mv dist/static/robots.txt dist/robots.txt
 mv dist/static/sitemap.xml dist/sitemap.xml
+
+# alter output html
+node build/add-async.js

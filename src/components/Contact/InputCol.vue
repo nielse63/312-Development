@@ -58,9 +58,9 @@
         this.value = e.target.value;
         if (!this.value) {
           this.valid = false;
-        } if (!this.needsValidation) {
+        } else if (!this.needsValidation) {
           this.valid = true;
-        } if (this.type === 'email') {
+        } else if (this.type === 'email') {
           this.valid = this.isEmailValid(this.value);
         }
       },
@@ -109,6 +109,8 @@
     line-height: 1.5;
     display: block;
     width: 100%;
+    border-radius: 0;
+    appearance: none;
   }
 
   textarea {

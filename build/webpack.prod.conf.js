@@ -10,7 +10,6 @@ var HtmlWebpackPlugin = require('html-webpack-plugin')
 var ExtractTextPlugin = require('extract-text-webpack-plugin')
 var OptimizeCSSPlugin = require('optimize-css-assets-webpack-plugin')
 var SWPrecacheWebpackPlugin = require('sw-precache-webpack-plugin')
-// var OfflinePlugin = require('offline-plugin');
 
 var env = process.env.NODE_ENV === 'testing'
   ? require('../config/test.env')
@@ -21,14 +20,6 @@ if(process.env.STAGING_ENV) {
 }
 
 var webpackConfig = merge(baseWebpackConfig, {
-  performance: {
-    hints: "warning",
-    // maxEntrypointSize: 400000
-    // maxAssetSize: 100000
-    assetFilter(assetFilename) {
-      return assetFilename.endsWith('.js');
-    }
-  },
   module: {
     rules: utils.styleLoaders({
       sourceMap: config.build.productionSourceMap,
@@ -90,7 +81,7 @@ var webpackConfig = merge(baseWebpackConfig, {
       minify: {
         removeComments: true,
         collapseWhitespace: true,
-        removeAttributeQuotes: true
+        removeAttributeQuotes: true,
         // more options:
         // https://github.com/kangax/html-minifier#options-quick-reference
       },
@@ -138,9 +129,10 @@ var webpackConfig = merge(baseWebpackConfig, {
     new SWPrecacheWebpackPlugin({
       cacheId: '312-development',
       filename: 'service-worker.js',
-      staticFileGlobs: ['dist/**/*.{js,html,css}'],
+      staticFileGlobs: ['dist/**/*.{js,html,css,woff,woff2}'],
       minify: true,
-      stripPrefix: 'dist/'
+      stripPrefix: 'dist/',
+      mergeStaticsConfig: true,
     })
   ]
 })
@@ -165,9 +157,5 @@ if (config.build.bundleAnalyzerReport) {
   var BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
   webpackConfig.plugins.push(new BundleAnalyzerPlugin())
 }
-
-// webpackConfig.plugins.push(
-//   new OfflinePlugin()
-// );
 
 module.exports = webpackConfig

@@ -1,11 +1,6 @@
 
-const debug = require('debug')('get-tweets');
-// const path = require('path');
-// const fs = require('fs');
 const Twitter = require('twitter-node-client').Twitter;
-const { loadENV } = require('./helpers');
-
-loadENV();
+// const { loadENV } = require('./helpers');
 
 module.exports = function getTweets() {
   return new Promise(((resolve, reject) => {
@@ -22,6 +17,6 @@ module.exports = function getTweets() {
       resolve(success);
     });
   })).catch((error) => {
-    debug(error);
+    console.error(error);
   });
 };
