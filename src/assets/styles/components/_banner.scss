@@ -5,6 +5,7 @@
   background-color: $banner-color;
   padding: 10rem 0;
   position: relative;
+  overflow: hidden;
 
   @media (orientation: landscape) and (max-width: $tablet-width-max) {
     padding: 7rem 0;

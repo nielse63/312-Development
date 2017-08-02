@@ -15,6 +15,7 @@ function setResponseHeaders(res) {
   res.setHeader('X-XSS-Protection', '1; mode=block');
   res.setHeader('X-Frame-Options', 'SAMEORIGIN');
   res.setHeader('X-Content-Type-Options', 'nosniff');
+  res.setHeader('Cache-Control', 'max-age=2628000, public');
 }
 
 const app = express();

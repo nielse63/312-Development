@@ -1,7 +1,6 @@
 
 const express = require('express');
 const bodyParser = require('body-parser');
-// const sslRedirect = require('heroku-ssl-redirect');
 const sendEmail = require('./send-email');
 const getTweets = require('./get-tweets');
 const { loadENV, setupEnv } = require('./helpers');
@@ -16,7 +15,7 @@ function setHeaders(req, res) {
 
 loadENV();
 
-const port = 3000;
+const port = process.env.PORT || 3000;
 
 const app = express();
 

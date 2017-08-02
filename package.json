@@ -23,7 +23,7 @@
     "poststart": "pm2 logs all",
     "stop": "pm2 stop all; pm2 kill",
     "poststop": "yarn run clean-logs",
-    "postinstall": "if [ $IS_HEROKU ]; then yarn run build; fi"
+    "heroku-postbuild": "yarn run build"
   },
   "dependencies": {
     "autoprefixer": "^7.1.2",
