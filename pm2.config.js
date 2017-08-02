@@ -1,6 +1,10 @@
 // http://pm2.keymetrics.io/docs/usage/application-declaration/
 // https://gist.github.com/Unitech/4c8ea564aa8bf0a389c5#file-bootstrap-js-L28
 
+// https://github.com/heroku/node-js-getting-started
+// https://elements.heroku.com/buttons/narr/heroku-nginx-node-example
+// https://stackoverflow.com/questions/17745308/have-you-managed-to-make-your-node-nginx-proxy-setup-on-heroku-work
+
 const instances = process.env.WEB_CONCURRENCY || 4;
 const maxMemory = process.env.WEB_MEMORY || 256;
 
