@@ -7,7 +7,7 @@
   "scripts": {
     "predev": "rm -rf ./.logs && mkdir .logs",
     "vue": "cross-env NODE_ENV=development node build/dev-server.js",
-    "backend": "pm2 startOrRestart pm2.config.js --only back-end",
+    "backend": "pm2 start server/back-end.js --name backend",
     "dev": "yarn run backend | yarn run vue",
     "build": "cross-env NODE_ENV=production ./bin/build",
     "unit": "cross-env BABEL_ENV=test karma start test/unit/karma.conf.js",
@@ -47,6 +47,7 @@
     "css-loader": "^0.28.4",
     "d3": "^4.10.0",
     "date-fns": "^1.28.5",
+    "debug": "^2.6.8",
     "dotenv": "^4.0.0",
     "eslint": "^4.3.0",
     "eslint-config-airbnb-base": "^11.3.1",

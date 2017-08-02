@@ -4,7 +4,7 @@
 const instances = process.env.WEB_CONCURRENCY || -1;
 const maxMemory = process.env.WEB_MEMORY || 256;
 
-const apps = ['front-end', 'back-end'].map(app => ({
+const apps = ['front-end'].map(app => ({
   name: app,
   script: `./server/${app}.js`,
   watch: [
