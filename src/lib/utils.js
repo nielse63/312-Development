@@ -1,11 +1,21 @@
 
-export default {
-  makeid() {
-    const text = []
-    const possible = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'
-    for (let i = 0; i < 5; i += 1) {
-      text.push(possible.charAt(Math.floor(Math.random() * possible.length)))
-    }
-    return text.join('')
-  },
+import { get } from 'js-cookie';
+
+export function debounce(func, wait, immediate) {
+  let timeout;
+  return function rfn(...args) {
+    const context = this;
+    const later = function callback() {
+      timeout = null;
+      if (!immediate) func.apply(context, args);
+    };
+    const callNow = immediate && !timeout;
+    clearTimeout(timeout);
+    timeout = setTimeout(later, wait);
+    if (callNow) func.apply(context, args);
+  };
+}
+
+export function hasFormSubmission() {
+  return !!get('form_submission');
 }

@@ -1,0 +1,18 @@
+
+@import "../main";
+
+.panel {
+  padding: $panel-padding;
+  background-color: $color-white;
+
+  &:not(.panel__pink) {
+    & + & {
+      border-top: 1px solid $border-color;
+    }
+  }
+
+  &__pink {
+    background-color: $color-pink;
+    color: $color-white;
+  }
+}

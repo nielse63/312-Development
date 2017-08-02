@@ -4,34 +4,32 @@ engines:
     enabled: true
     config:
       languages:
-        javascript:
-    # exclude_fingerprints:
-    # - 6df301524c1b4d6cdd7dd5935cda768f
-    # - ee47385f22344fc1029b0739ecc267eb
-    # - 3f8f8f69d39d8e9df13f6b76a43b02c7
-    # - 5343005665ed9f82fe1661a352aabb6e
+      - javascript
+  stylelint:
+    enabled: true
   eslint:
     enabled: true
-    channel: "eslint-3"
-    checks:
-      import/no-unresolved:
-        enabled: false
-      import/no-extraneous-dependencies:
-        enabled: false
   fixme:
+    enabled: true
+  shellcheck:
     enabled: true
   markdownlint:
     enabled: true
-    checks:
-      MD013:
-        enabled: false
+  git-legal:
+    enabled: true
 ratings:
   paths:
+  - "**.md"
   - "**.js"
+  - "**.vue"
+  - "**.css"
   - "**.scss"
+  - "package.json"
+  - "yarn.lock"
 exclude_paths:
-- node_modules/
-- build/
-addons:
-  code_climate:
-    repo_token: 6e1412ae6fabced67e91bdef69c326e9d1d10080e65fc2ffc2ddaa33e5492194
+  - dist/
+  - node_modules/
+  - test/
+  - static/
+  - config/
+  - build/

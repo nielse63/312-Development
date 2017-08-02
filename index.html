@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>312 Development | Chicago JavaScript Engineer</title>
+    <meta name="description" content="The personal website of Erik Nielsen - Chicago-based UI/UX Software Engineer">
+    <meta name="robots" content="index, follow">
+    <meta name="web_author" content="Erik Nielsen">
+    <% for (var chunk of webpack.chunks) {
+        for (var file of chunk.files) {
+          if (file.match(/\.(js|css)$/)) { %>
+    <link rel="<%= chunk.initial?'preload':'prefetch' %>" href="<%= htmlWebpackPlugin.files.publicPath + file %>" as="<%= file.match(/\.css$/)?'style':'script' %>"><% }}} %>
+    <link rel="preload" href="https://www.google-analytics.com/analytics.js" as="script">
+    <link rel="preload" href="https://fonts.googleapis.com/css?family=Lato:400,700,900" as="style">
+
+    <!-- Icons -->
+    <link rel="apple-touch-icon" sizes="180x180" href="/static/img/icons/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/static/img/icons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/static/img/icons/favicon-16x16.png">
+    <link rel="manifest" href="/static/manifest.json">
+    <link rel="mask-icon" href="/static/img/icons/safari-pinned-tab.svg" color="#0074d9">
+    <meta name="theme-color" content="#0074d9">
+
+    <!-- Add to home screen for Safari on iOS -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="312 Development">
+    <link rel="apple-touch-icon" href="/static/img/icons/apple-touch-icon-152x152.png">
+
+    <!-- Add to home screen for Windows -->
+    <meta name="msapplication-TileImage" content="/static/img/icons/msapplication-icon-144x144.png">
+    <meta name="msapplication-TileColor" content="#0074d9">
+
+    <!-- Open Graph Meta Data -->
+    <meta property="fb:app_id" content="834389063291117">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Erik Nielsen | UI/UX Software Engineer">
+    <meta property="og:url" content="<%= htmlWebpackPlugin.options.props.url %>">
+    <meta property="og:image" content="<%= htmlWebpackPlugin.options.props.url %>/static/img/og-homepage.jpg">
+    <meta property="og:description" content="The personal website of Erik Nielsen - Chicago-based UI/UX Software Engineer">
+
+    <!-- Twitter Card Meta Data -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@erikkylenielsen">
+    <meta name="twitter:title" content="Erik Nielsen | UI/UX Software Engineer">
+    <meta name="twitter:description" content="The personal website of Erik Nielsen - Chicago-based UI/UX Software Engineer">
+    <meta name="twitter:image" content="<%= htmlWebpackPlugin.options.props.url %>/static/img/og-homepage.jpg">
+
+    <!-- JSON-LD Code -->
+    <script type="application/ld+json">
+      {
+        "@context": "http://schema.org/",
+        "@type": "Person",
+        "name": "Erik Nielsen",
+        "jobTitle": "UI/UX Software Engineer",
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "Chicago",
+          "addressRegion": "Illinois"
+        }
+      }
+    </script>
+    <link href="https://fonts.googleapis.com/css?family=Lato:400,700,900" rel="stylesheet">
+  </head>
+  <body>
+    <noscript>This site requires JavaScript to be enabled - Please turn JavaScript on and visit again.</noscript>
+    <div id="app"></div>
+    <%= htmlWebpackPlugin.options.serviceWorkerLoader %>
+
+    <script>
+      window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+      ga('create', 'UA-33505945-1', 'auto');
+      ga('send', 'pageview');
+    </script>
+    <script async src="https://www.google-analytics.com/analytics.js"></script>
+  </body>
+</html>

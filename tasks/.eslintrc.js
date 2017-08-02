@@ -1,6 +1,6 @@
 
 module.exports = {
-  "rules": {
-    "import/no-extraneous-dependencies": "off"
+  rules: {
+    'no-console': 'off'
   }
 }

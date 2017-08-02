@@ -1,41 +1,56 @@
+// http://eslint.org/docs/user-guide/configuring
+
+const production = process.env.NODE_ENV !== 'development';
+const warnOrOff = production ? 'warn' : 'off';
+const errorOrOff = production ? 'error' : 'off';
 
 module.exports = {
-  "root": true,
-  "env": {
-    "browser": true,
-    "node": true,
-    "es6": true,
+  root: true,
+  parser: 'babel-eslint',
+  parserOptions: {
+    sourceType: 'module',
   },
-  "parserOptions": {
-    "ecmaFeatures": {
-      "modules": true,
-      "jsx": true
-    }
+  env: {
+    browser: true,
   },
-  "extends": "airbnb",
-  "rules": {
-    "no-unused-vars": ['error', {
-      "varsIgnorePattern": "^h$"
+  extends: [
+    'airbnb-base',
+  ],
+  // required to lint *.vue files
+  plugins: [
+    'html',
+  ],
+  // check if imports actually resolve
+  settings: {
+    'import/resolver': {
+      webpack: {
+        config: 'build/webpack.base.conf.js',
+      },
+    },
+  },
+  // add your custom rules here
+  rules: {
+    // don't require .vue extension when importing
+    'import/extensions': ['error', 'always', {
+      js: 'never',
+      vue: 'never',
     }],
-    "indent": ["error", 2],
-    "react/react-in-jsx-scope": "off",
-    "react/jsx-filename-extension": "off",
-    "react/prefer-stateless-function": "off",
-    "no-underscore-dangle": "off",
-    "max-len": "off",
-    "no-param-reassign": "warn",
-    "max-nested-callbacks": ["error", 3],
-    "complexity": ["error", 5],
-    "max-statements": ["error", 10],
-    "semi": ["error", "never"],
-    "arrow-parens": ["error", "as-needed"],
-    "consistent-return": "warn",
-    "class-methods-use-this": "off",
-    "comma-dangle": ["error", {
-      "arrays": "always-multiline",
-      "objects": "always-multiline",
-      "functions": "never",
+    // allow optionalDependencies
+    'import/no-extraneous-dependencies': ['error', {
+      optionalDependencies: ['test/unit/index.js'],
     }],
-    'require-await': "error",
-  }
+    'import/prefer-default-export': 'off',
+    // allow debugger during development
+    'no-debugger': production ? 2 : 0,
+    semi: warnOrOff,
+    'comma-dangle': warnOrOff,
+    'no-console': [warnOrOff, { allow: ["warn", "error"] }],
+    'no-param-reassign': [warnOrOff, { "props": false }],
+    'max-len': 'off',
+    'keyword-spacing': warnOrOff,
+    'no-underscore-dangle': 'off',
+    'space-before-function-paren': warnOrOff,
+    complexity: ["warn", 3],
+    indent: errorOrOff,
+  },
 };

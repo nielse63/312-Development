@@ -1,0 +1,47 @@
+
+@import "../common/vars";
+
+.container {
+  margin: 0 auto;
+
+  @media (max-width: $mobile-width-max) {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
+  @media (max-width: $tablet-width-max) {
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+
+  @media (min-width: $tablet-width) {
+    width: ($container-width + 20vw);
+  }
+
+  @media (min-width: $large-width) {
+    width: $container-width;
+  }
+
+  &__narrow {
+    @media (min-width: $tablet-width) {
+      width: ($container-width / 2);
+    }
+  }
+}
+
+.row {
+  display: flex;
+  margin: 0 -1rem;
+
+  &__wrap {
+    flex-wrap: wrap;
+  }
+
+  &__middle {
+    align-items: center;
+  }
+
+  > .col {
+    padding: 0 1rem;
+  }
+}
