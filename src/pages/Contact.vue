@@ -6,7 +6,7 @@
         <div class="row">
           <div class="col col__left">
             <panel-header title="Shoot Me a Message" />
-            <form :action="action" class="form" method="post" novalidate="novalidate" v-on:submit="onsubmit">
+            <form action="/submission" class="form" method="post" novalidate="novalidate" v-on:submit="onsubmit">
               <input-col name="First Name" />
               <input-col name="Last Name" />
               <input-col name="Email Address" type="email" />
@@ -30,13 +30,11 @@
 </template>
 
 <script>
-  // import { format, parse, isToday, isYesterday } from 'date-fns';
   import Banner from '@/components/Banner';
   import InputCol from '@/components/Contact/InputCol';
   import TweetList from '@/components/Contact/TweetList';
   import PanelHeader from '@/components/Panels/PanelHeader';
   import { hasFormSubmission } from '@/lib/utils';
-  // import { getTweets } from '@/lib/data';
 
   export default {
     name: 'contact',
@@ -49,17 +47,7 @@
     data() {
       return {
         valid: false,
-        // tweets: []
       };
-    },
-    computed: {
-      action() {
-        const { protocol, hostname } = window.location;
-        const port = 3000;
-        const path = 'submission';
-
-        return `${protocol}//${hostname}:${port}/${path}`;
-      },
     },
     methods: {
       onsubmit(e) {
@@ -78,56 +66,11 @@
           e.preventDefault();
         }
       },
-      // formatDate(createdAt) {
-      //   const date = parse(createdAt);
-      //   const time = format(date, 'h:mm a');
-      //   let dateString = '';
-      //   if(isToday(date)) {
-      //     dateString = `Today @ ${time}`;
-      //   } else if(isYesterday(date)) {
-      //     dateString = `Yesterday @ ${time}`;
-      //   } else {
-      //     dateString = format(date, 'MMM DD @ HH:mm');
-      //   }
-      //   return dateString;
-      // },
-      // formatText(text) {
-      //   return text.split(' ').map((word) => {
-      //     if(/^http/.test(word)) {
-      //       return `<span>${word}</span>`;
-      //     }
-      //     return word;
-      //   }).join(' ');
-      // },
-      // formatTweets(array) {
-      //   this.tweets = array.map((object) => {
-      //     const idString = object.id_str;
-      //     const screenName = object.user.screen_name;
-      //     const url = `https://twitter.com/${screenName}/status/${idString}`;
-      //     const date = this.formatDate(object.created_at);
-      //     const text = this.formatText(object.text)
-      //     return {
-      //       url,
-      //       dateTime: object.created_at,
-      //       date,
-      //       text,
-      //     };
-      //   })
-      // }
     },
     beforeMount() {
       if (hasFormSubmission()) {
         window.location.href = '/#/thank-you';
       }
-
-      // getTweets().then((json) => {
-      //   try {
-      //     const array = JSON.parse(json);
-      //     this.formatTweets(array);
-      //   } catch(e) {
-      //     console.warn(e);
-      //   }
-      // })
     },
   };
 </script>

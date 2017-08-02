@@ -97,8 +97,7 @@ export function getTweets() {
     if (tweets && tweets.length) {
       resolve(tweets);
     } else {
-      const { protocol, hostname } = window.location;
-      const url = `${protocol}//${hostname}:3000/get-tweets`;
+      const url = '/get-tweets';
       const data = await fetchFromURL(url);
       try {
         const output = JSON.parse(data);

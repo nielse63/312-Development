@@ -5,6 +5,8 @@ const sendEmail = require('./send-email');
 const getTweets = require('./get-tweets');
 const { loadENV, setupEnv } = require('./helpers');
 
+loadENV();
+
 function setHeaders(req, res) {
   const referrer = req.get('referrer').replace(/\/$/g, '');
   if (referrer.indexOf(req.hostname) > -1) {
@@ -12,8 +14,6 @@ function setHeaders(req, res) {
     res.header('Access-Control-Allow-Headers', 'X-Requested-With');
   }
 }
-
-loadENV();
 
 const port = process.env.PORT || 3000;
 

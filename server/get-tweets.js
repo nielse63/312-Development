@@ -1,6 +1,8 @@
 
 const Twitter = require('twitter-node-client').Twitter;
-// const { loadENV } = require('./helpers');
+const { loadENV } = require('./helpers');
+
+loadENV();
 
 module.exports = function getTweets() {
   return new Promise(((resolve, reject) => {
