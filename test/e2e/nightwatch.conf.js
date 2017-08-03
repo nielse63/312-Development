@@ -11,18 +11,24 @@ module.exports = {
   custom_commands_path: [
     './node_modules/nightwatch-axe/src/commands',
   ],
-  globals_path: 'test/e2e/globals.js',
+  // globals_path: 'test/e2e/globals.js',
 
   selenium: {
-    start_process: false,
+    start_process: true,
+    server_path: require('selenium-server').path,
+    host: '127.0.0.1',
+    port: 4444,
+    log_path: false,
+    cli_args: {
+      'webdriver.chrome.driver': require('chromedriver').path,
+    },
   },
 
   test_settings: {
     default: {
       launch_url: `http://localhost:${process.env.PORT || config.dev.port}`,
-      selenium_port: 9515,
+      selenium_port: 4444,
       selenium_host: 'localhost',
-      default_path_prefix: '',
       silent: true,
     },
 

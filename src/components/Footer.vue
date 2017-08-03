@@ -6,17 +6,38 @@
         <router-link :to="{ name: route.name }">{{route.title}}</router-link>
       </li>
     </ul>
+    <ul class="footer__links">
+      <li v-for="link in links">
+        <external-link :text="link.text" :href="link.href" />
+      </li>
+    </ul>
   </footer>
 </template>
 
 <script>
+  import ExternalLink from '@/components/ExternalLink';
   import Pattern from '@/assets/images/pattern.jpg';
 
   export default {
     name: 'app-footer',
+    components: {
+      ExternalLink,
+    },
     data() {
       return {
         pattern: Pattern,
+        links: [
+          {
+            text: 'Twitter',
+            href: 'https://twitter.com/ErikKyleNielsen',
+          }, {
+            text: 'LinkedIn',
+            href: 'https://www.linkedin.com/in/erikkylenielsen/',
+          }, {
+            text: 'GitHub',
+            href: 'https://github.com/nielse63',
+          },
+        ],
       };
     },
     computed: {
@@ -49,21 +70,6 @@
     letter-spacing: strip-unit(($letter-spacing / $font-size)) + em;
 
     &__menu {
-      position: relative;
-      text-align: center;
-      margin: 0 auto;
-
-      @media (max-width: $tablet-width-max) {
-        width: 75vw;
-      }
-
-      @media (min-width: $tablet-width) {
-        width: 700px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-      }
-
       li {
         @include flex-item(100%);
 
@@ -71,24 +77,52 @@
           @include flex-item(25%);
         }
       }
+
+      a {
+        background-color: $color-white;
+        transition: background-color $link-transition-duration;
+        color: #115292;
+
+        &:hover,
+        &:active,
+        &.active {
+          background-color: #e6f1fb;
+        }
+      }
+    }
+
+    &__links {
+      margin-top: 2rem;
+
+      a {
+        color: $color-white;
+      }
+    }
+  }
+
+  ul {
+    position: relative;
+    text-align: center;
+    margin: 0 auto;
+
+    @media (max-width: $tablet-width-max) {
+      width: 75vw;
+    }
+
+    @media (min-width: $tablet-width) {
+      width: 700px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
   }
 
   a {
     display: block;
-    background-color: $color-white;
-    transition: background-color $link-transition-duration;
-    color: #115292;
     padding: 2em;
 
     @media (min-width: $tablet-width) {
       padding: 1em 2em;
-    }
-
-    &:hover,
-    &:active,
-    &.active {
-      background-color: #e6f1fb;
     }
   }
 
