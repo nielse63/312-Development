@@ -66,6 +66,25 @@ function createNPMUrl(name) {
   return `https://api.npmjs.org/downloads/range/${startString}:${endString}/${name}`;
 }
 
+function handleNPMData(data = {}) {
+  let output = data;
+  if ({}.toString.call(output) === '[object Array]') {
+    output = {
+      downloads: [],
+    };
+  }
+  return output;
+}
+
+function saveNPMPackage(data = {}) {
+  if (data.package) {
+    store.commit('saveModule', {
+      name: data.package,
+      data,
+    });
+  }
+}
+
 export function getNPMInfo(name) {
   return new Promise(async (resolve, reject) => {
     const module = store.getters.getModule(name);
@@ -74,13 +93,11 @@ export function getNPMInfo(name) {
     } else {
       const url = createNPMUrl(name);
       try {
-        const data = await fetchFromURL(url);
+        let data = await fetchFromURL(url);
+        data = handleNPMData(data);
         const totalDownloads = data.downloads.reduce((sum, object) => sum + object.downloads, 0);
         data.totalDownloads = totalDownloads;
-        store.commit('saveModule', {
-          name: data.package,
-          data,
-        });
+        saveNPMPackage(data);
         resolve(data);
       } catch (e) {
         reject(e);

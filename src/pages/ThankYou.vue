@@ -54,7 +54,7 @@
 </script>
 
 <style lang="scss" scoped>
-  @import "../assets/styles/components/banner";
+  @import "../assets/styles/main";
 
   $dt-width: 125px;
 
