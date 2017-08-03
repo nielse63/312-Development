@@ -1,6 +1,7 @@
 
 module.exports = {
   rules: {
-    complexity: "off"
+    complexity: "off",
+    'no-console': 'off',
   }
 }

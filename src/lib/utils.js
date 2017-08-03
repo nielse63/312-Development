@@ -16,10 +16,10 @@ export function debounce(func, wait, immediate) {
   };
 }
 
-export function hasFormSubmission() {
-  return !!get('form_submission');
-}
-
 export function inTesting() {
   return window.navigator.userAgent.indexOf('HeadlessChrome') > -1;
+}
+
+export function hasFormSubmission() {
+  return !inTesting() && !!get('form_submission');
 }

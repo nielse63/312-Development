@@ -12,4 +12,11 @@ describe('ThankYou.vue', () => {
     expect(vm.$el.classList.contains('thank-you')).to.be.true;
     expect(vm.$el.querySelector('.page-title').textContent).to.equal('Thank You');
   });
+
+  it('should titleize content', () => {
+    const titleize = ThankYou.filters.titlize;
+    const string = 'thank-you';
+    const expected = 'Thank You';
+    expect(titleize(string)).to.equal(expected);
+  });
 });
