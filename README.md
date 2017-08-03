@@ -11,46 +11,58 @@
 
 ## About This Repo
 
-First and foremost, this repo is **not meant to be a tutorial or boilerplate** of any kind. This is simply the repo for my personal site, [312development.com](https://312development.com/), hoping to share the code I've used to create this latest iteration.
+First and foremost, this repo is not meant to be a tutorial or boilerplate of any kind. This is simply the repo for [my personal site](https://312development.com/), hoping to share the code I've used to create this latest iteration.
 
 [Feel free to email me](mailto:erik@312development.com) with any questions you might have regarding how and why I did things the way I did and, as always, I welcome [any bugs you find and report](https://github.com/nielse63/312-Development/issues/new), as well as new [pull requests](https://github.com/nielse63/312-Development/compare).
-
-### Error Reporting
-
-If there's a bug in my code that you found, or you just think the design of my site is dumb, the best way to let me know is [logging an issue](https://github.com/nielse63/312-Development/issues/new) within this repo.
 
 ## Technology & Tools
 
 This is just the highlight reel of all the tools I'm using on my site. To see all the giants whose shoulders I'm standing on, checkout the [package.json](https://github.com/nielse63/312-Development/blob/master/package.json) file.*
 
-### Frameworks & Build Tools
+### The Base
 
-* [Preact](https://github.com/developit/preact) for UI and views (Preact is like React, but is a smaller library)
-* [Preact Router](https://github.com/developit/preact-router) for handling routes
-* [Babel](http://babeljs.io/) for transpiling ES6
-* [Webpack](http://webpack.github.io/) to bundle modules and handle workflow automation
-* [Express](http://expressjs.com/) for server-side routing
+![Vue.js](static/img/vue.png)
+![Webpack](static/img/webpack.png)
+![Yarn](static/img/yarn.png)
 
-### Languages & Automation
+I built my site using the Vue.js framework, running on Webpack-based build system, with Yarn as my package manager of choice.
 
-* JS is written in [ES6 format](http://es6-features.org/#Constants)
-* CSS is compiled from [Sass](http://sass-lang.com/)
-* Webpack, mentioned above, handles the bulk of the workflow:
-  * Compiling Sass
-  * Load optimization of bundled JS
-  * Image and font file optimization
+### Production
 
-### Linting, Testing, and CI
+![Heroku](static/img/heroku.png)
+![Express](static/img/express.png)
+![PM2](static/img/pm2.png)
 
-* [Eslint](http://eslint.org/), executed in a custom Gulp task, validates the JS
-* [Sass Lint](https://github.com/sasstools/sass-lint) as a style type checker on .scss files
-* Using [TravisCI](https://travis-ci.org/) for continuous integration, asset linting cannot fail in order for the build to pass
+The production server is running on Express and I'm using PM2 for process management and load-balancing. The site is hosted on Heroku, using the Node.js buildpack.
 
-## Third-Party Integrations
+### Transpiling
 
-The app is deployed via [Heroku](https://heroku.com/), and incorporates several add-ons that can be easily incorporated through the platform:
+![Babel](static/img/babel.png)
+![PostCSS](static/img/postcss.png)
+![ESLint](static/img/eslint.png)
+![StyleLint](static/img/stylelint.png)
 
-* The SSL Endpoint, and certificate purchased via [DNSimple](https://dnsimple.com/)
-* I installed [Librato](https://www.librato.com/) for HTTP request and memory usage monitoring
-* The Raven SDK from [Sentry.io](https://sentry.io/) is used to track and alert all client-side errors.
-* Finally, I'm usng [KeenIO](https://keen.io/) for advanced analytics and user-data collection.
+All JavaScript is written in ES6+, and style is transpiled from SCSS. As such, I'm using Babel and PostCSS to transpile the development code to be production ready. These modules work in congruency with ESLint and StyleLint to maintain code quality and style.
+
+### Testing
+
+![Mocha](static/img/mocha.png)
+![Chai](static/img/chai.png)
+![Karma](static/img/karma.png)
+![Nightwatch](static/img/nightwatch.png)
+![Travis](static/img/travis-ci.png)
+
+Just like any professional project, I wanted to have my code tested. Tests are run by Karma, using Mocha as the test framework and Chai as the assertion library. End-to-end and integration tests are done in Nightwatch, and all test suites must pass in Travis before a deployment can proceed.
+
+### Other Services
+
+![CodeClimate](static/img/codeclimate.png)
+![Coveralls](static/img/coveralls.png)
+![Snyk](static/img/snyk.png)
+![David](static/img/david.png)
+
+I'm running my code through several third-party services including: **CodeClimate** to maintain code quality; **Coveralls** for test coverage; **Snyk** to watch for any vulnerabilities in my NPM packages; and **David** to ensure my dependencies are up to date.
+
+## Found a Bug?
+
+If there's a bug in my code that you found, or you just think the design of my site is dumb, the best way to let me know is [logging an issue](https://github.com/nielse63/312-Development/issues/new).
