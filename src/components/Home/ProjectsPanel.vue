@@ -32,6 +32,7 @@
 <script>
   import { mapGetters } from 'vuex';
   import { getGithubData, getNPMInfo } from '@/lib/data';
+  import { inTesting } from '@/lib/utils';
   import Octocat from '@/assets/images/octocat.png';
   import Image from '@/assets/images/logo.png';
 
@@ -51,9 +52,10 @@
     },
     watch: {
       repos(newValue, oldValue) {
-        if (oldValue.length) {
+        if (oldValue.length || inTesting()) {
           return;
         }
+        /* istanbul ignore next */
         newValue.forEach((repo, i) => {
           const p = new Promise(async (resolve) => {
             const { title } = repo;

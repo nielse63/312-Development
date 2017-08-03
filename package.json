@@ -12,6 +12,7 @@
     "dev": "yarn run backend | yarn run vue",
     "build": "cross-env NODE_ENV=production ./bin/build",
     "unit": "cross-env BABEL_ENV=test karma start test/unit/karma.conf.js",
+    "pree2e": "rm -rf test/e2e/reports/*.xml",
     "e2e": "node test/e2e/runner.js",
     "test": "yarn run unit && yarn run e2e",
     "coverage": "cat test/unit/coverage/lcov.info | coveralls",
