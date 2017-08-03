@@ -6,5 +6,5 @@ export function inTesting() {
 }
 
 export function hasFormSubmission() {
-  return !inTesting() && !!get('form_submission');
+  return !!get('form_submission');
 }
