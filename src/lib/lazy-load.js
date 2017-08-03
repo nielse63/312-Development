@@ -1,4 +1,5 @@
 
+/* istanbul ignore next */
 function loadImageElement(element, src, callback) {
   if (!element.hasAttribute('data-lazy-load')) {
     callback();
@@ -11,6 +12,7 @@ function loadImageElement(element, src, callback) {
   element.setAttribute('src', src);
 }
 
+/* istanbul ignore next */
 function loadBackgroundImage(element, src, callback) {
   if (!element.hasAttribute('data-lazy-load')) {
     callback();
@@ -21,6 +23,7 @@ function loadBackgroundImage(element, src, callback) {
   callback();
 }
 
+/* istanbul ignore next */
 function loadImage(element, callback = () => {}) {
   const src = element.getAttribute('data-lazy-load');
   if (element.nodeName.toLowerCase() === 'img') {
@@ -30,6 +33,7 @@ function loadImage(element, callback = () => {}) {
   }
 }
 
+/* istanbul ignore next */
 export default function lazyLoad() {
   if (document.readyState !== 'complete') {
     document.onreadystatechange = lazyLoad;

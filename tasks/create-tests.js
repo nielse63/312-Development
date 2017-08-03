@@ -20,6 +20,7 @@ const blacklist = [
   'main.js',
   'service-worker.js',
   'prototypes.js',
+  'lazy-load.js',
 ];
 
 function createTestFolder(file) {

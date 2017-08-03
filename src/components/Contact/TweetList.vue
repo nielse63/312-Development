@@ -15,6 +15,7 @@
 <script>
   import Tweet from '@/components/Contact/Tweet';
   import { getTweets } from '@/lib/data';
+  import { inTesting } from '@/lib/utils';
 
   export default {
     name: 'tweet-list',
@@ -40,9 +41,13 @@
       },
     },
     beforeMount() {
-      getTweets().then(this.formatTweets, (error) => {
-        console.warn(error);
-      });
+      if (inTesting()) {
+        this.formatTweets([]);
+      } else {
+        getTweets().then(this.formatTweets, (error) => {
+          console.warn(error);
+        });
+      }
     },
   };
 </script>

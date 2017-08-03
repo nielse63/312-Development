@@ -5,6 +5,7 @@ import About from '@/pages/About';
 import Contact from '@/pages/Contact';
 import Portfolio from '@/pages/Portfolio';
 import ThankYou from '@/pages/ThankYou';
+import FourOhFour from '@/pages/404';
 
 Vue.use(Router);
 
@@ -49,6 +50,14 @@ export default new Router({
       props: {
         hidden: true,
         title: 'Thank You!',
+      },
+    }, {
+      path: '*',
+      name: '404',
+      component: FourOhFour,
+      props: {
+        hidden: true,
+        title: 'Page Not Found',
       },
     },
   ],
