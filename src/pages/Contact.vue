@@ -76,7 +76,7 @@
 </script>
 
 <style lang="scss" scoped>
-  @import "../assets/styles/components/banner";
+  @import "../assets/styles/main";
 
   .row {
     @media (max-width: $tablet-width-max) {

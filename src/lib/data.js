@@ -68,11 +68,10 @@ function createNPMUrl(name) {
 
 function handleNPMData(data = {}) {
   let output = data;
-  if ({}.toString.call(output) === '[object Object]') {
-    output = [];
-  }
-  if (!output.downloads) {
-    output.downloads = [];
+  if ({}.toString.call(output) === '[object Array]') {
+    output = {
+      downloads: [],
+    };
   }
   return output;
 }

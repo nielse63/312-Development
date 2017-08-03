@@ -23,7 +23,3 @@
     },
   };
 </script>
-
-<style lang="scss" scoped>
-  @import "../assets/styles/components/banner";
-</style>
