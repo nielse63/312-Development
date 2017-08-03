@@ -9,8 +9,14 @@
 
 import axios from 'axios';
 import store from '@/store';
+import { inTesting } from '@/lib/utils';
 
+// eslint-disable-next-line complexity
 async function fetchFromURL(url) {
+  if (inTesting()) {
+    return [];
+  }
+
   try {
     const response = await axios(url);
     if (response.status === 200) {
@@ -103,8 +109,6 @@ export function getNPMInfo(name) {
         reject(e);
       }
     }
-  }).catch((e) => {
-    console.error(e);
   });
 }
 
