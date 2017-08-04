@@ -106,7 +106,7 @@ export function getNPMInfo(name) {
 }
 
 export function getTweets() {
-  return new Promise(async (resolve, reject) => {
+  return new Promise(async (resolve, reject) => { // eslint-disable-line complexity
     const tweets = store.getters.getTweets;
     if (tweets && tweets.length) {
       resolve(tweets);
@@ -114,8 +114,6 @@ export function getTweets() {
       const url = '/get-tweets';
       const data = await fetchFromURL(url);
       let output = data;
-      // const output = JSON.parse(data);
-      // completePromise(resolve, reject, output, 'saveTweets');
       try {
         if (typeof output === 'string') {
           output = JSON.parse(output);
