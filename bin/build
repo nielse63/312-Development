@@ -1,5 +1,8 @@
 #!/usr/bin/env bash
 
+# exit on failure
+set -e
+
 NODE_ENV=production
 export NODE_ENV=production
 
@@ -11,11 +14,14 @@ yarn run lint:js -- --fix
 yarn run lint:scss
 
 # build for production
-node --gc_interval=100 build/build.js
+node_modules/.bin/cross-env NODE_ENV=production node --harmony --gc_interval=100 build/build.js
 
 # move seo-related files
-mv dist/static/robots.txt dist/robots.txt
-mv dist/static/sitemap.xml dist/sitemap.xml
+for file in {robots.txt,sitemap.xml}; do
+  from="dist/static/$file"
+  to="dist/$file"
+  [ -f "$from" ] && mv "$from" "$to";
+done;
 
 # alter output html
 node build/add-async.js

@@ -2,6 +2,7 @@ import Vue from 'vue';
 import store from '@/store';
 import ProjectsPanel from '@/components/Home/ProjectsPanel';
 import MockRepo from '../../../mocks/repo';
+import { isArray } from '../../../helpers';
 
 function createVM() {
   const Constructor = Vue.extend(ProjectsPanel);
@@ -29,7 +30,7 @@ describe('ProjectsPanel.vue', () => {
 
     it('should return for empty array', () => {
       const output = watchRepos([], []);
-      expect(output).to.equal(undefined);
+      expect(output).to.be.undefined;
     });
   });
 
@@ -42,7 +43,7 @@ describe('ProjectsPanel.vue', () => {
 
     it('should output array', () => {
       const output = formatRepos([MockRepo]);
-      expect({}.toString.call(output)).to.equal('[object Array]');
+      expect(isArray(output)).to.be.true;
     });
 
     it('should format correctly', () => {

@@ -53,14 +53,11 @@
       isEmailValid(value) {
         return value && /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/.test(value);
       },
-      // eslint-disable-next-line complexity
       onblur(e) {
         this.value = e.target.value;
         if (!this.value) {
           this.valid = false;
-        } else if (!this.needsValidation) {
-          this.valid = true;
-        } else if (this.type === 'email') {
+        } else if (this.needsValidation) {
           this.valid = this.isEmailValid(this.value);
         }
       },

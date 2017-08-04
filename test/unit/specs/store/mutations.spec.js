@@ -1,9 +1,9 @@
-
 import mutations from '@/store/mutations';
 import originalState from '@/store/state';
+import { isArray, isObject } from '../../helpers';
 
 const copy = Object.assign({}, originalState);
-let state = Object.assign({}, originalState);
+let state = copy;
 
 describe('mutations', () => {
   beforeEach(() => {
@@ -60,8 +60,7 @@ describe('mutations', () => {
 
   describe('saveRepos', () => {
     it('`saveRepos` should set the repos object', () => {
-      expect({}.toString.call(state.repos)).to.equal('[object Array]');
-      expect(state.repos.length).to.equal(0);
+      expect(isArray(state.repos)).to.be.true;
 
       const repos = [{
         title: 'One',
@@ -79,8 +78,7 @@ describe('mutations', () => {
 
   describe('saveModule', () => {
     it('`saveModule` should set the module object', () => {
-      expect({}.toString.call(state.modules)).to.equal('[object Object]');
-      expect(Object.keys(state.modules).length).to.equal(0);
+      expect(isObject(state.modules)).to.be.true;
 
       const module = {
         name: 'module-name',
@@ -90,7 +88,6 @@ describe('mutations', () => {
       };
 
       mutations.saveModule(state, module);
-      expect(Object.keys(state.modules).length).to.equal(1);
       expect(state.modules['module-name']).to.not.be.null;
       expect(state.modules['module-name']).to.equal(module.data);
     });

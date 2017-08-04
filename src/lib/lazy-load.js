@@ -1,4 +1,5 @@
 
+/* istanbul ignore next */
 function loadImage(element) {
   const src = element.getAttribute('data-lazy-load');
   element.removeAttribute('data-lazy-load');
@@ -9,6 +10,7 @@ function loadImage(element) {
   }
 }
 
+/* istanbul ignore next */
 function onload() {
   document.querySelectorAll('[data-lazy-load]').forEach(loadImage);
 }

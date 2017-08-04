@@ -10,14 +10,12 @@
 import axios from 'axios';
 import store from '@/store';
 
-async function fetchFromURL(url) {
+export async function fetchFromURL(url) {
   try {
     const response = await axios(url);
-    if (response.status === 200) {
-      return response.data;
-    }
+    return response.data;
   } catch (err) {
-    console.warn(err);
+    // console.warn(err);
   }
   return [];
 }
@@ -103,8 +101,6 @@ export function getNPMInfo(name) {
         reject(e);
       }
     }
-  }).catch((e) => {
-    console.error(e);
   });
 }
 
@@ -116,8 +112,13 @@ export function getTweets() {
     } else {
       const url = '/get-tweets';
       const data = await fetchFromURL(url);
+      let output = data;
+      // const output = JSON.parse(data);
+      // completePromise(resolve, reject, output, 'saveTweets');
       try {
-        const output = JSON.parse(data);
+        if (typeof output === 'string') {
+          output = JSON.parse(output);
+        }
         completePromise(resolve, reject, output, 'saveTweets');
       } catch (e) {
         reject(e);

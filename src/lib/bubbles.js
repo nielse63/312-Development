@@ -1,12 +1,12 @@
 
 import { scaleLinear, scaleQuantize, range, select, timer } from 'd3';
 
-function getSize() {
+export function getSize() {
   const wrapper = document.getElementById('bubbles');
   return { width: wrapper.clientWidth, height: wrapper.clientHeight };
 }
 
-function getRangeData(width, colors) {
+export function getRangeData(width, colors) {
   const colorScale = scaleQuantize().domain([0, 1]).range(colors);
   let rangeValue = Math.floor((40 / 1280) * width);
   if (rangeValue < 20) {
@@ -23,7 +23,7 @@ function getRangeData(width, colors) {
 }
 
 export default function bubbles() {
-  if (!document.getElementById('bubbles') || document.querySelector('#bubbles canvas')) {
+  if (!document.getElementById('bubbles')) {
     return;
   }
 
@@ -45,9 +45,9 @@ export default function bubbles() {
     .attr('height', height)
     .attr('id', 'canvas');
 
-  // node returns first dom element in a selection
   let context = canvas.node().getContext('2d');
 
+  /* istanbul ignore next */
   select(window).on('resize', () => {
     const htmlCanvas = document.getElementById('canvas');
     context = htmlCanvas.getContext('2d');
@@ -62,11 +62,11 @@ export default function bubbles() {
       .range([0, height]);
   });
 
+  /* istanbul ignore next */
   timer(() => {
     context.clearRect(0, 0, width, height);
     data.forEach((d) => {
       d.y -= d.yv;
-      // Recycle old circles
       if (d.y < (0 - d.size)) {
         d.y = 100 + d.size;
       }

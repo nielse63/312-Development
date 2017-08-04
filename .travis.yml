@@ -14,12 +14,10 @@ install:
   - yarn
 
 env:
-  - TEST_COMMAND="lint:js"
-  - TEST_COMMAND="lint:scss"
-  - TEST_COMMAND="unit"
-  - TEST_COMMAND="e2e"
+  - TEST_COMMAND="yarn run lint:js"
+  - TEST_COMMAND="yarn run lint:scss"
+  - TEST_COMMAND="yarn run unit"
+  - TEST_COMMAND="yarn run e2e"
 
 script:
-  - (eval "yarn run $TEST_COMMAND")
-
-after_success: yarn run coverage
+  - (eval "$TEST_COMMAND")
