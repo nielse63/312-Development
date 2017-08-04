@@ -3,6 +3,7 @@ var path = require('path')
 var utils = require('./utils')
 var webpack = require('webpack')
 var config = require('../config')
+const content = require('./html-content')
 var merge = require('webpack-merge')
 var baseWebpackConfig = require('./webpack.base.conf')
 var HtmlWebpackPlugin = require('html-webpack-plugin')
@@ -12,11 +13,6 @@ var FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin')
 Object.keys(baseWebpackConfig.entry).forEach(function (name) {
   baseWebpackConfig.entry[name] = ['./build/dev-client'].concat(baseWebpackConfig.entry[name])
 })
-
-var builtURL = process.env.NODE_ENV === 'production' ? 'https://312development.com/' : 'https://localhost:9999/';
-if(process.env.STAGING_ENV) {
-  builtURL = 'https://staging312.herokuapp.com';
-}
 
 module.exports = merge(baseWebpackConfig, {
   module: {
@@ -38,9 +34,7 @@ module.exports = merge(baseWebpackConfig, {
       inject: true,
       serviceWorkerLoader: `<script>${fs.readFileSync(path.join(__dirname,
         './service-worker-dev.js'), 'utf-8')}</script>`,
-      props: {
-        url: builtURL
-      }
+      props: content
     }),
     new FriendlyErrorsPlugin()
   ]

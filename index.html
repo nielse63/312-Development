@@ -4,8 +4,8 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>312 Development | Chicago JavaScript Engineer</title>
-    <meta name="description" content="The personal website of Erik Nielsen - Chicago-based UI/UX Software Engineer">
+    <title><%= htmlWebpackPlugin.options.props.title %></title>
+    <meta name="description" content="<%= htmlWebpackPlugin.options.props.description %>">
     <meta name="robots" content="index, follow">
     <meta name="web_author" content="Erik Nielsen">
     <% for (var chunk of webpack.chunks) {
@@ -29,7 +29,7 @@
     <!-- Add to home screen for Safari on iOS -->
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
-    <meta name="apple-mobile-web-app-title" content="312 Development">
+    <meta name="apple-mobile-web-app-title" content="<%= htmlWebpackPlugin.options.props.title %>">
     <link rel="apple-touch-icon" href="/static/img/icons/apple-touch-icon-152x152.png">
 
     <!-- Add to home screen for Windows -->
@@ -39,17 +39,17 @@
     <!-- Open Graph Meta Data -->
     <meta property="fb:app_id" content="834389063291117">
     <meta property="og:type" content="website">
-    <meta property="og:title" content="Erik Nielsen | UI/UX Software Engineer">
+    <meta property="og:title" content="<%= htmlWebpackPlugin.options.props.title %>">
     <meta property="og:url" content="<%= htmlWebpackPlugin.options.props.url %>">
-    <meta property="og:image" content="<%= htmlWebpackPlugin.options.props.url %>/static/img/og-homepage.jpg">
-    <meta property="og:description" content="The personal website of Erik Nielsen - Chicago-based UI/UX Software Engineer">
+    <meta property="og:image" content="<%= htmlWebpackPlugin.options.props.image %>">
+    <meta property="og:description" content="<%= htmlWebpackPlugin.options.props.description %>">
 
     <!-- Twitter Card Meta Data -->
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:site" content="@erikkylenielsen">
-    <meta name="twitter:title" content="Erik Nielsen | UI/UX Software Engineer">
-    <meta name="twitter:description" content="The personal website of Erik Nielsen - Chicago-based UI/UX Software Engineer">
-    <meta name="twitter:image" content="<%= htmlWebpackPlugin.options.props.url %>/static/img/og-homepage.jpg">
+    <meta name="twitter:title" content="<%= htmlWebpackPlugin.options.props.title %>">
+    <meta name="twitter:description" content="<%= htmlWebpackPlugin.options.props.description %>">
+    <meta name="twitter:image" content="<%= htmlWebpackPlugin.options.props.image %>">
 
     <!-- JSON-LD Code -->
     <script type="application/ld+json">

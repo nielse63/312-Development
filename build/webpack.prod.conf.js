@@ -1,6 +1,7 @@
 var fs = require('fs')
 var path = require('path')
 var utils = require('./utils')
+var content = require('./html-content')
 var webpack = require('webpack')
 var config = require('../config')
 var merge = require('webpack-merge')
@@ -14,10 +15,6 @@ var SWPrecacheWebpackPlugin = require('sw-precache-webpack-plugin')
 var env = process.env.NODE_ENV === 'testing'
   ? require('../config/test.env')
   : config.build.env
-var builtURL = process.env.NODE_ENV === 'production' ? 'https://312development.com/' : 'https://localhost:9999/';
-if(process.env.STAGING_ENV) {
-  builtURL = 'https://staging312.herokuapp.com';
-}
 
 var webpackConfig = merge(baseWebpackConfig, {
   module: {
@@ -89,9 +86,7 @@ var webpackConfig = merge(baseWebpackConfig, {
       chunksSortMode: 'dependency',
       serviceWorkerLoader: `<script>${fs.readFileSync(path.join(__dirname,
         './service-worker-prod.js'), 'utf-8')}</script>`,
-      props: {
-        url: builtURL
-      }
+      props: content
     }),
     // split vendor js into its own file
     new webpack.optimize.CommonsChunkPlugin({
