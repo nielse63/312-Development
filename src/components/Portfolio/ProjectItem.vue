@@ -26,7 +26,6 @@
 </template>
 
 <script>
-  // import Highcharts from 'highcharts';
   import { getNPMInfo } from '@/lib/data';
   import ExternalLink from '@/components/ExternalLink';
 
@@ -45,7 +44,6 @@
       return {
         downloads: 0,
         trend: [],
-        firstDay: '',
       };
     },
     computed: {
@@ -83,7 +81,6 @@
           chart: {
             type: 'spline',
             margin: [0, 0, 0, 0],
-            // spacing: [0, 0, 0, 0],
             alignTicks: false,
             height: parent.clientHeight,
             width: parent.clientWidth,
@@ -176,21 +173,12 @@
         });
       });
       p.then((output) => {
-        this.firstDay = output.data[0].day;
         this.trend = output.data.map(object => object.downloads);
         this.downloads = output.totalDownloads;
-        // this.loadChart().then(() => {
-        //   console.log('loaded')
-        // })
         this.createChart();
-        // const interval = setInterval(() => {
-        //   if (window.Highcharts) {
-        //     clearInterval(interval);
-        //     this.createChart();
-        //   }
-        // }, 500);
-      }).catch((e) => {
-        console.error(e);
+      }).catch((error) => {
+        console.error(`ProjectItem:
+${error}`);
       });
     },
   };

@@ -111,7 +111,8 @@
       getGithubData().then((data) => {
         this.repos = this.formatRepos(data.slice(0, 3));
       }, (error) => {
-        console.error(error);
+        console.error(`ProjectsPanel:
+${error}`);
       });
     },
   };

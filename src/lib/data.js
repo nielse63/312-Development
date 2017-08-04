@@ -9,6 +9,7 @@
 
 import axios from 'axios';
 import store from '@/store';
+import { inTesting } from '@/lib/utils';
 
 export async function fetchFromURL(url) {
   try {
