@@ -53,6 +53,7 @@
 
   .timeline__row {
     position: relative;
+    perspective: 1000px;
 
     &:before {
       content: '';

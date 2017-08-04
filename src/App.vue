@@ -13,7 +13,6 @@
   import { mapGetters } from 'vuex';
   import lazyLoad from '@/lib/lazy-load';
   import scrolling from '@/lib/scrolling';
-  // import isVisible from '@/lib/is-visible';
   import AppHeader from '@/components/Header';
   import AppFooter from '@/components/Footer';
   import Navigation from '@/components/Navigation';
@@ -48,7 +47,6 @@
       }, false);
 
       setTimeout(lazyLoad, 500);
-      // isVisible();
       scrolling();
     },
   };
