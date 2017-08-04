@@ -9,14 +9,13 @@
 
 import axios from 'axios';
 import store from '@/store';
-import { inTesting } from '@/lib/utils';
 
 export async function fetchFromURL(url) {
   try {
     const response = await axios(url);
     return response.data;
   } catch (err) {
-    // console.warn(err);
+    console.warn(err);
   }
   return [];
 }
