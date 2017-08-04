@@ -11,7 +11,7 @@ yarn run lint:js -- --fix
 yarn run lint:scss
 
 # build for production
-node build/build.js
+node --gc_interval=100 build/build.js
 
 # move seo-related files
 mv dist/static/robots.txt dist/robots.txt
