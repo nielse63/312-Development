@@ -9,19 +9,11 @@
 
 import axios from 'axios';
 import store from '@/store';
-import { inTesting } from '@/lib/utils';
 
-// eslint-disable-next-line complexity
-async function fetchFromURL(url) {
-  if (inTesting()) {
-    return [];
-  }
-
+export async function fetchFromURL(url) {
   try {
     const response = await axios(url);
-    if (response.status === 200) {
-      return response.data;
-    }
+    return response.data;
   } catch (err) {
     console.warn(err);
   }
@@ -113,15 +105,18 @@ export function getNPMInfo(name) {
 }
 
 export function getTweets() {
-  return new Promise(async (resolve, reject) => {
+  return new Promise(async (resolve, reject) => { // eslint-disable-line complexity
     const tweets = store.getters.getTweets;
     if (tweets && tweets.length) {
       resolve(tweets);
     } else {
       const url = '/get-tweets';
       const data = await fetchFromURL(url);
+      let output = data;
       try {
-        const output = JSON.parse(data);
+        if (typeof output === 'string') {
+          output = JSON.parse(output);
+        }
         completePromise(resolve, reject, output, 'saveTweets');
       } catch (e) {
         reject(e);

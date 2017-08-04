@@ -6,17 +6,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title><%= htmlWebpackPlugin.options.props.title %></title>
     <meta name="description" content="<%= htmlWebpackPlugin.options.props.description %>">
-    <meta name="robots" content="index, follow">
-    <meta name="web_author" content="Erik Nielsen">
     <% for (var chunk of webpack.chunks) {
         for (var file of chunk.files) {
           if (file.match(/\.(js|css)$/)) { %>
     <link rel="<%= chunk.initial?'preload':'prefetch' %>" href="<%= htmlWebpackPlugin.files.publicPath + file %>" as="<%= file.match(/\.css$/)?'style':'script' %>"><% }}} %>
+
+    <!-- Resource Hints -->
+    <link rel="dns-prefetch" href="https://www.google-analytics.com/">
+    <link rel="dns-prefetch" href="https://fonts.googleapis.com/">
+    <link rel="dns-prefetch" href="https://api.github.com">
+    <link rel="dns-prefetch" href="https://api.npmjs.org">
     <link rel="preload" href="https://www.google-analytics.com/analytics.js" as="script">
     <link rel="preload" href="https://fonts.googleapis.com/css?family=Lato:400,700,900" as="style">
 
     <!-- SEO Stuff -->
     <link rel="canonical" href="<%= htmlWebpackPlugin.options.props.url %>" />
+    <meta name="robots" content="index, follow">
+    <meta name="web_author" content="Erik Nielsen">
 
     <!-- Icons -->
     <link rel="apple-touch-icon" sizes="180x180" href="/static/img/icons/apple-touch-icon.png">
@@ -56,8 +62,8 @@
       {
         "@context": "http://schema.org/",
         "@type": "Person",
-        "name": "Erik Nielsen",
-        "jobTitle": "UI/UX Software Engineer",
+        "name": "<%= htmlWebpackPlugin.options.props.me.name %>",
+        "jobTitle": "<%= htmlWebpackPlugin.options.props.me.title %>",
         "address": {
           "@type": "PostalAddress",
           "addressLocality": "Chicago",
@@ -72,11 +78,6 @@
     <div id="app"></div>
     <%= htmlWebpackPlugin.options.serviceWorkerLoader %>
 
-    <script>
-      window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
-      ga('create', 'UA-33505945-1', 'auto');
-      ga('send', 'pageview');
-    </script>
-    <script async src="https://www.google-analytics.com/analytics.js"></script>
+    <%= htmlWebpackPlugin.options.props.analytics %>
   </body>
 </html>

@@ -1,30 +1,27 @@
 
 import actions from '@/store/actions';
+import { isFunction, isObject } from '../../helpers';
 
 describe('actions', () => {
   describe('existence', () => {
     it('should exist', () => {
-      expect(actions).to.not.be.null;
+      expect(isObject(actions)).to.be.true;
     });
 
     it('should have `closeMenu` function', () => {
-      expect(actions.closeMenu).to.not.be.null;
-      expect(typeof actions.closeMenu).to.equal('function');
+      expect(isFunction(actions.closeMenu)).to.be.true;
     });
 
     it('should have `toggleMenu` function', () => {
-      expect(actions.toggleMenu).to.not.be.null;
-      expect(typeof actions.toggleMenu).to.equal('function');
+      expect(isFunction(actions.toggleMenu)).to.be.true;
     });
 
     it('should have `saveRepos` function', () => {
-      expect(actions.saveRepos).to.not.be.null;
-      expect(typeof actions.saveRepos).to.equal('function');
+      expect(isFunction(actions.saveRepos)).to.be.true;
     });
 
     it('should have `saveModule` function', () => {
-      expect(actions.saveModule).to.not.be.null;
-      expect(typeof actions.saveModule).to.equal('function');
+      expect(isFunction(actions.saveModule)).to.be.true;
     });
   });
 });

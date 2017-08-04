@@ -6,8 +6,8 @@
   "private": true,
   "scripts": {
     "dev": "cross-env NODE_ENV=development node build/dev-server.js",
-    "build": "cross-env NODE_ENV=production ./bin/build",
-    "unit": "cross-env BABEL_ENV=test karma start test/unit/karma.conf.js",
+    "build": "./bin/build",
+    "unit": "./bin/unit-test",
     "pree2e": "rm -rf test/e2e/reports/*.xml",
     "e2e": "node test/e2e/runner.js",
     "test": "yarn run unit && yarn run e2e",
@@ -15,7 +15,6 @@
     "lint:js": "eslint --ext .js,.vue src server ./*.js",
     "lint:internal": "eslint tasks test/unit test/e2e *.js --ignore-pattern '!.*.js'",
     "lint:scss": "stylelint src/**/*.vue src/assets/**/*.scss --config .stylelintrc.js --syntax scss",
-    "clean-logs": "rm -rf .logs ./*.log && mkdir .logs",
     "start": "node --harmony --gc_global --optimize_for_size --max_old_space_size=460 --gc_interval=100 server/front-end",
     "heroku-postbuild": "yarn run build"
   },
@@ -91,6 +90,7 @@
     "webpack-merge": "^4.1.0"
   },
   "devDependencies": {
+    "axios-mock-adapter": "^1.9.0",
     "chai": "^4.1.0",
     "chromedriver": "^2.31.0",
     "coveralls": "^2.13.1",

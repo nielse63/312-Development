@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+
+# lint/fix all files
+set -e
+yarn run lint:js -- --fix --cache
+yarn run lint:internal -- --fix --cache
+set +e
+
+# run tests
+node_modules/.bin/cross-env BABEL_ENV=test karma start test/unit/karma.conf.js
+
+# submit coverage if in travis
+if [ $TRAVIS ]; then
+  yarn run coverage
+fi

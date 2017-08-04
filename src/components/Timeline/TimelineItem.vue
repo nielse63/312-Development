@@ -1,5 +1,5 @@
 <template>
- <div class="timeline__item" v-bind:class="this.class">
+ <div class="timeline__item" v-bind:class="this.class" data-is-in-view>
   <header class="timeline__item__header">
     <h3>{{this.title}}</h3>
   </header>
@@ -14,6 +14,7 @@
 
 <script>
   import { format } from 'date-fns';
+  import isVisible from '@/lib/is-visible';
 
   export default {
     name: 'timeline-item',
@@ -45,6 +46,9 @@
         return format(this.date, 'MMMM Do, YYYY');
       },
     },
+    mounted() {
+      isVisible();
+    },
   };
 </script>
 
@@ -57,7 +61,10 @@
       border: 1px solid $banner-color;
       position: absolute;
       top: 50%;
-      transform: translate(0, -50%);
+      transform: translate(0, -50%) rotateX(90deg);
+      transform-style: preserve-3d;
+      transition: transform 0.5s 0.5s;
+      transform-origin: center;
 
       @media (min-width: $tablet-width) {
         width: 50%;
@@ -136,5 +143,9 @@
         letter-spacing: 2px;
       }
     }
+  }
+
+  .visible {
+    transform: translate(0, -50%);
   }
 </style>

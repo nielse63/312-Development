@@ -12,6 +12,7 @@
 <script>
   import { mapGetters } from 'vuex';
   import lazyLoad from '@/lib/lazy-load';
+  import scrolling from '@/lib/scrolling';
   import AppHeader from '@/components/Header';
   import AppFooter from '@/components/Footer';
   import Navigation from '@/components/Navigation';
@@ -39,38 +40,14 @@
       setTimeout(lazyLoad, 500);
     },
     mounted() {
+      document.addEventListener('scrolling', () => {
+        if (this.isMenuOpen) {
+          this.$store.dispatch('toggleMenu');
+        }
+      }, false);
+
       setTimeout(lazyLoad, 500);
-
-      // eslint-disable-next-line complexity
-      (() => {
-        let lastY = 0;
-        let closing = false;
-        const scroll = window.requestAnimationFrame ||
-          window.webkitRequestAnimationFrame ||
-          window.mozRequestAnimationFrame ||
-          window.msRequestAnimationFrame ||
-          window.oRequestAnimationFrame ||
-          function (callback) { window.setTimeout(callback, 1000 / 60); }; // eslint-disable-line func-names
-
-        const update = () => {
-          if (this.isMenuOpen) {
-            this.$store.dispatch('toggleMenu');
-          }
-          closing = false;
-        };
-
-        const loop = () => {
-          // console.log(this.isMenuOpen);
-          const top = window.scrollY;
-          if (!closing && top !== lastY) {
-            closing = true;
-            lastY = top;
-            update();
-          }
-          scroll(loop);
-        };
-        loop();
-      })();
+      scrolling();
     },
   };
 </script>
@@ -89,34 +66,6 @@
     font-weight: normal;
     font-style: normal;
   }
-
-  // @font-face {
-  //   font-family: 'Avenir';
-  //   src: url('assets/fonts/Avenir-Medium.woff2') format('woff2'),
-  //        url('assets/fonts/Avenir-Medium.woff') format('woff');
-  //   font-weight: 400;
-  //   font-style: normal;
-  //   unicode-range: U+000-5FF;
-  // }
-
-  // @font-face {
-  //   font-family: 'Avenir';
-  //   src: url('assets/fonts/Avenir-Heavy.woff2') format('woff2'),
-  //        url('assets/fonts/Avenir-Heavy.woff') format('woff');
-  //   font-weight: 700;
-  //   font-style: normal;
-  //   unicode-range: U+000-5FF;
-  // }
-
-  // @font-face {
-  //   font-family: 'Avenir';
-  //   src: local('☺︎'),
-  //        url('assets/fonts/Avenir-Black.woff2') format('woff2'),
-  //        url('assets/fonts/Avenir-Black.woff') format('woff');
-  //   font-weight: 900;
-  //   font-style: normal;
-  //   unicode-range: U+000-5FF;
-  // }
 </style>
 
 <style lang="scss" scoped>
