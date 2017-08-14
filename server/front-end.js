@@ -22,6 +22,7 @@ function setResponseHeaders(res) {
   res.setHeader('X-Frame-Options', 'SAMEORIGIN');
   res.setHeader('X-Content-Type-Options', 'nosniff');
   res.setHeader('Cache-Control', 'max-age=2628000, public');
+  res.setHeader('X-DNS-Prefetch-Control', 'on');
 }
 
 const app = express();
