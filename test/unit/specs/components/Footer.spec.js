@@ -19,7 +19,7 @@ describe('Footer.vue', () => {
     }).$mount();
     const visibleLinks = router.options.routes.filter(route => !route.props.hidden);
     expect(
-      vm.$el.querySelectorAll('.footer__menu li').length,
+      vm.$el.querySelectorAll('.footer__menu li').length
     ).to.equal(visibleLinks.length);
   });
 });

@@ -1,26 +1,33 @@
-// import Vue from 'vue';
-// import store from '@/store'
-// import ProjectsPanel from '@/components/Portfolio/ProjectsPanel';
+import Vue from 'vue';
+import store from '@/store';
+import router from '@/router';
+import ProjectsPanel from '@/components/Portfolio/ProjectsPanel';
 
-// function createVM() {
-//   const Constructor = Vue.extend(ProjectsPanel);
-//   return new Constructor({
-//     store,
-//   }).$mount();
-// }
+function createVM() {
+  const Constructor = Vue.extend(ProjectsPanel);
+  return new Constructor({
+    store,
+    router,
+  }).$mount();
+}
 
-// describe('ProjectsPanel.vue', () => {
-//   it('should render correctly', () => {
-//     const vm = createVM();
-//     expect(vm.$el.classList.contains('panel')).to.be.true;
-//   });
+describe('ProjectsPanel.vue', () => {
+  it('load highcharts', (done) => {
+    ProjectsPanel.methods.loadChart().then(() => {
+      expect(window.Highcharts).to.not.be.null;
+      done();
+    });
+  });
 
-//   it('should render project objects', () => {
-//     const vm = createVM();
-//     expect(
-//       vm.$el.querySelectorAll('.project').length
-//     ).to.equal(
-//       ProjectsPanel.data().projects.length
-//     );
-//   });
-// });
+  it('prevent loading highcharts', (done) => {
+    ProjectsPanel.methods.loadChart().then(() => {
+      expect(window.Highcharts).to.not.be.null;
+      done();
+    });
+  });
+
+  it('should render correctly', () => {
+    const vm = createVM();
+    expect(vm.$el.classList.contains('panel')).to.be.true;
+  });
+});

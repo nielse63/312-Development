@@ -2,7 +2,7 @@ import Vue from 'vue';
 import store from '@/store';
 import router from '@/router';
 import ProficiencyItem from '@/components/Portfolio/ProficiencyItem';
-import image from '@/assets/images/clean/angular.svg';
+import image from '@/assets/images/clean/angular';
 
 function createVM() {
   const Constructor = Vue.extend(ProficiencyItem);
