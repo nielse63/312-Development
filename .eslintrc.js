@@ -44,7 +44,6 @@ module.exports = {
     // allow debugger during development
     'no-debugger': production ? 2 : 0,
     semi: warnOrOff,
-    'comma-dangle': warnOrOff,
     'no-console': [warnOrOff, { allow: ['warn', 'error'] }],
     'no-param-reassign': [warnOrOff, { props: false }],
     'max-len': 'off',
@@ -53,5 +52,10 @@ module.exports = {
     'space-before-function-paren': warnOrOff,
     complexity: ['warn', 3],
     indent: errorOrOff,
+    'comma-dangle': [warnOrOff, {
+      arrays: 'always-multiline',
+      objects: 'always-multiline',
+      functions: 'never',
+    }],
   },
 };

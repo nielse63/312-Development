@@ -5,10 +5,10 @@ const path = require('path');
 const chalk = require('chalk');
 
 const sampleContent = fs.readFileSync(
-  path.join(__dirname, '../test/unit/sample/Sample.spec.js'), 'utf8',
+  path.join(__dirname, '../test/unit/sample/Sample.spec.js'), 'utf8'
 );
 const jsSampleContent = fs.readFileSync(
-  path.join(__dirname, '../test/unit/sample/jssample.spec.js'), 'utf8',
+  path.join(__dirname, '../test/unit/sample/jssample.spec.js'), 'utf8'
 );
 
 const samples = {
@@ -35,7 +35,7 @@ function createVueTest(file) {
   const srcFile = file.replace(/src\//, '');
   const testFilePath = path.resolve(
     __dirname, '../test/unit/specs',
-    srcFile.replace('.vue', '.spec.js'),
+    srcFile.replace('.vue', '.spec.js')
   );
   if (fs.existsSync(testFilePath)) {
     return;
@@ -56,7 +56,7 @@ function createJSTest(file) {
   const srcFile = file.replace(/src\//, '');
   const testFilePath = path.resolve(
     __dirname, '../test/unit/specs',
-    srcFile.replace(/\.js$/, '.spec.js'),
+    srcFile.replace(/\.js$/, '.spec.js')
   );
   if (fs.existsSync(testFilePath)) {
     return;
