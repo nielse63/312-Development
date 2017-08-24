@@ -57,6 +57,7 @@
   @import "assets/styles/common/globals";
   @import "assets/styles/shared/grid";
   @import "assets/styles/shared/links";
+  @import "assets/styles/shared/visually-hidden";
   @import "assets/styles/shared/font-awesome";
 
   @font-face {
