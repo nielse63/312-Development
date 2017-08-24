@@ -1,4 +1,4 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2488.8 2481.9">
+module.exports = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2488.8 2481.9">
   <linearGradient id="a" x1="1128.278" x2="1128.013" y1="-3.754" y2="-4.222" gradientTransform="matrix(1981.5812 0 0 1980.0968 -2233588.25 10140.197)" gradientUnits="userSpaceOnUse">
     <stop offset="0" stop-color="#fb7655"/>
     <stop offset="0" stop-color="#fb7655"/>
@@ -132,3 +132,4 @@
   </linearGradient>
   <path fill="url(#p)" d="M1707.1 221.2l762.6 107C2429 155.8 2304.1 44.5 2091 9.7l-383.9 211.5z"/>
 </svg>
+`;
