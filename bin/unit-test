@@ -6,12 +6,15 @@ yarn run lint:js -- --fix --cache
 yarn run lint:internal -- --fix --cache
 set +e
 
+# Remove old coverage reports
+rm -rf test/unit/coverage/*
+
 # run tests
 export BABEL_ENV=test
 export NODE_ENV=test
 node_modules/.bin/cross-env BABEL_ENV=test karma start test/unit/karma.conf.js
 
 # submit coverage if in travis
-if [ $TRAVIS ]; then
-  yarn run coverage
-fi
+# if [ $TRAVIS ]; then
+#   yarn run coverage
+# fi

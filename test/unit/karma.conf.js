@@ -1,10 +1,31 @@
 const webpackConfig = require('../../build/webpack.test.conf');
 
+const reporters = ['spec', 'coverage'];
+const coverageReporter = {
+  dir: './coverage',
+  reporters: [
+    { type: 'text-summary' },
+  ],
+};
+
+if (process.env.TRAVIS) {
+  coverageReporter.reporters.push({
+    type: 'lcov',
+    subdir: '.',
+    dir: './coverage',
+  });
+  reporters.push('coveralls');
+} else {
+  coverageReporter.reporters.push({
+    type: 'html',
+  });
+}
+
 module.exports = (config) => {
   config.set({
     browsers: ['ChromeHeadless'],
     frameworks: ['mocha', 'chai'],
-    reporters: ['spec', 'coverage'],
+    reporters,
     files: ['./index.js'],
     preprocessors: {
       './index.js': ['webpack', 'sourcemap'],
@@ -13,14 +34,17 @@ module.exports = (config) => {
     webpackMiddleware: {
       noInfo: true,
     },
-    coverageReporter: {
-      dir: './coverage',
-      reporters: [
-        { type: 'lcov', subdir: '.' },
-        { type: 'text-summary' },
-        { type: 'html' },
-      ],
-    },
+    coverageReporter,
     singleRun: true,
+    plugins: [
+      'karma-chai',
+      'karma-chrome-launcher',
+      'karma-coverage',
+      'karma-coveralls',
+      'karma-mocha',
+      'karma-sourcemap-loader',
+      'karma-spec-reporter',
+      'karma-webpack',
+    ],
   });
 };
