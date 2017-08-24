@@ -1,16 +1,16 @@
 
-const debug = require('debug');
-const path = require('path');
-const express = require('express');
-const serveStatic = require('serve-static');
-const compression = require('compression');
-const sslRedirect = require('heroku-ssl-redirect');
-const expressStaticGzip = require('express-static-gzip');
-const helmet = require('helmet');
-const bodyParser = require('body-parser');
-const sendEmail = require('./send-email');
-const getTweets = require('./get-tweets');
-const { isProduction, setupEnv } = require('./helpers');
+import debug from 'debug';
+import path from 'path';
+import express from 'express';
+import serveStatic from 'serve-static';
+import compression from 'compression';
+import sslRedirect from 'heroku-ssl-redirect';
+import expressStaticGzip from 'express-static-gzip';
+import helmet from 'helmet';
+import bodyParser from 'body-parser';
+import sendEmail from './send-email';
+import getTweets from './get-tweets';
+import { isProduction, setupEnv } from './helpers';
 
 const log = debug('frontend:log');
 const logError = debug('frontend:error');

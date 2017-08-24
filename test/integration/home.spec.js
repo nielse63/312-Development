@@ -1,6 +1,6 @@
 
 import test from 'ava';
-// import path from 'path';
+import path from 'path';
 import { newBrowser, newPage } from './utils';
 
 let browser;
@@ -56,22 +56,21 @@ test.skip('Correct Panel Titles', async (t) => {
     const output = [];
     panels.forEach((panel) => {
       const element = panel.querySelector('.panel__title');
-      if(!element) {
+      if (!element) {
         output.push('');
       } else {
         output.push(element.innerText);
       }
-    })
+    });
     return output;
   });
   let hasAllTitles = true;
   titles.forEach((title) => {
-    if(!title) {
+    if (hasAllTitles && !title) {
       hasAllTitles = false;
-      return false;
     }
-  })
-  if(!hasAllTitles) {
+  });
+  if (!hasAllTitles) {
     await page.screenshot({
       path: path.join(__dirname, 'home-titles.png'),
       fullPage: true,
@@ -81,7 +80,7 @@ test.skip('Correct Panel Titles', async (t) => {
   t.is(titles[0], 'About Me');
   t.is(titles[1], 'Latest Work');
   t.is(titles[2], 'What I\'m Reading');
-})
+});
 
 test('6 Reading Panels', async (t) => {
   const count = await page.evaluate(() => {

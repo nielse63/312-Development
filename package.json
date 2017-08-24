@@ -8,7 +8,7 @@
     "dev": "cross-env NODE_ENV=development node build/dev-server.js",
     "build": "./bin/build",
     "unit": "./bin/unit-test",
-    "daemon:start": "pm2 start server/front-end.js",
+    "daemon:start": "pm2 start server/index.js",
     "daemon:kill": "pm2 kill",
     "preintegration": "yarn run build && yarn run daemon:start",
     "integration": "node test/integration/runner.js",
@@ -17,7 +17,7 @@
     "lint:js": "eslint --ext .js,.vue src server ./*.js",
     "lint:internal": "eslint tasks test *.js --ignore-pattern '!.*.js'",
     "lint:scss": "stylelint src/**/*.vue src/assets/**/*.scss --config .stylelintrc.js --syntax scss",
-    "start": "node --harmony --gc_global --optimize_for_size --max_old_space_size=460 --gc_interval=100 server/front-end",
+    "start": "cross-env NODE_ENV=production node --harmony --gc_global --optimize_for_size --max_old_space_size=460 --gc_interval=100 server",
     "heroku-postbuild": "yarn run build"
   },
   "dependencies": {

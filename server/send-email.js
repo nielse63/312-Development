@@ -1,7 +1,7 @@
 
-const nodemailer = require('nodemailer');
-const mg = require('nodemailer-mailgun-transport');
-const { loadENV } = require('./helpers');
+import nodemailer from 'nodemailer';
+import mg from 'nodemailer-mailgun-transport';
+import { loadENV } from './helpers';
 
 loadENV();
 
@@ -12,7 +12,7 @@ const msg = {
   message: 'This is a test',
 };
 
-module.exports = function sendEmail(message = msg) {
+export default function sendEmail(message = msg) {
   const auth = {
     auth: {
       api_key: process.env.MAILGUN_API_KEY,
@@ -39,4 +39,4 @@ module.exports = function sendEmail(message = msg) {
       console.log('Email sent successfully');
     }
   });
-};
+}
