@@ -18,3 +18,8 @@ export const newPage = async function newPage(browser, viewport = DEFAULTS.viewp
   await page.setViewport(viewport);
   return page;
 };
+
+export function urlForPage(pagename = '') {
+  const port = process.env.PORT || 9999;
+  return `http://localhost:${port}/#/${pagename}`;
+}

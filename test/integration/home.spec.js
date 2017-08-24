@@ -1,7 +1,7 @@
 
 import test from 'ava';
 import path from 'path';
-import { newBrowser, newPage } from './utils';
+import { newBrowser, newPage, urlForPage } from './utils';
 
 let browser;
 let page;
@@ -15,7 +15,9 @@ test.before(async (t) => {
   page.on('error', (error) => {
     t.fail(error);
   });
-  await page.goto('http://localhost:9999/');
+  await page.goto(
+    urlForPage()
+  );
   await page.waitForSelector('#app');
 });
 
