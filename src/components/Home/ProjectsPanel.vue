@@ -32,7 +32,6 @@
 <script>
   import { mapGetters } from 'vuex';
   import { getGithubData, getNPMInfo } from '@/lib/data';
-  import { inTesting } from '@/lib/utils';
   import Octocat from '@/assets/images/octocat.png';
   import Image from '@/assets/images/logo.png';
 
@@ -52,10 +51,10 @@
     },
     watch: {
       repos(newValue, oldValue) {
-        if (oldValue.length || inTesting()) {
+        /* istanbul ignore if */
+        if (oldValue.length) {
           return;
         }
-        /* istanbul ignore next */
         newValue.forEach((repo, i) => {
           const p = new Promise(async (resolve) => {
             const { title } = repo;
@@ -75,7 +74,7 @@
     },
     methods: {
       onclick(e) {
-        const index = parseInt(e.target.closest('li').getAttribute('data-index'), 10);
+        const index = typeof e === 'number' ? e : parseInt(e.target.closest('li').getAttribute('data-index'), 10);
         if (index !== this.activeIndex) {
           this.activeIndex = index;
         }
@@ -100,6 +99,7 @@
           if (a.stars < b.stars) {
             return 1;
           }
+          /* istanbul ignore next */
           return 0;
         }).map((repo, i) => {
           repo.cls.active = !i;
@@ -108,12 +108,15 @@
       },
     },
     beforeMount() {
-      getGithubData().then((data) => {
-        this.repos = this.formatRepos(data.slice(0, 3));
-      }, (error) => {
-        console.error(`ProjectsPanel:
-${error}`);
-      });
+      (async () => {
+        try {
+          const data = await getGithubData();
+          this.repos = this.formatRepos(data.slice(0, 3));
+        } catch (e) {
+          /* istanbul ignore next */
+          console.error(`ProjectsPanel: ${e}`);
+        }
+      })();
     },
   };
 </script>

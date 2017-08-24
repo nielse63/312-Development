@@ -62,12 +62,16 @@
           }
         });
 
-        if (!isValid) {
+        this.valid = isValid;
+
+        if (!isValid && !window.IN_TESTING) {
+          /* istanbul ignore next */
           e.preventDefault();
         }
       },
     },
     beforeMount() {
+      /* istanbul ignore if */
       if (hasFormSubmission()) {
         window.location.href = '/#/thank-you';
       }

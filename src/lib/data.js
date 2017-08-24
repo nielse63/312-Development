@@ -15,7 +15,7 @@ export async function fetchFromURL(url) {
     const response = await axios(url);
     return response.data;
   } catch (err) {
-    console.warn(err);
+    console.error(err);
   }
   return [];
 }
@@ -42,7 +42,7 @@ export function getGithubData() {
   });
 }
 
-function createNPMUrl(name) {
+export function createNPMUrl(name) {
   function stringFromDate(dateObject) {
     let month = dateObject.getMonth() + 1;
     let date = dateObject.getDate();
@@ -110,7 +110,7 @@ export function getTweets() {
     if (tweets && tweets.length) {
       resolve(tweets);
     } else {
-      const url = '/get-tweets';
+      const url = `${window.location.origin}/get-tweets`;
       const data = await fetchFromURL(url);
       let output = data;
       try {

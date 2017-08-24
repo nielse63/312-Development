@@ -1,14 +1,6 @@
 <template>
   <div class="item">
-    <template v-if="!isSVG">
-      <img v-if="image"
-        :data-lazy-load="src"
-        :alt="name"
-      >
-    </template>
-    <template v-else>
-      <div class="item__svg" v-html="src"></div>
-    </template>
+    <div class="item__svg" v-html="image"></div>
   </div>
 </template>
 
@@ -21,21 +13,8 @@
         required: true,
       },
       image: {
-        type: [Object, String],
-      },
-    },
-    computed: {
-      isSVG() {
-        if ({}.toString.call(this.image) === '[object Object]' && this.image.template) {
-          return true;
-        }
-        return false;
-      },
-      src() {
-        if (this.isSVG) {
-          return this.image.template;
-        }
-        return this.image;
+        type: String,
+        default: '',
       },
     },
   };

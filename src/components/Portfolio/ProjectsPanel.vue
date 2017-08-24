@@ -33,7 +33,6 @@
           } else {
             const resource = document.createElement('script');
             resource.src = 'https://cdnjs.cloudflare.com/ajax/libs/highcharts/5.0.14/highcharts.js';
-            // resource.setAttribute('async', 'true');
             resource.onload = () => {
               resolve();
             };
@@ -43,7 +42,7 @@
         });
       },
     },
-    created() {
+    beforeMount() {
       this.loadChart().then(() => {
         this.projects = [
           'expand-hex-code',
@@ -56,7 +55,6 @@
           'tinyqueue.js',
         ];
       });
-
       (async () => {
         await getGithubData();
       })();

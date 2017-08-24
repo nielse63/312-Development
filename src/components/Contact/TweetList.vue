@@ -15,7 +15,6 @@
 <script>
   import Tweet from '@/components/Contact/Tweet';
   import { getTweets } from '@/lib/data';
-  import { inTesting } from '@/lib/utils';
 
   export default {
     name: 'tweet-list',
@@ -29,7 +28,7 @@
     },
     methods: {
       formatTweets(array) {
-        this.tweets = array.slice(0, 3).map((object) => {
+        return array.slice(0, 3).map((object) => {
           const idString = object.id_str;
           const screenName = object.user.screen_name;
           return {
@@ -41,13 +40,15 @@
       },
     },
     beforeMount() {
-      if (inTesting()) {
-        this.formatTweets([]);
-      } else {
-        getTweets().then(this.formatTweets, (error) => {
-          console.warn(error);
-        });
-      }
+      (async () => {
+        try {
+          const array = await getTweets();
+          this.tweets = this.formatTweets(array);
+        } catch (e) {
+          /* istanbul ignore next */
+          console.error(`TweetList: ${e}`);
+        }
+      })();
     },
   };
 </script>

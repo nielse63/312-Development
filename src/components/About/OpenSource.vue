@@ -38,12 +38,15 @@
       },
     },
     beforeMount() {
-      getGithubData().then((data) => {
-        this.repos = this.formatRepos(data.slice(0, 6));
-      }, (error) => {
-        console.error(`OpenSource:
-${error}`);
-      });
+      (async () => {
+        try {
+          const data = await getGithubData();
+          this.repos = this.formatRepos(data.slice(0, 6));
+        } catch (e) {
+          /* istanbul ignore next */
+          console.error(`ProjectsPanel: ${e}`);
+        }
+      })();
     },
   };
 </script>

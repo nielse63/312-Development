@@ -49,6 +49,7 @@
     computed: {
       repo() {
         const repository = this.$store.getters.getRepo(this.title);
+        /* istanbul ignore if */
         if (repository) {
           return repository;
         }
@@ -157,29 +158,24 @@
         });
       },
     },
-    beforeMount() {
-      const p = new Promise(async (resolve) => {
+    mounted() {
+      (async () => {
         const module = await getNPMInfo(this.title);
         let firstDownload = false;
-        const output = module.downloads.filter((object) => {
+        const data = module.downloads.filter((object) => {
           if (!firstDownload && object.downloads) {
             firstDownload = true;
           }
           return firstDownload;
         });
-        resolve({
-          data: output,
+        const output = {
+          data,
           totalDownloads: module.totalDownloads,
-        });
-      });
-      p.then((output) => {
+        };
         this.trend = output.data.map(object => object.downloads);
         this.downloads = output.totalDownloads;
         this.createChart();
-      }).catch((error) => {
-        console.error(`ProjectItem:
-${error}`);
-      });
+      })();
     },
   };
 </script>
