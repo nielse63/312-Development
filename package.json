@@ -8,12 +8,14 @@
     "dev": "cross-env NODE_ENV=development node build/dev-server.js",
     "build": "./bin/build",
     "unit": "./bin/unit-test",
-    "pree2e": "rm -rf test/e2e/reports/*.xml",
-    "e2e": "node test/e2e/runner.js",
-    "test": "yarn run unit && yarn run e2e",
+    "daemon:start": "pm2 start server/front-end.js",
+    "daemon:kill": "pm2 kill",
+    "preintegration": "yarn run build && yarn run daemon:start",
+    "integration": "node test/integration/runner.js",
+    "test": "yarn run unit && yarn run integration",
     "coverage": "cat test/unit/coverage/lcov.info | coveralls",
     "lint:js": "eslint --ext .js,.vue src server ./*.js",
-    "lint:internal": "eslint tasks test/unit test/e2e *.js --ignore-pattern '!.*.js'",
+    "lint:internal": "eslint tasks test *.js --ignore-pattern '!.*.js'",
     "lint:scss": "stylelint src/**/*.vue src/assets/**/*.scss --config .stylelintrc.js --syntax scss",
     "start": "node --harmony --gc_global --optimize_for_size --max_old_space_size=460 --gc_interval=100 server/front-end",
     "heroku-postbuild": "yarn run build"
@@ -89,9 +91,9 @@
     "webpack-merge": "^4.1.0"
   },
   "devDependencies": {
+    "ava": "^0.22.0",
     "axios-mock-adapter": "^1.9.0",
     "chai": "^4.1.1",
-    "chromedriver": "^2.31.0",
     "coveralls": "^2.13.1",
     "karma": "^1.7.0",
     "karma-chai": "^0.1.0",
@@ -101,16 +103,16 @@
     "karma-sourcemap-loader": "^0.3.7",
     "karma-spec-reporter": "^0.0.31",
     "karma-webpack": "^2.0.4",
+    "lighthouse": "^2.4.0",
     "lolex": "^2.1.2",
     "mocha": "^3.5.0",
-    "nightwatch": "^0.9.16",
-    "nightwatch-axe": "^0.1.5",
-    "selenium-server": "^3.5.0",
+    "pm2": "^2.6.1",
+    "puppeteer": "^0.9.0",
     "svgo": "^0.7.2",
     "webpack-bundle-analyzer": "^2.9.0"
   },
   "engines": {
-    "node": ">= 8.2.0",
+    "node": ">= 8.4.0",
     "npm": ">= 5.3.0",
     "yarn": ">= 0.27.5"
   },
@@ -118,5 +120,22 @@
     "> 1%",
     "last 2 versions",
     "not ie <= 8"
-  ]
+  ],
+  "ava": {
+    "files": [
+      "test/integration/*.spec.js"
+    ],
+    "source": [
+      "src/**/*.{js,jsx}"
+    ],
+    "concurrency": 5,
+    "failFast": true,
+    "failWithoutAssertions": false,
+    "powerAssert": false,
+    "require": [
+      "babel-register"
+    ],
+    "babel": "inherit",
+    "verbose": true
+  }
 }

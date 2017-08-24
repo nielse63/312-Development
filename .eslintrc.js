@@ -6,9 +6,9 @@ const errorOrOff = production ? 'error' : 'off';
 
 module.exports = {
   root: true,
+  parser: 'babel-eslint',
   parserOptions: {
     ecmaVersion: 2017,
-    parser: "babel-eslint",
     sourceType: 'module',
   },
   env: {

@@ -17,7 +17,7 @@ env:
   - TEST_COMMAND="yarn run lint:js"
   - TEST_COMMAND="yarn run lint:scss"
   - TEST_COMMAND="yarn run unit"
-  - TEST_COMMAND="yarn run e2e"
+  - TEST_COMMAND="yarn run integration"
 
 script:
   - (eval "$TEST_COMMAND")

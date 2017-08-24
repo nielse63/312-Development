@@ -9,7 +9,7 @@
         </div>
         <div class="col col__right">
           <aside class="projects">
-            <h2>Latest Work</h2>
+            <h2 class="panel__title">Latest Work</h2>
             <ul class="projects__list">
               <li v-for="(repo, index) in repos" :data-index="index">
                 <button class="projects__button" v-bind:class="repo.cls" @click="onclick" :aria-label="repo.title">{{repo.title}}</button>

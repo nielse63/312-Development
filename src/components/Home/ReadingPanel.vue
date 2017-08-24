@@ -1,7 +1,7 @@
 <template>
   <section class="panel">
     <div class="container">
-      <h2>What I'm Reading</h2>
+      <h2 class="panel__title">What I'm Reading</h2>
       <card-row :items="articles" />
     </div>
   </section>

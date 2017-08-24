@@ -1,4 +1,3 @@
 src/assets/vendor/*.js
-test/e2e/reports
 coverage
 test/unit/sample
