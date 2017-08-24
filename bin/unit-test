@@ -13,8 +13,3 @@ rm -rf test/unit/coverage/*
 export BABEL_ENV=test
 export NODE_ENV=test
 node_modules/.bin/cross-env BABEL_ENV=test karma start test/unit/karma.conf.js
-
-# submit coverage if in travis
-# if [ $TRAVIS ]; then
-#   yarn run coverage
-# fi

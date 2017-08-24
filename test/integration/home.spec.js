@@ -50,38 +50,38 @@ test('Has Correct Number of Panels', async (t) => {
   t.is(count, 3);
 });
 
-// test.skip('Correct Panel Titles', async (t) => {
-//   const titles = await page.evaluate(() => {
-//     const panels = document.body.querySelectorAll('.panel');
-//     const output = [];
-//     panels.forEach((panel) => {
-//       const element = panel.querySelector('.panel__title');
-//       if(!element) {
-//         output.push('');
-//       } else {
-//         output.push(element.innerText);
-//       }
-//     })
-//     return output;
-//   });
-//   let hasAllTitles = true;
-//   titles.forEach((title) => {
-//     if(!title) {
-//       hasAllTitles = false;
-//       return false;
-//     }
-//   })
-//   if(!hasAllTitles) {
-//     await page.screenshot({
-//       path: path.join(__dirname, 'home-titles.png'),
-//       fullPage: true,
-//     });
-//   }
-//   t.is(titles.length, 3);
-//   t.is(titles[0], 'About Me');
-//   t.is(titles[1], 'Latest Work');
-//   t.is(titles[2], 'What I\'m Reading');
-// })
+test.skip('Correct Panel Titles', async (t) => {
+  const titles = await page.evaluate(() => {
+    const panels = document.body.querySelectorAll('.panel');
+    const output = [];
+    panels.forEach((panel) => {
+      const element = panel.querySelector('.panel__title');
+      if(!element) {
+        output.push('');
+      } else {
+        output.push(element.innerText);
+      }
+    })
+    return output;
+  });
+  let hasAllTitles = true;
+  titles.forEach((title) => {
+    if(!title) {
+      hasAllTitles = false;
+      return false;
+    }
+  })
+  if(!hasAllTitles) {
+    await page.screenshot({
+      path: path.join(__dirname, 'home-titles.png'),
+      fullPage: true,
+    });
+  }
+  t.is(titles.length, 3);
+  t.is(titles[0], 'About Me');
+  t.is(titles[1], 'Latest Work');
+  t.is(titles[2], 'What I\'m Reading');
+})
 
 test('6 Reading Panels', async (t) => {
   const count = await page.evaluate(() => {

@@ -59,7 +59,7 @@ test('Correct Panel Titles', async (t) => {
   t.is(titles[2], 'Resume');
 });
 
-test('Pulling in Open Source Work', async (t) => {
+test.skip('Pulling in Open Source Work', async (t) => {
   await page.waitFor('.card');
   const count = await page.evaluate(() => {
     const panels = document.body.querySelectorAll('.panel');
