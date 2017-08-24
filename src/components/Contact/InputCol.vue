@@ -25,10 +25,11 @@
         default: 'text',
       },
     },
-    filters: {
-      titlize(value = '') {
-        return `Your ${value.toString().titleCase()}`;
-      },
+    data() {
+      return {
+        valid: true,
+        value: '',
+      };
     },
     computed: {
       needsValidation() {
@@ -43,11 +44,10 @@
         return this.name.toString().kebabCase();
       },
     },
-    data() {
-      return {
-        valid: true,
-        value: '',
-      };
+    filters: {
+      titlize(value = '') {
+        return `Your ${value.toString().titleCase()}`;
+      },
     },
     methods: {
       isEmailValid(value) {

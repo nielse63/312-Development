@@ -1,14 +1,35 @@
-import Vue from 'vue';
-import ProficienciesPanel from '@/components/Portfolio/ProficienciesPanel';
 
-function createVM() {
-  const Constructor = Vue.extend(ProficienciesPanel);
-  return new Constructor().$mount();
-}
+import ProficienciesPanel from '@/components/Portfolio/ProficienciesPanel';
+import { isFunction, isObject } from '../../../helpers';
 
 describe('ProficienciesPanel.vue', () => {
-  it('should render correct contents', () => {
-    const vm = createVM();
-    expect(vm.$el).to.not.be.null;
+  describe('data', () => {
+    it('should have data', () => {
+      const data = ProficienciesPanel.data().tools;
+      expect(data).to.not.be.null;
+      expect(isObject(data)).to.be.true;
+    });
+  });
+
+  describe('filters', () => {
+    it('should have titlize function', () => {
+      expect(
+        isFunction(ProficienciesPanel.filters.titlize)
+      ).to.be.true;
+    });
+
+    it('should filter text', () => {
+      const input = 'this-is-a-string';
+      const output = 'This Is A String';
+      expect(
+        ProficienciesPanel.filters.titlize(input)
+      ).to.equal(output);
+    });
+
+    it('should filter without argument', () => {
+      expect(
+        ProficienciesPanel.filters.titlize()
+      ).to.equal('');
+    });
   });
 });

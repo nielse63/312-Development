@@ -34,75 +34,75 @@
         tools: {
           frameworks: [{
             name: 'Vue.js',
-            image: require('@/assets/images/clean/vue.svg'),
+            image: require('@/assets/images/clean/vue.js'),
           }, {
             name: 'react',
-            image: require('@/assets/images/clean/react.svg'),
+            image: require('@/assets/images/clean/react.js'),
           }, {
             name: 'preact',
-            image: require('@/assets/images/clean/preact.svg'),
+            image: require('@/assets/images/clean/preact.js'),
           }, {
             name: 'angular',
-            image: require('@/assets/images/clean/angular.svg'),
+            image: require('@/assets/images/clean/angular.js'),
           }, {
             name: 'ember',
-            image: require('@/assets/images/clean/ember.svg'),
+            image: require('@/assets/images/clean/ember.js'),
           }],
 
           'build-systems': [{
             name: 'webpack',
-            image: require('@/assets/images/clean/webpack.svg'),
+            image: require('@/assets/images/clean/webpack.js'),
           }, {
             name: 'gulp',
-            image: require('@/assets/images/clean/gulp.svg'),
+            image: require('@/assets/images/clean/gulp.js'),
           }, {
             name: 'grunt',
-            image: require('@/assets/images/clean/grunt.svg'),
+            image: require('@/assets/images/clean/grunt.js'),
           }],
 
           'utility-modules': [{
             name: 'babel',
-            image: require('@/assets/images/clean/babel.svg'),
+            image: require('@/assets/images/clean/babel.js'),
           }, {
             name: 'eslint',
-            image: require('@/assets/images/clean/eslint.svg'),
+            image: require('@/assets/images/clean/eslint.js'),
           }, {
             name: 'stylelint',
-            image: require('@/assets/images/clean/stylelint.svg'),
+            image: require('@/assets/images/clean/stylelint.js'),
           }, {
             name: 'postcss',
-            image: require('@/assets/images/clean/postcss.svg'),
+            image: require('@/assets/images/clean/postcss.js'),
           }],
 
           testing: [{
             name: 'mocha',
-            image: require('@/assets/images/clean/mocha.svg'),
+            image: require('@/assets/images/clean/mocha.js'),
           }, {
             name: 'karma',
-            image: require('@/assets/images/clean/karma.svg'),
+            image: require('@/assets/images/clean/karma.js'),
           }, {
             name: 'nightwatch',
-            image: require('@/assets/images/clean/nightwatch.svg'),
+            image: require('@/assets/images/clean/nightwatch.js'),
           }, {
             name: 'jasmine',
-            image: require('@/assets/images/clean/jasmine.svg'),
+            image: require('@/assets/images/clean/jasmine.js'),
           }, {
             name: 'chai',
-            image: require('@/assets/images/clean/chai.svg'),
+            image: require('@/assets/images/clean/chai.js'),
           }, {
             name: 'sinon',
-            image: require('@/assets/images/clean/sinon.svg'),
+            image: require('@/assets/images/clean/sinon.js'),
           }, {
             name: 'ava',
-            image: require('@/assets/images/clean/ava.svg'),
+            image: require('@/assets/images/clean/ava.js'),
           }],
 
           'package-managers': [{
             name: 'yarn',
-            image: require('@/assets/images/clean/yarn.svg'),
+            image: require('@/assets/images/clean/yarn.js'),
           }, {
             name: 'npm',
-            image: require('@/assets/images/clean/npm.svg'),
+            image: require('@/assets/images/clean/npm.js'),
           }],
         },
       };

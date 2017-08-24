@@ -65,7 +65,7 @@ describe('bubbles', () => {
     it('should handle resize', () => {
       window.resizeTo(
         window.screen.availWidth / 2,
-        window.screen.availHeight / 2,
+        window.screen.availHeight / 2
       );
       const element = document.getElementById('bubbles');
       expect(element).to.not.be.null;

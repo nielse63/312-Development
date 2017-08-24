@@ -1,7 +1,7 @@
+
 import Vue from 'vue';
 import store from '@/store';
 import ProjectsPanel from '@/components/Home/ProjectsPanel';
-import MockRepo from '../../../mocks/repo';
 import { isArray } from '../../../helpers';
 
 function createVM() {
@@ -10,61 +10,46 @@ function createVM() {
     store,
   }).$mount();
 }
-
-function copyObject(object) {
-  return Object.assign({}, object);
-}
+let vm;
 
 describe('ProjectsPanel.vue', () => {
-  it('should render correctly', () => {
-    const vm = createVM();
-    expect(vm.$el.classList.contains('panel__pink')).to.be.true;
+  beforeEach((done) => {
+    window.IN_TESTING = true;
+    vm = createVM();
+
+    setTimeout(() => {
+      done();
+    }, 1000);
   });
 
-  describe('watch.repos', () => {
-    const watchRepos = ProjectsPanel.watch.repos;
-
-    it('should be a function', () => {
-      expect(typeof watchRepos).to.equal('function');
-    });
-
-    it('should return for empty array', () => {
-      const output = watchRepos([], []);
-      expect(output).to.be.undefined;
+  afterEach((done) => {
+    vm.$destroy();
+    Vue.nextTick(() => {
+      done();
     });
   });
 
-  describe('formatRepos', () => {
-    const formatRepos = ProjectsPanel.methods.formatRepos;
+  it('should set repos', () => {
+    expect(isArray(vm.repos)).to.be.true;
+    expect(vm.repos.length).to.be.above(0);
+    expect(vm.repos.length).to.be.below(4);
+  });
 
-    it('should be a function', () => {
-      expect(typeof formatRepos).to.equal('function');
-    });
+  it('should change on click', () => {
+    const buttons = vm.$el.querySelectorAll('.projects__button');
+    buttons.item(1).click();
+    expect(vm.activeIndex).to.equal(1);
+  });
 
-    it('should output array', () => {
-      const output = formatRepos([MockRepo]);
-      expect(isArray(output)).to.be.true;
-    });
+  it('should revert on click', () => {
+    const buttons = vm.$el.querySelectorAll('.projects__button');
+    buttons.item(0).click();
+    expect(vm.activeIndex).to.equal(0);
+  });
 
-    it('should format correctly', () => {
-      const output = formatRepos([MockRepo]);
-      expect(output[0].title).to.equal(MockRepo.name);
-      expect(output[0].content).to.equal(MockRepo.description);
-      expect(output[0].stars).to.equal(MockRepo.stargazers_count);
-    });
-
-    it('should sort correctly', () => {
-      const repos = [
-        copyObject(MockRepo),
-        copyObject(MockRepo),
-      ];
-      repos[0].name = 'First Repo';
-      repos[0].stargazers_count = 0;
-      repos[1].name = 'Second Repo';
-      repos[1].stargazers_count = 100;
-      const output = formatRepos(repos);
-      expect(output[0].title).to.equal(repos[1].name);
-      expect(output[1].title).to.equal(repos[0].name);
-    });
+  it('should prevent index update on same button click', () => {
+    const buttons = vm.$el.querySelectorAll('.projects__button');
+    buttons.item(0).click();
+    expect(vm.activeIndex).to.equal(0);
   });
 });

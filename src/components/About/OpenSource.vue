@@ -16,6 +16,7 @@
   import Octocat from '@/assets/images/octocat.png';
   import PanelHeader from '@/components/Panels/PanelHeader';
   import CardRow from '@/components/Card/CardRow';
+  import { getGithubData } from '@/lib/data';
 
   export default {
     name: 'open-source',
@@ -37,19 +38,15 @@
       },
     },
     beforeMount() {
-      import(
-        /* webpackChunkName: "data" */
-        /* webpackMode: "lazy" */
-        '@/lib/data',
-      ).then((module) => {
-        const { getGithubData } = module;
-        getGithubData().then((data) => {
+      (async () => {
+        try {
+          const data = await getGithubData();
           this.repos = this.formatRepos(data.slice(0, 6));
-        }, (error) => {
-          console.error(`OpenSource:
-${error}`);
-        });
-      });
+        } catch (e) {
+          /* istanbul ignore next */
+          console.error(`ProjectsPanel: ${e}`);
+        }
+      })();
     },
   };
 </script>

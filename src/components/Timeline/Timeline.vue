@@ -52,7 +52,7 @@
           date.getDate(),
           date.getHours(),
           date.getMinutes(),
-          date.getSeconds(),
+          date.getSeconds()
         );
         const rightDate = new Date(
           lastDate.getFullYear(),
@@ -60,11 +60,11 @@
           lastDate.getDate(),
           lastDate.getHours(),
           lastDate.getMinutes(),
-          lastDate.getSeconds(),
+          lastDate.getSeconds()
         );
         const days = differenceInDays(
           leftDate,
-          rightDate,
+          rightDate
         );
         return {
           days,
@@ -81,7 +81,7 @@
           const start = item.date;
           const days = differenceInDays(
             end,
-            start,
+            start
           );
           const diff = days / this.dates.days;
           return {

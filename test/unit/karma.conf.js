@@ -1,19 +1,31 @@
-// This is a karma config file. For more details see
-//   http://karma-runner.github.io/0.13/config/configuration-file.html
-// we are also using it with karma-webpack
-//   https://github.com/webpack/karma-webpack
-
 const webpackConfig = require('../../build/webpack.test.conf');
+
+const reporters = ['spec', 'coverage'];
+const coverageReporter = {
+  dir: './coverage',
+  reporters: [
+    { type: 'text-summary' },
+  ],
+};
+
+if (process.env.TRAVIS) {
+  coverageReporter.reporters.push({
+    type: 'lcov',
+    subdir: '.',
+    dir: './coverage',
+  });
+  reporters.push('coveralls');
+} else {
+  coverageReporter.reporters.push({
+    type: 'html',
+  });
+}
 
 module.exports = (config) => {
   config.set({
-    // to run in additional browsers:
-    // 1. install corresponding karma launcher
-    //    http://karma-runner.github.io/0.13/config/browsers.html
-    // 2. add it to the `browsers` array below.
     browsers: ['ChromeHeadless'],
     frameworks: ['mocha', 'chai'],
-    reporters: ['spec', 'coverage'],
+    reporters,
     files: ['./index.js'],
     preprocessors: {
       './index.js': ['webpack', 'sourcemap'],
@@ -22,14 +34,17 @@ module.exports = (config) => {
     webpackMiddleware: {
       noInfo: true,
     },
-    coverageReporter: {
-      dir: './coverage',
-      reporters: [
-        { type: 'lcov', subdir: '.' },
-        { type: 'text-summary' },
-        { type: 'html' },
-      ],
-    },
+    coverageReporter,
     singleRun: true,
+    plugins: [
+      'karma-chai',
+      'karma-chrome-launcher',
+      'karma-coverage',
+      'karma-coveralls',
+      'karma-mocha',
+      'karma-sourcemap-loader',
+      'karma-spec-reporter',
+      'karma-webpack',
+    ],
   });
 };

@@ -31,16 +31,19 @@
     },
     methods: {
       onClick(e) {
+        /* istanbul ignore next */
         if (this.isMenuOpen && !e.target.closest('.navigation') && !e.target.closest('.header__button')) {
           this.$store.dispatch('toggleMenu');
         }
       },
     },
     updated() {
+      /* istanbul ignore next */
       setTimeout(lazyLoad, 500);
     },
     mounted() {
       document.addEventListener('scrolling', () => {
+        /* istanbul ignore next */
         if (this.isMenuOpen) {
           this.$store.dispatch('toggleMenu');
         }

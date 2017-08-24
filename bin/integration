@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+
+# exit on failure
+set -e
+
+# build on travis
+if [[ "$TRAVIS" ]]; then
+  yarn run build
+else
+  node_modules/.bin/eslint test/integration --fix
+fi
+
+node test/integration/runner.js

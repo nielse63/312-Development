@@ -9,7 +9,7 @@ const me = {
 module.exports = {
   me,
   title: `${me.name} | ${me.title}`,
-  description: 'I’m Erik Nielsen, a UI, JavaScript and Full-Stack Software Engineer from Chicago, Illinois. I’ve been in the industry for over 8 years, and work with the fine folks at Enova International.',
+  description: 'I\'m Erik Nielsen, a UI/UX/JavaScript, and Full-Stack Software Engineer from Chicago, Illinois.',
   url,
   image: `${url}/static/img/og-homepage.jpg`,
   analytics: (process.env.IS_HEROKU && !process.env.STAGING_ENV) ? `<script>
