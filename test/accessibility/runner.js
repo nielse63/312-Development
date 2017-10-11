@@ -30,7 +30,7 @@ const flags = {
 // Usage:
 launchChromeAndRunLighthouse('http://localhost:9999', flags).then((results) => {
   const accessibilityResults = results.reportCategories.filter(category => category.id === 'accessibility');
-  const score = accessibilityResults[0].score;
+  const { score } = accessibilityResults[0];
   let code = 0;
   if (score < 90) {
     console.log(chalk.red(`FAILED: Accessibility score is ${score} - 90 is the minimum`));

@@ -1,5 +1,5 @@
 
-const Twitter = require('twitter-node-client').Twitter;
+const { Twitter } = require('twitter-node-client');
 const { loadENV } = require('./helpers');
 
 loadENV();

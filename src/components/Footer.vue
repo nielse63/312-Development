@@ -43,7 +43,7 @@
     computed: {
       routes() {
         return this.$router.options.routes.map((object) => {
-          const name = object.name;
+          const { name } = object;
           return Object.assign({}, {
             title: name.substr(0, 1).toUpperCase() + name.substr(1),
             hidden: object.props.hidden || false,

@@ -2,8 +2,8 @@
 
 # lint/fix all files
 set -e
-yarn run lint:js -- --fix --cache
-yarn run lint:internal -- --fix --cache
+yarn run lint:js --fix --cache
+yarn run lint:internal --fix --cache
 set +e
 
 # Remove old coverage reports

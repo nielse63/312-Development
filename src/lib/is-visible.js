@@ -1,6 +1,6 @@
 
 function offsetTop(element) {
-  const top = element.getBoundingClientRect().top;
+  const { top } = element.getBoundingClientRect();
   if (!element.hasAttribute('data-top')) {
     element.setAttribute('data-top', top);
   }
