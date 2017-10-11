@@ -17,12 +17,12 @@ router.afterEach((to) => {
 
   // update the document title
   const route = to.matched[0];
-  const title = route.props.default.title;
+  const { title } = route.props.default;
   window.document.title = `312 Development | ${title}`;
 
   // create a canonical link
   const { protocol, hostname } = window.location;
-  const path = route.path;
+  const { path } = route;
   const canonicalUrl = `${protocol}//${hostname}${path}`;
   const link = document.createElement('link');
   link.rel = 'canonical';

@@ -19,7 +19,7 @@
     computed: {
       routes() {
         return this.$router.options.routes.map((object) => {
-          const name = object.name;
+          const { name } = object;
           const cls = {
             fa: true,
           };
