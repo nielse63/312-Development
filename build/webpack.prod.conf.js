@@ -148,8 +148,10 @@ if (config.build.productionGzip) {
 }
 
 if (config.build.bundleAnalyzerReport) {
-  var BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
-  webpackConfig.plugins.push(new BundleAnalyzerPlugin())
+  // var BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
+  // webpackConfig.plugins.push(new BundleAnalyzerPlugin())
+  const DashboardPlugin = require('webpack-dashboard/plugin');
+  webpackConfig.plugins.push(new DashboardPlugin())
 }
 
 module.exports = webpackConfig
