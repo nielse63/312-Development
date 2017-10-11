@@ -111,8 +111,7 @@
     "pm2": "^2.6.1",
     "puppeteer": "^0.11.0",
     "svgo": "^0.7.2",
-    "webpack-bundle-analyzer": "^2.9.0",
-    "webpack-dashboard": "^1.0.0-5"
+    "webpack-bundle-analyzer": "^2.9.0"
   },
   "engines": {
     "node": ">= 8.4.0",
