@@ -4,12 +4,8 @@ const fs = require('fs');
 const path = require('path');
 const chalk = require('chalk');
 
-const sampleContent = fs.readFileSync(
-  path.join(__dirname, '../test/unit/sample/Sample.spec.js'), 'utf8'
-);
-const jsSampleContent = fs.readFileSync(
-  path.join(__dirname, '../test/unit/sample/jssample.spec.js'), 'utf8'
-);
+const sampleContent = fs.readFileSync(path.join(__dirname, '../test/unit/sample/Sample.spec.js'), 'utf8');
+const jsSampleContent = fs.readFileSync(path.join(__dirname, '../test/unit/sample/jssample.spec.js'), 'utf8');
 
 const samples = {
   vue: sampleContent,

@@ -8,8 +8,8 @@ export NODE_ENV=production
 
 # lint assets
 yarn run lint:scss
-yarn run lint:internal -- --fix
-yarn run lint:js -- --fix
+yarn run lint:internal --fix
+yarn run lint:js --fix
 
 # ensure we can build
 node_modules/.bin/cross-env NODE_ENV=production node --harmony --gc_interval=100 build/build.js

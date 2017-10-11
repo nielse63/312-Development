@@ -13,23 +13,17 @@ describe('ProficienciesPanel.vue', () => {
 
   describe('filters', () => {
     it('should have titlize function', () => {
-      expect(
-        isFunction(ProficienciesPanel.filters.titlize)
-      ).to.be.true;
+      expect(isFunction(ProficienciesPanel.filters.titlize)).to.be.true;
     });
 
     it('should filter text', () => {
       const input = 'this-is-a-string';
       const output = 'This Is A String';
-      expect(
-        ProficienciesPanel.filters.titlize(input)
-      ).to.equal(output);
+      expect(ProficienciesPanel.filters.titlize(input)).to.equal(output);
     });
 
     it('should filter without argument', () => {
-      expect(
-        ProficienciesPanel.filters.titlize()
-      ).to.equal('');
+      expect(ProficienciesPanel.filters.titlize()).to.equal('');
     });
   });
 });

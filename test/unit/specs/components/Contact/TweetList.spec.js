@@ -20,9 +20,7 @@ function resetTweetsArray() {
   const output = [];
   let i = 0;
   while (i < 10) {
-    output.push(
-      Object.assign({}, MockTweet)
-    );
+    output.push(Object.assign({}, MockTweet));
     i += 1;
   }
   return output;

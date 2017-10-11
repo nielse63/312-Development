@@ -15,9 +15,7 @@ test.before(async (t) => {
   page.on('error', (error) => {
     t.fail(error);
   });
-  await page.goto(
-    urlForPage()
-  );
+  await page.goto(urlForPage());
   await page.waitForSelector('#app');
 });
 

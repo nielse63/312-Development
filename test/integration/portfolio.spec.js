@@ -14,9 +14,7 @@ test.before(async (t) => {
   page.on('error', (error) => {
     t.fail(error);
   });
-  await page.goto(
-    urlForPage('portfolio')
-  );
+  await page.goto(urlForPage('portfolio'));
   await page.waitForSelector('#app');
 });
 
@@ -36,7 +34,7 @@ test('Portfolio Page Title', async (t) => {
   const element = await page.$('.page-title');
   t.not(element, null);
 
-  const title = await element.evaluate(() => document.body.querySelector('.page-title').innerText);
+  const title = await page.evaluate(() => document.body.querySelector('.page-title').innerText);
   t.is(title, 'PORTFOLIO');
 });
 
