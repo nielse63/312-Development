@@ -1,4 +1,5 @@
 const webpackConfig = require('../../build/webpack.test.conf');
+process.env.CHROME_BIN = require('puppeteer').executablePath()
 
 const reporters = ['spec', 'coverage'];
 const coverageReporter = {
