@@ -3,21 +3,19 @@ language: node_js
 node_js:
   - "node"
 sudo: false
-dist: trusty
-addons:
-  chrome: stable
 cache:
   yarn: true
   directories:
     - node_modules
+dist: trusty
+addons:
+  chrome: stable
 before_install:
   - google-chrome-stable --no-sandbox --headless --disable-gpu --remote-debugging-port=9222 --window-size=1440,900
 install:
   - yarn
 
 env:
-  - TEST_COMMAND="yarn run lint:js"
-  - TEST_COMMAND="yarn run lint:scss"
   - TEST_COMMAND="yarn run unit"
   - TEST_COMMAND="yarn run integration"
   # - TEST_COMMAND="yarn run accessibility"
