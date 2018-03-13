@@ -14,7 +14,7 @@
     "preaccessibility": "yarn run daemon:start",
     "accessibility": "node test/accessibility/runner.js",
     "lint:js": "eslint --ext .js,.vue src/ server/ ./*.js --fix",
-    "lint:internal": "eslint tasks test *.js --ignore-pattern '!.*.js'",
+    "lint:internal": "eslint tasks test *.js --ignore-pattern '!.*.js' --fix",
     "lint:scss": "stylelint src/**/*.vue src/assets/**/*.scss --config .stylelintrc.js --syntax scss",
     "start": "cross-env NODE_ENV=production node --harmony --gc_global --optimize_for_size --max_old_space_size=460 --gc_interval=100 server",
     "heroku-postbuild": "yarn run build"

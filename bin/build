@@ -13,7 +13,7 @@ yarn run lint:js
 yarn run lint:scss
 
 # build for production
-node build/build.js
+node --harmony --gc_interval=100 build/build.js
 
 # move seo-related files
 for file in {robots.txt,sitemap.xml}; do

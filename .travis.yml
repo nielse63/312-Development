@@ -10,6 +10,8 @@ cache:
   yarn: true
   directories:
     - node_modules
+before_install:
+  - google-chrome-stable --no-sandbox --headless --disable-gpu --remote-debugging-port=9222 --window-size=1440,900
 install:
   - yarn
 
