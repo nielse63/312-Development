@@ -57,6 +57,15 @@
 <style lang="scss" scoped>
   @import "../assets/styles/main";
 
+  a {
+    display: block;
+    padding: 2em;
+
+    @media (min-width: $tablet-width) {
+      padding: 1em 2em;
+    }
+  }
+
   .footer {
     $font-size: 14px;
     $letter-spacing: 4px;
@@ -68,6 +77,14 @@
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: strip-unit(($letter-spacing / $font-size)) + em;
+
+    &__links {
+      margin-top: 2rem;
+
+      a {
+        color: $color-white;
+      }
+    }
 
     &__menu {
       li {
@@ -90,14 +107,6 @@
         }
       }
     }
-
-    &__links {
-      margin-top: 2rem;
-
-      a {
-        color: $color-white;
-      }
-    }
   }
 
   ul {
@@ -114,15 +123,6 @@
       display: flex;
       align-items: center;
       justify-content: center;
-    }
-  }
-
-  a {
-    display: block;
-    padding: 2em;
-
-    @media (min-width: $tablet-width) {
-      padding: 1em 2em;
     }
   }
 

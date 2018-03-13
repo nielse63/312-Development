@@ -1,3 +1,4 @@
 src/assets/vendor/*.js
 coverage
 test/unit/sample
+build/

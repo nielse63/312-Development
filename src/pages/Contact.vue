@@ -36,6 +36,13 @@
   import PanelHeader from '@/components/Panels/PanelHeader';
   import { hasFormSubmission } from '@/lib/utils';
 
+  const invalidateChildElement = (child) => {
+    if (child.valid && !child.value) {
+      child.valid = false;
+    }
+    return child;
+  };
+
   export default {
     name: 'contact',
     components: {
@@ -51,27 +58,17 @@
     },
     methods: {
       onsubmit(e) {
-        let isValid = true;
-        this.$children.forEach((child) => {
-          if (child.valid && !child.value) {
-            child.valid = false;
-          }
+        const invalidChildren = this.$children
+          .filter(({ type }) => type)
+          .map(invalidateChildElement)
+          .filter(({ valid }) => !valid);
 
-          if (isValid && child.type && !child.valid) {
-            isValid = false;
-          }
-        });
-
-        this.valid = isValid;
-
-        if (!isValid && !window.IN_TESTING) {
-          /* istanbul ignore next */
+        if (invalidChildren.length) {
           e.preventDefault();
         }
       },
     },
     beforeMount() {
-      /* istanbul ignore if */
       if (hasFormSubmission()) {
         window.location.href = '/#/thank-you';
       }
