@@ -24,11 +24,11 @@ jobs:
     - stage: tests
       script: yarn run unit
     - script: yarn run integration
-    - stage: deploy to staging
-      script: skip
-      deploy: &heroku
-        provider: heroku
-        app: three-one-two-staging
-        api_key: $HEROKU_AUTH_TOKEN
+    - stage: build script
+      script: yarn run build
     - stage: test staging
       script: 'curl https://three-one-two-staging.herokuapp.com/#/'
+      if: branch = develop
+    - stage: test production
+      script: 'curl https://312development.com/#/'
+      if: branch = master

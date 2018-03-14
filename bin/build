@@ -1,15 +1,12 @@
 #!/usr/bin/env bash
 set -e
 
-# set env vars
-export NODE_ENV=production
-
-# Remove old dist files
-rm -rf dist
-
-# lint js and style
-yarn run lint:js
-yarn run lint:scss
+# run locally
+if [ ! "$IS_HEROKU" ] && [ ! "$TRAVIS" ]; then
+  rm -rf dist
+  yarn run lint:js
+  yarn run lint:scss
+fi
 
 # build for production
 node --harmony --gc_interval=100 build/build.js
