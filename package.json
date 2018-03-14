@@ -135,17 +135,12 @@
     "babel": "inherit",
     "verbose": true
   },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged"
-    }
-  },
   "lint-staged": {
-    "src/**/*.{js,vue}": [
+    "*.{js,vue}": [
       "eslint --fix",
       "git add"
     ],
-    "src/**/*.{scss,vue}": [
+    "*.{scss,vue}": [
       "stylelint",
       "git add"
     ]
