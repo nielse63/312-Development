@@ -10,12 +10,12 @@ fi
 . bin/print-env
 
 # only run locally
-if [[ ! "$TRAVIS" ]]; then
+if [ ! "$TRAVIS" ]; then
   yarn run lint:js
   yarn run lint:internal
 
   # Remove old coverage reports
-  rm -rf test/unit/coverage/*
+  rm -rf coverage/
 fi
 
 # run tests

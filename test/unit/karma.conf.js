@@ -1,25 +1,23 @@
+const path = require('path');
 const webpackConfig = require('../../build/webpack.test.conf');
 const chromeFlags = require('../chrome-flags');
 process.env.CHROME_BIN = require('puppeteer').executablePath();
 
 const reporters = ['spec', 'coverage'];
 const coverageReporter = {
-  dir: './coverage',
+  dir: path.resolve(__dirname, '../../coverage'),
   reporters: [
     { type: 'text-summary' },
+    { type: 'lcov', subdir: '.' },
   ],
 };
 
 if (process.env.TRAVIS) {
-  coverageReporter.reporters.push({
-    type: 'lcov',
-    subdir: '.',
-    dir: './coverage',
-  });
   reporters.push('coveralls');
 } else {
   coverageReporter.reporters.push({
     type: 'html',
+    subdir: '.',
   });
 }
 
@@ -37,6 +35,7 @@ module.exports = (config) => {
     files: ['./index.js'],
     preprocessors: {
       './index.js': ['webpack', 'sourcemap'],
+      'src/**/*.{js,vue}': ['coverage'],
     },
     webpack: webpackConfig,
     webpackMiddleware: {

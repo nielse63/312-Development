@@ -10,7 +10,7 @@ fi
 . bin/print-env
 
 # build on travis
-if [[ "$TRAVIS" ]]; then
+if [ "$TRAVIS" ]; then
   yarn run build
 else
   node_modules/.bin/eslint test/integration --fix
