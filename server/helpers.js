@@ -1,17 +1,17 @@
 
-import helmet from 'helmet';
+const helmet = require('helmet');
 
-export function isProduction() {
+module.exports.isProduction = function isProduction() {
   return process.env.IS_HEROKU;
-}
+};
 
-export function loadENV() {
+module.exports.loadENV = function loadENV() {
   if (!process.env.IS_HEROKU && !process.env.TRAVIS) {
     require('dotenv').config();
   }
-}
+};
 
-export function setupEnv(app) {
+module.exports.setupEnv = function setupEnv(app) {
   app.set('env', (process.env.NODE_ENV || 'development'));
   app.set('etag', 'strong');
   app.disable('x-powered-by');
@@ -23,4 +23,4 @@ export function setupEnv(app) {
       policy: 'origin',
     },
   }));
-}
+};

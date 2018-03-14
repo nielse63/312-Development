@@ -39,10 +39,6 @@ var webpackConfig = merge(baseWebpackConfig, {
       debug: false
     }),
     new webpack.optimize.UglifyJsPlugin({
-      // compress: {
-      //   warnings: false
-      // },
-      // sourceMap: true
       compress: {
         warnings: false,
         screw_ie8: true,
@@ -51,7 +47,6 @@ var webpackConfig = merge(baseWebpackConfig, {
       beautify: false,
       mangle: {
         screw_ie8: true,
-        // keep_fnames: true
       },
       comments: false,
     }),

@@ -1,15 +1,22 @@
 #!/usr/bin/env bash
-
-# lint/fix all files
 set -e
-yarn run lint:js --fix --cache
-yarn run lint:internal --fix --cache
-set +e
 
-# Remove old coverage reports
-rm -rf test/unit/coverage/*
+# set default env vars
+if [ ! "$NODE_ENV" ]; then
+  export NODE_ENV=test
+fi
+
+# print environment information
+. bin/print-env
+
+# only run locally
+if [ ! "$TRAVIS" ]; then
+  yarn run lint:js
+  yarn run lint:internal
+
+  # Remove old coverage reports
+  rm -rf coverage/
+fi
 
 # run tests
-export BABEL_ENV=test
-export NODE_ENV=test
-node_modules/.bin/cross-env BABEL_ENV=test karma start test/unit/karma.conf.js
+node_modules/.bin/karma start test/unit/karma.conf.js

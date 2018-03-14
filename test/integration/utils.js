@@ -1,5 +1,5 @@
-
 const puppeteer = require('puppeteer');
+const chromeFlags = require('../chrome-flags');
 
 const DEFAULTS = {
   viewport: {
@@ -9,7 +9,7 @@ const DEFAULTS = {
 };
 
 export const newBrowser = async function newBrowser() {
-  const browser = await puppeteer.launch();
+  const browser = await puppeteer.launch({ args: chromeFlags });
   return browser;
 };
 

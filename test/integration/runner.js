@@ -1,6 +1,4 @@
 
-require('babel-register');
-
 process.env.PORT = 9999;
 process.env.NODE_ENV = 'testing';
 process.env.BABEL_ENV = 'test';

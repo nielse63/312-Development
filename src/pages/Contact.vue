@@ -30,11 +30,18 @@
 </template>
 
 <script>
+  import { get } from 'js-cookie';
   import Banner from '@/components/Banner';
   import InputCol from '@/components/Contact/InputCol';
   import TweetList from '@/components/Contact/TweetList';
   import PanelHeader from '@/components/Panels/PanelHeader';
-  import { hasFormSubmission } from '@/lib/utils';
+
+  const invalidateChildElement = (child) => {
+    if (child.valid && !child.value) {
+      child.valid = false;
+    }
+    return child;
+  };
 
   export default {
     name: 'contact',
@@ -51,28 +58,19 @@
     },
     methods: {
       onsubmit(e) {
-        let isValid = true;
-        this.$children.forEach((child) => {
-          if (child.valid && !child.value) {
-            child.valid = false;
-          }
-
-          if (isValid && child.type && !child.valid) {
-            isValid = false;
-          }
-        });
-
-        this.valid = isValid;
-
-        if (!isValid && !window.IN_TESTING) {
-          /* istanbul ignore next */
+        const invalidChildren = this.$children
+          .filter(({ type }) => type)
+          .map(invalidateChildElement)
+          .filter(({ valid }) => !valid);
+        this.valid = !invalidChildren.length;
+        if (this.valid && !window.IN_TESTING) {
           e.preventDefault();
         }
       },
     },
     beforeMount() {
-      /* istanbul ignore if */
-      if (hasFormSubmission()) {
+      if (!window.IN_TESTING && get('form_submission')) {
+        /* istanbul ignore next */
         window.location.href = '/#/thank-you';
       }
     },
