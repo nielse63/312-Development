@@ -31,19 +31,23 @@
     },
     methods: {
       canClick(target) {
+        /* istanbul ignore next */
         return this.isMenuOpen && !target.closest('.navigation') && !target.closest('.header__button');
       },
       onClick({ target }) {
+        /* istanbul ignore if */
         if (this.canClick(target)) {
           this.$store.dispatch('toggleMenu');
         }
       },
     },
     updated() {
+      /* istanbul ignore next */
       setTimeout(lazyLoad, 500);
     },
     mounted() {
       document.addEventListener('scrolling', () => {
+        /* istanbul ignore if */
         if (this.isMenuOpen) {
           this.$store.dispatch('toggleMenu');
         }
