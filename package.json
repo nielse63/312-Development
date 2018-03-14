@@ -133,7 +133,8 @@
     "failWithoutAssertions": false,
     "powerAssert": false,
     "babel": "inherit",
-    "verbose": true
+    "verbose": true,
+    "require": ["babel-register"]
   },
   "lint-staged": {
     "*.{js,vue}": [
