@@ -64,6 +64,7 @@
           .filter(({ valid }) => !valid);
         this.valid = !invalidChildren.length;
         if (this.valid && !window.IN_TESTING) {
+          /* istanbul ignore next */
           e.preventDefault();
         }
       },

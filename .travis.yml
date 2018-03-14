@@ -24,9 +24,3 @@ jobs:
     - stage: tests
       script: yarn run unit
     - script: yarn run integration
-    - stage: test staging
-      script: 'curl https://three-one-two-staging.herokuapp.com/#/'
-      if: branch = develop
-    - stage: test production
-      script: 'curl https://312development.com/#/'
-      if: branch = master

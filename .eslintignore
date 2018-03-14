@@ -1,4 +1,3 @@
-src/assets/vendor/*.js
-coverage
-test/unit/sample
+dist/
+coverage/
 build/
