@@ -4,7 +4,7 @@ const { loadENV } = require('./helpers');
 
 loadENV();
 
-export default function getTweets() {
+module.exports = function getTweets() {
   return new Promise(((resolve, reject) => {
     const twitter = new Twitter({
       consumerKey: process.env.TWITTER_CONSUMER_KEY,
@@ -21,4 +21,4 @@ export default function getTweets() {
   })).catch((error) => {
     console.error(error);
   });
-}
+};

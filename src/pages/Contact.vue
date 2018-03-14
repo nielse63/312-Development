@@ -62,8 +62,8 @@
           .filter(({ type }) => type)
           .map(invalidateChildElement)
           .filter(({ valid }) => !valid);
-
-        if (invalidChildren.length) {
+        this.valid = !invalidChildren.length;
+        if (this.valid && !window.IN_TESTING) {
           e.preventDefault();
         }
       },

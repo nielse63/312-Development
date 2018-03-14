@@ -1,5 +1,6 @@
 const webpackConfig = require('../../build/webpack.test.conf');
-process.env.CHROME_BIN = require('puppeteer').executablePath()
+const chromeFlags = require('../chrome-flags');
+process.env.CHROME_BIN = require('puppeteer').executablePath();
 
 const reporters = ['spec', 'coverage'];
 const coverageReporter = {
@@ -24,7 +25,13 @@ if (process.env.TRAVIS) {
 
 module.exports = (config) => {
   config.set({
-    browsers: ['ChromeHeadless'],
+    browsers: ['ChromeHeadlessNoSandbox'],
+    customLaunchers: {
+      ChromeHeadlessNoSandbox: {
+        base: 'ChromeHeadless',
+        flags: chromeFlags,
+      },
+    },
     frameworks: ['mocha', 'chai'],
     reporters,
     files: ['./index.js'],

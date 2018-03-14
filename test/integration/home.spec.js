@@ -1,7 +1,7 @@
 
-import test from 'ava';
-import path from 'path';
-import { newBrowser, newPage, urlForPage } from './utils';
+const test = require('ava');
+const path = require('path');
+const { newBrowser, newPage, urlForPage } = require('./utils');
 
 let browser;
 let page;

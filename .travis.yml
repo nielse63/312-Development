@@ -6,17 +6,27 @@ sudo: false
 cache:
   yarn: true
   directories:
+    - $HOME/.npm
     - node_modules
 dist: trusty
 addons:
   chrome: stable
-install:
-  - yarn
+before_install:
+  - npm config set spin false
 
 env:
-  - TEST_COMMAND="yarn run unit"
-  - TEST_COMMAND="yarn run integration"
-  # - TEST_COMMAND="yarn run accessibility"
+  global:
+    - JOBS=1
+    - NODE_ENV=test
+#   matrix:
+#     - TEST_COMMAND="yarn run unit"
+#     - TEST_COMMAND="yarn run integration"
 
-script:
-  - (eval "$TEST_COMMAND")
+# script:
+#   - (eval "$TEST_COMMAND")
+jobs:
+  include:
+    - stage: unit tests
+      script: yarn run unit
+    - stage: integration tests
+      script: yarn run integration

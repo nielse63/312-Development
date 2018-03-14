@@ -1,16 +1,16 @@
 
-import debug from 'debug';
-import path from 'path';
-import express from 'express';
-import serveStatic from 'serve-static';
-import compression from 'compression';
-import sslRedirect from 'heroku-ssl-redirect';
-import expressStaticGzip from 'express-static-gzip';
-import helmet from 'helmet';
-import bodyParser from 'body-parser';
-import sendEmail from './send-email';
-import getTweets from './get-tweets';
-import { isProduction, setupEnv } from './helpers';
+const debug = require('debug');
+const path = require('path');
+const express = require('express');
+const serveStatic = require('serve-static');
+const compression = require('compression');
+const sslRedirect = require('heroku-ssl-redirect');
+const expressStaticGzip = require('express-static-gzip');
+const helmet = require('helmet');
+const bodyParser = require('body-parser');
+const sendEmail = require('./send-email');
+const getTweets = require('./get-tweets');
+const { isProduction, setupEnv } = require('./helpers');
 
 const log = debug('frontend:log');
 const logError = debug('frontend:error');
@@ -46,7 +46,6 @@ app.use(serveStatic(staticDir, {
 }));
 app.use('/', expressStaticGzip(staticDir));
 
-const oneDate = 24 * 60 * 60 * 1000;
 app.use('/submission', bodyParser.json());
 app.use('/submission', bodyParser.urlencoded({
   extended: true,
@@ -54,8 +53,11 @@ app.use('/submission', bodyParser.urlencoded({
 
 app.post('/submission', (req, res) => {
   const returnURL = `${req.get('referer')}#/thank-you`;
+  const oneDate = 24 * 60 * 60 * 1000;
   sendEmail(req.body);
-  res.cookie('form_submission', req.body, { expires: new Date(Date.now() + oneDate) });
+  res.cookie('form_submission', req.body, {
+    expires: new Date(Date.now() + oneDate),
+  });
   res.redirect(returnURL);
 });
 
