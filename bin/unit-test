@@ -1,14 +1,14 @@
 #!/usr/bin/env bash
 set -e
 
-# lint/fix all files
-yarn run lint:js
-yarn run lint:internal
+# only run locally
+if [[ ! "$TRAVIS" ]]; then
+  yarn run lint:js
+  yarn run lint:internal
 
-# Remove old coverage reports
-rm -rf test/unit/coverage/*
+  # Remove old coverage reports
+  rm -rf test/unit/coverage/*
+fi
 
 # run tests
-export BABEL_ENV=test
-export NODE_ENV=test
 node_modules/.bin/karma start test/unit/karma.conf.js

@@ -1,6 +1,4 @@
 #!/usr/bin/env bash
-
-# exit on failure
 set -e
 
 # build on travis
