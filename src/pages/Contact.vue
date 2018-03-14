@@ -70,6 +70,7 @@
     },
     beforeMount() {
       if (!window.IN_TESTING && get('form_submission')) {
+        /* istanbul ignore next */
         window.location.href = '/#/thank-you';
       }
     },

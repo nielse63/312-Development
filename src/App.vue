@@ -35,7 +35,7 @@
         return this.isMenuOpen && !target.closest('.navigation') && !target.closest('.header__button');
       },
       onClick({ target }) {
-        /* istanbul ignore if */
+        /* istanbul ignore next */
         if (this.canClick(target)) {
           this.$store.dispatch('toggleMenu');
         }

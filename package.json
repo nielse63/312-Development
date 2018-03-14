@@ -141,8 +141,8 @@
       "eslint --fix",
       "git add"
     ],
-    "*.{scss,vue}": [
-      "stylelint",
+    "*.scss": [
+      "stylelint --fix",
       "git add"
     ]
   }
