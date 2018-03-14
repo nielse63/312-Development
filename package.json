@@ -53,7 +53,6 @@
     "extract-text-webpack-plugin": "^3.0.2",
     "file-loader": "^1.1.11",
     "friendly-errors-webpack-plugin": "^1.6.1",
-    "globby": "^8.0.1",
     "helmet": "^3.12.0",
     "heroku-ssl-redirect": "^0.0.4",
     "html-webpack-plugin": "^3.0.6",
@@ -108,7 +107,6 @@
     "pm2": "^2.10.1",
     "puppeteer": "^1.1.1",
     "snyk": "^1.70.0",
-    "svgo": "^1.0.5",
     "webpack-bundle-analyzer": "^2.11.1"
   },
   "engines": {
@@ -134,7 +132,9 @@
     "powerAssert": false,
     "babel": "inherit",
     "verbose": true,
-    "require": ["babel-register"]
+    "require": [
+      "babel-register"
+    ]
   },
   "lint-staged": {
     "*.{js,vue}": [
