@@ -5,6 +5,7 @@
   "author": "Erik Nielsen <erik@312development.com>",
   "private": true,
   "scripts": {
+    "precommit": "lint-staged",
     "dev": "NODE_ENV=development node build/dev-server.js",
     "build": "./bin/build",
     "unit": "./bin/unit-test",
@@ -91,7 +92,7 @@
     "chai": "^4.1.1",
     "cross-spawn": "^6.0.5",
     "dotenv": "^5.0.1",
-    "husky": "^0.15.0-rc.9",
+    "husky": "^0.14.3",
     "karma": "^2.0.0",
     "karma-chai": "^0.1.0",
     "karma-chrome-launcher": "^2.2.0",
