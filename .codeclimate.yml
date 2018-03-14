@@ -15,7 +15,7 @@ plugins:
     checks:
       MD013:
         enabled: false
-exclude_paths:
+exclude_patterns:
   - bin/
   - build/
   - config/
