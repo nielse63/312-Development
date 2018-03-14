@@ -43,6 +43,11 @@ module.exports = (config) => {
       noInfo: true,
     },
     coverageReporter,
+    client: {
+      mocha: {
+        timeout: 5000,
+      },
+    },
     singleRun: true,
     plugins: [
       'karma-chai',

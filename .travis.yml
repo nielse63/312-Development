@@ -26,7 +26,5 @@ env:
 #   - (eval "$TEST_COMMAND")
 jobs:
   include:
-    - stage: unit tests
-      script: yarn run unit
-    - stage: integration tests
-      script: yarn run integration
+    - script: yarn run unit
+    - script: yarn run integration

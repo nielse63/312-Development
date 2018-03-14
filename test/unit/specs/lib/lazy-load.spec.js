@@ -2,7 +2,7 @@
 import lazyLoad from '@/lib/lazy-load';
 import { isFunction } from '../../helpers';
 
-const source = 'https://images.unsplash.com/photo-1464454709131-ffd692591ee5?dpr=2&auto=format&fit=crop&w=1500&h=994&q=80&cs=tinysrgb&crop=';
+const source = 'https://images.unsplash.com/photo-1464454709131-ffd692591ee5?dpr=2&auto=format&fit=crop&w=250&h=157&q=50&cs=tinysrgb&crop=';
 
 describe('lazy-load', () => {
   it('should exist', () => {
