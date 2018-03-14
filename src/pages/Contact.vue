@@ -30,11 +30,11 @@
 </template>
 
 <script>
+  import { get } from 'js-cookie';
   import Banner from '@/components/Banner';
   import InputCol from '@/components/Contact/InputCol';
   import TweetList from '@/components/Contact/TweetList';
   import PanelHeader from '@/components/Panels/PanelHeader';
-  import { hasFormSubmission } from '@/lib/utils';
 
   const invalidateChildElement = (child) => {
     if (child.valid && !child.value) {
@@ -69,7 +69,7 @@
       },
     },
     beforeMount() {
-      if (!window.IN_TESTING && hasFormSubmission()) {
+      if (!window.IN_TESTING && get('form_submission')) {
         window.location.href = '/#/thank-you';
       }
     },

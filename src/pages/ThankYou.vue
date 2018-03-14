@@ -20,7 +20,6 @@
   import Banner from '@/components/Banner';
   import PanelHeader from '@/components/Panels/PanelHeader';
   import { get } from 'js-cookie';
-  import { hasFormSubmission } from '@/lib/utils';
 
   export default {
     name: 'thank-you',
@@ -46,7 +45,7 @@
       },
     },
     beforeMount() {
-      if (!window.IN_TESTING && !hasFormSubmission()) {
+      if (!window.IN_TESTING && !get('form_submission')) {
         window.location.href = '/#/contact';
       }
     },
