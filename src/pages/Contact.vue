@@ -69,7 +69,7 @@
       },
     },
     beforeMount() {
-      if (hasFormSubmission()) {
+      if (!window.IN_TESTING && hasFormSubmission()) {
         window.location.href = '/#/thank-you';
       }
     },

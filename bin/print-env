@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+
+# print environment information
+cat <<EOF
+-------------------------
+ NODE_ENV:  | $NODE_ENV
+-------------------------
+ node:      | $(node -v)
+ npm:       | $(npm -v)
+ yarn:      | $(yarn -v)
+-------------------------
+EOF
