@@ -18,13 +18,9 @@ env:
   global:
     - JOBS=1
     - NODE_ENV=test
-#   matrix:
-#     - TEST_COMMAND="yarn run unit"
-#     - TEST_COMMAND="yarn run integration"
 
-# script:
-#   - (eval "$TEST_COMMAND")
 jobs:
   include:
-    - script: yarn run unit
+    - stage: tests
+      script: yarn run unit
     - script: yarn run integration
