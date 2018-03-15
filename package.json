@@ -109,6 +109,9 @@
     "npm": ">= 5.7.x",
     "yarn": ">= 1.x.x"
   },
+  "resolutions": {
+    "vue-template-compiler": "2.5.16"
+  },
   "browserslist": [
     "> 3%",
     "last 2 versions",
