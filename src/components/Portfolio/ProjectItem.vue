@@ -158,24 +158,23 @@
         });
       },
     },
-    mounted() {
-      (async () => {
-        const module = await getNPMInfo(this.title);
-        let firstDownload = false;
-        const data = module.downloads.filter((object) => {
-          if (!firstDownload && object.downloads) {
-            firstDownload = true;
-          }
-          return firstDownload;
-        });
-        const output = {
-          data,
-          totalDownloads: module.totalDownloads,
-        };
-        this.trend = output.data.map(object => object.downloads);
-        this.downloads = output.totalDownloads;
-        this.createChart();
-      })();
+    async mounted() {
+      const module = await getNPMInfo(this.title);
+      let firstDownload = false;
+      const data = module.downloads.filter((object) => {
+        /* istanbul ignore next */
+        if (!firstDownload && object.downloads) {
+          firstDownload = true;
+        }
+        return firstDownload;
+      });
+      const output = {
+        data,
+        totalDownloads: module.totalDownloads,
+      };
+      this.trend = output.data.map(object => object.downloads);
+      this.downloads = output.totalDownloads;
+      this.createChart();
     },
   };
 </script>
