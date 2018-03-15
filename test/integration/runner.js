@@ -1,6 +1,6 @@
 
 process.env.PORT = 9999;
-process.env.NODE_ENV = 'testing';
+process.env.NODE_ENV = 'test';
 process.env.BABEL_ENV = 'test';
 
 const chalk = require('chalk');

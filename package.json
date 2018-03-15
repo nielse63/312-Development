@@ -6,18 +6,16 @@
   "private": true,
   "scripts": {
     "precommit": "lint-staged",
-    "dev": "NODE_ENV=development node build/dev-server.js",
+    "dev": "webpack-dashboard -- node build/dev-server.js",
     "build": "./bin/build",
     "unit": "./bin/unit-test",
     "daemon:start": "pm2 start server/index.js",
     "daemon:kill": "pm2 kill",
     "integration": "./bin/integration",
-    "preaccessibility": "yarn run daemon:start",
-    "accessibility": "node test/accessibility/runner.js",
     "lint:js": "eslint --ext .js,.vue src/ server/ ./*.js --fix",
     "lint:internal": "eslint tasks test *.js --ignore-pattern '!.*.js' --fix",
     "lint:scss": "stylelint src/**/*.vue src/assets/**/*.scss -s scss",
-    "start": "NODE_ENV=production node --harmony --gc_global --optimize_for_size --max_old_space_size=460 --gc_interval=100 server",
+    "start": "DEBUG=frontend* NODE_ENV=production node --harmony --max_old_space_size=460 --gc_interval=100 server",
     "heroku-postbuild": "yarn run build"
   },
   "dependencies": {
@@ -39,7 +37,7 @@
     "css-loader": "^0.28.10",
     "d3": "^4.13.0",
     "date-fns": "^1.29.0",
-    "debug": "^3.0.0",
+    "debug": "^3.1.0",
     "eslint": "^4.18.2",
     "eslint-config-airbnb-base": "^12.1.0",
     "eslint-friendly-formatter": "^3.0.0",
@@ -52,7 +50,6 @@
     "express-static-gzip": "^0.3.2",
     "extract-text-webpack-plugin": "^3.0.2",
     "file-loader": "^1.1.11",
-    "friendly-errors-webpack-plugin": "^1.6.1",
     "helmet": "^3.12.0",
     "heroku-ssl-redirect": "^0.0.4",
     "html-webpack-plugin": "^3.0.6",
@@ -107,7 +104,7 @@
     "pm2": "^2.10.1",
     "puppeteer": "^1.1.1",
     "snyk": "^1.70.0",
-    "webpack-bundle-analyzer": "^2.11.1"
+    "webpack-dashboard": "^1.1.1"
   },
   "engines": {
     "node": ">= 9.x.x",

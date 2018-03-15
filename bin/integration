@@ -6,13 +6,11 @@ if [ ! "$NODE_ENV" ]; then
   export NODE_ENV=test
 fi
 
-# print environment information
-. bin/print-env
-
 # build on travis
 if [ "$TRAVIS" ]; then
   yarn run build
 else
+  . bin/print-env
   node_modules/.bin/eslint test/integration --fix
 fi
 

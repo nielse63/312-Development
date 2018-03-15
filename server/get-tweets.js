@@ -16,7 +16,9 @@ module.exports = function getTweets() {
     twitter.getUserTimeline({ screen_name: process.env.TWITTER_USERNAME, count: 3 }, (error) => {
       reject(error);
     }, (success) => {
-      resolve(success);
+      const output = typeof success === 'string' ?
+        JSON.parse(success) : success;
+      resolve(output);
     });
   })).catch((error) => {
     console.error(error);
