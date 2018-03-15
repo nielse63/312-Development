@@ -9,12 +9,12 @@
     "dev": "webpack-dashboard -- node build/dev-server.js",
     "build": "./bin/build",
     "unit": "./bin/unit-test",
-    "daemon:start": "pm2 start server/index.js",
+    "daemon:start": "pm2 start server/index.js --watch server/",
     "daemon:kill": "pm2 kill",
     "integration": "./bin/integration",
     "lint:js": "eslint --ext .js,.vue src/ server/ ./*.js --fix",
-    "lint:internal": "eslint tasks test *.js --ignore-pattern '!.*.js' --fix",
-    "lint:scss": "stylelint src/**/*.vue src/assets/**/*.scss -s scss",
+    "lint:internal": "eslint test/ ./*.js --ignore-pattern '!.*.js' --fix",
+    "lint:scss": "stylelint 'src/**/*.{vue,scss}' -s scss",
     "start": "DEBUG=frontend* NODE_ENV=production node --harmony --max_old_space_size=460 --gc_interval=100 server",
     "heroku-postbuild": "yarn run build"
   },
@@ -37,6 +37,7 @@
     "d3": "^4.13.0",
     "date-fns": "^1.29.0",
     "debug": "^3.1.0",
+    "duplicate-package-checker-webpack-plugin": "^2.1.0",
     "express": "^4.16.3",
     "express-static-gzip": "^0.3.2",
     "extract-text-webpack-plugin": "^3.0.2",
@@ -45,7 +46,6 @@
     "heroku-ssl-redirect": "^0.0.4",
     "html-webpack-plugin": "^3.0.6",
     "inject-loader": "^3.0.1",
-    "js-cookie": "^2.2.0",
     "node-sass": "^4.7.2",
     "nodemailer": "^4.6.3",
     "nodemailer-mailgun-transport": "^1.3.6",
@@ -68,6 +68,7 @@
     "webpack-merge": "^4.1.2"
   },
   "devDependencies": {
+    "@mapbox/stylelint-processor-arbitrary-tags": "^0.2.0",
     "ava": "^0.25.0",
     "axios-mock-adapter": "^1.14.1",
     "chai": "^4.1.1",
@@ -98,8 +99,10 @@
     "puppeteer": "^1.1.1",
     "snyk": "^1.70.2",
     "stylelint": "^9.1.3",
+    "stylelint-config-recommended-scss": "^3.1.0",
     "stylelint-config-standard": "^18.2.0",
     "stylelint-processor-html": "^1.0.0",
+    "stylelint-scss": "^2.5.0",
     "webpack-dashboard": "^1.1.1",
     "webpack-dev-middleware": "^1.12.0",
     "webpack-hot-middleware": "^2.21.2"
@@ -110,7 +113,8 @@
     "yarn": ">= 1.x.x"
   },
   "resolutions": {
-    "vue-template-compiler": "2.5.16"
+    "vue-template-compiler": "2.5.16",
+    "chalk": "2.3.2"
   },
   "browserslist": [
     "> 3%",

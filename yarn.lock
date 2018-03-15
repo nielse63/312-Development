@@ -136,6 +136,13 @@
     pretty-ms "^0.2.1"
     text-table "^0.2.0"
 
+"@mapbox/stylelint-processor-arbitrary-tags@^0.2.0":
+  version "0.2.0"
+  resolved "https://registry.yarnpkg.com/@mapbox/stylelint-processor-arbitrary-tags/-/stylelint-processor-arbitrary-tags-0.2.0.tgz#4c2b50711bd9033a6c4f7f19e418b5f43f1a1e51"
+  dependencies:
+    execall "^1.0.0"
+    split-lines "^1.1.0"
+
 "@most/multicast@^1.2.5":
   version "1.3.0"
   resolved "https://registry.yarnpkg.com/@most/multicast/-/multicast-1.3.0.tgz#e01574840df634478ac3fabd164c6e830fb3b966"
@@ -1947,7 +1954,7 @@ chalk@^1.0.0, chalk@^1.1, chalk@^1.1.1, chalk@^1.1.3:
     strip-ansi "^3.0.0"
     supports-color "^2.0.0"
 
-chalk@^2.0.0, chalk@^2.0.1, chalk@^2.1.0, chalk@^2.3.1, chalk@^2.3.2:
+chalk@^2.0.0, chalk@^2.0.1, chalk@^2.1.0, chalk@^2.3.0, chalk@^2.3.1, chalk@^2.3.2:
   version "2.3.2"
   resolved "https://registry.yarnpkg.com/chalk/-/chalk-2.3.2.tgz#250dc96b07491bfd601e648d66ddf5f60c7a5c65"
   dependencies:
@@ -3471,6 +3478,15 @@ duplexify@^3.2.0, duplexify@^3.4.2, duplexify@^3.5.3:
     readable-stream "^2.0.0"
     stream-shift "^1.0.0"
 
+duplicate-package-checker-webpack-plugin@^2.1.0:
+  version "2.1.0"
+  resolved "https://registry.yarnpkg.com/duplicate-package-checker-webpack-plugin/-/duplicate-package-checker-webpack-plugin-2.1.0.tgz#6723ee32d89947997470778973c10788cb69e496"
+  dependencies:
+    chalk "^2.3.0"
+    find-root "^1.0.0"
+    lodash "^4.17.4"
+    semver "^5.4.1"
+
 ecc-jsbn@~0.1.1:
   version "0.1.1"
   resolved "https://registry.yarnpkg.com/ecc-jsbn/-/ecc-jsbn-0.1.1.tgz#0fc73a9ed5f0d53c38193398523ef7e543777505"
@@ -4328,6 +4344,10 @@ find-parent-dir@^0.3.0:
 find-root@^0.1.1:
   version "0.1.2"
   resolved "https://registry.yarnpkg.com/find-root/-/find-root-0.1.2.tgz#98d2267cff1916ccaf2743b3a0eea81d79d7dcd1"
+
+find-root@^1.0.0:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/find-root/-/find-root-1.1.0.tgz#abcfc8ba76f708c42a97b3d685b7e9450bfb9ce4"
 
 find-up@^1.0.0:
   version "1.1.2"
@@ -6005,10 +6025,6 @@ jest-validate@^22.4.0, jest-validate@^22.4.2:
 js-base64@^2.1.8, js-base64@^2.1.9:
   version "2.4.3"
   resolved "https://registry.yarnpkg.com/js-base64/-/js-base64-2.4.3.tgz#2e545ec2b0f2957f41356510205214e98fad6582"
-
-js-cookie@^2.2.0:
-  version "2.2.0"
-  resolved "https://registry.yarnpkg.com/js-cookie/-/js-cookie-2.2.0.tgz#1b2c279a6eece380a12168b92485265b35b1effb"
 
 js-string-escape@^1.0.1:
   version "1.0.1"
@@ -8454,7 +8470,7 @@ postcss-selector-parser@^2.0.0, postcss-selector-parser@^2.2.2:
     indexes-of "^1.0.1"
     uniq "^1.0.1"
 
-postcss-selector-parser@^3.1.0:
+postcss-selector-parser@^3.1.0, postcss-selector-parser@^3.1.1:
   version "3.1.1"
   resolved "https://registry.yarnpkg.com/postcss-selector-parser/-/postcss-selector-parser-3.1.1.tgz#4f875f4afb0c96573d5cf4d74011aee250a7e865"
   dependencies:
@@ -10029,6 +10045,10 @@ specificity@^0.3.1:
   version "0.3.2"
   resolved "https://registry.yarnpkg.com/specificity/-/specificity-0.3.2.tgz#99e6511eceef0f8d9b57924937aac2cb13d13c42"
 
+split-lines@^1.1.0:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/split-lines/-/split-lines-1.1.0.tgz#3abba8f598614142f9db8d27ab6ab875662a1e09"
+
 split-string@^3.0.1, split-string@^3.0.2:
   version "3.1.0"
   resolved "https://registry.yarnpkg.com/split-string/-/split-string-3.1.0.tgz#7cb09dda3a86585705c64b39a6466038682e8fe2"
@@ -10277,7 +10297,13 @@ style-search@^0.1.0:
   version "0.1.0"
   resolved "https://registry.yarnpkg.com/style-search/-/style-search-0.1.0.tgz#7958c793e47e32e07d2b5cafe5c0bf8e12e77902"
 
-stylelint-config-recommended@^2.1.0:
+stylelint-config-recommended-scss@^3.1.0:
+  version "3.1.0"
+  resolved "https://registry.yarnpkg.com/stylelint-config-recommended-scss/-/stylelint-config-recommended-scss-3.1.0.tgz#25b8511074420615cce18de812b21b2aba13a29f"
+  dependencies:
+    stylelint-config-recommended "^2.0.0"
+
+stylelint-config-recommended@^2.0.0, stylelint-config-recommended@^2.1.0:
   version "2.1.0"
   resolved "https://registry.yarnpkg.com/stylelint-config-recommended/-/stylelint-config-recommended-2.1.0.tgz#f526d5c771c6811186d9eaedbed02195fee30858"
 
@@ -10292,6 +10318,16 @@ stylelint-processor-html@^1.0.0:
   resolved "https://registry.yarnpkg.com/stylelint-processor-html/-/stylelint-processor-html-1.0.0.tgz#6892b6b2855a45f0291cd845191d6908130a2918"
   dependencies:
     htmlparser2 "^3.9.1"
+
+stylelint-scss@^2.5.0:
+  version "2.5.0"
+  resolved "https://registry.yarnpkg.com/stylelint-scss/-/stylelint-scss-2.5.0.tgz#ac4c83474c53b19cc1f9e93d332786cf89c8d217"
+  dependencies:
+    lodash "^4.17.4"
+    postcss-media-query-parser "^0.2.3"
+    postcss-resolve-nested-selector "^0.1.1"
+    postcss-selector-parser "^3.1.1"
+    postcss-value-parser "^3.3.0"
 
 stylelint@^9.1.3:
   version "9.1.3"
