@@ -30,9 +30,13 @@
       }),
     },
     methods: {
-      onClick(e) {
+      canClick(target) {
         /* istanbul ignore next */
-        if (this.isMenuOpen && !e.target.closest('.navigation') && !e.target.closest('.header__button')) {
+        return this.isMenuOpen && !target.closest('.navigation') && !target.closest('.header__button');
+      },
+      onClick({ target }) {
+        /* istanbul ignore next */
+        if (this.canClick(target)) {
           this.$store.dispatch('toggleMenu');
         }
       },
@@ -43,7 +47,7 @@
     },
     mounted() {
       document.addEventListener('scrolling', () => {
-        /* istanbul ignore next */
+        /* istanbul ignore if */
         if (this.isMenuOpen) {
           this.$store.dispatch('toggleMenu');
         }
@@ -56,13 +60,6 @@
 </script>
 
 <style lang="scss">
-  @import "assets/styles/common/reset";
-  @import "assets/styles/common/globals";
-  @import "assets/styles/shared/grid";
-  @import "assets/styles/shared/links";
-  @import "assets/styles/shared/visually-hidden";
-  @import "assets/styles/shared/font-awesome";
-
   @font-face {
     font-family: 'FontAwesome';
     src: url('assets/fonts/fontawesome-webfont.woff2?v=4.7.0') format('woff2'),
@@ -70,6 +67,13 @@
     font-weight: normal;
     font-style: normal;
   }
+
+  @import "assets/styles/common/reset";
+  @import "assets/styles/common/globals";
+  @import "assets/styles/shared/grid";
+  @import "assets/styles/shared/links";
+  @import "assets/styles/shared/visually-hidden";
+  @import "assets/styles/shared/font-awesome";
 </style>
 
 <style lang="scss" scoped>

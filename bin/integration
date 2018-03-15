@@ -1,10 +1,16 @@
 #!/usr/bin/env bash
-
-# exit on failure
 set -e
 
+# set default env vars
+if [ ! "$NODE_ENV" ]; then
+  export NODE_ENV=test
+fi
+
+# print environment information
+. bin/print-env
+
 # build on travis
-if [[ "$TRAVIS" ]]; then
+if [ "$TRAVIS" ]; then
   yarn run build
 else
   node_modules/.bin/eslint test/integration --fix

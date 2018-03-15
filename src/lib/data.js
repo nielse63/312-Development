@@ -10,39 +10,40 @@
 import axios from 'axios';
 import store from '@/store';
 
-export async function fetchFromURL(url) {
+export const fetchFromURL = async (url) => {
   try {
-    const response = await axios(url);
-    return response.data;
-  } catch (err) {
-    console.error(err);
+    const { data } = await axios(url);
+    return data;
+  } catch (e) {
+    /* istanbul ignore next */
+    console.error(e);
   }
+  /* istanbul ignore next */
   return [];
-}
+};
 
-function completePromise(resolve, reject, payload, method) {
+const completePromise = (resolve, reject, payload, method) => {
   if (!payload || !payload.length) {
-    reject('No data returned');
+    /* istanbul ignore next */
+    reject(new Error('No data returned'));
   } else {
     store.commit(method, payload);
     resolve(payload);
   }
-}
+};
 
-export function getGithubData() {
-  return new Promise(async (resolve, reject) => {
-    const repos = store.getters.getRepos;
-    if (repos && repos.length) {
-      resolve(repos);
-    } else {
-      const data = await fetchFromURL('https://api.github.com/users/nielse63/repos?visibility=public&sort=pushed');
-      const toSave = data.filter(repo => repo.name !== '312-Development');
-      completePromise(resolve, reject, toSave, 'saveRepos');
-    }
-  });
-}
+export const getGithubData = () => new Promise(async (resolve, reject) => {
+  const repos = store.getters.getRepos;
+  if (repos && repos.length) {
+    resolve(repos);
+  } else {
+    const data = await fetchFromURL('https://api.github.com/users/nielse63/repos?visibility=public&sort=pushed');
+    const toSave = data.filter(repo => repo.name !== '312-Development');
+    completePromise(resolve, reject, toSave, 'saveRepos');
+  }
+});
 
-export function createNPMUrl(name) {
+export const createNPMUrl = (name) => {
   function stringFromDate(dateObject) {
     let month = dateObject.getMonth() + 1;
     let date = dateObject.getDate();
@@ -62,65 +63,45 @@ export function createNPMUrl(name) {
   const startString = stringFromDate(start);
   const endString = stringFromDate(end);
   return `https://api.npmjs.org/downloads/range/${startString}:${endString}/${name}`;
-}
+};
 
-function handleNPMData(data = {}) {
-  let output = data;
-  if ({}.toString.call(output) === '[object Array]') {
-    output = {
-      downloads: [],
-    };
+const handleNPMData = (data = {}) => {
+  if (Array.isArray(data)) {
+    return { downloads: [] };
   }
-  return output;
-}
+  return data;
+};
 
-function saveNPMPackage(data = {}) {
+const saveNPMPackage = (data = {}) => {
+  /* istanbul ignore if */
   if (data.package) {
-    store.commit('saveModule', {
-      name: data.package,
-      data,
-    });
+    store.commit('saveModule', { name: data.package, data });
   }
-}
+};
 
-export function getNPMInfo(name) {
-  return new Promise(async (resolve, reject) => {
-    const module = store.getters.getModule(name);
-    if (module) {
-      resolve(module);
-    } else {
-      const url = createNPMUrl(name);
-      try {
-        let data = await fetchFromURL(url);
-        data = handleNPMData(data);
-        const totalDownloads = data.downloads.reduce((sum, object) => sum + object.downloads, 0);
-        data.totalDownloads = totalDownloads;
-        saveNPMPackage(data);
-        resolve(data);
-      } catch (e) {
-        reject(e);
-      }
-    }
-  });
-}
+export const getNPMInfo = name => new Promise(async (resolve, reject) => {
+  try {
+    const url = createNPMUrl(name);
+    const rawData = await fetchFromURL(url);
+    const npmData = handleNPMData(rawData);
+    const totalDownloads = npmData.downloads.reduce((sum, object) => sum + object.downloads, 0);
+    npmData.totalDownloads = totalDownloads;
+    npmData.name = name;
+    saveNPMPackage(npmData);
+    resolve(npmData);
+  } catch (e) {
+    /* istanbul ignore next */
+    reject(e);
+  }
+});
 
-export function getTweets() {
-  return new Promise(async (resolve, reject) => { // eslint-disable-line complexity
-    const tweets = store.getters.getTweets;
-    if (tweets && tweets.length) {
-      resolve(tweets);
-    } else {
-      const url = `${window.location.origin}/get-tweets`;
-      const data = await fetchFromURL(url);
-      let output = data;
-      try {
-        if (typeof output === 'string') {
-          output = JSON.parse(output);
-        }
-        completePromise(resolve, reject, output, 'saveTweets');
-      } catch (e) {
-        reject(e);
-      }
-    }
-  });
-}
+export const getTweets = () => new Promise(async (resolve, reject) => {
+  const url = `${window.location.origin}/get-tweets`;
+  try {
+    const data = await fetchFromURL(url);
+    completePromise(resolve, reject, data, 'saveTweets');
+  } catch (e) {
+    reject(e);
+  }
+});
+

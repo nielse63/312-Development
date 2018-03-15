@@ -96,6 +96,7 @@
           if (a.stars > b.stars) {
             return -1;
           }
+          /* istanbul ignore if */
           if (a.stars < b.stars) {
             return 1;
           }

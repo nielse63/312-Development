@@ -39,16 +39,11 @@
         });
       },
     },
-    beforeMount() {
-      (async () => {
-        try {
-          const array = await getTweets();
-          this.tweets = this.formatTweets(array);
-        } catch (e) {
-          /* istanbul ignore next */
-          console.error(`TweetList: ${e}`);
-        }
-      })();
+    async mounted() {
+      const tweets = this.$store.getters.getTweets.length ?
+        this.$store.getters.getTweets :
+        await getTweets();
+      this.tweets = this.formatTweets(tweets);
     },
   };
 </script>

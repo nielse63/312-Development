@@ -17,5 +17,6 @@ module.exports = {
   ga('create', 'UA-33505945-1', 'auto');
   ga('send', 'pageview');
 </script>
+<link rel="preload" href="https://www.google-analytics.com/analytics.js" as="script">
 <script async src="https://www.google-analytics.com/analytics.js"></script>` : ''
 }

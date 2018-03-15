@@ -10,7 +10,6 @@ function resolve (dir) {
 module.exports = {
   entry: {
     app: './src/main.js',
-    // libs: ['d3', 'highcharts'],
   },
   output: {
     path: config.build.assetsRoot,
