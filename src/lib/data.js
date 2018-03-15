@@ -80,41 +80,28 @@ const saveNPMPackage = (data = {}) => {
 };
 
 export const getNPMInfo = name => new Promise(async (resolve, reject) => {
-  const module = store.getters.getModule(name);
-  if (module) {
-    /* istanbul ignore next */
-    resolve(module);
-  } else {
+  try {
     const url = createNPMUrl(name);
-    try {
-      let data = await fetchFromURL(url);
-      data = handleNPMData(data);
-      const totalDownloads = data.downloads.reduce((sum, object) => sum + object.downloads, 0);
-      data.totalDownloads = totalDownloads;
-      saveNPMPackage(data);
-      resolve(data);
-    } catch (e) {
-      /* istanbul ignore next */
-      reject(e);
-    }
+    const rawData = await fetchFromURL(url);
+    const npmData = handleNPMData(rawData);
+    const totalDownloads = npmData.downloads.reduce((sum, object) => sum + object.downloads, 0);
+    npmData.totalDownloads = totalDownloads;
+    npmData.name = name;
+    saveNPMPackage(npmData);
+    resolve(npmData);
+  } catch (e) {
+    /* istanbul ignore next */
+    reject(e);
   }
 });
 
-export const getTweets = () => new Promise(async (resolve, reject) => { // eslint-disable-line complexity
-  const tweets = store.getters.getTweets;
-  if (tweets && tweets.length) {
-    resolve(tweets);
-  } else {
-    const url = `${window.location.origin}/get-tweets`;
+export const getTweets = () => new Promise(async (resolve, reject) => {
+  const url = `${window.location.origin}/get-tweets`;
+  try {
     const data = await fetchFromURL(url);
-    let output = data;
-    try {
-      if (typeof output === 'string') {
-        output = JSON.parse(output);
-      }
-      completePromise(resolve, reject, output, 'saveTweets');
-    } catch (e) {
-      reject(e);
-    }
+    completePromise(resolve, reject, data, 'saveTweets');
+  } catch (e) {
+    reject(e);
   }
 });
+
