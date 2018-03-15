@@ -48,7 +48,7 @@ export default new Router({
       name: 'ThankYou',
       component: ThankYou,
       props: {
-        hidden: true,
+        'hidden-from-nav': true,
         title: 'Thank You!',
       },
     }, {
@@ -56,7 +56,7 @@ export default new Router({
       name: '404',
       component: FourOhFour,
       props: {
-        hidden: true,
+        'hidden-from-nav': true,
         title: 'Page Not Found',
       },
     },

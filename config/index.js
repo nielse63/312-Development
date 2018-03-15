@@ -29,7 +29,7 @@ module.exports = {
     assetsSubDirectory: 'static',
     assetsPublicPath: '/',
     proxyTable: {
-      '/get-tweets': {
+      '/tweets': {
         target: 'http://localhost:9999',
         changeOrigin: true,
       },

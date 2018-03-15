@@ -4,8 +4,9 @@
       <template v-for="tweet in tweets">
         <tweet
           :text="tweet.text"
-          :href="tweet.href"
+          :href="tweet.url"
           :time="tweet.time"
+          :date="tweet.date"
         />
       </template>
     </ul>
@@ -26,24 +27,10 @@
         tweets: [],
       };
     },
-    methods: {
-      formatTweets(array) {
-        return array.slice(0, 3).map((object) => {
-          const idString = object.id_str;
-          const screenName = object.user.screen_name;
-          return {
-            href: `https://twitter.com/${screenName}/status/${idString}`,
-            time: object.created_at,
-            text: object.text,
-          };
-        });
-      },
-    },
     async mounted() {
-      const tweets = this.$store.getters.getTweets.length ?
+      this.tweets = this.$store.getters.getTweets.length ?
         this.$store.getters.getTweets :
         await getTweets();
-      this.tweets = this.formatTweets(tweets);
     },
   };
 </script>

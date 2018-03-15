@@ -42,7 +42,7 @@
         });
       },
     },
-    beforeMount() {
+    async beforeMount() {
       this.loadChart().then(() => {
         this.projects = [
           'expand-hex-code',
@@ -55,9 +55,7 @@
           'tinyqueue.js',
         ];
       });
-      (async () => {
-        await getGithubData();
-      })();
+      await getGithubData();
     },
   };
 </script>

@@ -7,9 +7,9 @@
           <div class="col col__left">
             <panel-header title="Shoot Me a Message" />
             <form action="/submission" class="form" method="post" novalidate="novalidate" v-on:submit="onsubmit">
-              <input-col name="First Name" />
-              <input-col name="Last Name" />
-              <input-col name="Email Address" type="email" />
+              <input-col name="First Name" autocomplete="given-name" />
+              <input-col name="Last Name" autocomplete="family-name" />
+              <input-col name="Email Address" type="email" autocomplete="email" />
               <input-col name="Message" type="textarea" />
               <div class="row">
                 <div class="col">
@@ -30,7 +30,6 @@
 </template>
 
 <script>
-  import { get } from 'js-cookie';
   import Banner from '@/components/Banner';
   import InputCol from '@/components/Contact/InputCol';
   import TweetList from '@/components/Contact/TweetList';
@@ -63,17 +62,11 @@
           .map(invalidateChildElement)
           .filter(({ valid }) => !valid);
         this.valid = !invalidChildren.length;
-        if (this.valid && !window.IN_TESTING) {
+        if (!this.valid && !window.IN_TESTING) {
           /* istanbul ignore next */
           e.preventDefault();
         }
       },
-    },
-    beforeMount() {
-      if (!window.IN_TESTING && get('form_submission')) {
-        /* istanbul ignore next */
-        window.location.href = '/#/thank-you';
-      }
     },
   };
 </script>

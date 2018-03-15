@@ -19,10 +19,10 @@
       /* eslint-disable global-require */
       return {
         mediumArticles: [{
-          name: '5 Questions Every Unit Test Must Answer',
-          description: 'Every developer knows we should write unit tests in order to prevent defects from being deployed to production.',
+          name: 'Webpack 4.1 and ES Modules (ESM)',
+          description: 'Treeshaking with webpack has come a long way. My favorite parts of webpack 4 are the ES module handling and tree shaking improvements.',
           image: require('@/assets/images/articles/unit-tests.min.jpg'),
-          url: 'https://medium.com/javascript-scene/what-every-unit-test-needs-f6cd34d9836d',
+          url: 'https://medium.com/@zwegrzyniak/webpack-4-1-and-es-modules-esm-dd0bd7dca4da',
           readmore: 'Read it on Medium',
         }, {
           name: '10 Interview Questions Every JavaScript Developer Should Know',
@@ -61,11 +61,15 @@
       articles() {
         const wordCount = 15;
         return this.mediumArticles.map((article) => {
-          const words = article.description.split(' ');
-          if (words.length > wordCount) {
-            article.description = `${words.slice(0, wordCount).join(' ')}...`;
-          }
-          return article;
+          const { description } = article;
+          const words = description.split(' ');
+          const shortDescription = `${words.slice(0, wordCount).join(' ')}...`;
+          return {
+            ...article,
+            ...{
+              description: shortDescription,
+            },
+          };
         });
       },
     },

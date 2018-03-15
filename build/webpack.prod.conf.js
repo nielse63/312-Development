@@ -11,6 +11,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const OptimizeCSSPlugin = require('optimize-css-assets-webpack-plugin');
 const SWPrecacheWebpackPlugin = require('sw-precache-webpack-plugin');
+const CompressionWebpackPlugin = require('compression-webpack-plugin');
 
 const env = process.env.NODE_ENV === 'test'
   ? require('../config/test.env')
@@ -120,19 +121,14 @@ const webpackConfig = merge(baseWebpackConfig, {
       minify: true,
       stripPrefix: 'dist/',
     }),
+    new CompressionWebpackPlugin({
+      asset: '[path].gz[query]',
+      algorithm: 'gzip',
+      test: new RegExp(`\\.(${config.build.productionGzipExtensions.join('|')})$`),
+      threshold: 10240,
+      minRatio: 0.8,
+    }),
   ],
 });
-
-if (config.build.productionGzip) {
-  const CompressionWebpackPlugin = require('compression-webpack-plugin');
-
-  webpackConfig.plugins.push(new CompressionWebpackPlugin({
-    asset: '[path].gz[query]',
-    algorithm: 'gzip',
-    test: new RegExp(`\\.(${config.build.productionGzipExtensions.join('|')})$`),
-    threshold: 10240,
-    minRatio: 0.8,
-  }));
-}
 
 module.exports = webpackConfig;
