@@ -1,5 +1,5 @@
 
-@import "../main";
+@import '../main';
 
 body,
 html {
@@ -11,6 +11,6 @@ html {
   -moz-osx-font-smoothing: grayscale;
 }
 
-@import "type";
-@import "../shared/lists";
-@import "../components/panel";
+@import 'type';
+@import '../shared/lists';
+@import '../components/panel';

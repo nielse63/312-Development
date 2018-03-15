@@ -8,8 +8,6 @@
 </template>
 
 <script>
-  import { format, parse, isToday, isYesterday } from 'date-fns';
-
   export default {
     name: 'tweet',
     props: {
@@ -18,6 +16,10 @@
         default: '',
       },
       href: {
+        type: String,
+        default: '',
+      },
+      date: {
         type: String,
         default: '',
       },
@@ -35,24 +37,8 @@
       content() {
         return this.formatText(this.text);
       },
-      date() {
-        return this.formatDate(this.time);
-      },
     },
     methods: {
-      formatDate(createdAt) {
-        const date = parse(createdAt);
-        const time = format(date, 'h:mm a');
-        let dateString = '';
-        if (isToday(date)) {
-          dateString = `Today @ ${time}`;
-        } else if (isYesterday(date)) {
-          dateString = `Yesterday @ ${time}`;
-        } else {
-          dateString = format(date, 'MMM DD @ HH:mm');
-        }
-        return dateString;
-      },
       formatText(text) {
         this.links = text.split(' ')
           .filter(word => /^http/.test(word))

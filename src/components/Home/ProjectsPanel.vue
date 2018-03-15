@@ -73,8 +73,8 @@
       },
     },
     methods: {
-      onclick(e) {
-        const index = typeof e === 'number' ? e : parseInt(e.target.closest('li').getAttribute('data-index'), 10);
+      onclick({ target }) {
+        const index = parseInt(target.closest('li').getAttribute('data-index'), 10);
         if (index !== this.activeIndex) {
           this.activeIndex = index;
         }
@@ -93,14 +93,8 @@
             },
           };
         }).sort((a, b) => {
-          if (a.stars > b.stars) {
-            return -1;
-          }
-          /* istanbul ignore if */
-          if (a.stars < b.stars) {
-            return 1;
-          }
-          /* istanbul ignore next */
+          if (a.stars > b.stars) { return -1; }
+          if (a.stars < b.stars) { return 1; }
           return 0;
         }).map((repo, i) => {
           repo.cls.active = !i;
@@ -108,16 +102,9 @@
         });
       },
     },
-    beforeMount() {
-      (async () => {
-        try {
-          const data = await getGithubData();
-          this.repos = this.formatRepos(data.slice(0, 3));
-        } catch (e) {
-          /* istanbul ignore next */
-          console.error(`ProjectsPanel: ${e}`);
-        }
-      })();
+    async beforeMount() {
+      const data = await getGithubData();
+      this.repos = this.formatRepos(data.slice(0, 3));
     },
   };
 </script>

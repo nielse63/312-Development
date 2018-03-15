@@ -1,9 +1,6 @@
 
 const nodemailer = require('nodemailer');
 const mg = require('nodemailer-mailgun-transport');
-const { loadENV } = require('./helpers');
-
-loadENV();
 
 const msg = {
   'first-name': 'Erik',
