@@ -3,7 +3,13 @@
     <div class="col" v-bind:class="classes">
       <label :for="inputName" :id="inputName">{{name | titlize}}</label>
       <template v-if="type !== 'textarea'">
-        <input :name="inputName" :type="type" v-on:blur="onblur" :aria-labelledby="inputName">
+        <input
+          :name="inputName"
+          :type="type"
+          :aria-labelledby="inputName"
+          :autocomplete="autocomplete"
+          v-on:blur="onblur"
+        >
       </template>
       <template v-else>
         <textarea :name="inputName" v-on:blur="onblur" :aria-labelledby="inputName"></textarea>
@@ -23,6 +29,10 @@
       type: {
         type: String,
         default: 'text',
+      },
+      autocomplete: {
+        type: String,
+        default: '',
       },
     },
     data() {

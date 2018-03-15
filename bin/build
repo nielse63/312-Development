@@ -10,11 +10,8 @@ fi
 . bin/print-env
 
 # run locally
-if [ -f node_modules/.bin/eslint ] && [ -f node_modules/.bin/stylelint ]; then
-  rm -rf dist
-  yarn run lint:js
-  yarn run lint:scss
-fi
+if [ -f node_modules/.bin/eslint ]; then yarn run lint:js; fi
+if [ -d dist ]; then rm -rf dist; fi
 
 # build for production
 node --harmony --gc_interval=100 build/build.js

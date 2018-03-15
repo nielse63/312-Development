@@ -37,16 +37,9 @@
         }));
       },
     },
-    beforeMount() {
-      (async () => {
-        try {
-          const data = await getGithubData();
-          this.repos = this.formatRepos(data.slice(0, 6));
-        } catch (e) {
-          /* istanbul ignore next */
-          console.error(`ProjectsPanel: ${e}`);
-        }
-      })();
+    async beforeMount() {
+      const data = await getGithubData();
+      this.repos = this.formatRepos(data.slice(0, 6));
     },
   };
 </script>

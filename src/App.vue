@@ -68,16 +68,16 @@
     font-style: normal;
   }
 
-  @import "assets/styles/common/reset";
-  @import "assets/styles/common/globals";
-  @import "assets/styles/shared/grid";
-  @import "assets/styles/shared/links";
-  @import "assets/styles/shared/visually-hidden";
-  @import "assets/styles/shared/font-awesome";
+  @import 'assets/styles/common/reset';
+  @import 'assets/styles/common/globals';
+  @import 'assets/styles/shared/grid';
+  @import 'assets/styles/shared/links';
+  @import 'assets/styles/shared/visually-hidden';
+  @import 'assets/styles/shared/font-awesome';
 </style>
 
 <style lang="scss" scoped>
-  @import "assets/styles/main";
+  @import 'assets/styles/main';
 
   .app {
     max-width: 100vw;

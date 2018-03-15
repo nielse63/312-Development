@@ -10,7 +10,10 @@ const helmet = require('helmet');
 const bodyParser = require('body-parser');
 const sendEmail = require('./send-email');
 const getTweets = require('./get-tweets');
-const { isProduction, setupEnv } = require('./helpers');
+const { loadENV, isProduction, setupEnv } = require('./helpers');
+
+// load environment variables
+loadENV();
 
 const log = debug('frontend:log');
 const logError = debug('frontend:error');
@@ -51,15 +54,11 @@ app.use('/submission', bodyParser.urlencoded({
 
 app.post('/submission', (req, res) => {
   const returnURL = `${req.get('referer')}#/thank-you`;
-  const oneDate = 24 * 60 * 60 * 1000;
   sendEmail(req.body);
-  res.cookie('form_submission', req.body, {
-    expires: new Date(Date.now() + oneDate),
-  });
   res.redirect(returnURL);
 });
 
-app.get('/get-tweets', (req, res) => {
+app.get('/tweets', (req, res) => {
   getTweets().then((data) => {
     res.status(200).json(data);
   }, (error) => {

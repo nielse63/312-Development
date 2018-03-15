@@ -1,7 +1,7 @@
 
 .fa {
   display: inline-block;
-  font: normal normal normal 14px/1 FontAwesome;
+  font: normal normal normal 14px/1 FontAwesome, sans-serif;
   font-size: inherit;
   text-rendering: auto;
   -webkit-font-smoothing: antialiased;
@@ -160,10 +160,11 @@
 //   content: "\f004";
 // }
 .fa-star:before {
-  content: "\f005";
+  content: '\f005';
 }
+
 .fa-star-o:before {
-  content: "\f006";
+  content: '\f006';
 }
 // .fa-user:before {
 //   content: "\f007";
@@ -186,7 +187,7 @@
 .fa-remove:before,
 .fa-close:before,
 .fa-times:before {
-  content: "\f00d";
+  content: '\f00d';
 }
 // .fa-search-plus:before {
 //   content: "\f00e";
@@ -208,7 +209,7 @@
 //   content: "\f014";
 // }
 .fa-home:before {
-  content: "\f015";
+  content: '\f015';
 }
 // .fa-file-o:before {
 //   content: "\f016";
@@ -220,7 +221,7 @@
 //   content: "\f018";
 // }
 .fa-download:before {
-  content: "\f019";
+  content: '\f019';
 }
 // .fa-arrow-circle-o-down:before {
 //   content: "\f01a";
@@ -657,7 +658,7 @@
 //   content: "\f0b0";
 // }
 .fa-briefcase:before {
-  content: "\f0b1";
+  content: '\f0b1';
 }
 // .fa-arrows-alt:before {
 //   content: "\f0b2";
@@ -697,7 +698,7 @@
 // .fa-navicon:before,
 // .fa-reorder:before,
 .fa-bars:before {
-  content: "\f0c9";
+  content: '\f0c9';
 }
 // .fa-list-ul:before {
 //   content: "\f0ca";
@@ -781,7 +782,7 @@
 //   content: "\f0e4";
 // }
 .fa-comment-o:before {
-  content: "\f0e5";
+  content: '\f0e5';
 }
 // .fa-comments-o:before {
 //   content: "\f0e6";
@@ -2173,7 +2174,7 @@
 //   content: "\f2bd";
 // }
 .fa-user-circle-o:before {
-  content: "\f2be";
+  content: '\f2be';
 }
 // .fa-user-o:before {
 //   content: "\f2c0";

@@ -33,7 +33,7 @@ export function resetStore(store) {
 function blankTweetArray() {
   const output = [];
   let i = 0;
-  while (i < 10) {
+  while (i < 3) {
     output.push(Object.assign({}, MockTweet));
     i += 1;
   }
@@ -42,10 +42,11 @@ function blankTweetArray() {
 
 function blankRepoArray() {
   const output = [];
+  const stars = [0, 1, 0, 3, 3, 2, 5, 0, 4, 1];
   let i = 0;
   while (i < 10) {
     output.push(Object.assign({}, MockRepo, {
-      stargazers_count: Math.floor(Math.random() * 10),
+      stargazers_count: stars[1],
     }));
     i += 1;
   }
@@ -56,7 +57,7 @@ export function setupMockRequests() {
   const mock = new MockAdapter(axios);
 
   // urls
-  const tweetsURL = `${window.location.origin}/get-tweets`;
+  const tweetsURL = `${window.location.origin}/tweets`;
   const githubURL = 'https://api.github.com/users/nielse63/repos?visibility=public&sort=pushed';
   const npmURL = createNPMUrl('Hello-World');
 

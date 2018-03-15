@@ -4,7 +4,7 @@
       <i class="fa fa-close" aria-hidden="true"></i>
     </button>
     <ul class="navigation__list">
-      <li v-for="route in routes" v-if="!route.hidden">
+      <li v-for="route in routes">
         <router-link :to="{ name: route.name }"><i v-bind:class="route.cls" aria-hidden="true"></i> {{route.title}}</router-link>
       </li>
     </ul>
@@ -18,19 +18,21 @@
     name: 'navigation',
     computed: {
       routes() {
-        return this.$router.options.routes.map((object) => {
-          const { name } = object;
-          const cls = {
-            fa: true,
-          };
-          cls[`fa ${object.props.icon}`] = true;
+        return this.$router.options.routes
+          .filter(object => !object.props['hidden-from-nav'])
+          .map((object) => {
+            const { name } = object;
+            const cls = {
+              fa: true,
+            };
+            cls[`fa ${object.props.icon}`] = true;
 
-          return Object.assign({}, {
-            title: name.substr(0, 1).toUpperCase() + name.substr(1),
-            hidden: object.props.hidden || false,
-            cls,
-          }, object);
-        });
+            return Object.assign({}, {
+              title: name.substr(0, 1).toUpperCase() + name.substr(1),
+              hidden: object.props.hidden || false,
+              cls,
+            }, object);
+          });
       },
     },
     methods: {
