@@ -24,7 +24,7 @@ mock
   .reply(200, [MockRepo, Mock312Repo])
   .onGet(npmURL)
   .reply(200, MockNPMModule)
-  .onGet('/get-tweets')
+  .onGet('/tweets')
   .reply(200, JSON.stringify([MockTweet]));
 
 describe('data', () => {

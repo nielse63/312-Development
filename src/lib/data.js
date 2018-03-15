@@ -96,7 +96,7 @@ export const getNPMInfo = name => new Promise(async (resolve, reject) => {
 });
 
 export const getTweets = () => new Promise(async (resolve, reject) => {
-  const url = `${window.location.origin}/get-tweets`;
+  const url = `${window.location.origin}/tweets`;
   try {
     const data = await fetchFromURL(url);
     completePromise(resolve, reject, data, 'saveTweets');
