@@ -10,7 +10,7 @@ fi
 . bin/print-env
 
 # run locally
-if [ ! "$IS_HEROKU" ] && [ ! "$TRAVIS" ]; then
+if [ -f node_modules/.bin/eslint ] && [ -f node_modules/.bin/stylelint ]; then
   rm -rf dist
   yarn run lint:js
   yarn run lint:scss
