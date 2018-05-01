@@ -1,12 +1,11 @@
 import Vue from 'vue';
 import Router from 'vue-router';
 import Home from '@/pages/Home';
-
-const About = () => import('@/pages/About');
-const Contact = () => import('@/pages/Contact');
-const Portfolio = () => import('@/pages/Portfolio');
-const ThankYou = () => import('@/pages/ThankYou');
-const FourOhFour = () => import('@/pages/404');
+import About from '@/pages/About';
+import Contact from '@/pages/Contact';
+import Portfolio from '@/pages/Portfolio';
+import ThankYou from '@/pages/ThankYou';
+import FourOhFour from '@/pages/404';
 
 Vue.use(Router);
 
