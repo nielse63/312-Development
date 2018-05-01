@@ -1,7 +1,6 @@
----
 language: node_js
 node_js:
-  - "9"
+- node
 sudo: false
 cache:
   yarn: true
@@ -9,19 +8,20 @@ dist: trusty
 addons:
   chrome: stable
 before_install:
-  - npm config set spin false
-
+- npm config set spin false
 env:
   global:
-    - JOBS=1
-    - NODE_ENV=test
-
+  - JOBS=1
+  - NODE_ENV=test
 jobs:
   include:
-    - stage: tests
-      script: yarn run unit
-    - script: yarn run integration
-
+  - stage: lint
+    script: yarn run lint:js
+  - script: yarn run lint:internal
+  - script: yarn run lint:scss
+  - stage: tests
+    script: yarn run unit
+  - script: yarn run integration
 branches:
   only:
   - master

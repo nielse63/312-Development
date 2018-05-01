@@ -3,7 +3,6 @@ process.env.PORT = 9999;
 process.env.NODE_ENV = 'test';
 process.env.BABEL_ENV = 'test';
 
-const chalk = require('chalk');
 const spawn = require('cross-spawn');
 
 function start() {
@@ -17,8 +16,6 @@ function close() {
 // startup server
 const server = start();
 server.on('exit', () => {
-  console.log(chalk.green('Running the integration server'));
-
   // execute runner
   const runner = spawn('./node_modules/.bin/ava', [], { stdio: 'inherit' });
 

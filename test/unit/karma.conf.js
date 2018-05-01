@@ -12,9 +12,7 @@ const coverageReporter = {
   ],
 };
 
-if (process.env.TRAVIS) {
-  reporters.push('coveralls');
-} else {
+if (!process.env.TRAVIS) {
   coverageReporter.reporters.push({
     type: 'html',
     subdir: '.',
@@ -52,7 +50,6 @@ module.exports = (config) => {
       'karma-chai',
       'karma-chrome-launcher',
       'karma-coverage',
-      'karma-coveralls',
       'karma-mocha',
       'karma-sourcemap-loader',
       'karma-spec-reporter',

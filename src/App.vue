@@ -2,7 +2,9 @@
   <div id="app" v-bind:class="{ 'menu-open': isMenuOpen, app: true }" @click="onClick">
     <app-header />
     <main id="main" class="main">
-      <router-view></router-view>
+      <transition name="fade">
+        <router-view></router-view>
+      </transition>
     </main>
     <app-footer />
     <navigation />
