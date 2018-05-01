@@ -38,13 +38,19 @@ describe('data', () => {
     });
 
     it('should handle single digit months', () => {
-      const output = createNPMUrl(name, new Date('2018-04-01T00:00:00'));
-      expect(output).to.equal('https://api.npmjs.org/downloads/range/2017-12-31:2018-04-01/something');
+      const endDate = new Date(2018, 3, 1);
+      endDate.setTime(endDate.getTime() + (endDate.getTimezoneOffset() * 60 * 1000));
+      console.log(endDate);
+      const output = createNPMUrl(name, endDate);
+      expect(output).to.equal('https://api.npmjs.org/downloads/range/2018-01-01:2018-04-01/something');
     });
 
     it('should handle double digit months', () => {
-      const output = createNPMUrl(name, new Date('2018-06-01T00:00:00'));
-      expect(output).to.equal('https://api.npmjs.org/downloads/range/2018-03-02:2018-06-01/something');
+      const endDate = new Date(2018, 11, 1);
+      endDate.setTime(endDate.getTime() + (endDate.getTimezoneOffset() * 60 * 1000));
+      console.log(endDate);
+      const output = createNPMUrl(name, endDate);
+      expect(output).to.equal('https://api.npmjs.org/downloads/range/2018-09-02:2018-12-01/something');
     });
   });
 });
