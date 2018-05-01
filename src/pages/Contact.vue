@@ -72,7 +72,7 @@
 </script>
 
 <style lang="scss" scoped>
-  @import "../assets/styles/main";
+  @import '../assets/styles/main';
 
   .row {
     @media (max-width: $tablet-width-max) {

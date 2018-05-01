@@ -180,7 +180,7 @@
 </script>
 
 <style lang="scss" scoped>
-  @import "../../assets/styles/main";
+  @import '../../assets/styles/main';
 
   $project-header-width-small: 150px;
   $project-header-width: 200px;
@@ -203,25 +203,25 @@
         text-align: center;
       }
 
-       @media (min-width: $tablet-width) {
+      @media (min-width: $tablet-width) {
         @include flex-item($project-header-width-small);
         display: flex;
         align-items: center;
         justify-content: center;
-       }
+      }
 
-       @media (min-width: $desktop-width) {
+      @media (min-width: $desktop-width) {
         @include flex-item($project-header-width);
       }
 
-       h3 {
+      h3 {
         max-width: 100%;
 
         @media (min-width: $tablet-width) {
           flex: 1;
           height: 100%;
         }
-       }
+      }
 
       a {
         color: $color-pink;
@@ -287,13 +287,13 @@
       display: grid;
       grid-template-rows: (76px / 2) 1fr;
       grid-template-columns: 50% 1fr;
-      grid-template-areas: "data-one data-two"
-                           "graph    graph";
+      grid-template-areas: 'data-one data-two'
+                           'graph    graph';
 
       @media (min-width: $desktop-width) {
         grid-template-columns: 130px 1fr;
-        grid-template-areas: "data-one graph"
-                             "data-two graph";
+        grid-template-areas: 'data-one graph'
+                             'data-two graph';
       }
 
       * + & {
@@ -315,7 +315,7 @@
         grid-area: data-one;
 
         i {
-          background: linear-gradient(#7F00FF, #E100FF);
+          background: linear-gradient(#7f00ff, #e100ff);
           -webkit-background-clip: text;
           -webkit-text-fill-color: transparent;
         }
@@ -333,7 +333,7 @@
         }
 
         i {
-          background: linear-gradient(#F3F9A7, #CAC531);
+          background: linear-gradient(#f3f9a7, #cac531);
           -webkit-background-clip: text;
           -webkit-text-fill-color: transparent;
         }

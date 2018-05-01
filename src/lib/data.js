@@ -7,43 +7,30 @@
   get npm download stats: https://api.npmjs.org/downloads/range/{date-start}:{date-end}/{repo}
 */
 
-import axios from 'axios';
 import store from '@/store';
 
 export const fetchFromURL = async (url) => {
-  try {
-    const { data } = await axios(url);
-    return data;
-  } catch (e) {
-    /* istanbul ignore next */
-    console.error(e);
-  }
-  /* istanbul ignore next */
-  return [];
+  const response = await fetch(url);
+  return response.json();
 };
 
-const completePromise = (resolve, reject, payload, method) => {
-  if (!payload || !payload.length) {
-    /* istanbul ignore next */
-    reject(new Error('No data returned'));
-  } else {
-    store.commit(method, payload);
-    resolve(payload);
-  }
+export const completePromise = (resolve, payload, method) => {
+  store.commit(method, payload);
+  resolve(payload);
 };
 
-export const getGithubData = () => new Promise(async (resolve, reject) => {
+export const getGithubData = () => new Promise(async (resolve) => {
   const repos = store.getters.getRepos;
   if (repos && repos.length) {
     resolve(repos);
   } else {
     const data = await fetchFromURL('https://api.github.com/users/nielse63/repos?visibility=public&sort=pushed');
     const toSave = data.filter(repo => repo.name !== '312-Development');
-    completePromise(resolve, reject, toSave, 'saveRepos');
+    completePromise(resolve, toSave, 'saveRepos');
   }
 });
 
-export const createNPMUrl = (name) => {
+export const createNPMUrl = (name, endDate = new Date()) => {
   function stringFromDate(dateObject) {
     let month = dateObject.getMonth() + 1;
     let date = dateObject.getDate();
@@ -57,15 +44,14 @@ export const createNPMUrl = (name) => {
   }
 
   const threeMonths = 60 * 60 * 24 * 90 * 1000;
-  const end = new Date();
-  const start = new Date(Date.now() - threeMonths);
+  const start = new Date(endDate - threeMonths);
 
   const startString = stringFromDate(start);
-  const endString = stringFromDate(end);
+  const endString = stringFromDate(endDate);
   return `https://api.npmjs.org/downloads/range/${startString}:${endString}/${name}`;
 };
 
-const handleNPMData = (data = {}) => {
+export const handleNPMData = (data = {}) => {
   if (Array.isArray(data)) {
     return { downloads: [] };
   }
@@ -96,10 +82,10 @@ export const getNPMInfo = name => new Promise(async (resolve, reject) => {
 });
 
 export const getTweets = () => new Promise(async (resolve, reject) => {
-  const url = `${window.location.origin}/tweets`;
   try {
-    const data = await fetchFromURL(url);
-    completePromise(resolve, reject, data, 'saveTweets');
+    const data = await fetchFromURL('/tweets');
+    /* istanbul ignore next */
+    completePromise(resolve, data, 'saveTweets');
   } catch (e) {
     reject(e);
   }

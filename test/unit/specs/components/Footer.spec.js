@@ -17,7 +17,8 @@ describe('Footer.vue', () => {
     const vm = new Constructor({
       router,
     }).$mount();
-    const visibleLinks = router.options.routes.filter(route => !route.props.hidden);
+    const visibleLinks = router.options.routes
+      .filter(object => !object.props['hidden-from-nav']);
     expect(vm.$el.querySelectorAll('.footer__menu li').length).to.equal(visibleLinks.length);
   });
 });

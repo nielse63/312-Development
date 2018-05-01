@@ -2,37 +2,38 @@
 import Vue from 'vue';
 import store from '@/store';
 import ProjectsPanel from '@/components/Home/ProjectsPanel';
-import { isArray } from '../../../helpers';
+import { isArray, randomNumber } from '../../../helpers';
 
 function createVM() {
+  const repos = store.getters.getRepos;
+  const newRepos = repos.map(object => ({
+    ...object,
+    ...{
+      stargazers_count: randomNumber(),
+    },
+  }));
+  store.commit('saveRepos', newRepos);
   const Constructor = Vue.extend(ProjectsPanel);
-  return new Constructor({
-    store,
-  }).$mount();
+  return new Constructor({ store }).$mount();
 }
+
 let vm;
 
 describe('ProjectsPanel.vue', () => {
   beforeEach((done) => {
     window.IN_TESTING = true;
     vm = createVM();
-
-    setTimeout(() => {
-      done();
-    }, 1000);
+    setTimeout(() => { done(); }, 1000);
   });
 
   afterEach((done) => {
     vm.$destroy();
-    Vue.nextTick(() => {
-      done();
-    });
+    Vue.nextTick(() => { done(); });
   });
 
   it('should set repos', () => {
     expect(isArray(vm.repos)).to.be.true;
-    expect(vm.repos.length).to.be.above(0);
-    expect(vm.repos.length).to.be.below(4);
+    expect(vm.repos.length).to.equal(3);
   });
 
   it('should change on click', () => {

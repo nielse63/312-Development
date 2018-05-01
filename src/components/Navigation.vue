@@ -4,8 +4,13 @@
       <i class="fa fa-close" aria-hidden="true"></i>
     </button>
     <ul class="navigation__list">
-      <li v-for="route in routes">
-        <router-link :to="{ name: route.name }"><i v-bind:class="route.cls" aria-hidden="true"></i> {{route.title}}</router-link>
+      <li
+        v-for="route in routes"
+        :key="route.title"
+      >
+        <router-link :to="{ name: route.name }">
+          <i v-bind:class="route.cls" aria-hidden="true"></i> {{route.title}}
+        </router-link>
       </li>
     </ul>
   </aside>
@@ -44,7 +49,7 @@
 </script>
 
 <style lang="scss" scoped>
-  @import "../assets/styles/main";
+  @import '../assets/styles/main';
 
   .navigation {
     position: fixed;

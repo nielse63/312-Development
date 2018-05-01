@@ -21,7 +21,7 @@
 </script>
 
 <style lang="scss" scoped>
-  @import "../../assets/styles/components/banner";
+  @import '../../assets/styles/components/banner';
 
   .site-title {
     font-size: 62px;

@@ -52,7 +52,7 @@
 </script>
 
 <style lang="scss" scoped>
-  @import "../../assets/styles/main";
+  @import '../../assets/styles/main';
 
   .tweet {
     font-size: 14px;

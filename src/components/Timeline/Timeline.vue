@@ -95,7 +95,7 @@
 </script>
 
 <style lang="scss" scoped>
-  @import "../../assets/styles/main";
+  @import '../../assets/styles/main';
 
   .timeline {
     display: flex;

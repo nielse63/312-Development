@@ -63,13 +63,19 @@
 </script>
 
 <style lang="scss" scoped>
-  @import "../../assets/styles/main";
+  @import '../../assets/styles/main';
 
   .card {
     box-shadow: 0 0 0 1px $border-color;
     display: flex;
     flex-direction: column;
     width: 100%;
+
+    &__title {
+      font-size: 24px;
+      margin: 0;
+      border-bottom: 1px solid $border-color;
+    }
 
     &__image {
       margin: 0;
@@ -92,17 +98,6 @@
         left: 0;
       }
 
-      .card {
-        &__title {
-          position: absolute;
-          bottom: 1rem;
-          left: 1rem;
-          right: 1rem;
-          border: 0;
-          font-size: 20px;
-        }
-      }
-
       a {
         @include size(100%);
 
@@ -111,28 +106,16 @@
         top: 0;
         left: 0;
         right: 0;
-
-        &,
-        &:hover,
-        &:active {
-          color: $color-white;
-        }
       }
-    }
 
-    &__title {
-      font-size: 24px;
-      margin: 0;
-      border-bottom: 1px solid $border-color;
-
-      a {
-        display: block;
-        padding: 1rem;
-
-        &,
-        &:hover,
-        &:active {
-          color: inherit;
+      .card {
+        &__title {
+          position: absolute;
+          bottom: 1rem;
+          left: 1rem;
+          right: 1rem;
+          border: 0;
+          font-size: 20px;
         }
       }
     }
@@ -144,30 +127,34 @@
     }
 
     &__footer {
-      padding: 1rem;
       border-top: 1px solid $border-color;
       font-size: 12px;
       letter-spacing: 2px;
 
       a {
+        $link-after-left: 3px;
+
         font-weight: 900;
         text-transform: uppercase;
         color: $color-pink;
         position: relative;
-        display: inline-block;
+        display: block;
+        padding: 1rem;
+        background-color: fade-out($color-pink, 1);
+        transition: background-color $link-transition-duration;
 
         &:after {
           content: '\203A';
-          position: absolute;
-          right: 0;
-          transform: translate(calc(100% + 3px), -50%);
-          top: calc(50% - 1px);
-          transition: $link-transition-duration transform;
+          position: relative;
+          left: $link-after-left;
+          transition: left $link-transition-duration;
         }
 
         &:hover {
+          background-color: fade-out($color-pink, 0.95);
+
           &:after {
-            transform: translate(calc(100% + 6px), -50%);
+            left: ($link-after-left + 5px);
           }
         }
       }

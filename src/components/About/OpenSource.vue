@@ -34,6 +34,7 @@
         return array.map(repo => Object.assign({}, repo, {
           image: Octocat,
           url: repo.html_url,
+          readmore: 'View on GitHub',
         }));
       },
     },
