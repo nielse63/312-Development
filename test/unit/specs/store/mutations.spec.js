@@ -92,4 +92,26 @@ describe('mutations', () => {
       expect(state.modules['module-name']).to.equal(module.data);
     });
   });
+
+  describe('saveTweets', () => {
+    it('`saveTweets` should set the tweets object', () => {
+      expect(isArray(state.tweets)).to.be.true;
+
+      const tweets = [{
+        date: 'Today @ 3:47 pm',
+        text: 'Animating Progress https://t.co/BtMooIjCcm',
+        time: 'Mon Apr 30 20:47:30 +0000 2018',
+        url: 'https://twitter.com/ErikKyleNielsen/status/991056471117967400',
+      }, {
+        date: 'Today @ 12:26 pm',
+        text: 'Go Time 78: Hacking drones with Go with Ron Evans https://t.co/Bj6PRsqWtd',
+        time: 'Mon Apr 30 17:26:11 +0000 2018',
+        url: 'https://twitter.com/ErikKyleNielsen/status/991005807553720300',
+      }];
+
+      mutations.saveTweets(state, tweets);
+      expect(state.tweets.length).to.equal(tweets.length);
+      expect(state.tweets).to.equal(tweets);
+    });
+  });
 });

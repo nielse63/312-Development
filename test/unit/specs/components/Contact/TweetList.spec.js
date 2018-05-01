@@ -4,8 +4,6 @@ import store from '@/store';
 import router from '@/router';
 import TweetList from '@/components/Contact/TweetList';
 
-let vm;
-
 function createVM() {
   const Constructor = Vue.extend(TweetList);
   return new Constructor({
@@ -15,27 +13,8 @@ function createVM() {
 }
 
 describe('TweetList.vue', () => {
-  describe('get tweets', () => {
-    before(() => {
-      window.IN_TESTING = true;
-    });
-
-    beforeEach((done) => {
-      vm = createVM();
-      setTimeout(() => {
-        done();
-      }, 1000);
-    });
-
-    afterEach((done) => {
-      vm.$destroy();
-      Vue.nextTick(() => {
-        done();
-      });
-    });
-
-    it('should fetch tweets', () => {
-      expect(vm.tweets.length).to.equal(3);
-    });
+  it('should render correct contents', () => {
+    const vm = createVM();
+    expect(vm.$el).to.not.be.null;
   });
 });
