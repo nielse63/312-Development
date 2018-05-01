@@ -42,13 +42,15 @@
     },
     computed: {
       routes() {
-        return this.$router.options.routes.map((object) => {
-          const { name } = object;
-          return Object.assign({}, {
-            title: name.substr(0, 1).toUpperCase() + name.substr(1),
-            hidden: object.props.hidden || false,
-          }, object);
-        });
+        return this.$router.options.routes
+          .filter(object => !object.props['hidden-from-nav'])
+          .map((object) => {
+            const { name } = object;
+            return Object.assign({}, {
+              title: name.substr(0, 1).toUpperCase() + name.substr(1),
+              hidden: object.props.hidden || false,
+            }, object);
+          });
       },
     },
   };
