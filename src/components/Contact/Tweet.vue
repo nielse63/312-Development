@@ -56,13 +56,14 @@
 
   .tweet {
     font-size: 14px;
+    line-height: 1.5;
 
     p {
       margin: 0;
     }
 
     span {
-      color: $color-blue;
+      color: $color-pink;
       font-weight: bold;
       white-space: nowrap;
     }
