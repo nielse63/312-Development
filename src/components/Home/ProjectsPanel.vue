@@ -113,7 +113,7 @@
 </script>
 
 <style lang="scss" scoped>
-  @import "../../assets/styles/main";
+  @import '../../assets/styles/main';
 
   .col {
     &__left,
@@ -172,7 +172,7 @@
       background: none;
 
       &:after {
-        content: "";
+        content: '';
         position: absolute;
         bottom: 0;
         left: 0;
@@ -216,8 +216,5 @@
         }
       }
     }
-  }
-
-  .list-inline {
   }
 </style>

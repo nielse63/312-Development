@@ -1,7 +1,5 @@
 <template>
-  <div class="item">
-    <div class="item__svg" v-html="image"></div>
-  </div>
+  <div class="proficiency-item" v-html="image"></div>
 </template>
 
 <script>
@@ -20,24 +18,12 @@
   };
 </script>
 
-<style lang="scss">
-  .item {
-    svg {
-      max-width: 100px;
-      max-height: 155px;
-    }
-  }
-</style>
-
 <style lang="scss" scoped>
-  @import "../../assets/styles/main";
+  @import '../../assets/styles/main';
 
-  .item {
+  .proficiency-item {
     text-align: center;
-  }
-
-  .item,
-  img {
     max-height: 155px;
+    max-width: 100px;
   }
 </style>

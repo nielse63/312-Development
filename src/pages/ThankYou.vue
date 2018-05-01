@@ -26,7 +26,7 @@
 </script>
 
 <style lang="scss" scoped>
-  @import "../assets/styles/main";
+  @import '../assets/styles/main';
 
   a {
     color: $color-pink;

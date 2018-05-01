@@ -14,7 +14,7 @@
     "integration": "./bin/integration",
     "lint:js": "eslint --ext .js,.vue src/ server/ ./*.js --fix --cache",
     "lint:internal": "eslint test/ ./*.js --ignore-pattern '!.*.js' --fix --cache",
-    "lint:scss": "stylelint 'src/**/*.{vue,scss}' -s scss",
+    "lint:scss": "stylelint 'src/**/*.{vue,scss}' -s scss --cache",
     "start": "DEBUG=frontend* NODE_ENV=production node --harmony --max_old_space_size=460 --gc_interval=100 server",
     "heroku-postbuild": "yarn run build"
   },
@@ -137,6 +137,10 @@
   "lint-staged": {
     "*.{js,vue}": [
       "eslint --fix",
+      "git add"
+    ],
+    "*.vue": [
+      "stylelint",
       "git add"
     ],
     "*.scss": [

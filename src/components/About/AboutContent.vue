@@ -17,7 +17,7 @@
 </script>
 
 <style lang="scss" scoped>
-  @import "../../assets/styles/main";
+  @import '../../assets/styles/main';
 
   .about-me {
     font-size: 20px;
@@ -29,7 +29,7 @@
       position: relative;
 
       &:after {
-        content: "";
+        content: '';
         position: absolute;
         top: 0;
         left: -0.15em;

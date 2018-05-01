@@ -29,7 +29,7 @@
 </script>
 
 <style lang="scss" scoped>
-  @import "../assets/styles/components/banner";
+  @import '../assets/styles/components/banner';
 
   .title {
     @media (max-width: $tablet-width) {

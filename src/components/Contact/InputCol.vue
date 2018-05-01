@@ -76,25 +76,7 @@
 </script>
 
 <style lang="scss" scoped>
-  @import "../../assets/styles/main";
-
-  .col {
-    @include flex-item(100%);
-  }
-
-  .required {
-    font-weight: 700;
-    color: $color-red;
-  }
-
-  .invalid {
-    color: $color-red;
-
-    input,
-    textarea {
-      border-color: $color-red;
-    }
-  }
+  @import '../../assets/styles/main';
 
   label {
     font-weight: 700;
@@ -122,5 +104,23 @@
 
   textarea {
     height: 150px;
+  }
+
+  .col {
+    @include flex-item(100%);
+  }
+
+  .required {
+    font-weight: 700;
+    color: $color-red;
+  }
+
+  .invalid {
+    color: $color-red;
+
+    input,
+    textarea {
+      border-color: $color-red;
+    }
   }
 </style>

@@ -22,5 +22,6 @@ module.exports = {
       ignore: ['after-comment'],
     }],
     'no-missing-end-of-source-newline': true,
+    'no-empty-source': null,
   },
 };
