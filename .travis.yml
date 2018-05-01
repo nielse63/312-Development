@@ -1,4 +1,4 @@
-
+---
 language: node_js
 node_js:
   - "9"
@@ -21,3 +21,8 @@ jobs:
     - stage: tests
       script: yarn run unit
     - script: yarn run integration
+
+branches:
+  only:
+  - master
+  - develop
