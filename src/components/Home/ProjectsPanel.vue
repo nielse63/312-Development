@@ -11,11 +11,20 @@
           <aside class="projects">
             <h2 class="panel__title">Latest Work</h2>
             <ul class="projects__list">
-              <li v-for="(repo, index) in repos" :data-index="index">
+              <li
+                v-for="(repo, index) in repos"
+                :data-index="index"
+                :key="repo.title"
+              >
                 <button class="projects__button" v-bind:class="repo.cls" @click="onclick" :aria-label="repo.title">{{repo.title}}</button>
               </li>
             </ul>
-            <div v-for="(repo, index) in repos" v-show="activeIndex === index" class="projects__description">
+            <div
+              v-for="(repo, index) in repos"
+              v-show="activeIndex === index"
+              class="projects__description"
+              :key="repo.title"
+            >
               <p>{{repo.content}}</p>
               <ul class="projects__list">
                 <li><i class="fa fa-download" aria-hidden="true"></i> {{repo.downloads}} downloads</li>
@@ -30,7 +39,6 @@
 </template>
 
 <script>
-  import { mapGetters } from 'vuex';
   import { getGithubData, getNPMInfo } from '@/lib/data';
   import Octocat from '@/assets/images/octocat.png';
   import Image from '@/assets/images/logo.png';
@@ -43,11 +51,6 @@
         repos: [],
         image: Image,
       };
-    },
-    computed: {
-      ...mapGetters({
-        getModule: 'getModule',
-      }),
     },
     watch: {
       repos(newValue, oldValue) {
