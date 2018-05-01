@@ -18,6 +18,10 @@ env:
 
 jobs:
   include:
+    - stage: lint
+      script: yarn run lint:js
+    - script: yarn run lint:internal
+    - script: yarn run lint:scss
     - stage: tests
       script: yarn run unit
     - script: yarn run integration

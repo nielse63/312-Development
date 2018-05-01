@@ -20,3 +20,8 @@ fi
 
 # run tests
 node_modules/.bin/karma start test/unit/karma.conf.js
+
+# report coverage
+if [ "$TRAVIS" ]; then
+  cat coverage/lcov.info | node_modules/.bin/coveralls
+fi

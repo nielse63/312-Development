@@ -1,6 +1,23 @@
 #!/usr/bin/env bash
 set -e
 
+# colors
+cyan="\e[36m"
+yellow="\e[33m"
+reset="\e[0m"
+
+# functions
+function print_success {
+  local msg=$@
+  echo -e "$cyan  $msg$reset"
+  echo ''
+}
+function print_warning {
+  local msg=$@
+  echo -e "$yellow  $msg$reset"
+  echo ''
+}
+
 # set default env vars
 if [ ! "$NODE_ENV" ]; then
   export NODE_ENV=production
@@ -25,3 +42,7 @@ done;
 
 # alter output html
 node build/add-async.js
+
+# print success
+print_success 'Build complete'
+print_warning 'Tip: built files are meant to be served over an HTTP server.'
