@@ -26,7 +26,7 @@ branches:
   only:
   - master
   - develop
-before_deploy: "deploying to heroku"
+before_deploy: "echo 'deploying to heroku'"
 deploy:
   provider: heroku
   api_key:
