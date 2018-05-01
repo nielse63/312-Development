@@ -1,7 +1,6 @@
----
 language: node_js
 node_js:
-  - "node"
+- node
 sudo: false
 cache:
   yarn: true
@@ -9,24 +8,29 @@ dist: trusty
 addons:
   chrome: stable
 before_install:
-  - npm config set spin false
-
+- npm config set spin false
 env:
   global:
-    - JOBS=1
-    - NODE_ENV=test
-
+  - JOBS=1
+  - NODE_ENV=test
 jobs:
   include:
-    - stage: lint
-      script: yarn run lint:js
-    - script: yarn run lint:internal
-    - script: yarn run lint:scss
-    - stage: tests
-      script: yarn run unit
-    - script: yarn run integration
-
+  - stage: lint
+    script: yarn run lint:js
+  - script: yarn run lint:internal
+  - script: yarn run lint:scss
+  - stage: tests
+    script: yarn run unit
+  - script: yarn run integration
 branches:
   only:
   - master
   - develop
+before_deploy: "deploying to heroku"
+deploy:
+  provider: heroku
+  api_key:
+    secure: hcByCUevfXkPXQ3k89/t4GRSGNuiM+rnCdda4ghsLU7bGtb2lSuNFdcqMjhG4SyVrkzQI7ox8/PV8Wh6LsPc2p0pcY1G06MU2TQ/NkpjKmrE23t7EkUAxIMAi+rfrQmajOiy7CaxOdN7mMVkeuDy9YVD9WBC4Etrv0cfhN6tr/nZPqh9geO61JhZkKV1YcEKDq2Vo9RAOoL0PiNPk32weap+xp1Yx/PItMWbtYYAENpukEVwg+RkWb4XwFGJvYsRuLEdWvJFDlVF/hvrBlZzsFDNSLfcq8f7w5RxOLtZo8xp5vDaZF423VYxcoGA5OlYYRv7rKN+Qt//FSalLlpy8EufHvRZkuKlMVAD7Rx4/3K2UyiGnWUriyXREutHon65OtYQ3ipEfAvw87rkmYKXVftnvpeBV9DWl7kIvYbsIzLWn49tlEj5wS27uQWsDVlWV/CDWjjrUhLl96HBgDm8kzXFserVD3cnA7TgKAUGz5qXhsjrjH00diSuC9kYsZK/qr1FMKjM/OldOlfyOC0Mo/9Gr2KJeSXXS7tyLCKmSFegiBsa+mj/TTHyamv9OYreAKrbRddzPcpRM0JjH+de0SqRUiaJ145vXLy+mu1e66gLWbh5Uv3+wFY1M+tT13iWzxBBpE6K12K6dnfxqsjDuS7ocsqXn3DXc3tdJAD30Ug=
+  app:
+    master: three-one-two-prod
+    develop: three-one-two-staging
