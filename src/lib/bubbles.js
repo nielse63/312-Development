@@ -1,5 +1,8 @@
 
-import { scaleLinear, scaleQuantize, range, select, timer } from 'd3';
+import { scaleLinear, scaleQuantize } from 'd3-scale';
+import { range } from 'd3-array';
+import { select } from 'd3-selection';
+import { timer } from 'd3-timer';
 
 export function getSize() {
   const wrapper = document.getElementById('bubbles');

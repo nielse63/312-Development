@@ -1,13 +1,10 @@
-
+---
 language: node_js
 node_js:
-  - "node"
+  - "9"
 sudo: false
 cache:
   yarn: true
-  directories:
-    - $HOME/.npm
-    - node_modules
 dist: trusty
 addons:
   chrome: stable
@@ -24,3 +21,8 @@ jobs:
     - stage: tests
       script: yarn run unit
     - script: yarn run integration
+
+branches:
+  only:
+  - master
+  - develop

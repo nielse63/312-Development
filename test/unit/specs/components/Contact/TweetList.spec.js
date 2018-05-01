@@ -4,9 +4,11 @@ import store from '@/store';
 import router from '@/router';
 import TweetList from '@/components/Contact/TweetList';
 
-let vm;
+function createVM(tweets) {
+  if (tweets) {
+    store.commit('saveTweets', tweets);
+  }
 
-function createVM() {
   const Constructor = Vue.extend(TweetList);
   return new Constructor({
     store,
@@ -14,28 +16,49 @@ function createVM() {
   }).$mount();
 }
 
+let vm;
+
 describe('TweetList.vue', () => {
-  describe('get tweets', () => {
-    before(() => {
-      window.IN_TESTING = true;
-    });
-
-    beforeEach((done) => {
+  describe('exists', () => {
+    before((done) => {
       vm = createVM();
-      setTimeout(() => {
-        done();
-      }, 1000);
+      Vue.nextTick(() => { done(); });
     });
 
-    afterEach((done) => {
+    after((done) => {
       vm.$destroy();
-      Vue.nextTick(() => {
-        done();
-      });
+      Vue.nextTick(() => { done(); });
     });
 
-    it('should fetch tweets', () => {
-      expect(vm.tweets.length).to.equal(3);
+    it('should render correct contents', () => {
+      expect(vm.$el).to.not.be.null;
+    });
+  });
+
+  describe('gets existing tweets', () => {
+    before((done) => {
+      const tweets = [{
+        date: 'Today @ 3:47 pm',
+        text: 'Animating Progress https://t.co/BtMooIjCcm',
+        time: 'Mon Apr 30 20:47:30 +0000 2018',
+        url: 'https://twitter.com/ErikKyleNielsen/status/991056471117967400',
+      }, {
+        date: 'Today @ 12:26 pm',
+        text: 'Go Time 78: Hacking drones with Go with Ron Evans https://t.co/Bj6PRsqWtd',
+        time: 'Mon Apr 30 17:26:11 +0000 2018',
+        url: 'https://twitter.com/ErikKyleNielsen/status/991005807553720300',
+      }];
+      vm = createVM(tweets);
+      Vue.nextTick(() => { done(); });
+    });
+
+    after((done) => {
+      vm.$destroy();
+      Vue.nextTick(() => { done(); });
+    });
+
+    it('should render existing tweets', () => {
+      expect(vm.tweets.length).to.equal(2);
     });
   });
 });

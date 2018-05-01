@@ -10,9 +10,6 @@ export default {
   getRepo(state) {
     return name => state.repos.find(repo => repo.name === name);
   },
-  getModule(state) {
-    return name => state.modules[name];
-  },
   getTweets(state) {
     return state.tweets;
   },

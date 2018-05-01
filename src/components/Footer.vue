@@ -2,12 +2,18 @@
   <footer class="footer">
     <figure class="pattern" :data-lazy-load="pattern"></figure>
     <ul class="footer__menu">
-      <li v-for="route in routes" v-if="!route.hidden">
+      <li
+        v-for="route in routes"
+        :key="route.title"
+      >
         <router-link :to="{ name: route.name }">{{route.title}}</router-link>
       </li>
     </ul>
     <ul class="footer__links">
-      <li v-for="link in links">
+      <li
+        v-for="link in links"
+        :key="link.text"
+      >
         <external-link :text="link.text" :href="link.href" />
       </li>
     </ul>
@@ -42,20 +48,22 @@
     },
     computed: {
       routes() {
-        return this.$router.options.routes.map((object) => {
-          const { name } = object;
-          return Object.assign({}, {
-            title: name.substr(0, 1).toUpperCase() + name.substr(1),
-            hidden: object.props.hidden || false,
-          }, object);
-        });
+        return this.$router.options.routes
+          .filter(object => !object.props['hidden-from-nav'])
+          .map((object) => {
+            const { name } = object;
+            return Object.assign({}, {
+              title: name.substr(0, 1).toUpperCase() + name.substr(1),
+              hidden: object.props.hidden || false,
+            }, object);
+          });
       },
     },
   };
 </script>
 
 <style lang="scss" scoped>
-  @import "../assets/styles/main";
+  @import '../assets/styles/main';
 
   a {
     display: block;

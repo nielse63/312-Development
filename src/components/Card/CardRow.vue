@@ -30,7 +30,7 @@
 </script>
 
 <style lang="scss" scoped>
-  @import "../../assets/styles/main";
+  @import '../../assets/styles/main';
 
   .card-row {
     flex-wrap: wrap;
