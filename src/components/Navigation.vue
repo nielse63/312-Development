@@ -4,7 +4,10 @@
       <i class="fa fa-close" aria-hidden="true"></i>
     </button>
     <ul class="navigation__list">
-      <li v-for="route in routes">
+      <li
+        v-for="route in routes"
+        :key="route.title"
+      >
         <router-link :to="{ name: route.name }">
           <i v-bind:class="route.cls" aria-hidden="true"></i> {{route.title}}
         </router-link>

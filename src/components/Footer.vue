@@ -2,12 +2,18 @@
   <footer class="footer">
     <figure class="pattern" :data-lazy-load="pattern"></figure>
     <ul class="footer__menu">
-      <li v-for="route in routes" v-if="!route.hidden">
+      <li
+        v-for="route in routes"
+        :key="route.title"
+      >
         <router-link :to="{ name: route.name }">{{route.title}}</router-link>
       </li>
     </ul>
     <ul class="footer__links">
-      <li v-for="link in links">
+      <li
+        v-for="link in links"
+        :key="link.text"
+      >
         <external-link :text="link.text" :href="link.href" />
       </li>
     </ul>

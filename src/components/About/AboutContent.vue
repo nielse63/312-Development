@@ -20,45 +20,30 @@
   @import "../../assets/styles/main";
 
   .about-me {
-    $panel-font-size: 20px;
-    $link-color: lighten($color-pink, 15%);
-    $link-color-hover: $color-pink;
-
-    font-size: $panel-font-size;
+    font-size: 20px;
     line-height: 2;
 
     a {
-      $after-height: ($panel-font-size / 8);
-      $after-height-hover: ($after-height + 2px);
-
-      $link-color: lighten($color-pink, 15%);
-      $link-color-hover: $color-pink;
-
       color: $color-pink;
       font-weight: 700;
       position: relative;
-      transition: color $link-transition-duration;
-
-      &:hover {
-        color: $color-pink;
-      }
 
       &:after {
         content: "";
         position: absolute;
-        bottom: 0;
-        left: 0;
-        width: 100%;
-        height: $after-height;
-        background-color: $link-color;
-        transition: height $link-transition-duration,
-        background-color $link-transition-duration;
+        top: 0;
+        left: -0.15em;
+        right: -0.15em;
+        height: 100%;
+        background-color: fade-out($color-pink, 1);
+        transition: background-color $link-transition-duration,
       }
 
-      &:hover {
+      &:hover,
+      &:active,
+      &:focus {
         &:after {
-          height: $after-height-hover;
-          background-color: $link-color-hover;
+          background-color: fade-out($color-pink, 0.85);
         }
       }
     }
