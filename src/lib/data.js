@@ -7,19 +7,11 @@
   get npm download stats: https://api.npmjs.org/downloads/range/{date-start}:{date-end}/{repo}
 */
 
-import axios from 'axios';
 import store from '@/store';
 
 export const fetchFromURL = async (url) => {
-  try {
-    const { data } = await axios(url);
-    return data;
-  } catch (e) {
-    /* istanbul ignore next */
-    console.error(e);
-  }
-  /* istanbul ignore next */
-  return [];
+  const response = await fetch(url);
+  return response.json();
 };
 
 const completePromise = (resolve, reject, payload, method) => {
@@ -96,9 +88,8 @@ export const getNPMInfo = name => new Promise(async (resolve, reject) => {
 });
 
 export const getTweets = () => new Promise(async (resolve, reject) => {
-  const url = `${window.location.origin}/tweets`;
   try {
-    const data = await fetchFromURL(url);
+    const data = await fetchFromURL('/tweets');
     completePromise(resolve, reject, data, 'saveTweets');
   } catch (e) {
     reject(e);

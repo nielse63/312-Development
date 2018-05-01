@@ -144,30 +144,34 @@
     }
 
     &__footer {
-      padding: 1rem;
       border-top: 1px solid $border-color;
       font-size: 12px;
       letter-spacing: 2px;
 
       a {
+        $link-after-left: 3px;
+
         font-weight: 900;
         text-transform: uppercase;
         color: $color-pink;
         position: relative;
-        display: inline-block;
+        display: block;
+        padding: 1rem;
+        background-color: fade-out($color-pink, 1);
+        transition: background-color $link-transition-duration;
 
         &:after {
           content: '\203A';
-          position: absolute;
-          right: 0;
-          transform: translate(calc(100% + 3px), -50%);
-          top: calc(50% - 1px);
-          transition: $link-transition-duration transform;
+          position: relative;
+          left: $link-after-left;
+          transition: left $link-transition-duration;
         }
 
         &:hover {
+          background-color: fade-out($color-pink, 0.95);
+
           &:after {
-            transform: translate(calc(100% + 6px), -50%);
+            left: ($link-after-left + 5px);
           }
         }
       }
