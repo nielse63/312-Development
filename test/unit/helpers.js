@@ -12,7 +12,7 @@ export function isArray(object) {
 }
 
 export function isObject(object) {
-  return {}.toString.call(object) === '[object Object]';
+  return !!object && {}.toString.call(object) === '[object Object]';
 }
 
 export function isString(object) {

@@ -12,8 +12,8 @@
     "daemon:start": "pm2 start server/index.js --watch server/",
     "daemon:kill": "pm2 kill",
     "integration": "./bin/integration",
-    "lint:js": "eslint --ext .js,.vue src/ server/ ./*.js --fix",
-    "lint:internal": "eslint test/ ./*.js --ignore-pattern '!.*.js' --fix",
+    "lint:js": "eslint --ext .js,.vue src/ server/ ./*.js --fix --cache",
+    "lint:internal": "eslint test/ ./*.js --ignore-pattern '!.*.js' --fix --cache",
     "lint:scss": "stylelint 'src/**/*.{vue,scss}' -s scss",
     "start": "DEBUG=frontend* NODE_ENV=production node --harmony --max_old_space_size=460 --gc_interval=100 server",
     "heroku-postbuild": "yarn run build"

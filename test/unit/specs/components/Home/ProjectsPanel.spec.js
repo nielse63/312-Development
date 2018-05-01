@@ -16,6 +16,7 @@ function createVM() {
   const Constructor = Vue.extend(ProjectsPanel);
   return new Constructor({ store }).$mount();
 }
+
 let vm;
 
 describe('ProjectsPanel.vue', () => {
@@ -32,8 +33,7 @@ describe('ProjectsPanel.vue', () => {
 
   it('should set repos', () => {
     expect(isArray(vm.repos)).to.be.true;
-    expect(vm.repos.length).to.be.above(0);
-    expect(vm.repos.length).to.be.below(4);
+    expect(vm.repos.length).to.equal(3);
   });
 
   it('should change on click', () => {
