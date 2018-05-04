@@ -1,7 +1,7 @@
 // https://github.com/michael-ciniawsky/postcss-load-config
 
 module.exports = {
-  parser: 'postcss-scss',
+  parser:  'postcss-scss',
   plugins: {
     autoprefixer: {},
   },

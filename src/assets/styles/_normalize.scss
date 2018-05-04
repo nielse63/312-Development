@@ -8,7 +8,6 @@
  */
 
 html {
-  box-sizing: border-box;
   line-height: 1.15;
   min-height: 100vh;
 }
@@ -16,7 +15,7 @@ html {
 *,
 *::before,
 *::after {
-  box-sizing: inherit;
+  box-sizing: border-box;
 }
 
 /**
