@@ -1,0 +1,51 @@
+
+@function set-button-hover-color($color) {
+  @if (lightness($color) == 100) {
+    @return fade-out($color-white, 0.15);
+  } @else {
+    @return darken($color, 10%);
+  }
+}
+
+@mixin size($width, $height: $width) {
+  width: $width;
+  height: $height;
+}
+
+@mixin button($button-color: $color-blue) {
+  background-color: $button-color;
+  border: 2px solid $button-color;
+
+  &,
+  &:hover,
+  &:active,
+  &:focus {
+    color: $color-white;
+  }
+
+  &:hover,
+  &:active,
+  &:focus {
+    border-color: set-button-hover-color($button-color);
+    background-color: set-button-hover-color($button-color);
+  }
+}
+
+@mixin button-ghost($button-color: $color-blue) {
+  border-color: $button-color;
+  color: $button-color;
+
+  &,
+  &:hover,
+  &:active,
+  &:focus {
+    background-color: transparent;
+  }
+
+  &:hover,
+  &:active,
+  &:focus {
+    color: set-button-hover-color($button-color);
+    border-color: set-button-hover-color($button-color);
+  }
+}

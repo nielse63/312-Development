@@ -1,111 +1,55 @@
 <template>
-  <div id="app" v-bind:class="{ 'menu-open': isMenuOpen, app: true }" @click="onClick">
-    <app-header />
-    <main id="main" class="main">
-      <router-view></router-view>
-    </main>
-    <app-footer />
-    <navigation />
+  <div id="main" class="app">
+    <h1>Header h1</h1>
+    <h2>Header h2</h2>
+    <h3>Header h3</h3>
+    <h4>Header h4</h4>
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis vestibulum sodales nibh, in sollicitudin tortor facilisis id. Nullam vel eleifend neque. Duis eu ipsum feugiat, tristique risus non, tincidunt ante. Aenean quis elit a dolor mattis molestie nec nec metus. Nulla ipsum magna, pulvinar a sodales nec, porttitor sit amet risus. Maecenas iaculis pellentesque ligula vel maximus. Donec ac odio at tortor interdum vulputate semper vel elit. Mauris quis ligula dapibus, molestie ante sit amet, viverra justo.</p>
+    <p><a href="#">Praesent vitae lorem vitae nibh semper pellentesque ut vitae magna</a>.</p>
+    <p><i>Phasellus interdum non mauris a tempor. Duis dapibus ac sapien in finibus.</i></p>
+    <p><strong>Etiam tincidunt justo vel enim iaculis iaculis.</strong></p>
+    <p><button class="button">Button</button></p>
+    <p><a href="#" class="button">Link Button</a></p>
+    <p><button class="button--pink">Pink Button</button></p>
+    <p><button class="button--purple">Purple Button</button></p>
+    <p><button class="button__ghost">Button Ghost</button></p>
+    <p><button class="button__ghost--white">White Button Ghost</button></p>
+    <p>
+      <label for="">Label</label>
+      <input type="text" placeholder="Input">
+    </p>
+    <p>
+      <input type="checbox">
+      <input type="checbox">
+    </p>
+    <p>
+      <input type="radio">
+      <input type="radio">
+    </p>
+    <p>
+      <textarea>Textarea</textarea>
+    </p>
+    <p>
+      <select>
+        <option value="">-- Select --</option>
+        <option value="">Option</option>
+        <option value="">Option</option>
+        <option value="">Option</option>
+      </select>
+    </p>
   </div>
 </template>
 
 <script>
-  import { mapGetters } from 'vuex';
-  import lazyLoad from '@/lib/lazy-load';
-  import scrolling from '@/lib/scrolling';
-  import AppHeader from '@/components/Header';
-  import AppFooter from '@/components/Footer';
-  import Navigation from '@/components/Navigation';
-
   export default {
     name: 'app',
-    components: {
-      AppHeader,
-      AppFooter,
-      Navigation,
-    },
-    computed: {
-      ...mapGetters({
-        isMenuOpen: 'isMenuOpen',
-      }),
-    },
-    methods: {
-      canClick(target) {
-        /* istanbul ignore next */
-        return this.isMenuOpen && !target.closest('.navigation') && !target.closest('.header__button');
-      },
-      onClick({ target }) {
-        /* istanbul ignore next */
-        if (this.canClick(target)) {
-          this.$store.dispatch('toggleMenu');
-        }
-      },
-    },
-    updated() {
-      /* istanbul ignore next */
-      setTimeout(lazyLoad, 500);
-    },
     mounted() {
-      document.addEventListener('scrolling', () => {
-        /* istanbul ignore if */
-        if (this.isMenuOpen) {
-          this.$store.dispatch('toggleMenu');
-        }
-      }, false);
-
-      setTimeout(lazyLoad, 500);
-      scrolling();
+      // eslint-disable-next-line
+      console.log('howdy');
     },
   };
 </script>
 
 <style lang="scss">
-  @font-face {
-    font-family: 'FontAwesome';
-    src: url('assets/fonts/fontawesome-webfont.woff2?v=4.7.0') format('woff2'),
-         url('assets/fonts/fontawesome-webfont.woff?v=4.7.0') format('woff');
-    font-weight: normal;
-    font-style: normal;
-  }
-
-  @import 'assets/styles/common/reset';
-  @import 'assets/styles/common/globals';
-  @import 'assets/styles/shared/grid';
-  @import 'assets/styles/shared/links';
-  @import 'assets/styles/shared/visually-hidden';
-  @import 'assets/styles/shared/font-awesome';
-</style>
-
-<style lang="scss" scoped>
-  @import 'assets/styles/main';
-
-  .app {
-    max-width: 100vw;
-    overflow-x: hidden;
-  }
-
-  .main,
-  .footer {
-    position: relative;
-
-    &:after {
-      @include size(100%);
-
-      content: '';
-      opacity: 0;
-      visibility: hidden;
-      background-color: #111;
-      transition: opacity $transition-duration,
-                  visibility $transition-duration;
-      position: absolute;
-      top: 0;
-      left: 0;
-      z-index: 1;
-
-      .menu-open & {
-        opacity: 0.5;
-        visibility: visible;
-      }
-    }
-  }
+  @import "assets/styles/global";
 </style>
