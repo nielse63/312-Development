@@ -1,6 +1,7 @@
 
 .panel {
   padding: $panel-padding 0;
+  font-size: 18px;
 }
 
 .container {
@@ -22,5 +23,18 @@
 
   @media (min-width: $large-width) {
     width: $container-width;
+  }
+
+  .content {
+    padding: 0 5vw;
+    line-height: 2;
+
+    .right & {
+      padding-left: 20vw;
+    }
+
+    .left & {
+      padding-right: 20vw;
+    }
   }
 }

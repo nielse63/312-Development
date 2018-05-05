@@ -5,7 +5,7 @@
       <h2>{{subtitle}}</h2>
     </div>
     <div class="button-group">
-      <a href="#about" class="button button__ghost--white">
+      <a href="#about-me" class="button button__ghost--white">
         <font-awesome-icon :icon="icon" />
         Keep Reading
       </a>
@@ -18,12 +18,12 @@
   import faArrowDown from '@fortawesome/fontawesome-free-solid/faArrowDown';
 
   export default {
-    name: 'site-title',
+    name:       'site-title',
     components: {
       FontAwesomeIcon,
     },
     props: {
-      title: String,
+      title:    String,
       subtitle: String,
     },
     data() {
@@ -44,11 +44,12 @@
   }
 
   h1 {
-    font-family: $font-family-serif;
-    font-weight: 400;
-    font-style: italic;
+    // font-family: $font-family-serif;
+    // font-weight: 400;
+    // font-style: italic;
     font-size: 6rem;
     margin: 0;
+    color: $color-black;
   }
 
   h2 {

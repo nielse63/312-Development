@@ -24,7 +24,7 @@ server.on('exit', () => {
   console.log('Running the integration server');
 
   // execute runner
-  const runner = spawn('node_modules/.bin/mocha', ['test/specs/**.spec.js'], { stdio: 'inherit' });
+  const runner = spawn('node_modules/.bin/mocha', ['test/specs/**/**.spec.js'], { stdio: 'inherit' });
   runner.on('exit', onexit);
   runner.on('error', onerror);
 });

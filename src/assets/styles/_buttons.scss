@@ -1,9 +1,7 @@
 
-button,
-input[type='submit'],
-input[type='button'] {
+button {
   @include button;
-  font-weight: 700;
+  font-weight: 800;
   font-size: 12px;
   text-transform: uppercase;
   letter-spacing: 1px;
@@ -13,6 +11,12 @@ input[type='button'] {
   cursor: pointer;
   transition: $transition-duration;
   -webkit-appearance: none;
+
+  &:disabled {
+    // @include button($color-gray);
+    pointer-events: none;
+    opacity: 0.5;
+  }
 
   svg {
     margin-right: 0.25em;

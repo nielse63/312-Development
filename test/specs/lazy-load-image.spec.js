@@ -1,13 +1,13 @@
 
 const chai = require('chai');
-const { newBrowser, newPage, urlForPage } = require('../../browser');
+const { newBrowser, newPage, urlForPage } = require('../browser');
 
 const { expect } = chai;
 
 let browser;
 let page;
 
-describe('Intro', () => {
+describe('LazyLoadImage', () => {
   before(async () => {
     browser = await newBrowser();
     page = await newPage(browser);
@@ -19,7 +19,7 @@ describe('Intro', () => {
   });
 
   it('component should exist', async () => {
-    const componentLength = await page.$$eval('.intro', divs => divs.length);
+    const componentLength = await page.$$eval('.lazy-load-image', divs => divs.length);
     expect(componentLength).to.equal(1);
   });
 });

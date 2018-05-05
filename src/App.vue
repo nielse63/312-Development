@@ -1,33 +1,46 @@
 <template>
   <div id="main" class="app">
     <intro></intro>
-    <!-- <banner></banner>
-    <something-about></something-about>
-    <something-experience></something-experience>
-    <something-contact></something-contact>
-    <something-footer></something-footer> -->
+    <about-me></about-me>
+    <process></process>
+    <experience></experience>
+    <contact></contact>
+    <social-media></social-media>
   </div>
 </template>
 
 <script>
   import Intro from '@/components/panels/Intro';
-  // import SectionAbout from '@/components/SectionAbout';
-  // import SectionExperience from '@/components/SectionExperience';
-  // import SectionContact from '@/components/SectionContact';
-  // import SectionFooter from '@/components/SectionFooter';
+  import AboutMe from '@/components/panels/AboutMe';
+  import Process from '@/components/panels/Process';
+  import Experience from '@/components/panels/Experience';
+  import Contact from '@/components/panels/Contact';
+  import SocialMedia from '@/components/panels/SocialMedia';
+  // const AboutMe = () => ({
+  //   component: import(/* webpackChunkName: "about-me" */ '@/components/panels/AboutMe'),
+  // });
+  // const Process = () => ({
+  //   component: import(/* webpackChunkName: "process" */ '@/components/panels/Process'),
+  // });
+  // const Experience = () => ({
+  //   component: import(/* webpackChunkName: "experience" */ '@/components/panels/Experience'),
+  // });
+  // const Contact = () => ({
+  //   component: import(/* webpackChunkName: "contact" */ '@/components/panels/Contact'),
+  // });
+  // const SocialMedia = () => ({
+  //   component: import(/* webpackChunkName: "social-media" */ '@/components/panels/SocialMedia'),
+  // });
 
   export default {
     name:       'app',
     components: {
       Intro,
-      // SectionAbout,
-      // SectionExperience,
-      // SectionContact,
-      // SectionFooter,
-    },
-    mounted() {
-      // eslint-disable-next-line
-      console.log('howdy');
+      AboutMe,
+      Process,
+      Experience,
+      Contact,
+      SocialMedia,
     },
   };
 </script>
