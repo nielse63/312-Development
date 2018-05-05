@@ -6,15 +6,12 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { VueLoaderPlugin } = require('vue-loader');
 const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin');
-// const DashboardPlugin = require('webpack-dashboard/plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
-// const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 
 const NODE_ENV = process.env.NODE_ENV || 'development';
 const setPath = dir => path.resolve(__dirname, dir);
 const buildingForLocal = () => NODE_ENV === 'development';
 const IS_LOCAL = buildingForLocal();
-// const IS_DEV = NODE_ENV !== 'development';
 const PORT = process.env.PORT || 8080;
 
 // eslint-disable-next-line no-console
@@ -77,9 +74,6 @@ const config = {
     //   // },
     // },
   },
-  // resolveLoader: {
-  //   modules: [setPath('node_modules')],
-  // },
   resolve: {
     extensions: ['.js', '.vue', '.json'],
     alias:      {
@@ -91,7 +85,6 @@ const config = {
     historyApiFallback: true,
     noInfo:             false,
     inline:             true,
-    // quiet: true,
     hot:                true,
     port:               PORT,
   },
@@ -100,11 +93,6 @@ const config = {
     new VueLoaderPlugin(),
     extractHTML,
     extractCSS,
-    // new MiniCssExtractPlugin({
-    //   // filename: '[name].[chunkhash].css',
-    //   filename: IS_DEV ? '[name].css' : '[name].[hash].css',
-    //   chunkFilename: IS_DEV ? '[id].css' : '[id].[hash].css',
-    // }),
     new webpack.DefinePlugin({
       'process.env': {
         NODE_ENV: `"${NODE_ENV}"`,
@@ -128,26 +116,6 @@ const config = {
         options: {
           loaders: {
             js: 'babel-loader',
-            // scss: extractCSS.extract({
-            //   fallback: 'style-loader',
-            //   use:      ['css-loader', 'postcss-loader', 'sass-loader'],
-            // }),
-            // scss: !IS_LOCAL ?
-            //   extractCSS.extract({
-            //     fallback: 'style-loader',
-            //     use:      ['css-loader', 'postcss-loader', 'sass-loader'],
-            //   }) :
-            //   [{
-            //     loader: 'style-loader',
-            //   }, {
-            //     loader: 'css-loader',
-            //   }, {
-            //     loader: 'sass-loader',
-            //   }],
-            // options: {
-            //   minimize:  process.env.NODE_ENV === 'production',
-            //   sourceMap: IS_LOCAL,
-            // },
           },
           transformToRequire: {
             video:  ['src', 'poster'],
@@ -162,15 +130,6 @@ const config = {
         loader:  'babel-loader',
         include: [setPath('src'), setPath('test')],
       },
-      // {
-      //   test: /\.s?[ac]ss$/,
-      //   use: [
-      //     IS_DEV ? 'style-loader' : MiniCssExtractPlugin.loader,
-      //     'css-loader',
-      //     'postcss-loader',
-      //     'sass-loader',
-      //   ],
-      // },
       {
         test: /\.scss$/,
         use:  !IS_LOCAL ?
@@ -205,12 +164,8 @@ const config = {
 if (IS_LOCAL) {
   config.devtool = '#cheap-module-eval-source-map';
   config.plugins.concat([
-    // new DashboardPlugin({
-    //   port: PORT
-    // }),
     new FriendlyErrorsWebpackPlugin(),
   ]);
 }
-// console.log(config);
-// process.exit();
+
 module.exports = config;

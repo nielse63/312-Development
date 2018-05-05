@@ -5,39 +5,7 @@
 @import 'fonts';
 @import 'forms';
 @import 'buttons';
-
-body {
-  background: none;
-  background-image: linear-gradient(0deg, #eee, #fff);
-  background-repeat: no-repeat;
-}
-
-:focus {
-  outline: none;
-}
-
-a {
-  color: $color-blue;
-  transition: color $transition-duration;
-  text-decoration: none;
-
-  &:hover,
-  &:active,
-  &:focus {
-    color: darken($color-blue, 8%);
-  }
-}
-
-ul {
-  list-style-type: none;
-  padding: 0;
-  margin: 0 auto;
-}
-
-li {
-  display: block;
-  margin: 10px 0;
-}
+@import 'panels';
 
 .visually-hidden {
   position: absolute;

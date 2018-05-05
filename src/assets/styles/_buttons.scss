@@ -13,6 +13,10 @@ input[type='button'] {
   cursor: pointer;
   transition: $transition-duration;
   -webkit-appearance: none;
+
+  svg {
+    margin-right: 0.25em;
+  }
 }
 
 .button {

@@ -28,6 +28,18 @@ html {
   font-size: 16px;
 }
 
+:focus {
+  outline: none;
+}
+
+:first-child {
+  margin-top: 0;
+}
+
+:last-child {
+  margin-bottom: 0;
+}
+
 /* Sections
    ========================================================================== */
 
@@ -48,6 +60,9 @@ body {
 		'Apple Color Emoji',
 		'Segoe UI Emoji',
 		'Segoe UI Symbol';
+  background: none;
+  background-image: linear-gradient(0deg, #eee, #fff);
+  background-repeat: no-repeat;
 }
 
 /**
@@ -256,7 +271,7 @@ progress {
 // stylelint-disable-next-line no-descending-specificity
 ::-webkit-file-upload-button {
   -webkit-appearance: button;
-  font: inherit; 
+  font: inherit;
 }
 
 /* Interactive
@@ -276,4 +291,27 @@ details {
 
 summary {
   display: list-item;
+}
+
+ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0 auto;
+}
+
+li {
+  display: block;
+  margin: 10px 0;
+}
+
+a {
+  color: $color-blue;
+  transition: color $transition-duration;
+  text-decoration: none;
+
+  &:hover,
+  &:active,
+  &:focus {
+    color: darken($color-blue, 8%);
+  }
 }

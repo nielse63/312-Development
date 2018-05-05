@@ -47,4 +47,30 @@ module.exports = {
     'func-names':           'error',
     complexity:             ['error', 5],
   },
+  overrides: [
+    {
+      files: [
+        'bin/**',
+      ],
+      env: {
+        browser: false,
+        node: true,
+      },
+      rules: {
+        'import/no-extraneous-dependencies': 'off',
+        'no-console': 'off',
+      }
+    },
+    {
+      files: [
+        'test/**'
+      ],
+      env: {
+        mocha: true,
+      },
+      rules: {
+        'no-console': 'off',
+      }
+    }
+  ],
 };

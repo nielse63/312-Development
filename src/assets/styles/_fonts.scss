@@ -1,22 +1,18 @@
 
 html,
 body {
-  font-family: 'Karla', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  font-family: $font-family-sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   color: $text-color;
 }
 
-h1,
-h2 {
-  font-family: 'Cormorant Garamond', Georgia, 'Times New Roman', serif;
-  font-weight: 400;
-  font-style: italic;
-}
-
-h1 {
-  font-size: 3rem;
-}
+// h1 {
+//   font-family: $font-family-serif;
+//   font-weight: 400;
+//   font-style: italic;
+//   font-size: 3rem;
+// }
 
 h2 {
   font-size: 2rem;
@@ -28,6 +24,12 @@ h3 {
 
 h4 {
   font-size: 1rem;
+}
+
+h2,
+h3,
+h4 {
+  font-weight: 800;
 }
 
 p {

@@ -9,7 +9,22 @@ $color-gray: #7f8c8d;
 $color-green: #0eff00;
 
 $text-color: $color-black;
+$font-family-sans-serif: 'Open Sans', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+$font-family-serif: 'Cormorant Garamond', Georgia, 'Times New Roman', serif;
 
 $border-color: fade-out($color-black, 0.75);
 
 $transition-duration: 0.15s;
+
+$container-width: 80vw;
+
+$mobile-width: 420px;
+$tablet-width: 768px;
+$desktop-width: 1024px;
+$large-width: 1240px;
+$mobile-width-max: ($mobile-width - 1px);
+$tablet-width-max: ($tablet-width - 1px);
+$desktop-width-max: ($desktop-width - 1px);
+$large-width-max: ($large-width - 1px);
+
+$panel-padding: 3rem;
