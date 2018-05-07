@@ -9,6 +9,8 @@ const CleanWebpackPlugin = require('clean-webpack-plugin');
 const CompressionPlugin = require('compression-webpack-plugin');
 const FaviconsWebpackPlugin = require('favicons-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
+// const PrerenderSPAPlugin = require('prerender-spa-plugin');
+// const PuppeteerRenderer = require('@prerenderer/renderer-puppeteer');
 
 const NODE_ENV = process.env.NODE_ENV || 'development';
 const setPath = dir => path.resolve(__dirname, dir);
@@ -47,17 +49,14 @@ const extractHTML = new HtmlWebpackPlugin({
   inject:         true,
   template:       setPath('index.html'),
   chunksSortMode: 'dependency',
-  // minify:         {
-  //   removeComments:        true,
-  //   collapseWhitespace:    true,
-  //   removeAttributeQuotes: true,
-  // },
+  minify:         {
+    removeComments:        true,
+    collapseWhitespace:    true,
+    removeAttributeQuotes: true,
+  },
 
   // options
   title: 'Erik Nielsen | Tech Lead & Senior UI Engineer',
-  // environment:  NODE_ENV,
-  // isLocalBuild: IS_LOCAL,
-  // imgPath:      !IS_LOCAL ? 'assets' : 'src/assets',
 });
 
 const config = {
@@ -68,7 +67,7 @@ const config = {
   output: {
     path:       setPath('dist'),
     publicPath: '/',
-    filename:   '[name].[chunkhash].js',
+    filename:   IS_LOCAL ? '[name].js' : '[name].[chunkhash].js',
   },
   devtool:     IS_LOCAL ? '#cheap-module-eval-source-map' : '#source-map',
   stats,
@@ -147,6 +146,13 @@ const config = {
         twitter:      true,
       },
     }),
+    // new PrerenderSPAPlugin({
+    //   staticDir: setPath('dist'),
+    //   routes:    ['/'],
+    //   renderer:  new PuppeteerRenderer({
+    //     renderAfterElementExists: '#social-media',
+    //   }),
+    // }),
     new CompressionPlugin({
       test:      /\.(js|css|woff|woff2|svg|html)$/,
       algorithm: 'gzip',
