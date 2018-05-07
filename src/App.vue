@@ -1,8 +1,9 @@
 <template>
   <div id="main" class="app">
+    <link rel="preload" :href="trianglify" as="image">
     <intro></intro>
     <about-me></about-me>
-    <process></process>
+    <!-- <process></process> -->
     <experience></experience>
     <contact></contact>
     <social-media></social-media>
@@ -16,21 +17,12 @@
   import Experience from '@/components/panels/Experience';
   import Contact from '@/components/panels/Contact';
   import SocialMedia from '@/components/panels/SocialMedia';
-  // const AboutMe = () => ({
-  //   component: import(/* webpackChunkName: "about-me" */ '@/components/panels/AboutMe'),
-  // });
-  // const Process = () => ({
-  //   component: import(/* webpackChunkName: "process" */ '@/components/panels/Process'),
-  // });
-  // const Experience = () => ({
-  //   component: import(/* webpackChunkName: "experience" */ '@/components/panels/Experience'),
-  // });
-  // const Contact = () => ({
-  //   component: import(/* webpackChunkName: "contact" */ '@/components/panels/Contact'),
-  // });
-  // const SocialMedia = () => ({
-  //   component: import(/* webpackChunkName: "social-media" */ '@/components/panels/SocialMedia'),
-  // });
+  import trianglify from '@/assets/images/trianglify.svg';
+  // const AboutMe = () => ({ component: import('@/components/panels/AboutMe'), });
+  // const Process = () => ({ component: import('@/components/panels/Process'), });
+  // const Experience = () => ({ component: import('@/components/panels/Experience'), });
+  // const Contact = () => ({ component: import('@/components/panels/Contact'), });
+  // const SocialMedia = () => ({ component: import('@/components/panels/SocialMedia'), });
 
   export default {
     name:       'app',
@@ -41,6 +33,16 @@
       Experience,
       Contact,
       SocialMedia,
+    },
+    data() {
+      return {
+        trianglify,
+      };
+    },
+    created() {
+      const style = document.createElement('style');
+      style.innerText = `.panel:before { background-image: url('${this.trianglify}'); }`;
+      document.head.appendChild(style);
     },
   };
 </script>

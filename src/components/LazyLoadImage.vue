@@ -1,5 +1,9 @@
 <template>
   <img :alt="alt" :data-lazy-load="src">
+  <!-- <div class="lazy-load">
+    <link rel="preload" :href="src" as="image">
+    <img :alt="alt" :data-lazy-load="src">
+  </div> -->
 </template>
 
 <script>
@@ -9,35 +13,29 @@
       src: String,
       alt: String,
     },
-    data() {
-      return {
-        didMount: false,
-        loaded:   false,
-      };
-    },
     methods: {
-      setSrc() {
-        if (this.didMount) {
-          this.$el.src = this.src;
-        }
+      preload() {
+        const img = this.$el;
+        const link = document.createElement('link');
+        link.rel = 'preload';
+        link.as = 'image';
+        link.href = this.src;
+        img.offsetParent.insertBefore(link, img);
+        this.$nextTick(() => {
+          img.src = this.src;
+        });
       },
     },
-    created() {
-      const link = document.createElement('link');
-      link.rel = 'preload';
-      link.as = 'image';
-      link.href = this.src;
-      link.onload = () => {
-        this.loaded = true;
-        this.setSrc();
-      };
-      document.head.appendChild(link);
-    },
     mounted() {
-      this.didMount = true;
-      if (this.loaded) {
-        this.setSrc();
-      }
+      this.preload();
+      // this.$el.querySelector('img').src = this.src;
     },
   };
 </script>
+
+<style lang="scss" scoped>
+  // img {
+  //   max-width: 50vw;
+  // }
+</style>
+

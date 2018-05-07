@@ -5,7 +5,7 @@
       <h2>{{subtitle}}</h2>
     </div>
     <div class="button-group">
-      <a href="#about-me" class="button button__ghost--white">
+      <a href="#about-me" class="button button__ghost--white" @click.prevent="scrollto">
         <font-awesome-icon :icon="icon" />
         Keep Reading
       </a>
@@ -31,6 +31,18 @@
         icon: faArrowDown,
       };
     },
+    methods: {
+      scrollto({ target }) {
+        /* eslint-disable */
+        const id = target.getAttribute('href');
+        const { offsetTop } = document.querySelector(id);
+        window.scrollTo({
+          top: offsetTop,
+          left: 0,
+          behavior: 'smooth',
+        })
+      },
+    },
   };
 </script>
 
@@ -44,9 +56,6 @@
   }
 
   h1 {
-    // font-family: $font-family-serif;
-    // font-weight: 400;
-    // font-style: italic;
     font-size: 6rem;
     margin: 0;
     color: $color-black;

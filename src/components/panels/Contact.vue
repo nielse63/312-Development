@@ -1,5 +1,5 @@
 <template>
-  <section id="contact" class="contact panel">
+  <section id="contact" class="contact panel" :class="classObject">
     <article class="container">
       <panel-title
         :title="title"
@@ -15,9 +15,11 @@
 <script>
   import PanelTitle from '@/components/PanelTitle';
   import ContactForm from '@/components/contact/ContactForm';
+  import panelMixin from '@/mixins/panel-mixin';
 
   export default {
     name:       'contact',
+    mixins:     [panelMixin],
     components: {
       PanelTitle,
       ContactForm,
@@ -37,6 +39,10 @@
   .contact {
     color: $color-white;
     background-color: $color-black;
+
+    &:before {
+      opacity: 0.5;
+    }
   }
 
   .content--wide {

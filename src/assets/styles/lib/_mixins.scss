@@ -33,19 +33,19 @@
 
 @mixin button-ghost($button-color: $color-blue) {
   border-color: $button-color;
-  color: $button-color;
 
   &,
   &:hover,
   &:active,
   &:focus {
+    color: $color-white;
     background-color: transparent;
   }
 
   &:hover,
   &:active,
   &:focus {
-    color: set-button-hover-color($button-color);
     border-color: set-button-hover-color($button-color);
+    background-color: fade-out($button-color, 0.9);
   }
 }

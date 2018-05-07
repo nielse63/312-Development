@@ -1,6 +1,6 @@
 <template>
-  <section id="intro" class="panel intro">
-    <link rel="preload" :href="backgroundImage" as="image">
+  <section id="intro" class="panel panel--triangles intro">
+    <!-- <link rel="preload" :href="backgroundImage" as="image"> -->
     <div class="container">
       <site-title
         :title="title"
@@ -11,7 +11,7 @@
 </template>
 
 <script>
-  import trianglify from '@/assets/images/trianglify.svg';
+  // import trianglify from '@/assets/images/trianglify.svg';
   import SiteTitle from '@/components/SiteTitle';
 
   export default {
@@ -21,14 +21,14 @@
     },
     data() {
       return {
-        title:           'Erik Nielsen',
-        subtitle:        'Tech Lead & Senior UI Engineer',
-        backgroundImage: trianglify,
+        title:    'Erik Nielsen',
+        subtitle: 'Chicago Senior UI Engineer',
+        // backgroundImage: trianglify,
       };
     },
-    mounted() {
-      this.$el.style.cssText = `background-image: url(${this.backgroundImage});`;
-    },
+    // mounted() {
+    //   this.$el.style.cssText = `background-image: url(${this.backgroundImage});`;
+    // },
   };
 </script>
 
@@ -66,7 +66,7 @@
   .intro {
     padding-top: $intro-padding;
     padding-bottom: $intro-padding;
-    background-size: cover;
+    // background-size: cover;
     background-color: $color-green;
     animation: 50s intro-background infinite;
     color: $color-white;

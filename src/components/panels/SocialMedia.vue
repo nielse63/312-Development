@@ -1,12 +1,12 @@
 <template>
-  <div id="social-media" class="panel social-media">
+  <div id="social-media" class="panel social-media" :class="classObject">
     <article class="container">
       <panel-title
         :title="title"
       ></panel-title>
       <ul>
         <li v-for="link in links" :key="link.href">
-          <a :href="link.href" target="_blank">
+          <a :href="link.href" target="_blank" rel="noopener noreferrer">
             <lazy-load-image :src="link.image.src" :alt="link.image.alt"></lazy-load-image>
             <p>{{link.content}}</p>
           </a>
@@ -19,16 +19,18 @@
 <script>
   import PanelTitle from '@/components/PanelTitle';
   import LazyLoadImage from '@/components/LazyLoadImage';
-  import trianglify from '@/assets/images/trianglify.svg';
+  // import trianglify from '@/assets/images/trianglify.svg';
   import github from '@/assets/images/github.svg';
   import npm from '@/assets/images/npm.svg';
   import medium from '@/assets/images/medium.svg';
   import twitter from '@/assets/images/twitter.svg';
   import linkedin from '@/assets/images/linkedin.svg';
   import instagram from '@/assets/images/instagram.svg';
+  import panelMixin from '@/mixins/panel-mixin';
 
   export default {
     name:       'social-media',
+    mixins:     [panelMixin],
     components: {
       PanelTitle,
       LazyLoadImage,
@@ -88,9 +90,9 @@
         ],
       };
     },
-    mounted() {
-      this.$el.style.cssText = `background-image: url(${trianglify});`;
-    },
+    // mounted() {
+    //   this.$el.style.cssText = `background-image: url(${trianglify});`;
+    // },
   };
 </script>
 
@@ -151,6 +153,8 @@
     &:hover,
     &:active,
     &:focus {
+      background-color: transparent;
+
       &:after {
         transform: translate(0, 0);
       }

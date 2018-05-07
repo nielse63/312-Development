@@ -290,6 +290,37 @@ details {
  * Add the correct display in all browsers.
  */
 
+mark {
+  font-style: italic;
+  background-color: $color-blue;
+  color: inherit;
+  padding: 0 2px;
+}
+
+blockquote {
+  font-size: 1.75rem;
+  margin: 3rem 0 0;
+  font-family: $font-family-serif;
+  font-style: italic;
+  border-left: 3px solid $color-pink;
+  padding: 0.15em 0 0.25em 0.5em;
+
+  + * {
+    margin-top: 3rem;
+  }
+}
+
+cite {
+  display: block;
+  font-size: 0.85rem;
+  margin-top: 1.5em;
+  text-align: right;
+
+  &:before {
+    content: '\2014 ';
+  }
+}
+
 summary {
   display: list-item;
 }
@@ -306,13 +337,22 @@ li {
 }
 
 a {
-  color: $color-blue;
-  transition: color $transition-duration;
+  // color: $color-blue;
+  transition: $transition-duration;
   text-decoration: none;
+  border-bottom: 2px solid $color-blue;
+
+  &,
+  &:hover,
+  &:active,
+  &:focus {
+    color: inherit;
+  }
 
   &:hover,
   &:active,
   &:focus {
-    color: darken($color-blue, 8%);
+    background-color: fade-out($color-blue, 0.5);
+    // color: darken($color-blue, 8%);
   }
 }

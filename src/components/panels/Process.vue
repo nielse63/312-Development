@@ -1,12 +1,17 @@
 <template>
-  <section id="process" class="panel process" :class="dir">
+  <section id="process" class="panel panel--triangles process" :class="classObject">
     <article class="container">
       <panel-title
         :title="title"
         color="pink"
       ></panel-title>
       <div class="content">
-        <p>{{content}}</p>
+        <blockquote>
+          Michael always says 'K-I-S-S. Keep it simple, stupid.' Great advice. Hurts my feelings every time.
+          <cite>Dright Schrute</cite>
+        </blockquote>
+        <p>The one thing I always try to do in my work is to <mark>keep it as simple as possible</mark>. Early in my career I found myself creating solutions that were fancier than need be - needlessly creating a complex solution just because I could. But that didn't make the code more readable; it didn't help my team members, and din't help drive the project toward completion.</p>
+        <p>This paradigm applies to all facets of my job - whether it's writing code, improving team communication, or creating a new standard/styleguide. The aim is always to keep it simple and easy; <mark>creating a complex solution doesn't solve the problem</mark>.</p>
       </div>
     </article>
   </section>
@@ -14,17 +19,18 @@
 
 <script>
   import PanelTitle from '@/components/PanelTitle';
+  import panelMixin from '@/mixins/panel-mixin';
 
   export default {
     name:       'process',
+    mixins:     [panelMixin],
     components: {
       PanelTitle,
     },
     data() {
       return {
-        dir:     'left',
-        title:   'My Process/Philosophy',
-        content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam in nunc sollicitudin, suscipit ante id, vehicula neque. Aliquam porttitor, nibh vitae viverra vehicula, enim ex malesuada quam, rhoncus hendrerit quam velit quis magna. Mauris at felis eget est venenatis feugiat eu et nunc. Pellentesque nec libero accumsan odio euismod eleifend. Ut sodales ipsum nulla. Aenean tempor sem augue, ac pulvinar orci porta aliquam. Nam viverra lorem ac ipsum tempus, non imperdiet ex fringilla. Morbi eget consequat sem.',
+        dir:   'left',
+        title: 'My Process/Philosophy',
       };
     },
   };
@@ -34,8 +40,15 @@
   @import 'src/assets/styles/lib/vars';
 
   .process {
-    background: none;
     background-color: $color-black;
     color: $color-white;
+
+    &:before {
+      opacity: 0.5;
+    }
+  }
+
+  mark {
+    background-color: $color-pink;
   }
 </style>

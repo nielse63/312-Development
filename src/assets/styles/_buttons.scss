@@ -40,5 +40,9 @@ button {
     &--white {
       @include button-ghost($color-white);
     }
+
+    &--pink {
+      @include button-ghost($color-pink);
+    }
   }
 }

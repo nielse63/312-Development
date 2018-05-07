@@ -28,7 +28,7 @@ module.exports = {
   settings: {
     'import/resolver': {
       webpack: {
-        config: './webpack.config.js',
+        config: './build/webpack.base.conf.js',
       },
     },
   },
@@ -70,6 +70,21 @@ module.exports = {
       },
       rules: {
         'no-console': 'off',
+      }
+    },
+    {
+      files: [
+        'build/**'
+      ],
+      env: {
+        browser: false,
+        node: true,
+      },
+      rules: {
+        'no-console': 'off',
+        "import/no-extraneous-dependencies": ["error", {
+          "devDependencies": true,
+        }]
       }
     }
   ],
