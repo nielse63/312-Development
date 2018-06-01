@@ -26,8 +26,7 @@
     "http-server": "^0.11.1",
     "listr": "^0.14.0",
     "marked": "^0.3.19",
-    "vue": "^2.5.16",
-    "vuex": "^3.0.1"
+    "vue": "^2.5.16"
   },
   "devDependencies": {
     "@mapbox/stylelint-processor-arbitrary-tags": "^0.2.0",
@@ -86,7 +85,7 @@
   },
   "engines": {
     "node": ">= 9.x",
-    "npm": ">= 6.x",
+    "npm": ">= 5.6.x",
     "yarn": ">= 1.x"
   },
   "browserslist": [
@@ -95,11 +94,12 @@
     "not ie <= 10"
   ],
   "lint-staged": {
-    "*.{js,vue}": [
+    "*.js": [
       "eslint --fix",
       "git add"
     ],
     "*.vue": [
+      "eslint --fix",
       "stylelint",
       "git add"
     ],
