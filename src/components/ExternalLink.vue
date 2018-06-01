@@ -25,13 +25,5 @@
         return this.title || this.$slots.default[0].text;
       },
     },
-    // data() {
-    //   return {
-    //     title: '',
-    //   };
-    // },
-    // beforeMount() {
-    //   this.title = this.$slots.default[0].text;
-    // },
   };
 </script>

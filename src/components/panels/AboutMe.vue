@@ -12,10 +12,7 @@
       </div>
       <footer class="panel__footer">
         <p>
-          <a href="#experience" class="button button--purple">
-            <font-awesome-icon :icon="icon" />
-            My Experience
-          </a>
+          <scroll-to selector="#experience" class="button--purple">My Experience</scroll-to>
         </p>
       </footer>
     </article>
@@ -23,11 +20,9 @@
 </template>
 
 <script>
-  // import { getAboutPanelContent } from '@/lib/contentful';
   import PanelTitle from '@/components/PanelTitle';
   import ExternalLink from '@/components/ExternalLink';
-  import FontAwesomeIcon from '@fortawesome/vue-fontawesome';
-  import faArrowDown from '@fortawesome/fontawesome-free-solid/faArrowDown';
+  import ScrollTo from '@/components/ScrollTo';
   import content from '@/lib/content';
   import panelMixin from '@/mixins/panel-mixin';
 
@@ -37,21 +32,16 @@
     components: {
       PanelTitle,
       ExternalLink,
-      FontAwesomeIcon,
+      ScrollTo,
     },
     data() {
       return {
         dir:    'right',
         title:  'About Me',
-        icon:   faArrowDown,
         years:  9,
         resume: content.resume.link,
       };
     },
-    // async beforeMount() {
-    //   const response = await getAboutPanelContent();
-    //   console.log(response);
-    // },
   };
 </script>
 

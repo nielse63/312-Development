@@ -54,6 +54,9 @@
           email:   this.email,
           message: this.message,
         });
+        setTimeout(() => {
+          this.submitting = false;
+        }, 1000);
       },
     },
   };

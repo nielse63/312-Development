@@ -1,9 +1,5 @@
 <template>
   <img :alt="alt" :data-lazy-load="src">
-  <!-- <div class="lazy-load">
-    <link rel="preload" :href="src" as="image">
-    <img :alt="alt" :data-lazy-load="src">
-  </div> -->
 </template>
 
 <script>
@@ -28,14 +24,7 @@
     },
     mounted() {
       this.preload();
-      // this.$el.querySelector('img').src = this.src;
     },
   };
 </script>
-
-<style lang="scss" scoped>
-  // img {
-  //   max-width: 50vw;
-  // }
-</style>
 

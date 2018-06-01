@@ -14,7 +14,7 @@
 
 <script>
   import PanelTitle from '@/components/PanelTitle';
-  import ContactForm from '@/components/contact/ContactForm';
+  import ContactForm from '@/components/ContactForm';
   import panelMixin from '@/mixins/panel-mixin';
 
   export default {

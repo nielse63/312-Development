@@ -1,15 +1,13 @@
 <template>
   <div id="social-media" class="panel social-media" :class="classObject">
     <article class="container">
-      <panel-title
-        :title="title"
-      ></panel-title>
+      <panel-title :title="title"></panel-title>
       <ul>
         <li v-for="link in links" :key="link.href">
-          <a :href="link.href" target="_blank" rel="noopener noreferrer">
+          <external-link :href="link.href" :title="link.content">
             <lazy-load-image :src="link.image.src" :alt="link.image.alt"></lazy-load-image>
             <p>{{link.content}}</p>
-          </a>
+          </external-link>
         </li>
       </ul>
     </article>
@@ -19,7 +17,7 @@
 <script>
   import PanelTitle from '@/components/PanelTitle';
   import LazyLoadImage from '@/components/LazyLoadImage';
-  // import trianglify from '@/assets/images/trianglify.svg';
+  import ExternalLink from '@/components/ExternalLink';
   import github from '@/assets/images/github.svg';
   import npm from '@/assets/images/npm.svg';
   import medium from '@/assets/images/medium.svg';
@@ -34,6 +32,7 @@
     components: {
       PanelTitle,
       LazyLoadImage,
+      ExternalLink,
     },
     data() {
       return {
@@ -90,9 +89,6 @@
         ],
       };
     },
-    // mounted() {
-    //   this.$el.style.cssText = `background-image: url(${trianglify});`;
-    // },
   };
 </script>
 

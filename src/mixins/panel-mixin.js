@@ -2,6 +2,7 @@
 export default {
   data() {
     return {
+      dir:     'left',
       top:     0,
       lastY:   -1,
       inView:  false,

@@ -1,6 +1,5 @@
 <template>
   <section id="intro" class="panel panel--triangles intro">
-    <!-- <link rel="preload" :href="backgroundImage" as="image"> -->
     <div class="container">
       <site-title
         :title="title"
@@ -11,7 +10,6 @@
 </template>
 
 <script>
-  // import { getIntroPanelContent } from '@/lib/contentful';
   import content from '@/lib/content';
   import SiteTitle from '@/components/SiteTitle';
 
@@ -26,11 +24,6 @@
         subtitle: content.subtitle,
       };
     },
-    // async created() {
-    //   const { title, subtitle } = await getIntroPanelContent();
-    //   this.title = title;
-    //   this.subtitle = subtitle;
-    // },
   };
 </script>
 
