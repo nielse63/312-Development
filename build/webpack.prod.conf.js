@@ -2,7 +2,7 @@
 
 const webpack = require('webpack');
 const merge = require('webpack-merge');
-const CleanWebpackPlugin = require('clean-webpack-plugin');
+// const CleanWebpackPlugin = require('clean-webpack-plugin');
 const CompressionPlugin = require('compression-webpack-plugin');
 const FaviconsWebpackPlugin = require('favicons-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
@@ -12,12 +12,12 @@ const baseConfig = require('./webpack.base.conf');
 // const PuppeteerRenderer = require('@prerenderer/renderer-puppeteer');
 
 module.exports = merge(baseConfig, {
-  mode:  'production',
+  mode:   'production',
   output: {
-    filename:   '[name].[chunkhash].js',
+    filename: '[name].[chunkhash].js',
   },
   optimization: {
-    minimize: true,
+    minimize:     true,
     runtimeChunk: {
       name: 'manifest',
     },
@@ -36,9 +36,9 @@ module.exports = merge(baseConfig, {
     },
   },
   plugins: [
-    new CleanWebpackPlugin(['dist'], {
-      root: setPath('/'),
-    }),
+    // new CleanWebpackPlugin(['dist'], {
+    //   root: setPath('/'),
+    // }),
     new webpack.HashedModuleIdsPlugin(),
     new CopyWebpackPlugin([
       { from: 'static/**/*', to: setPath('dist'), flatten: true },

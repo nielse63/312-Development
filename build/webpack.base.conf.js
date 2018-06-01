@@ -1,7 +1,9 @@
 /* eslint-disable global-require */
 
 const webpack = require('webpack');
-const { NODE_ENV, IS_LOCAL, setPath, stats, extractCSS, extractHTML } = require('./build-config');
+const {
+  NODE_ENV, IS_LOCAL, setPath, stats, extractCSS, extractHTML,
+} = require('./build-config');
 const { VueLoaderPlugin } = require('vue-loader');
 
 module.exports = {
@@ -60,7 +62,15 @@ module.exports = {
         use:  !IS_LOCAL ?
           extractCSS.extract({
             fallback: 'style-loader',
-            use:      ['css-loader', 'postcss-loader', 'sass-loader'],
+            use:      [
+              {
+                loader:  'css-loader',
+                options: {
+                  minimize: NODE_ENV === 'production',
+                },
+              },
+              'postcss-loader',
+              'sass-loader'],
           }) :
           [{
             loader: 'style-loader',
@@ -71,10 +81,10 @@ module.exports = {
           }],
       },
       {
-        test:    /\.(jpe?g|png|gif|svg)$/i,
-        use: [
+        test: /\.(jpe?g|png|gif|svg)$/i,
+        use:  [
           {
-            loader: 'file-loader',
+            loader:  'file-loader',
             options: {
               name:            '[name].[hash].[ext]',
               useRelativePath: false,

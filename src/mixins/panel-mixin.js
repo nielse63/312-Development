@@ -2,9 +2,9 @@
 export default {
   data() {
     return {
-      top:    0,
-      lastY:  -1,
-      inView: false,
+      top:     0,
+      lastY:   -1,
+      inView:  false,
       ticking: false,
     };
   },
@@ -33,7 +33,9 @@ export default {
       window.requestAnimationFrame(this.onscroll);
     },
     onscroll() {
-      const { inView, ticking, lastY, top } = this;
+      const {
+        inView, ticking, lastY, top,
+      } = this;
       if (inView || ticking) { return; }
       this.ticking = true;
       const scrollBottom = window.scrollY + window.innerHeight;

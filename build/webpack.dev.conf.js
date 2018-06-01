@@ -8,7 +8,7 @@ module.exports = merge(baseConfig, {
   output: {
     filename: '[name].js',
   },
-  devtool: '#cheap-module-eval-source-map',
+  devtool:   '#cheap-module-eval-source-map',
   devServer: {
     stats,
     historyApiFallback: true,

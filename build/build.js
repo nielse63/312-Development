@@ -12,6 +12,10 @@ const tasks = new Listr([
     task:  () => shell('yarn run lint:scss'),
   },
   {
+    title: 'Removing existing build',
+    task:  () => shell('rm -rf dist/'),
+  },
+  {
     title: 'Building dist files',
     task:  ctx => shell('cross-env NODE_ENV=production webpack --mode production --colors')
       .then(({ stdout, stderr, code }) => {

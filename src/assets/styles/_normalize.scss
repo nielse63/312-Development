@@ -290,11 +290,17 @@ details {
  * Add the correct display in all browsers.
  */
 
-mark {
+mark,
+i {
+  color: $color-white;
+  background: none;
   font-style: italic;
-  background-color: $color-blue;
-  color: inherit;
-  padding: 0 2px;
+  font-weight: bold;
+  display: inline-block;
+  padding: 0 0.1em;
+  // background-color: $color-blue;
+  // color: inherit;
+  // padding: 0 2px;
 }
 
 blockquote {

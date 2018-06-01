@@ -42,8 +42,9 @@ module.exports = {
     'import/prefer-default-export': 'off',
 
     // allow debugger during development
+    'max-len':              [warnOrOff, 100],
     'key-spacing':          ['warn', { align: 'value' }],
-    'no-console':           ['error', { allow: ['error', 'warn'] }],
+    'no-console':           [errorOrOff, { allow: ['error', 'warn'] }],
     'func-names':           'error',
     complexity:             ['error', 5],
   },

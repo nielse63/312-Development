@@ -11,7 +11,8 @@
 </template>
 
 <script>
-  // import trianglify from '@/assets/images/trianglify.svg';
+  // import { getIntroPanelContent } from '@/lib/contentful';
+  import content from '@/lib/content';
   import SiteTitle from '@/components/SiteTitle';
 
   export default {
@@ -21,13 +22,14 @@
     },
     data() {
       return {
-        title:    'Erik Nielsen',
-        subtitle: 'Chicago Senior UI Engineer',
-        // backgroundImage: trianglify,
+        title:    content.title,
+        subtitle: content.subtitle,
       };
     },
-    // mounted() {
-    //   this.$el.style.cssText = `background-image: url(${this.backgroundImage});`;
+    // async created() {
+    //   const { title, subtitle } = await getIntroPanelContent();
+    //   this.title = title;
+    //   this.subtitle = subtitle;
     // },
   };
 </script>
@@ -66,9 +68,11 @@
   .intro {
     padding-top: $intro-padding;
     padding-bottom: $intro-padding;
-    // background-size: cover;
     background-color: $color-green;
     animation: 50s intro-background infinite;
     color: $color-white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
   }
 </style>

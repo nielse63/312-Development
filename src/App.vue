@@ -11,6 +11,7 @@
 </template>
 
 <script>
+  // import { getEntries, getPanelsContent } from '@/lib/contentful';
   import Intro from '@/components/panels/Intro';
   import AboutMe from '@/components/panels/AboutMe';
   import Process from '@/components/panels/Process';
@@ -18,11 +19,6 @@
   import Contact from '@/components/panels/Contact';
   import SocialMedia from '@/components/panels/SocialMedia';
   import trianglify from '@/assets/images/trianglify.svg';
-  // const AboutMe = () => ({ component: import('@/components/panels/AboutMe'), });
-  // const Process = () => ({ component: import('@/components/panels/Process'), });
-  // const Experience = () => ({ component: import('@/components/panels/Experience'), });
-  // const Contact = () => ({ component: import('@/components/panels/Contact'), });
-  // const SocialMedia = () => ({ component: import('@/components/panels/SocialMedia'), });
 
   export default {
     name:       'app',
@@ -37,6 +33,10 @@
     data() {
       return {
         trianglify,
+        // entries: {
+        //   about:       null,
+        //   expierience: null,
+        // },
       };
     },
     created() {
@@ -44,6 +44,32 @@
       style.innerText = `.panel:before { background-image: url('${this.trianglify}'); }`;
       document.head.appendChild(style);
     },
+    // async beforeMount() {
+    //   const entries = await getEntries();
+    //   console.log(entries);
+    //   const response = await getPanelsContent();
+    //   const aboutContent = response.filter(object => object.title.toLowerCase().startsWith('about'))[0];
+    //   const experienceContent = response.filter(object => object.title.toLowerCase().startsWith('experience'))[0];
+    //   this.entries = {
+    //     about:      aboutContent,
+    //     experience: experienceContent,
+    //   };
+    //   console.log(this.entries);
+    // },
+    // mounted() {
+    //   /* eslint-disable no-console */
+    //   const client = createClient({
+    //     space:       'o4irotzruet8',
+    //     accessToken: 'b162fa3e196303db85b6f21ca47b754d76d21eecbeedf012e66ed1e866747fae',
+    //   });
+    //   console.log(client);
+    //   client.getContentTypes()
+    //     .then((response) => {
+    //       console.log(response);
+    //     }).catch((err) => {
+    //       console.error(err);
+    //     });
+    // },
   };
 </script>
 

@@ -7,7 +7,7 @@
         color="purple"
       ></panel-title>
       <div class="content">
-        <p>I'm a Senior User-Interface Software Engineer and Tech Lead in Chicago, currently creating great user experiences at <a href="#">Enova</a>. I’ve been in the industry for over {{years}} years, and my experience spans from Node to Ruby, and everything in between. <a href="#">Resume here</a>.</p>
+        <p>I'm a <mark>Senior User-Interface Software Engineer</mark> and <mark>Tech Lead</mark> in Chicago, currently creating great user experiences at <external-link href="https://enova.com/">Enova</external-link>. I’ve been in the industry for over {{years}} years, and my experience spans from Node to Ruby, and everything in between. <external-link :href="resume" title="View my resume online">Resume Here</external-link>.</p>
         <p>Aside from writing code I'm an <a href="#">avid traveller</a>, triathlete and long-distance runner, and a huge fan of hiking/camping/fishing (anytning outdoors).</p>
       </div>
       <footer class="panel__footer">
@@ -23,9 +23,12 @@
 </template>
 
 <script>
+  // import { getAboutPanelContent } from '@/lib/contentful';
   import PanelTitle from '@/components/PanelTitle';
+  import ExternalLink from '@/components/ExternalLink';
   import FontAwesomeIcon from '@fortawesome/vue-fontawesome';
   import faArrowDown from '@fortawesome/fontawesome-free-solid/faArrowDown';
+  import content from '@/lib/content';
   import panelMixin from '@/mixins/panel-mixin';
 
   export default {
@@ -33,16 +36,22 @@
     mixins:     [panelMixin],
     components: {
       PanelTitle,
+      ExternalLink,
       FontAwesomeIcon,
     },
     data() {
       return {
-        dir:   'right',
-        title: 'About Me',
-        icon:  faArrowDown,
-        years: 9,
+        dir:    'right',
+        title:  'About Me',
+        icon:   faArrowDown,
+        years:  9,
+        resume: content.resume.link,
       };
     },
+    // async beforeMount() {
+    //   const response = await getAboutPanelContent();
+    //   console.log(response);
+    // },
   };
 </script>
 
@@ -55,5 +64,9 @@
     &:before {
       opacity: 0.5;
     }
+  }
+
+  mark {
+    background-color: fade-out($color-blue, 0.1);
   }
 </style>
