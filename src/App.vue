@@ -1,19 +1,18 @@
 <template>
   <div id="main" class="app">
-    <link rel="preload" :href="trianglify" as="image">
+    <router-view></router-view>
+    <!-- <link rel="preload" :href="trianglify" as="image">
     <intro></intro>
     <about-me></about-me>
-    <!-- <process></process> -->
     <experience></experience>
     <contact></contact>
-    <social-media></social-media>
+    <social-media></social-media> -->
   </div>
 </template>
 
 <script>
   import Intro from '@/components/panels/Intro';
   import AboutMe from '@/components/panels/AboutMe';
-  import Process from '@/components/panels/Process';
   import Experience from '@/components/panels/Experience';
   import Contact from '@/components/panels/Contact';
   import SocialMedia from '@/components/panels/SocialMedia';
@@ -24,7 +23,6 @@
     components: {
       Intro,
       AboutMe,
-      Process,
       Experience,
       Contact,
       SocialMedia,
@@ -44,4 +42,7 @@
 
 <style lang="scss">
   @import 'assets/styles/global';
+  body {
+    font-family: 'Arial';
+  }
 </style>

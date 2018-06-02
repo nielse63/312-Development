@@ -3,25 +3,23 @@
 const production = process.env.NODE_ENV !== 'development';
 const warnOrOff = production ? 'warn' : 'off';
 const errorOrOff = production ? 'error' : 'off';
+const errorOrWarn = production ? 'error' : 'warn';
 
 module.exports = {
-  root: true,
-  parser: 'babel-eslint',
+  root:          true,
+  parser:        'babel-eslint',
   parserOptions: {
-    // parser: 'babel-eslint',
     ecmaVersion: 2017,
-    sourceType: 'module',
+    sourceType:  'module',
   },
   env: {
     browser: true,
   },
   extends: [
     'airbnb-base',
-    // 'plugin:vue/essential',
   ],
   // required to lint *.vue files
   plugins: [
-    // 'vue',
     'html',
   ],
   // check if imports actually resolve
@@ -36,17 +34,19 @@ module.exports = {
   rules: {
     // don't require .vue extension when importing
     'import/extensions': ['error', 'always', {
-      js: 'never',
+      js:  'never',
       vue: 'never',
     }],
     'import/prefer-default-export': 'off',
 
     // allow debugger during development
-    'max-len':              [warnOrOff, 100],
-    'key-spacing':          ['warn', { align: 'value' }],
-    'no-console':           [errorOrOff, { allow: ['error', 'warn'] }],
-    'func-names':           'error',
-    complexity:             ['error', 5],
+    // 'max-len':              [warnOrOff, 100],
+    'max-len':            'off',
+    'key-spacing':        ['warn', { align: 'value' }],
+    'no-console':         [errorOrOff, { allow: ['error', 'warn'] }],
+    'func-names':         'error',
+    complexity:           ['error', 5],
+    'no-mixed-operators': [errorOrWarn],
   },
   overrides: [
     {
@@ -55,38 +55,38 @@ module.exports = {
       ],
       env: {
         browser: false,
-        node: true,
+        node:    true,
       },
       rules: {
         'import/no-extraneous-dependencies': 'off',
-        'no-console': 'off',
-      }
+        'no-console':                        'off',
+      },
     },
     {
       files: [
-        'test/**'
+        'test/**',
       ],
       env: {
         mocha: true,
       },
       rules: {
         'no-console': 'off',
-      }
+      },
     },
     {
       files: [
-        'build/**'
+        'build/**',
       ],
       env: {
         browser: false,
-        node: true,
+        node:    true,
       },
       rules: {
-        'no-console': 'off',
-        "import/no-extraneous-dependencies": ["error", {
-          "devDependencies": true,
-        }]
-      }
-    }
+        'no-console':                        'off',
+        'import/no-extraneous-dependencies': ['error', {
+          devDependencies: true,
+        }],
+      },
+    },
   ],
 };

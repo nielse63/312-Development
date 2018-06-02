@@ -2,22 +2,34 @@
 
 const webpack = require('webpack');
 const merge = require('webpack-merge');
-// const CleanWebpackPlugin = require('clean-webpack-plugin');
 const CompressionPlugin = require('compression-webpack-plugin');
 const FaviconsWebpackPlugin = require('favicons-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
+const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
+// const DashboardPlugin = require('webpack-dashboard/plugin');
 const { setPath, extractCSS } = require('./build-config');
 const baseConfig = require('./webpack.base.conf');
 // const PrerenderSPAPlugin = require('prerender-spa-plugin');
 // const PuppeteerRenderer = require('@prerenderer/renderer-puppeteer');
 
-module.exports = merge(baseConfig, {
+const prodConfig = merge(baseConfig, {
   mode:   'production',
   output: {
     filename: '[name].[chunkhash].js',
+    // chunkFilename: '[name].[chunkhash].js',
   },
   optimization: {
-    minimize:     true,
+    // nodeEnv: 'production',
+    minimize:  true,
+    minimizer: [
+      new UglifyJsPlugin({
+        cache:     true,
+        parallel:  true,
+        sourceMap: true, // set to true if you want JS source maps
+      }),
+      new OptimizeCSSAssetsPlugin({}),
+    ],
     runtimeChunk: {
       name: 'manifest',
     },
@@ -36,9 +48,6 @@ module.exports = merge(baseConfig, {
     },
   },
   plugins: [
-    // new CleanWebpackPlugin(['dist'], {
-    //   root: setPath('/'),
-    // }),
     new webpack.HashedModuleIdsPlugin(),
     new CopyWebpackPlugin([
       { from: 'static/**/*', to: setPath('dist'), flatten: true },
@@ -81,5 +90,8 @@ module.exports = merge(baseConfig, {
       asset:     '[path].gz[query]',
     }),
     extractCSS,
+    // new DashboardPlugin(),
   ],
 });
+
+module.exports = prodConfig;

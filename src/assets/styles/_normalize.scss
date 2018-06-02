@@ -292,15 +292,17 @@ details {
 
 mark,
 i {
-  color: $color-white;
+  // color: $color-white;
   background: none;
   font-style: italic;
   font-weight: bold;
-  display: inline-block;
-  padding: 0 0.1em;
+  // display: inline-block;
+  // padding: 0 0.1em;
   // background-color: $color-blue;
   // color: inherit;
   // padding: 0 2px;
+  opacity: 0.85;
+  color: inherit;
 }
 
 blockquote {

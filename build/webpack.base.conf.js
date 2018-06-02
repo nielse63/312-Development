@@ -1,10 +1,12 @@
 /* eslint-disable global-require */
 
 const webpack = require('webpack');
-const {
-  NODE_ENV, IS_LOCAL, setPath, stats, extractCSS, extractHTML,
-} = require('./build-config');
 const { VueLoaderPlugin } = require('vue-loader');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+
+const {
+  NODE_ENV, IS_LOCAL, IN_DEV, setPath, stats, extractCSS, extractHTML,
+} = require('./build-config');
 
 module.exports = {
   entry: {
@@ -59,26 +61,32 @@ module.exports = {
       },
       {
         test: /\.scss$/,
-        use:  !IS_LOCAL ?
-          extractCSS.extract({
-            fallback: 'style-loader',
-            use:      [
-              {
-                loader:  'css-loader',
-                options: {
-                  minimize: NODE_ENV === 'production',
-                },
-              },
-              'postcss-loader',
-              'sass-loader'],
-          }) :
-          [{
-            loader: 'style-loader',
-          }, {
-            loader: 'css-loader',
-          }, {
-            loader: 'sass-loader',
-          }],
+        use:  [
+          IN_DEV ? 'style-loader' : MiniCssExtractPlugin.loader,
+          'css-loader',
+          'postcss-loader',
+          'sass-loader',
+        ],
+        // use:  IN_DEV ?
+        //   extractCSS.extract({
+        //     fallback: 'style-loader',
+        //     use:      [
+        //       {
+        //         loader:  'css-loader',
+        //         options: {
+        //           minimize: NODE_ENV === 'production',
+        //         },
+        //       },
+        //       'postcss-loader',
+        //       'sass-loader'],
+        //   }) :
+        //   [{
+        //     loader: 'style-loader',
+        //   }, {
+        //     loader: 'css-loader',
+        //   }, {
+        //     loader: 'sass-loader',
+        //   }],
       },
       {
         test: /\.(jpe?g|png|gif|svg)$/i,

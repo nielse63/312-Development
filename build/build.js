@@ -5,11 +5,11 @@ const Listr = require('listr');
 const tasks = new Listr([
   {
     title: 'Linting JS',
-    task:  () => shell('yarn run lint:js'),
+    task:  () => shell('cross-env NODE_ENV=production yarn run lint:js'),
   },
   {
     title: 'Linting SCSS',
-    task:  () => shell('yarn run lint:scss'),
+    task:  () => shell('cross-env NODE_ENV=production yarn run lint:scss'),
   },
   {
     title: 'Removing existing build',

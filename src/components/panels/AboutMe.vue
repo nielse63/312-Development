@@ -56,7 +56,7 @@
     }
   }
 
-  mark {
-    background-color: fade-out($color-blue, 0.1);
-  }
+  // mark {
+  //   background-color: fade-out($color-blue, 0.1);
+  // }
 </style>
