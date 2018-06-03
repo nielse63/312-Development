@@ -11,6 +11,7 @@
     "lint:js": "eslint --ext .js,.vue ./*.js src/ --fix --cache",
     "prelint:scss": "stylelint 'src/**/*.scss' -s scss --fix --cache",
     "lint:scss": "stylelint 'src/**/*.vue' -s scss --cache",
+    "generate": "vg",
     "pretest": "yarn run build",
     "test": "cross-env NODE_ENV=test node test/runner.js"
   },
@@ -77,6 +78,7 @@
     "stylelint-config-recommended-scss": "^3.2.0",
     "stylelint-scss": "^3.1.0",
     "uglifyjs-webpack-plugin": "^1.2.5",
+    "vue-generator": "^1.1.0",
     "vue-loader": "^15.0.7",
     "vue-style-loader": "^4.1.0",
     "vue-template-compiler": "^2.5.16",

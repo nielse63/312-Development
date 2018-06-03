@@ -51,19 +51,6 @@ module.exports = {
   overrides: [
     {
       files: [
-        'bin/**',
-      ],
-      env: {
-        browser: false,
-        node:    true,
-      },
-      rules: {
-        'import/no-extraneous-dependencies': 'off',
-        'no-console':                        'off',
-      },
-    },
-    {
-      files: [
         'test/**',
       ],
       env: {
@@ -86,6 +73,14 @@ module.exports = {
         'import/no-extraneous-dependencies': ['error', {
           devDependencies: true,
         }],
+      },
+    },
+    {
+      files: [
+        'src/lib/canvas/**',
+      ],
+      rules: {
+        'no-param-reassign': 'off',
       },
     },
   ],
