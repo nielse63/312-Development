@@ -5,7 +5,7 @@ const { VueLoaderPlugin } = require('vue-loader');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 const {
-  NODE_ENV, IS_LOCAL, IN_DEV, setPath, stats, extractCSS, extractHTML,
+  NODE_ENV, IN_DEV, setPath, stats, extractHTML,
 } = require('./build-config');
 
 module.exports = {
@@ -67,26 +67,6 @@ module.exports = {
           'postcss-loader',
           'sass-loader',
         ],
-        // use:  IN_DEV ?
-        //   extractCSS.extract({
-        //     fallback: 'style-loader',
-        //     use:      [
-        //       {
-        //         loader:  'css-loader',
-        //         options: {
-        //           minimize: NODE_ENV === 'production',
-        //         },
-        //       },
-        //       'postcss-loader',
-        //       'sass-loader'],
-        //   }) :
-        //   [{
-        //     loader: 'style-loader',
-        //   }, {
-        //     loader: 'css-loader',
-        //   }, {
-        //     loader: 'sass-loader',
-        //   }],
       },
       {
         test: /\.(jpe?g|png|gif|svg)$/i,
