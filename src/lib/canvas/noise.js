@@ -1,7 +1,10 @@
+/* eslint-disable no-bitwise, complexity, no-mixed-operators */
 
 class Grad {
   constructor(x, y, z) {
-    this.x = x; this.y = y; this.z = z;
+    this.x = x;
+    this.y = y;
+    this.z = z;
   }
 
   dot2(x, y) {

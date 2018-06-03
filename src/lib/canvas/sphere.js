@@ -37,8 +37,9 @@ export default () => {
     let i = 0;
     while (i < verticesAmount) {
       const vector = new THREE.Vector3();
-      vector.x = Math.cos(i / verticesAmount * Math.PI * 2);
-      vector.z = Math.sin(i / verticesAmount * Math.PI * 2);
+      const percentage = i / verticesAmount;
+      vector.x = Math.cos(percentage * Math.PI * 2);
+      vector.z = Math.sin(percentage * Math.PI * 2);
       vector.clone = vector.clone();
       geometry.vertices.push(vector);
       i += 1;
@@ -54,11 +55,11 @@ export default () => {
       if (line.geometry.y > radius * 2) {
         line.geometry.y = 0;
       }
-      const radiusHeight = Math.sqrt(line.geometry.y * (2 * radius - line.geometry.y));
+      const radiusHeight = Math.sqrt(line.geometry.y * ((2 * radius) - line.geometry.y));
       line.geometry.vertices.forEach((vector) => {
         const ratio = noise(
           vector.x * 0.009,
-          vector.z * 0.009 + a * 0.0006,
+          (vector.z * 0.009) + (a * 0.0006),
           line.geometry.y * 0.009,
         ) * 15;
         vector.copy(vector.clone);

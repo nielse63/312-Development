@@ -1,5 +1,5 @@
 <template>
-  <div class="contact">
+  <div class="portfolio">
     <intro-canvas
       :type="type"
       :title="title"
@@ -11,14 +11,14 @@
 import IntroCanvas from '@/components/IntroCanvas';
 
 export default {
-  name:       'Cbout',
+  name:       'Portfolio',
   components: {
     IntroCanvas,
   },
   data() {
     return {
-      type:  'cubes',
-      title: 'Contact Me',
+      type:  'waves',
+      title: 'Portfolio',
     };
   },
 };
@@ -27,7 +27,7 @@ export default {
 <style lang="scss" scoped>
 @import '../assets/styles/lib/vars';
 
-.contact {
+.portfolio {
   // ...
 }
 </style>

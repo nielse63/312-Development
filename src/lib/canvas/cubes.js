@@ -7,6 +7,7 @@ import {
 import noise from '@/lib/canvas/noise';
 import { getCanvas } from '@/lib/canvas/utils';
 
+// eslint-disable-next-line complexity
 function setFaceVector(geometry, face, segments) {
   const v1 = geometry.vertices[face.a];
   const v2 = geometry.vertices[face.b];
