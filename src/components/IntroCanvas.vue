@@ -51,7 +51,7 @@
 </template>
 
 <script>
-import canvas from '@/lib/canvas';
+// import canvas from '@/lib/canvas';
 
 export default {
   name:  'IntroCanvas',
@@ -63,9 +63,27 @@ export default {
     title:    String,
     subtitle: String,
   },
-  mounted() {
-    canvas(this.type);
-  },
+  // data() {
+  //   return {
+  //     canvasObject: null,
+  //   };
+  // },
+  // mounted() {
+  //   this.canvasObject = canvas(this.type);
+  //   this.canvasObject.init();
+  //   // console.log({
+  //   //   type: this.type,
+  //   // });
+  //   // if (this.canvasObject.init) {
+  //   //   this.canvasObject.init();
+  //   // }
+  // },
+  // beforeDestroy() {
+  //   console.log(this.canvasObject.destroy);
+  //   if (this.canvasObject.destroy) {
+  //     this.canvasObject.destroy();
+  //   }
+  // },
 };
 </script>
 
@@ -80,6 +98,7 @@ export default {
   margin: 0 auto;
   min-height: 100vh;
   color: $color-white;
+  background-color: $color-black;
   text-align: center;
 }
 

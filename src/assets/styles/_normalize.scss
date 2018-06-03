@@ -336,20 +336,5 @@ li {
 }
 
 a {
-  transition: $transition-duration;
   text-decoration: none;
-  border-bottom: 2px solid $color-blue;
-
-  &,
-  &:hover,
-  &:active,
-  &:focus {
-    color: inherit;
-  }
-
-  &:hover,
-  &:active,
-  &:focus {
-    background-color: fade-out($color-blue, 0.5);
-  }
 }
