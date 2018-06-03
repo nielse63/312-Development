@@ -13,8 +13,5 @@ const canvases = {
 };
 
 export default (type) => {
-  if ({}.hasOwnProperty.call(canvases, type)) {
-    return canvases[type]();
-  }
-  return console.warn(`No canvas named ${type} exists`);
+  canvases[type]();
 };

@@ -1,4 +1,3 @@
-import Vue from 'vue';
 import {
   Group, WebGLRenderer, Scene,
   PerspectiveCamera, LineBasicMaterial,
@@ -101,10 +100,8 @@ function create() {
   }
 
   init();
+  window.addEventListener('resize', onresize, false);
   requestAnimationFrame(render);
-  window.addEventListener('resize', () => {
-    Vue.nextTick().then(onresize);
-  });
 }
 
 export default () => {

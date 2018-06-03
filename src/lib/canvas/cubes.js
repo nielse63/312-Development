@@ -1,4 +1,3 @@
-import Vue from 'vue';
 import {
   Vector3, WebGLRenderer, Scene,
   PerspectiveCamera, BoxGeometry, MeshBasicMaterial,
@@ -98,8 +97,6 @@ export default () => {
   }
 
   // start animation
+  window.addEventListener('resize', onresize, false);
   requestAnimationFrame(render);
-  window.addEventListener('resize', () => {
-    Vue.nextTick().then(onresize);
-  });
 };

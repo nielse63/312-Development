@@ -5,7 +5,6 @@ import {
   BufferGeometry, BufferAttribute, ShaderMaterial,
   Points, LineBasicMaterial, LineSegments,
 } from 'three';
-import Vue from 'vue';
 import TweenMax from 'gsap/TweenMax';
 import { getCanvas } from '@/lib/canvas/utils';
 
@@ -146,7 +145,6 @@ function network() {
     });
   }
 
-  requestAnimationFrame(render);
 
   function onresize() {
     canvas.style.width = '';
@@ -159,9 +157,8 @@ function network() {
   }
 
   // let resizeTm;
-  window.addEventListener('resize', () => {
-    Vue.nextTick().then(onresize);
-  });
+  window.addEventListener('resize', onresize, false);
+  requestAnimationFrame(render);
 }
 
 export default network;

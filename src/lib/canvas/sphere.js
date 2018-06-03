@@ -1,4 +1,3 @@
-import Vue from 'vue';
 import * as THREE from 'three';
 import noise from '@/lib/canvas/noise';
 import { getCanvas } from '@/lib/canvas/utils';
@@ -86,8 +85,6 @@ export default () => {
     renderer.setSize(width, height);
   }
 
+  window.addEventListener('resize', onresize, false);
   requestAnimationFrame(render);
-  window.addEventListener('resize', () => {
-    Vue.nextTick().then(onresize);
-  });
 };

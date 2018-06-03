@@ -1,4 +1,3 @@
-import Vue from 'vue';
 import TweenMax from 'gsap/TweenMax';
 import {
   WebGLRenderer, Scene, PerspectiveCamera, Geometry,
@@ -94,9 +93,6 @@ export default () => {
     renderer.setSize(width, height);
   }
 
+  window.addEventListener('resize', onresize, false);
   requestAnimationFrame(render);
-
-  window.addEventListener('resize', () => {
-    Vue.nextTick().then(onresize);
-  });
 };
