@@ -1,33 +1,30 @@
 <template>
   <div class="contact">
-    <intro-canvas
-      :type="type"
-      :title="title"
-    ></intro-canvas>
+    <div class="canvas">
+      <canvas class="scene scene--full" id="contact-scene" width="100%" height="100%"></canvas>
+      <h1>{{title}}</h1>
+    </div>
   </div>
 </template>
 
 <script>
-import IntroCanvas from '@/components/IntroCanvas';
+import canvas from '@/lib/canvas/cubes';
 
 export default {
-  name:       'Cbout',
-  components: {
-    IntroCanvas,
-  },
+  name: 'Contact',
   data() {
     return {
-      type:  'cubes',
       title: 'Contact Me',
     };
+  },
+  mounted() {
+    const element = document.getElementById('contact-scene');
+    canvas(element);
   },
 };
 </script>
 
 <style lang="scss" scoped>
-@import '../assets/styles/lib/vars';
-
-.contact {
-  // ...
-}
+@import "../assets/styles/lib/vars";
+@import "../assets/styles/canvas";
 </style>

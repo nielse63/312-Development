@@ -15,7 +15,7 @@ module.exports = {
     'color-named': 'never',
     'number-leading-zero': 'always',
     'number-no-trailing-zeros': true,
-    'string-quotes': 'single',
+    'string-quotes': 'double',
     'length-zero-no-unit': true,
     'rule-empty-line-before': ['always', {
       except: ['first-nested'],

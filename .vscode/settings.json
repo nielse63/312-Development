@@ -1,5 +1,30 @@
 {
-    "files.associations": {
-      ".vuegenerator": "json",
+  "files.associations": {
+    ".vuegenerator": "json",
+  },
+  "files.exclude": {
+    "**/*.log": true,
+    "**/*.log*": true,
+    "**/node_modules": true,
+  },
+  "editor.insertSpaces": true,
+  "editor.tabSize": 2,
+  "editor.trimAutoWhitespace": true,
+  "files.trimTrailingWhitespace": true,
+  "files.eol": "\n",
+  "files.insertFinalNewline": true,
+  "files.trimFinalNewlines": true,
+  "editor.formatOnSave": true,
+  "eslint.autoFixOnSave": true,
+  "eslint.run": "onSave",
+  "eslint.validate": [
+    {
+      "language": "javascript",
+      "autoFix": true
+    },
+    {
+      "language": "vue",
+      "autoFix": true
     }
-  }
+  ],
+}

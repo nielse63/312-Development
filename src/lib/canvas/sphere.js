@@ -1,28 +1,22 @@
-import * as THREE from 'three';
-import noise from '@/lib/canvas/noise';
-import { getCanvas } from '@/lib/canvas/utils';
+import {
+  Scene, PerspectiveCamera, Group,
+  LineBasicMaterial, Geometry, Vector3, Line,
+} from 'three';
+import noise from './noise';
+import { getCanvasSize, onresize, createRenderer } from './utils';
 
-export default () => {
-  const canvasObject = getCanvas();
-  const { canvas } = canvasObject;
-  let { width, height } = canvasObject;
+export default (canvas) => {
+  const { width, height } = getCanvasSize(canvas);
+  const renderer = createRenderer(canvas);
 
-  const renderer = new THREE.WebGLRenderer({
-    canvas,
-    antialias: true,
-  });
-  renderer.setPixelRatio(window.devicePixelRatio > 1 ? 2 : 1);
-  renderer.setSize(width, height);
-  renderer.setClearColor(0x000000, 0);
-
-  const scene = new THREE.Scene();
-  const camera = new THREE.PerspectiveCamera(40, width / height, 0.1, 1000);
+  const scene = new Scene();
+  const camera = new PerspectiveCamera(40, width / height, 0.1, 1000);
   camera.position.set(0, 0, 350);
 
-  const sphere = new THREE.Group();
+  const sphere = new Group();
   scene.add(sphere);
 
-  const material = new THREE.LineBasicMaterial({
+  const material = new LineBasicMaterial({
     color: 0xfe0e55,
   });
   const linesAmount = 18;
@@ -31,11 +25,11 @@ export default () => {
 
   let linesIndex = 0;
   while (linesIndex < linesAmount) {
-    const geometry = new THREE.Geometry();
+    const geometry = new Geometry();
     geometry.y = (linesIndex / linesAmount) * radius * 2;
     let i = 0;
     while (i < verticesAmount) {
-      const vector = new THREE.Vector3();
+      const vector = new Vector3();
       const percentage = i / verticesAmount;
       vector.x = Math.cos(percentage * Math.PI * 2);
       vector.z = Math.sin(percentage * Math.PI * 2);
@@ -43,7 +37,7 @@ export default () => {
       geometry.vertices.push(vector);
       i += 1;
     }
-    const line = new THREE.Line(geometry, material);
+    const line = new Line(geometry, material);
     sphere.add(line);
     linesIndex += 1;
   }
@@ -69,22 +63,15 @@ export default () => {
     });
   }
 
-  function render(a) {
+  function render(a = 0) {
+    if (!document.getElementById(canvas.id)) {
+      return;
+    }
     requestAnimationFrame(render);
     updateVertices(a);
     renderer.render(scene, camera);
   }
 
-  function onresize() {
-    canvas.style.width = '';
-    canvas.style.height = '';
-    width = canvas.offsetWidth;
-    height = canvas.offsetHeight;
-    camera.aspect = width / height;
-    camera.updateProjectionMatrix();
-    renderer.setSize(width, height);
-  }
-
-  window.addEventListener('resize', onresize, false);
-  requestAnimationFrame(render);
+  window.addEventListener('resize', onresize.bind(null, canvas, camera, renderer), false);
+  render();
 };

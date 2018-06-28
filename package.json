@@ -9,9 +9,9 @@
     "dev": "cross-env NODE_ENV=development webpack-dev-server --hot",
     "start": "DEBUG=312dev* NODE_ENV=production node --harmony --max_old_space_size=460 --gc_interval=100 server",
     "lint:js": "eslint --ext .js,.vue ./*.js src/ server/ --fix --cache",
-    "prelint:scss": "stylelint 'src/**/*.scss' -s scss --fix --cache",
-    "lint:scss": "stylelint 'src/**/*.vue' -s scss --cache",
-    "generate": "vg",
+    "prelint:scss": "stylelint 'src/**/*.scss' -s scss --fix",
+    "lint:scss": "stylelint 'src/**/*.vue' -s scss",
+    "new": "vg",
     "pretest": "yarn run build",
     "test": "cross-env NODE_ENV=test node test/runner.js"
   },
@@ -88,8 +88,8 @@
     "yorkie": "^1.0.3"
   },
   "engines": {
-    "node": ">= 9.x",
-    "npm": ">= 5.6.x",
+    "node": ">= 10.x",
+    "npm": ">= 6.x",
     "yarn": ">= 1.x"
   },
   "browserslist": [

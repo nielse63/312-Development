@@ -27,7 +27,7 @@ export default {
 </script>
 
 <style scoped lang="scss">
-@import '../assets/styles/lib/vars';
+@import "../assets/styles/lib/vars";
 
 .app-navigation {
   position: fixed;
@@ -36,6 +36,7 @@ export default {
   bottom: 0;
   padding: 2rem 1rem;
   background-color: $color-white;
+  z-index: 2;
 }
 
 a {

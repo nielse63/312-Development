@@ -1,24 +1,17 @@
-import TweenMax from 'gsap/TweenMax';
 import {
-  WebGLRenderer, Scene, PerspectiveCamera, Geometry,
-  TextureLoader, IcosahedronGeometry, BufferGeometry,
-  BufferAttribute, ShaderMaterial, Points,
+  Scene, PerspectiveCamera, Geometry, TextureLoader,
+  IcosahedronGeometry, BufferGeometry,
+  BufferAttribute, Points,
 } from 'three';
+import { TweenLite } from 'gsap';
+import {
+  getCanvasSize, onresize, dotTextureImage,
+  createRenderer, createShaderMaterial,
+} from './utils';
 
-const dotTextureImage = require('@/assets/images/dot-texture.png');
-
-export default () => {
-  const canvas = document.querySelector('#scene');
-  let width = canvas.offsetWidth;
-  let height = canvas.offsetHeight;
-
-  const renderer = new WebGLRenderer({
-    canvas,
-    antialias: true,
-  });
-  renderer.setPixelRatio(window.devicePixelRatio > 1 ? 2 : 1);
-  renderer.setSize(width, height);
-  renderer.setClearColor(0x59c384);
+export default (canvas) => {
+  const { width, height } = getCanvasSize(canvas);
+  const renderer = createRenderer(canvas, 0x59c384);
 
   const scene = new Scene();
 
@@ -36,63 +29,63 @@ export default () => {
   const positions = new Float32Array(sphereGeom.vertices.length * 3);
 
   function updateDot(index, vector) {
-    positions[index * 3] = vector.x;
-    positions[(index * 3) + 2] = vector.z;
+    const i3 = index * 3;
+    positions[i3] = vector.x;
+    positions[(i3) + 2] = vector.z;
+  }
+
+  function onComplete() {
+    this.reversed(!this.reversed());
   }
 
   function animateDot(index, vector) {
-    TweenMax.to(vector, 4, {
-      x:        0,
-      z:        0,
-      ease:     window.Back.easeOut,
-      delay:    Math.abs(vector.y / radius) * 2,
-      repeat:   -1,
-      yoyo:     true,
-      yoyoEase: window.Back.easeOut,
+    TweenLite.to(vector, 4, {
+      x:                 0,
+      z:                 0,
+      ease:              window.Back.easeOut,
+      delay:             Math.abs(vector.y / radius) * 2,
+      repeat:            -1,
+      onComplete,
+      onReverseComplete: onComplete,
       onUpdate() {
         updateDot(index, vector);
       },
     });
   }
 
-  sphereGeom.vertices.forEach((vector, i) => {
-    animateDot(i, vector);
-    dotsGeom.vertices.push(vector);
-    vector.toArray(positions, i * 3);
-  });
+  {
+    let i = 0;
+    const { vertices } = sphereGeom;
+    const { length } = vertices;
+    while (i < length) {
+      const vector = vertices[i];
+      animateDot(i, vector);
+      dotsGeom.vertices.push(vector);
+      vector.toArray(positions, i * 3);
+      i += 1;
+    }
+  }
 
   const attributePositions = new BufferAttribute(positions, 3);
   bufferDotsGeom.addAttribute('position', attributePositions);
-  const shaderMaterial = new ShaderMaterial({
-    uniforms: {
-      texture: {
-        value: dotTexture,
-      },
-    },
-    vertexShader:   document.getElementById('wrapVertexShader').textContent,
-    fragmentShader: document.getElementById('wrapFragmentShader').textContent,
-    transparent:    true,
-  });
+  const shaderMaterial = createShaderMaterial(
+    'wrapVertexShader',
+    'wrapFragmentShader',
+    dotTexture,
+  );
   const dots = new Points(bufferDotsGeom, shaderMaterial);
   scene.add(dots);
 
   function render() {
+    if (!document.getElementById(canvas.id)) {
+      return;
+    }
     requestAnimationFrame(render);
     dots.geometry.verticesNeedUpdate = true;
     dots.geometry.attributes.position.needsUpdate = true;
     renderer.render(scene, camera);
   }
 
-  function onresize() {
-    canvas.style.width = '';
-    canvas.style.height = '';
-    width = canvas.offsetWidth;
-    height = canvas.offsetHeight;
-    camera.aspect = width / height;
-    camera.updateProjectionMatrix();
-    renderer.setSize(width, height);
-  }
-
-  window.addEventListener('resize', onresize, false);
-  requestAnimationFrame(render);
+  window.addEventListener('resize', onresize.bind(null, canvas, camera, renderer), false);
+  render();
 };

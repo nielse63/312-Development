@@ -1,21 +1,13 @@
 import {
-  Group, WebGLRenderer, Scene,
+  Group, Scene,
   PerspectiveCamera, LineBasicMaterial,
   Geometry, Line, Vector3,
 } from 'three';
+import { getCanvasSize, onresize, createRenderer } from './utils';
 
-function create() {
-  const canvas = document.querySelector('#scene');
-  let width = canvas.offsetWidth;
-  let height = canvas.offsetHeight;
-
-  const renderer = new WebGLRenderer({
-    canvas,
-    antialias: true,
-  });
-  renderer.setPixelRatio(window.devicePixelRatio > 1 ? 2 : 1);
-  renderer.setSize(width, height);
-  renderer.setClearColor(0x191919);
+export default (canvas) => {
+  const { width, height } = getCanvasSize(canvas);
+  const renderer = createRenderer(canvas, 0x191919);
 
   const scene = new Scene();
 
@@ -35,7 +27,7 @@ function create() {
   const lines = 50;
   const dots = 50;
 
-  function init() {
+  {
     let i = 0;
     while (i < lines) {
       const geometry = new Geometry();
@@ -61,18 +53,17 @@ function create() {
   }
 
   function updateDots(a) {
-    let line;
-    let vector;
-    let y;
+    const { children } = sphere;
 
     let i = 0;
     while (i < lines) {
-      line = sphere.children[i];
+      const line = children[i];
+      const { vertices } = line.geometry;
       let j = 0;
       while (j < dots) {
-        vector = sphere.children[i].geometry.vertices[j];
+        const vector = vertices[j];
         const ratio = 1 - ((line.radius - Math.abs(vector.x)) / line.radius);
-        y = Math.sin((a / line.speed) + (j * 0.15)) * 12 * ratio;
+        const y = Math.sin((a / line.speed) + (j * 0.15)) * 12 * ratio;
         vector.y = y;
         j += 1;
       }
@@ -81,7 +72,10 @@ function create() {
     }
   }
 
-  function render(a) {
+  function render(a = 0) {
+    if (!document.getElementById(canvas.id)) {
+      return;
+    }
     requestAnimationFrame(render);
     updateDots(a);
     sphere.rotation.y = (a * 0.0001);
@@ -89,21 +83,6 @@ function create() {
     renderer.render(scene, camera);
   }
 
-  function onresize() {
-    canvas.style.width = '';
-    canvas.style.height = '';
-    width = canvas.offsetWidth;
-    height = canvas.offsetHeight;
-    camera.aspect = width / height;
-    camera.updateProjectionMatrix();
-    renderer.setSize(width, height);
-  }
-
-  init();
-  window.addEventListener('resize', onresize, false);
-  requestAnimationFrame(render);
-}
-
-export default () => {
-  create();
+  window.addEventListener('resize', onresize.bind(null, canvas, camera, renderer), false);
+  render();
 };
