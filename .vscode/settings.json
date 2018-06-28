@@ -6,6 +6,7 @@
     "**/*.log": true,
     "**/*.log*": true,
     "**/node_modules": true,
+    "**/dist": true,
   },
   "editor.insertSpaces": true,
   "editor.tabSize": 2,
