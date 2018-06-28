@@ -51,27 +51,14 @@ module.exports = {
   overrides: [
     {
       files: [
-        'test/**',
+        'test/e2e/**',
       ],
       env: {
-        mocha: true,
+        jest: true,
       },
       globals: {
         browser: true,
         page: true,
-      },
-      rules: {
-        'no-console': 'off',
-        'no-unused-expressions': 'off',
-      },
-    },
-    {
-      files: [
-        'test/specs/**',
-      ],
-      globals: {
-        // page: true,
-        expect: true,
       },
     },
     {

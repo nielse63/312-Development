@@ -15,6 +15,9 @@ env:
     - JOBS=1
     - NODE_ENV=test
 
+before_script:
+  - yarn build
+
 jobs:
   include:
     - stage: linting
@@ -22,8 +25,3 @@ jobs:
     - script: yarn lint:scss
     - stage: tests
       script: yarn test
-
-# branches:
-#   only:
-#   - master
-#   - develop
