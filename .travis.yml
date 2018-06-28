@@ -1,8 +1,7 @@
 ---
 language: node_js
 node_js:
-  - "9"
-sudo: false
+  - node
 cache:
   yarn: true
 dist: trusty
@@ -18,11 +17,13 @@ env:
 
 jobs:
   include:
+    - stage: linting
+      script: yarn lint:js
+    - script: yarn lint:scss
     - stage: tests
-      script: yarn run unit
-    - script: yarn run integration
+      script: yarn test
 
-branches:
-  only:
-  - master
-  - develop
+# branches:
+#   only:
+#   - master
+#   - develop

@@ -7,11 +7,12 @@
   "scripts": {
     "build": "cross-env NODE_ENV=production node build/build",
     "dev": "cross-env NODE_ENV=development webpack-dev-server --hot",
-    "start": "DEBUG=312dev* NODE_ENV=production node --harmony --max_old_space_size=460 --gc_interval=100 server",
-    "lint:js": "eslint --ext .js,.vue ./*.js src/ server/ --fix --cache",
+    "start": "DEBUG=312dev* NODE_ENV=production pm2 serve dist/",
+    "lint:js": "eslint --ext .js,.vue ./*.js src/ server/ --fix",
     "prelint:scss": "stylelint 'src/**/*.scss' -s scss --fix",
     "lint:scss": "stylelint 'src/**/*.vue' -s scss",
     "new": "vg",
+    "pretest": "eslint test/ --fix",
     "test": "cross-env NODE_ENV=test node test/runner.js"
   },
   "gitHooks": {
@@ -65,6 +66,7 @@
     "mocha": "^5.2.0",
     "node-sass": "^4.9.0",
     "optimize-css-assets-webpack-plugin": "^4.0.3",
+    "pm2": "^2.10.4",
     "postcss-loader": "^2.1.5",
     "postcss-scss": "^1.0.6",
     "puppeteer": "^1.5.0",

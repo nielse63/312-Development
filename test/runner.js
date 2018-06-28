@@ -1,7 +1,7 @@
 
 const spawn = require('cross-spawn');
 
-const start = () => spawn('node_modules/.bin/pm2', ['start', 'index.js'], { stdio: 'inherit' });
+const start = () => spawn('node_modules/.bin/pm2', ['serve', 'dist/'], { stdio: 'inherit' });
 
 const close = () => spawn('node_modules/.bin/pm2', ['kill'], { stdio: 'inherit' });
 
@@ -24,7 +24,11 @@ server.on('exit', () => {
   console.log('Running the integration server');
 
   // execute runner
-  const runner = spawn('node_modules/.bin/mocha', ['test/specs/**/**.spec.js'], { stdio: 'inherit' });
+  const runner = spawn('node_modules/.bin/mocha', [
+    'test/bootstrap.js',
+    '--recursive',
+    'test/specs',
+  ], { stdio: 'inherit' });
   runner.on('exit', onexit);
   runner.on('error', onerror);
 });
