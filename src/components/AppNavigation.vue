@@ -1,28 +1,61 @@
 <template>
-  <nav class="app-navigation">
+  <nav class="app-navigation" :class="{ open }">
     <ul>
-      <li>
-        <router-link to="/">Home</router-link>
-      </li>
-      <li>
-        <router-link to="/about-me">About Me</router-link>
-      </li>
-      <li>
-        <router-link to="/experience">Experience</router-link>
-      </li>
-      <li>
-        <router-link to="/portfolio">Portfolio</router-link>
-      </li>
-      <li>
-        <router-link to="/contact">Contact Me</router-link>
-      </li>
+      <app-navigation-item
+        v-for="(item, index) in items"
+        :key="index"
+        :path="item.path"
+        :text="item.text"
+        :color="item.color"
+      ></app-navigation-item>
     </ul>
   </nav>
 </template>
 
 <script>
+import AppNavigationItem from '@/components/AppNavigationItem';
+
 export default {
-  name: 'AppNavigation',
+  name:       'AppNavigation',
+  components: {
+    AppNavigationItem,
+  },
+  props: {
+    open: {
+      type:    Boolean,
+      default: false,
+    },
+  },
+  data() {
+    return {
+      items: [
+        {
+          path:  '/',
+          text:  'Home',
+          color: 'pink',
+        },
+        {
+          path:  '/about-me',
+          text:  'About Me',
+          color: 'green',
+        },
+        {
+          path:  '/experience',
+          text:  'Experience',
+          color: 'purple',
+        },
+        {
+          path:  '/portfolio',
+          text:  'Portfolio',
+          color: 'blue',
+        },
+        {
+          path: '/contact-me',
+          text: 'Contact Me',
+        },
+      ],
+    };
+  },
 };
 </script>
 
@@ -34,16 +67,19 @@ export default {
   top: 0;
   right: 0;
   bottom: 0;
-  padding: 2rem 1rem;
+  padding: 0 1rem;
   background-color: $color-white;
   z-index: 2;
+  width: 25vw;
+  max-width: 350px;
+  font-size: 23px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  transform: translate(100%, 0);
+  transition: 0.25s transform ease-in-out;
 }
 
-a {
-  color: $color-black;
-  text-transform: uppercase;
-  font-weight: 700;
-  letter-spacing: 4px;
-  font-size: 14px;
+.open {
+  transform: translate(0, 0);
 }
 </style>

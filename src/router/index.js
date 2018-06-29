@@ -9,7 +9,8 @@ import Contact from '@/views/Contact';
 
 Vue.use(Router);
 
-export default new Router({
+const router = new Router({
+  mode:   process.env.NODE_ENV === 'test' ? 'hash' : 'history',
   base:   '/',
   routes: [
     {
@@ -39,3 +40,5 @@ export default new Router({
     },
   ],
 });
+
+export default router;
