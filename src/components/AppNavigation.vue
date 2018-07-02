@@ -21,12 +21,6 @@ export default {
   components: {
     AppNavigationItem,
   },
-  // props: {
-  //   open: {
-  //     type:    Boolean,
-  //     default: false,
-  //   },
-  // },
   data() {
     return {
       items: [

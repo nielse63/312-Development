@@ -119,7 +119,6 @@ export default (canvas) => { // eslint-disable-line complexity
 
   function render() {
     store.state.canvas.animationFrameId = requestAnimationFrame(render);
-    // console.log(store.state.canvas);
     if (store.state.canvas.paused) {
       return;
     }
@@ -127,7 +126,6 @@ export default (canvas) => { // eslint-disable-line complexity
     segmentsGeom.verticesNeedUpdate = true;
     attributeSizes.needsUpdate = true;
     attributePositions.needsUpdate = true;
-    // console.log(scene);
     renderer.render(scene, camera);
   }
 

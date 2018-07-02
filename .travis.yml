@@ -23,5 +23,7 @@ jobs:
     - stage: linting
       script: yarn lint:js
     - script: yarn lint:scss
+    - stage: compile
+      script: yarn build
     - stage: tests
       script: yarn test

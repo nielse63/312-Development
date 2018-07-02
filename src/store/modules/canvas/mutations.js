@@ -18,7 +18,6 @@ export default {
     state.paused = false;
     state.running = false;
     state.function = null;
-    // state.element = null;
     state.animationFrameId = null;
   },
 };
