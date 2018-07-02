@@ -10,6 +10,7 @@ import {
   getCanvasSize, onresize, dotTextureImage,
   createRenderer, createShaderMaterial,
 } from './utils';
+import store from '../../store';
 
 export default (canvas) => { // eslint-disable-line complexity
   const { width, height } = getCanvasSize(canvas);
@@ -117,10 +118,10 @@ export default (canvas) => { // eslint-disable-line complexity
   galaxy.add(segments);
 
   function render() {
-    if (!document.getElementById(canvas.id)) {
+    store.state.canvas.animationFrameId = requestAnimationFrame(render);
+    if (store.state.canvas.paused) {
       return;
     }
-    requestAnimationFrame(render);
     dotsGeometry.verticesNeedUpdate = true;
     segmentsGeom.verticesNeedUpdate = true;
     attributeSizes.needsUpdate = true;
@@ -152,7 +153,6 @@ export default (canvas) => { // eslint-disable-line complexity
     });
   }
 
-  // let resizeTm;
   window.addEventListener('resize', onresize.bind(null, canvas, camera, renderer), false);
   render();
 };

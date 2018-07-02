@@ -4,6 +4,7 @@ import {
   Geometry, Line, Vector3,
 } from 'three';
 import { getCanvasSize, onresize, createRenderer } from './utils';
+import store from '../../store';
 
 export default (canvas) => {
   const { width, height } = getCanvasSize(canvas);
@@ -73,10 +74,10 @@ export default (canvas) => {
   }
 
   function render(a = 0) {
-    if (!document.getElementById(canvas.id)) {
+    store.state.canvas.animationFrameId = requestAnimationFrame(render);
+    if (store.state.canvas.paused) {
       return;
     }
-    requestAnimationFrame(render);
     updateDots(a);
     sphere.rotation.y = (a * 0.0001);
     sphere.rotation.x = (-a * 0.0001);

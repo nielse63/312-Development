@@ -5,6 +5,7 @@ import {
 } from 'three';
 import noise from './noise';
 import { getCanvasSize, onresize, createRenderer } from './utils';
+import store from '../../store';
 
 function faceMaterialIndexValue(value, segments) {
   return Math.floor(value + 25) % (segments * 2) < segments ? 0 : 1;
@@ -61,10 +62,10 @@ export default (canvas) => {
   scene.add(sphere);
 
   function render(a = 0) {
-    if (!document.getElementById(canvas.id)) {
+    store.state.canvas.animationFrameId = requestAnimationFrame(render);
+    if (store.state.canvas.paused) {
       return;
     }
-    requestAnimationFrame(render);
 
     geometry.vertices.forEach((vector) => {
       const ratio = noise(

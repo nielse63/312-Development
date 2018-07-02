@@ -23,22 +23,48 @@
       </script>
       <h1>{{title}}</h1>
     </div>
+    <content-section>
+      <content-panel>
+        <!-- staggered content boxes of open source projects -->
+      </content-panel>
+    </content-section>
   </div>
 </template>
 
 <script>
+import { mapMutations, mapActions } from 'vuex';
 import canvas from '@/lib/canvas/waves';
+import ContentSection from '@/components/ContentSection';
+import ContentPanel from '@/components/ContentPanel';
 
 export default {
-  name: 'Portfolio',
+  name:       'Portfolio',
+  components: {
+    ContentSection,
+    ContentPanel,
+  },
   data() {
     return {
       title: 'Portfolio',
     };
   },
+  methods: {
+    ...mapMutations('canvas', [
+      'setFunction',
+      'setElement',
+    ]),
+    ...mapActions('canvas', {
+      startCanvas: 'start',
+      stopCanvas:  'stop',
+    }),
+  },
   mounted() {
-    const element = document.getElementById('portfolio-scene');
-    canvas(element);
+    this.setFunction(canvas);
+    this.setElement(document.getElementById('portfolio-scene'));
+    this.startCanvas();
+  },
+  beforeDestroy() {
+    this.stopCanvas();
   },
 };
 </script>

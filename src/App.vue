@@ -1,6 +1,6 @@
 <template>
   <div id="main" class="app" :class="appClass">
-    <div class="page" @click="onclick">
+    <div class="page" @click="onpageclick">
       <transition>
         <router-view :class="{ open: isNavOpen, 'page-content': true }"></router-view>
       </transition>
@@ -16,6 +16,7 @@
 </template>
 
 <script>
+import { mapMutations } from 'vuex';
 import AppNavigation from '@/components/AppNavigation';
 
 export default {
@@ -61,10 +62,14 @@ export default {
     },
   },
   methods: {
+    ...mapMutations('canvas', {
+      pauseCanvas:  'pause',
+      resumeCanvas: 'start',
+    }),
     onbuttonclick() {
       this.isNavOpen = !this.isNavOpen;
     },
-    onclick() {
+    onpageclick() {
       if (this.isNavOpen) {
         this.isNavOpen = false;
       }
@@ -73,8 +78,10 @@ export default {
       const headerBottom = document.querySelector('.canvas').offsetHeight;
       if (!this.isBelowCanvas && window.scrollY > headerBottom) {
         this.isBelowCanvas = true;
+        this.pauseCanvas();
       } else if (this.isBelowCanvas && window.scrollY <= headerBottom) {
         this.isBelowCanvas = false;
+        this.resumeCanvas();
       }
     },
   },

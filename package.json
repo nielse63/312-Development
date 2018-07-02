@@ -30,7 +30,8 @@
     "serve-static": "^1.13.2",
     "three": "^0.94.0",
     "vue": "^2.5.16",
-    "vue-router": "^3.0.1"
+    "vue-router": "^3.0.1",
+    "vuex": "^3.0.1"
   },
   "devDependencies": {
     "@mapbox/stylelint-processor-arbitrary-tags": "^0.2.0",
@@ -48,9 +49,7 @@
     "css-loader": "^0.28.11",
     "eslint": "^5.0.1",
     "eslint-config-airbnb-base": "^13.0.0",
-    "eslint-friendly-formatter": "^4.0.1",
     "eslint-import-resolver-webpack": "^0.10.1",
-    "eslint-loader": "^2.0.0",
     "eslint-plugin-html": "^4.0.5",
     "eslint-plugin-import": "^2.13.0",
     "extract-text-webpack-plugin": "^4.0.0-beta.0",

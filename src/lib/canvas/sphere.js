@@ -4,6 +4,7 @@ import {
 } from 'three';
 import noise from './noise';
 import { getCanvasSize, onresize, createRenderer } from './utils';
+import store from '../../store';
 
 export default (canvas) => {
   const { width, height } = getCanvasSize(canvas);
@@ -64,10 +65,10 @@ export default (canvas) => {
   }
 
   function render(a = 0) {
-    if (!document.getElementById(canvas.id)) {
+    store.state.canvas.animationFrameId = requestAnimationFrame(render);
+    if (store.state.canvas.paused) {
       return;
     }
-    requestAnimationFrame(render);
     updateVertices(a);
     renderer.render(scene, camera);
   }

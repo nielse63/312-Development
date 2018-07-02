@@ -26,24 +26,53 @@
       <h1>{{title}}</h1>
       <h2>{{subtitle}}</h2>
     </div>
+    <content-section>
+      <content-panel>
+        <!-- this is the intro content -->
+      </content-panel>
+      <content-panel>
+        <!-- this section should have staggered blocks on cont -->
+      </content-panel>
+    </content-section>
   </div>
 </template>
 
 <script>
+import { mapMutations, mapActions } from 'vuex';
 import { title, subtitle } from '@/lib/content';
-import canvas from '@/lib/canvas/network';
+import network from '@/lib/canvas/network';
+import ContentSection from '@/components/ContentSection';
+import ContentPanel from '@/components/ContentPanel';
 
 export default {
-  name: 'Home',
+  name:       'Home',
+  components: {
+    ContentSection,
+    ContentPanel,
+  },
   data() {
     return {
       title,
       subtitle,
     };
   },
+  methods: {
+    ...mapMutations('canvas', [
+      'setFunction',
+      'setElement',
+    ]),
+    ...mapActions('canvas', {
+      startCanvas: 'start',
+      stopCanvas:  'stop',
+    }),
+  },
   mounted() {
-    const element = document.getElementById('home-scene');
-    canvas(element);
+    this.setFunction(network);
+    this.setElement(document.getElementById('home-scene'));
+    this.startCanvas();
+  },
+  beforeDestroy() {
+    this.stopCanvas();
   },
 };
 </script>
@@ -51,12 +80,4 @@ export default {
 <style lang="scss" scoped>
 @import "../assets/styles/lib/vars";
 @import "../assets/styles/canvas";
-
-.canvas {
-  height: 100vh;
-}
-
-h1 {
-  font-size: 10vw;
-}
 </style>

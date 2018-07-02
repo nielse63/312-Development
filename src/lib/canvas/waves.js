@@ -8,6 +8,7 @@ import {
   getCanvasSize, onresize, dotTextureImage,
   createRenderer, createShaderMaterial,
 } from './utils';
+import store from '../../store';
 
 export default (canvas) => {
   const { width, height } = getCanvasSize(canvas);
@@ -77,10 +78,10 @@ export default (canvas) => {
   scene.add(dots);
 
   function render() {
-    if (!document.getElementById(canvas.id)) {
+    store.state.canvas.animationFrameId = requestAnimationFrame(render);
+    if (store.state.canvas.paused) {
       return;
     }
-    requestAnimationFrame(render);
     dots.geometry.verticesNeedUpdate = true;
     dots.geometry.attributes.position.needsUpdate = true;
     renderer.render(scene, camera);
