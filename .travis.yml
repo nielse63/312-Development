@@ -15,9 +15,6 @@ env:
     - JOBS=1
     - NODE_ENV=test
 
-before_script:
-  - yarn build
-
 jobs:
   include:
     - stage: linting
