@@ -70,8 +70,8 @@ export default (canvas) => {
   const attributePositions = new BufferAttribute(positions, 3);
   bufferDotsGeom.addAttribute('position', attributePositions);
   const shaderMaterial = createShaderMaterial(
-    'wrapVertexShader',
-    'wrapFragmentShader',
+    'wrapWavesVertexShader',
+    'wrapWavesFragmentShader',
     dotTexture,
   );
   const dots = new Points(bufferDotsGeom, shaderMaterial);

@@ -1,9 +1,10 @@
 <template>
   <div id="main" class="app" :class="appClass">
     <div class="page" @click="onpageclick">
-      <transition>
+      <!-- <transition>
         <router-view :class="routerViewClass"></router-view>
-      </transition>
+      </transition> -->
+      <router-view :class="routerViewClass"></router-view>
     </div>
     <app-navigation :open="isNavOpen"></app-navigation>
     <app-navigation-button></app-navigation-button>
@@ -28,7 +29,7 @@ export default {
   },
   watch: {
     $route() {
-      this.isNavOpen = false;
+      this.closeNav();
     },
   },
   computed: {

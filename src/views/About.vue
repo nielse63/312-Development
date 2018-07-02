@@ -1,9 +1,9 @@
 <template>
   <div class="about">
-    <div class="canvas">
-      <canvas class="scene scene--full" id="about-scene" width="100%" height="100%"></canvas>
-      <h1>{{title}}</h1>
-    </div>
+    <intro-panel
+      :title="title"
+      :canvas="sphere"
+    ></intro-panel>
     <content-section>
       <content-panel>
         <!-- intro content -->
@@ -16,44 +16,27 @@
 </template>
 
 <script>
-import { mapMutations, mapActions } from 'vuex';
 import sphere from '@/lib/canvas/sphere';
+import IntroPanel from '@/components/IntroPanel';
 import ContentSection from '@/components/ContentSection';
 import ContentPanel from '@/components/ContentPanel';
 
 export default {
   name:       'About',
   components: {
+    IntroPanel,
     ContentSection,
     ContentPanel,
   },
   data() {
     return {
       title: 'About Me',
+      sphere,
     };
-  },
-  methods: {
-    ...mapMutations('canvas', [
-      'setFunction',
-      'setElement',
-    ]),
-    ...mapActions('canvas', {
-      startCanvas: 'start',
-      stopCanvas:  'stop',
-    }),
-  },
-  mounted() {
-    this.setFunction(sphere);
-    this.setElement(document.getElementById('about-scene'));
-    this.startCanvas();
-  },
-  beforeDestroy() {
-    this.stopCanvas();
   },
 };
 </script>
 
 <style lang="scss" scoped>
 @import "../assets/styles/lib/vars";
-@import "../assets/styles/canvas";
 </style>

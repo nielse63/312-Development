@@ -43,6 +43,7 @@ module.exports = {
     'func-names':         'error',
     complexity:           ['error', 5],
     'no-mixed-operators': [errorOrWarn],
+    'no-debugger':        [errorOrWarn],
   },
   overrides: [
     {

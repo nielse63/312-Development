@@ -1,9 +1,9 @@
 
 export default {
   start({ commit, state }) {
-    const fn = state.function;
-    const { element } = state;
-    fn(element);
+    // const fn = state.function;
+    // const { element } = state;
+    state.function(document.getElementById('scene'));
     commit('start');
   },
   // pause({ commit }) {
