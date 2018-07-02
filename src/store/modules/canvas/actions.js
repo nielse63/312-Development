@@ -1,13 +1,23 @@
 
 export default {
   start({ commit, state }) {
-    state.function(document.getElementById('scene'));
-    commit('start');
+    if (state.running) {
+      commit('pause');
+    }
+    if (state.animationFrameId) {
+      cancelAnimationFrame(state.animationFrameId);
+    }
+    state.function(state.element);
+    setTimeout(() => {
+      commit('start');
+    }, 0);
   },
   stop({ commit, state }) {
-    commit('pause');
-    const { animationFrameId } = state;
-    cancelAnimationFrame(animationFrameId);
-    commit('reset');
+    if (state.running) {
+      commit('pause');
+    }
+    if (state.animationFrameId) {
+      cancelAnimationFrame(state.animationFrameId);
+    }
   },
 };

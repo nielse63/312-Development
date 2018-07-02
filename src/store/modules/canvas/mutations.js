@@ -6,6 +6,9 @@ export default {
   setFunction(state, payload) {
     state.function = payload;
   },
+  setAnimationFrame(state, payload) {
+    state.animationFrameId = payload;
+  },
   start(state) {
     state.running = true;
     state.paused = false;
@@ -15,8 +18,6 @@ export default {
     state.paused = true;
   },
   reset(state) {
-    state.paused = false;
-    state.running = false;
     state.function = null;
     state.animationFrameId = null;
   },

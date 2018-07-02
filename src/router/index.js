@@ -6,6 +6,7 @@ import About from '@/views/About';
 import Experience from '@/views/Experience';
 import Portfolio from '@/views/Portfolio';
 import Contact from '@/views/Contact';
+import store from '@/store';
 
 Vue.use(Router);
 
@@ -42,6 +43,11 @@ const router = new Router({
       component: Contact,
     },
   ],
+});
+
+router.beforeEach((to, from, next) => {
+  store.dispatch('nav/close', null, { root: true });
+  next();
 });
 
 export default router;

@@ -16,7 +16,7 @@ export default {
   data() {
     return {
       inView: false,
-      top:    0,
+      // top:    0,
     };
   },
   computed: {
@@ -25,10 +25,10 @@ export default {
         'in-view': this.inView,
       };
     },
-    offsetTop() {
-      const { offsetTop, clientHeight } = this.$el;
-      return offsetTop + (clientHeight / 2);
-    },
+    // offsetTop() {
+    //   const { offsetTop, clientHeight } = this.$el;
+    //   return offsetTop + (clientHeight / 2);
+    // },
   },
   methods: {
     onscroll() {
@@ -41,8 +41,13 @@ export default {
         this.inView = true;
       }
     },
+    setOffsetTop() {
+      const { offsetTop, clientHeight } = this.$el;
+      this.offsetTop = offsetTop + (clientHeight / 2);
+    },
   },
   mounted() {
+    this.setOffsetTop();
     window.addEventListener('scroll', this.onscroll, false);
   },
   beforeDestroy() {
@@ -64,6 +69,14 @@ export default {
 
   &:last-child {
     padding-bottom: $content-padding;
+  }
+
+  &:nth-child(even) {
+    text-align: right;
+  }
+
+  & ~ & {
+    padding-top: $content-padding;
   }
 }
 

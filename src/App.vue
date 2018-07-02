@@ -1,10 +1,8 @@
 <template>
   <div id="main" class="app" :class="appClass">
     <div class="page" @click="onpageclick">
-      <!-- <transition>
-        <router-view :class="routerViewClass"></router-view>
-      </transition> -->
       <router-view :class="routerViewClass"></router-view>
+      <app-footer></app-footer>
     </div>
     <app-navigation :open="isNavOpen"></app-navigation>
     <app-navigation-button></app-navigation-button>
@@ -15,22 +13,19 @@
 import { mapState, mapMutations, mapActions } from 'vuex';
 import AppNavigation from '@/components/AppNavigation';
 import AppNavigationButton from '@/components/AppNavigationButton';
+import AppFooter from '@/components/AppFooter';
 
 export default {
   name:       'app',
   components: {
     AppNavigation,
     AppNavigationButton,
+    AppFooter,
   },
   data() {
     return {
       isBelowCanvas: false,
     };
-  },
-  watch: {
-    $route() {
-      this.closeNav();
-    },
   },
   computed: {
     ...mapState('nav', {
@@ -60,7 +55,9 @@ export default {
       closeNav: 'close',
     }),
     onpageclick() {
-      this.closeNav();
+      if (this.isNavOpen) {
+        this.closeNav();
+      }
     },
     onscroll() {
       const headerBottom = document.querySelector('.canvas').offsetHeight;

@@ -63,14 +63,12 @@ export default {
     ]),
     ...mapActions('canvas', ['start', 'stop']),
   },
-  beforeMount() {
-    this.stop();
-  },
   mounted() {
-    this.setElement(document.getElementById('scene'));
-    this.setFunction(this.canvas);
     this.$nextTick().then(() => {
-      this.$forceUpdate();
+      this.stop();
+    }).then(() => {
+      this.setFunction(this.canvas);
+      this.setElement(document.getElementById('scene'));
     }).then(() => {
       this.start();
     });

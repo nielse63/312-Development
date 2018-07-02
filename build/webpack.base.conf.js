@@ -61,7 +61,7 @@ module.exports = {
         ],
       },
       {
-        test: /\.(jpe?g|png|gif|svg)$/i,
+        test: /\.(jpe?g|png|gif)$/i,
         use:  [
           {
             loader:  'file-loader',
@@ -71,6 +71,18 @@ module.exports = {
             },
           },
           'img-loader',
+        ],
+      },
+      {
+        test: /\.svg$/,
+        use:  [
+          {
+            loader:  'svg-inline-loader',
+            options: {
+              removeTags:        true,
+              removeSVGTagAttrs: true,
+            },
+          },
         ],
       },
     ],
