@@ -1,7 +1,7 @@
 <template>
   <div id="main" class="app" :class="appClass">
-    <div class="page" @click="onpageclick">
-      <router-view :class="routerViewClass"></router-view>
+    <div :class="pageClass" @click="onpageclick">
+      <router-view class="page-content"></router-view>
       <app-footer></app-footer>
     </div>
     <app-navigation :open="isNavOpen"></app-navigation>
@@ -25,6 +25,7 @@ export default {
   data() {
     return {
       isBelowCanvas: false,
+      headerBottom:  0,
     };
   },
   computed: {
@@ -39,10 +40,10 @@ export default {
       object[routeClassName] = true;
       return object;
     },
-    routerViewClass() {
+    pageClass() {
       return {
-        'page-content': true,
-        open:           this.isNavOpen,
+        open: this.isNavOpen,
+        page: true,
       };
     },
   },
@@ -52,7 +53,9 @@ export default {
       resumeCanvas: 'start',
     }),
     ...mapActions('nav', {
-      closeNav: 'close',
+      closeNav:   'close',
+      darkenNav:  'darken',
+      lightenNav: 'lighten',
     }),
     onpageclick() {
       if (this.isNavOpen) {
@@ -60,13 +63,14 @@ export default {
       }
     },
     onscroll() {
-      const headerBottom = document.querySelector('.canvas').offsetHeight;
-      if (!this.isBelowCanvas && window.scrollY > headerBottom) {
+      if (!this.isBelowCanvas && window.scrollY > this.headerBottom) {
         this.isBelowCanvas = true;
         this.pauseCanvas();
-      } else if (this.isBelowCanvas && window.scrollY <= headerBottom) {
+        this.darkenNav();
+      } else if (this.isBelowCanvas && window.scrollY <= this.headerBottom) {
         this.isBelowCanvas = false;
         this.resumeCanvas();
+        this.lightenNav();
       }
     },
   },
@@ -74,6 +78,7 @@ export default {
     window.addEventListener('scroll', this.onscroll, false);
   },
   mounted() {
+    this.headerBottom = document.querySelector('.canvas').offsetHeight;
     this.onscroll();
   },
   beforeDestroy() {
@@ -89,13 +94,22 @@ export default {
 <style lang="scss" scoped>
 @import "assets/styles/lib/vars";
 
+.app {
+  background-color: $color-black;
+}
+
 .page {
   &-content {
     min-height: 100vh;
+  }
+
+  > * {
     transition: 0.25s opacity ease-in-out;
     will-change: opacity;
+  }
 
-    &.open {
+  &.open {
+    > * {
       opacity: 0.35;
     }
   }

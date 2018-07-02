@@ -1,34 +1,40 @@
 <template>
   <div class="content-panel" :class="wrapperClass">
-    <header>
+    <!-- <header>
       <h2>Some Title</h2>
-    </header>
+    </header> -->
     <div class="body">
-      <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Nostrum dignissimos quo alias. Libero suscipit error sequi aliquam consectetur et amet esse temporibus sunt? Dolore id quisquam facilis aperiam expedita aliquam.</p>
-      <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Dolore perferendis aliquam quisquam commodi doloremque neque libero, laborum consequuntur, iusto nulla recusandae maiores. Aspernatur, ab explicabo? Sint quia quidem ab dignissimos.</p>
+      <!-- <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Nostrum dignissimos quo alias. Libero suscipit error sequi aliquam consectetur et amet esse temporibus sunt? Dolore id quisquam facilis aperiam expedita aliquam.</p>
+      <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Dolore perferendis aliquam quisquam commodi doloremque neque libero, laborum consequuntur, iusto nulla recusandae maiores. Aspernatur, ab explicabo? Sint quia quidem ab dignissimos.</p> -->
+      <slot></slot>
     </div>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'ContentPanel',
+  name:  'ContentPanel',
+  props: {
+    narrow: {
+      type: Boolean,
+      default() {
+        return false;
+      },
+    },
+  },
   data() {
     return {
-      inView: false,
-      // top:    0,
+      inView:    false,
+      offsetTop: 0,
     };
   },
   computed: {
     wrapperClass() {
       return {
+        narrow:    this.narrow,
         'in-view': this.inView,
       };
     },
-    // offsetTop() {
-    //   const { offsetTop, clientHeight } = this.$el;
-    //   return offsetTop + (clientHeight / 2);
-    // },
   },
   methods: {
     onscroll() {
@@ -46,9 +52,12 @@ export default {
       this.offsetTop = offsetTop + (clientHeight / 2);
     },
   },
+  beforeMount() {
+    window.addEventListener('scroll', this.onscroll, false);
+  },
   mounted() {
     this.setOffsetTop();
-    window.addEventListener('scroll', this.onscroll, false);
+    this.onscroll();
   },
   beforeDestroy() {
     window.removeEventListener('scroll', this.onscroll);
@@ -60,24 +69,17 @@ export default {
 @import "../assets/styles/lib/vars";
 
 .content-panel {
-  padding: ($content-padding / 2) ($content-padding * 2);
+  padding: $content-padding ($content-padding * 2);
   font-size: 18px;
-
-  &:first-child {
-    padding-top: $content-padding;
-  }
-
-  &:last-child {
-    padding-bottom: $content-padding;
-  }
+  margin: 0 auto;
 
   &:nth-child(even) {
     text-align: right;
   }
+}
 
-  & ~ & {
-    padding-top: $content-padding;
-  }
+.narrow {
+  max-width: 80vw;
 }
 
 header {

@@ -48,4 +48,10 @@ export default {
 
 <style lang="scss" scoped>
 @import "../assets/styles/lib/vars";
+
+.content-panel {
+  & + & {
+    border-top: 1px solid $color-black;
+  }
+}
 </style>

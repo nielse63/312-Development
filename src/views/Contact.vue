@@ -5,8 +5,10 @@
       :canvas="canvas"
     ></intro-panel>
     <content-section>
-      <content-panel>
-        <!-- form containing name, email, url, message -->
+      <content-panel :narrow="narrow">
+        <form-input label="Name"></form-input>
+        <form-input label="Email" type="email"></form-input>
+        <form-input label="Message" type="textarea"></form-input>
       </content-panel>
     </content-section>
   </div>
@@ -17,6 +19,7 @@ import canvas from '@/lib/canvas/cubes';
 import IntroPanel from '@/components/IntroPanel';
 import ContentSection from '@/components/ContentSection';
 import ContentPanel from '@/components/ContentPanel';
+import FormInput from '@/components/FormInput';
 
 export default {
   name:       'Contact',
@@ -24,11 +27,13 @@ export default {
     IntroPanel,
     ContentSection,
     ContentPanel,
+    FormInput,
   },
   data() {
     return {
-      title: 'Contact Me',
       canvas,
+      title:  'Contact Me',
+      narrow: true,
     };
   },
 };
