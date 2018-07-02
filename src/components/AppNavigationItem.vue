@@ -58,13 +58,20 @@ a {
     transition-timing-function: cubic-bezier(0.2, 1, 0.3, 1);
   }
 
-  &:hover,
-  .router-link-exact-active {
+  &:hover {
     color: $color-black;
 
     &:before {
       transform: scale3d(1, 1, 1);
     }
+  }
+}
+
+.router-link-exact-active {
+  color: $color-black;
+
+  &:before {
+    transform: scale3d(1, 1, 1);
   }
 }
 

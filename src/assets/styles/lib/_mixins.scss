@@ -9,7 +9,8 @@
     background: $color;
   }
 
-  &:hover {
+  &:hover,
+  &.router-link-exact-active {
     color: $color;
   }
 }
