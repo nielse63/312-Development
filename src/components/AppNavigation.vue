@@ -13,6 +13,7 @@
 </template>
 
 <script>
+import { mapState } from 'vuex';
 import AppNavigationItem from '@/components/AppNavigationItem';
 
 export default {
@@ -20,12 +21,12 @@ export default {
   components: {
     AppNavigationItem,
   },
-  props: {
-    open: {
-      type:    Boolean,
-      default: false,
-    },
-  },
+  // props: {
+  //   open: {
+  //     type:    Boolean,
+  //     default: false,
+  //   },
+  // },
   data() {
     return {
       items: [
@@ -55,6 +56,9 @@ export default {
         },
       ],
     };
+  },
+  computed: {
+    ...mapState('nav', ['open']),
   },
 };
 </script>

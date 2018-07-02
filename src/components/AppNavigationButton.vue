@@ -1,0 +1,115 @@
+<template>
+  <button class="app-navigation-button" :class="buttonClass" @click="toggleNav">
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
+</template>
+
+<script>
+import { mapState, mapActions } from 'vuex';
+
+export default {
+  name:     'AppNavigationButton',
+  computed: {
+    ...mapState('nav', {
+      isNavOpen: 'open',
+    }),
+    isButtonDark() {
+      return this.isNavOpen || this.isBelowCanvas;
+    },
+    buttonClass() {
+      return {
+        'button-open': this.isNavOpen,
+        'button-dark': this.isButtonDark,
+      };
+    },
+  },
+  methods: {
+    ...mapActions('nav', {
+      toggleNav: 'toggle',
+    }),
+  },
+};
+</script>
+
+<style scoped lang="scss">
+@import "../assets/styles/lib/vars";
+
+$button-width: 40px;
+$button-height: 34px;
+
+$bar-height: 6px;
+$top-bar-top: 0;
+$bottom-bar-top: ($button-height - $bar-height);
+$middle-bar-top: ($bottom-bar-top / 2);
+
+.app {
+  background-color: $color-black;
+}
+
+.app-navigation-button {
+  cursor: pointer;
+  background: none;
+  border: 0;
+  position: fixed;
+  top: 1rem;
+  right: 1rem;
+  width: $button-width;
+  height: $button-height;
+  z-index: 2;
+
+  span {
+    display: block;
+    position: absolute;
+    height: $bar-height;
+    width: 100%;
+    background: $color-white;
+    border-radius: 9px;
+    opacity: 1;
+    left: 0;
+    transform: rotate(0deg);
+    transition: 0.25s ease-in-out;
+    transition-property: top, width, left, transform;
+
+    &:nth-child(1) {
+      top: $top-bar-top;
+    }
+
+    &:nth-child(2),
+    &:nth-child(3) {
+      top: $middle-bar-top;
+    }
+
+    &:nth-child(4) {
+      top: $bottom-bar-top;
+    }
+  }
+}
+
+.button-dark {
+  span { /* stylelint-disable-line no-descending-specificity */
+    background: $color-black;
+  }
+}
+
+.button-open {
+  span { /* stylelint-disable-line no-descending-specificity */
+    &:nth-child(1),
+    &:nth-child(4) {
+      top: $middle-bar-top;
+      width: 0%;
+      left: 50%;
+    }
+
+    &:nth-child(2) {
+      transform: rotate(45deg);
+    }
+
+    &:nth-child(3) {
+      transform: rotate(-45deg);
+    }
+  }
+}
+</style>

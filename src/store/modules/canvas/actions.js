@@ -6,6 +6,12 @@ export default {
     fn(element);
     commit('start');
   },
+  // pause({ commit }) {
+  //   commit('pause');
+  // },
+  // resume({ commit }) {
+  //   commit('pause');
+  // },
   stop({ commit, state }) {
     commit('pause');
     const { animationFrameId } = state;

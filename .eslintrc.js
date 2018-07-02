@@ -18,9 +18,7 @@ module.exports = {
     'airbnb-base',
   ],
   // required to lint *.vue files
-  plugins: [
-    'html',
-  ],
+  plugins: ['html'],
   // check if imports actually resolve
   settings: {
     'import/resolver': {
