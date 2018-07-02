@@ -43,8 +43,8 @@ a {
   display: inline-block;
 
   &:before {
-    background: fade-out($color-black, 0.15);
     content: "";
+    background: fade-out($color-black, 0.15);
     position: absolute;
     z-index: -1;
     bottom: 0;
@@ -58,7 +58,8 @@ a {
     transition-timing-function: cubic-bezier(0.2, 1, 0.3, 1);
   }
 
-  &:hover {
+  &:hover,
+  .router-link-exact-active {
     color: $color-black;
 
     &:before {

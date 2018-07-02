@@ -10,8 +10,11 @@ import Contact from '@/views/Contact';
 Vue.use(Router);
 
 const router = new Router({
-  mode:   process.env.NODE_ENV === 'test' ? 'hash' : 'history',
-  base:   '/',
+  mode: 'history',
+  base: '/',
+  scrollBehavior() {
+    return { x: 0, y: 0 };
+  },
   routes: [
     {
       name:      'home',

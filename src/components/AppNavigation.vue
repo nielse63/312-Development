@@ -69,7 +69,7 @@ export default {
   bottom: 0;
   padding: 0 1rem;
   background-color: $color-white;
-  z-index: 2;
+  z-index: 1;
   width: 25vw;
   max-width: 350px;
   font-size: 23px;

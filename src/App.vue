@@ -1,32 +1,44 @@
 <template>
   <div id="main" class="app" :class="appClass">
-    <app-navigation :open="isNavOpen"></app-navigation>
-    <app-navigation-button @toggle="ontoggle" :isNavOpen="isNavOpen"></app-navigation-button>
     <div class="page" @click="onclick">
       <transition>
         <router-view :class="{ open: isNavOpen, 'page-content': true }"></router-view>
       </transition>
     </div>
+    <app-navigation :open="isNavOpen"></app-navigation>
+    <button class="app-navigation-button" :class="buttonClass" @click="onbuttonclick">
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
   </div>
 </template>
 
 <script>
 import AppNavigation from '@/components/AppNavigation';
-import AppNavigationButton from '@/components/AppNavigationButton';
 
 export default {
   name:       'app',
   components: {
     AppNavigation,
-    AppNavigationButton,
   },
   data() {
     return {
-      isNavOpen: false,
-      navClass:  'app-navigation',
+      isNavOpen:     false,
+      isBelowCanvas: false,
+      navClass:      'app-navigation',
     };
   },
+  watch: {
+    $route() {
+      this.isNavOpen = false;
+    },
+  },
   computed: {
+    isButtonDark() {
+      return this.isNavOpen || this.isBelowCanvas;
+    },
     appClass() {
       const object = {
         'nav-open': this.isNavOpen,
@@ -35,16 +47,45 @@ export default {
       object[routeClassName] = true;
       return object;
     },
+    routerViewClass() {
+      return {
+        'page-content': true,
+        open:           this.isNavOpen,
+      };
+    },
+    buttonClass() {
+      return {
+        'button-open': this.isNavOpen,
+        'button-dark': this.isButtonDark,
+      };
+    },
   },
   methods: {
-    ontoggle(isNavOpen) {
-      this.isNavOpen = isNavOpen;
+    onbuttonclick() {
+      this.isNavOpen = !this.isNavOpen;
     },
     onclick() {
       if (this.isNavOpen) {
         this.isNavOpen = false;
       }
     },
+    onscroll() {
+      const headerBottom = document.querySelector('.canvas').offsetHeight;
+      if (!this.isBelowCanvas && window.scrollY > headerBottom) {
+        this.isBelowCanvas = true;
+      } else if (this.isBelowCanvas && window.scrollY <= headerBottom) {
+        this.isBelowCanvas = false;
+      }
+    },
+  },
+  beforeMount() {
+    window.addEventListener('scroll', this.onscroll, false);
+  },
+  mounted() {
+    this.onscroll();
+  },
+  beforeDestroy() {
+    window.removeEventListener('scroll', this.onscroll);
   },
 };
 </script>
@@ -56,40 +97,89 @@ export default {
 <style lang="scss" scoped>
 @import "assets/styles/lib/vars";
 
+$button-width: 40px;
+$button-height: 34px;
+
+$bar-height: 6px;
+$top-bar-top: 0;
+$bottom-bar-top: ($button-height - $bar-height);
+$middle-bar-top: ($bottom-bar-top / 2);
+
 .app {
   background-color: $color-black;
 }
 
-.view {
-  &-home,
-  &-about-me,
-  &-contact-me {
-    background-color: #000;
-  }
+.app-navigation-button {
+  cursor: pointer;
+  background: none;
+  border: 0;
+  position: fixed;
+  top: 1rem;
+  right: 1rem;
+  width: $button-width;
+  height: $button-height;
+  z-index: 2;
 
-  &-experience {
-    background-color: #191919;
-  }
+  span {
+    display: block;
+    position: absolute;
+    height: $bar-height;
+    width: 100%;
+    background: $color-white;
+    border-radius: 9px;
+    opacity: 1;
+    left: 0;
+    transform: rotate(0deg);
+    transition: 0.25s ease-in-out;
+    transition-property: top, width, left, transform;
 
-  &-portfolio {
-    background-color: #59c384;
+    &:nth-child(1) {
+      top: $top-bar-top;
+    }
+
+    &:nth-child(2),
+    &:nth-child(3) {
+      top: $middle-bar-top;
+    }
+
+    &:nth-child(4) {
+      top: $bottom-bar-top;
+    }
+  }
+}
+
+.button-dark {
+  span { /* stylelint-disable-line no-descending-specificity */
+    background: $color-black;
+  }
+}
+
+.button-open {
+  span { /* stylelint-disable-line no-descending-specificity */
+    &:nth-child(1),
+    &:nth-child(4) {
+      top: $middle-bar-top;
+      width: 0%;
+      left: 50%;
+    }
+
+    &:nth-child(2) {
+      transform: rotate(45deg);
+    }
+
+    &:nth-child(3) {
+      transform: rotate(-45deg);
+    }
   }
 }
 
 .page {
-  perspective: 100vw;
-
   &-content {
     min-height: 100vh;
-    transition-duration: 0.25s;
-    transition-timing-function: ease-in-out;
-    transition-property: opacity, transform;
-    will-change: opacity, transform;
-    backface-visibility: hidden;
-    transform: translate3d(0, 0, 0);
+    transition: 0.25s opacity ease-in-out;
+    will-change: opacity;
 
     &.open {
-      transform: translate3d(0, 5vh, -5vw);
       opacity: 0.35;
     }
   }
