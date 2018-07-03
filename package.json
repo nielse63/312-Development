@@ -113,6 +113,10 @@
     "*.scss": [
       "stylelint --fix",
       "git add"
+    ],
+    "*.svg": [
+      "svgo --pretty -p 2 --config=.svgo.yml --indent=2",
+      "git add"
     ]
   }
 }
