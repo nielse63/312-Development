@@ -17,12 +17,13 @@
 </template>
 
 <script>
+import { mapActions, mapState } from 'vuex';
+import { projectImages, shuffeImages } from '@/lib/content/images';
 import canvas from '@/lib/canvas/waves';
 import IntroPanel from '@/components/IntroPanel';
 import ContentSection from '@/components/ContentSection';
 import ContentPanel from '@/components/ContentPanel';
 import FloatingBox from '@/components/FloatingBox';
-import PlaceholderImage from '@/assets/images/placeholder.jpg';
 
 export default {
   name:       'Portfolio',
@@ -34,59 +35,42 @@ export default {
   },
   data() {
     return {
-      title: 'Portfolio',
+      title:  'Portfolio',
       canvas,
-      items: [
-        {
-          title: 'Something',
-          text:  'lorem ipsum dolor sit amet...',
-          href:  'https://google.com',
-          image: PlaceholderImage,
-        },
-        {
-          title: 'Something',
-          text:  'lorem ipsum dolor sit amet...',
-          href:  'https://google.com',
-          image: PlaceholderImage,
-        },
-        {
-          title: 'Something',
-          text:  'lorem ipsum dolor sit amet...',
-          href:  'https://google.com',
-          image: PlaceholderImage,
-        },
-        {
-          title: 'Something',
-          text:  'lorem ipsum dolor sit amet...',
-          href:  'https://google.com',
-          image: PlaceholderImage,
-        },
-        {
-          title: 'Something',
-          text:  'lorem ipsum dolor sit amet...',
-          href:  'https://google.com',
-          image: PlaceholderImage,
-        },
-        {
-          title: 'Something',
-          text:  'lorem ipsum dolor sit amet...',
-          href:  'https://google.com',
-          image: PlaceholderImage,
-        },
-        {
-          title: 'Something',
-          text:  'lorem ipsum dolor sit amet...',
-          href:  'https://google.com',
-          image: PlaceholderImage,
-        },
-        {
-          title: 'Something',
-          text:  'lorem ipsum dolor sit amet...',
-          href:  'https://google.com',
-          image: PlaceholderImage,
-        },
-      ],
+      images: shuffeImages(),
     };
+  },
+  computed: {
+    ...mapState('portfolio', ['repos']),
+    items() {
+      return this.repos.splice(0, 10).map(({
+        name, description, url, homepage,
+      }) => {
+        const image = projectImages[name] ? projectImages[name] : this.randomImage();
+        return {
+          title: name,
+          text:  description,
+          href:  url || homepage,
+          image,
+        };
+      });
+    },
+  },
+  methods: {
+    ...mapActions('portfolio', ['fetchGitHubData']),
+    randomImage() {
+      const { images } = this;
+      if (!images.length) {
+        this.images = shuffeImages();
+        return this.randomImage();
+      }
+      const index = Math.floor(Math.random() * images.length);
+      const image = images.splice(index, 1);
+      return image[0];
+    },
+  },
+  mounted() {
+    this.fetchGitHubData();
   },
 };
 </script>

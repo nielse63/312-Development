@@ -87,6 +87,7 @@ export default {
   margin: 0 auto;
   height: 100vh;
   max-height: 600px;
+  min-height: 450px;
   position: relative;
   color: $color-white;
   text-align: center;

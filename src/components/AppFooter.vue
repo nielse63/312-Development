@@ -1,5 +1,5 @@
 <template>
-  <footer class="footer" :style="style">
+  <footer class="footer">
     <ul class="footer__links">
       <li v-for="link in links" :key="link.text">
         <external-link :text="link.text" :href="link.href">
@@ -12,6 +12,7 @@
 </template>
 
 <script>
+import preload from '@/lib/preload';
 import content from '@/lib/content';
 import ExternalLink from '@/components/ExternalLink';
 import GithubIcon from '@/assets/images/github.svg';
@@ -29,9 +30,7 @@ export default {
   },
   data() {
     return {
-      style: {
-        backgroundImage: `url(${BackgroundImage})`,
-      },
+      image: BackgroundImage,
       links: [
         {
           text: 'GitHub',
@@ -52,6 +51,12 @@ export default {
         },
       ],
     };
+  },
+  mounted() {
+    preload(this.image);
+    this.$nextTick().then(() => {
+      this.$el.style.backgroundImage = `url(${this.image})`;
+    });
   },
 };
 </script>

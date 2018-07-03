@@ -19,5 +19,9 @@
   "*.md": [
     "remark -o",
     "git add"
+  ],
+  "src/assets/images/**/*.{png,jpg}": [
+    "node scripts/resize-images.js",
+    "git add"
   ]
 }

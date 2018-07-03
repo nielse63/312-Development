@@ -17,4 +17,16 @@ export default {
     twitter:   'https://twitter.com/ErikKyleNielsen/',
     npm:       'https://www.npmjs.com/~nielse63',
   },
+  about: {
+    description: 'More info about me - personally and professionally',
+  },
+  experience: {
+    description: 'A list of all the tools and technologies I have experience with',
+  },
+  portfolio: {
+    description: 'A selection of my open-source work',
+  },
+  contact: {
+    description: 'Let\'s stay in touch - shoot me a message',
+  },
 };

@@ -1,19 +1,31 @@
 <template>
   <div class="floating-box" :style="style">
-    <figure :style="figureStyle">
-      <a :href="href">
-        <figcaption>
-          <h3>{{title}}</h3>
-          <p v-if="text">{{text}}</p>
-        </figcaption>
-      </a>
+    <figure>
+      <template v-if="href[0] == '/'">
+        <router-link :to="href">
+          <figcaption>
+            <h3>{{title}}</h3>
+            <p v-if="text">{{text}}</p>
+          </figcaption>
+        </router-link>
+      </template>
+      <template v-else>
+        <a :href="href">
+          <figcaption>
+            <h3>{{title}}</h3>
+            <p v-if="text">{{text}}</p>
+            <slot></slot>
+          </figcaption>
+        </a>
+      </template>
     </figure>
   </div>
 </template>
 
 <script>
-const maxOffset = 65;
-const randomNumber = () => Math.floor(Math.random() * maxOffset) - (maxOffset / 2);
+import preload from '@/lib/preload';
+
+const randomNumber = (max = 100) => Math.floor(Math.random() * max) - (max / 2);
 
 export default {
   name:  'FloatingBox',
@@ -36,7 +48,6 @@ export default {
   },
   data() {
     return {
-      top:  randomNumber(),
       left: randomNumber() * 2,
     };
   },
@@ -44,14 +55,16 @@ export default {
     style() {
       const left = this.index % 2 === 0 ? -Math.abs(this.left) : Math.abs(this.left);
       return {
-        transform: `translate(${left}px, ${this.top}px)`,
+        transform: `translate(${left}px, 0px)`,
       };
     },
-    figureStyle() {
-      return {
-        backgroundImage: `url(${this.image})`,
-      };
-    },
+  },
+  mounted() {
+    preload(this.image);
+    this.$nextTick().then(() => {
+      const target = this.$el.querySelector('a');
+      target.style.backgroundImage = `url(${this.image})`;
+    });
   },
 };
 </script>
@@ -71,8 +84,6 @@ figure {
   max-height: 100%;
   overflow: hidden;
   position: relative;
-  background-size: cover;
-  background-position: top center;
 }
 
 figcaption {
@@ -80,7 +91,7 @@ figcaption {
   bottom: 0;
   left: 0;
   right: 0;
-  padding: 1em;
+  padding: 1.5em;
   color: $color-white;
 }
 
@@ -88,6 +99,8 @@ a {
   display: block;
   height: 350px;
   position: relative;
+  background-size: cover;
+  background-position: top center;
 
   &:before {
     content: "";
@@ -97,14 +110,14 @@ a {
     left: 0;
     right: 0;
     background: linear-gradient(to bottom, transparent 0%, $color-black 100%);
-    height: 35%;
+    height: 50%;
     transition: 0.5s height ease-in-out;
     will-change: height;
   }
 
   &:hover {
     &:before {
-      height: 50%;
+      height: 70%;
     }
   }
 }
@@ -112,9 +125,13 @@ a {
 h3 {
   line-height: 1;
   margin: 0;
+
+  + * {
+    margin-top: 1em;
+  }
 }
 
 p {
-  margin: 0;
+  line-height: 1;
 }
 </style>
