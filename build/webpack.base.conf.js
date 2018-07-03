@@ -80,7 +80,9 @@ module.exports = {
             loader:  'svg-inline-loader',
             options: {
               removeTags:        true,
+              removingTags:      ['title', 'desc'],
               removeSVGTagAttrs: true,
+              removingTagAttrs:  ['height', 'width'],
             },
           },
         ],

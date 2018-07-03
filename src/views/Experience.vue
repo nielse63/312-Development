@@ -7,7 +7,13 @@
     <content-section>
       <template v-for="(panel, index) in panels">
         <content-panel :key="index" :title="panel.title">
-          <!--  -->
+          <ul>
+            <li v-for="(item, j) in panel.items" :key="j">
+              <figure v-html="item.image">
+                <figcaption>{{item.title}}</figcaption>
+              </figure>
+            </li>
+          </ul>
         </content-panel>
       </template>
     </content-section>
@@ -16,6 +22,11 @@
 
 <script>
 import canvas from '@/lib/canvas/brain';
+import languages from '@/lib/content/experience/languages';
+import frameworks from '@/lib/content/experience/frameworks';
+import buildTools from '@/lib/content/experience/build-tools';
+import libraries from '@/lib/content/experience/libraries';
+import testing from '@/lib/content/experience/testing';
 import IntroPanel from '@/components/IntroPanel';
 import ContentSection from '@/components/ContentSection';
 import ContentPanel from '@/components/ContentPanel';
@@ -32,27 +43,42 @@ export default {
       title:  'My Experience',
       canvas,
       panels: [
-        {
-          title: 'Languages',
-        },
-        {
-          title: 'Frameworks',
-        },
-        {
-          title: 'Build Tools',
-        },
-        {
-          title: 'Libraries',
-        },
-        {
-          title: 'Testing',
-        },
+        languages,
+        frameworks,
+        buildTools,
+        libraries,
+        testing,
       ],
     };
   },
 };
 </script>
 
+<style lang="scss">
+.experience {
+  svg {
+    max-height: 150px;
+  }
+}
+</style>
+
 <style lang="scss" scoped>
 @import "../assets/styles/lib/vars";
+
+ul {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 3em;
+}
+
+li {
+  flex: 1 0 auto;
+  margin: 0 1em;
+}
+
+figure {
+  max-height: 150px;
+  margin: 0;
+}
 </style>

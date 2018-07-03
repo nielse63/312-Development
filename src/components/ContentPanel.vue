@@ -38,6 +38,7 @@ export default {
       }
       const windowBottom = window.scrollY + window.innerHeight;
       if (windowBottom > this.offsetTop) {
+        window.removeEventListener('scroll', this.onscroll);
         this.inView = true;
       }
     },
