@@ -1,5 +1,5 @@
 <template>
-  <footer class="footer">
+  <footer class="footer" :style="style">
     <ul class="footer__links">
       <li v-for="link in links" :key="link.text">
         <external-link :text="link.text" :href="link.href">
@@ -18,6 +18,7 @@ import GithubIcon from '@/assets/images/github.svg';
 import LinkedInIcon from '@/assets/images/linkedin.svg';
 import TwitterIcon from '@/assets/images/twitter.svg';
 import NPMIcon from '@/assets/images/npm.svg';
+import BackgroundImage from '@/assets/images/trianglify.png';
 
 const { links } = content;
 
@@ -28,6 +29,9 @@ export default {
   },
   data() {
     return {
+      style: {
+        backgroundImage: `url(${BackgroundImage})`,
+      },
       links: [
         {
           text: 'GitHub',
@@ -77,6 +81,7 @@ li {
 a {
   display: flex;
   padding: 0.25em;
+  transition: 0.15s background-color ease-in-out;
 
   &:hover {
     background-color: fade-out($color-white, 0.8);

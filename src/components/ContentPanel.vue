@@ -84,6 +84,7 @@ header {
 
 .body {
   line-height: 2;
+  position: relative;
 }
 
 h2 {

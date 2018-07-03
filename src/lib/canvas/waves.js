@@ -24,7 +24,7 @@ export default (canvas) => {
   const dotTexture = loader.load(dotTextureImage);
 
   const radius = 50;
-  const sphereGeom = new IcosahedronGeometry(radius, 5);
+  const sphereGeom = new IcosahedronGeometry(radius, 4);
   const dotsGeom = new Geometry();
   const bufferDotsGeom = new BufferGeometry();
   const positions = new Float32Array(sphereGeom.vertices.length * 3);
@@ -41,6 +41,7 @@ export default (canvas) => {
 
   function animateDot(index, vector) {
     TweenLite.to(vector, 4, {
+      lazy:              true,
       x:                 0,
       z:                 0,
       ease:              window.Back.easeOut,
