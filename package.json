@@ -12,7 +12,7 @@
     "lint:scss": "bin/lint scss",
     "lint:md": "bin/lint md",
     "new": "vg",
-    "test": "jest"
+    "test": "bin/test e2e"
   },
   "gitHooks": {
     "pre-commit": "lint-staged"

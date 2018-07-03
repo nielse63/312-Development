@@ -1,0 +1,25 @@
+#!/usr/bin/env bash
+
+function test_e2e() {
+  echo 'Building dist files'
+  yarn build
+  echo 'Running e2e tests'
+  node_modules/.bin/jest
+}
+
+function usage() {
+  echo "runs automated tests"
+  echo " "
+  echo "bin/test [command]"
+  echo " "
+  echo "commands:"
+  echo "e2e                     runs e2e tests"
+  exit 0
+}
+
+if [ "$1" == "e2e" ]; then
+  test_e2e
+else
+  usage
+  exit 1
+fi
