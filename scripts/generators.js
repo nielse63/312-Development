@@ -12,7 +12,7 @@ function outputPath(type, filename) {
       return path.resolve(__dirname, '../src/components', `${className}.vue`);
     case 'view':
       return path.resolve(__dirname, '../src/views', `${className}.vue`);
-    case 'doc':
+    case 'docs':
       return path.resolve(__dirname, '../docs', `${kebabName}.md`);
     default:
       return path.resolve(__dirname, '..', `${kebabName}.js`);
@@ -24,7 +24,7 @@ function templatePath(type) {
     case 'vue':
     case 'component':
       return path.resolve(__dirname, '../blueprints/component.vue');
-    case 'doc':
+    case 'docs':
       return path.resolve(__dirname, '../blueprints/docs.md');
     default:
       return path.resolve(__dirname, '../blueprints/basic.js');
