@@ -57,7 +57,10 @@ module.exports = {
       },
     },
     {
-      files: ['build/**'],
+      files: [
+        'build/**',
+        'scripts/**'
+      ],
       env:   {
         browser: false,
         node:    true,
