@@ -1,6 +1,7 @@
 {
   "files.associations": {
     ".vuegenerator": "json",
+    ".remarkrc": "jsonc",
   },
   "files.exclude": {
     "**/*.log": true,
@@ -24,4 +25,8 @@
     { "language": "javascriptreact", "autoFix": true },
     { "language": "vue", "autoFix": true }
   ],
+  "[markdown]": {
+    "editor.wordWrap": "wordWrapColumn",
+    "editor.wordWrapColumn": 80
+  }
 }

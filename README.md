@@ -17,7 +17,7 @@ First and foremost, this repo is not meant to be a tutorial or boilerplate of an
 
 ## Technology & Tools
 
-This is just the highlight reel of all the tools I'm using on my site. To see all the giants whose shoulders I'm standing on, checkout the [package.json](https://github.com/nielse63/312-Development/blob/master/package.json) file.*
+This is just the highlight reel of all the tools I'm using on my site. To see all the giants whose shoulders I'm standing on, checkout the [package.json](https://github.com/nielse63/312-Development/blob/master/package.json) file.
 
 ### The Base
 
