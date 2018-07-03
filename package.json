@@ -8,9 +8,9 @@
     "build": "cross-env NODE_ENV=production webpack --mode production --colors",
     "serve": "cross-env NODE_ENV=development webpack-dev-server --hot",
     "start": "cross-env NODE_ENV=production DEBUG=312dev* pm2 start server/ --name '312-prod'",
-    "lint:js": "bin/lint --js",
-    "lint:scss": "bin/lint --scss",
-    "lint:md": "bin/lint --md",
+    "lint:js": "bin/lint js",
+    "lint:scss": "bin/lint scss",
+    "lint:md": "bin/lint md",
     "new": "vg",
     "test": "jest"
   },

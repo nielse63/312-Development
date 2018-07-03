@@ -1,67 +1,40 @@
 #!/usr/bin/env bash
-set -e
 
 function lint_js() {
   echo 'Linting JS files'
-  npx eslint --ext .js,.vue \
-    ./.*.js ./*.js src/ server/ build/ test/ \
-    --ignore-pattern='!.*.js' \
-    --fix
+  node_modules/.bin/eslint --ext .js,.vue ./*.js src/ server/ build/ test/ --fix
 }
 
 function lint_scss() {
   echo 'Linting SCSS files'
-  npx stylelint 'src/**/*.scss' -s scss --fix
-  npx stylelint 'src/**/*.vue' -s scss
+  node_modules/.bin/stylelint 'src/**/*.scss' -s scss --fix
+  node_modules/.bin/stylelint 'src/**/*.vue' -s scss
 }
 
 function lint_md() {
   echo 'Linting .md files'
-  npx remark -S docs/*.md *.md -o
+  node_modules/.bin/remark -S docs/*.md *.md -o
 }
 
-function help() {
+function usage() {
   echo "lints source files"
   echo " "
-  echo "bin/lint [options]"
+  echo "bin/lint [command]"
   echo " "
-  echo "options:"
-  echo "-h, --help                show brief help"
-  echo "--js                      lints javascript files"
-  echo "--scss                    lints scss files"
-  echo "--md                      lints markdown files"
-  echo "--all                     run all linters"
+  echo "commands:"
+  echo "js                      lints javascript files"
+  echo "scss                    lints scss files"
+  echo "md                      lints markdown files"
   exit 0
 }
 
-while test $# -gt 0; do
-  case "$1" in
-    -h|--help)
-      help
-      ;;
-    --js)
-      shift
-      lint_js
-      shift
-      ;;
-    --scss)
-      shift
-      lint_scss
-      shift
-      ;;
-    --md)
-      shift
-      lint_md
-      shift
-      ;;
-    --all)
-      shift
-      lint_js
-      lint_scss
-      shift
-      ;;
-    *)
-      break
-      ;;
-  esac
-done
+if [ "$1" == "js" ]; then
+  lint_js
+elif [ "$1" == "scss" ]; then
+  lint_scss
+elif [ "$1" == "md" ]; then
+  lint_md
+else
+  usage
+  exit 1
+fi
