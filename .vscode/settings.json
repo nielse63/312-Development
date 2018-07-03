@@ -1,7 +1,7 @@
 {
   "files.associations": {
     ".vuegenerator": "json",
-    ".remarkrc": "jsonc",
+    ".*rc": "jsonc",
   },
   "files.exclude": {
     "**/*.log": true,

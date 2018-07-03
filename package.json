@@ -102,28 +102,5 @@
     "> 1%",
     "last 2 versions",
     "not ie <= 10"
-  ],
-  "lint-staged": {
-    "*.js": [
-      "eslint --fix",
-      "git add"
-    ],
-    "*.vue": [
-      "eslint --fix",
-      "stylelint",
-      "git add"
-    ],
-    "*.scss": [
-      "stylelint --fix",
-      "git add"
-    ],
-    "*.svg": [
-      "svgo --pretty -p 2 --config=.svgo.yml --indent=2",
-      "git add"
-    ],
-    "*.md": [
-      "remark",
-      "git add"
-    ]
-  }
+  ]
 }
