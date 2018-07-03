@@ -6,12 +6,7 @@
       :canvas="network"
     ></intro-panel>
     <content-section>
-      <content-panel>
-        <!-- this is the intro content -->
-      </content-panel>
-      <content-panel>
-        <!-- this section should have staggered blocks on cont -->
-      </content-panel>
+      <!--  -->
     </content-section>
   </div>
 </template>

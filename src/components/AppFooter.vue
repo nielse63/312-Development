@@ -12,10 +12,14 @@
 </template>
 
 <script>
+import content from '@/lib/content';
 import ExternalLink from '@/components/ExternalLink';
 import GithubIcon from '@/assets/images/github.svg';
 import LinkedInIcon from '@/assets/images/linkedin.svg';
 import TwitterIcon from '@/assets/images/twitter.svg';
+import NPMIcon from '@/assets/images/npm.svg';
+
+const { links } = content;
 
 export default {
   name:       'AppFooter',
@@ -26,17 +30,21 @@ export default {
     return {
       links: [
         {
+          text: 'GitHub',
+          href: links.github,
+          icon: GithubIcon,
+        }, {
+          text: 'NPM',
+          href: links.npm,
+          icon: NPMIcon,
+        }, {
           text: 'Twitter',
-          href: 'https://twitter.com/ErikKyleNielsen',
+          href: links.twitter,
           icon: TwitterIcon,
         }, {
           text: 'LinkedIn',
-          href: 'https://www.linkedin.com/in/erikkylenielsen/',
+          href: links.linkedin,
           icon: LinkedInIcon,
-        }, {
-          text: 'GitHub',
-          href: 'https://github.com/nielse63',
-          icon: GithubIcon,
         },
       ],
     };

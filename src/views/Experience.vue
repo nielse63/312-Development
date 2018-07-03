@@ -5,21 +5,11 @@
       :canvas="canvas"
     ></intro-panel>
     <content-section>
-      <content-panel>
-        <!-- languages -->
-      </content-panel>
-      <content-panel>
-        <!-- frameworks -->
-      </content-panel>
-      <content-panel>
-        <!-- build tools -->
-      </content-panel>
-      <content-panel>
-        <!-- libraries -->
-      </content-panel>
-      <content-panel>
-        <!-- other -->
-      </content-panel>
+      <template v-for="(panel, index) in panels">
+        <content-panel :key="index" :title="panel.title">
+          <!--  -->
+        </content-panel>
+      </template>
     </content-section>
   </div>
 </template>
@@ -39,8 +29,25 @@ export default {
   },
   data() {
     return {
-      title: 'My Experience',
+      title:  'My Experience',
       canvas,
+      panels: [
+        {
+          title: 'Languages',
+        },
+        {
+          title: 'Frameworks',
+        },
+        {
+          title: 'Build Tools',
+        },
+        {
+          title: 'Libraries',
+        },
+        {
+          title: 'Testing',
+        },
+      ],
     };
   },
 };
@@ -51,7 +58,7 @@ export default {
 
 .content-panel {
   & + & {
-    border-top: 1px solid $color-black;
+    border-top: 1px solid $border-color;
   }
 }
 </style>

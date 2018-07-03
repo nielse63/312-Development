@@ -1,8 +1,8 @@
 <template>
   <div class="content-panel" :class="wrapperClass">
-    <!-- <header>
-      <h2>Some Title</h2>
-    </header> -->
+    <header v-if="title">
+      <h2>{{title}}</h2>
+    </header>
     <div class="body">
       <!-- <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Nostrum dignissimos quo alias. Libero suscipit error sequi aliquam consectetur et amet esse temporibus sunt? Dolore id quisquam facilis aperiam expedita aliquam.</p>
       <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Dolore perferendis aliquam quisquam commodi doloremque neque libero, laborum consequuntur, iusto nulla recusandae maiores. Aspernatur, ab explicabo? Sint quia quidem ab dignissimos.</p> -->
@@ -20,6 +20,9 @@ export default {
       default() {
         return false;
       },
+    },
+    title: {
+      type: String,
     },
   },
   data() {
@@ -83,8 +86,8 @@ export default {
 }
 
 header {
-  margin-bottom: 2rem;
   font-size: 1.25em;
+  margin-top: 2rem;
 }
 
 .body {
@@ -104,7 +107,7 @@ h2 {
     position: absolute;
     bottom: 0;
     left: 0;
-    width: 100%;
+    width: 95%;
     height: 50%;
     opacity: 0.3;
     transform: scale3d(0, 1, 1);
@@ -122,6 +125,17 @@ h2 {
       transform: scale3d(1, 1, 1);
       background: $color-pink;
     }
+  }
+}
+
+a {
+  background-color: fade-out($color-pink, 0.35);
+  color: $color-white;
+  padding: 0 0.25em;
+  font-weight: 700;
+
+  &:hover {
+    background-color: fade-out($color-pink, 0.28);
   }
 }
 </style>
