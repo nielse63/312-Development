@@ -1,4 +1,4 @@
-<svg xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMinYMin meet" viewBox="0 0 256 100">
-  <path fill="#fff" d="M0 0v85.5h71.17v14.33H128V85.5h128V0H0z"/>
-  <path fill="#00bcd4" d="M42.5 14.33H14.33v56.84H42.5v-42.5h14.33v42.5h14.34V14.33H42.5zm43 0V85.5h28.66V71.17h28.17V14.33H85.5zm42.5 42.5h-13.84V28.66H128v28.17zm56.83-42.5h-28.17v56.84h28.17v-42.5h14.34v42.5h14.33v-42.5h14.33v42.5h14.33V14.33h-57.33z"/>
+<svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128.22 50">
+  <path d="M0 0v42.82h35.65V50h28.46v-7.18h64.11V0z" fill="#fff"/>
+  <path d="M21.29 7.18H7.18v28.47h14.11V14.36h7.18v21.29h7.18V7.18zm21.54 0v35.64h14.35v-7.17h14.11V7.18zm21.28 21.28h-6.93V14.35h6.93zM92.57 7.18H78.46v28.47h14.11V14.36h7.18v21.29h7.18V14.36h7.18v21.29h7.18V7.18z" fill="#00bcd4"/>
 </svg>

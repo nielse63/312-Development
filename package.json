@@ -7,7 +7,7 @@
   "scripts": {
     "build": "cross-env NODE_ENV=production webpack --mode production --colors",
     "serve": "cross-env NODE_ENV=development webpack-dev-server --hot",
-    "start": "cross-env NODE_ENV=production DEBUG=312dev* pm2 start server/index.js --name '312-prod'",
+    "start": "cross-env NODE_ENV=production DEBUG=312dev* pm2 start server/ --name '312-prod'",
     "lint:js": "eslint --ext .js,.vue ./*.js src/ server/ --fix",
     "prelint:scss": "stylelint 'src/**/*.scss' -s scss --fix",
     "lint:scss": "stylelint 'src/**/*.vue' -s scss",

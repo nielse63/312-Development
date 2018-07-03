@@ -11,7 +11,6 @@ import store from '@/store';
 Vue.use(Router);
 
 const router = new Router({
-  mode: 'history',
   base: '/',
   scrollBehavior() {
     return { x: 0, y: 0 };

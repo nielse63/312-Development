@@ -1,0 +1,49 @@
+#!/usr/bin/env bash
+set -e
+
+function lint_js() {
+  echo 'Linting JS files'
+  npx eslint --ext .js,.vue \
+    ./.*.js ./*.js src/ server/ build/ test/ \
+    --ignore-pattern='!.*.js' \
+    --fix
+}
+
+function lint_scss() {
+  echo 'Linting SCSS files'
+  npx stylelint 'src/**/*.scss' -s scss --fix
+  npx stylelint 'src/**/*.vue' -s scss
+}
+
+function help() {
+  echo "lints source files"
+  echo " "
+  echo "bin/lint [options]"
+  echo " "
+  echo "options:"
+  echo "-h, --help                show brief help"
+  echo "--js                      lints javascript files"
+  echo "--scss                    lints scss files"
+  exit 0
+}
+
+while test $# -gt 0; do
+  case "$1" in
+    -h|--help)
+      help
+      ;;
+    --js)
+      shift
+      lint_js
+      shift
+      ;;
+    --scss)
+      shift
+      lint_scss
+      shift
+      ;;
+    *)
+      break
+      ;;
+  esac
+done

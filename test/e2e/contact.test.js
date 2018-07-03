@@ -1,7 +1,7 @@
 
 describe('Contact', () => {
   beforeAll(async () => {
-    await page.goto('http://localhost:8080/contact-me');
+    await page.goto('http://localhost:8080/#/contact-me');
   });
 
   it('should render correctly', async () => {
