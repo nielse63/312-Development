@@ -24,7 +24,9 @@ plugins:
   - inlineStyles
   - minifyStyles: false
   - convertStyleToAttrs
-  - cleanupIDs
+  - cleanupIDs:
+      remove: true
+      minify: false
   - prefixIds
   - removeRasterImages
   - removeUselessDefs
