@@ -2,5 +2,5 @@
   "viewDestination": "./src/views/",
   "storeDestination": "./src/store/modules/",
   "componentDestination": "./src/components/",
-  "templatePath": "./templates/"
+  "templatePath": "./blueprints/"
 }

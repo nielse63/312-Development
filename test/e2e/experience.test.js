@@ -1,7 +1,7 @@
 
 describe('Experience', () => {
   beforeAll(async () => {
-    await page.goto('http://localhost:8080/#/experience');
+    await page.goto('http://localhost:8080/experience');
   });
 
   it('should render correctly', async () => {

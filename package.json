@@ -12,7 +12,7 @@
     "prelint:scss": "stylelint 'src/**/*.scss' -s scss --fix",
     "lint:scss": "stylelint 'src/**/*.vue' -s scss",
     "new": "vg",
-    "test": "jest test/e2e/"
+    "test": "jest"
   },
   "gitHooks": {
     "pre-commit": "lint-staged"

@@ -1,7 +1,7 @@
 
 describe('Portfolio', () => {
   beforeAll(async () => {
-    await page.goto('http://localhost:8080/#/portfolio');
+    await page.goto('http://localhost:8080/portfolio');
   });
 
   it('should render correctly', async () => {

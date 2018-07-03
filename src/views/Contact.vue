@@ -5,10 +5,15 @@
       :canvas="canvas"
     ></intro-panel>
     <content-section>
-      <content-panel :narrow="narrow">
-        <form-input label="Name"></form-input>
-        <form-input label="Email" type="email"></form-input>
-        <form-input label="Message" type="textarea"></form-input>
+      <content-panel>
+        <form novalidate="true" autocomplete="false" @submit.prevent="onsubmit">
+          <form-input label="Name" :value="entry.name" @input="entry.name = $event"></form-input>
+          <form-input label="Email" type="email" :value="entry.email" @input="entry.email = $event"></form-input>
+          <form-input label="Company/Organization" type="text" :value="entry.company" @input="entry.company = $event"></form-input>
+          <form-input label="URL" type="url" :value="entry.url" @input="entry.url = $event"></form-input>
+          <form-input label="Message" type="textarea" class="wide"></form-input>
+          <div class="wide"><button type="submit">Submit</button></div>
+        </form>
       </content-panel>
     </content-section>
   </div>
@@ -32,13 +37,53 @@ export default {
   data() {
     return {
       canvas,
-      title:  'Contact Me',
-      narrow: true,
+      title: 'Contact Me',
+      entry: {
+        name:    '',
+        email:   '',
+        company: '',
+        url:     '',
+        message: '',
+      },
     };
+  },
+  methods: {
+    onsubmit() {
+      // submit form
+    },
   },
 };
 </script>
 
 <style lang="scss" scoped>
 @import "../assets/styles/lib/vars";
+
+form {
+  display: flex;
+  flex-wrap: wrap;
+
+  > * {
+    flex: 1 0 50%;
+    padding: 1em;
+  }
+}
+
+.wide {
+  flex: 1 0 100%;
+}
+
+button {
+  background-color: $color-blue;
+  color: $color-white;
+  border: 2px solid $color-blue;
+  border-radius: 2px;
+  font-weight: 700;
+  font-size: 0.8em;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  line-height: 1.5;
+  padding: 0.5em 2em;
+  cursor: pointer;
+  display: block;
+}
 </style>

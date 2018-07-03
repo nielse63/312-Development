@@ -90,6 +90,10 @@ export default {
 <style scoped lang="scss">
 @import "../assets/styles/lib/vars";
 
+.contributions-graph {
+  margin-top: 3em;
+}
+
 canvas {
   width: 100%;
 }

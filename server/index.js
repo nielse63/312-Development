@@ -8,7 +8,7 @@ const expressStaticGzip = require('express-static-gzip');
 const helmet = require('helmet');
 
 const log = debug('312dev');
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 8080;
 const staticDir = path.resolve(__dirname, '../dist');
 const app = express();
 

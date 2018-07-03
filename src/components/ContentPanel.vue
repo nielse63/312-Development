@@ -4,8 +4,6 @@
       <h2>{{title}}</h2>
     </header>
     <div class="body">
-      <!-- <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Nostrum dignissimos quo alias. Libero suscipit error sequi aliquam consectetur et amet esse temporibus sunt? Dolore id quisquam facilis aperiam expedita aliquam.</p>
-      <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Dolore perferendis aliquam quisquam commodi doloremque neque libero, laborum consequuntur, iusto nulla recusandae maiores. Aspernatur, ab explicabo? Sint quia quidem ab dignissimos.</p> -->
       <slot></slot>
     </div>
   </div>
@@ -15,12 +13,6 @@
 export default {
   name:  'ContentPanel',
   props: {
-    narrow: {
-      type: Boolean,
-      default() {
-        return false;
-      },
-    },
     title: {
       type: String,
     },
@@ -34,7 +26,6 @@ export default {
   computed: {
     wrapperClass() {
       return {
-        narrow:    this.narrow,
         'in-view': this.inView,
       };
     },
@@ -79,10 +70,10 @@ export default {
   &:nth-child(even) {
     text-align: right;
   }
-}
 
-.narrow {
-  max-width: 80vw;
+  & + & {
+    border-top: 1px solid $border-color;
+  }
 }
 
 header {
