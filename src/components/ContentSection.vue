@@ -16,7 +16,7 @@ export default {
 .content-section {
   background-color: $color-white;
   position: relative;
-  padding-top: 5rem;
+  padding-top: 20vh;
 
   &:before {
     content: "";
@@ -24,7 +24,7 @@ export default {
     top: 0;
     left: 0;
     right: 0;
-    height: 25vh;
+    height: 20vh;
     background: linear-gradient(to bottom, #000, transparent);
   }
 }

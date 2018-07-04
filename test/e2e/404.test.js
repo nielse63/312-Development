@@ -5,10 +5,13 @@ describe('404', () => {
   });
 
   it('should render correctly', async () => {
-    await expect(page).toMatchElement('.four-oh-four');
+    await expect(page).toMatchElement('.four-oh-four', { timeout: 1000 });
   });
 
   it('should have title', async () => {
-    await expect(page).toMatchElement('h1', { text: 'Page Not Found' });
+    await expect(page).toMatchElement('h1', {
+      text:    'Page Not Found',
+      timeout: 1000,
+    });
   });
 });

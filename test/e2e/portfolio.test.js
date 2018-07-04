@@ -5,7 +5,7 @@ describe('Portfolio', () => {
   });
 
   it('should render correctly', async () => {
-    await expect(page).toMatchElement('.view-portfolio');
+    await expect(page).toMatchElement('.view-portfolio', { timeout: 1000 });
   });
 
   it('should have title', async () => {

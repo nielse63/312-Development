@@ -77,13 +77,13 @@ export default {
       }
       const percentage = y / height;
       const translateY = percentage * -100;
-      const translateZ = Math.abs(translateY);
+      const translateZ = percentage * 25;
       const opacity = 1 - percentage;
       const { h1, h2 } = this;
-      h1.style.transform = `translate3d(0, ${translateY}px, ${translateZ}px)`;
+      h1.style.transform = `translate3d(0, ${translateY}px, ${translateZ}vw)`;
       h1.style.opacity = opacity;
       if (h2) {
-        const h2translateY = translateY / 2;
+        const h2translateY = percentage * -125;
         h2.style.transform = `translate(0, ${h2translateY}px)`;
         h2.style.opacity = opacity;
       }

@@ -5,7 +5,7 @@ describe('Home', () => {
   });
 
   it('should render correctly', async () => {
-    await expect(page).toMatchElement('.home');
+    await expect(page).toMatchElement('.home', { timeout: 1000 });
   });
 
   it('should have title and subtitle', async () => {

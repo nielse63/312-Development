@@ -1,5 +1,5 @@
 <template>
-  <footer class="footer">
+  <footer class="footer" :style="style">
     <ul class="footer__links">
       <li v-for="link in links" :key="link.text">
         <external-link :text="link.text" :href="link.href">
@@ -12,14 +12,13 @@
 </template>
 
 <script>
-import preload from '@/lib/preload';
+// import preload from '@/lib/preload';
 import content from '@/lib/content';
 import ExternalLink from '@/components/ExternalLink';
 import GithubIcon from '@/assets/images/github.svg';
 import LinkedInIcon from '@/assets/images/linkedin.svg';
 import TwitterIcon from '@/assets/images/twitter.svg';
 import NPMIcon from '@/assets/images/npm.svg';
-import BackgroundImage from '@/assets/images/trianglify.png';
 
 const { links } = content;
 
@@ -30,7 +29,7 @@ export default {
   },
   data() {
     return {
-      image: BackgroundImage,
+      image: null,
       links: [
         {
           text: 'GitHub',
@@ -52,11 +51,25 @@ export default {
       ],
     };
   },
+  computed: {
+    style() {
+      if (!this.image) {
+        return {};
+      }
+      return {
+        backgroundImage: `url(${this.image})`,
+      };
+    },
+  },
+  methods: {
+    async setImage() {
+      const BackgroundImage = await import('@/assets/images/trianglify.png');
+      this.image = BackgroundImage.default;
+    },
+    setLinks() {},
+  },
   mounted() {
-    preload(this.image);
-    this.$nextTick().then(() => {
-      this.$el.style.backgroundImage = `url(${this.image})`;
-    });
+    this.setImage();
   },
 };
 </script>
@@ -67,10 +80,13 @@ export default {
 
 .footer {
   padding: 2rem 0;
-  background-color: $color-blue;
   color: $color-white;
   font-size: 22px;
   letter-spacing: 1px;
+  background-color: $color-blue;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 ul {
