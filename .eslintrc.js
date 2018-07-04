@@ -16,10 +16,14 @@ module.exports = {
   },
   extends: [
     'airbnb-base',
-    'plugin:vue/essential'
+    'plugin:unicorn/recommended',
+    'plugin:vue/essential',
   ],
   // required to lint *.vue files
-  plugins:  ['vue'],
+  plugins: [
+    'unicorn',
+    'vue',
+  ],
   // check if imports actually resolve
   settings: {
     'import/resolver': {
@@ -47,6 +51,14 @@ module.exports = {
     'no-debugger':        [errorOrWarn],
   },
   overrides: [
+    {
+      files: ['**/*.vue'],
+      rules: {
+        'unicorn/filename-case': ['error', {
+          case: 'pascalCase',
+        }],
+      },
+    },
     {
       files: ['test/e2e/**'],
       env:   {

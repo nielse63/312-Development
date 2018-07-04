@@ -10,17 +10,17 @@
 </template>
 
 <script>
-  export default {
-    name:  'ExternalLink',
-    props: {
-      href: {
-        type:    String,
-        require: true,
-      },
-      text: {
-        type:    String,
-        require: true,
-      },
+export default {
+  name:  'ExternalLink',
+  props: {
+    href: {
+      type:    String,
+      require: true,
     },
-  };
+    text: {
+      type:    String,
+      require: true,
+    },
+  },
+};
 </script>
