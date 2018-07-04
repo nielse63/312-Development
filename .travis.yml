@@ -17,9 +17,13 @@ env:
 
 jobs:
   include:
+    # linting steps
     - stage: linting
       script: yarn lint:js
     - script: yarn lint:scss
     - script: yarn lint:md
+
+    # test steps
     - stage: tests
-      script: yarn test
+      script: yarn test:unit
+    - script: yarn lint:e2e

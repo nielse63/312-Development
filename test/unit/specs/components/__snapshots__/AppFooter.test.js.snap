@@ -1,0 +1,20 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`AppFooter.vue matches snapshot 1`] = `
+<footer class="footer">
+  <ul class="footer__links">
+    <li>
+      <externallink-stub></externallink-stub>
+    </li>
+    <li>
+      <externallink-stub></externallink-stub>
+    </li>
+    <li>
+      <externallink-stub></externallink-stub>
+    </li>
+    <li>
+      <externallink-stub></externallink-stub>
+    </li>
+  </ul>
+</footer>
+`;

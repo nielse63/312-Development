@@ -12,7 +12,6 @@
 </template>
 
 <script>
-// import preload from '@/lib/preload';
 import content from '@/lib/content';
 import ExternalLink from '@/components/ExternalLink';
 import GithubIcon from '@/assets/images/github.svg';
@@ -69,7 +68,9 @@ export default {
     setLinks() {},
   },
   mounted() {
-    this.setImage();
+    this.$nextTick(() => {
+      this.setImage();
+    });
   },
 };
 </script>

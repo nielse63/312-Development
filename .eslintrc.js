@@ -63,13 +63,16 @@ module.exports = {
       },
     },
     {
-      files: ['test/e2e/**'],
+      files: ['test/**'],
       env:   {
         jest: true,
       },
       globals: {
         browser: true,
         page:    true,
+      },
+      rules: {
+        'unicorn/filename-case': 'off',
       },
     },
     {

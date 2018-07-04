@@ -9,6 +9,7 @@
     "**/node_modules": true,
     "**/dist": true,
     "**/site": true,
+    "**/coverage": true,
   },
   "editor.insertSpaces": true,
   "editor.tabSize": 2,
