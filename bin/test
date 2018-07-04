@@ -7,18 +7,29 @@ function test_e2e() {
   node_modules/.bin/jest
 }
 
+function test_unit() {
+  node_modules/.bin/jest --config=test/unit/jest.config.js
+}
+
 function usage() {
   echo "runs automated tests"
   echo " "
   echo "bin/test [command]"
   echo " "
   echo "commands:"
+  echo "unit                    runs unit tests"
   echo "e2e                     runs e2e tests"
+  echo " "
+  echo "help                    displays usage"
   exit 0
 }
 
 if [ "$1" == "e2e" ]; then
   test_e2e
+elif [ "$1" == "unit" ]; then
+  test_unit
+elif [ "$1" == "help" ]; then
+  usage
 else
   usage
   exit 1

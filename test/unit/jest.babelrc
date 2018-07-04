@@ -1,0 +1,7 @@
+{
+  "plugins": ["dynamic-import-node"],
+  "presets": [
+    ["env", {"targets": { "node": "current" }}],
+    "stage-2"
+  ]
+}
