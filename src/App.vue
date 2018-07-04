@@ -32,6 +32,9 @@ export default {
     ...mapState('nav', {
       isNavOpen: 'open',
     }),
+    ...mapState('canvas', {
+      isCanvasRunning: 'running',
+    }),
     appClass() {
       const object = {
         'nav-open': this.isNavOpen,
@@ -63,12 +66,10 @@ export default {
       }
     },
     onscroll() {
-      if (!this.isBelowCanvas && window.scrollY > this.headerBottom) {
-        this.isBelowCanvas = true;
+      if (this.isCanvasRunning && window.scrollY > this.headerBottom) {
         this.pauseCanvas();
         this.darkenNav();
-      } else if (this.isBelowCanvas && window.scrollY <= this.headerBottom) {
-        this.isBelowCanvas = false;
+      } else if (!this.isCanvasRunning && window.scrollY <= this.headerBottom) {
         this.resumeCanvas();
         this.lightenNav();
       }
@@ -82,7 +83,7 @@ export default {
     this.onscroll();
   },
   beforeDestroy() {
-    window.removeEventListener('scroll', this.onscroll);
+    window.removeEventListener('scroll', this.onscroll, false);
   },
 };
 </script>

@@ -39,20 +39,34 @@ export default {
       const windowBottom = window.scrollY + window.innerHeight;
       if (windowBottom > this.offsetTop) {
         window.removeEventListener('scroll', this.onscroll);
-        this.inView = true;
+        this.$nextTick(() => {
+          this.inView = true;
+        });
       }
     },
-    setOffsetTop() {
-      const { offsetTop, clientHeight } = this.$el;
-      this.offsetTop = offsetTop + (clientHeight / 2);
+    getTop() {
+      let yPosition = 0;
+      let element = this.$el;
+      while (element) {
+        yPosition += (element.offsetTop - element.scrollTop + element.clientTop);
+        element = element.offsetParent;
+      }
+      return yPosition;
     },
-  },
-  beforeMount() {
-    window.addEventListener('scroll', this.onscroll, false);
+    setOffsetTop() {
+      const { clientHeight } = this.$el;
+      this.offsetTop = this.getTop() + (clientHeight / 3);
+    },
   },
   mounted() {
     this.setOffsetTop();
-    this.onscroll();
+    this.$nextTick()
+      .then(() => {
+        window.addEventListener('scroll', this.onscroll, false);
+      })
+      .then(() => {
+        this.onscroll();
+      });
   },
   beforeDestroy() {
     window.removeEventListener('scroll', this.onscroll);
@@ -79,7 +93,10 @@ export default {
 
 header {
   font-size: 1.25em;
-  margin-top: 2rem;
+
+  + * {
+    margin-top: 2rem;
+  }
 }
 
 .body {

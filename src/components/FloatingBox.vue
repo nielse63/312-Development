@@ -1,5 +1,5 @@
 <template>
-  <div class="floating-box" :style="style">
+  <div class="floating-box">
     <figure>
       <template v-if="href[0] == '/'">
         <router-link :to="href">
@@ -25,7 +25,7 @@
 <script>
 import preload from '@/lib/preload';
 
-const randomNumber = (max = 100) => Math.floor(Math.random() * max) - (max / 2);
+// const randomNumber = (max = 100) => Math.floor(Math.random() * max) - (max / 2);
 
 export default {
   name:  'FloatingBox',
@@ -46,26 +46,64 @@ export default {
       type: String,
     },
   },
-  data() {
-    return {
-      left: randomNumber() * 2,
-    };
-  },
-  computed: {
-    style() {
-      const left = this.index % 2 === 0 ? -Math.abs(this.left) : Math.abs(this.left);
-      return {
-        transform: `translate(${left}px, 0px)`,
-      };
-    },
-  },
+  // data() {
+  //   return {
+  //     middle: 0,
+  //     style:  {
+  //       transform:       'translate(0, 0)',
+  //       transitionDelay: '0s',
+  //       opacity:         0,
+  //     },
+  //   };
+  // },
+  // methods: {
+  //   getTop() {
+  //     let yPosition = 0;
+  //     let element = this.$el;
+  //     while (element) {
+  //       yPosition += (element.offsetTop - element.scrollTop + element.clientTop);
+  //       element = element.offsetParent;
+  //     }
+  //     return yPosition;
+  //   },
+  //   onscroll() {
+  //     const screenBottom = window.scrollY + window.innerHeight;
+  //     if (this.middle < screenBottom) {
+  //       this.style = {
+  //         ...this.style,
+  //         transform: 'translate(0, 0)',
+  //         opacity:   1,
+  //       };
+  //       window.removeEventListener('scroll', this.onscroll, false);
+  //     }
+  //   },
+  // },
+  // beforeMount() {
+  //   const translate = Math.floor(Math.random() * 50) + 100;
+  //   const transitionDelay = Math.random() / 2;
+  //   this.style = {
+  //     ...this.style,
+  //     transform:       `translate(0, ${translate}px)`,
+  //     transitionDelay: `${transitionDelay}s`,
+  //   };
+  // },
   mounted() {
-    preload(this.image);
-    this.$nextTick().then(() => {
-      const target = this.$el.querySelector('a');
-      target.style.backgroundImage = `url(${this.image})`;
-    });
+    // this.middle = this.getTop() + (this.$el.clientHeight / 2);
+    this.$nextTick()
+      .then(() => {
+        preload(this.image);
+      })
+      .then(() => {
+        this.$el.querySelector('a').style.backgroundImage = `url(${this.image})`;
+      });
+    // .then(() => {
+    //   window.addEventListener('scroll', this.onscroll, false);
+    //   this.onscroll();
+    // });
   },
+  // beforeDestroy() {
+  //   window.removeEventListener('scroll', this.onscroll, false);
+  // },
 };
 </script>
 
@@ -75,7 +113,6 @@ export default {
 
 .floating-box {
   @include size(calc(50% - 2em), 350px);
-  box-shadow: 0 10px 25px fade-out($color-black, 0.75);
   margin: 2em 0;
 }
 
@@ -84,6 +121,10 @@ figure {
   max-height: 100%;
   overflow: hidden;
   position: relative;
+  box-shadow: 0 10px 25px fade-out($color-black, 0.75);
+  will-change: opacity, transform;
+  transition: 0.5s transform ease-in-out,
+              0.25s opacity ease-in-out;
 }
 
 figcaption {

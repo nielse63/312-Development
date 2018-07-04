@@ -56,22 +56,62 @@ export default {
     title:    String,
     subtitle: String,
   },
+  data() {
+    return {
+      // bound:  false,
+      height: 0,
+      h1:     null,
+      h2:     null,
+    };
+  },
   methods: {
     ...mapMutations('canvas', [
       'setFunction',
       'setElement',
     ]),
-    ...mapActions('canvas', ['start', 'stop']),
+    ...mapActions('canvas', ['start']),
+    onscroll() {
+      const y = window.scrollY;
+      const { height } = this;
+      if (y > height) {
+        return;
+      }
+      const percentage = y / height;
+      const translateY = percentage * -100;
+      const translateZ = Math.abs(translateY);
+      const opacity = 1 - percentage;
+      const { h1, h2 } = this;
+      h1.style.transform = `translate3d(0, ${translateY}px, ${translateZ}px)`;
+      h1.style.opacity = opacity;
+      if (h2) {
+        const h2translateY = translateY / 2;
+        h2.style.transform = `translate(0, ${h2translateY}px)`;
+        h2.style.opacity = opacity;
+      }
+    },
+    setElements() {
+      this.height = this.$el.clientHeight;
+      this.h1 = this.$el.querySelector('h1');
+      this.h2 = this.$el.querySelector('h2');
+    },
+  },
+  beforeMount() {
+    window.removeEventListener('scroll', this.onscroll, false);
+    window.addEventListener('scroll', this.onscroll, false);
   },
   mounted() {
-    this.$nextTick().then(() => {
-      this.stop();
-    }).then(() => {
-      this.setFunction(this.canvas);
-      this.setElement(document.getElementById('scene'));
-    }).then(() => {
-      this.start();
-    });
+    this.setElements();
+    this.$nextTick()
+      .then(() => {
+        this.setFunction(this.canvas);
+        this.setElement(this.$el.querySelector('#scene'));
+      })
+      .then(() => {
+        this.start();
+      });
+  },
+  beforeDestroy() {
+    window.removeEventListener('scroll', this.onscroll, false);
   },
 };
 </script>
@@ -91,6 +131,7 @@ export default {
   position: relative;
   color: $color-white;
   text-align: center;
+  perspective: 100vw;
 }
 
 canvas {
@@ -104,6 +145,11 @@ canvas {
   ~ * {
     z-index: 1;
   }
+}
+
+h1,
+h2 {
+  will-change: transform, opacity;
 }
 
 h1 {

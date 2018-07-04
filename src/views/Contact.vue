@@ -58,6 +58,12 @@ export default {
 <style lang="scss" scoped>
 @import "../assets/styles/lib/vars";
 
+.content-section {
+  &:before {
+    background: linear-gradient(to bottom, #0f1617, transparent);
+  }
+}
+
 form {
   display: flex;
   flex-wrap: wrap;
