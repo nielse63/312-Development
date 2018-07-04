@@ -1,11 +1,11 @@
 
 describe('Contact', () => {
   beforeAll(async () => {
-    await page.goto('http://localhost:8080/#/contact-me');
+    await page.goto('http://localhost:3000/#/contact-me');
   });
 
   it('should render correctly', async () => {
-    await expect(page).toMatchElement('.contact');
+    await expect(page).toMatchElement('.view-contact-me');
   });
 
   it('should have title', async () => {

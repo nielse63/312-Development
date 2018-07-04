@@ -56,7 +56,7 @@ export default {
     },
     items() {
       return this.routes
-        .filter(route => route.name !== 'home')
+        .filter(route => route.name !== 'home' && route.name !== 'four-oh-four')
         .map((route, i) => ({
           title: titleCase(route.name),
           text:  route.meta.description || '',

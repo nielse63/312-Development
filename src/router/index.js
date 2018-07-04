@@ -6,6 +6,7 @@ import About from '@/views/About';
 import Experience from '@/views/Experience';
 import Portfolio from '@/views/Portfolio';
 import Contact from '@/views/Contact';
+import FourOhFour from '@/views/FourOhFour';
 import store from '@/store';
 import content, { subtitle } from '@/lib/content';
 
@@ -55,6 +56,14 @@ const router = new Router({
       component: Contact,
       meta:      {
         description: content.contact.description,
+      },
+    },
+    {
+      name:      'four-oh-four',
+      path:      '*',
+      component: FourOhFour,
+      meta:      {
+        description: content.four04.description,
       },
     },
   ],
