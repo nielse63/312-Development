@@ -22,11 +22,6 @@
 
 <script>
 import canvas from '@/lib/canvas/brain';
-import languages from '@/lib/content/experience/languages';
-import frameworks from '@/lib/content/experience/frameworks';
-import buildTools from '@/lib/content/experience/build-tools';
-import libraries from '@/lib/content/experience/libraries';
-import testing from '@/lib/content/experience/testing';
 import IntroPanel from '@/components/IntroPanel';
 import ContentSection from '@/components/ContentSection';
 import ContentPanel from '@/components/ContentPanel';
@@ -42,14 +37,27 @@ export default {
     return {
       title:  'My Experience',
       canvas,
-      panels: [
-        languages,
-        frameworks,
-        buildTools,
-        libraries,
-        testing,
-      ],
+      panels: [],
     };
+  },
+  methods: {
+    async setPanels() {
+      const languages = await import('@/lib/content/experience/languages');
+      const frameworks = await import('@/lib/content/experience/frameworks');
+      const buildTools = await import('@/lib/content/experience/build-tools');
+      const libraries = await import('@/lib/content/experience/libraries');
+      const testing = await import('@/lib/content/experience/testing');
+      this.panels.push(
+        languages.default,
+        frameworks.default,
+        buildTools.default,
+        libraries.default,
+        testing.default,
+      );
+    },
+  },
+  mounted() {
+    this.setPanels();
   },
 };
 </script>

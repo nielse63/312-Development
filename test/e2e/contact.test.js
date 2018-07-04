@@ -5,7 +5,7 @@ describe('Contact', () => {
   });
 
   it('should render correctly', async () => {
-    await expect(page).toMatchElement('.view-contact-me');
+    await expect(page).toMatchElement('.view-contact', { timeout: 1000 });
   });
 
   it('should have title', async () => {

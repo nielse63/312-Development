@@ -5,7 +5,7 @@
   ],
   "*.vue": [
     "eslint --ext .vue --fix",
-    "stylelint",
+    "stylelint --custom-syntax postcss-html --fix",
     "git add"
   ],
   "*.scss": [

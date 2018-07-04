@@ -8,7 +8,7 @@ function lint_js() {
 function lint_scss() {
   echo 'Linting SCSS files'
   node_modules/.bin/stylelint 'src/**/*.scss' -s scss --fix
-  node_modules/.bin/stylelint 'src/**/*.vue' -s scss
+  node_modules/.bin/stylelint 'src/**/*.vue' --custom-syntax postcss-html --fix
 }
 
 function lint_md() {

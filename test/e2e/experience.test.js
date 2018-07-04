@@ -5,10 +5,13 @@ describe('Experience', () => {
   });
 
   it('should render correctly', async () => {
-    await expect(page).toMatchElement('.view-experience');
+    await expect(page).toMatchElement('.view-experience', { timeout: 1000 });
   });
 
   it('should have title', async () => {
-    await expect(page).toMatchElement('h1', { text: 'My Experience' });
+    await expect(page).toMatchElement('h1', {
+      text:    'My Experience',
+      timeout: 1000,
+    });
   });
 });

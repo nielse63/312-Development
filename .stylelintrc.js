@@ -1,9 +1,7 @@
 
 module.exports = {
-  processors: [
-    ['@mapbox/stylelint-processor-arbitrary-tags', {
-      fileFilterRegex: [/\.vue$/],
-    }],
+  plugins: [
+    'stylelint-scss',
   ],
   extends: 'stylelint-config-recommended-scss',
   rules:   {
