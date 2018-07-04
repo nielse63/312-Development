@@ -29,4 +29,7 @@ export default {
   contact: {
     description: 'Let\'s stay in touch - shoot me a message',
   },
+  four04: {
+    description: 'The page you\'re looking for cannot be found',
+  },
 };

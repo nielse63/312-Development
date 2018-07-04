@@ -1,7 +1,7 @@
 
 module.exports = {
   server: {
-    command: 'node server/',
-    port:    8080,
+    command: 'PORT=3000 node server/',
+    port:    3000,
   },
 };
