@@ -53,7 +53,7 @@ export default (canvas) => {
       opacity:     0,
     }),
     new MeshBasicMaterial({
-      color:     0x13756a,
+      color:     0x13756A,
       side:      DoubleSide,
       wireframe: true,
     }),

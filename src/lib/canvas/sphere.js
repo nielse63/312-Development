@@ -18,7 +18,7 @@ export default (canvas) => {
   scene.add(sphere);
 
   const material = new LineBasicMaterial({
-    color: 0xfe0e55,
+    color: 0xFE0E55,
   });
   const linesAmount = 18;
   const radius = 100;

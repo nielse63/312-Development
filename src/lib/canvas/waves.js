@@ -12,7 +12,7 @@ import store from '../../store';
 
 export default (canvas) => {
   const { width, height } = getCanvasSize(canvas);
-  const renderer = createRenderer(canvas, 0x59c384);
+  const renderer = createRenderer(canvas, 0x59C384);
 
   const scene = new Scene();
 

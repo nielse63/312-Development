@@ -18,7 +18,7 @@ export default (canvas) => {
   const sphere = new Group();
   scene.add(sphere);
   const mat1 = new LineBasicMaterial({
-    color: 0x4a4a4a,
+    color: 0x4A4A4A,
   });
   const mat2 = new LineBasicMaterial({
     color: 0x3F51B5,

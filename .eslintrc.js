@@ -41,6 +41,9 @@ module.exports = {
     }],
     'import/prefer-default-export': 'off',
 
+    // override unicorn rules
+    'unicorn/explicit-length-check': 'off',
+
     // allow debugger during development
     'max-len':            'off',
     'key-spacing':        ['warn', { align: 'value' }],
