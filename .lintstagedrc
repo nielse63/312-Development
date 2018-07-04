@@ -4,7 +4,7 @@
     "git add"
   ],
   "*.vue": [
-    "eslint --fix",
+    "eslint --ext .vue --fix",
     "stylelint",
     "git add"
   ],

@@ -3,3 +3,4 @@ coverage/
 build/service-worker-*
 templates/
 blueprints/
+!.eslintrc.js
