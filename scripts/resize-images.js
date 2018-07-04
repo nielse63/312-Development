@@ -12,10 +12,9 @@ images.forEach((imagepath) => {
   const basename = path.basename(imagepath);
   const newpath = path.resolve(__dirname, '../src/assets/images/', `new-${basename}`);
   sharp(imagepath)
-    .resize(500, 500, {
+    .resize(null, 500, {
       kernel: sharp.kernel.nearest,
     })
-    .max()
     .toFile(newpath, (err) => {
       if (err) {
         console.error({ basename, err });

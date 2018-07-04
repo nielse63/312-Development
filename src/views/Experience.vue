@@ -65,6 +65,12 @@ export default {
 <style lang="scss" scoped>
 @import "../assets/styles/lib/vars";
 
+.content-section {
+  &:before {
+    background: linear-gradient(to bottom, #191919, transparent);
+  }
+}
+
 ul {
   display: flex;
   align-items: center;

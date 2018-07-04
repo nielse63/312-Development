@@ -43,25 +43,39 @@ export default (canvas) => {
     linesIndex += 1;
   }
 
+  function updateVector(vector, y, radiusHeight, a) {
+    const ratio = noise(
+      vector.x * 0.009,
+      (vector.z * 0.009) + (a * 0.0006),
+      y * 0.009,
+    ) * 15;
+    vector.copy(vector.clone);
+    vector.multiplyScalar(radiusHeight + ratio);
+    vector.y = y - radius;
+  }
+
   function updateVertices(a) {
-    sphere.children.forEach((line) => {
+    let i = 0;
+    const { length } = sphere.children;
+    while (i < length) {
+      const line = sphere.children[i];
       line.geometry.y += 0.3;
       if (line.geometry.y > radius * 2) {
         line.geometry.y = 0;
       }
       const radiusHeight = Math.sqrt(line.geometry.y * ((2 * radius) - line.geometry.y));
-      line.geometry.vertices.forEach((vector) => {
-        const ratio = noise(
-          vector.x * 0.009,
-          (vector.z * 0.009) + (a * 0.0006),
-          line.geometry.y * 0.009,
-        ) * 15;
-        vector.copy(vector.clone);
-        vector.multiplyScalar(radiusHeight + ratio);
-        vector.y = line.geometry.y - radius;
-      });
+
+      let j = 0;
+      const { vertices } = line.geometry;
+      const vertLength = vertices.length;
+      while (j < vertLength) {
+        const vector = vertices[j];
+        updateVector(vector, line.geometry.y, radiusHeight, a);
+        j += 1;
+      }
       line.geometry.verticesNeedUpdate = true;
-    });
+      i += 1;
+    }
   }
 
   function render(a = 0) {
