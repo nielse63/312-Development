@@ -4,7 +4,8 @@ function test_e2e() {
   echo 'Building dist files'
   yarn build
   echo 'Running e2e tests'
-  node_modules/.bin/jest
+  export JEST_PUPPETEER_CONFIG=test/e2e/jest-puppeteer.config.js
+  node_modules/.bin/jest --config=test/e2e/jest.config.js
 }
 
 function test_unit() {
