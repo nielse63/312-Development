@@ -5,11 +5,6 @@ module.exports = {
 
   // config defs
   rootDir: path.resolve(__dirname, '../../'),
-  globals: {
-    'vue-jest': {
-      babelRcFile: 'test/unit/jest.babelrc',
-    },
-  },
 
   // transformations and matchers
   transform: {
@@ -31,11 +26,6 @@ module.exports = {
     '\\.(css|scss)$':             '<rootDir>/test/__mocks__/style-mock.js',
     '^@/(.*)$':                   '<rootDir>/src/$1',
   },
-
-  // snapshots
-  snapshotSerializers: [
-    '<rootDir>/node_modules/jest-serializer-vue',
-  ],
 
   // coverage
   collectCoverage:     true,

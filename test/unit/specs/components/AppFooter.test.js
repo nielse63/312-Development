@@ -6,9 +6,4 @@ describe('AppFooter.vue', () => {
     const wrapper = shallowMount(AppFooter);
     expect(wrapper.classes()).toContain('footer');
   });
-
-  it('matches snapshot', () => {
-    const wrapper = shallowMount(AppFooter);
-    expect(wrapper.html()).toMatchSnapshot();
-  });
 });
