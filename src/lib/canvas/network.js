@@ -15,8 +15,8 @@ import store from '../../store';
 export default (canvas) => { // eslint-disable-line complexity
   const { width, height } = getCanvasSize(canvas);
   const colors = [
-    new Color(0xac1122),
-    new Color(0x96789f),
+    new Color(0xAC1122),
+    new Color(0x96789F),
     new Color(0x535353),
   ];
   const renderer = createRenderer(canvas);
@@ -87,7 +87,7 @@ export default (canvas) => { // eslint-disable-line complexity
   const segmentsGeom = new Geometry();
   const segmentsMat = new LineBasicMaterial({
     vertexColors,
-    color:       0xffffff,
+    color:       0xFFFFFF,
     transparent: true,
     opacity:     0.3,
   });
