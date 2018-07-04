@@ -13,7 +13,6 @@
     "lint:scss": "bin/lint scss",
     "lint:md": "bin/lint md",
     "new": "vg",
-    "update-snapshots": "jest --config=test/unit/jest.config.js --updateSnapshot",
     "test:e2e": "bin/test e2e",
     "test:unit": "bin/test unit"
   },
@@ -36,7 +35,6 @@
     "vuex": "^3.0.1"
   },
   "devDependencies": {
-    "@vue/server-test-utils": "^1.0.0-beta.20",
     "@vue/test-utils": "^1.0.0-beta.20",
     "autoprefixer": "^8.6.4",
     "babel-core": "^6.26.3",

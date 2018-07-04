@@ -174,10 +174,6 @@
     "@shellscape/koa-send" "^4.1.0"
     debug "^2.6.8"
 
-"@types/node@*":
-  version "10.5.1"
-  resolved "https://registry.yarnpkg.com/@types/node/-/node-10.5.1.tgz#d578446f4abff5c0b49ade9b4e5274f6badaadfc"
-
 "@types/strip-bom@^3.0.0":
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/@types/strip-bom/-/strip-bom-3.0.0.tgz#14a8ec3956c2e81edb7520790aecf21c290aebd2"
@@ -199,12 +195,6 @@
     prettier "^1.13.0"
     source-map "^0.5.6"
     vue-template-es2015-compiler "^1.6.0"
-
-"@vue/server-test-utils@^1.0.0-beta.20":
-  version "1.0.0-beta.20"
-  resolved "https://registry.yarnpkg.com/@vue/server-test-utils/-/server-test-utils-1.0.0-beta.20.tgz#d71e3bacfc381a65b8c262a1787b1518b5017f35"
-  dependencies:
-    cheerio "^1.0.0-rc.2"
 
 "@vue/test-utils@^1.0.0-beta.20":
   version "1.0.0-beta.20"
@@ -1931,17 +1921,6 @@ cheerio@^0.19.0:
     htmlparser2 "~3.8.1"
     lodash "^3.2.0"
 
-cheerio@^1.0.0-rc.2:
-  version "1.0.0-rc.2"
-  resolved "https://registry.yarnpkg.com/cheerio/-/cheerio-1.0.0-rc.2.tgz#4b9f53a81b27e4d5dac31c0ffd0cfa03cc6830db"
-  dependencies:
-    css-select "~1.2.0"
-    dom-serializer "~0.1.0"
-    entities "~1.1.1"
-    htmlparser2 "^3.9.1"
-    lodash "^4.15.0"
-    parse5 "^3.0.1"
-
 chokidar@^1.5.1:
   version "1.7.0"
   resolved "https://registry.yarnpkg.com/chokidar/-/chokidar-1.7.0.tgz#798e689778151c8076b4b360e5edd28cda2bb468"
@@ -2619,7 +2598,7 @@ css-select-base-adapter@~0.1.0:
   version "0.1.0"
   resolved "https://registry.yarnpkg.com/css-select-base-adapter/-/css-select-base-adapter-0.1.0.tgz#0102b3d14630df86c3eb9fa9f5456270106cf990"
 
-css-select@^1.1.0, css-select@~1.2.0:
+css-select@^1.1.0:
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/css-select/-/css-select-1.2.0.tgz#2b3a110539c5355f1cd8d314623e870b121ec858"
   dependencies:
@@ -4838,7 +4817,7 @@ html-webpack-plugin@^3.2.0:
     toposort "^1.0.0"
     util.promisify "1.0.0"
 
-htmlparser2@^3.9.1, htmlparser2@^3.9.2:
+htmlparser2@^3.9.2:
   version "3.9.2"
   resolved "https://registry.yarnpkg.com/htmlparser2/-/htmlparser2-3.9.2.tgz#1bdf87acca0f3f9e53fa4fcceb0f4b4cbb00b338"
   dependencies:
@@ -6593,7 +6572,7 @@ lodash.zip@^4.2.0:
   version "4.2.0"
   resolved "https://registry.yarnpkg.com/lodash.zip/-/lodash.zip-4.2.0.tgz#ec6662e4896408ed4ab6c542a3990b72cc080020"
 
-lodash@4.x, lodash@^4.0.0, lodash@^4.11.1, lodash@^4.13.1, lodash@^4.15.0, lodash@^4.17.10, lodash@^4.17.3, lodash@^4.17.4, lodash@^4.17.5, lodash@^4.2.0, lodash@^4.3.0, lodash@~4.17.10:
+lodash@4.x, lodash@^4.0.0, lodash@^4.11.1, lodash@^4.13.1, lodash@^4.17.10, lodash@^4.17.3, lodash@^4.17.4, lodash@^4.17.5, lodash@^4.2.0, lodash@^4.3.0, lodash@~4.17.10:
   version "4.17.10"
   resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.10.tgz#1b7793cf7259ea38fb3661d4d38b3260af8ae4e7"
 
@@ -7776,12 +7755,6 @@ parse-png@^1.0.0, parse-png@^1.1.1:
 parse5@4.0.0:
   version "4.0.0"
   resolved "https://registry.yarnpkg.com/parse5/-/parse5-4.0.0.tgz#6d78656e3da8d78b4ec0b906f7c08ef1dfe3f608"
-
-parse5@^3.0.1:
-  version "3.0.3"
-  resolved "https://registry.yarnpkg.com/parse5/-/parse5-3.0.3.tgz#042f792ffdd36851551cf4e9e066b3874ab45b5c"
-  dependencies:
-    "@types/node" "*"
 
 parseqs@0.0.5:
   version "0.0.5"
