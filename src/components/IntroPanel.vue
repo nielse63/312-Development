@@ -58,7 +58,6 @@ export default {
   },
   data() {
     return {
-      // bound:  false,
       height: 0,
       h1:     null,
       h2:     null,

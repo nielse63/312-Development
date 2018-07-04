@@ -25,8 +25,6 @@
 <script>
 import preload from '@/lib/preload';
 
-// const randomNumber = (max = 100) => Math.floor(Math.random() * max) - (max / 2);
-
 export default {
   name:  'FloatingBox',
   props: {
@@ -46,49 +44,7 @@ export default {
       type: String,
     },
   },
-  // data() {
-  //   return {
-  //     middle: 0,
-  //     style:  {
-  //       transform:       'translate(0, 0)',
-  //       transitionDelay: '0s',
-  //       opacity:         0,
-  //     },
-  //   };
-  // },
-  // methods: {
-  //   getTop() {
-  //     let yPosition = 0;
-  //     let element = this.$el;
-  //     while (element) {
-  //       yPosition += (element.offsetTop - element.scrollTop + element.clientTop);
-  //       element = element.offsetParent;
-  //     }
-  //     return yPosition;
-  //   },
-  //   onscroll() {
-  //     const screenBottom = window.scrollY + window.innerHeight;
-  //     if (this.middle < screenBottom) {
-  //       this.style = {
-  //         ...this.style,
-  //         transform: 'translate(0, 0)',
-  //         opacity:   1,
-  //       };
-  //       window.removeEventListener('scroll', this.onscroll, false);
-  //     }
-  //   },
-  // },
-  // beforeMount() {
-  //   const translate = Math.floor(Math.random() * 50) + 100;
-  //   const transitionDelay = Math.random() / 2;
-  //   this.style = {
-  //     ...this.style,
-  //     transform:       `translate(0, ${translate}px)`,
-  //     transitionDelay: `${transitionDelay}s`,
-  //   };
-  // },
   mounted() {
-    // this.middle = this.getTop() + (this.$el.clientHeight / 2);
     this.$nextTick()
       .then(() => {
         preload(this.image);
@@ -96,14 +52,7 @@ export default {
       .then(() => {
         this.$el.querySelector('a').style.backgroundImage = `url(${this.image})`;
       });
-    // .then(() => {
-    //   window.addEventListener('scroll', this.onscroll, false);
-    //   this.onscroll();
-    // });
   },
-  // beforeDestroy() {
-  //   window.removeEventListener('scroll', this.onscroll, false);
-  // },
 };
 </script>
 

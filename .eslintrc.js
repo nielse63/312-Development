@@ -6,8 +6,8 @@ const errorOrWarn = production ? 'error' : 'warn';
 
 module.exports = {
   root:          true,
-  parser:        'babel-eslint',
   parserOptions: {
+    parser:      'babel-eslint',
     ecmaVersion: 2017,
     sourceType:  'module',
   },
@@ -16,9 +16,10 @@ module.exports = {
   },
   extends: [
     'airbnb-base',
+    'plugin:vue/essential'
   ],
   // required to lint *.vue files
-  plugins:  ['html'],
+  plugins:  ['vue'],
   // check if imports actually resolve
   settings: {
     'import/resolver': {
