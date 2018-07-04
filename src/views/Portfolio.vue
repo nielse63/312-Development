@@ -42,8 +42,11 @@ export default {
   },
   computed: {
     ...mapState('portfolio', ['repos']),
+    usableRepos() {
+      return this.repos.slice(0).splice(0, 10);
+    },
     items() {
-      return this.repos.splice(0, 10).map(({
+      return this.usableRepos.map(({
         name, description, url, homepage,
       }) => {
         const image = projectImages[name] ? projectImages[name] : this.randomImage();

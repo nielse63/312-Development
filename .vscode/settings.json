@@ -19,7 +19,7 @@
   "files.trimFinalNewlines": true,
   // "editor.formatOnSave": true,
   "eslint.autoFixOnSave": true,
-  "eslint.run": "onSave",
+  "eslint.run": "onType",
   "eslint.validate": [
     { "language": "javascript", "autoFix": true },
     { "language": "javascriptreact", "autoFix": true },
