@@ -26,4 +26,4 @@ jobs:
     # test steps
     - stage: tests
       script: yarn test:unit
-    - script: yarn lint:e2e
+    - script: yarn test:e2e

@@ -6,6 +6,7 @@
     ></intro-panel>
     <content-section>
       <content-panel>
+        <app-loading v-if="loading"></app-loading>
         <form novalidate="true" autocomplete="false" @submit.prevent="onsubmit">
           <form-input label="Name" :value="entry.name" @input="entry.name = $event"></form-input>
           <form-input label="Email" type="email" :value="entry.email" @input="entry.email = $event"></form-input>
@@ -25,6 +26,7 @@ import IntroPanel from '@/components/IntroPanel';
 import ContentSection from '@/components/ContentSection';
 import ContentPanel from '@/components/ContentPanel';
 import FormInput from '@/components/FormInput';
+import AppLoading from '@/components/AppLoading';
 
 export default {
   name:       'Contact',
@@ -33,12 +35,14 @@ export default {
     ContentSection,
     ContentPanel,
     FormInput,
+    AppLoading,
   },
   data() {
     return {
       canvas,
-      title: 'Contact Me',
-      entry: {
+      title:   'Contact Me',
+      loading: false,
+      entry:   {
         name:    '',
         email:   '',
         company: '',
@@ -49,7 +53,10 @@ export default {
   },
   methods: {
     onsubmit() {
-      // submit form
+      this.loading = true;
+      setTimeout(() => {
+        this.loading = false;
+      }, 1500);
     },
   },
 };

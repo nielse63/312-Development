@@ -61,13 +61,19 @@ export default (canvas) => {
   const sphere = new Mesh(geometry, material);
   scene.add(sphere);
 
+  let running = false;
   function render(a = 0) {
     store.state.canvas.animationFrameId = requestAnimationFrame(render);
-    if (store.state.canvas.paused) {
+    if (running || store.state.canvas.paused) {
       return;
     }
+    running = true;
 
-    geometry.vertices.forEach((vector) => {
+    const { vertices } = geometry;
+    const { length } = vertices;
+    let i = 0;
+    while (i < length) {
+      const vector = vertices[i];
       const ratio = noise(
         (vector.clone.x * 0.01),
         (vector.clone.y * 0.01) + (a * 0.0005),
@@ -75,13 +81,15 @@ export default (canvas) => {
       );
       vector.copy(vector.clone);
       vector.multiplyScalar(1 + (ratio * 0.05));
-      vector.multiplyScalar(1);
-    });
+      i += 1;
+    }
+
     geometry.verticesNeedUpdate = true;
 
     sphere.rotation.x += 0.001;
     sphere.rotation.y += 0.001;
     renderer.render(scene, camera);
+    running = false;
   }
 
   // start animation

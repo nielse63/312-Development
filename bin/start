@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+
+node_modules/.bin/http-server \
+  -p 3000 \
+  --gzip \
+  --no-dotfiles \
+  dist/
