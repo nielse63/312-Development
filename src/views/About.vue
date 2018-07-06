@@ -24,6 +24,7 @@ import IntroPanel from '@/components/IntroPanel';
 import ContentSection from '@/components/ContentSection';
 import ContentPanel from '@/components/ContentPanel';
 import ExternalLink from '@/components/ExternalLink';
+import ContributionsGraph from '@/components/ContributionsGraph';
 
 export default {
   name:       'About',
@@ -32,7 +33,7 @@ export default {
     ContentSection,
     ContentPanel,
     ExternalLink,
-    ContributionsGraph: () => import('@/components/ContributionsGraph'),
+    ContributionsGraph,
   },
   data() {
     return {

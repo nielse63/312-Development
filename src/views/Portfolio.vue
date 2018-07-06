@@ -6,11 +6,9 @@
     ></intro-panel>
     <content-section>
       <content-panel>
-        <div class="boxes">
-          <template v-for="(item, i) in items">
-            <floating-box v-bind="item" :index="i" :key="i"></floating-box>
-          </template>
-        </div>
+        <template v-for="(repo, i) in repos">
+          <portfolio-item v-bind="repo" :key="i"></portfolio-item>
+        </template>
       </content-panel>
     </content-section>
   </div>
@@ -18,12 +16,11 @@
 
 <script>
 import { mapActions, mapState } from 'vuex';
-import { projectImages, shuffeImages } from '@/lib/content/images';
 import canvas from '@/lib/canvas/waves';
 import IntroPanel from '@/components/IntroPanel';
 import ContentSection from '@/components/ContentSection';
 import ContentPanel from '@/components/ContentPanel';
-import FloatingBox from '@/components/FloatingBox';
+import PortfolioItem from '@/components/PortfolioItem';
 
 export default {
   name:       'Portfolio',
@@ -31,49 +28,24 @@ export default {
     IntroPanel,
     ContentSection,
     ContentPanel,
-    FloatingBox,
+    PortfolioItem,
   },
   data() {
     return {
-      title:  'Portfolio',
       canvas,
-      images: shuffeImages(),
+      title: 'Portfolio',
     };
   },
   computed: {
     ...mapState('portfolio', ['repos']),
-    usableRepos() {
-      return this.repos.slice(0).splice(0, 10);
-    },
-    items() {
-      return this.usableRepos.map(({
-        name, description, url, homepage,
-      }) => {
-        const image = projectImages[name] ? projectImages[name] : this.randomImage();
-        return {
-          title: name,
-          text:  description,
-          href:  url || homepage,
-          image,
-        };
-      });
-    },
   },
   methods: {
-    ...mapActions('portfolio', ['fetchGitHubData']),
-    randomImage() {
-      const { images } = this;
-      if (!images.length) {
-        this.images = shuffeImages();
-        return this.randomImage();
-      }
-      const index = Math.floor(Math.random() * images.length);
-      const image = images.splice(index, 1);
-      return image[0];
-    },
+    ...mapActions('portfolio', ['fetchRepos']),
   },
   mounted() {
-    this.fetchGitHubData();
+    this.$nextTick().then(() => {
+      this.fetchRepos();
+    });
   },
 };
 </script>
@@ -85,12 +57,5 @@ export default {
   &:before {
     background: linear-gradient(to bottom, #59c384, transparent);
   }
-}
-
-.boxes {
-  min-height: 100vh;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
 }
 </style>

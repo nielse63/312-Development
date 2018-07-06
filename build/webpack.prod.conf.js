@@ -6,6 +6,7 @@ const CompressionPlugin = require('compression-webpack-plugin');
 const FaviconsWebpackPlugin = require('favicons-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
+const CleanWebpackPlugin = require('clean-webpack-plugin');
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const { setPath, extractCSS } = require('./build-config');
 const baseConfig = require('./webpack.base.conf');
@@ -43,6 +44,7 @@ module.exports = merge(baseConfig, {
     },
   },
   plugins: [
+    new CleanWebpackPlugin('dist'),
     new webpack.HashedModuleIdsPlugin(),
     new CopyWebpackPlugin([
       { from: 'static/**/*', to: setPath('dist'), flatten: true },

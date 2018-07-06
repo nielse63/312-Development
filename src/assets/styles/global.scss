@@ -14,3 +14,9 @@
   padding: 0;
   border: 0;
 }
+
+.icon {
+  svg {
+    @include size($portfolio-icon-size);
+  }
+}

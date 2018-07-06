@@ -62,7 +62,7 @@ export default {
   },
   methods: {
     async setImage() {
-      const BackgroundImage = await import('@/assets/images/trianglify.png');
+      const BackgroundImage = await import(/* webpackChunkName: 'footer-image' */ '@/assets/images/trianglify.png');
       this.image = BackgroundImage.default;
     },
     setLinks() {},

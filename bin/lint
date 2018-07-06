@@ -2,7 +2,7 @@
 
 function lint_js() {
   echo 'Linting JS files'
-  node_modules/.bin/eslint --ext .js,.vue ./*.js src/ server/ build/ test/ --fix
+  node_modules/.bin/eslint --ext .js,.vue ./*.js src/ build/ test/ --fix
 }
 
 function lint_scss() {

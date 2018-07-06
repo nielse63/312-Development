@@ -3,7 +3,7 @@
 const webpack = require('webpack');
 const { VueLoaderPlugin } = require('vue-loader');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const CleanWebpackPlugin = require('clean-webpack-plugin');
+const Dotenv = require('dotenv-webpack');
 
 const {
   NODE_ENV, IN_DEV, setPath, stats, extractHTML,
@@ -90,7 +90,7 @@ module.exports = {
     ],
   },
   plugins: [
-    new CleanWebpackPlugin('dist'),
+    new Dotenv(),
     new webpack.DefinePlugin({
       'process.env': {
         NODE_ENV: `"${NODE_ENV}"`,

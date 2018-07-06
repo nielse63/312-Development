@@ -42,11 +42,11 @@ export default {
   },
   methods: {
     async setPanels() {
-      const languages = await import('@/lib/content/experience/languages');
-      const frameworks = await import('@/lib/content/experience/frameworks');
-      const buildTools = await import('@/lib/content/experience/build-tools');
-      const libraries = await import('@/lib/content/experience/libraries');
-      const testing = await import('@/lib/content/experience/testing');
+      const languages = await import(/* webpackChunkName: 'experience-content' */ '@/lib/content/experience/languages');
+      const frameworks = await import(/* webpackChunkName: 'experience-content' */ '@/lib/content/experience/frameworks');
+      const buildTools = await import(/* webpackChunkName: 'experience-content' */ '@/lib/content/experience/build-tools');
+      const libraries = await import(/* webpackChunkName: 'experience-content' */ '@/lib/content/experience/libraries');
+      const testing = await import(/* webpackChunkName: 'experience-content' */ '@/lib/content/experience/testing');
       this.panels.push(
         languages.default,
         frameworks.default,
