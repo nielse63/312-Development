@@ -1,36 +1,17 @@
 <template>
-  <div class="floating-box">
-    <figure>
-      <template v-if="href[0] == '/'">
-        <router-link :to="href">
-          <figcaption>
-            <h3>{{title}}</h3>
-            <p v-if="text">{{text}}</p>
-          </figcaption>
-        </router-link>
-      </template>
-      <template v-else>
-        <a :href="href">
-          <figcaption>
-            <h3>{{title}}</h3>
-            <p v-if="text">{{text}}</p>
-            <slot></slot>
-          </figcaption>
-        </a>
-      </template>
-    </figure>
+  <div :class="cls">
+    <div class="inner">
+      <router-link :to="href">
+        <h3>{{title}}</h3>
+      </router-link>
+    </div>
   </div>
 </template>
 
 <script>
-import preload from '@/lib/preload';
-
 export default {
   name:  'FloatingBox',
   props: {
-    index: {
-      type: Number,
-    },
     title: {
       type: String,
     },
@@ -40,18 +21,18 @@ export default {
     href: {
       type: String,
     },
-    image: {
+    color: {
       type: String,
     },
   },
-  mounted() {
-    this.$nextTick()
-      .then(() => {
-        preload(this.image);
-      })
-      .then(() => {
-        this.$el.querySelector('a').style.backgroundImage = `url(${this.image})`;
-      });
+  computed: {
+    cls() {
+      const output = {
+        'floating-box': true,
+      };
+      output[this.color] = true;
+      return output;
+    },
   },
 };
 </script>
@@ -60,68 +41,92 @@ export default {
 @import "../assets/styles/lib/vars";
 @import "../assets/styles/lib/mixins";
 
-.floating-box {
-  @include size(calc(50% - 2em), 350px);
-  margin: 2em 0;
-}
-
-figure {
-  margin: 0;
-  max-height: 100%;
-  overflow: hidden;
-  position: relative;
-  box-shadow: 0 10px 25px fade-out($color-black, 0.75);
-  will-change: opacity, transform;
-  transition: 0.5s transform ease-in-out,
-              0.25s opacity ease-in-out;
-}
-
-figcaption {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  padding: 1.5em;
-  color: $color-white;
-}
-
-a {
-  display: block;
-  height: 350px;
-  position: relative;
-  background-size: cover;
-  background-position: top center;
-
-  &:before {
-    content: "";
-    display: block;
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    background: linear-gradient(to bottom, transparent 0%, $color-black 100%);
-    height: 50%;
-    transition: 0.5s height ease-in-out;
-    will-change: height;
-  }
-
-  &:hover {
+@mixin link($color) {
+  a {
     &:before {
-      height: 70%;
+      border-color: $color;
+    }
+
+    &:hover {
+      &:before {
+        background-color: $color;
+      }
     }
   }
 }
 
-h3 {
-  line-height: 1;
-  margin: 0;
+.floating-box {
+  flex: 1;
+  position: relative;
 
-  + * {
-    margin-top: 1em;
+  &:before {
+    content: "";
+    display: block;
+    padding-top: 100%;
   }
 }
 
-p {
-  line-height: 1;
+.inner {
+  position: absolute;
+  top: 0;
+  left: 0;
+  @include size(100%);
+}
+
+h3 {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 2rem;
+  font-weight: 400;
+  font-family: $font-family-sans-serif;
+}
+
+a {
+  display: block;
+  height: 100%;
+  position: relative;
+  will-change: color;
+  transition: color 0.35s cubic-bezier(0.65, 0, 0.35,1);
+
+  &:before {
+    @include size(80%);
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border: 10px solid $color-pink;
+    border-radius: 50%;
+    will-change: border-radius, height, background-color;
+    transition: all 0.35s cubic-bezier(0.65, 0, 0.35,1);
+  }
+
+  &:hover {
+    color: $color-white;
+
+    &:before {
+      border-radius: 0;
+      height: 35%;
+      background-color: $color-pink;
+    }
+  }
+}
+
+.pink {
+  @include link($color-pink);
+}
+
+.blue {
+  @include link($color-blue);
+}
+
+.purple {
+  @include link($color-purple);
+}
+
+.green {
+  @include link($color-green);
 }
 </style>

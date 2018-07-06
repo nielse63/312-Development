@@ -10,10 +10,10 @@
         <p>Hi! I'm Erik Nielsen, a Senior UI Software Engineer and Tech Lead from Chicago. Thanks for visiting my portfolio and taking the time to learn a little more about me. Check out the <router-link to="/about-me">About Me</router-link> to learn more about me, or visit the <router-link to="/portfolio">Portfolio</router-link> and <router-link to="/experience">Experience</router-link> pages, where I showcase my latest projects and interests.</p>
         <p>If you're just looking to grab a copy of my resume, you can <external-link :href="resume">download it here</external-link>.</p>
       </content-panel>
-      <content-panel>
+      <content-panel title="Want to learn more?">
         <div class="boxes">
           <template v-for="(item, i) in items">
-            <floating-box v-bind="item" :index="i" :key="i"></floating-box>
+            <floating-box v-bind="item" :key="i"></floating-box>
           </template>
         </div>
       </content-panel>
@@ -30,7 +30,6 @@ import ContentSection from '@/components/ContentSection';
 import ContentPanel from '@/components/ContentPanel';
 import FloatingBox from '@/components/FloatingBox';
 import ExternalLink from '@/components/ExternalLink';
-import { shuffeImages } from '@/lib/content/images';
 
 export default {
   name:       'Home',
@@ -46,8 +45,13 @@ export default {
       title,
       subtitle,
       network,
-      images: shuffeImages(),
       resume: content.resume.link,
+      colors: [
+        'pink',
+        'blue',
+        'purple',
+        'green',
+      ],
     };
   },
   computed: {
@@ -61,7 +65,7 @@ export default {
           title: titleCase(route.name),
           text:  route.meta.description || '',
           href:  route.path,
-          image: this.images[i],
+          color: this.colors[i],
         }));
     },
   },
@@ -72,15 +76,9 @@ export default {
 @import "../assets/styles/lib/vars";
 
 .boxes {
-  min-height: 100vh;
   display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-}
-
-.content-panel {
-  & + & {
-    border-top: 0;
-  }
+  text-align: center;
+  white-space: nowrap;
+  margin-top: 5rem;
 }
 </style>

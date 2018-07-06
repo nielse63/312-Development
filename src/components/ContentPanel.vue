@@ -105,6 +105,10 @@ header {
 }
 
 h2 {
+  font-family: $font-family-serif;
+  font-style: italic;
+  font-weight: 400;
+  font-size: 3rem;
   padding: 0 0.35em;
   transition: color 1s;
   transition-timing-function: cubic-bezier(0.2, 1, 0.3, 1);
@@ -117,8 +121,8 @@ h2 {
     position: absolute;
     bottom: 0;
     left: 0;
-    width: 95%;
-    height: 50%;
+    width: 90%;
+    height: 35%;
     opacity: 0.3;
     transform: scale3d(0, 1, 1);
     transform-origin: 0% 50%;
@@ -139,13 +143,13 @@ h2 {
 }
 
 a {
-  background-color: fade-out($color-pink, 0.35);
-  color: $color-white;
-  padding: 0 0.25em;
-  font-weight: 700;
+  border-bottom: 1px solid $color-pink;
+  font-style: italic;
+  font-family: $font-family-serif;
+  transition: 0.15s background-color ease-in-out;
 
   &:hover {
-    background-color: fade-out($color-pink, 0.28);
+    background-color: fade-out($color-pink, 0.9);
   }
 }
 </style>

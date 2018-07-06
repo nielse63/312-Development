@@ -1,5 +1,6 @@
 <template>
   <footer class="footer" :style="style">
+    <link rel="preload" :href="image" as="image">
     <ul class="footer__links">
       <li v-for="link in links" :key="link.text">
         <external-link :text="link.text" :href="link.href">
@@ -13,6 +14,7 @@
 
 <script>
 import content from '@/lib/content';
+import BackgroundImage from '@/assets/images/trianglify.png';
 import ExternalLink from '@/components/ExternalLink';
 import GithubIcon from '@/assets/images/github.svg';
 import LinkedInIcon from '@/assets/images/linkedin.svg';
@@ -28,7 +30,7 @@ export default {
   },
   data() {
     return {
-      image: null,
+      image: BackgroundImage,
       links: [
         {
           text: 'GitHub',
@@ -59,18 +61,6 @@ export default {
         backgroundImage: `url(${this.image})`,
       };
     },
-  },
-  methods: {
-    async setImage() {
-      const BackgroundImage = await import(/* webpackChunkName: 'footer-image' */ '@/assets/images/trianglify.png');
-      this.image = BackgroundImage.default;
-    },
-    setLinks() {},
-  },
-  mounted() {
-    this.$nextTick(() => {
-      this.setImage();
-    });
   },
 };
 </script>
