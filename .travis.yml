@@ -31,8 +31,8 @@ jobs:
     - stage: tests
       script: yarn test:unit
     - script: yarn test:e2e
-      # addons:
-      #   chrome: stable
+      addons:
+        chrome: stable
 
     # docs steps
     - stage: docs
