@@ -1,6 +1,6 @@
 # 312-Development
 
-[Check out the Site](https://312development.com/) | [Follow me on Twitter](https://twitter.com/erikkylenielsen/)
+[Check out the Site](https://312development.com/) \| [Follow me on Twitter](https://twitter.com/erikkylenielsen/)
 
 [![Build Status](https://travis-ci.org/nielse63/312-Development.svg?branch=master)](https://travis-ci.org/nielse63/312-Development)
 [![Coverage Status](https://coveralls.io/repos/github/nielse63/312-Development/badge.svg?branch=master)](https://coveralls.io/github/nielse63/312-Development?branch=master)
