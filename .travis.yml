@@ -4,9 +4,9 @@ node_js:
   - node
 cache:
   yarn: true
+  directories:
+    - node_modules
 dist: trusty
-addons:
-  chrome: stable
 before_install:
   - npm config set spin false
 
@@ -17,6 +17,10 @@ env:
 
 jobs:
   include:
+    # precache
+    - stage: precache
+      script: true
+
     # linting steps
     - stage: linting
       script: yarn lint:js
@@ -27,6 +31,8 @@ jobs:
     - stage: tests
       script: yarn test:unit
     - script: yarn test:e2e
+      # addons:
+      #   chrome: stable
 
     # docs steps
     - stage: docs

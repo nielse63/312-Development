@@ -5,6 +5,7 @@
   "author": "Erik Nielsen <erik@312development.com>",
   "private": true,
   "scripts": {
+    "prebuild": "rm -rf dist/",
     "build": "cross-env NODE_ENV=production webpack --mode production --colors",
     "serve": "cross-env NODE_ENV=development webpack-dev-server --hot",
     "start": "bin/start",
@@ -42,12 +43,10 @@
     "babel-preset-stage-2": "^6.24.1",
     "body-parser": "^1.18.3",
     "case": "^1.5.5",
-    "clean-webpack-plugin": "^0.1.19",
     "compression-webpack-plugin": "^1.1.11",
     "copy-webpack-plugin": "^4.5.2",
     "cross-env": "^5.2.0",
     "css-loader": "^1.0.0",
-    "dotenv-webpack": "^1.5.7",
     "ejs": "^2.6.1",
     "eslint": "^5.0.1",
     "eslint-config-airbnb-base": "^13.0.0",
@@ -68,7 +67,7 @@
     "jest-puppeteer": "^3.2.1",
     "lint-staged": "^7.2.0",
     "mini-css-extract-plugin": "^0.4.1",
-    "node-sass": "^4.9.1",
+    "node-sass": "^4.9.2",
     "optimize-css-assets-webpack-plugin": "^4.0.3",
     "postcss-html": "^0.31.0",
     "postcss-loader": "^2.1.5",
@@ -93,7 +92,7 @@
     "vue-loader": "^15.2.4",
     "vue-style-loader": "^4.1.0",
     "vue-template-compiler": "^2.5.16",
-    "vuepress": "^0.10.2",
+    "vuepress": "^0.11.0",
     "webpack": "^4.15.1",
     "webpack-cli": "^3.0.8",
     "webpack-dashboard": "^2.0.0",
@@ -103,9 +102,9 @@
     "yorkie": "^1.0.3"
   },
   "engines": {
-    "node": ">= 10.x",
-    "npm": ">= 6.x",
-    "yarn": ">= 1.x"
+    "node": ">= 10.6.x",
+    "npm": ">= 6.1.x",
+    "yarn": ">= 1.7.x"
   },
   "browserslist": [
     "> 1%",
