@@ -11,7 +11,6 @@
         <external-link :href="url" :title="linkTitle">Visit Repo</external-link>
       </p>
       <p><span class="icon" v-html="images.star"></span>{{stargazers}}</p>
-      <p><span class="icon" v-html="images.eye"></span>{{watchers}}</p>
     </div>
   </div>
 </template>
@@ -47,7 +46,6 @@ export default {
 
     // numbers
     stargazers: Number,
-    watchers:   Number,
   },
   data() {
     return {
