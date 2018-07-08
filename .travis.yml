@@ -27,3 +27,8 @@ jobs:
     - stage: tests
       script: yarn test:unit
     - script: yarn test:e2e
+
+    # docs steps
+    - stage: docs
+      if: branch = redesign/multi-page
+      script: yarn docs:deploy
