@@ -17,7 +17,7 @@
     "git add"
   ],
   "*.md": [
-    "remark -o",
+    "node scripts/lint-staged-remark.js",
     "git add"
   ],
   "src/assets/images/**/*.{png,jpg}": [

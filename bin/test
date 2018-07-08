@@ -1,15 +1,16 @@
 #!/usr/bin/env bash
+set -e
 
 function test_e2e() {
   echo 'Building dist files'
   yarn build
   echo 'Running e2e tests'
   export JEST_PUPPETEER_CONFIG=test/e2e/jest-puppeteer.config.js
-  node_modules/.bin/jest --config=test/e2e/jest.config.js
+  yarn jest --config=test/e2e/jest.config.js
 }
 
 function test_unit() {
-  node_modules/.bin/jest --config=test/unit/jest.config.js
+  yarn jest --config=test/unit/jest.config.js
 }
 
 function usage() {

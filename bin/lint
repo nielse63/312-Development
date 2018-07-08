@@ -1,19 +1,20 @@
 #!/usr/bin/env bash
+set -e
 
 function lint_js() {
   echo 'Linting JS files'
-  node_modules/.bin/eslint --ext .js,.vue ./*.js src/ build/ test/ --fix
+  yarn eslint --ext .js,.vue ./*.js src/ build/ test/ --fix
 }
 
 function lint_scss() {
   echo 'Linting SCSS files'
-  node_modules/.bin/stylelint 'src/**/*.scss' -s scss --fix
-  node_modules/.bin/stylelint 'src/**/*.vue' --custom-syntax postcss-html --fix
+  yarn stylelint 'src/**/*.scss' -s scss --fix
+  yarn stylelint 'src/**/*.vue' --custom-syntax postcss-html --fix
 }
 
 function lint_md() {
   echo 'Linting .md files'
-  node_modules/.bin/remark -S docs/*.md *.md -o
+  yarn remark -S docs/*.md *.md -o
 }
 
 function usage() {

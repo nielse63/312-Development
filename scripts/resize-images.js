@@ -1,4 +1,3 @@
-/* eslint-disable unicorn/no-process-exit */
 const sharp = require('sharp');
 const sizeOf = require('image-size');
 const path = require('path');

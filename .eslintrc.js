@@ -92,6 +92,14 @@ module.exports = {
       },
     },
     {
+      files: [
+        'scripts/**',
+      ],
+      rules: {
+        'unicorn/no-process-exit': 'off',
+      },
+    },
+    {
       files: ['src/store/**/mutations.js'],
       rules: {
         'no-param-reassign': ['error', {
