@@ -1,22 +1,14 @@
-import Vue from 'vue';
 import {
-  Group, WebGLRenderer, Scene,
+  Group, Scene,
   PerspectiveCamera, LineBasicMaterial,
   Geometry, Line, Vector3,
 } from 'three';
+import { getCanvasSize, onresize, createRenderer } from './utils';
+import store from '../../store';
 
-function create() {
-  const canvas = document.querySelector('#scene');
-  let width = canvas.offsetWidth;
-  let height = canvas.offsetHeight;
-
-  const renderer = new WebGLRenderer({
-    canvas,
-    antialias: true,
-  });
-  renderer.setPixelRatio(window.devicePixelRatio > 1 ? 2 : 1);
-  renderer.setSize(width, height);
-  renderer.setClearColor(0x191919);
+export default (canvas) => {
+  const { width, height } = getCanvasSize(canvas);
+  const renderer = createRenderer(canvas, 0x191919);
 
   const scene = new Scene();
 
@@ -26,7 +18,7 @@ function create() {
   const sphere = new Group();
   scene.add(sphere);
   const mat1 = new LineBasicMaterial({
-    color: 0x4a4a4a,
+    color: 0x4A4A4A,
   });
   const mat2 = new LineBasicMaterial({
     color: 0x3F51B5,
@@ -36,7 +28,7 @@ function create() {
   const lines = 50;
   const dots = 50;
 
-  function init() {
+  {
     let i = 0;
     while (i < lines) {
       const geometry = new Geometry();
@@ -62,18 +54,17 @@ function create() {
   }
 
   function updateDots(a) {
-    let line;
-    let vector;
-    let y;
+    const { children } = sphere;
 
     let i = 0;
     while (i < lines) {
-      line = sphere.children[i];
+      const line = children[i];
+      const { vertices } = line.geometry;
       let j = 0;
       while (j < dots) {
-        vector = sphere.children[i].geometry.vertices[j];
+        const vector = vertices[j];
         const ratio = 1 - ((line.radius - Math.abs(vector.x)) / line.radius);
-        y = Math.sin((a / line.speed) + (j * 0.15)) * 12 * ratio;
+        const y = Math.sin((a / line.speed) + (j * 0.15)) * 12 * ratio;
         vector.y = y;
         j += 1;
       }
@@ -82,31 +73,17 @@ function create() {
     }
   }
 
-  function render(a) {
-    requestAnimationFrame(render);
+  function render(a = 0) {
+    store.state.canvas.animationFrameId = requestAnimationFrame(render);
+    if (store.state.canvas.paused) {
+      return;
+    }
     updateDots(a);
     sphere.rotation.y = (a * 0.0001);
     sphere.rotation.x = (-a * 0.0001);
     renderer.render(scene, camera);
   }
 
-  function onresize() {
-    canvas.style.width = '';
-    canvas.style.height = '';
-    width = canvas.offsetWidth;
-    height = canvas.offsetHeight;
-    camera.aspect = width / height;
-    camera.updateProjectionMatrix();
-    renderer.setSize(width, height);
-  }
-
-  init();
-  requestAnimationFrame(render);
-  window.addEventListener('resize', () => {
-    Vue.nextTick().then(onresize);
-  });
-}
-
-export default () => {
-  create();
+  window.addEventListener('resize', onresize.bind(null, canvas, camera, renderer), false);
+  render();
 };

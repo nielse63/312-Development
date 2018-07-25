@@ -1,10 +1,11 @@
 ---
 language: node_js
 node_js:
-  - "9"
-sudo: false
+  - node
 cache:
   yarn: true
+  directories:
+    - node_modules
 dist: trusty
 addons:
   chrome: stable
@@ -18,11 +19,22 @@ env:
 
 jobs:
   include:
-    - stage: tests
-      script: yarn run unit
-    - script: yarn run integration
+    # precache
+    - stage: precache
+      script: true
 
-branches:
-  only:
-  - master
-  - develop
+    # linting steps
+    - stage: linting
+      script: yarn lint:js
+    - script: yarn lint:scss
+    - script: yarn lint:md
+
+    # test steps
+    - stage: tests
+      script: yarn test:unit
+    - script: yarn test:e2e
+
+    # docs steps
+    - stage: docs
+      if: branch = redesign/multi-page
+      script: yarn docs:deploy

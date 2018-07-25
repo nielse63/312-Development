@@ -5,7 +5,7 @@ const { VueLoaderPlugin } = require('vue-loader');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 const {
-  NODE_ENV, IS_LOCAL, IN_DEV, setPath, stats, extractCSS, extractHTML,
+  NODE_ENV, IN_DEV, setPath, stats, extractHTML,
 } = require('./build-config');
 
 module.exports = {
@@ -30,15 +30,6 @@ module.exports = {
   },
   module: {
     rules: [
-      {
-        test:    /\.(js|vue)$/,
-        loader:  'eslint-loader',
-        enforce: 'pre',
-        include: [setPath('src')],
-        options: {
-          formatter: require('eslint-friendly-formatter'),
-        },
-      },
       {
         test:    /\.vue$/,
         loader:  'vue-loader',
@@ -67,29 +58,9 @@ module.exports = {
           'postcss-loader',
           'sass-loader',
         ],
-        // use:  IN_DEV ?
-        //   extractCSS.extract({
-        //     fallback: 'style-loader',
-        //     use:      [
-        //       {
-        //         loader:  'css-loader',
-        //         options: {
-        //           minimize: NODE_ENV === 'production',
-        //         },
-        //       },
-        //       'postcss-loader',
-        //       'sass-loader'],
-        //   }) :
-        //   [{
-        //     loader: 'style-loader',
-        //   }, {
-        //     loader: 'css-loader',
-        //   }, {
-        //     loader: 'sass-loader',
-        //   }],
       },
       {
-        test: /\.(jpe?g|png|gif|svg)$/i,
+        test: /\.(jpe?g|png|gif)$/i,
         use:  [
           {
             loader:  'file-loader',
@@ -99,6 +70,20 @@ module.exports = {
             },
           },
           'img-loader',
+        ],
+      },
+      {
+        test: /\.svg$/,
+        use:  [
+          {
+            loader:  'svg-inline-loader',
+            options: {
+              removeTags:        true,
+              removingTags:      ['title', 'desc'],
+              removeSVGTagAttrs: true,
+              removingTagAttrs:  ['height', 'width'],
+            },
+          },
         ],
       },
     ],

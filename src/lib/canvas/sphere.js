@@ -1,30 +1,24 @@
-import Vue from 'vue';
-import * as THREE from 'three';
-import noise from '@/lib/canvas/noise';
-import { getCanvas } from '@/lib/canvas/utils';
+import {
+  Scene, PerspectiveCamera, Group,
+  LineBasicMaterial, Geometry, Vector3, Line,
+} from 'three';
+import noise from './noise';
+import { getCanvasSize, onresize, createRenderer } from './utils';
+import store from '../../store';
 
-export default () => {
-  const canvasObject = getCanvas();
-  const { canvas } = canvasObject;
-  let { width, height } = canvasObject;
+export default (canvas) => {
+  const { width, height } = getCanvasSize(canvas);
+  const renderer = createRenderer(canvas);
 
-  const renderer = new THREE.WebGLRenderer({
-    canvas,
-    antialias: true,
-  });
-  renderer.setPixelRatio(window.devicePixelRatio > 1 ? 2 : 1);
-  renderer.setSize(width, height);
-  renderer.setClearColor(0x000000, 0);
-
-  const scene = new THREE.Scene();
-  const camera = new THREE.PerspectiveCamera(40, width / height, 0.1, 1000);
+  const scene = new Scene();
+  const camera = new PerspectiveCamera(40, width / height, 0.1, 1000);
   camera.position.set(0, 0, 350);
 
-  const sphere = new THREE.Group();
+  const sphere = new Group();
   scene.add(sphere);
 
-  const material = new THREE.LineBasicMaterial({
-    color: 0xfe0e55,
+  const material = new LineBasicMaterial({
+    color: 0xFE0E55,
   });
   const linesAmount = 18;
   const radius = 100;
@@ -32,61 +26,67 @@ export default () => {
 
   let linesIndex = 0;
   while (linesIndex < linesAmount) {
-    const geometry = new THREE.Geometry();
+    const geometry = new Geometry();
     geometry.y = (linesIndex / linesAmount) * radius * 2;
     let i = 0;
     while (i < verticesAmount) {
-      const vector = new THREE.Vector3();
-      vector.x = Math.cos(i / verticesAmount * Math.PI * 2);
-      vector.z = Math.sin(i / verticesAmount * Math.PI * 2);
+      const vector = new Vector3();
+      const percentage = i / verticesAmount;
+      vector.x = Math.cos(percentage * Math.PI * 2);
+      vector.z = Math.sin(percentage * Math.PI * 2);
       vector.clone = vector.clone();
       geometry.vertices.push(vector);
       i += 1;
     }
-    const line = new THREE.Line(geometry, material);
+    const line = new Line(geometry, material);
     sphere.add(line);
     linesIndex += 1;
   }
 
+  function updateVector(vector, y, radiusHeight, a) {
+    const ratio = noise(
+      vector.x * 0.009,
+      (vector.z * 0.009) + (a * 0.0006),
+      y * 0.009,
+    ) * 15;
+    vector.copy(vector.clone);
+    vector.multiplyScalar(radiusHeight + ratio);
+    vector.y = y - radius;
+  }
+
   function updateVertices(a) {
-    sphere.children.forEach((line) => {
+    let i = 0;
+    const { length } = sphere.children;
+    while (i < length) {
+      const line = sphere.children[i];
       line.geometry.y += 0.3;
       if (line.geometry.y > radius * 2) {
         line.geometry.y = 0;
       }
-      const radiusHeight = Math.sqrt(line.geometry.y * (2 * radius - line.geometry.y));
-      line.geometry.vertices.forEach((vector) => {
-        const ratio = noise(
-          vector.x * 0.009,
-          vector.z * 0.009 + a * 0.0006,
-          line.geometry.y * 0.009,
-        ) * 15;
-        vector.copy(vector.clone);
-        vector.multiplyScalar(radiusHeight + ratio);
-        vector.y = line.geometry.y - radius;
-      });
+      const radiusHeight = Math.sqrt(line.geometry.y * ((2 * radius) - line.geometry.y));
+
+      let j = 0;
+      const { vertices } = line.geometry;
+      const vertLength = vertices.length;
+      while (j < vertLength) {
+        const vector = vertices[j];
+        updateVector(vector, line.geometry.y, radiusHeight, a);
+        j += 1;
+      }
       line.geometry.verticesNeedUpdate = true;
-    });
+      i += 1;
+    }
   }
 
-  function render(a) {
-    requestAnimationFrame(render);
+  function render(a = 0) {
+    store.state.canvas.animationFrameId = requestAnimationFrame(render);
+    if (store.state.canvas.paused) {
+      return;
+    }
     updateVertices(a);
     renderer.render(scene, camera);
   }
 
-  function onresize() {
-    canvas.style.width = '';
-    canvas.style.height = '';
-    width = canvas.offsetWidth;
-    height = canvas.offsetHeight;
-    camera.aspect = width / height;
-    camera.updateProjectionMatrix();
-    renderer.setSize(width, height);
-  }
-
-  requestAnimationFrame(render);
-  window.addEventListener('resize', () => {
-    Vue.nextTick().then(onresize);
-  });
+  window.addEventListener('resize', onresize.bind(null, canvas, camera, renderer), false);
+  render();
 };

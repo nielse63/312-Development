@@ -1,11 +1,15 @@
-import Vue from 'vue';
 import {
-  Vector3, WebGLRenderer, Scene,
-  PerspectiveCamera, BoxGeometry, MeshBasicMaterial,
+  Vector3, Scene, PerspectiveCamera,
+  BoxGeometry, MeshBasicMaterial,
   Mesh, DoubleSide,
 } from 'three';
-import noise from '@/lib/canvas/noise';
-import { getCanvas } from '@/lib/canvas/utils';
+import noise from './noise';
+import { getCanvasSize, onresize, createRenderer } from './utils';
+import store from '../../store';
+
+function faceMaterialIndexValue(value, segments) {
+  return Math.floor(value + 25) % (segments * 2) < segments ? 0 : 1;
+}
 
 function setFaceVector(geometry, face, segments) {
   const v1 = geometry.vertices[face.a];
@@ -13,30 +17,21 @@ function setFaceVector(geometry, face, segments) {
   const v3 = geometry.vertices[face.c];
   const center = new Vector3();
   center.add(v1).add(v2).add(v3).divideScalar(3);
-  face.materialIndex = Math.floor(center.y + 25) % (segments * 2) < segments ? 0 : 1;
+  face.materialIndex = faceMaterialIndexValue(center.y, segments);
   if (center.y === 24.5) {
     face.materialIndex = 0;
   }
   if (face.materialIndex === 0) {
-    face.materialIndex = Math.floor(center.x + 25) % (segments * 2) < segments ? 0 : 1;
+    face.materialIndex = faceMaterialIndexValue(center.x, segments);
     if (center.x === 24.5) {
       face.materialIndex = 0;
     }
   }
 }
 
-export default () => {
-  const canvasObject = getCanvas();
-  const { canvas } = canvasObject;
-  let { width, height } = canvasObject;
-
-  const renderer = new WebGLRenderer({
-    canvas,
-    antialias: true,
-  });
-  renderer.setPixelRatio(window.devicePixelRatio > 1 ? 2 : 1);
-  renderer.setSize(width, height);
-  renderer.setClearColor(0x0F1617);
+export default (canvas) => {
+  const { width, height } = getCanvasSize(canvas);
+  const renderer = createRenderer(canvas, 0x0F1617);
 
   const scene = new Scene();
   const camera = new PerspectiveCamera(45, width / height, 0.1, 1000);
@@ -58,7 +53,7 @@ export default () => {
       opacity:     0,
     }),
     new MeshBasicMaterial({
-      color:     0x13756a,
+      color:     0x13756A,
       side:      DoubleSide,
       wireframe: true,
     }),
@@ -66,20 +61,19 @@ export default () => {
   const sphere = new Mesh(geometry, material);
   scene.add(sphere);
 
-  function onresize() {
-    canvas.style.width = '';
-    canvas.style.height = '';
-    width = canvas.offsetWidth;
-    height = canvas.offsetHeight;
-    camera.aspect = width / height;
-    camera.updateProjectionMatrix();
-    renderer.setSize(width, height);
-  }
+  let running = false;
+  function render(a = 0) {
+    store.state.canvas.animationFrameId = requestAnimationFrame(render);
+    if (running || store.state.canvas.paused) {
+      return;
+    }
+    running = true;
 
-  function render(a) {
-    requestAnimationFrame(render);
-
-    geometry.vertices.forEach((vector) => {
+    const { vertices } = geometry;
+    const { length } = vertices;
+    let i = 0;
+    while (i < length) {
+      const vector = vertices[i];
       const ratio = noise(
         (vector.clone.x * 0.01),
         (vector.clone.y * 0.01) + (a * 0.0005),
@@ -87,18 +81,18 @@ export default () => {
       );
       vector.copy(vector.clone);
       vector.multiplyScalar(1 + (ratio * 0.05));
-      vector.multiplyScalar(1);
-    });
+      i += 1;
+    }
+
     geometry.verticesNeedUpdate = true;
 
     sphere.rotation.x += 0.001;
     sphere.rotation.y += 0.001;
     renderer.render(scene, camera);
+    running = false;
   }
 
   // start animation
-  requestAnimationFrame(render);
-  window.addEventListener('resize', () => {
-    Vue.nextTick().then(onresize);
-  });
+  window.addEventListener('resize', onresize.bind(null, canvas, camera, renderer), false);
+  render();
 };

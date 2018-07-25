@@ -1,98 +1,47 @@
 <template>
   <div class="about">
-    <h1>About Me</h1>
-    <!-- <h2>Senior UI Software Engineer from Chicago, IL</h2> -->
-    <canvas class="scene scene--full" id="scene" width="100%" height="100%"></canvas>
-    <script type="x-shader/x-vertex" id="wrapVertexShader">
-      #define PI 3.1415926535897932384626433832795
-      attribute float size;
-      void main() {
-        vec4 mvPosition = modelViewMatrix * vec4( position, 1.0 );
-        gl_PointSize = 3.0;
-        gl_Position = projectionMatrix * mvPosition;
-      }
-    </script>
-    <script type="x-shader/x-fragment" id="wrapFragmentShader">
-      uniform sampler2D texture;
-      void main(){
-        vec4 textureColor = texture2D( texture, gl_PointCoord );
-        if ( textureColor.a < 0.3 ) discard;
-        vec4 dotColor = vec4(0.06, 0.18, 0.36, 0.4);
-        vec4 color = dotColor * textureColor;
-        gl_FragColor = color;
-      }
-    </script>
+    <intro-panel
+      :title="title"
+      :canvas="sphere"
+    ></intro-panel>
+    <content-section>
+      <content-panel title="Who I Am">
+        <p>I'm a <mark>Senior User-Interface Software Engineer and Tech Lead</mark> in Chicago, currently creating great user experiences at <external-link href="https://enova.com/">Enova</external-link>. I've been a developer and engineer since 2010, and my experience spans from Node to Ruby, and everything in between. <external-link :href="resume" title="View my resume online">Resume Here</external-link>.</p>
+        <p>Aside from writing code I'm an <external-link :href="instagram">avid traveller</external-link>, triathlete and long-distance runner, and a huge fan of hiking/camping/fishing (anytning outdoors).</p>
+      </content-panel>
+      <content-panel title="My Contributions">
+        <p>I actively contribute to open-source software, and try to publish and share my work as much as I can here. Below you'll see just how much I contribute, and to what projects:</p>
+        <contributions-graph></contributions-graph>
+      </content-panel>
+    </content-section>
   </div>
 </template>
 
 <script>
-import canvas from '@/lib/canvas';
+import sphere from '@/lib/canvas/sphere';
+import content from '@/lib/content';
+import IntroPanel from '@/components/IntroPanel';
+import ContentSection from '@/components/ContentSection';
+import ContentPanel from '@/components/ContentPanel';
+import ExternalLink from '@/components/ExternalLink';
+import ContributionsGraph from '@/components/ContributionsGraph';
 
 export default {
-  name: 'About',
-  mounted() {
-    // canvas('waves');
-    canvas('cubes');
+  name:       'About',
+  components: {
+    IntroPanel,
+    ContentSection,
+    ContentPanel,
+    ExternalLink,
+    ContributionsGraph,
+  },
+  data() {
+    return {
+      title:     'About Me',
+      sphere,
+      resume:    content.resume.link,
+      instagram: content.links.instagram,
+    };
   },
 };
 </script>
-
-<style lang="scss" scoped>
-@import '../assets/styles/lib/vars';
-
-.about {
-  display: grid;
-  justify-content: center;
-  align-items: center;
-  align-content: center;
-  margin: 0 auto;
-  min-height: 100vh;
-  color: #fff;
-  text-align: center;
-}
-
-h1 {
-  margin: 0;
-  font-family: $font-family-serif;
-  font-size: 10vw;
-}
-
-h2 {
-  font-size: 1.25em;
-  padding: 0 0.75em;
-  margin: 0;
-  letter-spacing: 0.5em;
-  text-indent: 0.5em;
-  font-weight: bold;
-  text-transform: uppercase;
-  position: relative;
-  max-width: 50vw;
-
-  &:before,
-  &:after {
-    content: '';
-    position: absolute;
-    top: 50%;
-    height: 1px;
-    background-color: #fff;
-    width: 20%;
-  }
-
-  &:before {
-    right: 100%;
-  }
-
-  &:after {
-    left: 100%;
-  }
-}
-
-canvas {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  z-index: -1;
-}
-</style>

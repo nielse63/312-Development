@@ -1,14 +1,13 @@
 // http://eslint.org/docs/user-guide/configuring
 
 const production = process.env.NODE_ENV !== 'development';
-const warnOrOff = production ? 'warn' : 'off';
 const errorOrOff = production ? 'error' : 'off';
 const errorOrWarn = production ? 'error' : 'warn';
 
 module.exports = {
   root:          true,
-  parser:        'babel-eslint',
   parserOptions: {
+    parser:      'babel-eslint',
     ecmaVersion: 2017,
     sourceType:  'module',
   },
@@ -17,10 +16,13 @@ module.exports = {
   },
   extends: [
     'airbnb-base',
+    'plugin:unicorn/recommended',
+    'plugin:vue/essential',
   ],
   // required to lint *.vue files
   plugins: [
-    'html',
+    'unicorn',
+    'vue',
   ],
   // check if imports actually resolve
   settings: {
@@ -39,43 +41,44 @@ module.exports = {
     }],
     'import/prefer-default-export': 'off',
 
+    // override unicorn rules
+    'unicorn/explicit-length-check': 'off',
+
     // allow debugger during development
-    // 'max-len':              [warnOrOff, 100],
     'max-len':            'off',
     'key-spacing':        ['warn', { align: 'value' }],
     'no-console':         [errorOrOff, { allow: ['error', 'warn'] }],
     'func-names':         'error',
     complexity:           ['error', 5],
     'no-mixed-operators': [errorOrWarn],
+    'no-debugger':        [errorOrWarn],
   },
   overrides: [
     {
-      files: [
-        'bin/**',
-      ],
-      env: {
-        browser: false,
-        node:    true,
-      },
+      files: ['**/*.vue'],
       rules: {
-        'import/no-extraneous-dependencies': 'off',
-        'no-console':                        'off',
+        'unicorn/filename-case': ['error', {
+          case: 'pascalCase',
+        }],
       },
     },
     {
-      files: [
-        'test/**',
-      ],
-      env: {
-        mocha: true,
+      files: ['test/**'],
+      env:   {
+        jest: true,
+      },
+      globals: {
+        browser: true,
+        page:    true,
       },
       rules: {
-        'no-console': 'off',
+        'unicorn/filename-case': 'off',
       },
     },
     {
       files: [
         'build/**',
+        'scripts/**',
       ],
       env: {
         browser: false,
@@ -86,6 +89,29 @@ module.exports = {
         'import/no-extraneous-dependencies': ['error', {
           devDependencies: true,
         }],
+      },
+    },
+    {
+      files: [
+        'scripts/**',
+      ],
+      rules: {
+        'unicorn/no-process-exit': 'off',
+      },
+    },
+    {
+      files: ['src/store/**/mutations.js'],
+      rules: {
+        'no-param-reassign': ['error', {
+          props:                          true,
+          ignorePropertyModificationsFor: ['state'],
+        }],
+      },
+    },
+    {
+      files: ['src/lib/canvas/**'],
+      rules: {
+        'no-param-reassign': 'off',
       },
     },
   ],

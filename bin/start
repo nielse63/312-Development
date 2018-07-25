@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+set -e
+
+# build only if dist doesn't exist
+if ! [ -d dist ]; then
+  yarn build
+fi
+
+# serve
+yarn http-server \
+  -p 3000 \
+  --gzip \
+  --no-dotfiles \
+  dist/

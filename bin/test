@@ -1,0 +1,36 @@
+#!/usr/bin/env bash
+set -e
+
+function test_e2e() {
+  echo 'Running e2e tests'
+  export JEST_PUPPETEER_CONFIG=test/e2e/jest-puppeteer.config.js
+  yarn jest --config=test/e2e/jest.config.js
+}
+
+function test_unit() {
+  yarn jest --config=test/unit/jest.config.js
+}
+
+function usage() {
+  echo "runs automated tests"
+  echo " "
+  echo "bin/test [command]"
+  echo " "
+  echo "commands:"
+  echo "unit                    runs unit tests"
+  echo "e2e                     runs e2e tests"
+  echo " "
+  echo "help                    displays usage"
+  exit 0
+}
+
+if [ "$1" == "e2e" ]; then
+  test_e2e
+elif [ "$1" == "unit" ]; then
+  test_unit
+elif [ "$1" == "help" ]; then
+  usage
+else
+  usage
+  exit 1
+fi

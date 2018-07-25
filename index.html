@@ -1,22 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta http-equiv="Content-type" content="text/html; charset=utf-8"/>
-    <meta http-equiv="expires" content="0">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
-    <title><%= htmlWebpackPlugin.options.title %></title>
-
-    <link rel="manifest" href="/icons/manifest.json">
-    <!-- <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,700,700i,800&amp;Cormorant+Garamond:400i" rel="preload" onload="this.rel='stylesheet'" as="style"> -->
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,700,700i,800&amp;Vidaloka" rel="preload" onload="this.rel='stylesheet'" as="style">
-    <% for (var chunk of webpack.chunks) {
+<head>
+  <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+  <meta http-equiv="expires" content="0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+  <title><%= htmlWebpackPlugin.options.title %></title>
+  <link rel="manifest" href="/icons/manifest.json">
+  <link href="https://fonts.googleapis.com/css?family=Seaweed+Script|Nunito:400,400i,700,700i" rel="preload" onload="this.rel='stylesheet'"
+    as="style">
+  <% for (var chunk of webpack.chunks) {
         for (var file of chunk.files) {
-          if (file.match(/\.(js|css)$/)) { %>
-      <link rel="<%= chunk.initial?'preload':'prefetch' %>" href="<%= htmlWebpackPlugin.files.publicPath + file %>" as="<%= file.match(/\.css$/)?'style':'script' %>"><% }}} %>
-  </head>
-  <body>
-    <a href="#main" class="visually-hidden">Skip to main content</a>
-    <noscript>This site requires JavaScript to be enabled - Please turn JavaScript on and visit again.</noscript>
-    <div id="app"></div>
-  </body>
+          if (file.match(/\.(js|css)$/)) { %><link rel="<%= chunk.initial?'preload':'prefetch' %>" href="<%= htmlWebpackPlugin.files.publicPath + file %>" as="<%= file.match(/\.css$/)?'style':'script' %>"><% }}} %>
+</head>
+<body>
+  <a href="#main" class="visually-hidden">Skip to main content</a>
+  <noscript>This site requires JavaScript to be enabled - Please turn JavaScript on and visit again.</noscript>
+  <div id="app"></div>
+</body>
+
 </html>

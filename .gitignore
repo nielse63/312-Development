@@ -10,3 +10,4 @@ test/integration/*.png
 .env
 .logs/*
 .*cache
+site/

@@ -1,16 +1,17 @@
 
 $color-black: #363636;
 $color-white: #fff;
-$color-purple: #9013fe;
-$color-pink: #ff4081;
-$color-blue: #00bcd4;
+$color-purple: #96f;
+$color-pink: #ff6384;
+$color-blue: #36a2eb;
 $color-red: #f44336;
-$color-gray: #7f8c8d;
-$color-green: #0eff00;
+$color-gray: #c9cbcf;
+$color-green: #62a75e;
 
 $text-color: $color-black;
-$font-family-sans-serif: 'Open Sans', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-$font-family-serif: 'Vidaloka', 'Cormorant Garamond', Georgia, 'Times New Roman', serif;
+$font-family-sans-serif: Nunito, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+$font-family-serif: Georgia, "Times New Roman", serif;
+$font-family-cursive: "Seaweed Script", cursive;
 
 $border-color: fade-out($color-black, 0.75);
 
@@ -28,3 +29,7 @@ $desktop-width-max: ($desktop-width - 1px);
 $large-width-max: ($large-width - 1px);
 
 $panel-padding: 5rem;
+
+$content-padding: 5rem;
+
+$portfolio-icon-size: 1.25em;

@@ -1,29 +1,26 @@
 <template>
   <a
-    :href="href"
-    :title="titleText"
+    :href="this.href"
+    :title="this.text"
     target="_blank"
     rel="noopener noreferrer"
-  ><slot></slot></a>
+  >
+    <slot></slot>
+  </a>
 </template>
 
 <script>
-  export default {
-    name:  'external-link',
-    props: {
-      href: {
-        type:    String,
-        require: true,
-      },
-      title: {
-        type:    String,
-        default: '',
-      },
+export default {
+  name:  'ExternalLink',
+  props: {
+    href: {
+      type:    String,
+      require: true,
     },
-    computed: {
-      titleText() {
-        return this.title || this.$slots.default[0].text;
-      },
+    text: {
+      type:    String,
+      require: true,
     },
-  };
+  },
+};
 </script>

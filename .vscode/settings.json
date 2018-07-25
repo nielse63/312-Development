@@ -1,0 +1,33 @@
+{
+  "files.associations": {
+    ".vuegenerator": "json",
+    ".*rc": "jsonc",
+  },
+  "files.exclude": {
+    "**/*.log": true,
+    "**/*.log*": true,
+    "**/node_modules": true,
+    "**/dist": true,
+    "**/site": true,
+    "**/coverage": true,
+  },
+  "editor.insertSpaces": true,
+  "editor.tabSize": 2,
+  "editor.trimAutoWhitespace": true,
+  "files.trimTrailingWhitespace": true,
+  "files.eol": "\n",
+  "files.insertFinalNewline": true,
+  "files.trimFinalNewlines": true,
+  // "editor.formatOnSave": true,
+  "eslint.autoFixOnSave": true,
+  "eslint.run": "onSave",
+  "eslint.validate": [
+    { "language": "javascript", "autoFix": true },
+    { "language": "javascriptreact", "autoFix": true },
+    { "language": "vue", "autoFix": true }
+  ],
+  "[markdown]": {
+    "editor.wordWrap": "wordWrapColumn",
+    "editor.wordWrapColumn": 80
+  }
+}

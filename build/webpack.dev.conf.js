@@ -12,7 +12,7 @@ module.exports = merge(baseConfig, {
   devServer: {
     stats,
     historyApiFallback: true,
-    noInfo:             false,
+    noInfo:             true,
     inline:             true,
     hot:                true,
     port:               PORT,

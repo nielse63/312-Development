@@ -1,77 +1,102 @@
 <template>
   <div class="contact">
-    <h1>Contact Me</h1>
-    <canvas class="scene scene--full" id="scene" width="100%" height="100%"></canvas>
+    <intro-panel
+      :title="title"
+      :canvas="canvas"
+    ></intro-panel>
+    <content-section>
+      <content-panel>
+        <app-loading v-if="loading"></app-loading>
+        <form novalidate="true" autocomplete="false" @submit.prevent="onsubmit">
+          <form-input label="Name" :value="entry.name" @input="entry.name = $event"></form-input>
+          <form-input label="Email" type="email" :value="entry.email" @input="entry.email = $event"></form-input>
+          <form-input label="Company/Organization" type="text" :value="entry.company" @input="entry.company = $event"></form-input>
+          <form-input label="URL" type="url" :value="entry.url" @input="entry.url = $event"></form-input>
+          <form-input label="Message" type="textarea" class="wide"></form-input>
+          <div class="wide"><button type="submit">Submit</button></div>
+        </form>
+      </content-panel>
+    </content-section>
   </div>
 </template>
 
 <script>
-import canvas from '@/lib/canvas';
+import canvas from '@/lib/canvas/cubes';
+import IntroPanel from '@/components/IntroPanel';
+import ContentSection from '@/components/ContentSection';
+import ContentPanel from '@/components/ContentPanel';
+import FormInput from '@/components/FormInput';
+import AppLoading from '@/components/AppLoading';
 
 export default {
-  name: 'Contact',
-  mounted() {
-    canvas('cubes');
+  name:       'Contact',
+  components: {
+    IntroPanel,
+    ContentSection,
+    ContentPanel,
+    FormInput,
+    AppLoading,
+  },
+  data() {
+    return {
+      canvas,
+      title:   'Contact Me',
+      loading: false,
+      entry:   {
+        name:    '',
+        email:   '',
+        company: '',
+        url:     '',
+        message: '',
+      },
+    };
+  },
+  methods: {
+    onsubmit() {
+      this.loading = true;
+      setTimeout(() => {
+        this.loading = false;
+      }, 1500);
+    },
   },
 };
 </script>
 
 <style lang="scss" scoped>
-@import '../assets/styles/lib/vars';
+@import "../assets/styles/lib/vars";
 
-.contact {
-  display: grid;
-  justify-content: center;
-  align-items: center;
-  align-content: center;
-  margin: 0 auto;
-  min-height: 100vh;
-  color: #fff;
-  text-align: center;
-}
-
-h1 {
-  margin: 0;
-  font-family: $font-family-serif;
-  font-size: 10vw;
-}
-
-h2 {
-  font-size: 1.25em;
-  padding: 0 0.75em;
-  margin: 0;
-  letter-spacing: 0.5em;
-  text-indent: 0.5em;
-  font-weight: bold;
-  text-transform: uppercase;
-  position: relative;
-  max-width: 50vw;
-
-  &:before,
-  &:after {
-    content: '';
-    position: absolute;
-    top: 50%;
-    height: 1px;
-    background-color: #fff;
-    width: 20%;
-  }
-
+.content-section {
   &:before {
-    right: 100%;
-  }
-
-  &:after {
-    left: 100%;
+    background: linear-gradient(to bottom, #0f1617, transparent);
   }
 }
 
-canvas {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  z-index: -1;
+form {
+  display: flex;
+  flex-wrap: wrap;
+
+  > * {
+    flex: 1 0 50%;
+    padding: 1em;
+  }
+}
+
+.wide {
+  flex: 1 0 100%;
+}
+
+button {
+  background-color: $color-blue;
+  color: $color-white;
+  border: 2px solid $color-blue;
+  border-radius: 2px;
+  font-weight: 700;
+  font-size: 0.8em;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  line-height: 1.5;
+  padding: 0.5em 2em;
+  cursor: pointer;
+  display: block;
 }
 </style>
