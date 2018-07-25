@@ -45,7 +45,7 @@ export default {
 <style lang="scss" scoped>
 @import "../assets/styles/lib/vars";
 
-.content {
-  padding-top: 100vh;
-}
+// .content {
+//   padding-top: 100vh;
+// }
 </style>

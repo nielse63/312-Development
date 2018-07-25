@@ -1,27 +1,62 @@
 <template>
   <content-section title="Selected Work" id="portfolio">
     <article>
-      <p>I'm a <mark>Senior User-Interface Software Engineer and Tech Lead</mark> in Chicago, currently creating great user experiences at <external-link href="https://enova.com/">Enova International</external-link>. I've been a developer and engineer since 2010, and my experience spans from Node to Ruby, and everything in between. <external-link :href="resume" title="View my resume online">Resume Here</external-link>.</p>
-      <p>Aside from writing code I'm an <external-link :href="instagram">avid traveller</external-link>, triathlete and long-distance runner, and a huge fan of hiking/camping/fishing (anytning outdoors).</p>
+      <div class="cards">
+        <template v-for="(card, i) in cards">
+          <card-portfolio
+            :key="i"
+            :index="i"
+            :title="card.title"
+            :image="card.image"
+          ></card-portfolio>
+        </template>
+      </div>
     </article>
   </content-section>
 </template>
 
 <script>
-import content from '@/lib/content';
 import ContentSection from '@/components/ContentSection';
-import ExternalLink from '@/components/ExternalLink';
+import CardPortfolio from '@/components/CardPortfolio';
+import MountainImage from '@/assets/images/mountains.jpg';
+import RoadImage from '@/assets/images/road.jpg';
+import PoolImage from '@/assets/images/pool.jpg';
+import PlaceholderImage from '@/assets/images/placeholder.jpg';
 
 export default {
   name:       'ContentSectionPortfolio',
   components: {
     ContentSection,
-    ExternalLink,
+    CardPortfolio,
   },
   data() {
     return {
-      resume:    content.resume.link,
-      instagram: content.links.instagram,
+      cards: [
+        {
+          title: 'Project Name',
+          image: MountainImage,
+        },
+        {
+          title: 'Project Name',
+          image: RoadImage,
+        },
+        {
+          title: 'Project Name',
+          image: PoolImage,
+        },
+        {
+          title: 'Project Name',
+          image: PlaceholderImage,
+        },
+        {
+          title: 'Project Name',
+          image: MountainImage,
+        },
+        {
+          title: 'Project Name',
+          image: RoadImage,
+        },
+      ],
     };
   },
 };
@@ -33,6 +68,7 @@ export default {
 
 .content-section {
   flex-direction: row-reverse;
+  align-items: center;
 
   &:before {
     content: "";
@@ -42,11 +78,24 @@ export default {
     top: 0;
     left: 0;
     background-image: linear-gradient(#de6cff, #bc41df);
+    clip-path: polygon(0% 0%, 40% 0%, 71% 100%, 0% 100%);
+    transition: $content-section-transition;
+  }
+}
+
+.visible {
+  &:before {
     clip-path: polygon(0% 0%, 47% 0%, 60% 100%, 0% 100%);
   }
 }
 
 article {
   padding-right: 1rem;
+}
+
+.cards {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
 }
 </style>

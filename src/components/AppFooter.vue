@@ -13,15 +13,13 @@
 </template>
 
 <script>
-import content from '@/lib/content';
+import { links } from '@/lib/content';
 import BackgroundImage from '@/assets/images/trianglify.png';
 import ExternalLink from '@/components/ExternalLink';
 import GithubIcon from '@/assets/images/github.svg';
 import LinkedInIcon from '@/assets/images/linkedin.svg';
 import TwitterIcon from '@/assets/images/twitter.svg';
 import NPMIcon from '@/assets/images/npm.svg';
-
-const { links } = content;
 
 export default {
   name:       'AppFooter',
@@ -74,6 +72,7 @@ export default {
   color: $color-white;
   font-size: 22px;
   letter-spacing: 1px;
+  background-image: radial-gradient( circle farthest-corner at 41.5% 52.8%,  rgba(0,133,195,1) 0%, rgba(0,108,159,1) 87.3% );
   background-color: $color-blue;
   background-position: center;
   background-repeat: no-repeat;

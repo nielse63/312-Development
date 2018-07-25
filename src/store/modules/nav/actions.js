@@ -14,10 +14,4 @@ export default {
       dispatch('open');
     }
   },
-  darken({ commit }) {
-    commit('darken');
-  },
-  lighten({ commit }) {
-    commit('lighten');
-  },
 };

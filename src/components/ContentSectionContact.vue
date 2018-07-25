@@ -63,7 +63,6 @@ export default {
     position: absolute;
     top: 0;
     left: 0;
-    // background-image: linear-gradient(to bottom, #bf2885, #eb9100);
     background-image: linear-gradient(to bottom, #00b870, #11eb96);
     clip-path: polygon(70% 0%, 100% 0%, 100% 100%, 25% 100%);
   }
@@ -72,5 +71,10 @@ export default {
 article {
   padding-top: 0;
   color: $color-black;
+}
+
+form {
+  @include basic-content-transform;
+  transition-delay: 0.25s;
 }
 </style>

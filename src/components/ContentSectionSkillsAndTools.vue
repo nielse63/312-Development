@@ -1,16 +1,23 @@
 <template>
   <content-section title="Skills and Tools">
     <article>
-      <p>I'm a <mark>Senior User-Interface Software Engineer and Tech Lead</mark> in Chicago, currently creating great user experiences at <external-link href="https://enova.com/">Enova International</external-link>. I've been a developer and engineer since 2010, and my experience spans from Node to Ruby, and everything in between. <external-link :href="resume" title="View my resume online">Resume Here</external-link>.</p>
-      <p>Aside from writing code I'm an <external-link :href="instagram">avid traveller</external-link>, triathlete and long-distance runner, and a huge fan of hiking/camping/fishing (anytning outdoors).</p>
+      <div class="tools">
+        <template v-for="(tool, i) in tools">
+          <figure class="tool" :key="i" v-html="tool.image"></figure>
+        </template>
+      </div>
     </article>
   </content-section>
 </template>
 
 <script>
-import content from '@/lib/content';
 import ContentSection from '@/components/ContentSection';
 import ExternalLink from '@/components/ExternalLink';
+import languages from '@/lib/content/experience/languages';
+import frameworks from '@/lib/content/experience/frameworks';
+import buildTools from '@/lib/content/experience/build-tools';
+import libraries from '@/lib/content/experience/libraries';
+import testing from '@/lib/content/experience/testing';
 
 export default {
   name:       'ContentSectionSkillsAndTools',
@@ -20,14 +27,20 @@ export default {
   },
   data() {
     return {
-      resume:    content.resume.link,
-      instagram: content.links.instagram,
+      tools: [
+        ...languages.items,
+        ...frameworks.items,
+        ...buildTools.items,
+        ...libraries.items,
+        ...testing.items,
+      ],
     };
   },
 };
 </script>
 
 <style scoped lang="scss">
+@import "../assets/styles/lib/mixins";
 @import "../assets/styles/lib/vars";
 
 .content-section {
@@ -36,5 +49,28 @@ export default {
 
 article {
   background-image: linear-gradient(#fec163, #de4313);
+
+  p {
+    @include basic-content-transform;
+    transition-delay: 0.25s;
+
+    + p {
+      transition-delay: 0.5s;
+    }
+  }
+}
+
+.tools {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.tool {
+  margin: 0;
+  padding: 1rem;
+  display: block;
+  width: 100px;
 }
 </style>

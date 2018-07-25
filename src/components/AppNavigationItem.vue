@@ -1,10 +1,12 @@
 <template>
   <li>
-    <a :href="path" :class="color">{{text}}</a>
+    <a :href="path" :class="color" @click="onclick">{{text}}</a>
   </li>
 </template>
 
 <script>
+import { mapActions } from 'vuex';
+
 export default {
   name:  'AppNavigationItem',
   props: {
@@ -19,6 +21,29 @@ export default {
     color: {
       type:    String,
       default: 'black',
+    },
+  },
+  methods: {
+    ...mapActions('nav', {
+      closeNav: 'close',
+    }),
+    scrollTo(top, e) {
+      e.preventDefault();
+      this.closeNav();
+      window.scrollTo({ top, behavior: 'smooth' });
+    },
+    onclick(e) {
+      const href = e.srcElement.href.split('/').pop();
+      if (!href) {
+        this.scrollTo(0, e);
+        return;
+      }
+      const target = document.querySelector(href);
+      if (!target) {
+        return;
+      }
+      const top = target.offsetTop;
+      this.scrollTo(top, e);
     },
   },
 };

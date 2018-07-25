@@ -8,7 +8,7 @@
 </template>
 
 <script>
-import content from '@/lib/content';
+import { resume, links } from '@/lib/content';
 import ContentSection from '@/components/ContentSection';
 import ExternalLink from '@/components/ExternalLink';
 
@@ -20,8 +20,8 @@ export default {
   },
   data() {
     return {
-      resume:    content.resume.link,
-      instagram: content.links.instagram,
+      resume:    resume.link,
+      instagram: links.instagram,
     };
   },
 };
@@ -42,11 +42,21 @@ export default {
     top: 0;
     left: 0;
     background-image: linear-gradient(to bottom, #852d91, #312a6c);
-    clip-path: polygon(53% 0%, 100% 0%, 100% 100%, 40% 100%);
+    clip-path: polygon(60% 0%, 100% 0%, 100% 100%, 29% 100%);
+    transition: $content-section-transition;
+    // transition-delay: 0.5s;
   }
 }
 
 article {
   padding-left: 2rem;
+  @include basic-content-transform;
+}
+
+.visible {
+  &:before {
+    clip-path: polygon(53% 0%, 100% 0%, 100% 100%, 40% 100%);
+    transition-delay: 0s;
+  }
 }
 </style>

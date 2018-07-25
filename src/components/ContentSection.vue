@@ -24,14 +24,58 @@ export default {
       },
     },
   },
+  data() {
+    return {
+      atTop:   false,
+      visible: false,
+    };
+  },
   computed: {
     cls() {
       const output = {
+        visible:           this.visible,
         'content-section': true,
       };
       output[this.id] = true;
       return output;
     },
+  },
+  methods: {
+    shouldBeVisible() {
+      const { offsetTop, offsetHeight } = this.$el;
+      const { scrollY } = window;
+      const offsetBottom = offsetTop + offsetHeight;
+      // if (this.title === 'Selected Work') {
+      //   console.log({
+      //     offsetTop,
+      //     scrollY,
+      //     offsetBottom,
+      //     title:  this.title,
+      //     truthy: offsetTop < scrollY && scrollY < offsetBottom,
+      //   });
+      // }
+      return offsetTop < scrollY && scrollY < offsetBottom;
+    },
+    setObserver() {
+      const options = {
+        root:       null,
+        rootMargin: `${this.$el.offsetTop}px 0px 0px 0px`,
+        threshold:  [],
+      };
+      for (let i = 0; i <= 1; i += 0.01) {
+        options.threshold.push(i);
+      }
+      const observer = new IntersectionObserver(() => {
+        this.visible = this.shouldBeVisible();
+        // if (this.visible) {
+        //   observer.disconnect();
+        // }
+      }, options);
+      observer.observe(this.$el);
+    },
+  },
+  mounted() {
+    this.setObserver();
   },
 };
 </script>
@@ -61,6 +105,16 @@ h2 {
   font-family: $font-family-serif;
   font-weight: 400;
   font-size: 8vw;
+  opacity: 0;
+  transform: translate(0, 25px);
+  transition: $content-section-transition;
+  transition-delay: 0.5s;
+
+  .visible & {
+    opacity: 1;
+    transform: translate(0, 0);
+    transition-delay: 0s;
+  }
 }
 
 article {
@@ -76,7 +130,7 @@ a {
   transition: 0.15s background-color ease-in-out;
   position: relative;
 
-  &:after {
+  &:before {
     content: "";
     display: block;
     position: absolute;
@@ -84,15 +138,15 @@ a {
     right: 0;
     bottom: 0;
     height: 0.25em;
-    background-color: fade-out($color-pink, 0.55);
+    background-color: fade-out($color-pink, 0.15);
     transition: 0.15s ease-in-out;
     will-change: height, background-color;
   }
 
   &:hover {
-    &:after {
+    &:before {
       height: 0.5em;
-      background-color: fade-out($color-pink, 0.75);
+      background-color: fade-out($color-pink, 0.35);
     }
   }
 }
@@ -101,26 +155,7 @@ a {
   header {
     padding-right: 0;
     color: #852d91;
-    // text-align: right;
   }
-
-  // h2 {
-  //   position: relative;
-
-  //   &:before,
-  //   &:after {
-  //     content: attr(data-title);
-  //     color: $color-white;
-  //     position: absolute;
-  //     top: 0;
-  //     right: 0;
-  //   }
-
-  //   &:after {
-  //     color: $color-black;
-  //     clip-path: polygon(0 0, 100% 0, 94% 100%, 0 100%);
-  //   }
-  // }
 }
 
 .experience {
@@ -129,13 +164,6 @@ a {
   header {
     padding-bottom: 0;
   }
-
-  // h2 {
-  //   &:before,
-  //   &:after {
-  //     color: $color-white;
-  //   }
-  // }
 }
 
 .portfolio {

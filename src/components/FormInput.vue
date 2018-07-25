@@ -41,6 +41,12 @@ export default {
 <style scoped lang="scss">
 @import "../assets/styles/lib/vars";
 
+.form-input {
+  & + & {
+    margin-top: 1rem;
+  }
+}
+
 label,
 input,
 textarea {

@@ -15,7 +15,7 @@ export default {
   computed: {
     ...mapState('nav', {
       isNavOpen: 'open',
-      isDark:    'dark',
+      // isDark:    'dark',
     }),
     isButtonDark() {
       return this.isNavOpen || this.isDark;
@@ -23,7 +23,6 @@ export default {
     buttonClass() {
       return {
         'button-open': this.isNavOpen,
-        'button-dark': this.isButtonDark,
       };
     },
   },
@@ -60,43 +59,44 @@ $middle-bar-top: ($bottom-bar-top / 2);
   width: $button-width;
   height: $button-height;
   z-index: 2;
-
-  span {
-    display: block;
-    position: absolute;
-    height: $bar-height;
-    width: 100%;
-    background: $color-white;
-    border-radius: 9px;
-    opacity: 1;
-    left: 0;
-    transform: rotate(0deg);
-    transition: 0.25s ease-in-out;
-    transition-property: top, width, left, transform;
-
-    &:nth-child(1) {
-      top: $top-bar-top;
-    }
-
-    &:nth-child(2),
-    &:nth-child(3) {
-      top: $middle-bar-top;
-    }
-
-    &:nth-child(4) {
-      top: $bottom-bar-top;
-    }
-  }
 }
 
-.button-dark {
-  span { /* stylelint-disable-line no-descending-specificity */
-    background: $color-black;
+span {
+  display: block;
+  position: absolute;
+  height: $bar-height;
+  width: 100%;
+  background: $color-white;
+  border-radius: 9px;
+  opacity: 1;
+  left: 0;
+  transform: rotate(0deg);
+  transition: 0.25s ease-in-out;
+  box-shadow: 0 0 1px $color-black;
+
+  &:nth-child(1) {
+    top: $top-bar-top;
+  }
+
+  &:nth-child(2),
+  &:nth-child(3) {
+    top: $middle-bar-top;
+  }
+
+  &:nth-child(3) {
+    box-shadow: none;
+  }
+
+  &:nth-child(4) {
+    top: $bottom-bar-top;
   }
 }
 
 .button-open {
-  span { /* stylelint-disable-line no-descending-specificity */
+  span {
+    box-shadow: none;
+    background: $color-black;
+
     &:nth-child(1),
     &:nth-child(4) {
       top: $middle-bar-top;

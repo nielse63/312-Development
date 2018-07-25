@@ -10,7 +10,7 @@
 </template>
 
 <script>
-import { mapState, mapMutations, mapActions } from 'vuex';
+import { mapState, mapActions } from 'vuex';
 import AppNavigation from '@/components/AppNavigation';
 import AppNavigationButton from '@/components/AppNavigationButton';
 import AppFooter from '@/components/AppFooter';
@@ -24,25 +24,14 @@ export default {
     AppFooter,
     Home,
   },
-  data() {
-    return {
-      isBelowCanvas: false,
-      headerBottom:  0,
-    };
-  },
   computed: {
     ...mapState('nav', {
       isNavOpen: 'open',
-    }),
-    ...mapState('canvas', {
-      isCanvasRunning: 'running',
     }),
     appClass() {
       const object = {
         'nav-open': this.isNavOpen,
       };
-      // const routeClassName = `view-${this.$route.name}`;
-      // object[routeClassName] = true;
       return object;
     },
     pageClass() {
@@ -53,39 +42,14 @@ export default {
     },
   },
   methods: {
-    ...mapMutations('canvas', {
-      pauseCanvas:  'pause',
-      resumeCanvas: 'start',
-    }),
     ...mapActions('nav', {
-      closeNav:   'close',
-      darkenNav:  'darken',
-      lightenNav: 'lighten',
+      closeNav: 'close',
     }),
     onpageclick() {
       if (this.isNavOpen) {
         this.closeNav();
       }
     },
-    onscroll() {
-      if (this.isCanvasRunning && window.scrollY > this.headerBottom) {
-        this.pauseCanvas();
-        this.darkenNav();
-      } else if (!this.isCanvasRunning && window.scrollY <= this.headerBottom) {
-        this.resumeCanvas();
-        this.lightenNav();
-      }
-    },
-  },
-  beforeMount() {
-    window.addEventListener('scroll', this.onscroll, false);
-  },
-  mounted() {
-    this.headerBottom = document.querySelector('.canvas').offsetHeight;
-    this.onscroll();
-  },
-  beforeDestroy() {
-    window.removeEventListener('scroll', this.onscroll, false);
   },
 };
 </script>

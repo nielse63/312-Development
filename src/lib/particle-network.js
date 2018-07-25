@@ -11,6 +11,9 @@ export default function particleNetwork() {
   const FRAME_RATE = 50;
   let lastTime = Date.now();
   const balls = [];
+  const output = {
+    active: true,
+  };
 
   function Ball(startX, startY, startVelX, startVelY) {
     this.x = startX || Math.random() * canvas.width;
@@ -98,10 +101,12 @@ export default function particleNetwork() {
   }
 
   function loop() {
-    const { width, height } = canvas;
-    ctx.clearRect(0, 0, width, height);
-    update();
-    draw();
+    if (output.active) {
+      const { width, height } = canvas;
+      ctx.clearRect(0, 0, width, height);
+      update();
+      draw();
+    }
     requestAnimationFrame(loop);
   }
 
@@ -119,5 +124,6 @@ export default function particleNetwork() {
   }
 
   // Start
-  loop();
+  output.start = loop;
+  return output;
 }
