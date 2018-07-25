@@ -19,6 +19,7 @@
 </template>
 
 <script>
+import { mapActions, mapState } from 'vuex';
 import { resume } from '@/lib/content';
 import ContentSection from '@/components/ContentSection';
 import ExperienceBox from '@/components/ExperienceBox';
@@ -34,37 +35,60 @@ export default {
   data() {
     return {
       resume: resume.link,
-      boxes:  [
+    };
+  },
+  computed: {
+    ...mapState('portfolio', ['stats']),
+    boxes() {
+      return [
         {
           header:      '10',
           description: 'years as a software engineer',
         },
         {
-          header:      '100',
+          header:      this.stats.repos,
           description: 'public github repos',
         },
         {
-          header:      '10',
+          header:      this.stats.commits,
           description: 'git commits',
         },
         {
-          header:      '100',
-          description: 'GitHub stars',
+          header:      this.stats.stars,
+          description: 'github stars',
         },
         {
-          header:      '10',
+          header:      this.stats.gists,
           description: 'public gists',
         },
         {
-          header:      '100',
+          header:      this.stats.packages,
           description: 'published node modules',
         },
         {
-          header:      '100',
-          description: 'npm downloads',
+          header:      this.stats.downloads,
+          description: 'downloads of my npm packages',
         },
-      ],
-    };
+      ];
+    },
+  },
+  methods: {
+    ...mapActions('portfolio', [
+      'fetchRepos',
+      'fetchGitHubStats',
+      'fetchGithubUser',
+      'fetchGists',
+      'fetchNPMPackages',
+    ]),
+  },
+  mounted() {
+    this.$nextTick().then(() => {
+      this.fetchGithubUser();
+      this.fetchRepos();
+      this.fetchGists();
+      this.fetchNPMPackages();
+      this.fetchGitHubStats();
+    });
   },
 };
 </script>
@@ -79,8 +103,7 @@ export default {
 }
 
 article {
-  padding-top: 5rem;
-  padding-bottom: 5rem;
+  padding: 5rem;
   line-height: 1;
   text-align: center;
   font-weight: 700;

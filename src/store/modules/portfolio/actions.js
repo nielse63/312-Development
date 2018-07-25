@@ -1,15 +1,59 @@
+const api = require('api-npm');
 
-export default {
-  fetchRepos: async ({ commit }) => {
-    if (localStorage.repos) {
-      commit('repos', JSON.parse(localStorage.repos));
-      return;
-    }
-    const response = await fetch('https://api.github.com/users/nielse63/repos?visibility=public&sort=pushed&per_page=10', {
+function fetchGitHubStatsForRepo(state, repoName) {
+  return new Promise(async (resolve) => {
+    const response = await fetch(`https://api.github.com/repos/nielse63/${repoName}/stats/contributors`, {
       headers: {
+        Authorization:  'token 9217f80a8ca3cbe7408dc51210c0f094ba88dbd6',
         'Content-Type': 'application/json',
       },
     });
+    if (!response.ok || response.status !== 200) {
+      resolve(0);
+      return;
+    }
+    const json = await response.json();
+    const username = state.user.login;
+    let commitCount = 0;
+    json.filter(object => object.author.login === username).forEach((object) => {
+      const { weeks } = object;
+      weeks.forEach((week) => {
+        commitCount += week.c;
+      });
+    });
+    if (!commitCount) {
+      commitCount = 0;
+    }
+    resolve(commitCount);
+  });
+}
+
+export default {
+  fetchGithubUser: async ({ commit }) => {
+    const response = await fetch('https://api.github.com/user', {
+      headers: {
+        Authorization:  'token 9217f80a8ca3cbe7408dc51210c0f094ba88dbd6',
+        'Content-Type': 'application/json',
+      },
+    });
+    if (!response.ok || response.status !== 200) {
+      console.warn({ response });
+      return;
+    }
+    const json = await response.json();
+    commit('user', json);
+  },
+  fetchRepos: async ({ commit }) => {
+    const response = await fetch('https://api.github.com/users/nielse63/repos?visibility=public&sort=pushed&per_page=200', {
+      headers: {
+        Authorization:  'token 9217f80a8ca3cbe7408dc51210c0f094ba88dbd6',
+        'Content-Type': 'application/json',
+      },
+    });
+    if (!response.ok || response.status !== 200) {
+      console.warn({ response });
+      return;
+    }
     const json = await response.json();
     const filtered = json
       .map(object => ({
@@ -24,42 +68,52 @@ export default {
         stargazers:  object.stargazers_count,
         url:         object.url,
       }));
-    localStorage.setItem('repos', JSON.stringify(filtered));
     commit('repos', filtered);
   },
-  fetchGitHubStatsForRepo: async ({ commit }, repoName) => {
-    const localStorageKey = `stats-${repoName}`;
-    if (localStorage[localStorageKey]) {
-      commit('stats', JSON.parse(localStorage[localStorageKey]));
-      return;
-    }
-    const response = await fetch(`https://api.github.com/repos/nielse63/${repoName}/stats/contributors`, {
+  fetchGitHubStats({ commit, state }) {
+    const promises = state.repos.map(({ name }) => fetchGitHubStatsForRepo(state, name));
+    Promise.all(promises).then((commits) => {
+      const total = commits.reduce((accumulator, currentValue) => accumulator + currentValue, 0);
+      commit('commits', total);
+    }, (error) => {
+      console.error(error);
+    }).catch((error) => {
+      console.error(error);
+    });
+  },
+  fetchGists: async ({ commit }) => {
+    const response = await fetch('https://api.github.com/users/nielse63/gists', {
       headers: {
-        Authorization:  'Basic: nielse63',
+        Authorization:  'token 9217f80a8ca3cbe7408dc51210c0f094ba88dbd6',
         'Content-Type': 'application/json',
       },
     });
+    if (!response.ok || response.status !== 200) {
+      console.warn({ response });
+      return;
+    }
     const json = await response.json();
-    const allWeeks = json.map(({ weeks }) => weeks);
-    const stats = {};
-    allWeeks.forEach((collection) => {
-      collection.forEach(({
-        w, a, d, c,
-      }) => {
-        const key = `week-${w}`;
-        if (!stats[key]) {
-          stats[key] = {
-            a: 0,
-            d: 0,
-            c: 0,
-          };
-        }
-        stats[key].a += a;
-        stats[key].d -= d;
-        stats[key].c += c;
-      });
+    commit('gists', json);
+  },
+  fetchNPMPackages: async ({ dispatch, commit }) => {
+    const response = await fetch('http://registry.npmjs.org/-/v1/search?text=author:nielse63');
+    if (!response.ok || response.status !== 200) {
+      console.warn({ response });
+      return;
+    }
+    const json = await response.json();
+    commit('packages', json);
+    dispatch('fetchNPMDownloads');
+  },
+  fetchNPMDownloads({ dispatch, state }) {
+    state.packages.forEach((pkg) => {
+      const { name } = pkg.package;
+      dispatch('fetchPackageDownloads', name);
     });
-    localStorage.setItem(localStorageKey, JSON.stringify({ repo: repoName, stats }));
-    commit('stats', { repo: repoName, stats });
+  },
+  fetchPackageDownloads({ commit }, name) {
+    api.getstat(name, '2010-01-01', '2019-01-01', (data) => {
+      commit('downloads', data.downloads);
+    });
   },
 };

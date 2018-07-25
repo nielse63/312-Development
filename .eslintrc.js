@@ -100,7 +100,7 @@ module.exports = {
       },
     },
     {
-      files: ['src/store/**/mutations.js'],
+      files: ['src/store/**/*.js'],
       rules: {
         'no-param-reassign': ['error', {
           props:                          true,

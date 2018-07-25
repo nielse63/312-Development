@@ -3,7 +3,8 @@
     <article>
       <div class="tools">
         <template v-for="(tool, i) in tools">
-          <figure class="tool" :key="i" v-html="tool.image"></figure>
+          <!-- <figure class="tool" :key="i" v-html="tool.image"></figure> -->
+          <card-tool :key="i" :index="i" :image="tool.image" :title="tool.title"></card-tool>
         </template>
       </div>
     </article>
@@ -12,7 +13,7 @@
 
 <script>
 import ContentSection from '@/components/ContentSection';
-import ExternalLink from '@/components/ExternalLink';
+import CardTool from '@/components/CardTool';
 import languages from '@/lib/content/experience/languages';
 import frameworks from '@/lib/content/experience/frameworks';
 import buildTools from '@/lib/content/experience/build-tools';
@@ -23,7 +24,7 @@ export default {
   name:       'ContentSectionSkillsAndTools',
   components: {
     ContentSection,
-    ExternalLink,
+    CardTool,
   },
   data() {
     return {
@@ -65,12 +66,5 @@ article {
   justify-content: center;
   align-items: center;
   flex-wrap: wrap;
-}
-
-.tool {
-  margin: 0;
-  padding: 1rem;
-  display: block;
-  width: 100px;
 }
 </style>

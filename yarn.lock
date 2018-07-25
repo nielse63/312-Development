@@ -1193,6 +1193,10 @@ anymatch@^2.0.0:
     micromatch "^3.1.4"
     normalize-path "^2.1.1"
 
+api-npm@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/api-npm/-/api-npm-1.0.0.tgz#5b33589a8c58ebe78721d3c9a11f6e8182f00a26"
+
 app-root-path@^2.0.1:
   version "2.1.0"
   resolved "https://registry.yarnpkg.com/app-root-path/-/app-root-path-2.1.0.tgz#98bf6599327ecea199309866e8140368fd2e646a"

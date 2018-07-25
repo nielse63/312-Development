@@ -26,7 +26,6 @@ export default {
   },
   data() {
     return {
-      atTop:   false,
       visible: false,
     };
   },
@@ -56,26 +55,17 @@ export default {
       // }
       return offsetTop < scrollY && scrollY < offsetBottom;
     },
-    setObserver() {
-      const options = {
-        root:       null,
-        rootMargin: `${this.$el.offsetTop}px 0px 0px 0px`,
-        threshold:  [],
-      };
-      for (let i = 0; i <= 1; i += 0.01) {
-        options.threshold.push(i);
-      }
-      const observer = new IntersectionObserver(() => {
-        this.visible = this.shouldBeVisible();
-        // if (this.visible) {
-        //   observer.disconnect();
-        // }
-      }, options);
-      observer.observe(this.$el);
-    },
   },
   mounted() {
-    this.setObserver();
+    let y = -1;
+    const kickoff = () => {
+      if (window.scrollY !== y) {
+        this.visible = this.shouldBeVisible();
+      }
+      y = window.scrollY;
+      window.requestAnimationFrame(kickoff);
+    };
+    kickoff();
   },
 };
 </script>

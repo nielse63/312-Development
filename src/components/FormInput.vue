@@ -8,6 +8,7 @@
       <input :type="type"
       :name="name" :id="name"
       :value="value" @input="$emit('input', $event.target.value)"
+      :autocomplete="autocomplete"
       >
     </template>
   </div>
@@ -26,6 +27,10 @@ export default {
       default: 'text',
     },
     value: {
+      type:    String,
+      default: '',
+    },
+    autocomplete: {
       type:    String,
       default: '',
     },

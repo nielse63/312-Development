@@ -1,35 +1,32 @@
 <template>
   <content-section title="Contact Me">
     <article>
-      <app-loading v-if="loading"></app-loading>
       <form novalidate="true" autocomplete="false" @submit.prevent="onsubmit">
-        <form-input label="Name" :value="entry.name" @input="entry.name = $event"></form-input>
-        <form-input label="Email" type="email" :value="entry.email" @input="entry.email = $event"></form-input>
-        <form-input label="Company/Organization" type="text" :value="entry.company" @input="entry.company = $event"></form-input>
+        <form-input label="Name" :value="entry.name" @input="entry.name = $event" autocomplete="name"></form-input>
+        <form-input label="Email" type="email" :value="entry.email" @input="entry.email = $event" autocomplete="email"></form-input>
+        <form-input label="Company/Organization" type="text" :value="entry.company" @input="entry.company = $event" autocomplete="organization"></form-input>
         <form-input label="URL" type="url" :value="entry.url" @input="entry.url = $event"></form-input>
-        <form-input label="Message" type="textarea" class="wide"></form-input>
-        <div class="wide"><button type="submit">Submit</button></div>
+        <form-input label="Message" type="textarea"></form-input>
+        <div class="button"><button type="submit">Submit</button></div>
       </form>
     </article>
   </content-section>
 </template>
 
 <script>
+import { mapActions } from 'vuex';
 import ContentSection from '@/components/ContentSection';
 import FormInput from '@/components/FormInput';
-import AppLoading from '@/components/AppLoading';
 
 export default {
   name:       'ContentSectionContact',
   components: {
     ContentSection,
-    AppLoading,
     FormInput,
   },
   data() {
     return {
-      loading: false,
-      entry:   {
+      entry: {
         name:    '',
         email:   '',
         company: '',
@@ -39,11 +36,12 @@ export default {
     };
   },
   methods: {
+    ...mapActions(['setLoading']),
     onsubmit() {
-      this.loading = true;
+      this.setLoading(true);
       setTimeout(() => {
-        this.loading = false;
-      }, 1500);
+        this.setLoading(false);
+      }, 5000);
     },
   },
 };
@@ -76,5 +74,29 @@ article {
 form {
   @include basic-content-transform;
   transition-delay: 0.25s;
+  padding: 0 10rem;
+}
+
+button {
+  background: linear-gradient(#de6cff, #bc41df);
+  color: $color-white;
+  border: 0;
+  border-radius: 2px;
+  font-weight: 700;
+  font-size: 0.8em;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  line-height: 1.5;
+  padding: 0.5em 2em;
+  cursor: pointer;
+  display: block;
+
+  &:hover {
+    background: linear-gradient(#bc41df, #de6cff);
+  }
+}
+
+.button {
+  margin-top: 2rem;
 }
 </style>

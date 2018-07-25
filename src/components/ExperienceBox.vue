@@ -14,7 +14,7 @@ export default {
       required: true,
     },
     header: {
-      type:     String,
+      type:     [String, Number],
       required: true,
     },
     description: {
@@ -39,7 +39,7 @@ export default {
 .box {
   flex: 1 0 25%;
   max-width: 25%;
-  padding: 2rem;
+  padding: 2rem 1rem;
   @include basic-content-transform;
 
   &:nth-child(4) {
@@ -52,7 +52,7 @@ export default {
 }
 
 h3 {
-  font-size: 7vw;
+  font-size: 6vw;
   font-weight: 400;
   margin: 0;
 }
