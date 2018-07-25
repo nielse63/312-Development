@@ -1,9 +1,6 @@
 <template>
   <li>
-    <router-link
-      :to="path"
-      :class="color"
-    >{{text}}</router-link>
+    <a :href="path" :class="color">{{text}}</a>
   </li>
 </template>
 

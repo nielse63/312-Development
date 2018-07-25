@@ -1,7 +1,7 @@
 <template>
   <div id="main" class="app" :class="appClass">
     <div :class="pageClass" @click="onpageclick">
-      <router-view class="page-content"></router-view>
+      <home></home>
       <app-footer></app-footer>
     </div>
     <app-navigation :open="isNavOpen"></app-navigation>
@@ -14,6 +14,7 @@ import { mapState, mapMutations, mapActions } from 'vuex';
 import AppNavigation from '@/components/AppNavigation';
 import AppNavigationButton from '@/components/AppNavigationButton';
 import AppFooter from '@/components/AppFooter';
+import Home from '@/views/Home';
 
 export default {
   name:       'app',
@@ -21,6 +22,7 @@ export default {
     AppNavigation,
     AppNavigationButton,
     AppFooter,
+    Home,
   },
   data() {
     return {
@@ -39,8 +41,8 @@ export default {
       const object = {
         'nav-open': this.isNavOpen,
       };
-      const routeClassName = `view-${this.$route.name}`;
-      object[routeClassName] = true;
+      // const routeClassName = `view-${this.$route.name}`;
+      // object[routeClassName] = true;
       return object;
     },
     pageClass() {

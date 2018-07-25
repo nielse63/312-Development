@@ -30,22 +30,22 @@ export default {
           color: 'pink',
         },
         {
-          path:  '/about-me',
+          path:  '/#about-me',
           text:  'About Me',
           color: 'green',
         },
         {
-          path:  '/experience',
+          path:  '/#experience',
           text:  'Experience',
           color: 'purple',
         },
         {
-          path:  '/portfolio',
+          path:  '/#portfolio',
           text:  'Portfolio',
           color: 'blue',
         },
         {
-          path: '/contact-me',
+          path: '/#contact-me',
           text: 'Contact Me',
         },
       ],

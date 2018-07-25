@@ -15,8 +15,19 @@
   border: 0;
 }
 
+.canvas,
+.content-section {
+  min-height: 100vh;
+}
+
 .icon {
   svg {
     @include size($portfolio-icon-size);
+  }
+}
+
+.experience {
+  svg {
+    max-height: 150px;
   }
 }

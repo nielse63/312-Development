@@ -144,6 +144,8 @@ h2 {
 }
 
 a {
+  display: inline-block;
+  line-height: 1.1;
   font-style: italic;
   font-family: $font-family-serif;
   transition: 0.15s background-color ease-in-out;
