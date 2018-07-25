@@ -1,7 +1,7 @@
 <template>
   <div class="canvas">
     <canvas class="scene scene--full" id="scene" width="100%" height="100%"></canvas>
-    <script type="x-shader/x-vertex" id="wrapVertexShader">
+    <!-- <script type="x-shader/x-vertex" id="wrapVertexShader">
       attribute float size;
       attribute vec3 color;
       varying vec3 vColor;
@@ -40,19 +40,20 @@
           vec4 color = dotColor * textureColor;
           gl_FragColor = color;
         }
-      </script>
+      </script> -->
     <h1>{{title}}</h1>
     <h2 v-if="subtitle">{{subtitle}}</h2>
   </div>
 </template>
 
 <script>
-import { mapMutations, mapActions } from 'vuex';
+// import { mapMutations, mapActions } from 'vuex';
+import particleNetwork from '@/lib/particle-network';
 
 export default {
   name:  'IntroPanel',
   props: {
-    canvas:   Function,
+    // canvas:   Function,
     title:    String,
     subtitle: String,
   },
@@ -64,54 +65,61 @@ export default {
     };
   },
   methods: {
-    ...mapMutations('canvas', [
-      'setFunction',
-      'setElement',
-    ]),
-    ...mapActions('canvas', ['start']),
-    onscroll() {
-      const y = window.scrollY;
-      const { height } = this;
-      if (y > height) {
-        return;
-      }
-      const percentage = y / height;
-      const translateY = percentage * -100;
-      const translateZ = percentage * 25;
-      const opacity = 1 - percentage;
-      const { h1, h2 } = this;
-      h1.style.transform = `translate3d(0, ${translateY}px, ${translateZ}vw)`;
-      h1.style.opacity = opacity;
-      if (h2) {
-        const h2translateY = percentage * -125;
-        h2.style.transform = `translate(0, ${h2translateY}px)`;
-        h2.style.opacity = opacity;
-      }
-    },
-    setElements() {
-      this.height = this.$el.clientHeight;
-      this.h1 = this.$el.querySelector('h1');
-      this.h2 = this.$el.querySelector('h2');
-    },
+    // ...mapMutations('canvas', [
+    //   'setFunction',
+    //   'setElement',
+    // ]),
+    // ...mapActions('canvas', ['start']),
+    // onscroll() {
+    //   const y = window.scrollY;
+    //   const { height } = this;
+    //   if (y > height) {
+    //     return;
+    //   }
+    //   const percentage = y / height;
+    //   const translateY = percentage * -100;
+    //   const translateZ = percentage * 25;
+    //   const opacity = 1 - percentage;
+    //   const { h1, h2 } = this;
+    //   h1.style.transform = `translate3d(0, ${translateY}px, ${translateZ}vw)`;
+    //   h1.style.opacity = opacity;
+    //   if (h2) {
+    //     const h2translateY = percentage * -125;
+    //     h2.style.transform = `translate(0, ${h2translateY}px)`;
+    //     h2.style.opacity = opacity;
+    //   }
+    // },
+    // setElements() {
+    //   this.height = this.$el.clientHeight;
+    //   this.h1 = this.$el.querySelector('h1');
+    //   this.h2 = this.$el.querySelector('h2');
+    // },
   },
-  beforeMount() {
-    window.removeEventListener('scroll', this.onscroll, false);
-    window.addEventListener('scroll', this.onscroll, false);
-  },
+  // beforeMount() {
+  //   // window.removeEventListener('scroll', this.onscroll, false);
+  //   window.addEventListener('scroll', this.onscroll, false);
+  // },
   mounted() {
-    this.setElements();
     this.$nextTick()
+      // .then(() => {
+      //   this.setElements();
+      // })
       .then(() => {
-        this.setFunction(this.canvas);
-        this.setElement(this.$el.querySelector('#scene'));
-      })
-      .then(() => {
-        this.start();
+        particleNetwork();
       });
+    // this.setElements();
+    // this.$nextTick()
+    //   .then(() => {
+    //     this.setFunction(this.canvas);
+    //     this.setElement(this.$el.querySelector('#scene'));
+    //   })
+    //   .then(() => {
+    //     this.start();
+    //   });
   },
-  beforeDestroy() {
-    window.removeEventListener('scroll', this.onscroll, false);
-  },
+  // beforeDestroy() {
+  //   window.removeEventListener('scroll', this.onscroll, false);
+  // },
 };
 </script>
 
@@ -119,18 +127,18 @@ export default {
 @import "../assets/styles/lib/vars";
 
 .canvas {
+  position: fixed;
+  width: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   margin: 0 auto;
-  height: 100vh;
-  max-height: 600px;
-  min-height: 450px;
-  position: relative;
+  // position: relative;
   color: $color-white;
   text-align: center;
   perspective: 100vw;
+  background-image: linear-gradient(to bottom, #00588f, #0c96c0);
 }
 
 canvas {
