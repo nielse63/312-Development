@@ -2,11 +2,9 @@
 
 ## Dependencies
 
-## Built With...
+## The Stack
 
 ## Running Locally
-
-## Architecture
 
 ## Scripts / Tooling
 

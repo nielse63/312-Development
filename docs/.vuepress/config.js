@@ -15,13 +15,14 @@ module.exports = {
     sidebar:           [
       ['/', 'Home'],
       ['/motivation', 'Motivation & Goals'],
-      ['/packages', 'Packages'],
       ['/development', 'Development'],
       ['/testing', 'Testing'],
       ['/deployment', 'Deployment'],
       ['/documentation', 'Documentation'],
+      ['/packages', 'Packages'],
       ['/third-party-integrations', 'Third Party Integrations'],
       ['/acknowledgements', 'Acknowledgements & Testing'],
+      ['/roadmap', 'Roadmap'],
     ],
 
     // repo settings

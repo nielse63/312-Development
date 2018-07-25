@@ -1,6 +1,10 @@
 
 export default {
   fetchRepos: async ({ commit }) => {
+    if (localStorage.repos) {
+      commit('repos', JSON.parse(localStorage.repos));
+      return;
+    }
     const response = await fetch('https://api.github.com/users/nielse63/repos?visibility=public&sort=pushed&per_page=10', {
       headers: {
         'Content-Type': 'application/json',
@@ -20,9 +24,15 @@ export default {
         stargazers:  object.stargazers_count,
         url:         object.url,
       }));
+    localStorage.setItem('repos', JSON.stringify(filtered));
     commit('repos', filtered);
   },
   fetchGitHubStatsForRepo: async ({ commit }, repoName) => {
+    const localStorageKey = `stats-${repoName}`;
+    if (localStorage[localStorageKey]) {
+      commit('stats', JSON.parse(localStorage[localStorageKey]));
+      return;
+    }
     const response = await fetch(`https://api.github.com/repos/nielse63/${repoName}/stats/contributors`, {
       headers: {
         Authorization:  'Basic: nielse63',
@@ -49,6 +59,7 @@ export default {
         stats[key].c += c;
       });
     });
+    localStorage.setItem(localStorageKey, JSON.stringify({ repo: repoName, stats }));
     commit('stats', { repo: repoName, stats });
   },
 };

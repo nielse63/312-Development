@@ -7,6 +7,8 @@ cache:
   directories:
     - node_modules
 dist: trusty
+addons:
+  chrome: stable
 before_install:
   - npm config set spin false
 
@@ -31,8 +33,6 @@ jobs:
     - stage: tests
       script: yarn test:unit
     - script: yarn test:e2e
-      addons:
-        chrome: stable
 
     # docs steps
     - stage: docs

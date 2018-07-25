@@ -105,29 +105,31 @@ header {
 }
 
 h2 {
-  font-family: $font-family-serif;
+  font-family: $font-family-cursive;
   font-style: italic;
   font-weight: 400;
-  font-size: 3rem;
+  font-size: 4vw;
   padding: 0 0.35em;
   transition: color 1s;
   transition-timing-function: cubic-bezier(0.2, 1, 0.3, 1);
   position: relative;
   display: inline-block;
+  will-change: color;
 
   &:before {
     content: "";
     background: fade-out($color-pink, 0.15);
     position: absolute;
-    bottom: 0;
+    bottom: 0.35em;
     left: 0;
     width: 90%;
-    height: 35%;
+    height: 25%;
     opacity: 0.3;
     transform: scale3d(0, 1, 1);
     transform-origin: 0% 50%;
     transition: transform 1s;
     transition-timing-function: cubic-bezier(0.2, 1, 0.3, 1);
+    will-change: transform;
   }
 }
 
@@ -137,19 +139,34 @@ h2 {
 
     &:before {
       transform: scale3d(1, 1, 1);
-      background: $color-pink;
     }
   }
 }
 
 a {
-  border-bottom: 1px solid $color-pink;
   font-style: italic;
   font-family: $font-family-serif;
   transition: 0.15s background-color ease-in-out;
+  position: relative;
+
+  &:after {
+    content: "";
+    display: block;
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 0.25em;
+    background-color: fade-out($color-pink, 0.55);
+    transition: 0.15s ease-in-out;
+    will-change: height, background-color;
+  }
 
   &:hover {
-    background-color: fade-out($color-pink, 0.9);
+    &:after {
+      height: 0.5em;
+      background-color: fade-out($color-pink, 0.75);
+    }
   }
 }
 </style>
