@@ -47,6 +47,8 @@ export default {
 @import "../assets/styles/lib/vars";
 
 .form-input {
+  opacity: 0;
+
   & + & {
     margin-top: 1rem;
   }

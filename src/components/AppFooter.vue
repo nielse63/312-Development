@@ -1,6 +1,5 @@
 <template>
-  <footer class="footer" :style="style">
-    <link rel="preload" :href="image" as="image">
+  <footer class="footer">
     <ul class="footer__links">
       <li v-for="link in links" :key="link.text">
         <external-link :text="link.text" :href="link.href">
@@ -14,7 +13,6 @@
 
 <script>
 import { links } from '@/lib/content';
-import BackgroundImage from '@/assets/images/trianglify.png';
 import ExternalLink from '@/components/ExternalLink';
 import GithubIcon from '@/assets/images/github.svg';
 import LinkedInIcon from '@/assets/images/linkedin.svg';
@@ -28,7 +26,6 @@ export default {
   },
   data() {
     return {
-      image: BackgroundImage,
       links: [
         {
           text: 'GitHub',
@@ -50,16 +47,6 @@ export default {
       ],
     };
   },
-  computed: {
-    style() {
-      if (!this.image) {
-        return {};
-      }
-      return {
-        backgroundImage: `url(${this.image})`,
-      };
-    },
-  },
 };
 </script>
 
@@ -72,11 +59,7 @@ export default {
   color: $color-white;
   font-size: 22px;
   letter-spacing: 1px;
-  background-image: radial-gradient( circle farthest-corner at 41.5% 52.8%,  rgba(0,133,195,1) 0%, rgba(0,108,159,1) 87.3% );
-  background-color: $color-blue;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
+  background-image: linear-gradient(to bottom, #00588f, #0c96c0);
 }
 
 ul {
@@ -86,12 +69,13 @@ ul {
 }
 
 li {
-  margin: 0 1em;
+  margin: 0 0.5em;
 }
 
 a {
   display: flex;
-  padding: 0.25em;
+  padding: 0.25em 0.5em;
+  line-height: 1;
   transition: 0.15s background-color ease-in-out;
 
   &:hover {

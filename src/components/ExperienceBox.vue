@@ -1,7 +1,10 @@
 <template>
-  <div class="box" :style="style">
-    <h3>{{header}}</h3>
-    <p>{{description}}</p>
+  <!-- <div class="box" :style="style"> -->
+  <div :class="cls" :style="style">
+    <div class="box-inner">
+      <h3>{{header}}</h3>
+      <p>{{description}}</p>
+    </div>
   </div>
 </template>
 
@@ -9,9 +12,9 @@
 export default {
   name:  'ExperienceBox',
   props: {
-    index: {
-      type:     Number,
-      required: true,
+    inview: {
+      type:    Boolean,
+      default: false,
     },
     header: {
       type:     [String, Number],
@@ -23,9 +26,15 @@ export default {
     },
   },
   computed: {
+    cls() {
+      return {
+        box:    true,
+        inview: this.inview,
+      };
+    },
     style() {
       return {
-        'transition-delay': `${this.index * 0.15}s`,
+        'transition-delay': `${Math.random() / 2}s`,
       };
     },
   },
@@ -37,18 +46,28 @@ export default {
 @import "../assets/styles/lib/vars";
 
 .box {
-  flex: 1 0 25%;
-  max-width: 25%;
+  flex: 1 0 percentage(1 / 3);
+  max-width: percentage(1 / 3);
   padding: 2rem 1rem;
-  @include basic-content-transform;
+  text-shadow: 0.05em 0.05em 1em fade-out($color-black, 0.65);
+  transform: translateZ(-10vw);
+  opacity: 0;
+  transition: 0.5s $transition-timing-function;
+  transition-property: opacity, transform;
+  will-change: opacity, transform;
 
-  &:nth-child(4) {
-    ~ * {
-      margin-top: 3rem;
-      border-top: 1px solid currentColor;
-      padding-top: 4rem;
-    }
+  &-inner {
+    background-image: linear-gradient(to bottom, rgba(205, 81, 220, 0.4), rgba(41, 94, 230, 0.3));
+    height: 100%;
+    padding: 1rem 0;
+    box-shadow: 0 3px 1rem fade-out($color-black, 0.65);
+    border: 10px solid $color-white;
   }
+}
+
+.inview {
+  opacity: 1;
+  transform: none;
 }
 
 h3 {

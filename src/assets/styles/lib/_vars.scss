@@ -1,12 +1,27 @@
 
 $color-black: #363636;
 $color-white: #fff;
-$color-purple: #96f;
 $color-pink: #ff6384;
-$color-blue: #36a2eb;
 $color-red: #f44336;
 $color-gray: #c9cbcf;
 $color-green: #62a75e;
+
+$color-purple-light: #852d91;
+$color-purple-dark: #312a6c;
+$color-blue-light: #14b0d7;
+$color-blue-dark: #0a93f5;
+$color-blue: mix($color-blue-light, $color-blue-dark);
+$color-pink-light: #ff89fe;
+$color-pink-dark: #c915cb;
+$color-orange-light: #fec163;
+$color-orange-dark: #de4313;
+$color-green-light: #11eb96;
+$color-green-dark: #00b870;
+
+$gradient-purple: linear-gradient(to bottom, $color-purple-light, $color-purple-dark);
+$gradient-pink: linear-gradient(to bottom, $color-pink-light, $color-pink-dark);
+$gradient-orange: linear-gradient(to bottom, $color-orange-light, $color-orange-dark);
+$gradient-green: linear-gradient(to bottom, $color-green-dark, $color-green-light);
 
 $text-color: $color-black;
 $font-family-sans-serif: Nunito, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
@@ -16,6 +31,7 @@ $font-family-cursive: "Seaweed Script", cursive;
 $border-color: fade-out($color-black, 0.75);
 
 $transition-duration: 0.15s;
+$transition-timing-function: cubic-bezier(0.2, 1, 0.3, 1);
 
 $container-width: 80vw;
 
@@ -33,4 +49,6 @@ $panel-padding: 5rem;
 $content-padding: 10rem;
 
 $portfolio-icon-size: 1.25em;
-$content-section-transition: 0.75s ease-in-out;
+$content-section-transition: 0.5s ease-in-out;
+
+$tool-icon-size: 80px;

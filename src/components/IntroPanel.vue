@@ -1,5 +1,5 @@
 <template>
-  <div class="canvas">
+  <div class="canvas" data-inview="true">
     <canvas class="scene scene--full" id="scene" width="100%" height="100%"></canvas>
     <h1>{{title}}</h1>
     <h2 v-if="subtitle">{{subtitle}}</h2>
@@ -17,55 +17,48 @@ export default {
   },
   data() {
     return {
-      fn:      null,
+      canvas:  null,
       visible: true,
     };
   },
   methods: {
     hideTitle() {
       this.visible = false;
-      this.$el.classList.add('hide-title');
+      this.$el.dataset.inview = 'false';
     },
     showTitle() {
       this.visible = true;
-      this.$el.classList.remove('hide-title');
+      this.$el.dataset.inview = 'true';
     },
-    handleTitle(value) {
-      if (this.visible && value >= 0.4) {
+    handleTitle({ isIntersecting, intersectionRatio }) {
+      if (!isIntersecting) {
         this.hideTitle();
-      } else if (!this.visible && value < 0.4) {
+      } else if (intersectionRatio > 0.6 && !this.visible) {
         this.showTitle();
-      }
-    },
-    handleCanvas(value) {
-      if (this.fn.active && value >= 1) {
-        this.fn.active = false;
-      } else if (!this.fn.active && value < 1) {
-        this.fn.active = true;
       }
     },
     setObserver() {
       const options = {
         root:       null,
         rootMargin: '0px',
-        threshold:  [0, 0.5, 1],
+        threshold:  [],
       };
-      for (let i = 0; i <= 1; i += 0.01) {
+      for (let i = 0; i <= 1; i += 0.02) {
         options.threshold.push(i);
       }
       const observer = new IntersectionObserver((entries) => {
-        const value = entries[0].intersectionRatio * 10;
-        this.handleTitle(value);
-        this.handleCanvas(value);
+        this.handleTitle(entries[0]);
       }, options);
-      observer.observe(document.querySelector('.content'));
+      observer.observe(this.$el);
     },
   },
   mounted() {
+    this.canvas = this.$el.querySelector('canvas');
     this.setObserver();
-    this.fn = particleNetwork();
-    this.$nextTick().then(() => {
-      this.fn.start();
+
+    this.$nextTick(() => {
+      const fn = particleNetwork(this.canvas);
+      fn.start();
     });
   },
 };
@@ -87,6 +80,7 @@ export default {
   text-align: center;
   perspective: 100vw;
   background-image: linear-gradient(to bottom, #00588f, #0c96c0);
+  contain: content;
 }
 
 canvas {
@@ -105,6 +99,7 @@ h1,
 h2 {
   will-change: transform, opacity;
   transition: 0.5s ease-in-out;
+  transition-property: transform, opacity;
 }
 
 h1 {
@@ -112,7 +107,7 @@ h1 {
   font-family: $font-family-serif;
   font-size: 10vw;
 
-  .hide-title & {
+  [data-inview="false"] & {
     opacity: 0;
     transform: translate(0, -50px);
   }
@@ -130,7 +125,7 @@ h2 {
   max-width: 50vw;
   transition-delay: 0.05s;
 
-  .hide-title & {
+  [data-inview="false"] & {
     opacity: 0;
     transform: translate(0, -25px);
   }

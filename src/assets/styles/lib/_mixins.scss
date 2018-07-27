@@ -22,7 +22,7 @@
   transition-delay: 0.5s;
   will-change: opacity, transform;
 
-  .visible & {
+  [data-inview="true"] & {
     opacity: 1;
     transform: translate(0, 0);
     transition-delay: 0s;

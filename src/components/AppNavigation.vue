@@ -25,28 +25,33 @@ export default {
     return {
       items: [
         {
-          path:  '/',
-          text:  'Home',
-          color: 'pink',
+          path: '/',
+          text: 'Home',
         },
         {
           path:  '/#about-me',
           text:  'About Me',
-          color: 'green',
+          color: 'purple',
         },
         {
           path:  '/#experience',
           text:  'Experience',
-          color: 'purple',
+          color: 'blue',
         },
         {
           path:  '/#portfolio',
           text:  'Portfolio',
-          color: 'blue',
+          color: 'pink',
         },
         {
-          path: '/#contact-me',
-          text: 'Contact Me',
+          path:  '/#skills-and-tools',
+          text:  'Skills & Tools',
+          color: 'orange',
+        },
+        {
+          path:  '/#contact-me',
+          text:  'Contact Me',
+          color: 'green',
         },
       ],
     };
@@ -69,8 +74,8 @@ export default {
   background-color: $color-white;
   z-index: 1;
   width: 25vw;
-  max-width: 350px;
-  font-size: 23px;
+  max-width: 450px;
+  font-size: 28px;
   font-weight: 700;
   letter-spacing: 2px;
   transform: translate(100%, 0);

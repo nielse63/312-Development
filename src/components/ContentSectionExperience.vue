@@ -1,11 +1,11 @@
 <template>
-  <content-section title="Experience">
+  <content-section title="Experience" @inview="inview">
     <article>
       <div class="boxes">
         <template v-for="(box, i) in boxes">
           <experience-box
             :key="i"
-            :index="i"
+            :inview="isInView"
             :header="box.header"
             :description="box.description"
           ></experience-box>
@@ -34,7 +34,8 @@ export default {
   },
   data() {
     return {
-      resume: resume.link,
+      resume:   resume.link,
+      isInView: false,
     };
   },
   computed: {
@@ -49,10 +50,10 @@ export default {
           header:      this.stats.repos,
           description: 'public github repos',
         },
-        {
-          header:      this.stats.commits,
-          description: 'git commits',
-        },
+        // {
+        //   header:      this.stats.commits,
+        //   description: 'git commits',
+        // },
         {
           header:      this.stats.stars,
           description: 'github stars',
@@ -80,14 +81,16 @@ export default {
       'fetchGists',
       'fetchNPMPackages',
     ]),
+    inview() {
+      this.isInView = true;
+    },
   },
   mounted() {
     this.$nextTick().then(() => {
-      this.fetchGithubUser();
-      this.fetchRepos();
+      // this.fetchGithubUser();
+      // this.fetchRepos();
       this.fetchGists();
       this.fetchNPMPackages();
-      this.fetchGitHubStats();
     });
   },
 };
@@ -98,12 +101,12 @@ export default {
 @import "../assets/styles/lib/vars";
 
 .content-section {
-  background-image: linear-gradient(#0a93f5, #14b0d7);
+  background-image: linear-gradient(to bottom, $color-blue-dark, $color-blue-light);
   color: $color-white;
 }
 
 article {
-  padding: 5rem;
+  padding: 5rem 10rem;
   line-height: 1;
   text-align: center;
   font-weight: 700;
@@ -113,10 +116,21 @@ article {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
+  position: relative;
+
+  &:before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, 0);
+    width: 50%;
+    height: 1px;
+    background-color: $color-white;
+  }
 }
 
 footer {
-  @include basic-content-transform;
   padding: 0 10rem 7.5rem;
   text-align: center;
 }

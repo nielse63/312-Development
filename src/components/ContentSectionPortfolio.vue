@@ -1,11 +1,11 @@
 <template>
-  <content-section title="Selected Work" id="portfolio">
+  <content-section title="Selected Work" id="portfolio" @inview="inview">
     <article>
       <div class="cards">
         <template v-for="(card, i) in cards">
           <card-portfolio
             :key="i"
-            :index="i"
+            :inview="isInView"
             :title="card.title"
             :image="card.image"
           ></card-portfolio>
@@ -31,7 +31,8 @@ export default {
   },
   data() {
     return {
-      cards: [
+      isInView: false,
+      cards:    [
         {
           title: 'Project Name',
           image: MountainImage,
@@ -59,6 +60,11 @@ export default {
       ],
     };
   },
+  methods: {
+    inview() {
+      this.isInView = true;
+    },
+  },
 };
 </script>
 
@@ -77,25 +83,20 @@ export default {
     position: absolute;
     top: 0;
     left: 0;
-    background-image: linear-gradient(#de6cff, #bc41df);
-    clip-path: polygon(0% 0%, 40% 0%, 71% 100%, 0% 100%);
-    transition: $content-section-transition;
-  }
-}
-
-.visible {
-  &:before {
-    clip-path: polygon(0% 0%, 47% 0%, 60% 100%, 0% 100%);
+    background-image: $gradient-pink;
+    clip-path: polygon(0 0, 31% 0, 71% 100%, 0 100%);
   }
 }
 
 article {
   padding-right: 1rem;
+  padding-left: 3rem;
 }
 
 .cards {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
+  perspective: 100vw;
 }
 </style>

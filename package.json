@@ -22,11 +22,9 @@
     "pre-commit": "lint-staged"
   },
   "dependencies": {
+    "animejs": "^2.2.0",
     "api-npm": "^1.0.0",
-    "chart.js": "^2.7.2",
-    "gsap": "^2.0.1",
     "http-server": "^0.11.1",
-    "three": "^0.94.0",
     "vue": "^2.5.16",
     "vuex": "^3.0.1"
   },
@@ -59,7 +57,6 @@
     "favicons-webpack-plugin": "^0.0.9",
     "file-loader": "^1.1.11",
     "html-webpack-plugin": "^3.2.0",
-    "hygen": "^1.6.2",
     "image-size": "^0.6.3",
     "img-loader": "^3.0.0",
     "inject-loader": "^4.0.1",

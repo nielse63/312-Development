@@ -1,5 +1,5 @@
 <template>
-  <content-section title="Contact Me">
+  <content-section title="Contact Me" @inview="inview">
     <article>
       <form novalidate="true" autocomplete="false" @submit.prevent="onsubmit">
         <form-input label="Name" :value="entry.name" @input="entry.name = $event" autocomplete="name"></form-input>
@@ -14,6 +14,7 @@
 </template>
 
 <script>
+import anime from 'animejs';
 import { mapActions } from 'vuex';
 import ContentSection from '@/components/ContentSection';
 import FormInput from '@/components/FormInput';
@@ -43,6 +44,27 @@ export default {
         this.setLoading(false);
       }, 5000);
     },
+    animateInputs() {
+      return anime({
+        targets: this.$el.querySelectorAll('.form-input'),
+        opacity: 1,
+        translateY() {
+          return [`${anime.random(50, 75)}vh`, '0vh'];
+        },
+        duration: 1000,
+        easing:   'easeOutElastic',
+        delay(el, i) {
+          return (i * anime.random(0, 50)) + 200;
+        },
+        elasticity() {
+          return anime.random(100, 250);
+        },
+        autoplay: true,
+      });
+    },
+    inview() {
+      this.animateInputs();
+    },
   },
 };
 </script>
@@ -61,7 +83,7 @@ export default {
     position: absolute;
     top: 0;
     left: 0;
-    background-image: linear-gradient(to bottom, #00b870, #11eb96);
+    background-image: $gradient-green;
     clip-path: polygon(70% 0%, 100% 0%, 100% 100%, 25% 100%);
   }
 }
@@ -72,9 +94,7 @@ article {
 }
 
 form {
-  @include basic-content-transform;
   transition-delay: 0.25s;
-  padding: 0 10rem;
 }
 
 button {
@@ -92,7 +112,7 @@ button {
   display: block;
 
   &:hover {
-    background: linear-gradient(#bc41df, #de6cff);
+    background: #bc41df;
   }
 }
 

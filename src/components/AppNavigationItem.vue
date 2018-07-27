@@ -73,7 +73,7 @@ a {
     left: 0;
     width: 100%;
     height: 50%;
-    opacity: 0.3;
+    opacity: 0.5;
     transform: scale3d(0, 1, 1);
     transform-origin: 0% 50%;
     transition: transform 0.5s;
@@ -98,18 +98,22 @@ a {
 }
 
 .pink {
-  @include nav-link($color-pink);
+  @include nav-link($color-pink-dark);
 }
 
 .purple {
-  @include nav-link($color-purple);
+  @include nav-link($color-purple-light);
 }
 
 .green {
-  @include nav-link($color-green);
+  @include nav-link($color-green-dark);
 }
 
 .blue {
-  @include nav-link($color-blue);
+  @include nav-link($color-blue-dark);
+}
+
+.orange {
+  @include nav-link($color-orange-dark);
 }
 </style>

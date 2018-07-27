@@ -1,0 +1,4 @@
+
+@function random-number($max){
+  @return random($max);
+}
