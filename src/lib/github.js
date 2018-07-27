@@ -8,4 +8,17 @@ async function req(url) {
   });
 }
 
-export const gists = async () => req('https://api.github.com/users/nielse63/gists');
+export const gists = async () => {
+  const data = await req('https://api.github.com/users/nielse63/gists');
+  return data;
+};
+
+export const user = async () => {
+  const data = await req('https://api.github.com/user');
+  return data;
+};
+
+export const repos = async () => {
+  const data = await req('https://api.github.com/users/nielse63/repos?visibility=public&sort=pushed&per_page=200');
+  return data;
+};

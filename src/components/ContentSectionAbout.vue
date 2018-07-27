@@ -27,9 +27,9 @@ export default {
   },
   methods: {
     animateContent() {
-      const targets = this.$el.querySelectorAll('article p');
+      // const targets = this.$el.querySelectorAll('article p');
       return anime({
-        targets,
+        targets: this.$el.querySelectorAll('article p'),
         opacity: 1,
         translateX() {
           return [`${anime.random(50, 75)}vw`, '0vw'];
@@ -42,10 +42,14 @@ export default {
         elasticity() {
           return anime.random(50, 100);
         },
+        autoplay: false,
       });
     },
     inview() {
-      this.animateContent();
+      const animation = this.animateContent();
+      this.$nextTick(() => {
+        animation.play();
+      });
     },
   },
 };
@@ -73,6 +77,7 @@ export default {
 article {
   padding-left: 2rem;
   text-shadow: 0.05em 0.05em 1em fade-out($color-black, 0.65);
+  // contain: content;
 }
 
 p {

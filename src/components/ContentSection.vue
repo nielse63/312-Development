@@ -1,7 +1,9 @@
 <template>
   <div :class="cls" :id="id">
     <header>
-      <h2 class="section-title" v-html="titleHTML"></h2>
+      <h2 class="section-title">
+        <span v-for="(letter, i) in letters" :key="i" v-html="letter" v-once></span>
+      </h2>
     </header>
     <slot></slot>
   </div>
@@ -34,37 +36,37 @@ export default {
       output[this.id] = true;
       return output;
     },
-    titleHTML() {
+    letters() {
       return this.title
         .split('')
-        .map(letter => (letter === ' ' ? '&nbsp;' : letter))
-        .map((letter) => {
-          const transform = Math.floor(Math.random() * 50) + 25;
-          const css = `transform: translateY(${transform}vh);`;
-          return `<span style="${css}">${letter}</span>`;
-        })
-        .join('');
+        .map(letter => (/\s/.test(letter) ? '&nbsp;' : letter));
     },
   },
   methods: {
     animateTitle() {
-      const targets = this.$el.querySelectorAll('h2 span');
       return anime({
-        targets,
-        opacity:    1,
-        translateY: 0,
-        duration:   1000,
-        easing:     'easeOutElastic',
+        targets: this.$el.querySelectorAll('.section-title span'),
+        opacity: 1,
+        translateY() {
+          return [`${anime.random(25, 50)}vh`, '0vh'];
+        },
+        duration: 1000,
+        easing:   'easeOutElastic',
         delay(target, index) {
           return index * 25;
         },
         elasticity() {
           return anime.random(100, 150);
         },
+        autoplay: false,
       });
     },
     isInView() {
-      this.animateTitle();
+      const animation = this.animateTitle();
+      this.$nextTick(() => {
+        animation.play();
+        this.$emit('inview');
+      });
     },
     setObserver() {
       const options = {
@@ -82,17 +84,18 @@ export default {
         }
         if (entry.intersectionRect.height / window.innerHeight >= 0.75) {
           observer.unobserve(entry.target);
-          this.$emit('inview');
+          Promise.resolve().then(() => {
+            this.isInView();
+          });
         }
       }, options);
       observer.observe(this.$el);
     },
   },
-  created() {
-    this.$once('inview', this.isInView);
-  },
   mounted() {
-    this.setObserver();
+    this.$nextTick(() => {
+      this.setObserver();
+    });
   },
 };
 </script>
@@ -126,6 +129,17 @@ h2 {
   font-weight: 400;
   font-size: 8vw;
   text-shadow: 0.05em 0.05em 1em fade-out($color-black, 0.8);
+  display: inline-block;
+  background-color: $color-white;
+  padding: 0 0.15em 0.1em;
+  line-height: 1;
+  // contain: content;
+}
+
+span {
+  opacity: 0;
+  display: inline-block;
+  transform: translateY(50vh);
 }
 
 article {
@@ -166,24 +180,12 @@ a {
     padding-right: 0;
     color: #852d91;
   }
-
-  h2 {
-    background-color: $color-white;
-  }
 }
 
 .experience {
-  display: block;
-
   header {
     padding-bottom: 0;
     color: #0096f3;
-  }
-
-  h2 {
-    display: inline-block;
-    padding: 0 0.15em 0.1em;
-    background-color: $color-white;
   }
 }
 
@@ -198,13 +200,7 @@ a {
   header {
     padding-top: 5rem;
     padding-bottom: 0;
-  }
-
-  h2 {
-    display: inline-block;
     color: #f9a449;
-    padding: 0 0.15em;
-    background-color: $color-white;
   }
 }
 

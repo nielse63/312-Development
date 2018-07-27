@@ -59,7 +59,7 @@ export default {
   &-inner {
     background-image: linear-gradient(to bottom, rgba(205, 81, 220, 0.4), rgba(41, 94, 230, 0.3));
     height: 100%;
-    padding: 1rem 0;
+    padding: 1.5rem 1rem;
     box-shadow: 0 3px 1rem fade-out($color-black, 0.65);
     border: 10px solid $color-white;
   }

@@ -7,20 +7,6 @@ function cacheIsOld(dateString) {
   return diff > oneDay;
 }
 
-// function shouldEmptyCache() {
-//   const lastSaved = localStorage.saved;
-//   if (!lastSaved) {
-//     localStorage.setItem('saved', new Date());
-//     return false;
-//   }
-//   return cacheIsOld(lastSaved);
-// }
-
-// function emptyCache() {
-//   localStorage.clear();
-//   localStorage.setItem('saved', new Date());
-// }
-
 function getCachedData(url) {
   const string = localStorage.getItem(url);
   if (!string) {
@@ -58,7 +44,7 @@ export default async (url, customHeaders) => {
   try {
     response = await fetch(url, options);
   } catch (error) {
-    console.error({ error });
+    saveCachedData(url, {});
     return null;
   }
   const json = await response.json();

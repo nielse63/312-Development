@@ -76,7 +76,6 @@ export default {
   methods: {
     ...mapActions('portfolio', [
       'fetchRepos',
-      'fetchGitHubStats',
       'fetchGithubUser',
       'fetchGists',
       'fetchNPMPackages',
@@ -87,8 +86,8 @@ export default {
   },
   mounted() {
     this.$nextTick().then(() => {
-      // this.fetchGithubUser();
-      // this.fetchRepos();
+      this.fetchGithubUser();
+      this.fetchRepos();
       this.fetchGists();
       this.fetchNPMPackages();
     });
@@ -101,6 +100,7 @@ export default {
 @import "../assets/styles/lib/vars";
 
 .content-section {
+  display: block;
   background-image: linear-gradient(to bottom, $color-blue-dark, $color-blue-light);
   color: $color-white;
 }
@@ -117,6 +117,7 @@ article {
   flex-wrap: wrap;
   justify-content: center;
   position: relative;
+  contain: content;
 
   &:before {
     content: "";

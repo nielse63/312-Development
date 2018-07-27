@@ -5,7 +5,7 @@ export default {
     // set stars stat
     let count = 0;
     payload.forEach((repo) => {
-      count += repo.stargazers;
+      count += repo.stargazers_count;
     });
     state.stats.stars = count;
   },
@@ -24,6 +24,6 @@ export default {
     state.stats.packages = payload.total;
   },
   downloads(state, payload) {
-    state.stats.downloads += payload;
+    state.stats.downloads += payload.downloads || 0;
   },
 };

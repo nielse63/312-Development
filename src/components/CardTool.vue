@@ -1,5 +1,4 @@
 <template>
-  <!-- <div class="card-tool" :style="style"> -->
   <div class="card-tool">
     <figure class="tool" v-html="image"></figure>
   </div>
@@ -18,14 +17,6 @@ export default {
       required: true,
     },
   },
-  // computed: {
-  //   style() {
-  //     const y = Math.floor(Math.random() * 500);
-  //     return {
-  //       transform: `translate(0, ${y}px)`,
-  //     };
-  //   },
-  // },
 };
 </script>
 
@@ -47,12 +38,11 @@ export default {
 
 .card-tool {
   padding: 1rem;
-  transform: translateY(500px);
   opacity: 0;
 
   &:hover {
     .tool {
-      transform: scale(2);
+      transform: scale(1.5);
       z-index: 1;
     }
   }

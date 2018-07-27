@@ -11,3 +11,4 @@ test/integration/*.png
 .logs/*
 .*cache
 site/
+*.pem

@@ -20,12 +20,6 @@
   min-height: 100vh;
 }
 
-// .icon {
-//   svg {
-//     @include size($portfolio-icon-size);
-//   }
-// }
-
 .tool {
   svg {
     position: absolute;
@@ -37,9 +31,22 @@
   }
 }
 
-.section-title {
-  span {
-    display: inline-block;
-    opacity: 0;
+// .section-title {
+//   span {
+//     display: inline-block;
+//     opacity: 0;
+//   }
+// }
+
+.app-loading {
+  svg {
+    @include size($loading-icon-width);
+  }
+}
+
+button {
+  &[disabled] {
+    opacity: 0.5;
+    pointer-events: none;
   }
 }

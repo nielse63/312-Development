@@ -1,13 +1,45 @@
 <template>
   <content-section title="Contact Me" @inview="inview">
     <article>
-      <form novalidate="true" autocomplete="false" @submit.prevent="onsubmit">
-        <form-input label="Name" :value="entry.name" @input="entry.name = $event" autocomplete="name"></form-input>
-        <form-input label="Email" type="email" :value="entry.email" @input="entry.email = $event" autocomplete="email"></form-input>
-        <form-input label="Company/Organization" type="text" :value="entry.company" @input="entry.company = $event" autocomplete="organization"></form-input>
-        <form-input label="URL" type="url" :value="entry.url" @input="entry.url = $event"></form-input>
-        <form-input label="Message" type="textarea"></form-input>
-        <div class="button"><button type="submit">Submit</button></div>
+      <form autocomplete="false" @submit.prevent="onsubmit">
+        <form-input
+          label="Name"
+          autocomplete="name"
+          @input="entry.name = $event"
+        ></form-input>
+        <form-input
+          label="Email"
+          type="email"
+          autocomplete="email"
+          @input="entry.email = $event"
+        ></form-input>
+        <form-input
+          label="Company/Organization"
+          type="text"
+          name="organization"
+          autocomplete="organization"
+          @input="entry.company = $event"
+        ></form-input>
+        <form-input
+          label="URL"
+          type="url"
+          @input="entry.url = $event"
+        ></form-input>
+        <form-input
+          label="Message"
+          type="textarea"
+          @input="entry.message = $event"
+        ></form-input>
+        <div class="errors" v-if="errors.items.length">
+          <p v-for="(error, i) in errors.items" :key="i">{{error.msg}}</p>
+        </div>
+        <div class="button">
+          <button
+            type="submit"
+            :disabled="invalid"
+            :aria-disabled="invalid"
+          >Submit</button>
+        </div>
       </form>
     </article>
   </content-section>
@@ -36,9 +68,23 @@ export default {
       },
     };
   },
+  computed: {
+    hasEntries() {
+      const keyCount = Object.keys(this.entry).length;
+      const values = Object.values(this.entry).filter(value => !!value).length;
+      return keyCount === values;
+    },
+    invalid() {
+      return !this.hasEntries || !!this.errors.items.length;
+    },
+  },
   methods: {
     ...mapActions(['setLoading']),
-    onsubmit() {
+    async onsubmit() {
+      if (this.invalid) {
+        console.error('Form is invalid');
+        return;
+      }
       this.setLoading(true);
       setTimeout(() => {
         this.setLoading(false);
@@ -95,6 +141,15 @@ article {
 
 form {
   transition-delay: 0.25s;
+}
+
+.errors {
+  margin: 2rem 0 0;
+  padding: 1rem;
+  font-weight: 700;
+  font-size: 14px;
+  background-color: $color-orange-dark;
+  color: $color-white;
 }
 
 button {

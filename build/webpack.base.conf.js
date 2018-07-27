@@ -81,7 +81,6 @@ module.exports = {
               removeTags:        true,
               removingTags:      ['title', 'desc'],
               removeSVGTagAttrs: true,
-              removingTagAttrs:  ['height', 'width'],
             },
           },
         ],

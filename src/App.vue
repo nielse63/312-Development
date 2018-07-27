@@ -33,11 +33,10 @@ export default {
       isNavOpen: 'open',
     }),
     appClass() {
-      const object = {
+      return {
         'nav-open': this.isNavOpen,
         loading:    this.loading,
       };
-      return object;
     },
     pageClass() {
       return {
@@ -50,11 +49,17 @@ export default {
     ...mapActions('nav', {
       closeNav: 'close',
     }),
+    ...mapActions(['setLoading']),
     onpageclick() {
       if (this.isNavOpen) {
         this.closeNav();
       }
     },
+  },
+  mounted() {
+    this.$nextTick(() => {
+      this.setLoading(false);
+    });
   },
 };
 </script>
@@ -71,6 +76,8 @@ export default {
 }
 
 .page {
+  contain: content;
+
   &-content {
     min-height: 100vh;
   }
@@ -84,6 +91,13 @@ export default {
     > * {
       opacity: 0.35;
     }
+  }
+}
+
+.loading {
+  .page,
+  .app-navigation-button {
+    filter: blur(7.5px);
   }
 }
 </style>

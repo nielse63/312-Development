@@ -2,13 +2,23 @@
   <div class="form-input">
     <label :for="name">{{label}}</label>
     <template v-if="type == 'textarea'">
-      <textarea></textarea>
+      <textarea
+        :name="name"
+        :id="name"
+        :value="value"
+        @input="$emit('input', $event.target.value)"
+        v-validate.initial="rules"
+      ></textarea>
     </template>
     <template v-else>
-      <input :type="type"
-      :name="name" :id="name"
-      :value="value" @input="$emit('input', $event.target.value)"
-      :autocomplete="autocomplete"
+      <input
+        :type="type"
+        :name="name"
+        :id="name"
+        :value="value"
+        :autocomplete="autocomplete"
+        @input="$emit('input', $event.target.value)"
+        v-validate.initial="rules"
       >
     </template>
   </div>
@@ -21,6 +31,15 @@ export default {
     label: {
       type:     String,
       required: true,
+    },
+    name: {
+      type: String,
+      default() {
+        return this.label
+          .toLowerCase()
+          .replace(/\//g, '-')
+          .replace(/\b/g, '');
+      },
     },
     type: {
       type:    String,
@@ -36,8 +55,12 @@ export default {
     },
   },
   computed: {
-    name() {
-      return this.label.toLowerCase().replace(/\b/g, '');
+    rules() {
+      return {
+        required: true,
+        email:    this.type === 'email',
+        url:      this.type === 'url',
+      };
     },
   },
 };

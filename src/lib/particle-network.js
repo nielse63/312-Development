@@ -6,7 +6,7 @@ export default function particleNetwork(canvas) {
 
   const TAU = 2 * Math.PI;
   const LINE_COLOR = '#bebebe';
-  const FRAME_RATE = 16.667;
+  const FRAME_RATE = 16;
   let lastTime = Date.now();
   const balls = [];
   const output = {
@@ -23,20 +23,29 @@ export default function particleNetwork(canvas) {
     canvas.height = parent.offsetHeight;
   }
 
-  function Ball(startX, startY, startVelX, startVelY) {
+  function init() {
+    // ctx.globalCompositeOperation = 'destination-over';
+    ctx.globalAlpha = 1;
+    ctx.fillStyle = 'transparent';
+    ctx.lineWidth = '1px';
+
+    setCanvasSize();
+  }
+
+  function Ball(startX, startY, startVelX = 0, startVelY = 0) {
     this.x = startX || Math.random() * canvas.width;
     this.y = startY || Math.random() * canvas.height;
     this.vel = {
       x: startVelX || Math.random() * 2 - 1,
       y: startVelY || Math.random() * 2 - 1,
     };
-    this.drawing = false;
 
-    this.update = function u(cvs) {
-      if (this.x > cvs.width + 50 || this.x < -50) {
+    this.update = function u() {
+      const { width, height } = canvas;
+      if (this.x > width + 50 || this.x < -50) {
         this.vel.x = -this.vel.x;
       }
-      if (this.y > cvs.height + 50 || this.y < -50) {
+      if (this.y > height + 50 || this.y < -50) {
         this.vel.y = -this.vel.y;
       }
       this.x += this.vel.x / 1.5;
@@ -44,18 +53,16 @@ export default function particleNetwork(canvas) {
     };
 
     this.draw = function d() {
-      if (this.drawing) return;
-      this.drawing = true;
       ctx.beginPath();
       ctx.globalAlpha = 0.2;
       ctx.fillStyle = LINE_COLOR;
+      const x = (0.5 + this.x) | 0;
+      const y = (0.5 + this.y) | 0;
       ctx.arc(
-        (0.5 + this.x) | 0,
-        (0.5 + this.y) | 0,
-        3, 0, TAU, false,
+        x, y, 3,
+        0, TAU, true,
       );
       ctx.fill();
-      this.drawing = false;
     };
   }
 
@@ -66,7 +73,7 @@ export default function particleNetwork(canvas) {
     while (frame * FRAME_RATE < diff) {
       let index = 0;
       while (index < length) {
-        balls[index].update(canvas);
+        balls[index].update();
         index += 1;
       }
       frame += 1;
@@ -75,60 +82,67 @@ export default function particleNetwork(canvas) {
   }
 
   function draw() {
-    ctx.globalAlpha = 1;
-    ctx.fillStyle = 'transparent';
-    ctx.fillRect(0, 0, canvas.width, canvas.height);
-    let index = 0;
     const { length } = balls;
+    let index = 0;
+
+    ctx.save();
+    ctx.strokeStyle = LINE_COLOR;
+
+    // draw the balls
     while (index < length) {
       const ball = balls[index];
       ball.draw();
+
+      // vars
+      const x1 = ball.x;
+      const y1 = ball.y;
+
+      // draw the line
       ctx.beginPath();
       let index2 = length - 1;
       while (index2 > index) {
         const ball2 = balls[index2];
-        const dist = Math.hypot(ball.x - ball2.x, ball.y - ball2.y);
+        const x2 = ball2.x;
+        const y2 = ball2.y;
+        const dist = Math.hypot(x1 - x2, y1 - y2);
         if (dist < 100) {
-          ctx.strokeStyle = LINE_COLOR;
           ctx.globalAlpha = 1 - (dist > 100 ? 0.6 : dist / 10);
-          ctx.lineWidth = '1px';
           ctx.moveTo(
-            (0.5 + ball.x) | 0,
-            (0.5 + ball.y) | 0,
+            (0.5 + x1) | 0,
+            (0.5 + y1) | 0,
           );
           ctx.lineTo(
-            (0.5 + ball2.x) | 0,
-            (0.5 + ball2.y) | 0,
+            (0.5 + x2) | 0,
+            (0.5 + y2) | 0,
           );
         }
-        index2 += -1;
+        index2 -= 1;
       }
       ctx.stroke();
+      ctx.closePath();
       index += 1;
     }
+    ctx.restore();
   }
 
-  function loop() {
+  let lastFrameTime = 0;
+  function loop(elapsedTime) {
+    const delta = elapsedTime - (lastFrameTime || 0);
     requestAnimationFrame(loop);
-    const { width, height } = canvas;
-    ctx.clearRect(0, 0, width, height);
+    if (lastFrameTime && delta < 33) {
+      return;
+    }
+    lastFrameTime = elapsedTime;
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
     update();
     draw();
-    // const { width, height, dataset } = canvas;
-    // ctx.clearRect(0, 0, width, height);
-    // if (dataset.inactive === 'false') {
-    //   update();
-    //   draw();
-    // } else {
-    //   cancelAnimationFrame(aid);
-    // }
   }
 
   // add resize listener
   window.addEventListener('resize', debounce(setCanvasSize), false);
 
   // set canvas size
-  setCanvasSize();
+  init();
 
   // create balls
   {
