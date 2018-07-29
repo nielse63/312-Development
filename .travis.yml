@@ -23,18 +23,18 @@ jobs:
     - stage: precache
       script: true
 
-    # linting steps
-    - stage: linting
-      script: yarn lint:js
-    - script: yarn lint:scss
-    - script: yarn lint:md
+    # # linting steps
+    # - stage: linting
+    #   script: yarn lint:js
+    # - script: yarn lint:scss
+    # - script: yarn lint:md
 
-    # test steps
-    - stage: tests
-      script: yarn test:unit
-    - script: yarn test:e2e
+    # # test steps
+    # - stage: tests
+    #   script: yarn test:unit
+    # - script: yarn test:e2e
 
-    # docs steps
-    - stage: docs
-      if: branch = redesign/multi-page
-      script: yarn docs:deploy
+    # # docs steps
+    # - stage: docs
+    #   if: branch = redesign/multi-page
+    #   script: yarn docs:deploy

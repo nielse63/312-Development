@@ -20,6 +20,8 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex';
+
 export default {
   name: 'FormSubmit',
   data() {
@@ -54,6 +56,7 @@ export default {
     },
   },
   methods: {
+    ...mapActions('message', ['reset']),
     onsubmit() {
       this.loading = true;
       this.success = false;
@@ -63,6 +66,9 @@ export default {
       this.loading = false;
       this.success = success;
       this.error = !success;
+      this.$nextTick(() => {
+        this.reset();
+      });
     },
     createSVGObject(object, selector) {
       const svg = this.$el.querySelector(selector);

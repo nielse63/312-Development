@@ -1,6 +1,9 @@
 #!/usr/bin/env bash
 set -e
 
+# kill processes running on ports we're going to use
+yarn kill-port 3000 8080 9999
+
 # build only if dist doesn't exist
 if ! [ -d dist ]; then
   yarn build
@@ -9,6 +12,7 @@ fi
 # serve
 yarn http-server \
   -p 3000 \
+  --proxy http://localhost:9999 \
   --gzip \
   --no-dotfiles \
   dist/

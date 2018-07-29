@@ -2,7 +2,8 @@
 import defaults from './defaults';
 
 export default {
-  invalid: false,
-  entry:   defaults,
-  errors:  defaults,
+  invalid:     false,
+  submitError: false,
+  entry:       defaults,
+  errors:      defaults,
 };

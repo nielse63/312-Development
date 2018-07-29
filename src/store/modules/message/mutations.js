@@ -32,4 +32,7 @@ export default {
       .filter(error => !!error);
     Vue.set(state, 'invalid', !!errors.length);
   },
+  submitError(state, payload) {
+    Vue.set(state, 'submitError', payload);
+  },
 };

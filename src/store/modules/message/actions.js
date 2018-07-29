@@ -34,12 +34,22 @@ export default {
       dispatch('validateOne', { name: key, value });
     });
   },
-  submit({ commit }) {
-    return new Promise((resolve) => {
-      setTimeout(() => {
-        commit('reset');
-        resolve();
-      }, 1000);
+  submit: async ({ commit, state }) => {
+    const response = await fetch('/api/messages', {
+      method:  'POST',
+      headers: {
+        'Content-Type': 'application/json; charset=utf-8',
+      },
+      redirect: 'follow',
+      referrer: 'no-referrer',
+      body:     JSON.stringify(state.entry),
     });
+    if (!response.okay) {
+      commit('submitError', true);
+    }
+  },
+  reset({ commit }) {
+    commit('submitError', false);
+    commit('reset');
   },
 };

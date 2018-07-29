@@ -57,7 +57,7 @@ export default {
     };
   },
   computed: {
-    ...mapState('message', ['invalid']),
+    ...mapState('message', ['invalid', 'submitError']),
     cls() {
       return {
         form:     true,
@@ -70,13 +70,12 @@ export default {
     async onsubmit() {
       this.validate();
       if (this.invalid) {
-        console.warn('Form is invalid');
         return;
       }
       this.submitting = true;
       this.$dispatcher.$emit('submitting');
       await this.submit();
-      this.$dispatcher.$emit('complete');
+      this.$dispatcher.$emit('complete', this.submitError);
       this.submitting = false;
     },
     animateInputs() {

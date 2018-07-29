@@ -1,0 +1,43 @@
+{
+  "name": "@312dev/api-server",
+  "version": "0.0.0",
+  "description": "API server gateway for 312development.com",
+  "keywords": [
+    "server",
+    "express",
+    "api"
+  ],
+  "author": "Erik Nielsen <erik@312development.com> (https://312development.com)",
+  "homepage": "https://github.com/nielse63/312-Development#readme",
+  "license": "MIT",
+  "main": "index.js",
+  "directories": {
+    "lib": "lib"
+  },
+  "files": [
+    "lib"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nielse63/312-Development.git"
+  },
+  "scripts": {
+    "test": "echo \"Error: run tests from root\" && exit 1",
+    "serve": "DEBUG=312_API* nodemon index.js",
+    "start": "DEBUG=312_API* node index.js"
+  },
+  "bugs": {
+    "url": "https://github.com/nielse63/312-Development/issues"
+  },
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "debug": "^3.1.0",
+    "dotenv": "^6.0.0",
+    "express": "^4.16.3",
+    "mailgun.js": "^2.0.1",
+    "node-fetch": "^2.2.0"
+  },
+  "devDependencies": {
+    "nodemon": "^1.18.3"
+  }
+}
