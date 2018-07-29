@@ -125,6 +125,11 @@ h2 {
   max-width: 50vw;
   transition-delay: 0.05s;
 
+  @media (max-width: $mobile-width) {
+    font-size: 18px;
+    max-width: 80vw;
+  }
+
   [data-inview="false"] & {
     opacity: 0;
     transform: translate(0, -25px);
@@ -138,6 +143,10 @@ h2 {
     height: 1px;
     background-color: $color-white;
     width: 20%;
+
+    @media (max-width: $mobile-width) {
+      width: 5%;
+    }
   }
 
   &:before {

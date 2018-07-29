@@ -45,15 +45,21 @@ export default {
 @import "../assets/styles/lib/vars";
 
 .box {
-  flex: 1 0 percentage(1 / 3);
-  max-width: percentage(1 / 3);
-  padding: 2rem 1rem;
+  flex: 1 0 100%;
+  // flex: 1 0 percentage(1 / 3);
+  // max-width: percentage(1 / 3);
+  padding: 2vh 1vw;
   text-shadow: 0.05em 0.05em 1em fade-out($color-black, 0.65);
   transform: translateZ(-10vw);
   opacity: 0;
   transition: 0.5s $transition-timing-function;
   transition-property: opacity, transform;
   will-change: opacity, transform;
+
+  @media (min-width: $mobile-width) {
+    flex: 1 0 percentage(1 / 3);
+    max-width: percentage(1 / 3);
+  }
 
   &-inner {
     background-image: linear-gradient(to bottom, rgba(205, 81, 220, 0.4), rgba(41, 94, 230, 0.3));

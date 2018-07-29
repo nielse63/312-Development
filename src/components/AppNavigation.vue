@@ -73,13 +73,17 @@ export default {
   padding: 0 1rem;
   background-color: $color-white;
   z-index: 1;
-  width: 25vw;
-  max-width: 450px;
+  width: 90vw;
   font-size: 28px;
   font-weight: 700;
   letter-spacing: 2px;
   transform: translate(100%, 0);
   transition: 0.25s transform ease-in-out;
+
+  @media(min-width: $mobile-width) {
+    width: 25vw;
+    max-width: 450px;
+  }
 }
 
 .open {

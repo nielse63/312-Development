@@ -83,6 +83,10 @@ export default {
   flex-direction: row-reverse;
   align-items: center;
 
+  @media(max-width: $tablet-width) {
+    display: block;
+  }
+
   &:before {
     content: "";
     @include size(100%);
@@ -91,13 +95,22 @@ export default {
     top: 0;
     left: 0;
     background-image: $gradient-pink;
-    clip-path: polygon(0 0, 31% 0, 71% 100%, 0 100%);
+
+    @media (min-width: $mobile-width) {
+      clip-path: polygon(0 0, 31% 0, 71% 100%, 0 100%);
+    }
   }
 }
 
 article {
-  padding-right: 1rem;
-  padding-left: 3rem;
+  @media(max-width: $tablet-width) {
+    padding-top: 0;
+  }
+
+  @media (min-width: $mobile-width) {
+    padding-right: 1rem;
+    padding-left: 3rem;
+  }
 }
 
 .cards {

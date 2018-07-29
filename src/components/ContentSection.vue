@@ -105,7 +105,6 @@ export default {
 @import "../assets/styles/lib/vars";
 
 .content-section {
-  display: flex;
   background-color: $color-white;
   position: relative;
   font-size: 20px;
@@ -113,26 +112,36 @@ export default {
   perspective: 100vw;
   contain: style;
 
+  @media (min-width: $mobile-width) {
+    display: flex;
+  }
+
   > * {
-    flex: 1 0 50%;
     position: relative;
+
+    @media (min-width: $mobile-width) {
+      flex: 1 0 50%;
+    }
   }
 }
 
-header,
-article {
-  padding: ($content-padding * 0.75) $content-padding;
+header {
+  padding: 7.5vh 10vw;
 }
 
 h2 {
+  font-size: 10vw;
   font-family: $font-family-serif;
   font-weight: 400;
-  font-size: 8vw;
   text-shadow: 0.05em 0.05em 1em fade-out($color-black, 0.8);
   display: inline-block;
   background-color: $color-white;
   padding: 0 0.15em 0.1em;
   line-height: 1;
+
+  @media (min-width: $mobile-width) {
+    font-size: 8vw;
+  }
 }
 
 span {
@@ -144,6 +153,11 @@ span {
 article {
   color: $color-white;
   line-height: 2;
+  padding: 0 10vw 7.5vh;
+
+  @media (min-width: $mobile-width) {
+    padding: 7.5vh 10vw;
+  }
 }
 
 a {
@@ -163,7 +177,6 @@ a {
     height: 0.25em;
     background-color: fade-out($color-pink, 0.15);
     transition: 0.15s ease-in-out;
-    will-change: height, background-color;
   }
 
   &:hover {

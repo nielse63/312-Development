@@ -118,7 +118,11 @@ export default {
     top: 0;
     left: 0;
     background-image: $gradient-green;
-    clip-path: polygon(70% 0%, 100% 0%, 100% 100%, 25% 100%);
+    clip-path: polygon(0 0, 100% 0, 100% 84%, 0 70%);
+
+    @media (min-width: $mobile-width) {
+      clip-path: polygon(70% 0, 100% 0, 100% 100%, 25% 100%);
+    }
   }
 }
 
@@ -130,55 +134,4 @@ article {
 form {
   transition-delay: 0.25s;
 }
-
-// .disabled {
-//   .form-input {
-//     opacity: 0.5 !important;
-//     pointer-events: none;
-//   }
-// }
-
-// .errors {
-//   margin: 2rem 0 0;
-//   padding: 1rem;
-//   font-weight: 700;
-//   font-size: 14px;
-//   background-color: $color-orange-dark;
-//   color: $color-white;
-// }
-
-// .button {
-//   margin-top: 2rem;
-// }
-
-// .submitting {
-//   cursor: not-allowed;
-// }
-
-// button {
-//   // background: linear-gradient(#de6cff, #bc41df);
-//   background: transparent;
-//   // color: $color-white;
-//   color: $color-blue-dark;
-//   // border: 0;
-//   border: 2px solid $color-blue-dark;
-//   border-radius: 2px;
-//   font-weight: 700;
-//   font-size: 0.8em;
-//   text-transform: uppercase;
-//   letter-spacing: 1px;
-//   line-height: 1.5;
-//   padding: 0.5em 2em;
-//   cursor: pointer;
-//   display: block;
-//   transition: 0.1s background-color ease-in-out;
-
-//   &:hover {
-//     background-color: fade-out($color-blue-dark, 0.75);
-//   }
-
-//   &[disabled] {
-//     pointer-events: none;
-//   }
-// }
 </style>

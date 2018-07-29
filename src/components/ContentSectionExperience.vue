@@ -105,7 +105,7 @@ export default {
 }
 
 article {
-  padding: 5rem 10rem;
+  padding: 5vh 10vw;
   line-height: 1;
   text-align: center;
   font-weight: 700;
@@ -131,7 +131,7 @@ article {
 }
 
 footer {
-  padding: 0 10rem 7.5rem;
+  padding: 0 10vw 7.5vh;
   text-align: center;
 }
 </style>

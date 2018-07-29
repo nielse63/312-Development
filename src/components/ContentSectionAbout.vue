@@ -69,7 +69,10 @@ export default {
     top: 0;
     left: 0;
     background-image: $gradient-purple;
-    clip-path: polygon(54% 0%, 100% 0%, 100% 100%, 32% 100%);
+
+    @media (min-width: $mobile-width) {
+      clip-path: polygon(54% 0%, 100% 0%, 100% 100%, 32% 100%);
+    }
   }
 }
 

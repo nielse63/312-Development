@@ -80,7 +80,7 @@ export default {
 }
 
 article {
-  padding-top: 5rem;
+  padding-top: 5vh;
 }
 
 .tools {
@@ -90,5 +90,10 @@ article {
   flex-wrap: wrap;
   margin: 3rem 0;
   contain: style;
+
+  @media(max-width: $mobile-width) {
+    margin-left: -5vw;
+    margin-right: -5vw;
+  }
 }
 </style>

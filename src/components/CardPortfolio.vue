@@ -62,8 +62,7 @@ export default {
 @import "../assets/styles/lib/vars";
 
 .card-portfolio {
-  flex: 1 0 50%;
-  max-width: 50%;
+  flex: 1 0 100%;
   padding: 0.5rem;
   position: relative;
   transition: 0.5s $transition-timing-function;
@@ -72,11 +71,15 @@ export default {
   opacity: 0;
   perspective: 100vw;
 
+  @media (min-width: $mobile-width) {
+    flex: 1 0 50%;
+    max-width: 50%;
+  }
+
   &:hover {
     transform: translateZ(2vw);
 
     figure {
-      // 0 6px 2rem rgba(54, 54, 54, 0.45)
       box-shadow: 0 6px 2rem fade-out($color-black, 0.5);
     }
 
