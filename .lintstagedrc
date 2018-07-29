@@ -1,0 +1,27 @@
+{
+  "*.js": [
+    "eslint --fix",
+    "git add"
+  ],
+  "*.vue": [
+    "eslint --ext .vue --fix",
+    "stylelint --custom-syntax postcss-html --fix",
+    "git add"
+  ],
+  "*.scss": [
+    "stylelint --fix",
+    "git add"
+  ],
+  "*.svg": [
+    "svgo --pretty -p 2 --config=.svgo.yml --indent=2",
+    "git add"
+  ],
+  "*.md": [
+    "node scripts/lint-staged-remark.js",
+    "git add"
+  ],
+  "src/assets/images/**/*.{png,jpg}": [
+    "node scripts/resize-images.js",
+    "git add"
+  ]
+}

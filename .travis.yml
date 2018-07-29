@@ -1,9 +1,40 @@
+---
 language: node_js
-
 node_js:
-  - 5.8
+  - node
+cache:
+  yarn: true
+  directories:
+    - node_modules
+dist: trusty
+addons:
+  chrome: stable
+before_install:
+  - npm config set spin false
 
-install:
-  - npm install -g bower gulp
-  - npm install
-  - bower install
+env:
+  global:
+    - JOBS=1
+    - NODE_ENV=test
+
+jobs:
+  include:
+    # precache
+    - stage: precache
+      script: true
+
+    # # linting steps
+    # - stage: linting
+    #   script: yarn lint:js
+    # - script: yarn lint:scss
+    # - script: yarn lint:md
+
+    # # test steps
+    # - stage: tests
+    #   script: yarn test:unit
+    # - script: yarn test:e2e
+
+    # # docs steps
+    # - stage: docs
+    #   if: branch = redesign/multi-page
+    #   script: yarn docs:deploy

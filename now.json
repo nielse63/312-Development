@@ -1,0 +1,15 @@
+{
+  "name": "312-development",
+  "alias": "312-development",
+  "type": "static",
+  "dotenv": ".env",
+  "env": {
+    "NODE_ENV": "production"
+  },
+  "files": [
+    "dist"
+  ],
+  "static": {
+    "public": "dist"
+  }
+}

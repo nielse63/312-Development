@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+set -e
+
+if [ -f ".env.production" ]; then
+  source .env.production
+fi
+
+# serve
+yarn http-server \
+  -p 3000 \
+  --proxy $API_HOST \
+  --gzip \
+  --no-dotfiles \
+  dist/

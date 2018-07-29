@@ -1,0 +1,7 @@
+dist/
+coverage/
+build/service-worker-*
+templates/
+blueprints/
+!.eslintrc.js
+!docs/.vuepress/*.js

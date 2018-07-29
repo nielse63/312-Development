@@ -1,0 +1,9 @@
+{
+  "name": "312-dev-api-server",
+  "alias": "312-dev-api-server",
+  "dotenv": ".env",
+  "env": {
+    "NODE_ENV": "production"
+  },
+  "type": "npm"
+}

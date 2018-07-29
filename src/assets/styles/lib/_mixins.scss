@@ -1,0 +1,30 @@
+
+@mixin size($width, $height: $width) {
+  width: $width;
+  height: $height;
+}
+
+@mixin nav-link($color) {
+  &:before {
+    background: $color;
+  }
+
+  &:hover,
+  &.router-link-exact-active {
+    color: $color;
+  }
+}
+
+@mixin basic-content-transform {
+  opacity: 0;
+  transform: translate(0, 25px);
+  transition: $content-section-transition;
+  transition-delay: 0.5s;
+  will-change: opacity, transform;
+
+  [data-inview="true"] & {
+    opacity: 1;
+    transform: translate(0, 0);
+    transition-delay: 0s;
+  }
+}

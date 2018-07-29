@@ -1,8 +1,26 @@
-engines:
-  eslint:
+---
+version: "2"
+plugins:
+  duplication:
     enabled: true
-    channel: "eslint-2"
-
-ratings:
-   paths:
-   - "**.js"
+    config:
+      languages:
+      - javascript
+  fixme:
+    enabled: true
+  shellcheck:
+    enabled: true
+  markdownlint:
+    enabled: true
+    checks:
+      MD013:
+        enabled: false
+exclude_patterns:
+  - bin/
+  - build/
+  - config/
+  - coverage/
+  - dist/
+  - node_modules/
+  - static/
+  - test/
