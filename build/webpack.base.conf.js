@@ -91,6 +91,7 @@ module.exports = {
     new webpack.DefinePlugin({
       'process.env': {
         NODE_ENV: `"${NODE_ENV}"`,
+        API_HOST: `"${process.env.API_HOST}"`,
       },
     }),
     new VueLoaderPlugin(),

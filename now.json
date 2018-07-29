@@ -1,0 +1,16 @@
+{
+  "name": "312-development",
+  "alias": "312-development",
+  "type": "static",
+  "dotenv": ".env",
+  "env": {
+    "NODE_ENV": "production",
+    "API_HOST": "https://312-dev-api-server.now.sh"
+  },
+  "files": [
+    "dist"
+  ],
+  "static": {
+    "public": "dist"
+  }
+}

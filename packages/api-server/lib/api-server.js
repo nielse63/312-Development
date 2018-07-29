@@ -2,11 +2,15 @@
 const express = require('express');
 const debug = require('debug');
 const bodyParser = require('body-parser');
+const corser = require('corser');
 const routes = require('./routes');
 
 const app = express();
 const API_PORT = process.env.PORT || 9999;
 
+app.use(corser.create({
+  origins: [process.env.APP_HOST.split('//')[1]],
+}));
 app.use('/api/messages', bodyParser.json());
 app.use('/api/messages', bodyParser.urlencoded({
   extended: true,

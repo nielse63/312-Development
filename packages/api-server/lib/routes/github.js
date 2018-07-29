@@ -1,7 +1,7 @@
 const baseFetch = require('../fetch');
 
 const fetch = url => baseFetch(url, {
-  Authorization: `token ${process.env.GITHUB_OATH_TOKEN}`,
+  Authorization: `token ${process.env.GITHUB_API_TOKEN}`,
 });
 
 module.exports = (app) => {

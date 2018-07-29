@@ -35,7 +35,7 @@ export default {
     });
   },
   submit: async ({ commit, state }) => {
-    const response = await fetch('/api/messages', {
+    const response = await fetch(`${process.env.API_HOST}/api/messages`, {
       method:  'POST',
       headers: {
         'Content-Type': 'application/json; charset=utf-8',
