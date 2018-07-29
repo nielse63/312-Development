@@ -1,17 +1,24 @@
 <template>
   <div :class="cls">
+    <!-- <div class="layer"></div>
     <div class="layer"></div>
-    <div class="layer"></div>
-    <div class="layer"></div>
+    <div class="layer"></div> -->
     <figure :style="style">
-      <h3>{{title}}</h3>
+      <external-link :href="url">
+        <h3>{{title}}</h3>
+      </external-link>
     </figure>
   </div>
 </template>
 
 <script>
+import ExternalLink from '@/components/ExternalLink';
+
 export default {
-  name:  'CardPortfolio',
+  name:       'CardPortfolio',
+  components: {
+    ExternalLink,
+  },
   props: {
     inview: {
       type:    Boolean,
@@ -19,10 +26,17 @@ export default {
     },
     title: {
       type:     String,
+      default:  '',
       required: true,
     },
     image: {
       type:     String,
+      default:  '',
+      required: true,
+    },
+    url: {
+      type:     String,
+      default:  '',
       required: true,
     },
   },
@@ -54,54 +68,28 @@ export default {
   position: relative;
   transition: 0.5s $transition-timing-function;
   transition-property: opacity, transform;
-
-  &:not(.inview) {
-    opacity: 0;
-
-    &:first-child {
-      transform: translate((random(5) - 30) + px, (random(5) - 30) + px);
-    }
-
-    &:nth-child(2) {
-      transform: translate((random(5) + 25) + px, (random(5) - 30) + px);
-    }
-
-    &:nth-child(3) {
-      transform: translate((random(5) - 30) + px, 0);
-    }
-
-    &:nth-child(4) {
-      transform: translate((random(5) + 25) + px, 0);
-    }
-
-    &:nth-child(5) {
-      transform: translate((random(5) - 30) + px, (random(5) + 25) + px);
-    }
-
-    &:nth-child(6) {
-      transform: translate((random(5) + 25) + px, (random(5) + 25) + px);
-    }
-  }
+  transform: translateZ(-10vw);
+  opacity: 0;
+  perspective: 100vw;
 
   &:hover {
+    transform: translateZ(2vw);
+
     figure {
-      transform: translate3d(-2px, 4px, 30px) rotate(2deg);
+      // 0 6px 2rem rgba(54, 54, 54, 0.45)
+      box-shadow: 0 6px 2rem fade-out($color-black, 0.5);
     }
 
-    .layer {
-      &:first-child {
-        transform: translate3d(4px, 5px, 25px) rotate(-2deg);
-      }
-
-      &:nth-child(2) {
-        transform: translate3d(-3px, 10px, 15px) rotate(5deg);
-      }
-
-      &:nth-child(3) {
-        transform: translate3d(4px, -3px, 5px) rotate(-2deg);
-      }
+    h3 {
+      transform: translateZ(5vw);
+      text-shadow: 0 0.5em 1em fade-out($color-black, 0.5);
     }
   }
+}
+
+.inview {
+  opacity: 1;
+  transform: translateZ(0);
 }
 
 figure {
@@ -109,17 +97,14 @@ figure {
   background-size: cover;
   position: relative;
   margin: 0;
-  height: 35vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
   border: 10px solid currentColor;
   border-radius: 3px;
   box-shadow: 0 3px 1rem fade-out($color-black, 0.65);
   cursor: pointer;
-  transition: 0.25s transform ease-in-out;
+  transition: 0.25s ease-in-out;
 
-  &:before {
+  &:before,
+  &:after {
     content: "";
     position: absolute;
     top: 0;
@@ -127,35 +112,26 @@ figure {
     @include size(100%);
     background-image: linear-gradient(to bottom, rgba(245, 239, 40, 0.3), rgba(164, 22, 169, 0.6));
   }
+
+  &:after {
+    background-image: linear-gradient(to bottom, transparent, fade-out($color-black, 0.5));
+  }
+}
+
+a {
+  height: 35vh;
+  max-height: 200px;
+  padding: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 h3 {
   font-size: 20px;
   line-height: 1;
-  text-transform: uppercase;
-  letter-spacing: 3px;
   position: relative;
-}
-
-.layer {
-  opacity: 0.4;
-  position: absolute;
-  top: 10px;
-  left: 10px;
-  bottom: 10px;
-  right: 10px;
-  transition: 0.25s transform ease-in-out;
-
-  &:first-child {
-    background-color: #ac5cf5;
-  }
-
-  &:nth-child(2) {
-    background-color: #5db4eb;
-  }
-
-  &:nth-child(3) {
-    background-color: #5debb4;
-  }
+  z-index: 1;
+  transition: 0.5s $transition-timing-function;
 }
 </style>

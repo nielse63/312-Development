@@ -67,7 +67,7 @@ export default {
 
 .inview {
   opacity: 1;
-  transform: none;
+  transform: translateZ(0);
 }
 
 h3 {

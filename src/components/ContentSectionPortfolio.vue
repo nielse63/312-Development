@@ -8,6 +8,7 @@
             :inview="isInView"
             :title="card.title"
             :image="card.image"
+            :url="card.url"
           ></card-portfolio>
         </template>
       </div>
@@ -34,27 +35,33 @@ export default {
       isInView: false,
       cards:    [
         {
-          title: 'Project Name',
+          title: '312 Development',
+          url:   'https://github.com/nielse63/312-Development',
           image: MountainImage,
         },
         {
-          title: 'Project Name',
+          title: '@nielse63/eslint-config',
+          url:   'https://github.com/nielse63/nielse63/tree/master/packages/eslint-config',
           image: RoadImage,
         },
         {
-          title: 'Project Name',
+          title: 'WebGL Backgrounds',
+          url:   'https://github.com/nielse63/WebGL-Decorative-Backgrounds',
           image: PoolImage,
         },
         {
-          title: 'Project Name',
+          title: 'Node Simplex Noise',
+          url:   'https://github.com/nielse63/node-simplex-noise',
           image: PlaceholderImage,
         },
         {
-          title: 'Project Name',
+          title: 'tinyqueue.js',
+          url:   'https://github.com/nielse63/tinyqueue.js',
           image: MountainImage,
         },
         {
-          title: 'Project Name',
+          title: '@nielse63/debounce',
+          url:   'https://github.com/nielse63/nielse63/tree/master/packages/debounce',
           image: RoadImage,
         },
       ],
@@ -98,5 +105,7 @@ article {
   flex-wrap: wrap;
   justify-content: center;
   perspective: 100vw;
+  text-align: center;
+  contain: style;
 }
 </style>

@@ -133,7 +133,6 @@ h2 {
   background-color: $color-white;
   padding: 0 0.15em 0.1em;
   line-height: 1;
-  contain: style;
 }
 
 span {
@@ -193,6 +192,7 @@ a {
   header {
     padding-left: 2rem;
     color: #ba14bd;
+    text-align: right;
   }
 }
 

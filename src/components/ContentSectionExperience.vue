@@ -117,7 +117,7 @@ article {
   flex-wrap: wrap;
   justify-content: center;
   position: relative;
-  contain: content;
+  contain: style;
 
   &:before {
     content: "";
