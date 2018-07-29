@@ -19,7 +19,8 @@
     "test:unit": "bin/test unit",
     "docs:dev": "bin/docs dev",
     "docs:deploy": "bin/docs deploy",
-    "now:deploy": "yarn build && now --public && now alias"
+    "now:deploy": "bin/deploy app",
+    "heroku-postbuild": "yarn build"
   },
   "gitHooks": {
     "pre-commit": "lint-staged"

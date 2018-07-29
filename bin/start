@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 set -e
 
-if [ -f ".env.production" ]; then
-  source .env.production
+if [ -f ".env" ]; then
+  source .env
 fi
 
 # serve
