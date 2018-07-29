@@ -1,5 +1,4 @@
 <template>
-  <!-- <div class="box" :style="style"> -->
   <div :class="cls" :style="style">
     <div class="box-inner">
       <h3>{{header}}</h3>

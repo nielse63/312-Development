@@ -12,17 +12,18 @@ export function getCachedData(url) {
   if (!string) {
     return null;
   }
-  const { saved, data } = JSON.parse(string);
-  if (!cacheIsOld(saved)) {
-    return data;
+  const cache = JSON.parse(string);
+  if (!cacheIsOld(cache.saved)) {
+    return cache;
   }
-  localStorage.removeItem(url);
+  localStorage.removeItem(cache.url);
   return null;
 }
 
 export function saveCachedData(url, data) {
   const stringData = JSON.stringify({
     saved: new Date(),
+    ok:    !data.error,
     data,
   });
   localStorage.setItem(url, stringData);

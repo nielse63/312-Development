@@ -4,8 +4,7 @@
   "type": "static",
   "dotenv": ".env",
   "env": {
-    "NODE_ENV": "production",
-    "API_HOST": "https://312-dev-api-server.now.sh"
+    "NODE_ENV": "production"
   },
   "files": [
     "dist"

@@ -19,6 +19,7 @@ module.exports = merge(baseConfig, {
     proxy:              {
       '/api': {
         target: process.env.API_HOST,
+        secure: false,
       },
     },
   },

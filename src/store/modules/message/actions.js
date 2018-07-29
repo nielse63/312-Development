@@ -1,4 +1,6 @@
 
+import api from '@/lib/api';
+
 const VALIDATION_RULES = {
   required: {
     rgx:     /[a-zA-Z]+/,
@@ -35,7 +37,7 @@ export default {
     });
   },
   submit: async ({ commit, state }) => {
-    const response = await fetch(`${process.env.API_HOST}/api/messages`, {
+    const response = await api('/api/messages', {
       method:  'POST',
       headers: {
         'Content-Type': 'application/json; charset=utf-8',
@@ -44,7 +46,7 @@ export default {
       referrer: 'no-referrer',
       body:     JSON.stringify(state.entry),
     });
-    if (!response.okay) {
+    if (!response.ok) {
       commit('submitError', true);
     }
   },

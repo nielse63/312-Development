@@ -7,9 +7,13 @@ const routes = require('./routes');
 
 const app = express();
 const API_PORT = process.env.PORT || 9999;
+const appHost = process.env.APP_HOST.split('//')[1];
 
 app.use(corser.create({
-  origins: [process.env.APP_HOST.split('//')[1]],
+  origins:         [appHost],
+  responseHeaders: corser.simpleResponseHeaders.concat([
+    'Access-Control-Allow-Origin',
+  ]),
 }));
 app.use('/api/messages', bodyParser.json());
 app.use('/api/messages', bodyParser.urlencoded({
@@ -18,6 +22,10 @@ app.use('/api/messages', bodyParser.urlencoded({
 app.set('env', (process.env.NODE_ENV || 'development'));
 app.set('etag', 'strong');
 app.disable('x-powered-by');
+
+app.get('/api/status', (req, res) => {
+  res.status(200).json({ status: 'ok' });
+});
 
 routes.forEach((route) => {
   route(app);

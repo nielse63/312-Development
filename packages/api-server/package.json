@@ -21,8 +21,7 @@
   "scripts": {
     "test": "echo \"Error: run tests from root\" && exit 1",
     "serve": "DEBUG=312_API* nodemon index.js",
-    "start": "DEBUG=312_API* node index.js",
-    "deploy": "now --public && now alias"
+    "start": "DEBUG=312_API* node index.js"
   },
   "bugs": {
     "url": "https://github.com/nielse63/312-Development/issues"

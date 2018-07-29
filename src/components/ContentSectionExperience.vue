@@ -85,12 +85,11 @@ export default {
     },
   },
   mounted() {
-    this.$nextTick().then(() => {
-      this.fetchGithubUser();
-      this.fetchRepos();
-      this.fetchGists();
-      this.fetchNPMPackages();
-    });
+    this.$nextTick()
+      .then(() => this.fetchGithubUser())
+      .then(() => this.fetchRepos())
+      .then(() => this.fetchGists())
+      .then(() => this.fetchNPMPackages());
   },
 };
 </script>

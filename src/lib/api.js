@@ -1,18 +1,32 @@
 
 import { getCachedData, saveCachedData } from '@/lib/cache';
 
-export default async function api(url) {
-  const cached = getCachedData(url);
+const defaults = {
+  method: 'GET',
+};
+
+export default async function api(url, customOptions = {}) {
+  const options = { ...defaults, ...customOptions };
+  const cached = options.method === 'GET' && getCachedData(url);
   if (cached) {
     return cached;
   }
+
+  let response;
+  const output = {
+    status: 0,
+    ok:     false,
+    data:   {},
+  };
   try {
-    const response = await fetch(url);
+    response = await fetch(url, options);
+    output.status = response.status;
+    output.ok = response.ok;
     const json = await response.json();
     saveCachedData(url, json);
-    return json;
+    output.data = json;
   } catch (error) {
-    console.error({ url, error });
+    output.data = error;
   }
-  return null;
+  return output;
 }

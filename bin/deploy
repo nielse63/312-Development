@@ -1,0 +1,40 @@
+#!/usr/bin/env bash
+set -e
+
+function deploy_api
+{
+  cd packages/api-server
+  now --public
+  now alias
+}
+
+function deploy_app
+{
+  yarn build
+  now --public
+  now alias
+}
+
+function usage() {
+  echo "deploys the front and back ends of the application"
+  echo " "
+  echo "bin/deploy [command]"
+  echo " "
+  echo "commands:"
+  echo "app                deploys the vue app"
+  echo "api                deploys the express-server backend"
+  echo " "
+  echo "help               displays usage"
+  exit 0
+}
+
+if [ "$1" == "api" ]; then
+  deploy_api
+elif [ "$1" == "app" ]; then
+  deploy_app
+elif [ "$1" == "help" ]; then
+  usage
+else
+  usage
+  exit 1
+fi

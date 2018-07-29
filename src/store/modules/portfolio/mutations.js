@@ -24,6 +24,6 @@ export default {
     state.stats.packages = payload.total;
   },
   downloads(state, payload) {
-    state.stats.downloads += payload.downloads || 0;
+    state.stats.downloads = payload || 0;
   },
 };
