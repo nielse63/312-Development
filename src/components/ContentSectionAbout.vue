@@ -27,7 +27,6 @@ export default {
   },
   methods: {
     animateContent() {
-      // const targets = this.$el.querySelectorAll('article p');
       return anime({
         targets: this.$el.querySelectorAll('article p'),
         opacity: 1,
@@ -77,7 +76,7 @@ export default {
 article {
   padding-left: 2rem;
   text-shadow: 0.05em 0.05em 1em fade-out($color-black, 0.65);
-  // contain: content;
+  contain: style;
 }
 
 p {

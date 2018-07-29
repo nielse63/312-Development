@@ -111,7 +111,7 @@ export default {
   font-size: 20px;
   margin: 0 auto;
   perspective: 100vw;
-  contain: content;
+  contain: style;
 
   > * {
     flex: 1 0 50%;
@@ -133,7 +133,7 @@ h2 {
   background-color: $color-white;
   padding: 0 0.15em 0.1em;
   line-height: 1;
-  // contain: content;
+  contain: style;
 }
 
 span {

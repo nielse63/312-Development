@@ -89,5 +89,6 @@ article {
   align-items: center;
   flex-wrap: wrap;
   margin: 3rem 0;
+  contain: style;
 }
 </style>

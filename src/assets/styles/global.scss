@@ -1,6 +1,7 @@
 
 @import "lib/vars";
 @import "lib/mixins";
+@import "lib/keyframes";
 @import "normalize";
 @import "fonts";
 
@@ -31,22 +32,8 @@
   }
 }
 
-// .section-title {
-//   span {
-//     display: inline-block;
-//     opacity: 0;
-//   }
-// }
-
 .app-loading {
   svg {
     @include size($loading-icon-width);
-  }
-}
-
-button {
-  &[disabled] {
-    opacity: 0.5;
-    pointer-events: none;
   }
 }

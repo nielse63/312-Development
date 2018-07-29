@@ -1,11 +1,9 @@
 import Vue from 'vue';
-import VeeValidate from 'vee-validate';
 import App from '@/App';
 import store from '@/store';
 
-Vue.use(VeeValidate, {
-  events: 'blur',
-});
+// create global event bus
+Vue.prototype.$dispatcher = new Vue();
 Vue.config.productionTip = false;
 
 

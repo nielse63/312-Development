@@ -1,30 +1,28 @@
 <template>
-  <div class="form-input">
+  <div :class="cls">
     <label :for="name">{{label}}</label>
-    <template v-if="type == 'textarea'">
+    <div class="wrapper" :data-error="error" v-if="type == 'textarea'">
       <textarea
         :name="name"
         :id="name"
-        :value="value"
-        @input="$emit('input', $event.target.value)"
-        v-validate.initial="rules"
+        @blur="blur"
       ></textarea>
-    </template>
-    <template v-else>
+    </div>
+    <div class="wrapper" :data-error="error" v-else>
       <input
         :type="type"
         :name="name"
         :id="name"
-        :value="value"
         :autocomplete="autocomplete"
-        @input="$emit('input', $event.target.value)"
-        v-validate.initial="rules"
+        @blur="blur"
       >
-    </template>
+    </div>
   </div>
 </template>
 
 <script>
+import { mapState, mapActions } from 'vuex';
+
 export default {
   name:  'FormInput',
   props: {
@@ -45,22 +43,28 @@ export default {
       type:    String,
       default: 'text',
     },
-    value: {
-      type:    String,
-      default: '',
-    },
     autocomplete: {
       type:    String,
       default: '',
     },
   },
   computed: {
-    rules() {
+    ...mapState('message', ['errors']),
+    error() {
+      return this.errors[this.name];
+    },
+    cls() {
       return {
-        required: true,
-        email:    this.type === 'email',
-        url:      this.type === 'url',
+        'form-input': true,
+        error:        !!this.error,
       };
+    },
+  },
+  methods: {
+    ...mapActions('message', ['setValue']),
+    blur({ target }) {
+      const { value } = target;
+      this.setValue({ name: this.name, value });
     },
   },
 };
@@ -77,6 +81,24 @@ export default {
   }
 }
 
+.wrapper {
+  position: relative;
+  background-color: $color-white;
+
+  &:after {
+    content: attr(data-error);
+    position: absolute;
+    top: 50%;
+    right: 0.5rem;
+    transform: translate(0, -50%);
+    color: $color-red;
+    font-weight: 700;
+    font-size: 0.7em;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+}
+
 label,
 input,
 textarea {
@@ -89,16 +111,30 @@ label {
   font-size: 0.8em;
   text-transform: uppercase;
   letter-spacing: 1px;
+  cursor: pointer;
 }
 
 input,
 textarea {
   border: 1px solid $border-color;
-  padding: 0.5em 0.25em;
+  padding: 0.5em;
   line-height: 1.5;
 }
 
 textarea {
   min-height: 150px;
+}
+
+.error {
+  animation: shake 0.35s;
+
+  label {
+    color: $color-red;
+  }
+
+  input,
+  textarea {
+    border-color: $color-red;
+  }
 }
 </style>
