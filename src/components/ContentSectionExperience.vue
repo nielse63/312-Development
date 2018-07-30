@@ -117,17 +117,6 @@ article {
   justify-content: center;
   position: relative;
   contain: style;
-
-  &:before {
-    content: "";
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, 0);
-    width: 50%;
-    height: 1px;
-    background-color: $color-white;
-  }
 }
 
 footer {

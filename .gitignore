@@ -8,6 +8,7 @@ yarn-debug.log*
 yarn-error.log*
 coverage/
 test/integration/*.png
+.env
 .env*
 .logs/*
 .*cache

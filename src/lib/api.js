@@ -26,7 +26,7 @@ export default async function api(url, customOptions = {}) {
     saveCachedData(url, json);
     output.data = json;
   } catch (error) {
-    output.data = error;
+    output.data = cached || {};
   }
   return output;
 }

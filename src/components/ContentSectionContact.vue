@@ -88,16 +88,19 @@ export default {
         duration: 1000,
         easing:   'easeOutElastic',
         delay(el, i) {
-          return (i * anime.random(0, 50)) + 200;
+          return (i + 1) * 100;
         },
         elasticity() {
           return anime.random(100, 250);
         },
-        autoplay: true,
+        autoplay: false,
       });
     },
     inview() {
-      this.animateInputs();
+      const animation = this.animateInputs();
+      this.$nextTick(() => {
+        animation.play();
+      });
     },
   },
 };

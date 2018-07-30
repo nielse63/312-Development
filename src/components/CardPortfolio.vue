@@ -1,8 +1,5 @@
 <template>
   <div :class="cls">
-    <!-- <div class="layer"></div>
-    <div class="layer"></div>
-    <div class="layer"></div> -->
     <figure :style="style">
       <external-link :href="url">
         <h3>{{title}}</h3>
@@ -122,8 +119,8 @@ figure {
 }
 
 a {
-  height: 35vh;
-  max-height: 200px;
+  height: 26vh;
+  min-height: 150px;
   padding: 1rem;
   display: flex;
   align-items: center;

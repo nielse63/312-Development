@@ -66,6 +66,10 @@ ul {
   display: flex;
   justify-content: center;
   align-items: center;
+
+  @media (max-width: $mobile-width-max) {
+    flex-direction: column;
+  }
 }
 
 li {

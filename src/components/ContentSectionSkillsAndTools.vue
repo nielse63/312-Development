@@ -59,11 +59,14 @@ export default {
         elasticity() {
           return anime.random(100, 250);
         },
-        autoplay: true,
+        autoplay: false,
       });
     },
     inview() {
-      this.animateIcons();
+      const animation = this.animateIcons();
+      this.$nextTick(() => {
+        animation.play();
+      });
     },
   },
 };

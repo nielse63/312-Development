@@ -3,6 +3,8 @@
   "packages": [
     "packages/*"
   ],
+  "npmClient": "yarn",
+  "useWorkspaces": true,
   "command": {
     "publish": {
       "npmClient": "yarn",

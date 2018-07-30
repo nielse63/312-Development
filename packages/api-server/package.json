@@ -10,6 +10,9 @@
   "author": "Erik Nielsen <erik@312development.com> (https://312development.com)",
   "homepage": "https://github.com/nielse63/312-Development#readme",
   "license": "MIT",
+  "publishConfig": {
+    "public": "true"
+  },
   "main": "index.js",
   "directories": {
     "lib": "lib"

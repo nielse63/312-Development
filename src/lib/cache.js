@@ -1,10 +1,12 @@
 
 function cacheIsOld(dateString) {
-  const oneDay = 60 * 60 * 24;
+  const ONE_MINUTE = 60;
+  const ONE_HOUR = ONE_MINUTE * 60;
+  const TIME_TO_CACHE = ONE_HOUR;
   const date = Date.parse(dateString) / 1000;
   const today = Date.parse(new Date()) / 1000;
   const diff = today - date;
-  return diff > oneDay;
+  return diff > TIME_TO_CACHE;
 }
 
 export function getCachedData(url) {
@@ -13,11 +15,10 @@ export function getCachedData(url) {
     return null;
   }
   const cache = JSON.parse(string);
-  if (!cacheIsOld(cache.saved)) {
-    return cache;
+  if (cacheIsOld(cache.saved)) {
+    return null;
   }
-  localStorage.removeItem(cache.url);
-  return null;
+  return cache;
 }
 
 export function saveCachedData(url, data) {

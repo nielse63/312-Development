@@ -72,7 +72,8 @@ export default {
 @import "assets/styles/lib/vars";
 
 .app {
-  background-color: $color-black;
+  background-color: $color-white;
+  overflow-x: hidden;
 }
 
 .page {

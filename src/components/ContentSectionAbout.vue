@@ -36,7 +36,7 @@ export default {
         duration: 1000,
         easing:   'easeOutElastic',
         delay(target, index) {
-          return (index * anime.random(0, 50)) + 50;
+          return (index * anime.random(0, 150)) + 50;
         },
         elasticity() {
           return anime.random(50, 100);
@@ -61,6 +61,10 @@ export default {
 .content-section {
   align-items: center;
 
+  @media(min-width: $desktop-width) {
+    min-height: 100vh;
+  }
+
   &:before {
     content: "";
     @include size(100%);
@@ -70,16 +74,19 @@ export default {
     left: 0;
     background-image: $gradient-purple;
 
-    @media (min-width: $mobile-width) {
+    @media (min-width: $desktop-width) {
       clip-path: polygon(54% 0%, 100% 0%, 100% 100%, 32% 100%);
     }
   }
 }
 
 article {
-  padding-left: 2rem;
   text-shadow: 0.05em 0.05em 1em fade-out($color-black, 0.65);
   contain: style;
+
+  @media (min-width: $desktop-width) {
+    padding-left: 2rem;
+  }
 }
 
 p {

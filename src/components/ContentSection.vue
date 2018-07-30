@@ -112,21 +112,25 @@ export default {
   perspective: 100vw;
   contain: style;
 
-  @media (min-width: $mobile-width) {
+  @media (min-width: $desktop-width) {
     display: flex;
   }
 
   > * {
     position: relative;
 
-    @media (min-width: $mobile-width) {
+    @media (min-width: $desktop-width) {
       flex: 1 0 50%;
     }
   }
 }
 
 header {
-  padding: 7.5vh 10vw;
+  padding: 7.5vh 10vw 0;
+
+  @media (min-width: $desktop-width) {
+    padding-bottom: 7.5vh;
+  }
 }
 
 h2 {
@@ -136,7 +140,7 @@ h2 {
   text-shadow: 0.05em 0.05em 1em fade-out($color-black, 0.8);
   display: inline-block;
   background-color: $color-white;
-  padding: 0 0.15em 0.1em;
+  padding: 0 0.15em;
   line-height: 1;
 
   @media (min-width: $mobile-width) {
@@ -153,11 +157,7 @@ span {
 article {
   color: $color-white;
   line-height: 2;
-  padding: 0 10vw 7.5vh;
-
-  @media (min-width: $mobile-width) {
-    padding: 7.5vh 10vw;
-  }
+  padding: 7.5vh 10vw;
 }
 
 a {
@@ -198,6 +198,10 @@ a {
   header {
     padding-bottom: 0;
     color: #0096f3;
+  }
+
+  h2 {
+    padding-bottom: 0.2em;
   }
 }
 

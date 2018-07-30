@@ -75,12 +75,18 @@ export default {
   justify-content: center;
   align-items: center;
   margin: 0 auto;
-  position: relative;
+  padding: 5vh 0;
+  // position: relative;
   color: $color-white;
   text-align: center;
   perspective: 100vw;
   background-image: linear-gradient(to bottom, #00588f, #0c96c0);
   contain: content;
+  min-height: 80vh;
+
+  @media(min-width: $desktop-width), (orientation: landscape) {
+    min-height: 100vh;
+  }
 }
 
 canvas {
@@ -88,11 +94,11 @@ canvas {
   position: absolute;
   top: 0;
   left: 0;
-  z-index: 0;
+  // z-index: 0;
 
-  ~ * {
-    z-index: 1;
-  }
+  // ~ * {
+  //   z-index: 1;
+  // }
 }
 
 h1,

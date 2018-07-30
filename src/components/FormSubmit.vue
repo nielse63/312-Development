@@ -142,7 +142,7 @@ button {
   height: 70px;
   border: 2px solid $color;
   border-radius: 40px;
-  background: transparent;
+  background: $color-white;
   color: $color;
   letter-spacing: 1px;
   font-size: 18px;

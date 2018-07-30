@@ -79,6 +79,9 @@ export default {
   letter-spacing: 2px;
   transform: translate(100%, 0);
   transition: 0.25s transform ease-in-out;
+  white-space: nowrap;
+  min-width: 450px;
+  overflow: auto;
 
   @media(min-width: $mobile-width) {
     width: 25vw;
