@@ -1,7 +1,6 @@
 {
   "name": "312-dev-api-server",
   "alias": "312-dev-api-server",
-  "dotenv": true,
   "env": {
     "NODE_ENV": "production",
     "API_HOST": "@api-host",

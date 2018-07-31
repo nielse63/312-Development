@@ -30,7 +30,6 @@ jobs:
       script: true
     # lint src
     - stage: linting
-      if: branch != master
       script: yarn lint:js
       name: "Lint JS"
     - script: yarn lint:scss
