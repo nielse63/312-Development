@@ -21,23 +21,16 @@ env:
     - JOBS=1
     - NODE_ENV=test
 
-# stage order
-stages:
-  - name: precache
-  - stage: linting
-    if: branch != master
-  - stage: tests
-  - stage: deploy
-    if: type = push
-
 # build stage defs
 jobs:
   include:
     # precache npm packages
     - stage: precache
+      name: "Cache Dependencies"
       script: true
     # lint src
     - stage: linting
+      if: branch != master
       script: yarn lint:js
       name: "Lint JS"
     - script: yarn lint:scss
@@ -55,11 +48,11 @@ jobs:
     # deploy scripts
     - stage: deploy
       name: "Deploy API Server"
+      install: skip
       script: skip
-      before_install:
-        - npm i -g now
+      before_deploy: npm i -g now
       deploy:
-        provider: script # Run a custom deployment script which we will define below
+        provider: script
         script: bin/deploy api
         skip_cleanup: true
         on:
