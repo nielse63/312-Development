@@ -6,6 +6,7 @@ cache:
   yarn: true
   directories:
     - node_modules
+    - "packages/api-server/node_modules"
     - "$HOME/.nvm"
 dist: trusty
 addons:
@@ -44,6 +45,8 @@ jobs:
       name: "Integration Tests"
       before_install:
         - npm i -g http-server
+      before_script:
+        - yarn lerna bootstrap
     # deploy scripts
     - stage: deploy
       name: "Deploy API Server"
