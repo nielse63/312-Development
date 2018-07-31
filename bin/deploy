@@ -3,16 +3,12 @@ set -e
 
 function deploy_api
 {
+  if ! [ -f "packages/api-server" ]; then
+    cp .env packages/api-server/.env
+  fi
   cd packages/api-server
-  now --public
-  now alias
-}
-
-function deploy_app
-{
-  yarn build
-  now --public
-  now alias
+  now --token $NOW_TOKEN --public
+  now --token $NOW_TOKEN alias
 }
 
 function usage() {
@@ -21,7 +17,6 @@ function usage() {
   echo "bin/deploy [command]"
   echo " "
   echo "commands:"
-  echo "app                deploys the vue app"
   echo "api                deploys the express-server backend"
   echo " "
   echo "help               displays usage"
@@ -30,8 +25,6 @@ function usage() {
 
 if [ "$1" == "api" ]; then
   deploy_api
-elif [ "$1" == "app" ]; then
-  deploy_app
 elif [ "$1" == "help" ]; then
   usage
 else

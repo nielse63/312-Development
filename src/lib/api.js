@@ -19,7 +19,8 @@ export default async function api(url, customOptions = {}) {
     data:   {},
   };
   try {
-    response = await fetch(url, options);
+    const requestURL = new URL(url, process.env.API_HOST);
+    response = await fetch(requestURL.href, options);
     output.status = response.status;
     output.ok = response.ok;
     const json = await response.json();

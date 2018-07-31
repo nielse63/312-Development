@@ -9,32 +9,46 @@ cache:
 dist: trusty
 addons:
   chrome: stable
+
+# hooks
 before_install:
+  - openssl aes-256-cbc -K $encrypted_76951814e78d_key -iv $encrypted_76951814e78d_iv -in .env.enc -out .env -d
   - npm config set spin false
 
+# env vars
 env:
   global:
     - JOBS=1
     - NODE_ENV=test
 
+# build jobs
 jobs:
   include:
-    # precache
+    # precache npm packages
     - stage: precache
       script: true
-
-    # # linting steps
-    # - stage: linting
-    #   script: yarn lint:js
-    # - script: yarn lint:scss
-    # - script: yarn lint:md
-
-    # # test steps
-    # - stage: tests
-    #   script: yarn test:unit
-    # - script: yarn test:e2e
-
-    # # docs steps
-    # - stage: docs
-    #   if: branch = redesign/multi-page
-    #   script: yarn docs:deploy
+    # lint src
+    - stage: linting
+      script: yarn lint:js
+      name: "Lint JS"
+    - script: yarn lint:scss
+      name: "Lint SCSS"
+    - script: yarn lint:md
+      name: "Lint Markdown"
+    # run tests
+    - stage: tests
+      script: yarn test:unit
+      name: "Unit Tests"
+    - script: yarn test:e2e
+      name: "Integration Tests"
+    # deploy scripts
+    - stage: deploy
+      name: "Deploy API Server"
+      script: skip
+      deploy:
+        provider: script # Run a custom deployment script which we will define below
+        script: bin/deploy api
+        skip_cleanup: true
+        on:
+          all_branches: true
+          master: false

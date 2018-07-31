@@ -15,7 +15,6 @@ export default {
   computed: {
     ...mapState('nav', {
       isNavOpen: 'open',
-      // isDark:    'dark',
     }),
     isButtonDark() {
       return this.isNavOpen || this.isDark;

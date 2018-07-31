@@ -30,7 +30,9 @@ export default {
     scrollTo(top, e) {
       e.preventDefault();
       this.closeNav();
-      window.scrollTo({ top, behavior: 'smooth' });
+      this.$nextTick(() => {
+        window.scrollTo({ top, behavior: 'smooth' });
+      });
     },
     onclick(e) {
       const href = e.srcElement.href.split('/').pop();
