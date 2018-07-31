@@ -6,6 +6,7 @@ cache:
   yarn: true
   directories:
     - node_modules
+    - "$HOME/.nvm"
 dist: trusty
 addons:
   chrome: stable
@@ -41,6 +42,8 @@ jobs:
       name: "Unit Tests"
     - script: yarn test:e2e
       name: "Integration Tests"
+      before_install:
+        - npm i -g http-server
     # deploy scripts
     - stage: deploy
       name: "Deploy API Server"

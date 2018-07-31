@@ -6,8 +6,7 @@ if [ -f ".env" ]; then
 fi
 
 # serve
-yarn http-server \
-  -p 3000 \
+http-server -p 3000 \
   --proxy $API_HOST \
   --gzip \
   --no-dotfiles \
