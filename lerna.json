@@ -4,9 +4,9 @@
     "packages/*"
   ],
   "npmClient": "yarn",
+  "useWorkspaces": true,
   "command": {
     "publish": {
-      "npmClient": "yarn",
       "allowBranch": "master",
       "ignoreChanges": [
         "*.md",
