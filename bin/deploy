@@ -1,11 +1,16 @@
 #!/usr/bin/env bash
 set -e
 
+if [ -f ".env" ]; then
+  source .env
+fi
+
 function deploy_api
 {
   cd packages/api-server
-  now --token $NOW_API_TOKEN --public
-  now --token $NOW_API_TOKEN alias
+  now remove --token=$NOW_API_TOKEN 312-dev-api-server --all --yes
+  now deploy --public --token=$NOW_API_TOKEN
+  now alias --token=$NOW_API_TOKEN
 }
 
 function usage() {

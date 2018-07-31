@@ -1,6 +1,10 @@
 #!/usr/bin/env bash
 set -e
 
+if ! [ $(command -v http-server) ]; then
+  npm i -g http-server
+fi
+
 # serve
 http-server -p 3000 \
   --proxy $API_HOST \
