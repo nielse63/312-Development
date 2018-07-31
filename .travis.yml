@@ -15,6 +15,9 @@ addons:
 # hooks
 before_install:
   - npm config set spin false
+  - npm i -g http-server
+before_script:
+  - yarn lerna bootstrap
 
 # env vars
 env:
@@ -22,40 +25,34 @@ env:
     - JOBS=1
     - NODE_ENV=test
 
+script:
+  - yarn lint:js
+  - yarn lint:scss
+  - yarn test:unit
+  - yarn test:e2e
+
 # build stage defs
-jobs:
-  include:
-    # precache npm packages
-    - stage: precache
-      name: "Cache Dependencies"
-      script: true
-    # lint src
-    - stage: linting
-      script: yarn lint:js
-      name: "Lint JS"
-    - script: yarn lint:scss
-      name: "Lint SCSS"
-    - script: yarn lint:md
-      name: "Lint Markdown"
-    # run tests
-    - stage: tests
-      script: yarn test:unit
-      name: "Unit Tests"
-    - script: yarn test:e2e
-      name: "Integration Tests"
-      before_install:
-        - npm i -g http-server
-      before_script:
-        - yarn lerna bootstrap
-    # deploy scripts
-    - stage: deploy
-      name: "Deploy API Server"
-      install: skip
-      script: skip
-      before_deploy: npm i -g now
-      deploy:
-        provider: script
-        script: bin/deploy api
-        skip_cleanup: true
-        on:
-          branch: staging
+# jobs:
+#   include:
+#     # precache npm packages
+#     - stage: precache
+#       name: "Cache Dependencies"
+#       script: true
+#     # lint src
+#     - stage: linting
+#       script: yarn lint:js
+#       name: "Lint JS"
+#     - script: yarn lint:scss
+#       name: "Lint SCSS"
+#     - script: yarn lint:md
+#       name: "Lint Markdown"
+#     # run tests
+#     - stage: tests
+#       script: yarn test:unit
+#       name: "Unit Tests"
+#     - script: yarn test:e2e
+#       name: "Integration Tests"
+#       before_install:
+#         - npm i -g http-server
+#       before_script:
+#         - yarn lerna bootstrap
