@@ -22,7 +22,6 @@
   },
   "dependencies": {
     "animejs": "^2.2.0",
-    "http-server": "^0.11.1",
     "vue": "^2.5.16",
     "vuex": "^3.0.1"
   },
