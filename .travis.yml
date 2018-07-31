@@ -6,35 +6,54 @@ cache:
   yarn: true
   directories:
     - node_modules
+    - "$HOME/.nvm"
 dist: trusty
 addons:
   chrome: stable
+
+# hooks
 before_install:
   - npm config set spin false
 
+# env vars
 env:
   global:
     - JOBS=1
     - NODE_ENV=test
 
+# build stage defs
 jobs:
   include:
-    # precache
+    # precache npm packages
     - stage: precache
+      name: "Cache Dependencies"
       script: true
-
-    # # linting steps
-    # - stage: linting
-    #   script: yarn lint:js
-    # - script: yarn lint:scss
-    # - script: yarn lint:md
-
-    # # test steps
-    # - stage: tests
-    #   script: yarn test:unit
-    # - script: yarn test:e2e
-
-    # # docs steps
-    # - stage: docs
-    #   if: branch = redesign/multi-page
-    #   script: yarn docs:deploy
+    # lint src
+    - stage: linting
+      if: branch != master
+      script: yarn lint:js
+      name: "Lint JS"
+    - script: yarn lint:scss
+      name: "Lint SCSS"
+    - script: yarn lint:md
+      name: "Lint Markdown"
+    # run tests
+    - stage: tests
+      script: yarn test:unit
+      name: "Unit Tests"
+    - script: yarn test:e2e
+      name: "Integration Tests"
+      before_install:
+        - npm i -g http-server
+    # deploy scripts
+    - stage: deploy
+      name: "Deploy API Server"
+      install: skip
+      script: skip
+      before_deploy: npm i -g now
+      deploy:
+        provider: script
+        script: bin/deploy api
+        skip_cleanup: true
+        on:
+          branch: staging

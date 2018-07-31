@@ -6,7 +6,6 @@
     </div>
     <app-navigation :open="isNavOpen"></app-navigation>
     <app-navigation-button></app-navigation-button>
-    <app-loading v-if="loading"></app-loading>
   </div>
 </template>
 
@@ -16,7 +15,6 @@ import AppNavigation from '@/components/AppNavigation';
 import AppNavigationButton from '@/components/AppNavigationButton';
 import AppFooter from '@/components/AppFooter';
 import Home from '@/views/Home';
-import AppLoading from '@/components/AppLoading';
 
 export default {
   name:       'app',
@@ -25,17 +23,14 @@ export default {
     AppNavigationButton,
     AppFooter,
     Home,
-    AppLoading,
   },
   computed: {
-    ...mapState(['loading']),
     ...mapState('nav', {
       isNavOpen: 'open',
     }),
     appClass() {
       return {
         'nav-open': this.isNavOpen,
-        loading:    this.loading,
       };
     },
     pageClass() {
@@ -49,17 +44,11 @@ export default {
     ...mapActions('nav', {
       closeNav: 'close',
     }),
-    ...mapActions(['setLoading']),
     onpageclick() {
       if (this.isNavOpen) {
         this.closeNav();
       }
     },
-  },
-  mounted() {
-    this.$nextTick(() => {
-      this.setLoading(false);
-    });
   },
 };
 </script>

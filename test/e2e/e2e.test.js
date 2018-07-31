@@ -1,10 +1,14 @@
 
 describe('E2E', () => {
   beforeAll(async () => {
-    await page.goto('http://localhost:3000/#/');
+    await page.goto('http://localhost:3000');
   });
 
   describe('General', () => {
+    it('should render correctly', async () => {
+      await expect(page).toMatchElement('.home', { timeout: 1000 });
+    });
+
     describe('Footer', () => {
       let footer;
       beforeAll(async () => {
@@ -13,16 +17,16 @@ describe('E2E', () => {
 
       it('should have correct links', async () => {
         await expect(footer).toMatchElement('a[href="https://github.com/nielse63"]', {
-          tet: 'GitHub',
+          text: 'GitHub',
         });
         await expect(footer).toMatchElement('a[href="https://www.npmjs.com/~nielse63"]', {
-          tet: 'NPM',
+          text: 'NPM',
         });
         await expect(footer).toMatchElement('a[href="https://twitter.com/ErikKyleNielsen/"]', {
-          tet: 'Twitter',
+          text: 'Twitter',
         });
         await expect(footer).toMatchElement('a[href="https://www.linkedin.com/in/erikkylenielsen/"]', {
-          tet: 'LinkedIn',
+          text: 'LinkedIn',
         });
       });
     });
@@ -39,93 +43,62 @@ describe('E2E', () => {
     });
   });
 
-  describe('Home', () => {
-    it('should render correctly', async () => {
-      await expect(page).toMatchElement('.home', { timeout: 1000 });
-    });
-
-    describe('Intro Panel', () => {
-      it('should have title and subtitle', async () => {
-        await expect(page).toMatchElement('h1', { text: 'Erik Nielsen' });
-        await expect(page).toMatchElement('h2', {
-          text: 'Senior UI Software Engineer from Chicago, IL',
-        });
+  describe('Intro Panel', () => {
+    it('should have title and subtitle', async () => {
+      await expect(page).toMatchElement('h1', { text: 'Erik Nielsen' });
+      await expect(page).toMatchElement('h2', {
+        text: 'Senior UI Software Engineer from Chicago, IL',
       });
     });
   });
 
   describe('About', () => {
-    beforeAll(async () => {
-      await page.goto('http://localhost:3000/#/about-me');
-    });
-
     it('should render correctly', async () => {
-      await expect(page).toMatchElement('.view-about-me');
+      await expect(page).toMatchElement('.about-me');
     });
 
-    it('should have title', async () => {
-      await expect(page).toMatchElement('h1', { text: 'About Me' });
-    });
-
-    it('should have correct content panel text values', async () => {
-      await expect(page).toMatchElement('.content-panel h2', { text: 'Who I Am' });
-      await expect(page).toMatchElement('.content-panel h2', { text: 'My Contributions' });
-    });
+    // it('should have title', async () => {
+    //   await expect(await page.$('.about-me')).toMatchElement('h2', { text: 'About Me' });
+    // });
   });
 
   describe('Experience', () => {
-    beforeAll(async () => {
-      await page.goto('http://localhost:3000/#/experience');
-    });
-
     it('should render correctly', async () => {
-      await expect(page).toMatchElement('.view-experience');
+      await expect(page).toMatchElement('.experience');
     });
 
-    it('should have title', async () => {
-      await expect(page).toMatchElement('h1', { text: 'My Experience' });
-    });
-  });
-
-  describe('Contact', () => {
-    beforeAll(async () => {
-      await page.goto('http://localhost:3000/#/contact-me');
-    });
-
-    it('should render correctly', async () => {
-      await expect(page).toMatchElement('.view-contact');
-    });
-
-    it('should have title', async () => {
-      await expect(page).toMatchElement('h1', { text: 'Contact Me' });
-    });
+    // it('should have title', async () => {
+    //   await expect(page).toMatchElement('h2', { text: 'Experience' });
+    // });
   });
 
   describe('Portfolio', () => {
-    beforeAll(async () => {
-      await page.goto('http://localhost:3000/#/portfolio');
-    });
-
     it('should render correctly', async () => {
-      await expect(page).toMatchElement('.view-portfolio');
+      await expect(page).toMatchElement('.portfolio');
     });
 
-    it('should have title', async () => {
-      await expect(page).toMatchElement('h1', { text: 'Portfolio' });
-    });
+    // it('should have title', async () => {
+    //   await expect(page).toMatchElement('h1', { text: 'Portfolio' });
+    // });
   });
 
-  describe('404', () => {
-    beforeAll(async () => {
-      await page.goto('http://localhost:3000/#/not-found');
-    });
-
+  describe('Contact', () => {
     it('should render correctly', async () => {
-      await expect(page).toMatchElement('.four-oh-four');
+      await expect(page).toMatchElement('.contact-me');
     });
 
-    it('should have title', async () => {
-      await expect(page).toMatchElement('h1', { text: 'Page Not Found' });
+    // it('should have title', async () => {
+    //   await expect(page).toMatchElement('h1', { text: 'Contact Me' });
+    // });
+  });
+
+  describe('Skills and Tools', () => {
+    it('should render correctly', async () => {
+      await expect(page).toMatchElement('.skills-and-tools');
     });
+
+    // it('should have title', async () => {
+    //   await expect(page).toMatchElement('h1', { text: 'Contact Me' });
+    // });
   });
 });

@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+
+function copy_env() {
+  if ! [ -f ".env" ]; then
+    echo ".env file not found. exiting"
+    exit 1
+  fi
+
+  if ! [ -f "packages/api-server/.env" ]; then
+    echo "copying .env file"
+    cp .env packages/api-server/.env
+  fi
+
+  source .env
+}

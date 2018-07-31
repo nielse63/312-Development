@@ -14,7 +14,7 @@ function lint_scss() {
 
 function lint_md() {
   echo 'Linting .md files'
-  yarn remark -S docs/*.md *.md -o
+  yarn lint:md -S
 }
 
 function usage() {

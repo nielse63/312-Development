@@ -4,5 +4,4 @@ set -e
 rm -rf \
   dist/ \
   coverage/ \
-  docs/.vuepress/dist/ \
   *.log
