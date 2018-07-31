@@ -3,9 +3,6 @@ set -e
 
 function test_e2e() {
   echo 'Running e2e tests'
-  if ! [ $(command -v http-server) ]; then
-    npm i -g http-server
-  fi
   if [ $(command -v kill-port) ]; then
     kill-port 3000 9999 >/dev/null
   fi

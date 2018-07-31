@@ -1,10 +1,6 @@
 #!/usr/bin/env bash
 set -e
 
-if [ -f ".env" ]; then
-  source .env
-fi
-
 # serve
 http-server -p 3000 \
   --proxy $API_HOST \

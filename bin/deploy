@@ -1,23 +1,11 @@
 #!/usr/bin/env bash
 set -e
 
-if ! [ -f ".env" ]; then
-  echo ".env file not found. exiting"
-  exit 1
-fi
-
-if ! [ $(command -v now) ]; then
-  npm i -g now
-fi
-
 function deploy_api
 {
-  if ! [ -f "packages/api-server" ]; then
-    cp .env packages/api-server/.env
-  fi
   cd packages/api-server
-  now --token $NOW_TOKEN --public
-  now --token $NOW_TOKEN alias
+  now --token $NOW_API_TOKEN --public
+  now --token $NOW_API_TOKEN alias
 }
 
 function usage() {

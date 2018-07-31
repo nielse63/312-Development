@@ -13,7 +13,6 @@ addons:
 
 # hooks
 before_install:
-  - openssl aes-256-cbc -K $encrypted_76951814e78d_key -iv $encrypted_76951814e78d_iv -in .env.enc -out .env -d
   - npm config set spin false
 
 # env vars
@@ -22,7 +21,16 @@ env:
     - JOBS=1
     - NODE_ENV=test
 
-# build jobs
+# stage order
+stages:
+  - name: precache
+  - stage: linting
+    if: branch != master
+  - stage: tests
+  - stage: deploy
+    if: type = push
+
+# build stage defs
 jobs:
   include:
     # precache npm packages
@@ -48,10 +56,11 @@ jobs:
     - stage: deploy
       name: "Deploy API Server"
       script: skip
+      before_install:
+        - npm i -g now
       deploy:
         provider: script # Run a custom deployment script which we will define below
         script: bin/deploy api
         skip_cleanup: true
         on:
-          all_branches: true
-          master: false
+          branch: staging
