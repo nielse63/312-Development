@@ -1,1 +1,1 @@
-web: npm i -g http-server && yarn start
+web: npm i -g http-server && yarn start --prod

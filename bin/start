@@ -1,18 +1,30 @@
 #!/usr/bin/env bash
 set -e
 
-if ! [ $PORT ]; then
-  $PORT=3000
-  export $PORT
-fi
-
 if ! [ $(command -v http-server) ]; then
   npm i -g http-server
 fi
 
-# serve
-http-server -p $PORT \
-  --proxy $API_HOST \
-  --gzip \
-  --no-dotfiles \
-  dist/
+function start_non_production
+{
+  http-server -p 3000 \
+    --proxy $API_HOST \
+    --gzip \
+    --no-dotfiles \
+    dist/
+}
+
+function start_production
+{
+  http-server -p $PORT \
+    --proxy $API_HOST \
+    --gzip \
+    --no-dotfiles \
+    dist/
+}
+
+if [ "$1" == "--prod" ]; then
+  start_production
+else
+  start_non_production
+fi
