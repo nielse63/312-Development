@@ -1,8 +1,17 @@
 #!/usr/bin/env bash
 set -e
 
+if ! [ $PORT ]; then
+  $PORT=3000
+  export $PORT
+fi
+
+if ! [ $(command -v http-server) ]; then
+  npm i -g http-server
+fi
+
 # serve
-yarn http-server -p 3000 \
+http-server -p $PORT \
   --proxy $API_HOST \
   --gzip \
   --no-dotfiles \
