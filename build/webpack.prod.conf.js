@@ -3,10 +3,12 @@
 const webpack = require('webpack');
 const merge = require('webpack-merge');
 const CompressionPlugin = require('compression-webpack-plugin');
-const FaviconsWebpackPlugin = require('favicons-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
+const WebpackPwaManifest = require('webpack-pwa-manifest');
+const ResourceHintWebpackPlugin = require('resource-hints-webpack-plugin');
+const OfflinePlugin = require('offline-plugin');
 const { setPath, extractCSS, metadata } = require('./build-config');
 const baseConfig = require('./webpack.base.conf');
 
@@ -47,31 +49,30 @@ module.exports = merge(baseConfig, {
     new CopyWebpackPlugin([
       { from: 'static/**/*', to: setPath('dist'), flatten: true },
     ]),
-    new FaviconsWebpackPlugin({
-      logo:            setPath('src/assets/images/icon.png'),
-      prefix:          'icons/',
-      emitStats:       false,
-      statsFilename:   'iconstats.json',
-      persistentCache: true,
-      inject:          true,
-      background:      '#fff',
-      title:           metadata.title,
-      icons:           {
-        // don't create icons for...
-        firefox: false,
-        coast:   false,
-        yandex:  false,
-        windows: false,
-
-        // create icons for...
-        android:      true,
-        appleIcon:    true,
-        appleStartup: true,
-        favicons:     true,
-        opengraph:    true,
-        twitter:      true,
+    new WebpackPwaManifest({
+      name:             metadata.title,
+      short_name:       `${metadata.title.substring(0, 9)}...`,
+      description:      metadata.description,
+      background_color: metadata.themeColor,
+      theme_color:      metadata.themeColor,
+      orientation:      'portrait',
+      display:          'standalone',
+      start_url:        '.',
+      inject:           true,
+      fingerprints:     false,
+      icons:            [
+        {
+          src:   setPath('src/assets/images/icon.png'),
+          sizes: [96, 128, 192, 256, 384, 512],
+        },
+      ],
+      ios: {
+        'apple-mobile-web-app-title':            metadata.title,
+        'apple-mobile-web-app-status-bar-style': 'black',
       },
     }),
+    new ResourceHintWebpackPlugin(),
+    new OfflinePlugin(),
     new CompressionPlugin({
       test:      /\.(js|css|woff|woff2|svg|html)$/,
       algorithm: 'gzip',
