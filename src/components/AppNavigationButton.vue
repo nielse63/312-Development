@@ -3,6 +3,7 @@
     class="app-navigation-button"
     :class="buttonClass"
     role="presentation"
+    aria-label="Open Navigation"
     @click="toggleNav"
   >
     <span></span>
