@@ -4,12 +4,8 @@
   <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
   <meta http-equiv="expires" content="0">
   <title><%= htmlWebpackPlugin.options.title %></title>
-  <link rel="manifest" href="/icons/manifest.json">
   <link href="https://fonts.googleapis.com/css?family=Nunito:400,400i,700" rel="preload" onload="this.rel='stylesheet'"
     as="style">
-  <% for (var chunk of webpack.chunks) {
-        for (var file of chunk.files) {
-          if (file.match(/\.(js|css)$/)) { %><link rel="<%= chunk.initial?'preload':'prefetch' %>" href="<%= htmlWebpackPlugin.files.publicPath + file %>" as="<%= file.match(/\.css$/)?'style':'script' %>"><% }}} %>
 </head>
 <body>
   <a href="#main" class="visually-hidden">Skip to main content</a>

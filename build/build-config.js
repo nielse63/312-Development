@@ -44,6 +44,7 @@ exports.extractHTML = new HtmlWebpackPlugin({
     viewport:    'width=device-width, initial-scale=1.0, maximum-scale=1.0',
     description: pkg.description,
   },
+  favicon: setPath('src/assets/images/icon.png'),
 
   // options
   title: 'Erik Nielsen | Chicago Senior UI Engineer',
@@ -58,4 +59,5 @@ exports.extractCSS = new MiniCssExtractPlugin({
 exports.metadata = {
   title:       pkg.name.replace(/-/g, ' '),
   description: pkg.description,
+  themeColor:  '#0c96c0',
 };
