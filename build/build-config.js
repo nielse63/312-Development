@@ -41,7 +41,7 @@ exports.extractHTML = new HtmlWebpackPlugin({
     removeAttributeQuotes: true,
   },
   meta: {
-    view:        'width=device-width, initial-scale=1.0, maximum-scale=1.0',
+    viewport:    'width=device-width, initial-scale=1.0, maximum-scale=1.0',
     description: pkg.description,
   },
 
