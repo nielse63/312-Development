@@ -1,5 +1,10 @@
 <template>
-  <button class="app-navigation-button" :class="buttonClass" @click="toggleNav">
+  <button
+    class="app-navigation-button"
+    :class="buttonClass"
+    role="presentation"
+    @click="toggleNav"
+  >
     <span></span>
     <span></span>
     <span></span>

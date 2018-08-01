@@ -2,6 +2,7 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const pkg = require('../package.json');
 
 const NODE_ENV = process.env.NODE_ENV || 'development';
 const IN_DEV = NODE_ENV !== 'production';
@@ -39,6 +40,10 @@ exports.extractHTML = new HtmlWebpackPlugin({
     collapseWhitespace:    true,
     removeAttributeQuotes: true,
   },
+  meta: {
+    view:        'width=device-width, initial-scale=1.0, maximum-scale=1.0',
+    description: pkg.description,
+  },
 
   // options
   title: 'Erik Nielsen | Chicago Senior UI Engineer',
@@ -49,3 +54,8 @@ exports.extractCSS = new MiniCssExtractPlugin({
   // both options are optional
   filename: IN_DEV ? '[name].css' : '[name].[chunkhash].css',
 });
+
+exports.metadata = {
+  title:       pkg.name.replace(/-/g, ' '),
+  description: pkg.description,
+};
