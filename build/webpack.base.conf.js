@@ -1,64 +1,100 @@
-const path = require('path');
-const utils = require('./utils');
-const config = require('../config');
-const vueLoaderConfig = require('./vue-loader.conf');
+/* eslint-disable global-require */
 
-function resolve(dir) {
-  return path.join(__dirname, '..', dir);
-}
+const webpack = require('webpack');
+const { VueLoaderPlugin } = require('vue-loader');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
-const webpackConfig = {
+const {
+  NODE_ENV, IN_DEV, setPath, stats, extractHTML,
+} = require('./build-config');
+
+module.exports = {
   entry: {
-    app: './src/main.js',
+    app: setPath('src/main.js'),
   },
   output: {
-    path: config.build.assetsRoot,
-    filename: '[name].js',
-    publicPath: process.env.NODE_ENV === 'production'
-      ? config.build.assetsPublicPath
-      : config.dev.assetsPublicPath,
+    path:       setPath('dist'),
+    publicPath: '/',
+  },
+  stats,
+  cache:       true,
+  performance: {
+    hints: 'warning',
   },
   resolve: {
-    extensions: ['.js', '.vue', '.json', '.scss'],
-    alias: {
+    extensions: ['.js', '.vue', '.json'],
+    alias:      {
       vue$: 'vue/dist/vue.esm.js',
-      '@': resolve('src'),
+      '@':  setPath('src'),
     },
   },
   module: {
     rules: [
       {
-        test: /\.vue$/,
-        loader: 'vue-loader',
-        options: vueLoaderConfig,
-      },
-      {
-        test: /\.js$/,
-        loader: 'babel-loader',
-        include: [resolve('src'), resolve('test')],
-      },
-      {
-        test: /\.(png|jpe?g|gif|webp)(\?.*)?$/,
-        loader: 'url-loader',
+        test:    /\.vue$/,
+        loader:  'vue-loader',
         options: {
-          limit: 10000,
-          name: utils.assetsPath('img/[name].[hash:7].[ext]'),
+          loaders: {
+            js: 'babel-loader',
+          },
+          transformToRequire: {
+            video:  ['src', 'poster'],
+            source: 'src',
+            img:    'src',
+            image:  'xlink:href',
+          },
         },
       },
       {
-        test: /\.(woff2?|eot|ttf|otf)(\?.*)?$/,
-        loader: 'url-loader',
-        options: {
-          limit: 10000,
-          name: utils.assetsPath('fonts/[name].[hash:7].[ext]'),
-        },
+        test:    /\.js$/,
+        loader:  'babel-loader',
+        include: [setPath('src')],
       },
       {
-        test: /\.(svg)(\?.*)?$/,
-        loader: 'vue-svg-loader',
+        test: /\.scss$/,
+        use:  [
+          IN_DEV ? 'style-loader' : MiniCssExtractPlugin.loader,
+          'css-loader',
+          'postcss-loader',
+          'sass-loader',
+        ],
+      },
+      {
+        test: /\.(jpe?g|png|gif)$/i,
+        use:  [
+          {
+            loader:  'file-loader',
+            options: {
+              name:            '[name].[hash].[ext]',
+              useRelativePath: false,
+            },
+          },
+          'img-loader',
+        ],
+      },
+      {
+        test: /\.svg$/,
+        use:  [
+          {
+            loader:  'svg-inline-loader',
+            options: {
+              removeTags:        true,
+              removingTags:      ['title', 'desc'],
+              removeSVGTagAttrs: true,
+            },
+          },
+        ],
       },
     ],
   },
+  plugins: [
+    new webpack.DefinePlugin({
+      'process.env': {
+        NODE_ENV: `"${NODE_ENV}"`,
+        API_HOST: `"${process.env.API_HOST}"`,
+      },
+    }),
+    new VueLoaderPlugin(),
+    extractHTML,
+  ],
 };
-
-module.exports = webpackConfig;

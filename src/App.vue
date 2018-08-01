@@ -1,111 +1,93 @@
 <template>
-  <div id="app" v-bind:class="{ 'menu-open': isMenuOpen, app: true }" @click="onClick">
-    <app-header />
-    <main id="main" class="main">
-      <router-view></router-view>
-    </main>
-    <app-footer />
-    <navigation />
+  <div id="main" class="app" :class="appClass">
+    <div :class="pageClass" @click="onpageclick">
+      <home></home>
+      <app-footer></app-footer>
+    </div>
+    <app-navigation :open="isNavOpen"></app-navigation>
+    <app-navigation-button></app-navigation-button>
   </div>
 </template>
 
 <script>
-  import { mapGetters } from 'vuex';
-  import lazyLoad from '@/lib/lazy-load';
-  import scrolling from '@/lib/scrolling';
-  import AppHeader from '@/components/Header';
-  import AppFooter from '@/components/Footer';
-  import Navigation from '@/components/Navigation';
+import { mapState, mapActions } from 'vuex';
+import AppNavigation from '@/components/AppNavigation';
+import AppNavigationButton from '@/components/AppNavigationButton';
+import AppFooter from '@/components/AppFooter';
+import Home from '@/views/Home';
 
-  export default {
-    name: 'app',
-    components: {
-      AppHeader,
-      AppFooter,
-      Navigation,
+export default {
+  name:       'app',
+  components: {
+    AppNavigation,
+    AppNavigationButton,
+    AppFooter,
+    Home,
+  },
+  computed: {
+    ...mapState('nav', {
+      isNavOpen: 'open',
+    }),
+    appClass() {
+      return {
+        'nav-open': this.isNavOpen,
+      };
     },
-    computed: {
-      ...mapGetters({
-        isMenuOpen: 'isMenuOpen',
-      }),
+    pageClass() {
+      return {
+        open: this.isNavOpen,
+        page: true,
+      };
     },
-    methods: {
-      canClick(target) {
-        /* istanbul ignore next */
-        return this.isMenuOpen && !target.closest('.navigation') && !target.closest('.header__button');
-      },
-      onClick({ target }) {
-        /* istanbul ignore next */
-        if (this.canClick(target)) {
-          this.$store.dispatch('toggleMenu');
-        }
-      },
+  },
+  methods: {
+    ...mapActions('nav', {
+      closeNav: 'close',
+    }),
+    onpageclick() {
+      if (this.isNavOpen) {
+        this.closeNav();
+      }
     },
-    updated() {
-      /* istanbul ignore next */
-      setTimeout(lazyLoad, 500);
-    },
-    mounted() {
-      document.addEventListener('scrolling', () => {
-        /* istanbul ignore if */
-        if (this.isMenuOpen) {
-          this.$store.dispatch('toggleMenu');
-        }
-      }, false);
-
-      setTimeout(lazyLoad, 500);
-      scrolling();
-    },
-  };
+  },
+};
 </script>
 
 <style lang="scss">
-  @font-face {
-    font-family: 'FontAwesome';
-    src: url('assets/fonts/fontawesome-webfont.woff2?v=4.7.0') format('woff2'),
-         url('assets/fonts/fontawesome-webfont.woff?v=4.7.0') format('woff');
-    font-weight: normal;
-    font-style: normal;
-  }
-
-  @import 'assets/styles/common/reset';
-  @import 'assets/styles/common/globals';
-  @import 'assets/styles/shared/grid';
-  @import 'assets/styles/shared/links';
-  @import 'assets/styles/shared/visually-hidden';
-  @import 'assets/styles/shared/font-awesome';
+@import "assets/styles/global";
 </style>
 
 <style lang="scss" scoped>
-  @import 'assets/styles/main';
+@import "assets/styles/lib/vars";
 
-  .app {
-    max-width: 100vw;
-    overflow-x: hidden;
+.app {
+  background-color: $color-white;
+  overflow-x: hidden;
+}
+
+.page {
+  contain: content;
+
+  &-content {
+    min-height: 100vh;
   }
 
-  .main,
-  .footer {
-    position: relative;
+  > * {
+    transition: 0.25s opacity ease-in-out;
+    will-change: opacity;
+  }
 
-    &:after {
-      @include size(100%);
-
-      content: '';
-      opacity: 0;
-      visibility: hidden;
-      background-color: #111;
-      transition: opacity $transition-duration,
-                  visibility $transition-duration;
-      position: absolute;
-      top: 0;
-      left: 0;
-      z-index: 1;
-
-      .menu-open & {
-        opacity: 0.5;
-        visibility: visible;
-      }
+  &.open {
+    > * {
+      opacity: 0.35;
     }
   }
+}
+
+.loading {
+  .page,
+  .app-navigation-button {
+    filter: blur(7.5px);
+  }
+}
 </style>

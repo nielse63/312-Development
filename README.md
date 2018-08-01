@@ -1,6 +1,6 @@
 # 312-Development
 
-[Check out the Site](https://312development.com/) | [Follow me on Twitter](https://twitter.com/erikkylenielsen/)
+[Check out the Site](https://312development.com/) \| [Follow me on Twitter](https://twitter.com/erikkylenielsen/)
 
 [![Build Status](https://travis-ci.org/nielse63/312-Development.svg?branch=master)](https://travis-ci.org/nielse63/312-Development)
 [![Coverage Status](https://coveralls.io/repos/github/nielse63/312-Development/badge.svg?branch=master)](https://coveralls.io/github/nielse63/312-Development?branch=master)
@@ -17,7 +17,7 @@ First and foremost, this repo is not meant to be a tutorial or boilerplate of an
 
 ## Technology & Tools
 
-This is just the highlight reel of all the tools I'm using on my site. To see all the giants whose shoulders I'm standing on, checkout the [package.json](https://github.com/nielse63/312-Development/blob/master/package.json) file.*
+This is just the highlight reel of all the tools I'm using on my site. To see all the giants whose shoulders I'm standing on, checkout the [package.json](https://github.com/nielse63/312-Development/blob/master/package.json) file.
 
 ### The Base
 

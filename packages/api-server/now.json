@@ -1,0 +1,11 @@
+{
+  "name": "312-dev-api-server",
+  "alias": "312-dev-api-server",
+  "env": {
+    "NODE_ENV": "production",
+    "API_HOST": "@api-host",
+    "GITHUB_API_TOKEN": "@github-api-token",
+    "MAILGUN_API_TOKEN": "@mailgun-api-key"
+  },
+  "type": "npm"
+}

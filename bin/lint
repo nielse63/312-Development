@@ -1,0 +1,45 @@
+#!/usr/bin/env bash
+set -e
+
+function lint_js() {
+  echo 'Linting JS files'
+  yarn eslint --ext .js,.vue ./*.js src/ build/ test/ --fix
+}
+
+function lint_scss() {
+  echo 'Linting SCSS files'
+  yarn stylelint 'src/**/*.scss' -s scss --fix
+  yarn stylelint 'src/**/*.vue' --custom-syntax postcss-html --fix
+}
+
+function lint_md() {
+  echo 'Linting .md files'
+  yarn lint:md -S
+}
+
+function usage() {
+  echo "lints source files"
+  echo " "
+  echo "bin/lint [command]"
+  echo " "
+  echo "commands:"
+  echo "js                      lints javascript files"
+  echo "scss                    lints scss files"
+  echo "md                      lints markdown files"
+  echo " "
+  echo "help                    displays usage"
+  exit 0
+}
+
+if [ "$1" == "js" ]; then
+  lint_js
+elif [ "$1" == "scss" ]; then
+  lint_scss
+elif [ "$1" == "md" ]; then
+  lint_md
+elif [ "$1" == "help" ]; then
+  usage
+else
+  usage
+  exit 1
+fi

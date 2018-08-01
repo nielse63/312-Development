@@ -1,83 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title><%= htmlWebpackPlugin.options.props.title %></title>
-    <meta name="description" content="<%= htmlWebpackPlugin.options.props.description %>">
-    <% for (var chunk of webpack.chunks) {
+<head>
+  <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+  <meta http-equiv="expires" content="0">
+  <title><%= htmlWebpackPlugin.options.title %></title>
+  <link rel="manifest" href="/icons/manifest.json">
+  <link href="https://fonts.googleapis.com/css?family=Nunito:400,400i,700" rel="preload" onload="this.rel='stylesheet'"
+    as="style">
+  <% for (var chunk of webpack.chunks) {
         for (var file of chunk.files) {
-          if (file.match(/\.(js|css)$/)) { %>
-    <link rel="<%= chunk.initial?'preload':'prefetch' %>" href="<%= htmlWebpackPlugin.files.publicPath + file %>" as="<%= file.match(/\.css$/)?'style':'script' %>"><% }}} %>
+          if (file.match(/\.(js|css)$/)) { %><link rel="<%= chunk.initial?'preload':'prefetch' %>" href="<%= htmlWebpackPlugin.files.publicPath + file %>" as="<%= file.match(/\.css$/)?'style':'script' %>"><% }}} %>
+</head>
+<body>
+  <a href="#main" class="visually-hidden">Skip to main content</a>
+  <noscript>This site requires JavaScript to be enabled - Please turn JavaScript on and visit again.</noscript>
+  <div id="app"></div>
+</body>
 
-    <!-- Resource Hints -->
-    <link rel="dns-prefetch" href="https://www.google-analytics.com/">
-    <link rel="dns-prefetch" href="https://fonts.googleapis.com/">
-    <link rel="dns-prefetch" href="https://api.github.com">
-    <link rel="dns-prefetch" href="https://api.npmjs.org">
-    <link rel="preload" as="style" href="https://fonts.googleapis.com/css?family=Lato:400,700,900" onload="this.rel='stylesheet'">
-
-    <!-- SEO Stuff -->
-    <link rel="canonical" href="<%= htmlWebpackPlugin.options.props.url %>" />
-    <meta name="robots" content="index, follow">
-    <meta name="web_author" content="Erik Nielsen">
-    <meta name="google-site-verification" content="vyWEm34Gozx9VN-aZv3a9zdc34q6rvdznHIGDaVq8M8" />
-
-    <!-- Icons -->
-    <link rel="apple-touch-icon" sizes="180x180" href="/static/img/icons/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="/static/img/icons/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="/static/img/icons/favicon-16x16.png">
-    <link rel="manifest" href="/static/manifest.json">
-    <link rel="mask-icon" href="/static/img/icons/safari-pinned-tab.svg" color="#0074d9">
-    <meta name="theme-color" content="#0074d9">
-
-    <!-- Add to home screen for Safari on iOS -->
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black">
-    <meta name="apple-mobile-web-app-title" content="<%= htmlWebpackPlugin.options.props.title %>">
-    <link rel="apple-touch-icon" href="/static/img/icons/apple-touch-icon-152x152.png">
-
-    <!-- Add to home screen for Windows -->
-    <meta name="msapplication-TileImage" content="/static/img/icons/msapplication-icon-144x144.png">
-    <meta name="msapplication-TileColor" content="#0074d9">
-
-    <!-- Open Graph Meta Data -->
-    <meta property="fb:app_id" content="834389063291117">
-    <meta property="og:type" content="website">
-    <meta property="og:title" content="<%= htmlWebpackPlugin.options.props.title %>">
-    <meta property="og:url" content="<%= htmlWebpackPlugin.options.props.url %>">
-    <meta property="og:image" content="<%= htmlWebpackPlugin.options.props.image %>">
-    <meta property="og:description" content="<%= htmlWebpackPlugin.options.props.description %>">
-
-    <!-- Twitter Card Meta Data -->
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:site" content="@erikkylenielsen">
-    <meta name="twitter:title" content="<%= htmlWebpackPlugin.options.props.title %>">
-    <meta name="twitter:description" content="<%= htmlWebpackPlugin.options.props.description %>">
-    <meta name="twitter:image" content="<%= htmlWebpackPlugin.options.props.image %>">
-
-    <!-- JSON-LD Code -->
-    <script type="application/ld+json">
-      {
-        "@context": "http://schema.org/",
-        "@type": "Person",
-        "name": "<%= htmlWebpackPlugin.options.props.me.name %>",
-        "jobTitle": "<%= htmlWebpackPlugin.options.props.me.title %>",
-        "address": {
-          "@type": "PostalAddress",
-          "addressLocality": "Chicago",
-          "addressRegion": "Illinois"
-        }
-      }
-    </script>
-  </head>
-  <body>
-    <a href="#main" class="visually-hidden">Skip to main content</a>
-    <noscript>This site requires JavaScript to be enabled - Please turn JavaScript on and visit again.</noscript>
-    <div id="app"></div>
-    <%= htmlWebpackPlugin.options.serviceWorkerLoader %>
-
-    <%= htmlWebpackPlugin.options.props.analytics %>
-  </body>
 </html>

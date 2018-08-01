@@ -1,0 +1,34 @@
+
+@import "lib/vars";
+@import "lib/mixins";
+@import "lib/keyframes";
+@import "normalize";
+@import "fonts";
+
+.visually-hidden {
+  position: absolute;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  height: 1px;
+  width: 1px;
+  margin: -1px;
+  padding: 0;
+  border: 0;
+}
+
+.tool {
+  svg {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    max-height: ($tool-icon-size - 30px);
+    max-width: ($tool-icon-size - 30px);
+  }
+}
+
+.app-loading {
+  svg {
+    @include size($loading-icon-width);
+  }
+}

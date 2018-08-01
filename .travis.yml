@@ -1,28 +1,58 @@
 ---
 language: node_js
 node_js:
-  - "9"
-sudo: false
+  - node
 cache:
   yarn: true
+  directories:
+    - node_modules
+    - "packages/api-server/node_modules"
+    - "$HOME/.nvm"
 dist: trusty
 addons:
   chrome: stable
+
+# hooks
 before_install:
   - npm config set spin false
+  - npm i -g http-server
+before_script:
+  - yarn lerna bootstrap
 
+# env vars
 env:
   global:
     - JOBS=1
     - NODE_ENV=test
 
-jobs:
-  include:
-    - stage: tests
-      script: yarn run unit
-    - script: yarn run integration
+script:
+  - yarn lint:js
+  - yarn lint:scss
+  - yarn test:unit
+  - yarn test:e2e
 
-branches:
-  only:
-  - master
-  - develop
+# build stage defs
+# jobs:
+#   include:
+#     # precache npm packages
+#     - stage: precache
+#       name: "Cache Dependencies"
+#       script: true
+#     # lint src
+#     - stage: linting
+#       script: yarn lint:js
+#       name: "Lint JS"
+#     - script: yarn lint:scss
+#       name: "Lint SCSS"
+#     - script: yarn lint:md
+#       name: "Lint Markdown"
+#     # run tests
+#     - stage: tests
+#       script: yarn test:unit
+#       name: "Unit Tests"
+#     - script: yarn test:e2e
+#       name: "Integration Tests"
+#       before_install:
+#         - npm i -g http-server
+#       before_script:
+#         - yarn lerna bootstrap

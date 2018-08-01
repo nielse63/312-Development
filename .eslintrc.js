@@ -1,31 +1,34 @@
 // http://eslint.org/docs/user-guide/configuring
 
 const production = process.env.NODE_ENV !== 'development';
-const warnOrOff = production ? 'warn' : 'off';
 const errorOrOff = production ? 'error' : 'off';
+const errorOrWarn = production ? 'error' : 'warn';
 
 module.exports = {
-  root: true,
-  parser: 'babel-eslint',
+  root:          true,
   parserOptions: {
+    parser:      'babel-eslint',
     ecmaVersion: 2017,
-    sourceType: 'module',
+    sourceType:  'module',
   },
   env: {
     browser: true,
   },
   extends: [
     'airbnb-base',
+    'plugin:unicorn/recommended',
+    'plugin:vue/essential',
   ],
   // required to lint *.vue files
   plugins: [
-    'html',
+    'unicorn',
+    'vue',
   ],
   // check if imports actually resolve
   settings: {
     'import/resolver': {
       webpack: {
-        config: 'build/webpack.base.conf.js',
+        config: './build/webpack.base.conf.js',
       },
     },
   },
@@ -33,29 +36,83 @@ module.exports = {
   rules: {
     // don't require .vue extension when importing
     'import/extensions': ['error', 'always', {
-      js: 'never',
+      js:  'never',
       vue: 'never',
     }],
-    // allow optionalDependencies
-    'import/no-extraneous-dependencies': ['error', {
-      optionalDependencies: ['test/unit/index.js'],
-    }],
     'import/prefer-default-export': 'off',
+
+    // override unicorn rules
+    'unicorn/explicit-length-check': 'off',
+
     // allow debugger during development
-    'no-debugger': production ? 2 : 0,
-    semi: warnOrOff,
-    'no-console': [warnOrOff, { allow: ['warn', 'error'] }],
-    'no-param-reassign': [warnOrOff, { props: false }],
-    'max-len': 'off',
-    'keyword-spacing': warnOrOff,
-    'no-underscore-dangle': 'off',
-    'space-before-function-paren': warnOrOff,
-    complexity: ['warn', 3],
-    indent: errorOrOff,
-    'comma-dangle': [warnOrOff, {
-      arrays: 'always-multiline',
-      objects: 'always-multiline',
-      functions: 'never',
-    }],
+    'max-len':            'off',
+    'key-spacing':        ['warn', { align: 'value' }],
+    'no-console':         [errorOrOff, { allow: ['error', 'warn'] }],
+    'func-names':         'error',
+    complexity:           ['error', 5],
+    'no-mixed-operators': [errorOrWarn],
+    'no-debugger':        [errorOrWarn],
   },
+  overrides: [
+    {
+      files: ['**/*.vue'],
+      rules: {
+        'unicorn/filename-case': ['error', {
+          case: 'pascalCase',
+        }],
+      },
+    },
+    {
+      files: ['test/**'],
+      env:   {
+        jest: true,
+      },
+      globals: {
+        browser: true,
+        page:    true,
+      },
+      rules: {
+        'unicorn/filename-case': 'off',
+      },
+    },
+    {
+      files: [
+        'build/**',
+        'scripts/**',
+      ],
+      env: {
+        browser: false,
+        node:    true,
+      },
+      rules: {
+        'no-console':                        'off',
+        'import/no-extraneous-dependencies': ['error', {
+          devDependencies: true,
+        }],
+      },
+    },
+    {
+      files: [
+        'scripts/**',
+      ],
+      rules: {
+        'unicorn/no-process-exit': 'off',
+      },
+    },
+    {
+      files: ['src/store/**/*.js'],
+      rules: {
+        'no-param-reassign': ['error', {
+          props:                          true,
+          ignorePropertyModificationsFor: ['state'],
+        }],
+      },
+    },
+    {
+      files: ['src/lib/canvas/**'],
+      rules: {
+        'no-param-reassign': 'off',
+      },
+    },
+  ],
 };

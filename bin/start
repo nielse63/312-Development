@@ -1,0 +1,20 @@
+#!/usr/bin/env bash
+set -e
+
+# make sure http-server is installed
+if ! [ $(command -v http-server) ]; then npm i -g http-server; fi
+
+# source env vars, if available
+if [ -f ".env" ]; then source .env; fi
+
+# assign a port
+SERVER_PORT=$PORT
+if ! [ $SERVER_PORT ]; then SERVER_PORT=3000; fi
+
+# start the server
+http-server -p $SERVER_PORT \
+  --proxy $API_HOST \
+  --gzip \
+  --no-dotfiles \
+  -c86400 \
+  dist/
