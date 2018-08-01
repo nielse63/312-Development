@@ -170,6 +170,7 @@ button {
 
 span {
   transition: opacity 0.3s 0.1s;
+  color: #006640;
 
   .loading &,
   .success &,

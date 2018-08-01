@@ -1,7 +1,7 @@
 {
   "name": "312-development",
   "version": "2.0.0",
-  "description": "My personal website",
+  "description": "The portfolio site of Erik Nielsen, UI/UX engineer from Chicago",
   "author": "Erik Nielsen <erik@312development.com>",
   "private": true,
   "scripts": {

@@ -1,5 +1,11 @@
 <template>
-  <button class="app-navigation-button" :class="buttonClass" @click="toggleNav">
+  <button
+    class="app-navigation-button"
+    :class="buttonClass"
+    role="presentation"
+    aria-label="Open Navigation"
+    @click="toggleNav"
+  >
     <span></span>
     <span></span>
     <span></span>

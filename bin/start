@@ -1,30 +1,20 @@
 #!/usr/bin/env bash
 set -e
 
-if ! [ $(command -v http-server) ]; then
-  npm i -g http-server
-fi
+# make sure http-server is installed
+if ! [ $(command -v http-server) ]; then npm i -g http-server; fi
 
-function start_non_production
-{
-  http-server -p 3000 \
-    --proxy $API_HOST \
-    --gzip \
-    --no-dotfiles \
-    dist/
-}
+# source env vars, if available
+if [ -f ".env" ]; then source .env; fi
 
-function start_production
-{
-  http-server -p $PORT \
-    --proxy $API_HOST \
-    --gzip \
-    --no-dotfiles \
-    dist/
-}
+# assign a port
+SERVER_PORT=$PORT
+if ! [ $SERVER_PORT ]; then SERVER_PORT=3000; fi
 
-if [ "$1" == "--prod" ]; then
-  start_production
-else
-  start_non_production
-fi
+# start the server
+http-server -p $SERVER_PORT \
+  --proxy $API_HOST \
+  --gzip \
+  --no-dotfiles \
+  -c86400 \
+  dist/

@@ -7,7 +7,7 @@ const FaviconsWebpackPlugin = require('favicons-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
-const { setPath, extractCSS } = require('./build-config');
+const { setPath, extractCSS, metadata } = require('./build-config');
 const baseConfig = require('./webpack.base.conf');
 
 module.exports = merge(baseConfig, {
@@ -55,7 +55,7 @@ module.exports = merge(baseConfig, {
       persistentCache: true,
       inject:          true,
       background:      '#fff',
-      title:           'Erik Nielsen',
+      title:           metadata.title,
       icons:           {
         // don't create icons for...
         firefox: false,
