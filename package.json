@@ -15,7 +15,8 @@
     "new": "vg",
     "test:e2e": "bin/test e2e",
     "test:unit": "jest --config=test/unit/jest.config.js",
-    "heroku-postbuild": "yarn build"
+    "heroku-postbuild": "yarn build",
+    "commit": "git add . && git cz"
   },
   "gitHooks": {
     "pre-commit": "lint-staged"

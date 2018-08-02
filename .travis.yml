@@ -21,6 +21,9 @@ before_script:
   - yarn lerna bootstrap
 after_script:
   - greenkeeper-lockfile-upload
+after_success:
+  - npm i -g coveralls
+  - cat coveralls/info.lcov | coveralls
 
 # env vars
 env:
