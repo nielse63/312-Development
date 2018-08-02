@@ -1,15 +1,60 @@
 
-module.exports = function debounce(func, wait = 250, immediate = false) {
+function debounce(func, wait = 100, immediate) {
   let timeout;
-  return function fn(...args) {
-    const context = this;
-    const later = function later() {
+  let args;
+  let context;
+  let timestamp;
+  let result;
+
+  function later() {
+    const last = Date.now() - timestamp;
+
+    if (last < wait && last >= 0) {
+      timeout = setTimeout(later, wait - last);
+    } else {
       timeout = null;
-      if (!immediate) func.apply(context, ...args);
-    };
+      if (!immediate) {
+        result = func.apply(context, args);
+        context = null;
+        args = null;
+      }
+    }
+  }
+
+  const debounced = function debounced(...argz) {
+    context = this;
+    args = argz;
+    timestamp = Date.now();
     const callNow = immediate && !timeout;
-    clearTimeout(timeout);
-    timeout = setTimeout(later, wait);
-    if (callNow) func.apply(context, ...args);
+    if (!timeout) timeout = setTimeout(later, wait);
+    if (callNow) {
+      result = func.apply(context, args);
+      context = null;
+      args = null;
+    }
+
+    return result;
   };
-};
+
+  debounced.clear = function clear() {
+    if (timeout) {
+      clearTimeout(timeout);
+      timeout = null;
+    }
+  };
+
+  debounced.flush = function flush() {
+    if (timeout) {
+      result = func.apply(context, args);
+      context = null;
+      args = null;
+
+      clearTimeout(timeout);
+      timeout = null;
+    }
+  };
+
+  return debounced;
+}
+
+module.exports = debounce;

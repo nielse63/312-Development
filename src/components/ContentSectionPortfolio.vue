@@ -1,5 +1,5 @@
 <template>
-  <content-section title="Selected Work" id="portfolio" @inview="inview">
+  <content-section title="Selected Work" id="portfolio">
     <article>
       <div class="cards">
         <template v-for="(card, i) in cards">
@@ -66,11 +66,6 @@ export default {
         },
       ],
     };
-  },
-  methods: {
-    inview() {
-      this.isInView = true;
-    },
   },
 };
 </script>

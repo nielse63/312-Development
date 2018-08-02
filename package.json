@@ -21,9 +21,7 @@
     "pre-commit": "lint-staged"
   },
   "dependencies": {
-    "animejs": "^2.2.0",
     "offline-plugin": "^5.0.5",
-    "remove": "^0.1.5",
     "vue": "^2.5.17",
     "vuex": "^3.0.1"
   },

@@ -1,17 +1,13 @@
 <template>
   <div :class="cls" :id="id">
     <header>
-      <h2 class="section-title">
-        <span v-for="(letter, i) in letters" :key="i" v-html="letter" v-once></span>
-      </h2>
+      <h2 class="section-title" v-once v-in-view>{{title}}</h2>
     </header>
     <slot></slot>
   </div>
 </template>
 
 <script>
-import anime from 'animejs';
-
 export default {
   name:  'ContentSection',
   props: {
@@ -36,66 +32,6 @@ export default {
       output[this.id] = true;
       return output;
     },
-    letters() {
-      return this.title
-        .split('')
-        .map(letter => (/\s/.test(letter) ? '&nbsp;' : letter));
-    },
-  },
-  methods: {
-    animateTitle() {
-      return anime({
-        targets: this.$el.querySelectorAll('.section-title span'),
-        opacity: 1,
-        translateY() {
-          return [`${anime.random(25, 50)}vh`, '0vh'];
-        },
-        duration: 1000,
-        easing:   'easeOutElastic',
-        delay(target, index) {
-          return index * 25;
-        },
-        elasticity() {
-          return anime.random(100, 150);
-        },
-        autoplay: false,
-      });
-    },
-    isInView() {
-      const animation = this.animateTitle();
-      this.$nextTick(() => {
-        animation.play();
-        this.$emit('inview');
-      });
-    },
-    setObserver() {
-      const options = {
-        root:       null,
-        rootMargin: '0px',
-        threshold:  [],
-      };
-      for (let i = 0; i <= 1; i += 0.1) {
-        options.threshold.push(i);
-      }
-      const observer = new IntersectionObserver((entries) => {
-        const entry = entries[0];
-        if (!entry.isIntersecting) {
-          return;
-        }
-        if (entry.intersectionRect.height / window.innerHeight >= 0.75) {
-          observer.unobserve(entry.target);
-          Promise.resolve().then(() => {
-            this.isInView();
-          });
-        }
-      }, options);
-      observer.observe(this.$el);
-    },
-  },
-  mounted() {
-    this.$nextTick(() => {
-      this.setObserver();
-    });
   },
 };
 </script>
@@ -142,17 +78,28 @@ h2 {
   background-color: $color-white;
   padding: 0 0.15em;
   line-height: 1;
+  opacity: 0;
+  transform: translate(0, 50px);
+  transition: 0.35s ease-in-out 1s;
+  transition-property: transform, opacity;
+  // will-change: transform, opacity;
 
   @media (min-width: $mobile-width) {
     font-size: 8vw;
   }
+
+  &[data-in-view="true"] {
+    transition-delay: 0s;
+    opacity: 1;
+    transform: translate(0, 0);
+  }
 }
 
-span {
-  opacity: 0;
-  display: inline-block;
-  transform: translateY(50vh);
-}
+// span {
+//   opacity: 0;
+//   display: inline-block;
+//   transform: translateY(50vh);
+// }
 
 article {
   color: $color-white;
