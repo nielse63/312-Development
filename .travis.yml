@@ -23,7 +23,7 @@ after_script:
   - greenkeeper-lockfile-upload
 after_success:
   - npm i -g coveralls
-  - cat coveralls/info.lcov | coveralls
+  - cat coveralls/lcov.info | coveralls
 
 # env vars
 env:
