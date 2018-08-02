@@ -15,15 +15,19 @@ addons:
 # hooks
 before_install:
   - npm config set spin false
-  - npm i -g http-server
+  - npm i -g http-server greenkeeper-lockfile@2
 before_script:
+  - greenkeeper-lockfile-update
   - yarn lerna bootstrap
+after_script:
+  - greenkeeper-lockfile-upload
 
 # env vars
 env:
   global:
     - JOBS=1
     - NODE_ENV=test
+    - secure: c6gzNinL6AbKA/TKmMomcZRin4WvZTzcNTHYdwIbr2HNp/ofGXAPxqOkDL2wH3S87eBEDPYuMz1lp/Ky6JMDvPXJ8mXtbGOEEcGZvTtQISq9X2cqIqR928tTyEJw0n/v9sWzorL6I7/TPfXoi382QR/i9e4NRIJbvXCAeOVJq8uCHmF018vgup7tLmSCIFpwf91pnAya6NiHgCDLDQHqFYEJU0LygTIyHzUE8Aosss0jF4kkenvWZU8xPWTttLbjW6K80b8vezkwmEwa4wIbENaDVz8iQz24WRFzKPPEh296RsgJgS6NeNf6oG6OcU/J4bZxbqQNMMtNPVIBrefOtB7lZXrfqrCCuVTMlBcPVtcSfY3UWUfGGP+sXljmfi47d/AIgB3F36C7njP8gNtsdlpk+WJsuhrsm0aQ614zueEuYsEk+GElfr2cths7yxwDvEcQxEXGkWFxJ9cSdT76MZCVjt45MuBGmoiwcQ6CIb42PYOxxGRR2SXWVJTf9reP8EIysy+ylwcIpFAhIixS2QP1ffxN7/NYLgzE1TG+K+CVVrzKN/CKABMAHLFrpRXzicbM8a5e2xd/ULmDpcgQ5FyQddHbNQ8FU+YsPhIxUrv2NqCVI9LjGDt9FI9tzdzDzWux6VxZQBAqyt+EMURdXcB5y3MGS9QaH+BML7zPQz0=
 
 script:
   - yarn lint:js
