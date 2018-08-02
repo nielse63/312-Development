@@ -7,7 +7,7 @@
 [![Code Climate](https://codeclimate.com/github/nielse63/312-Development/badges/gpa.svg)](https://codeclimate.com/github/nielse63/312-Development)
 [![dependencies Status](https://david-dm.org/nielse63/312-Development/status.svg)](https://david-dm.org/nielse63/312-Development)
 [![devDependencies Status](https://david-dm.org/nielse63/312-Development/dev-status.svg)](https://david-dm.org/nielse63/312-Development?type=dev)
-[![Known Vulnerabilities](https://snyk.io/test/github/nielse63/312-development/badge.svg)](https://snyk.io/test/github/nielse63/312-development)
+[![Known Vulnerabilities](https://snyk.io/test/github/nielse63/312-development/badge.svg)](https://snyk.io/test/github/nielse63/312-development) [![Greenkeeper badge](https://badges.greenkeeper.io/nielse63/312-Development.svg)](https://greenkeeper.io/)
 
 ## About This Repo
 
