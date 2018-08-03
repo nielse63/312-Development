@@ -32,3 +32,10 @@
     @include size($loading-icon-width);
   }
 }
+
+[data-in-view="true"] {
+  .box {
+    opacity: 1;
+    transform: translate(0, 0);
+  }
+}

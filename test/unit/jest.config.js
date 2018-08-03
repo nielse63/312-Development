@@ -2,6 +2,7 @@ const path = require('path');
 
 module.exports = {
   verbose: true,
+  testURL: 'http://localhost',
 
   // config defs
   rootDir: path.resolve(__dirname, '../../'),
@@ -35,5 +36,5 @@ module.exports = {
     '!src/main.js',
     '!src/assets/**',
   ],
-  coverageReporters: ['html', 'text-summary'],
+  coverageReporters: ['html', 'text-summary', 'lcov'],
 };

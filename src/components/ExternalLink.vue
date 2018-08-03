@@ -4,9 +4,7 @@
     :title="this.text"
     target="_blank"
     rel="noopener noreferrer"
-  >
-    <slot></slot>
-  </a>
+  ><slot></slot></a>
 </template>
 
 <script>

@@ -1,5 +1,5 @@
 <template>
-  <content-section title="Skills and Tools" @inview="inview">
+  <content-section title="Skills and Tools">
     <article>
       <p>After ten years of experience I've become very familiar with the many languages, tools, paradigms, and practices that it takes to create a high-quality user interface. Below is a list of some of skills that I'm highly proficient in.</p>
       <div class="tools">
@@ -13,7 +13,6 @@
 </template>
 
 <script>
-import anime from 'animejs';
 import { resume } from '@/lib/content';
 import ContentSection from '@/components/ContentSection';
 import CardTool from '@/components/CardTool';
@@ -42,32 +41,6 @@ export default {
         ...testing.items,
       ],
     };
-  },
-  methods: {
-    animateIcons() {
-      return anime({
-        targets: this.$el.querySelectorAll('.card-tool'),
-        opacity: 1,
-        translateY() {
-          return [`${anime.random(50, 75)}vh`, '0vh'];
-        },
-        duration: 1000,
-        easing:   'easeOutElastic',
-        delay() {
-          return anime.random(250, 350);
-        },
-        elasticity() {
-          return anime.random(100, 250);
-        },
-        autoplay: false,
-      });
-    },
-    inview() {
-      const animation = this.animateIcons();
-      this.$nextTick(() => {
-        animation.play();
-      });
-    },
   },
 };
 </script>

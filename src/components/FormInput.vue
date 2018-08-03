@@ -1,5 +1,5 @@
 <template>
-  <div :class="cls">
+  <div :class="cls" v-in-view>
     <label :for="name">{{label}}</label>
     <div class="wrapper" :data-error="error" v-if="type == 'textarea'">
       <textarea
@@ -74,7 +74,15 @@ export default {
 @import "../assets/styles/lib/vars";
 
 .form-input {
+  transform: translateZ(-10vw);
   opacity: 0;
+  transition: 0.5s $transition-timing-function;
+  transition-property: opacity, transform;
+
+  &[data-in-view="true"] {
+    transform: translateZ(0);
+    opacity: 1;
+  }
 
   & + & {
     margin-top: 1rem;

@@ -1,5 +1,5 @@
 <template>
-  <content-section title="Contact Me" @inview="inview">
+  <content-section title="Contact Me">
     <article>
       <form
         :class="cls"
@@ -38,7 +38,6 @@
 </template>
 
 <script>
-import anime from 'animejs';
 import { mapState, mapActions } from 'vuex';
 import ContentSection from '@/components/ContentSection';
 import FormInput from '@/components/FormInput';
@@ -77,30 +76,6 @@ export default {
       await this.submit();
       this.$dispatcher.$emit('complete', this.submitError);
       this.submitting = false;
-    },
-    animateInputs() {
-      return anime({
-        targets: this.$el.querySelectorAll('.form-input'),
-        opacity: 1,
-        translateY() {
-          return [`${anime.random(50, 75)}vh`, '0vh'];
-        },
-        duration: 1000,
-        easing:   'easeOutElastic',
-        delay(el, i) {
-          return (i + 1) * 100;
-        },
-        elasticity() {
-          return anime.random(100, 250);
-        },
-        autoplay: false,
-      });
-    },
-    inview() {
-      const animation = this.animateInputs();
-      this.$nextTick(() => {
-        animation.play();
-      });
     },
   },
 };
