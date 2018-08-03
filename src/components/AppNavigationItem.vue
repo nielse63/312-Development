@@ -1,6 +1,10 @@
 <template>
   <li>
-    <a :href="path" :class="color" @click="onclick">{{text}}</a>
+    <a
+      :href="path"
+      :class="color"
+      @click="onclick"
+    >{{text}}</a>
   </li>
 </template>
 

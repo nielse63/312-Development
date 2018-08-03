@@ -1,5 +1,5 @@
 <template>
-  <div :class="cls">
+  <div :class="cls" v-in-view>
     <figure :style="style">
       <external-link :href="url">
         <h3>{{title}}</h3>
@@ -71,6 +71,11 @@ export default {
   @media (min-width: $mobile-width) {
     flex: 1 0 50%;
     max-width: 50%;
+  }
+
+  &[data-in-view="true"] {
+    transform: translateZ(0);
+    opacity: 1;
   }
 
   &:hover {

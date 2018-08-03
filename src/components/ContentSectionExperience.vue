@@ -1,7 +1,7 @@
 <template>
-  <content-section title="Experience" @inview="inview">
+  <content-section title="Experience">
     <article>
-      <div class="boxes">
+      <div class="boxes" v-in-view>
         <template v-for="(box, i) in boxes">
           <experience-box
             :key="i"
@@ -50,10 +50,6 @@ export default {
           header:      this.stats.repos,
           description: 'public github repos',
         },
-        // {
-        //   header:      this.stats.commits,
-        //   description: 'git commits',
-        // },
         {
           header:      this.stats.stars,
           description: 'github stars',
@@ -80,9 +76,6 @@ export default {
       'fetchGists',
       'fetchNPMPackages',
     ]),
-    inview() {
-      this.isInView = true;
-    },
   },
   mounted() {
     this.$nextTick()

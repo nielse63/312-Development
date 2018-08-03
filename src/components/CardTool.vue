@@ -1,5 +1,5 @@
 <template>
-  <div class="card-tool">
+  <div class="card-tool" v-in-view>
     <figure class="tool" v-html="image"></figure>
   </div>
 </template>
@@ -38,7 +38,15 @@ export default {
 
 .card-tool {
   padding: 1rem;
+  transform: translateZ(-10vw);
   opacity: 0;
+  transition: 0.5s $transition-timing-function;
+  transition-property: opacity, transform;
+
+  &[data-in-view="true"] {
+    transform: translateZ(0);
+    opacity: 1;
+  }
 
   &:hover {
     .tool {
