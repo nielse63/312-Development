@@ -1,6 +1,4 @@
 /* eslint-disable no-bitwise */
-const debounce = require('./debounce');
-
 export default function particleNetwork(canvas) {
   const ctx = canvas.getContext('2d');
 
@@ -137,9 +135,6 @@ export default function particleNetwork(canvas) {
     update();
     draw();
   }
-
-  // add resize listener
-  window.addEventListener('resize', debounce(setCanvasSize), false);
 
   // set canvas size
   init();

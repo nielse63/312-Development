@@ -8,7 +8,7 @@
     "**/*.log": true,
     "**/*.log*": true,
     "**/node_modules": true,
-    // "**/dist": true,
+    "**/dist": true,
     "**/coverage": true,
   },
   "editor.insertSpaces": true,
@@ -18,7 +18,6 @@
   "files.eol": "\n",
   "files.insertFinalNewline": true,
   "files.trimFinalNewlines": true,
-  // "editor.formatOnSave": true,
   "eslint.autoFixOnSave": true,
   "eslint.run": "onSave",
   "eslint.validate": [
