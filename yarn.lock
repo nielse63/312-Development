@@ -8335,9 +8335,9 @@ postcss-html@^0.31.0:
   dependencies:
     htmlparser2 "^3.9.2"
 
-postcss-html@^0.32.0:
-  version "0.32.0"
-  resolved "https://registry.yarnpkg.com/postcss-html/-/postcss-html-0.32.0.tgz#af218c1a11561d31ebee620f33cce429d2884d25"
+postcss-html@^0.33.0:
+  version "0.33.0"
+  resolved "https://registry.yarnpkg.com/postcss-html/-/postcss-html-0.33.0.tgz#8ab6067d7a8a234e1937920b38760e3be1dca070"
   dependencies:
     htmlparser2 "^3.9.2"
 
