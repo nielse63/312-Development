@@ -67,7 +67,7 @@
     "postcss-html": "^0.33.0",
     "postcss-loader": "^3.0.0",
     "postcss-scss": "^2.0.0",
-    "postcss-syntax": "^0.32.0",
+    "postcss-syntax": "^0.33.0",
     "puppeteer": "^1.6.1",
     "remark-cli": "^5.0.0",
     "remark-preset-lint-markdown-style-guide": "^2.1.2",
