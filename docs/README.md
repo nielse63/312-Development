@@ -16,7 +16,3 @@
 - [Deployment](deployment.md)
 - [Roadmap](roadmap.md)
 - [Resources / Credits](resources-credits.md)
-
----
-
-*Last Updated Aug 22, 2018*

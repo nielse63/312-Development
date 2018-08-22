@@ -2,11 +2,11 @@
 
 ...
 
-# Related Issues
+## Related Issues
 
 - [ ] [Issue 123](https://url.com)
 
-# Scope
+## Scope
 
 - [ ] Front End
 - [ ] Back End

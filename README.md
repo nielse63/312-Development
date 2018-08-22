@@ -39,7 +39,3 @@
 
 - [Twitter](https://twitter.com/erikkylenielsen)
 - [Email](mailto:erik@312development.com)
-
----
-
-*Last Updated Aug 22, 2018*

@@ -1,7 +1,3 @@
 # Scripts Tooling
 
-TODO: Content
-
----
-
-*Last Updated Aug 22, 2018*
+> Scripts for automation and improved efficiency
