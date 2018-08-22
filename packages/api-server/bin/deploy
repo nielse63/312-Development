@@ -17,23 +17,27 @@ fi
 # move into api-server dir
 cd "$API_SERVER_DIR"
 
-# install latest node modules
-yarn
-
 # authenticate with heroku
+echo 'logging into heroku'
 heroku login
+echo 'setting up heroku remote'
 heroku git:remote -a three-one-two-api-server
+echo 'heroku remote'
+git remote -v
 
 # create empty git repo
 # rm -rf .git/
 # git init
-git config --add user.name 'Heroku Deploy'
-git config --add user.email 'deploy@312development.com'
+# git config --add user.name 'Heroku Deploy'
+# git config --add user.email 'deploy@312development.com'
 # git remote add heroku "$HEROKU_API_SERVER_URL"
 
 # push changes to remote
+echo 'adding files'
 git add .
+echo 'committing files'
 git commit -am "Deploying to Heroku"
+echo 'pushing files'
 git push heroku master --force
 
 # cleanup
