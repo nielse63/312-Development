@@ -16,10 +16,6 @@
     "svgo --pretty -p 2 --config=.svgo.yml --indent=2",
     "git add"
   ],
-  "*.md": [
-    "node scripts/lint-staged-remark.js",
-    "git add"
-  ],
   "src/assets/images/**/*.{png,jpg}": [
     "node scripts/resize-images.js",
     "git add"
