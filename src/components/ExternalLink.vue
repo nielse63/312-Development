@@ -1,7 +1,7 @@
 <template>
   <a
     :href="this.href"
-    :title="this.text"
+    :title="this.title"
     target="_blank"
     rel="noopener noreferrer"
   ><slot></slot></a>
@@ -12,12 +12,13 @@ export default {
   name:  'ExternalLink',
   props: {
     href: {
-      type:    String,
-      require: true,
+      type:     String,
+      required: true,
     },
-    text: {
-      type:    String,
-      require: true,
+    title: {
+      type:     String,
+      default:  '',
+      required: true,
     },
   },
 };

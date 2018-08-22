@@ -1,11 +1,15 @@
 const path = require('path');
 
 module.exports = {
-  verbose: true,
+  verbose: false,
+  bail:    true,
   testURL: 'http://localhost',
 
   // config defs
   rootDir: path.resolve(__dirname, '../../'),
+
+  // setup files
+  setupFiles: ['jest-canvas-mock'],
 
   // transformations and matchers
   transform: {

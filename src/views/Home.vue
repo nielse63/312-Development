@@ -39,53 +39,6 @@ export default {
       subtitle,
     };
   },
-  // methods: {
-  //   isInView({ intersectionRect }) {
-  //     return intersectionRect.height / window.innerHeight >= 0.75;
-  //   },
-  //   getOptions() {
-  //     const options = {
-  //       root:       null,
-  //       rootMargin: '0px',
-  //       threshold:  [],
-  //     };
-  //     for (let i = 0; i <= 1; i += 0.05) {
-  //       options.threshold.push(i);
-  //     }
-  //     return options;
-  //   },
-  //   getChildrenObject() {
-  //     const childrenObject = {};
-  //     this.$children.forEach((child) => {
-  //       const { id } = child.$el;
-  //       childrenObject[id] = child;
-  //     });
-  //     return childrenObject;
-  //   },
-  //   setObserver() {
-  //     const options = this.getOptions();
-  //     const childrenObject = this.getChildrenObject();
-  //     const observer = new IntersectionObserver((entries) => {
-  //       entries
-  //         .filter(entry => entry.isIntersecting)
-  //         .filter(entry => this.isInView(entry))
-  //         .forEach((entry) => {
-  //           const { target } = entry;
-  //           observer.unobserve(target);
-  //           this.$nextTick(() => {
-  //             const component = childrenObject[target.id];
-  //             component.$children[0].inview = 'true';
-  //           });
-  //         });
-  //     }, options);
-  //     this.$el.querySelectorAll('.content-section').forEach((element) => {
-  //       observer.observe(element);
-  //     });
-  //   },
-  // },
-  // mounted() {
-  //   this.setObserver();
-  // },
 };
 </script>
 

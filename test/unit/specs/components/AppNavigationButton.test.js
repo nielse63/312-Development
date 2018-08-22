@@ -1,19 +1,8 @@
 import { shallowMount, createLocalVue } from '@vue/test-utils';
 import Vuex from 'vuex';
 import AppNavigationButton from '@/components/AppNavigationButton';
+import mockStore from '../../utils/store';
 
-const fakeStore = {
-  modules: {
-    nav: {
-      state: {
-        open: false,
-      },
-      actions: {
-        toggle: jest.fn(),
-      },
-    },
-  },
-};
 const localVue = createLocalVue();
 localVue.use(Vuex);
 
@@ -21,7 +10,7 @@ describe('AppNavigationButton.vue', () => {
   let store;
 
   beforeEach(() => {
-    store = new Vuex.Store(fakeStore);
+    store = mockStore();
   });
 
   it('renders correctly', () => {

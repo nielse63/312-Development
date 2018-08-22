@@ -12,7 +12,8 @@ export default {
   name:  'ContentSection',
   props: {
     title: {
-      type: String,
+      type:     String,
+      required: true,
     },
     id: {
       type: String,

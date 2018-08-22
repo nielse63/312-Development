@@ -10,7 +10,12 @@ function test_e2e() {
 }
 
 function test_unit() {
-  yarn jest --config=test/unit/jest.config.js
+  yarn test:unit
+}
+
+function test_all() {
+  test_unit
+  test_e2e
 }
 
 function usage() {
@@ -30,6 +35,8 @@ if [ "$1" == "e2e" ]; then
   test_e2e
 elif [ "$1" == "unit" ]; then
   test_unit
+elif [ "$1" == "--all" ]; then
+  test_all
 elif [ "$1" == "help" ]; then
   usage
 else
