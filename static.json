@@ -1,12 +1,10 @@
 {
-  "root": "dist/",
+  "root": "dist",
   "clean_urls": true,
-  "logging": {
-    "access": false,
-    "error": "warn"
-  },
-  "routes": {
-    "/*.html": "index.html",
-  },
-  "https_only": true
+  "https_only": true,
+  "proxies": {
+    "/api/": {
+      "origin": "https://312-dev-api-server.now.sh/"
+    }
+  }
 }

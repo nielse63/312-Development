@@ -8,6 +8,7 @@ async function downloadsForPackage(name) {
 export default {
   fetchGithubUser: async ({ commit }) => {
     const user = await api('/api/github/user');
+    console.log(user); // eslint-disable-line no-console
     if (user.ok) {
       commit('user', user.data);
     }
