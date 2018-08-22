@@ -20,7 +20,6 @@ export default async function api(url, customOptions = {}) {
   };
   try {
     response = await fetch(url, options);
-    console.log({ url, response, options }); // eslint-disable-line no-console
     output.status = response.status;
     output.ok = response.ok;
     const json = await response.json();

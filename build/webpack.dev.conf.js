@@ -20,11 +20,9 @@ module.exports = merge(baseConfig, {
     https:              true,
     proxy:              {
       '/api': {
-        target: process.env.API_HOST,
-        secure: false,
-        before(app) {
-          require('./dev-server')(app); // eslint-disable-line global-require
-        },
+        target:       process.env.API_HOST,
+        secure:       false,
+        changeOrigin: true,
       },
     },
   },

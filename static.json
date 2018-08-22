@@ -1,4 +1,23 @@
 {
-  "root": "dist",
-  "clean_urls": true
+  "root": "dist/",
+  "https_only": true,
+  "routes": {
+    "/**": "index.html"
+  },
+  "proxies": {
+    "/api/": {
+      "origin": "https://312-dev-api-server.now.sh/api"
+    }
+  },
+  "headers": {
+    "/": {
+      "Cache-Control": "no-store, no-cache"
+    },
+    "**.js": {
+      "Cache-Control": "public, max-age=31536000"
+    },
+    "**.css": {
+      "Cache-Control": "public, max-age=31536000"
+    }
+  }
 }
