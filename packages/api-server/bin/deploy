@@ -15,7 +15,7 @@ if [ -f "$APP_DIR/.env" ]; then
 fi
 
 # move into api-server dir
-cd $API_SERVER_DIR
+cd "$API_SERVER_DIR"
 
 # install latest node modules
 yarn
@@ -25,7 +25,7 @@ rm -rf .git/
 git init
 git config --add user.name 'Heroku Deploy'
 git config --add user.email 'deploy@312development.com'
-git remote add heroku $HEROKU_API_SERVER_URL
+git remote add heroku "$HEROKU_API_SERVER_URL"
 
 # push changes to remote
 git add .

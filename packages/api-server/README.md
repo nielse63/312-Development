@@ -23,8 +23,12 @@ yarn serve              # spin up dev server
 
 ## Testing
 
-**TODO**: Include testing
+Testing is not being run on this package as of yet, but that is in the roadmap
 
 ## Deployment
 
 Deployment is automated using [Travis' Build Stages](https://docs.travis-ci.com/user/build-stages/). See the [`.travis.yml`](https://github.com/nielse63/312-Development/blob/master/.travis.yml) config file for more info/details.
+
+## Roadmap
+
+- [ ] Write tests
