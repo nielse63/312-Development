@@ -15,7 +15,7 @@ function deploy_api
 
 function deploy_app
 {
-  # ...
+  heroku plugins:install heroku-cli-static
 }
 
 function usage() {
