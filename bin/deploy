@@ -1,16 +1,15 @@
 #!/usr/bin/env bash
 set -e
 
-if [ -f ".env" ]; then
-  source .env
+APP_DIR=$(pwd)
+if [ -f "$APP_DIR/.env" ]; then
+  source "$APP_DIR/.env"
 fi
+
 
 function deploy_api
 {
-  cd packages/api-server
-  now remove --token=$NOW_API_TOKEN 312-dev-api-server --all --yes
-  now deploy --public --token=$NOW_API_TOKEN
-  now alias --token=$NOW_API_TOKEN
+  ./packages/api-server/bin/deploy
 }
 
 function usage() {
