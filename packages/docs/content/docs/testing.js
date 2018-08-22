@@ -1,6 +1,7 @@
-# Testing
 
-TODO: Intro Content
+module.exports = {
+  title:   'Testing',
+  content: `TODO: Intro Content
 
 ## Unit Tests
 
@@ -13,7 +14,5 @@ TODO: Content
 ## E2E Tests
 
 TODO: Content
-
----
-
-*Last Updated Aug 22, 2018*
+  `,
+};

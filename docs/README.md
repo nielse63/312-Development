@@ -1,7 +1,5 @@
 # 312 Development
 
-> The portfolio site of Erik Nielsen, UI/UX engineer from Chicago.
-
 ## Table of Contents
 
 - [Motivation & Goals](motivation-and-goals.md)
@@ -18,3 +16,7 @@
 - [Deployment](deployment.md)
 - [Roadmap](roadmap.md)
 - [Resources / Credits](resources-credits.md)
+
+---
+
+*Last Updated Aug 22, 2018*

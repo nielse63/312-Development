@@ -2,7 +2,7 @@
   "files.associations": {
     ".vuegenerator": "json",
     ".*rc": "jsonc",
-    ".env.*": "dotenv",
+    ".env.*": "dotenv"
   },
   "files.exclude": {
     "**/*.log": true,

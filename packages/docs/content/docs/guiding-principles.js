@@ -1,6 +1,6 @@
-# Guiding Principles
 
-TODO: Intro content
+module.exports = {
+  content: `TODO: Intro content
 
 ## Focus on the user
 
@@ -17,7 +17,5 @@ TODO: Content
 ## 90% planning / 10% coding
 
 TODO: Content
-
----
-
-*Last Updated Aug 22, 2018*
+`,
+};

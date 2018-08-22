@@ -1,6 +1,7 @@
-# Third Party Integrations
 
-TODO: Intro Content
+module.exports = {
+  title:   'Third Party Integrations',
+  content: `TODO: Intro Content
 
 ## Travis CI
 
@@ -21,7 +22,5 @@ TODO: Content
 ## Greenkeeper
 
 TODO: Content
-
----
-
-*Last Updated Aug 22, 2018*
+  `,
+};
