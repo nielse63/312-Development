@@ -563,6 +563,10 @@
     call-me-maybe "^1.0.1"
     glob-to-regexp "^0.3.0"
 
+"@nielse63/throttle@^0.1.4":
+  version "0.1.4"
+  resolved "https://registry.yarnpkg.com/@nielse63/throttle/-/throttle-0.1.4.tgz#82caab2bba61c3d151ae16f229a7c9d033fd9b60"
+
 "@nodelib/fs.stat@^1.0.1":
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/@nodelib/fs.stat/-/fs.stat-1.1.0.tgz#50c1e2260ac0ed9439a181de3725a0168d59c48a"
@@ -5914,6 +5918,10 @@ istextorbinary@^2.1.0:
     binaryextensions "2"
     editions "^1.3.3"
     textextensions "2"
+
+jest-canvas-mock@^1.1.0:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/jest-canvas-mock/-/jest-canvas-mock-1.1.0.tgz#f6ed0998b6be3ae2b7e095d7173441ae62cc831e"
 
 jest-changed-files@^23.4.2:
   version "23.4.2"

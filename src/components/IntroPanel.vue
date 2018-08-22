@@ -1,5 +1,5 @@
 <template>
-  <div class="canvas" v-in-view>
+  <div class="canvas" data-in-view="false">
     <canvas class="scene scene--full" id="scene" width="100%" height="100%"></canvas>
     <h1>{{title}}</h1>
     <h2 v-if="subtitle">{{subtitle}}</h2>
@@ -15,12 +15,19 @@ export default {
     title:    String,
     subtitle: String,
   },
+  methods: {
+    startCanvas(canvas) {
+      const fn = particleNetwork(canvas);
+      this.$nextTick(() => {
+        fn.start();
+      });
+    },
+  },
   mounted() {
-    const canvas = this.$el.querySelector('canvas');
-    const fn = particleNetwork(canvas);
-
     this.$nextTick(() => {
-      fn.start();
+      this.$el.setAttribute('data-in-view', 'true');
+      const canvas = document.getElementById('scene');
+      if (canvas) { this.startCanvas(canvas); }
     });
   },
 };

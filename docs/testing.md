@@ -2,11 +2,29 @@
 
 ## Unit Tests
 
-...
+### How to Run
 
-## Integration Tests
+```bash
+yarn test:unit
+```
 
-...
+### Pertinent Files
+
+```bash
+.
+└─ test/
+   └─ unit/                       # directory containing all test files
+      └─ specs/                   # directory containing all spec files
+      └─ utils/                   # directory with, you guessed it, util files
+      └─ jest.config.js            # jest config file, used only for unit tests
+```
+
+### Dependencies
+
+| Dependency                                                     | Version                                         |
+| :------------------------------------------------------------- | :---------------------------------------------- |
+| [Jest](https://jestjs.io/)                                     | Easy-to-use, modern JavaScript testing platform |
+| [jest-canvas-mock](https://github.com/hustcc/jest-canvas-mock) | A module used to mock canvas in Jest.           |
 
 ## E2E Tests
 

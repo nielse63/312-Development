@@ -1,7 +1,7 @@
 <template>
   <div :class="cls" v-in-view>
     <figure :style="style">
-      <external-link :href="url">
+      <external-link :href="url" :title="title">
         <h3>{{title}}</h3>
       </external-link>
     </figure>
