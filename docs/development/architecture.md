@@ -16,16 +16,9 @@
 ├── docs
 │   └── development
 ├── packages
-│   ├── api-server
-│   │   └── lib
-│   │       └── routes
-│   └── docs
-│       ├── __tests__
-│       ├── content
-│       │   └── docs
-│       │       └── development
-│       ├── lib
-│       └── templates
+│   └── api-server
+│       └── lib
+│           └── routes
 ├── scripts
 ├── src
 │   ├── assets
