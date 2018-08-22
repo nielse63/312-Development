@@ -1,5 +1,5 @@
 import Vue from 'vue';
-import throttle from '@/lib/throttle';
+import throttle from '@nielse63/throttle';
 
 let elements = [];
 
@@ -99,11 +99,13 @@ function onViewportMove() {
 }
 
 
-['load', 'resize', 'scroll'].forEach((evt) => {
-  if (evt !== 'scroll') window.addEventListener(evt, onresize, false);
-  window.addEventListener(evt, onscroll, false);
-});
+export default () => {
+  ['load', 'resize', 'scroll'].forEach((evt) => {
+    if (evt !== 'scroll') window.addEventListener(evt, onresize, false);
+    window.addEventListener(evt, onscroll, false);
+  });
 
-Vue.directive('in-view', (el) => {
-  elements.push(setElement(el));
-});
+  Vue.directive('in-view', (el) => {
+    elements.push(setElement(el));
+  });
+};

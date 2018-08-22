@@ -2,7 +2,7 @@
   <footer class="footer">
     <ul class="footer__links">
       <li v-for="link in links" :key="link.text">
-        <external-link :text="link.text" :href="link.href">
+        <external-link :title="link.text" :href="link.href">
           <span v-html="link.icon"></span>
           {{link.text}}
         </external-link>

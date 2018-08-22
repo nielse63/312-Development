@@ -1,9 +1,5 @@
-import { shallowMount, createLocalVue } from '@vue/test-utils';
-import Vuex from 'vuex';
+import { shallowMount } from '@vue/test-utils';
 import AppNavigationItem from '@/components/AppNavigationItem';
-
-const localVue = createLocalVue();
-localVue.use(Vuex);
 
 describe('AppNavigationItem.vue', () => {
   it('renders correctly', () => {

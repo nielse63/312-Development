@@ -72,7 +72,8 @@ export default {
     },
     createSVGObject(object, selector) {
       const svg = this.$el.querySelector(selector);
-      const paths = [...svg.querySelectorAll('path')];
+      const paths = [...svg.querySelectorAll('path')]
+        .filter(path => !!path.getTotalLength);
       const lengths = paths.map(path => path.getTotalLength());
       return { ...object, paths, lengths };
     },
