@@ -1,10 +1,4 @@
 {
   "root": "dist",
-  "clean_urls": true,
-  "https_only": true,
-  "proxies": {
-    "/api/": {
-      "origin": "https://312-dev-api-server.now.sh/"
-    }
-  }
+  "clean_urls": true
 }
