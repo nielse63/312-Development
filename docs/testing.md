@@ -2,13 +2,13 @@
 
 ## Unit Tests
 
-### How to Run
+### Running Unit Tests
 
 ```bash
 yarn test:unit
 ```
 
-### Pertinent Files
+### Unit Test Directories
 
 ```bash
 .
@@ -19,7 +19,7 @@ yarn test:unit
       └─ jest.config.js            # jest config file, used only for unit tests
 ```
 
-### Dependencies
+### Unit Test Dependencies
 
 | Dependency                                                     | Version                                         |
 | :------------------------------------------------------------- | :---------------------------------------------- |
@@ -28,13 +28,13 @@ yarn test:unit
 
 ## E2E Tests
 
-### How to Run
+### Running E2E Tests
 
 ```bash
 yarn test:e2e
 ```
 
-### Pertinent Files
+### Unit E2E Directories
 
 ```bash
 .
@@ -46,7 +46,7 @@ yarn test:e2e
       └─ *.test.js                # spec files
 ```
 
-### Dependencies
+### E2E Test Dependencies
 
 | Dependency                                                      | Version                                         |
 | :-------------------------------------------------------------- | :---------------------------------------------- |
