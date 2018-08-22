@@ -1,4 +1,3 @@
-const path = require('path');
+require('./pre-start');
 
-require('dotenv').config({ path: path.resolve(__dirname, '../../', '.env') });
 module.exports = require('./lib/api-server');

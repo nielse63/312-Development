@@ -1,0 +1,40 @@
+#!/usr/bin/env bash
+set -e
+
+APP_DIR=$(pwd)
+API_SERVER_DIR="$APP_DIR/packages/api-server"
+
+# install the heroku cli tool if not exists
+if ! [ -x "$(command -v heroku)" ]; then
+  curl https://cli-assets.heroku.com/install.sh | sh
+fi
+
+# copy environment file
+if [ -f "$APP_DIR/.env" ]; then
+  cp "$APP_DIR/.env" "$API_SERVER_DIR/.env"
+fi
+
+# move into api-server dir
+cd $API_SERVER_DIR
+
+# install latest node modules
+yarn
+
+# create empty git repo
+rm -rf .git/
+git init
+git config --add user.name 'Heroku Deploy'
+git config --add user.email 'deploy@312development.com'
+git remote add heroku $HEROKU_API_SERVER_URL
+
+# push changes to remote
+git add .
+git commit -am "Deploying to Heroku"
+git push heroku master --force
+
+# cleanup
+rm "$API_SERVER_DIR/.env"
+rm -rf "$API_SERVER_DIR/.git"
+
+# return to initial directory
+cd "$APP_DIR"
