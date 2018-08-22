@@ -34,11 +34,10 @@ script:
   - yarn test:unit
   - yarn test:e2e
 
-before_deploy:
-  - heroku plugins:install heroku-cli-static
-  - yarn build
 after_deploy:
-  - heroku static:deploy
+  - yarn build
+  - heroku plugins:install heroku-cli-static
+  - heroku static:deploy --app three-one-two-staging
 
 deploy:
   provider: heroku
