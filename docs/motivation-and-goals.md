@@ -26,7 +26,7 @@ Anyway, thanks for checking out my portfolio!
 
 > **Erik Nielsen**
 
-* * *
+---
 
--   <mailto:erik@312development.com>
--   [@erikkylenielsen](https://twitter.com/erikkylenielsen)
+-  [Email](mailto:erik@312development.com)
+-  [@erikkylenielsen](https://twitter.com/erikkylenielsen)
