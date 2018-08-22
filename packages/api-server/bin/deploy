@@ -18,8 +18,10 @@ fi
 cd "$API_SERVER_DIR"
 
 # authenticate with heroku
-# echo 'logging into heroku'
-# heroku login
+if [ "$HEROKU_API_KEY" ]; then
+  echo 'logging into heroku'
+  heroku login
+fi
 echo 'setting up heroku remote'
 heroku git:remote -a three-one-two-api-server
 echo 'heroku remote'
