@@ -1,4 +1,4 @@
-
+require('dotenv').config();
 const merge = require('webpack-merge');
 const { PORT, stats } = require('./build-config');
 const baseConfig = require('./webpack.base.conf');
@@ -16,10 +16,13 @@ module.exports = merge(baseConfig, {
     inline:             true,
     hot:                true,
     port:               PORT,
+    compress:           true,
+    https:              true,
     proxy:              {
       '/api': {
-        target: process.env.API_HOST,
-        secure: false,
+        target:       process.env.API_HOST,
+        secure:       false,
+        changeOrigin: true,
       },
     },
   },
