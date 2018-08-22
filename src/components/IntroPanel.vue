@@ -41,16 +41,20 @@ $h2-transform: ($h1-transform * 2);
   align-items: center;
   margin: 0 auto;
   padding: 5vh 0;
-  // position: relative;
   color: $color-white;
   text-align: center;
   perspective: 100vw;
   background-image: linear-gradient(to bottom, #00588f, #0c96c0);
   contain: content;
   min-height: 80vh;
+  max-height: 600px;
 
   @media(min-width: $desktop-width), (orientation: landscape) {
     min-height: 100vh;
+  }
+
+  @media(min-height: 600px) {
+    max-height: 600px;
   }
 }
 
@@ -59,11 +63,6 @@ canvas {
   position: absolute;
   top: 0;
   left: 0;
-  // z-index: 0;
-
-  // ~ * {
-  //   z-index: 1;
-  // }
 }
 
 h1,

@@ -3,10 +3,8 @@ set -e
 
 function test_e2e() {
   echo 'Running e2e tests'
-  if [ $(command -v kill-port) ]; then
-    kill-port 3000 9999 >/dev/null
-  fi
-  yarn build
+  if [ $(command -v kill-port) ]; then kill-port 3000 9999 >/dev/null; fi
+  if ! [ -d "$(pwd)/dist" ]; then yarn build; fi
   export JEST_PUPPETEER_CONFIG=test/e2e/jest-puppeteer.config.js
   yarn jest --config=test/e2e/jest.config.js
 }
