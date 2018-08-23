@@ -3,7 +3,6 @@
 const webpack = require('webpack');
 const { VueLoaderPlugin } = require('vue-loader');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-
 const {
   NODE_ENV, IN_DEV, setPath, stats, extractHTML,
 } = require('./build-config');
