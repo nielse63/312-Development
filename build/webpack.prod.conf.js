@@ -9,6 +9,7 @@ const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const WebpackPwaManifest = require('webpack-pwa-manifest');
 const ResourceHintWebpackPlugin = require('resource-hints-webpack-plugin');
 const OfflinePlugin = require('offline-plugin');
+const HtmlCriticalWebpackPlugin = require('html-critical-webpack-plugin');
 const { setPath, extractCSS, metadata } = require('./build-config');
 const baseConfig = require('./webpack.base.conf');
 
@@ -79,5 +80,18 @@ module.exports = merge(baseConfig, {
       asset:     '[path].gz[query]',
     }),
     extractCSS,
+    new HtmlCriticalWebpackPlugin({
+      base:      setPath('dist'),
+      src:       'index.html',
+      dest:      'index.html',
+      inline:    true,
+      minify:    true,
+      extract:   true,
+      width:     1240,
+      height:    650,
+      penthouse: {
+        blockJSRequests: false,
+      },
+    }),
   ],
 });
