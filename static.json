@@ -6,7 +6,7 @@
   },
   "proxies": {
     "/api/": {
-      "origin": "https://312-dev-api-server.now.sh/api"
+      "origin": "${API_HOST}/api"
     }
   },
   "headers": {
