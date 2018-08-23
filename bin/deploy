@@ -13,11 +13,6 @@ function deploy_api
   now alias --token=$NOW_API_TOKEN
 }
 
-function deploy_app
-{
-  heroku plugins:install heroku-cli-static
-}
-
 function usage() {
   echo "deploys the front and back ends of the application"
   echo " "
