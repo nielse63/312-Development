@@ -11,7 +11,8 @@
     "start": "bin/start",
     "lint:js": "eslint --ext .js,.vue ./*.js src/ build/ test/ --fix",
     "lint:scss": "bin/lint scss",
-    "lint:md": "remark -S **/*.md -o",
+    "lint:md": "markdownlint --config .mdlrc docs/ README.md",
+    "duplicate": "jsinspect src/",
     "new": "vg",
     "test:e2e": "bin/test e2e",
     "test:unit": "jest --config=test/unit/jest.config.js",
@@ -56,6 +57,7 @@
     "extract-text-webpack-plugin": "^4.0.0-beta.0",
     "faker": "^4.1.0",
     "file-loader": "^2.0.0",
+    "html-critical-webpack-plugin": "^2.1.0",
     "html-webpack-plugin": "^3.2.0",
     "image-size": "^0.6.3",
     "img-loader": "^3.0.0",
@@ -63,7 +65,9 @@
     "jest": "^23.4.2",
     "jest-canvas-mock": "^1.1.0",
     "jest-puppeteer": "^3.2.1",
+    "jsinspect": "^0.12.7",
     "lint-staged": "^7.2.0",
+    "markdownlint-cli": "^0.13.0",
     "mini-css-extract-plugin": "^0.4.1",
     "node-sass": "^4.9.2",
     "optimize-css-assets-webpack-plugin": "^5.0.0",
@@ -97,7 +101,8 @@
     "yorkie": "^2.0.0"
   },
   "optionalDependencies": {
-    "lerna": "^3.0.0-rc.0"
+    "lerna": "^3.0.0-rc.0",
+    "webpack-monitor": "^1.0.14"
   },
   "engines": {
     "node": ">= 10.x",
@@ -111,7 +116,7 @@
   ],
   "config": {
     "commitizen": {
-      "path": "cz-conventional-changelog"
+      "path": "cz-emoji"
     }
   }
 }

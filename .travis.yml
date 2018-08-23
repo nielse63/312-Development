@@ -31,6 +31,7 @@ env:
 script:
   - yarn lint:js
   - yarn lint:scss
+  - yarn duplicate
   - yarn test:unit
   - yarn test:e2e
 

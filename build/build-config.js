@@ -41,10 +41,14 @@ exports.extractHTML = new HtmlWebpackPlugin({
     removeAttributeQuotes: true,
   },
   meta: {
-    viewport:    'width=device-width, initial-scale=1.0, maximum-scale=1.0',
+    viewport:    'width=device-width, initial-scale=1.0, maximum-scale=5.0',
     description: pkg.description,
   },
   favicon: setPath('src/assets/images/icon.png'),
+
+  // custom resource hinting strategy
+  preload:  ['**/*.*'],
+  prefetch: false,
 
   // options
   title: 'Erik Nielsen | Chicago Senior UI Engineer',

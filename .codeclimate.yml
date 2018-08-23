@@ -11,12 +11,7 @@ plugins:
   shellcheck:
     enabled: true
   markdownlint:
-    enabled: true
-    checks:
-      MD013:
-        enabled: false
-      MD036:
-        enabled: false
+    enabled: false
 exclude_patterns:
   - bin/
   - build/
