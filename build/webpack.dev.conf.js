@@ -1,6 +1,5 @@
 require('dotenv').config();
 const merge = require('webpack-merge');
-const WebpackMonitor = require('webpack-monitor');
 const { PORT, stats } = require('./build-config');
 const baseConfig = require('./webpack.base.conf');
 
@@ -27,10 +26,4 @@ module.exports = merge(baseConfig, {
       },
     },
   },
-  plugins: [
-    new WebpackMonitor({
-      target: '../stats/webpack-stats.json',
-      launch: true,
-    }),
-  ],
 });
