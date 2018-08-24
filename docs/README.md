@@ -8,7 +8,6 @@
   - [Setup](development/setup.md)
   - [Architecture](development/architecture.md)
   - [Scripts / Tooling](development/scripts-tooling.md)
-  - [Packages](development/packages.md)
 - [Code Quality](code-quality.md)
 - [Testing](testing.md)
 - [Third-Party Integrations / Tools](third-party-integrations.md)

@@ -6,7 +6,6 @@
 [![dependencies Status](https://david-dm.org/nielse63/312-Development/status.svg)](https://david-dm.org/nielse63/312-Development)
 [![devDependencies Status](https://david-dm.org/nielse63/312-Development/dev-status.svg)](https://david-dm.org/nielse63/312-Development?type&#x3D;dev)
 [![Known Vulnerabilities](https://snyk.io/test/github/nielse63/312-development/badge.svg)](https://snyk.io/test/github/nielse63/312-development) [![Greenkeeper badge](https://badges.greenkeeper.io/nielse63/312-Development.svg)](https://greenkeeper.io/)
-[![lerna](https://img.shields.io/badge/maintained%20with-lerna-cc00ff.svg)](https://lernajs.io/)
 
 <img src="logo.png" height="150" align="right">
 
@@ -22,7 +21,6 @@
   - [Setup](docs/development/setup.md)
   - [Architecture](docs/development/architecture.md)
   - [Scripts / Tooling](docs/development/scripts-tooling.md)
-  - [Packages](docs/development/packages.md)
 - [Code Quality](docs/code-quality.md)
 - [Testing](docs/testing.md)
 - [Third-Party Integrations / Tools](docs/third-party-integrations.md)
