@@ -16,7 +16,6 @@ before_install:
   - npm i -g http-server greenkeeper-lockfile@2
 before_script:
   - greenkeeper-lockfile-update
-  - yarn lerna bootstrap
 after_script:
   - greenkeeper-lockfile-upload
 after_success:
@@ -34,10 +33,3 @@ script:
   - yarn duplicate
   - yarn test:unit
   - yarn test:e2e
-
-deploy:
-  provider: heroku
-  api_key:
-    secure: ccIjdCHvy7C7vH42cMuo51OWBaWoK2SOUfcmSWNj9sE/N8iwriKYFQNaD7umhJnojvrqwlQRnrriDGq9FCCKROne8So1n97JKFyCPBRjCI9aH7nsdjl4T5F10SvmF0ZMBf4cXGR+sX5HQrJqFtwzq4HADO2bhKodLWNTknwJSoNn96JEhi1bmOY2/Bl+dvdu+yggbT7mHaZzaWSXJbG5bjS4ssVQZ24EZ2lHviA0kB2X90FPo+7bLpUnKh34LNOAXNk3AG6a+EgthXOfrUU/QsFe+sW+oQdHigteAB0ZwGnoVOdO+hsy1CCZ8njWiqJxpB7hdP/IBEcSBMyDZt2+TNhWJbrcAILIOLmN3rVAxxvvvQXjVuJ/BuC6B/VX0SM7ekwhljb/lj1A+KOtSFli58s85ZmSyArBkG+3gCfz6PCwp8qipIJpoUoo7mCqRBX3Wi0fNyy/3L+HpqrlBC3uJOPxHGTa8TW2HvjzuqzoYqw62kceRGQg6UNkQyVjB/ePRK2UN4/5WKv/nrwlzqi3VJPkVTuJGmg6qIls6uvghlBtYHVe4pjAuX50T9KpKwuFW0gYKILbCFNmqJGwKBC/TrmP99dZJaokOGUc3tdmENkcv68CiJ/87Aon+mOF9lwGlk2A9mkJC7ujCZbfRW7q1v14O1l/q//fAJk4HsHL0Y0=
-  app:
-    master: three-one-two-staging
