@@ -3,10 +3,12 @@
   "version": "2.0.0",
   "description": "The portfolio site of Erik Nielsen, UI/UX engineer from Chicago.",
   "author": "Erik Nielsen <erik@312development.com>",
+  "homepage": "https://312development.com/",
   "private": true,
   "scripts": {
     "prebuild": "rm -rf dist/",
     "build": "cross-env NODE_ENV=production webpack --mode production --colors",
+    "postbuild": "bin/post-build",
     "serve": "cross-env NODE_ENV=development webpack-dev-server --hot",
     "start": "bin/start",
     "lint:js": "eslint --ext .js,.vue ./*.js src/ build/ test/ --fix",
@@ -28,6 +30,7 @@
     "@nielse63/throttle": "^0.1.4",
     "offline-plugin": "^5.0.5",
     "vue": "^2.5.17",
+    "vue-analytics": "^5.14.0",
     "vuex": "^3.0.1"
   },
   "devDependencies": {
@@ -76,6 +79,7 @@
     "postcss-loader": "^3.0.0",
     "postcss-scss": "^2.0.0",
     "postcss-syntax": "^0.33.0",
+    "prerender-spa-plugin": "^3.3.0",
     "puppeteer": "^1.6.1",
     "resource-hints-webpack-plugin": "^0.0.2",
     "sass-loader": "^7.1.0",

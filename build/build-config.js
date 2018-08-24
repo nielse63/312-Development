@@ -31,7 +31,6 @@ exports.stats = {
 };
 
 exports.extractHTML = new HtmlWebpackPlugin({
-  filename:       'index.html',
   inject:         true,
   template:       setPath('index.html'),
   chunksSortMode: 'dependency',
@@ -51,7 +50,9 @@ exports.extractHTML = new HtmlWebpackPlugin({
   prefetch: false,
 
   // options
-  title: 'Erik Nielsen | Chicago Senior UI Engineer',
+  title:    'Erik Nielsen | Chicago Senior UI Engineer',
+  homepage: pkg.homepage,
+  ogimage:  '/homepage.jpg',
 });
 
 exports.extractCSS = new MiniCssExtractPlugin({
