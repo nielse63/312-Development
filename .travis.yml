@@ -1,3 +1,4 @@
+---
 language: node_js
 node_js:
   - node
@@ -10,25 +11,17 @@ dist: trusty
 env:
   global:
     - NODE_ENV=test
+before_install:
+  - npm config set spin false
+  - npm i -g http-server greenkeeper-lockfile@2
+before_script:
+  - greenkeeper-lockfile-update
+after_script:
+  - greenkeeper-lockfile-upload
+after_success:
+  - npm i -g coveralls
+  - cat coverage/lcov.info | coveralls
 
-jobs:
-  include:
-    - stage: tests
-      before_install:
-        - npm i -g http-server
-      script: &script
-        - yarn test:unit
-        - yarn test:e2e
-      after_success:
-        - npm i -g coveralls
-        - cat coverage/lcov.info | coveralls
-    - stage: greenkeeper
-      if: branch =~ /^greenkeeper/
-      before_install:
-        - npm i -g greenkeeper-lockfile@2
-      before_script:
-        - greenkeeper-lockfile-update
-      script:
-        <<: *script
-      after_script:
-        - greenkeeper-lockfile-upload
+  script:
+  - yarn test:unit
+  - yarn test:e2e
