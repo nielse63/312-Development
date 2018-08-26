@@ -5,10 +5,48 @@
   <meta http-equiv="expires" content="0">
   <title><%= htmlWebpackPlugin.options.title %></title>
   <link href="https://fonts.googleapis.com/css?family=Nunito:400,400i,700" rel="preload" onload="this.rel='stylesheet'" as="style">
+  <link rel="canonical" href="<%= htmlWebpackPlugin.options.homepage %>">
+  <meta name="msapplication-config" content="/browserconfig.xml" />
+  <meta name="robots" content="index, follow">
+  <meta name="web_author" content="Erik Nielsen">
+  <meta name="google-site-verification" content="vyWEm34Gozx9VN-aZv3a9zdc34q6rvdznHIGDaVq8M8" />
+
+  <!-- Open Graph Meta Data -->
+ <meta property="fb:app_id" content="834389063291117">
+ <meta property="og:type" content="website">
+ <meta property="og:title" content="<%= htmlWebpackPlugin.options.title %>">
+ <meta property="og:url" content="<%= htmlWebpackPlugin.options.homepage %>">
+ <meta property="og:image" content="<%= htmlWebpackPlugin.options.ogimage %>">
+ <meta property="og:description" content="<%= htmlWebpackPlugin.options.meta.description %>">
+
+  <!-- Twitter Card Meta Data -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:site" content="@erikkylenielsen">
+  <meta name="twitter:title" content="<%= htmlWebpackPlugin.options.title %>">
+  <meta name="twitter:description" content="<%= htmlWebpackPlugin.options.meta.description %>">
+  <meta name="twitter:image" content="<%= htmlWebpackPlugin.options.ogimage %>">
+
+  <!-- JSON-LD Code -->
+  <script type="application/ld+json">
+    {
+      "@context": "http://schema.org/",
+      "@type": "Person",
+      "name": "Erik Nielsen",
+      "jobTitle": "Senior UI Software Engineer",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Chicago",
+        "addressRegion": "Illinois"
+      }
+    }
+  </script>
 </head>
 <body>
   <a href="#main" class="visually-hidden">Skip to main content</a>
   <noscript>This site requires JavaScript to be enabled - Please turn JavaScript on and visit again.</noscript>
   <div id="app"></div>
+
+  <!-- Other HTML defined in build-config.js -->
+  <%= htmlWebpackPlugin.options.analytics %>
 </body>
 </html>
