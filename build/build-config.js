@@ -50,9 +50,16 @@ exports.extractHTML = new HtmlWebpackPlugin({
   prefetch: false,
 
   // options
-  title:    'Erik Nielsen | Chicago Senior UI Engineer',
-  homepage: pkg.homepage,
-  ogimage:  '/homepage.jpg',
+  title:     'Erik Nielsen | Chicago Senior UI Engineer',
+  homepage:  pkg.homepage,
+  ogimage:   `${pkg.homepage}/homepage.jpg`,
+  analytics: NODE_ENV === 'production' ? `<script async src="https://www.googletagmanager.com/gtag/js?id=UA-33505945-1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'UA-33505945-1');
+  </script>` : '',
 });
 
 exports.extractCSS = new MiniCssExtractPlugin({
