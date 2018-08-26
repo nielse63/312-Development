@@ -10,7 +10,6 @@ const WebpackPwaManifest = require('webpack-pwa-manifest');
 const ResourceHintWebpackPlugin = require('resource-hints-webpack-plugin');
 const OfflinePlugin = require('offline-plugin');
 const HtmlCriticalWebpackPlugin = require('html-critical-webpack-plugin');
-const PrerenderSpaPlugin = require('prerender-spa-plugin');
 const { setPath, extractCSS, metadata } = require('./build-config');
 const baseConfig = require('./webpack.base.conf');
 
@@ -93,10 +92,6 @@ module.exports = merge(baseConfig, {
       penthouse: {
         blockJSRequests: false,
       },
-    }),
-    new PrerenderSpaPlugin({
-      staticDir: setPath('dist'),
-      routes:    ['/'],
     }),
   ],
 });
