@@ -9,7 +9,6 @@ cache:
 dist: trusty
 env:
   global:
-    - JOBS=1
     - NODE_ENV=test
 
 jobs:
