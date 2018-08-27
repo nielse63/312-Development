@@ -9,8 +9,6 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex';
-
 export default {
   name:  'AppNavigationItem',
   props: {
@@ -28,12 +26,9 @@ export default {
     },
   },
   methods: {
-    ...mapActions('nav', {
-      closeNav: 'close',
-    }),
     scrollTo(top, e) {
       e.preventDefault();
-      this.closeNav();
+      this.$emit('navclose');
       this.$nextTick(() => {
         window.scrollTo({ top, behavior: 'smooth' });
       });
@@ -45,9 +40,7 @@ export default {
         return;
       }
       const target = document.querySelector(href);
-      if (!target) {
-        return;
-      }
+      if (!target) { return; }
       const top = target.offsetTop;
       this.scrollTo(top, e);
     },

@@ -1,5 +1,5 @@
 <template>
-  <div class="canvas" data-in-view="false">
+  <div class="canvas" :data-in-view="inView">
     <div class="scene scene--full" id="scene"></div>
     <h1>{{title}}</h1>
     <h2 v-if="subtitle">{{subtitle}}</h2>
@@ -12,23 +12,30 @@ import particles from '@/lib/particles';
 export default {
   name:  'IntroPanel',
   props: {
-    title:    String,
-    subtitle: String,
+    title: {
+      type: String,
+    },
+    subtitle: {
+      type: String,
+    },
+  },
+  data() {
+    return {
+      inView: false,
+    };
   },
   methods: {
-    startCanvas(element) {
-      particles(element);
+    startCanvas() {
+      const canvas = this.$el.querySelector('#scene');
+      particles(canvas);
     },
   },
   mounted() {
     this.$nextTick(() => {
-      this.$el.setAttribute('data-in-view', 'true');
-      const element = document.getElementById('scene');
-      if (element) {
-        setTimeout(() => {
-          this.startCanvas(element);
-        }, 0);
-      }
+      this.inView = true;
+      setTimeout(() => {
+        this.startCanvas();
+      }, 0);
     });
   },
 };
