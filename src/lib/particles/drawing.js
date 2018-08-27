@@ -19,32 +19,15 @@ export const density = function checkDensity(pJS) {
   }
 };
 
-export const check = function checkOverlap(pJS, p1, position) {
-  const { array } = pJS.particles;
-  for (let i = 0; i < array.length; i += 1) {
-    const p2 = array[i];
-    const dx = p1.x - p2.x;
-    const dy = p1.y - p2.y;
-    const dist = Math.sqrt(dx * dx + dy * dy);
-
-    if (dist <= p1.radius + p2.radius) {
-      const newp1 = { ...p1 };
-      newp1.x = position ? position.x : Math.random() * pJS.canvas.w;
-      newp1.y = position ? position.y : Math.random() * pJS.canvas.h;
-      pJS.fn.vendors.checkOverlap(newp1);
-    }
-  }
-};
-
 export const draw = function draw(pJS, frame) {
   pJS.fn.drawAnimFrame = requestAnimationFrame(pJS.fn.vendors.draw);
-  if (pJS.isPaused || pJS.isRunning) {
+  if (pJS.isPaused) {
     cancelAnimationFrame(frame);
     return;
   }
-  pJS.isRunning = true;
+  // pJS.isRunning = true;
   pJS.fn.particlesDraw();
-  pJS.isRunning = false;
+  // pJS.isRunning = false;
 };
 
 export const preDraw = function checkBeforeDraw(pJS) {

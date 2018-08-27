@@ -2,9 +2,6 @@ import hexToRgb from '../hex-to-rgb';
 
 function Particle(pJS, color, opacity, position) {
   /* size */
-  // console.log({
-  //   color, opacity, position, pJS,
-  // });
   this.pJS = pJS;
   this.radius = pJS.particles.size.value;
 

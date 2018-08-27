@@ -1,4 +1,5 @@
-import defaults from './defaults';
+import getDefaults from './defaults';
+import getValues from './values';
 import * as canvas from './canvas';
 import * as particles from './particles';
 import * as drawing from './drawing';
@@ -7,18 +8,9 @@ import * as bubble from './bubble';
 
 function ParticlesJS(element) {
   const canvasElement = element.querySelector('.particles-js-canvas-el');
-  this.pJS = defaults(canvasElement);
+  this.pJS = getDefaults(canvasElement);
   const { pJS } = this;
-
-  pJS.tmp.obj = {
-    size_value:           pJS.particles.size.value,
-    size_anim_speed:      pJS.particles.size.anim.speed,
-    move_speed:           pJS.particles.move.speed,
-    line_linked_distance: pJS.particles.line_linked.distance,
-    line_linked_width:    pJS.particles.line_linked.width,
-    mode_bubble_distance: pJS.interactivity.modes.bubble.distance,
-    mode_bubble_size:     pJS.interactivity.modes.bubble.size,
-  };
+  pJS.tmp.obj = getValues(pJS);
 
   // setup canvas
   pJS.fn.canvasInit = canvas.init.bind(null, pJS);
@@ -37,7 +29,6 @@ function ParticlesJS(element) {
 
   // drawing functions
   pJS.fn.vendors.densityAutoParticles = drawing.density.bind(null, pJS);
-  pJS.fn.vendors.checkOverlap = drawing.check.bind(null, pJS);
   pJS.fn.vendors.draw = drawing.draw.bind(null, pJS);
   pJS.fn.vendors.checkBeforeDraw = drawing.preDraw.bind(null, pJS);
 

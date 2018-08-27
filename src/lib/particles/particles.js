@@ -1,20 +1,73 @@
 import Particle from './particle';
+import { particles } from './defaults';
+import { clear as clearCanvas } from './canvas';
 
-export const create = function particlesCreate(pJS) {
-  const { particles } = pJS;
-  const { color, opacity } = particles;
-  const { value } = opacity;
-  for (let i = 0; i < particles.number.value; i += 1) {
-    particles.array.push(
-      new Particle(pJS, color, value),
-    );
-  }
-};
+const LINE_OPACITY = particles.line_linked.opacity;
+const LINE_WIDTH = particles.line_linked.width;
+const LINE_DISTANCE = particles.line_linked.distance;
+const LINE_COLOR = particles.line_linked.color_rgb_line;
 
 function moveSingleParticle(p, ms) {
   p.x += p.vx * ms;
   p.y += p.vy * ms;
 }
+
+function particleIsOutOfCanvas(p, newPos, { canvas }, axis) {
+  const axis2 = axis === 'x' ? 'y' : 'x';
+  const newPosAxes = axis === 'x' ? {
+    first:  'x_left',
+    second: 'x_right',
+  } : {
+    first:  'y_top',
+    second: 'y_bottom',
+  };
+  if (p[axis] - p.radius > canvas.w) {
+    p[axis] = newPos[newPosAxes.first];
+    p[axis2] = Math.random() * canvas.h;
+  } else if (p.x + p.radius < 0) {
+    p[axis] = newPos[newPosAxes.second];
+    p[axis2] = Math.random() * canvas.h;
+  }
+}
+
+export const create = function particlesCreate(pJS) {
+  const {
+    array, color, opacity, number,
+  } = pJS.particles;
+  const { value } = opacity;
+  for (let i = 0; i < number.value; i += 1) {
+    array.push(
+      new Particle(pJS, color, value),
+    );
+  }
+};
+
+export const link = function linkParticles(pJS, p1, p2) {
+  const dx = p1.x - p2.x;
+  const dy = p1.y - p2.y;
+  const { canvas } = pJS;
+  const { ctx } = canvas;
+  const dist = Math.sqrt(dx * dx + dy * dy);
+
+  // draw a line between p1 and p2 if the distance between them is under the config distance
+  if (dist > LINE_DISTANCE) return;
+
+  const opacityLine = LINE_OPACITY - (dist / (1 / LINE_OPACITY)) / LINE_DISTANCE;
+
+  if (opacityLine < 0) return;
+
+  // style
+  const colorLine = LINE_COLOR;
+  ctx.strokeStyle = `rgba(${colorLine.r}, ${colorLine.g}, ${colorLine.b}, ${opacityLine})`;
+  ctx.lineWidth = LINE_WIDTH;
+
+  // path
+  ctx.beginPath();
+  ctx.moveTo(p1.x, p1.y);
+  ctx.lineTo(p2.x, p2.y);
+  ctx.stroke();
+  ctx.closePath();
+};
 
 export const update = function particlesUpdate(pJS) { // eslint-disable-line complexity
   const { array, move } = pJS.particles;
@@ -35,42 +88,30 @@ export const update = function particlesUpdate(pJS) { // eslint-disable-line com
       y_bottom: pJS.canvas.h + p.radius,
     };
 
-    if (p.x - p.radius > pJS.canvas.w) {
-      p.x = newPos.x_left;
-      p.y = Math.random() * pJS.canvas.h;
-    } else if (p.x + p.radius < 0) {
-      p.x = newPos.x_right;
-      p.y = Math.random() * pJS.canvas.h;
-    }
-    if (p.y - p.radius > pJS.canvas.h) {
-      p.y = newPos.y_top;
-      p.x = Math.random() * pJS.canvas.w;
-    } else if (p.y + p.radius < 0) {
-      p.y = newPos.y_bottom;
-      p.x = Math.random() * pJS.canvas.w;
-    }
+    particleIsOutOfCanvas(p, newPos, pJS, 'x');
+    particleIsOutOfCanvas(p, newPos, pJS, 'y');
 
     // events
     pJS.fn.modes.bubbleParticle(p);
 
     // interaction auto between particles
     for (let j = i + 1; j < array.length; j += 1) {
-      const p2 = array[j];
-      pJS.fn.interact.linkParticles(p, p2);
+      link(pJS, p, array[j]);
     }
   }
 };
 
 export const draw = function particlesDraw(pJS) {
-  /* clear canvas */
-  pJS.canvas.ctx.clearRect(0, 0, pJS.canvas.w, pJS.canvas.h);
+  // clear canvas
+  clearCanvas(pJS);
 
-  /* update each particles param */
-  pJS.fn.particlesUpdate();
+  // update each particles param
+  update(pJS);
 
-  /* draw each particle */
-  for (let i = 0; i < pJS.particles.array.length; i += 1) {
-    const p = pJS.particles.array[i];
+  // draw each particle
+  const { array } = pJS.particles;
+  for (let i = 0; i < array.length; i += 1) {
+    const p = array[i];
     p.draw();
   }
 };
@@ -93,56 +134,19 @@ export const refresh = function particlesRefresh(pJS) {
   pJS.fn.vendors.start();
 };
 
-export const link = function linkParticles(pJS, p1, p2) {
-  const dx = p1.x - p2.x;
-
-
-  const dy = p1.y - p2.y;
-
-
-  const dist = Math.sqrt(dx * dx + dy * dy);
-
-  /* draw a line between p1 and p2 if the distance between them is under the config distance */
-  if (dist <= pJS.particles.line_linked.distance) {
-    const opacityLine = pJS.particles.line_linked.opacity - (dist / (1 / pJS.particles.line_linked.opacity)) / pJS.particles.line_linked.distance;
-
-    if (opacityLine > 0) {
-      /* style */
-      const colorLine = pJS.particles.line_linked.color_rgb_line;
-      pJS.canvas.ctx.strokeStyle = `rgba(${colorLine.r},${colorLine.g},${colorLine.b},${opacityLine})`;
-      pJS.canvas.ctx.lineWidth = pJS.particles.line_linked.width;
-      // pJS.canvas.ctx.lineCap = 'round'; /* performance issue */
-
-      /* path */
-      pJS.canvas.ctx.beginPath();
-      pJS.canvas.ctx.moveTo(p1.x, p1.y);
-      pJS.canvas.ctx.lineTo(p2.x, p2.y);
-      pJS.canvas.ctx.stroke();
-      pJS.canvas.ctx.closePath();
-    }
-  }
-};
-
-export const push = function pushParticles(pJS, nb, pos) {
+export const push = function pushParticles(pJS, nb) {
   pJS.tmp.pushing = true;
-  const { particles } = pJS;
-  const { array, color, opacity } = particles;
+  const { canvas } = pJS;
+  const { array, color, opacity } = pJS.particles;
 
   for (let i = 0; i < nb; i += 1) {
+    const x = Math.random() * canvas.w;
+    const y = Math.random() * canvas.h;
     array.push(
-      new Particle(
-        color,
-        opacity.value,
-        {
-          x: pos ? pos.pos_x : Math.random() * pJS.canvas.w,
-          y: pos ? pos.pos_y : Math.random() * pJS.canvas.h,
-        },
-      ),
+      new Particle(pJS, color, opacity.value, { x, y }),
     );
-    if (i === nb - 1) {
-      pJS.tmp.pushing = false;
-    }
   }
+  pJS.tmp.pushing = false;
 };
 
 export const remove = function removeParticles(pJS, nb) {

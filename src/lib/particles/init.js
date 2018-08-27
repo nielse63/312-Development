@@ -20,17 +20,48 @@ function onvisibilitychange(el, pJS) {
   }
 }
 
-function onmousemove(pJS, e) {
+function onmousemove({ tmp, interactivity, canvas }, e) {
   const posX = e.clientX;
   const posY = e.clientY;
 
-  pJS.interactivity.mouse.pos_x = posX;
-  pJS.interactivity.mouse.pos_y = posY;
+  interactivity.mouse.pos_x = posX;
+  interactivity.mouse.pos_y = posY;
 
-  if (pJS.tmp.retina) {
-    pJS.interactivity.mouse.pos_x *= pJS.canvas.pxratio;
-    pJS.interactivity.mouse.pos_y *= pJS.canvas.pxratio;
+  if (tmp.retina) {
+    interactivity.mouse.pos_x *= canvas.pxratio;
+    interactivity.mouse.pos_y *= canvas.pxratio;
   }
+}
+
+function onresizeend(pJS) {
+  pJS.canvas.w = pJS.canvas.el.offsetWidth;
+  pJS.canvas.h = pJS.canvas.el.offsetHeight;
+
+  // resize canvas
+  if (pJS.tmp.retina) {
+    pJS.canvas.w *= pJS.canvas.pxratio;
+    pJS.canvas.h *= pJS.canvas.pxratio;
+  }
+
+  // set canvas size
+  pJS.fn.canvasSize();
+
+  // density particles enabled
+  pJS.fn.vendors.densityAutoParticles();
+}
+
+let timeout;
+function onresize(pJS) {
+  pJS.isPaused = true;
+  if (timeout) {
+    clearTimeout(timeout);
+    timeout = null;
+  }
+  timeout = setTimeout(() => {
+    pJS.isPaused = false;
+    timeout = null;
+    onresizeend(pJS);
+  }, 200);
 }
 
 export const retina = function retina(pJS) {
@@ -62,37 +93,37 @@ export const listeners = function listeners(pJS) {
   window.addEventListener('scroll', onscroll.bind(null, el, pJS), false);
   document.addEventListener('visibilitychange', onvisibilitychange.bind(null, el, pJS), false);
 
-  const onResizeend = () => {
-    pJS.canvas.w = pJS.canvas.el.offsetWidth;
-    pJS.canvas.h = pJS.canvas.el.offsetHeight;
+  // const onResizeend = () => {
+  //   pJS.canvas.w = pJS.canvas.el.offsetWidth;
+  //   pJS.canvas.h = pJS.canvas.el.offsetHeight;
 
-    // resize canvas */
-    if (pJS.tmp.retina) {
-      pJS.canvas.w *= pJS.canvas.pxratio;
-      pJS.canvas.h *= pJS.canvas.pxratio;
-    }
+  //   // resize canvas
+  //   if (pJS.tmp.retina) {
+  //     pJS.canvas.w *= pJS.canvas.pxratio;
+  //     pJS.canvas.h *= pJS.canvas.pxratio;
+  //   }
 
-    pJS.canvas.el.width = pJS.canvas.w;
-    pJS.canvas.el.height = pJS.canvas.h;
+  //   // set canvas size
+  //   pJS.fn.canvasSize();
 
-    // density particles enabled
-    pJS.fn.vendors.densityAutoParticles();
-  };
+  //   // density particles enabled
+  //   pJS.fn.vendors.densityAutoParticles();
+  // };
 
-  let timeout;
-  const callback = () => {
-    pJS.isPaused = true;
-    if (timeout) {
-      clearTimeout(timeout);
-      timeout = null;
-    }
-    timeout = setTimeout(() => {
-      pJS.isPaused = false;
-      timeout = null;
-      onResizeend();
-    }, 200);
-  };
-  window.addEventListener('resize', callback, false);
+  // let timeout;
+  // const callback = () => {
+  //   pJS.isPaused = true;
+  //   if (timeout) {
+  //     clearTimeout(timeout);
+  //     timeout = null;
+  //   }
+  //   timeout = setTimeout(() => {
+  //     pJS.isPaused = false;
+  //     timeout = null;
+  //     onResizeend();
+  //   }, 200);
+  // };
+  window.addEventListener('resize', onresize.bind(null, pJS), false);
 };
 
 export const init = function init(pJS) {
