@@ -552,11 +552,12 @@ function ParticlesJS(element, params) {
 }
 
 export default (element, params = {}) => {
+  const parent = element || document.querySelector('#scene');
   /* pJS elements */
   const canvasClass = 'particles-js-canvas-el';
 
   // remove canvas if exists into the pJS target tag
-  const existingCanvases = element.querySelectorAll(`.${canvasClass}`);
+  const existingCanvases = parent.querySelectorAll(`.${canvasClass}`);
   existingCanvases.forEach((existingCanvas) => {
     element.removeChild(existingCanvas);
   });
@@ -570,13 +571,13 @@ export default (element, params = {}) => {
   canvasElement.style.height = '100%';
 
   // append canvas
-  const canvas = element.appendChild(canvasElement);
+  const canvas = parent.appendChild(canvasElement);
 
   // launch particle.js
   if (canvas !== null) {
     const pJSDom = [];
     pJSDom.push(
-      new ParticlesJS(element, params),
+      new ParticlesJS(parent, params),
     );
   }
 };

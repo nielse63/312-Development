@@ -14,3 +14,7 @@ cat > "dist/sitemap.xml" <<EOF
   </url>
 </urlset>
 EOF
+
+# create 404 page
+yarn webpack --mode production --colors --config build/webpack.error.conf.js
+node scripts/create-404.js
