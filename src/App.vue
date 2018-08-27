@@ -4,13 +4,12 @@
       <home></home>
       <app-footer></app-footer>
     </div>
-    <app-navigation :open="isNavOpen"></app-navigation>
-    <app-navigation-button></app-navigation-button>
+    <app-navigation :open="isNavOpen" @navclose="onnavclose"></app-navigation>
+    <app-navigation-button :open="isNavOpen" @navtoggle="onnavtoggle"></app-navigation-button>
   </div>
 </template>
 
 <script>
-import { mapState, mapActions } from 'vuex';
 import AppNavigation from '@/components/AppNavigation';
 import AppNavigationButton from '@/components/AppNavigationButton';
 import AppFooter from '@/components/AppFooter';
@@ -24,10 +23,12 @@ export default {
     AppFooter,
     Home,
   },
+  data() {
+    return {
+      isNavOpen: false,
+    };
+  },
   computed: {
-    ...mapState('nav', {
-      isNavOpen: 'open',
-    }),
     appClass() {
       return {
         'nav-open': this.isNavOpen,
@@ -41,13 +42,14 @@ export default {
     },
   },
   methods: {
-    ...mapActions('nav', {
-      closeNav: 'close',
-    }),
     onpageclick() {
-      if (this.isNavOpen) {
-        this.closeNav();
-      }
+      this.onnavclose();
+    },
+    onnavtoggle() {
+      this.isNavOpen = !this.isNavOpen;
+    },
+    onnavclose() {
+      this.isNavOpen = false;
     },
   },
 };

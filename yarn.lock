@@ -109,10 +109,6 @@
     call-me-maybe "^1.0.1"
     glob-to-regexp "^0.3.0"
 
-"@nielse63/throttle@^0.1.4":
-  version "0.1.4"
-  resolved "https://registry.yarnpkg.com/@nielse63/throttle/-/throttle-0.1.4.tgz#82caab2bba61c3d151ae16f229a7c9d033fd9b60"
-
 "@nodelib/fs.stat@^1.0.1":
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/@nodelib/fs.stat/-/fs.stat-1.1.0.tgz#50c1e2260ac0ed9439a181de3725a0168d59c48a"

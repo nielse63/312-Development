@@ -30,8 +30,9 @@ exports.stats = {
   excludeAssets: asset => !asset.endsWith('.js') && !asset.endsWith('.css'),
 };
 
-exports.extractHTML = new HtmlWebpackPlugin({
+const htmlPluginOptions = {
   inject:         true,
+  filename:       'index.html',
   template:       setPath('index.html'),
   chunksSortMode: 'dependency',
   minify:         {
@@ -60,7 +61,9 @@ exports.extractHTML = new HtmlWebpackPlugin({
     gtag('js', new Date());
     gtag('config', 'UA-33505945-1');
   </script>` : '',
-});
+};
+
+exports.extractHTML = new HtmlWebpackPlugin(htmlPluginOptions);
 
 exports.extractCSS = new MiniCssExtractPlugin({
   // Options similar to the same options in webpackOptions.output

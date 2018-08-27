@@ -4,7 +4,7 @@
     :class="buttonClass"
     role="presentation"
     aria-label="Open Navigation"
-    @click="toggleNav"
+    @click="onclick"
   >
     <span></span>
     <span></span>
@@ -14,27 +14,25 @@
 </template>
 
 <script>
-import { mapState, mapActions } from 'vuex';
-
 export default {
-  name:     'AppNavigationButton',
-  computed: {
-    ...mapState('nav', {
-      isNavOpen: 'open',
-    }),
-    isButtonDark() {
-      return this.isNavOpen || this.isDark;
+  name:  'AppNavigationButton',
+  props: {
+    open: {
+      type:    Boolean,
+      default: false,
     },
+  },
+  computed: {
     buttonClass() {
       return {
-        'button-open': this.isNavOpen,
+        'button-open': this.open,
       };
     },
   },
   methods: {
-    ...mapActions('nav', {
-      toggleNav: 'toggle',
-    }),
+    onclick() {
+      this.$emit('navtoggle');
+    },
   },
 };
 </script>

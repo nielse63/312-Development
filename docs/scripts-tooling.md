@@ -44,6 +44,10 @@ To see all available npm scripts, check out the [`package.json`](../package.json
 
 These files are custom node scripts that automate tasks for development, testing, or releases.
 
+### `create-404.js`
+
+Generates a static 404 error page, inserting `.js` assets generated from a special 404/error webpack configuration.
+
 ### `create-unit-tests.js`
 
 Using a template that runs a basic existence test, this script ensures that all Vue components have a unit test associated with them.

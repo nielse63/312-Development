@@ -9,7 +9,10 @@ module.exports = {
   rootDir: path.resolve(__dirname, '../../'),
 
   // setup files
-  setupFiles: ['jest-canvas-mock'],
+  setupFiles: [
+    '<rootDir>/test/unit/utils/jest-setup.js',
+    'jest-canvas-mock',
+  ],
 
   // transformations and matchers
   transform: {

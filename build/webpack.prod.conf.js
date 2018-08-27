@@ -73,7 +73,32 @@ module.exports = merge(baseConfig, {
       },
     }),
     new ResourceHintWebpackPlugin(),
-    new OfflinePlugin(),
+    new OfflinePlugin({
+      safeToUseOptionalCaches: true,
+      externals:               [
+        'https://fonts.googleapis.com/css?family=Nunito:400,400i,700',
+      ],
+      appShell: '/',
+      caches:   {
+        main: [
+          '*.js',
+          '*.css',
+          'index.html',
+        ],
+        additional: [
+          ':rest:',
+        ],
+        optional: [
+          ':externals:',
+        ],
+      },
+      ServiceWorker: {
+        events: true,
+      },
+      AppCache: {
+        events: true,
+      },
+    }),
     new CompressionPlugin({
       test:      /\.(js|css|woff|woff2|svg|html)$/,
       algorithm: 'gzip',
