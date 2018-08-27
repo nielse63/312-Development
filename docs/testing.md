@@ -1,5 +1,9 @@
 # Testing
 
+> *"To those who say that "if you need testing at the end, you're doing it wrong", would you prefer a Boeing, or are you going Air Icarus?"*
+>
+> **–- Michael Bolton**
+
 ## Unit Tests
 
 ### Running Unit Tests
