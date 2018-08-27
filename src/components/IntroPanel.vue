@@ -7,8 +7,6 @@
 </template>
 
 <script>
-import particles from '@/lib/particles';
-
 export default {
   name:  'IntroPanel',
   props: {
@@ -26,16 +24,16 @@ export default {
   },
   methods: {
     startCanvas() {
-      const canvas = this.$el.querySelector('#scene');
-      particles(canvas);
+      import(/* webpackChunkName: "particles" */ '@/lib/particles').then((particles) => {
+        const canvas = this.$el.querySelector('#scene');
+        particles.default(canvas);
+      });
     },
   },
   mounted() {
     this.$nextTick(() => {
       this.inView = true;
-      setTimeout(() => {
-        this.startCanvas();
-      }, 0);
+      this.startCanvas();
     });
   },
 };
