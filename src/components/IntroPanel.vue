@@ -7,7 +7,7 @@
 </template>
 
 <script>
-import canvas from '@/lib/canvas';
+import particles from '@/lib/particles';
 
 export default {
   name:  'IntroPanel',
@@ -17,7 +17,7 @@ export default {
   },
   methods: {
     startCanvas(element) {
-      canvas(element);
+      particles(element);
     },
   },
   mounted() {

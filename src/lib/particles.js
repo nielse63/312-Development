@@ -1,6 +1,7 @@
-// import throttle from '@nielse63/throttle';
+import hexToRgb from './hex-to-rgb';
 
 let isPaused = false;
+let isRunning = false;
 
 Object.deepExtend = function deepExtend(destination, source) {
   const output = destination;
@@ -15,23 +16,8 @@ Object.deepExtend = function deepExtend(destination, source) {
   return output;
 };
 
-function hexToRgb(hex) {
-  const shorthandRegex = /^#?([a-f\d])([a-f\d])([a-f\d])$/i;
-  const newhex = hex.replace(shorthandRegex, (m, r, g, b) => r + r + g + g + b + b);
-  const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(newhex);
-  return result ? {
-    r: parseInt(result[1], 16),
-    g: parseInt(result[2], 16),
-    b: parseInt(result[3], 16),
-  } : null;
-}
-
-// function isInArray(value, array) {
-//   return array.indexOf(value) > -1;
-// }
-
-function ParticlesJS(elementId, params) {
-  const canvasElement = document.querySelector(`#${elementId} > .particles-js-canvas-el`);
+function ParticlesJS(element, params) {
+  const canvasElement = element.querySelector('.particles-js-canvas-el');
 
   /* particles.js variables with default values */
   this.pJS = {
@@ -90,14 +76,6 @@ function ParticlesJS(elementId, params) {
         speed:     3,
         direction: 'none',
         random:    false,
-        // straight:  false,
-        // out_mode:  'out',
-        // bounce:    false,
-        // attract:   {
-        //   enable:  false,
-        //   rotateX: 3000,
-        //   rotateY: 3000,
-        // },
       },
       array: [],
     },
@@ -318,7 +296,6 @@ function ParticlesJS(elementId, params) {
   };
 
   pJS.fn.particlesDraw = function particlesDraw() {
-    if (isPaused) return;
     /* clear canvas */
     pJS.canvas.ctx.clearRect(0, 0, pJS.canvas.w, pJS.canvas.h);
 
@@ -381,7 +358,7 @@ function ParticlesJS(elementId, params) {
   };
 
   /* ---------- pJS functions - modes events ------------ */
-  pJS.fn.modes.pushParticles = function pushParticles(nb, pos) { // eslint-disable-line complexity
+  pJS.fn.modes.pushParticles = function pushParticles(nb, pos) {
     pJS.tmp.pushing = true;
 
     for (let i = 0; i < nb; i += 1) {
@@ -396,9 +373,6 @@ function ParticlesJS(elementId, params) {
         ),
       );
       if (i === nb - 1) {
-        if (!pJS.particles.move.enable) {
-          pJS.fn.particlesDraw();
-        }
         pJS.tmp.pushing = false;
       }
     }
@@ -460,37 +434,51 @@ function ParticlesJS(elementId, params) {
 
   pJS.fn.vendors.eventsListeners = function eventsListeners() {
     /* events target element */
-    if (pJS.interactivity.detect_on === 'window') {
-      pJS.interactivity.el = window;
-    } else {
-      pJS.interactivity.el = pJS.canvas.el;
-    }
-
+    pJS.interactivity.el = window;
+    const { el } = pJS.canvas;
 
     /* detect mouse pos - on hover / click event */
-    if (pJS.interactivity.events.onhover.enable || pJS.interactivity.events.onclick.enable) {
-      pJS.interactivity.el.addEventListener('mousemove', (e) => {
-        let posX;
-        let posY;
-        if (pJS.interactivity.el === window) {
-          posX = e.clientX;
-          posY = e.clientY;
-        } else {
-          posX = e.offsetX || e.clientX;
-          posY = e.offsetY || e.clientY;
-        }
+    pJS.interactivity.el.addEventListener('mousemove', (e) => {
+      let posX;
+      let posY;
+      if (pJS.interactivity.el === window) {
+        posX = e.clientX;
+        posY = e.clientY;
+      } else {
+        posX = e.offsetX || e.clientX;
+        posY = e.offsetY || e.clientY;
+      }
 
-        pJS.interactivity.mouse.pos_x = posX;
-        pJS.interactivity.mouse.pos_y = posY;
+      pJS.interactivity.mouse.pos_x = posX;
+      pJS.interactivity.mouse.pos_y = posY;
 
-        if (pJS.tmp.retina) {
-          pJS.interactivity.mouse.pos_x *= pJS.canvas.pxratio;
-          pJS.interactivity.mouse.pos_y *= pJS.canvas.pxratio;
-        }
+      if (pJS.tmp.retina) {
+        pJS.interactivity.mouse.pos_x *= pJS.canvas.pxratio;
+        pJS.interactivity.mouse.pos_y *= pJS.canvas.pxratio;
+      }
 
-        pJS.interactivity.status = 'mousemove';
-      });
-    }
+      pJS.interactivity.status = 'mousemove';
+    });
+
+    window.addEventListener('scroll', () => {
+      const canvasBottom = el.clientHeight;
+      const windowTop = window.scrollY;
+      if (!isPaused && windowTop > canvasBottom) {
+        isPaused = true;
+      } else if (isPaused && windowTop < canvasBottom) {
+        isPaused = false;
+      }
+    }, false);
+
+    document.addEventListener('visibilitychange', () => {
+      const canvasBottom = el.clientHeight;
+      const windowTop = window.scrollY;
+      if (document.hidden || windowTop > canvasBottom) {
+        isPaused = true;
+      } else if (!document.hidden && windowTop < canvasBottom) {
+        isPaused = false;
+      }
+    }, false);
   };
 
   pJS.fn.vendors.densityAutoParticles = function densityAutoParticles() {
@@ -513,8 +501,9 @@ function ParticlesJS(elementId, params) {
   };
 
   pJS.fn.vendors.checkOverlap = function checkOverlap(p1, position) {
-    for (let i = 0; i < pJS.particles.array.length; i += 1) {
-      const p2 = pJS.particles.array[i];
+    const { array } = pJS.particles;
+    for (let i = 0; i < array.length; i += 1) {
+      const p2 = array[i];
       const dx = p1.x - p2.x;
       const dy = p1.y - p2.y;
       const dist = Math.sqrt(dx * dx + dy * dy);
@@ -528,9 +517,15 @@ function ParticlesJS(elementId, params) {
     }
   };
 
-  pJS.fn.vendors.draw = function draw() {
-    pJS.fn.particlesDraw();
+  pJS.fn.vendors.draw = function draw(frame) {
     pJS.fn.drawAnimFrame = requestAnimationFrame(pJS.fn.vendors.draw);
+    if (isPaused || isRunning) {
+      cancelAnimationFrame(frame);
+      return;
+    }
+    isRunning = true;
+    pJS.fn.particlesDraw();
+    isRunning = false;
   };
 
   pJS.fn.vendors.checkBeforeDraw = function checkBeforeDraw() {
@@ -556,37 +551,32 @@ function ParticlesJS(elementId, params) {
   pJS.fn.vendors.start();
 }
 
-// window.pJSDom = [];
-
-window.particlesJS = function particlesJS(elementId, params = {}) {
+export default (element, params = {}) => {
   /* pJS elements */
-  const element = document.getElementById(elementId);
   const canvasClass = 'particles-js-canvas-el';
-  const existingCanvas = element.getElementsByClassName(canvasClass);
 
-  /* remove canvas if exists into the pJS target tag */
-  if (existingCanvas.length) {
-    while (existingCanvas.length > 0) {
-      element.removeChild(existingCanvas[0]);
-    }
-  }
+  // remove canvas if exists into the pJS target tag
+  const existingCanvases = element.querySelectorAll(`.${canvasClass}`);
+  existingCanvases.forEach((existingCanvas) => {
+    element.removeChild(existingCanvas);
+  });
 
-  /* create canvas element */
+  // create canvas element
   const canvasElement = document.createElement('canvas');
   canvasElement.className = canvasClass;
 
-  /* set size canvas */
+  // set size canvas
   canvasElement.style.width = '100%';
   canvasElement.style.height = '100%';
 
-  /* append canvas */
-  const canvas = document.getElementById(elementId).appendChild(canvasElement);
+  // append canvas
+  const canvas = element.appendChild(canvasElement);
 
-  /* launch particle.js */
+  // launch particle.js
   if (canvas !== null) {
     const pJSDom = [];
     pJSDom.push(
-      new ParticlesJS(elementId, params),
+      new ParticlesJS(element, params),
     );
   }
 };
