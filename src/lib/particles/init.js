@@ -1,4 +1,3 @@
-import hexToRgb from '../hex-to-rgb';
 
 function onscroll(el, pJS) {
   const canvasBottom = el.clientHeight;
@@ -92,37 +91,6 @@ export const listeners = function listeners(pJS) {
   window.addEventListener('mousemove', onmousemove.bind(null, pJS), false);
   window.addEventListener('scroll', onscroll.bind(null, el, pJS), false);
   document.addEventListener('visibilitychange', onvisibilitychange.bind(null, el, pJS), false);
-
-  // const onResizeend = () => {
-  //   pJS.canvas.w = pJS.canvas.el.offsetWidth;
-  //   pJS.canvas.h = pJS.canvas.el.offsetHeight;
-
-  //   // resize canvas
-  //   if (pJS.tmp.retina) {
-  //     pJS.canvas.w *= pJS.canvas.pxratio;
-  //     pJS.canvas.h *= pJS.canvas.pxratio;
-  //   }
-
-  //   // set canvas size
-  //   pJS.fn.canvasSize();
-
-  //   // density particles enabled
-  //   pJS.fn.vendors.densityAutoParticles();
-  // };
-
-  // let timeout;
-  // const callback = () => {
-  //   pJS.isPaused = true;
-  //   if (timeout) {
-  //     clearTimeout(timeout);
-  //     timeout = null;
-  //   }
-  //   timeout = setTimeout(() => {
-  //     pJS.isPaused = false;
-  //     timeout = null;
-  //     onResizeend();
-  //   }, 200);
-  // };
   window.addEventListener('resize', onresize.bind(null, pJS), false);
 };
 
@@ -133,7 +101,6 @@ export const init = function init(pJS) {
   pJS.fn.canvasPaint();
   pJS.fn.particlesCreate();
   pJS.fn.vendors.densityAutoParticles();
-  pJS.particles.line_linked.color_rgb_line = hexToRgb(pJS.particles.line_linked.color);
 };
 
 export const start = function start(pJS) {

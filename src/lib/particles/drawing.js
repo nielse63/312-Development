@@ -21,13 +21,12 @@ export const density = function checkDensity(pJS) {
 
 export const draw = function draw(pJS, frame) {
   pJS.fn.drawAnimFrame = requestAnimationFrame(pJS.fn.vendors.draw);
+  pJS.isPaused = !pJS.isPaused;
   if (pJS.isPaused) {
     cancelAnimationFrame(frame);
     return;
   }
-  // pJS.isRunning = true;
   pJS.fn.particlesDraw();
-  // pJS.isRunning = false;
 };
 
 export const preDraw = function checkBeforeDraw(pJS) {

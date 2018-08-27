@@ -57,8 +57,8 @@ export const link = function linkParticles(pJS, p1, p2) {
   if (opacityLine < 0) return;
 
   // style
-  const colorLine = LINE_COLOR;
-  ctx.strokeStyle = `rgba(${colorLine.r}, ${colorLine.g}, ${colorLine.b}, ${opacityLine})`;
+  const { r, g, b } = LINE_COLOR;
+  ctx.strokeStyle = `rgba(${r}, ${g}, ${b}, ${opacityLine})`;
   ctx.lineWidth = LINE_WIDTH;
 
   // path
@@ -74,7 +74,7 @@ export const update = function particlesUpdate(pJS) { // eslint-disable-line com
   const { speed } = move;
   const ms = speed / 2;
   for (let i = 0; i < array.length; i += 1) {
-    /* the particle */
+    // the particle
     const p = array[i];
 
     // move the particle
