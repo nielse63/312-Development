@@ -19,12 +19,6 @@ Documentation is primarily found in the `docs/` directory of the repo, and aims 
 - CI/CD Pipelines
 - Third-Party Integrations
 
-## Automation
-
-In order to keep my docs up to date, I've created a node script to insert markdown variables where needed, update the directory tree, and more.
-
-You can read the full details of this script in the [`scripts/docs`](../scripts/docs) directory.
-
 ## Linting
 
 I use [markdownlint-cli](https://github.com/igorshubovych/markdownlint-cli/) to lint my documentation. This is to ensure the information I'm publishing meets basic community standards of quality, and no errors are found in the wild.

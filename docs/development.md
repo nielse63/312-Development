@@ -32,7 +32,7 @@ Serve up a dev instance by running:
 yarn serve
 ```
 
-You can now visit the app at [http://localhost:8080](http://localhost:8080). This will run the app using webpack-dev-server with hot module replacement enabled, so that any changes you make to the source code will be immediately reflected in the browser.
+You can now visit the app at <http://localhost:8080>. This will run the app using webpack-dev-server with hot module replacement enabled, so that any changes you make to the source code will be immediately reflected in the browser.
 
 ## Building for Production
 
