@@ -1,5 +1,9 @@
 # Testing
 
+> *"To those who say that "if you need testing at the end, you're doing it wrong", would you prefer a Boeing, or are you going Air Icarus?"*
+>
+> **–- Michael Bolton**
+
 ## Unit Tests
 
 ### Running Unit Tests
@@ -21,9 +25,9 @@ yarn test:unit
 
 ### Unit Test Dependencies
 
-| Dependency                                                     | Version                                         |
+| Dependency                                                     | Description                                     |
 | :------------------------------------------------------------- | :---------------------------------------------- |
-| [Jest](https://jestjs.io/)                                     | Easy-to-use, modern JavaScript testing platform |
+| [jest](https://jestjs.io/)                                     | Easy-to-use, modern JavaScript testing platform |
 | [jest-canvas-mock](https://github.com/hustcc/jest-canvas-mock) | A module used to mock canvas in Jest.           |
 
 ## E2E Tests
@@ -48,7 +52,7 @@ yarn test:e2e
 
 ### E2E Test Dependencies
 
-| Dependency                                                      | Version                                         |
+| Dependency                                                      | Description                                     |
 | :-------------------------------------------------------------- | :---------------------------------------------- |
-| [Jest](https://jestjs.io/)                                      | Easy-to-use, modern JavaScript testing platform |
+| [jest](https://jestjs.io/)                                      | Easy-to-use, modern JavaScript testing platform |
 | [Jest Puppeteer](https://github.com/smooth-code/jest-puppeteer) | Run your tests using Jest & Puppeteer           |

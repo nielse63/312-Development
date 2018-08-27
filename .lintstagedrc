@@ -19,5 +19,9 @@
   "src/assets/images/**/*.{png,jpg}": [
     "node scripts/resize-images.js",
     "git add"
+  ],
+  "*.md": [
+    "markdownlint --config .mdlrc",
+    "git add"
   ]
 }

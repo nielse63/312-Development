@@ -20,8 +20,7 @@
     "test:e2e": "bin/test e2e",
     "test:unit": "jest --config=test/unit/jest.config.js",
     "test": "bin/test --all",
-    "heroku-postbuild": "yarn build",
-    "commit": "git add . && git cz"
+    "heroku-postbuild": "yarn build"
   },
   "gitHooks": {
     "pre-commit": "lint-staged"
