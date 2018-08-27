@@ -1,13 +1,13 @@
 <template>
   <div class="canvas" data-in-view="false">
-    <canvas class="scene scene--full" id="scene" width="100%" height="100%"></canvas>
+    <div class="scene scene--full" id="scene"></div>
     <h1>{{title}}</h1>
     <h2 v-if="subtitle">{{subtitle}}</h2>
   </div>
 </template>
 
 <script>
-import particleNetwork from '@/lib/particle-network';
+import canvas from '@/lib/canvas';
 
 export default {
   name:  'IntroPanel',
@@ -16,18 +16,19 @@ export default {
     subtitle: String,
   },
   methods: {
-    startCanvas(canvas) {
-      const fn = particleNetwork(canvas);
-      this.$nextTick(() => {
-        fn.start();
-      });
+    startCanvas(element) {
+      canvas(element);
     },
   },
   mounted() {
     this.$nextTick(() => {
       this.$el.setAttribute('data-in-view', 'true');
-      const canvas = document.getElementById('scene');
-      if (canvas) { this.startCanvas(canvas); }
+      const element = document.getElementById('scene');
+      if (element) {
+        setTimeout(() => {
+          this.startCanvas(element);
+        }, 0);
+      }
     });
   },
 };
@@ -65,7 +66,7 @@ $h2-transform: ($h1-transform * 2);
   }
 }
 
-canvas {
+.scene {
   @include size(100%);
   position: absolute;
   top: 0;
