@@ -73,6 +73,7 @@ module.exports = {
       },
       rules: {
         'unicorn/filename-case': 'off',
+        'no-console':            'off',
       },
     },
     {

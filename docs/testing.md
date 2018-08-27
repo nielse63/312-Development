@@ -38,7 +38,7 @@ yarn test:unit
 yarn test:e2e
 ```
 
-### Unit E2E Directories
+### E2E Tests Directories
 
 ```bash
 .
@@ -56,3 +56,30 @@ yarn test:e2e
 | :-------------------------------------------------------------- | :---------------------------------------------- |
 | [jest](https://jestjs.io/)                                      | Easy-to-use, modern JavaScript testing platform |
 | [Jest Puppeteer](https://github.com/smooth-code/jest-puppeteer) | Run your tests using Jest & Puppeteer           |
+
+## Lighthouse Tests
+
+Runs lighthouse against pre-defined benchmarks for SEO, Accessibility, Performance, and Best-Practice tests.
+
+### Running Lighthouse Tests
+
+```bash
+yarn test:lighthouse
+```
+
+### Lighthouse Test Directories
+
+```bash
+.
+└─ test/
+   └─ lighthouse/                 # houses all lighthouse tests
+      └─ config/                  # contains lighthouse config files
+      └─ test.js                  # the only test file that's run
+```
+
+### Lighthouse Test Dependencies
+
+| Dependency                                                         | Description                                                                |
+| :----------------------------------------------------------------- | :------------------------------------------------------------------------- |
+| [lighthouse](https://github.com/GoogleChrome/lighthouse)           | Auditing, performance metrics, and best practices for Progressive Web Apps |
+| [chrome-launcher](https://github.com/GoogleChrome/chrome-launcher) | Launch Google Chrome with ease from node.                                  |

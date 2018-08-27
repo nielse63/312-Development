@@ -13,9 +13,14 @@ function test_unit() {
   yarn test:unit
 }
 
+function test_lighthouse() {
+  node test/lighthouse/test.js
+}
+
 function test_all() {
   test_unit
   test_e2e
+  test_lighthouse
 }
 
 function usage() {
@@ -26,6 +31,7 @@ function usage() {
   echo "commands:"
   echo "unit                    runs unit tests"
   echo "e2e                     runs e2e tests"
+  echo "lighthouse              runs lighthouse tests"
   echo " "
   echo "help                    displays usage"
   exit 0
@@ -35,6 +41,8 @@ if [ "$1" == "e2e" ]; then
   test_e2e
 elif [ "$1" == "unit" ]; then
   test_unit
+elif [ "$1" == "lighthouse" ]; then
+  test_lighthouse
 elif [ "$1" == "--all" ]; then
   test_all
 elif [ "$1" == "help" ]; then
