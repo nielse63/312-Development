@@ -14,6 +14,9 @@ function test_unit() {
 }
 
 function test_lighthouse() {
+  if [ "$CI" ]; then
+    . ./bin/download-chrome
+  fi
   node test/lighthouse/test.js
 }
 
