@@ -10,7 +10,7 @@ function test_e2e() {
 }
 
 function test_unit() {
-  yarn test:unit
+  yarn jest --config=test/unit/jest.config.js
 }
 
 function test_lighthouse() {

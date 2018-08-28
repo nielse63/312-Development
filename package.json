@@ -16,7 +16,7 @@
     "lint:md": "markdownlint --config .mdlrc docs/ README.md",
     "new": "vg",
     "test:e2e": "bin/test e2e",
-    "test:unit": "jest --config=test/unit/jest.config.js",
+    "test:unit": "bin/test unit",
     "test:lighthouse": "bin/test lighthouse",
     "test": "bin/test --all",
     "heroku-postbuild": "yarn build"

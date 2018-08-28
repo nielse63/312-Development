@@ -13,6 +13,10 @@ before_install:
   - npm i -g http-server greenkeeper-lockfile@2
 before_script:
   - greenkeeper-lockfile-update
+  - export DISPLAY=:99.0
+  - export CHROME_PATH="$(which google-chrome-stable)"
+  - sh -e /etc/init.d/xvfb start
+  - sleep 3 # wait for xvfb to boot
 after_script:
   - greenkeeper-lockfile-upload
 after_success:
