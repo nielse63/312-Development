@@ -17,21 +17,20 @@ To see all available npm scripts, check out the [`package.json`](../package.json
 
 ### Code Quality
 
-| Script           | Description                                                     |
-| :--------------- | :-------------------------------------------------------------- |
-| `yarn lint:js`   | Lints `.js` files using eslint                                  |
-| `yarn lint:scss` | Lints `.scss` and `.vue` files using stylelint                  |
-| `yarn lint:md`   | Lints `.md` files using markdownlint                            |
-| `yarn seo`       | Validations SEO rules against the production URL (uses seolint) |
-| `yarn duplicate` | Checks for duplicate code using jsinspect                       |
+| Script           | Description                                    |
+| :--------------- | :--------------------------------------------- |
+| `yarn lint:js`   | Lints `.js` files using eslint                 |
+| `yarn lint:scss` | Lints `.scss` and `.vue` files using stylelint |
+| `yarn lint:md`   | Lints `.md` files using markdownlint           |
 
 ### Testing Scripts
 
-| Script           | Description                                |
-| :--------------- | :----------------------------------------- |
-| `yarn test:unit` | Runs unit tests using jest                 |
-| `yarn test:e2e`  | Runs end-to-end tests using jest-puppeteer |
-| `yarn test`      | Runs all test scripts (unit, e2e, etc.)    |
+| Script                 | Description                                                   |
+| :--------------------- | :------------------------------------------------------------ |
+| `yarn test:unit`       | Runs unit tests using jest                                    |
+| `yarn test:e2e`        | Runs end-to-end tests using jest-puppeteer                    |
+| `yarn test:lighthouse` | Uses lighthouse to ensure best practices are being maintained |
+| `yarn test`            | Runs all test scripts (unit, e2e, etc.)                       |
 
 ### Production Scripts
 
