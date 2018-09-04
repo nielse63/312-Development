@@ -1,5 +1,4 @@
 import Vue from 'vue';
-import throttle from '@nielse63/throttle';
 
 let elements = [];
 
@@ -82,18 +81,14 @@ function onViewportChange() {
   elements = [...elements.map(setElement)];
 }
 
-// eslint-disable-next-line no-use-before-define
-const onscroll = throttle(onViewportMove, 25);
-const onresize = throttle(onViewportChange, 100);
-
 function onViewportMove() {
   const viewport = getViewport();
   const elementsNotInView = elements.filter(element => checkElement(element, viewport));
   elements = elementsNotInView;
   if (!elements.length) {
     ['load', 'resize', 'scroll'].forEach((evt) => {
-      if (evt !== 'scroll') window.removeEventListener(evt, onresize);
-      window.removeEventListener(evt, onscroll);
+      if (evt !== 'scroll') window.removeEventListener(evt, onViewportChange);
+      window.removeEventListener(evt, onViewportMove);
     });
   }
 }
@@ -101,8 +96,8 @@ function onViewportMove() {
 
 export default () => {
   ['load', 'resize', 'scroll'].forEach((evt) => {
-    if (evt !== 'scroll') window.addEventListener(evt, onresize, false);
-    window.addEventListener(evt, onscroll, false);
+    if (evt !== 'scroll') window.addEventListener(evt, onViewportChange, false);
+    window.addEventListener(evt, onViewportMove, false);
   });
 
   Vue.directive('in-view', (el) => {

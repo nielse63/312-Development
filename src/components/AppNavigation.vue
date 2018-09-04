@@ -7,19 +7,25 @@
         :path="item.path"
         :text="item.text"
         :color="item.color"
+        @navclose="$emit('navclose')"
       ></app-navigation-item>
     </ul>
   </nav>
 </template>
 
 <script>
-import { mapState } from 'vuex';
 import AppNavigationItem from '@/components/AppNavigationItem';
 
 export default {
   name:       'AppNavigation',
   components: {
     AppNavigationItem,
+  },
+  props: {
+    open: {
+      type:    Boolean,
+      default: false,
+    },
   },
   data() {
     return {
@@ -55,9 +61,6 @@ export default {
         },
       ],
     };
-  },
-  computed: {
-    ...mapState('nav', ['open']),
   },
 };
 </script>

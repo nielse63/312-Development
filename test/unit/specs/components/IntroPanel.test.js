@@ -1,15 +1,30 @@
 import { shallowMount, createLocalVue } from '@vue/test-utils';
 import IntroPanel from '@/components/IntroPanel';
-import inView from '@/directives/in-view';
 
 const localVue = createLocalVue();
-localVue.directive('in-view', inView);
 
 describe('IntroPanel.vue', () => {
-  it('renders correctly', () => {
-    const wrapper = shallowMount(IntroPanel, {
+  let wrapper;
+  beforeEach(() => {
+    wrapper = shallowMount(IntroPanel, {
+      propsData: {
+        title: 'Panel Title',
+      },
       localVue,
+      attachToDocument: true,
     });
-    expect(wrapper).not.toBeNull();
+  });
+
+  it('renders correctly', () => {
+    expect(wrapper.classes()).toContain('canvas');
+  });
+
+  it('renders canvas', () => {
+    wrapper.vm.startCanvas();
+    expect(wrapper.contains('.particles-js-canvas-el')).toBeTruthy();
+  });
+
+  it('outputs title', () => {
+    expect(wrapper.find('h1').text()).toBe('Panel Title');
   });
 });
