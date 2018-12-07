@@ -100,9 +100,10 @@ module.exports = merge(baseConfig, {
       },
     }),
     new CompressionPlugin({
-      test:      /\.(js|css|woff|woff2|svg|html)$/,
+      test:      /\.(js|css|woff|woff2|svg|html)$/i,
       algorithm: 'gzip',
-      asset:     '[path].gz[query]',
+      filename:  '[path].gz[query]',
+      cache:     true,
     }),
     extractCSS,
     new HtmlCriticalWebpackPlugin({
