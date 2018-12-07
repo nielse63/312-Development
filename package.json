@@ -98,7 +98,7 @@
     "webpack-dashboard": "^2.0.0",
     "webpack-dev-server": "^3.1.5",
     "webpack-merge": "^4.1.4",
-    "webpack-pwa-manifest": "^3.6.3",
+    "webpack-pwa-manifest": "^4.0.0",
     "webpack-serve": "^2.0.2",
     "yorkie": "^2.0.0"
   },
