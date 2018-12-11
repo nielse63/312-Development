@@ -23,7 +23,6 @@ To see all available npm scripts, check out the [`package.json`](../package.json
 | `yarn lint:scss` | Lints `.scss` and `.vue` files using stylelint                  |
 | `yarn lint:md`   | Lints `.md` files using markdownlint                            |
 | `yarn seo`       | Validations SEO rules against the production URL (uses seolint) |
-| `yarn duplicate` | Checks for duplicate code using jsinspect                       |
 
 ### Testing Scripts
 
