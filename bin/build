@@ -1,6 +1,20 @@
 #!/usr/bin/env bash
+set -e
 
+# vars
+bin="node_modules/.bin"
 DATE=$(date -u +"%Y-%m-%dT%H:%M:%S")
+
+### pre-build ###
+echo "✨ pre-build"
+rm -rf dist/
+
+### build ###
+echo "✨ build"
+$bin/cross-env NODE_ENV=production $bin/webpack --mode production --colors
+
+### post-build ###
+echo "✨ post-build"
 
 cat > "dist/sitemap.xml" <<EOF
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
@@ -16,5 +30,5 @@ cat > "dist/sitemap.xml" <<EOF
 EOF
 
 # create 404 page
-yarn webpack --mode production --colors --config build/webpack.error.conf.js
+$bin/webpack --mode production --colors --config build/webpack.error.conf.js
 node scripts/create-404.js

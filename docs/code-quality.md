@@ -8,11 +8,12 @@ Code quality is guaranteed through a combination of tools and automation scripts
 
 ## Usage
 
-| Script           | Description                                                                                                                           |
-| :--------------- | :------------------------------------------------------------------------------------------------------------------------------------ |
-| `yarn lint:js`   | Lints the `.js` and `.vue` files using [eslint](https://eslint.org/)                                                                  |
-| `yarn lint:scss` | Lints all `.scss` files, as well as the style in Vue SFCs, using [stylelint](https://stylelint.io/)                                   |
-| `yarn lint:md`   | Runs [markdownlint](https://www.npmjs.com/package/markdownlint-cli) against `.md` doc files                                           |
+| Script           | Description                                                                                         |
+| :--------------- | :-------------------------------------------------------------------------------------------------- |
+| `yarn lint:js`   | Lints the `.js` and `.vue` files using [eslint](https://eslint.org/)                                |
+| `yarn lint:scss` | Lints all `.scss` files, as well as the style in Vue SFCs, using [stylelint](https://stylelint.io/) |
+| `yarn lint:md`   | Runs [markdownlint](https://www.npmjs.com/package/markdownlint-cli) against `.md` doc files         |
+| `yarn lint`      | Runs all lint tasks                                                                                 |
 
 Files are also linted before they are checked into the repo using [lint-staged](https://www.npmjs.com/package/lint-staged) and [yorkie](https://www.npmjs.com/package/yorkie).
 

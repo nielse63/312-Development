@@ -4,6 +4,14 @@
 >
 > **–- Michael Bolton**
 
+## Usage
+
+| Script           | Description                                |
+| :--------------- | :----------------------------------------- |
+| `yarn test:unit` | Runs unit tests using jest                 |
+| `yarn test:e2e`  | Runs end-to-end tests using jest-puppeteer |
+| `yarn test`      | Runs all test tasks                        |
+
 ## Unit Tests
 
 ### Running Unit Tests
@@ -38,7 +46,7 @@ yarn test:unit
 yarn test:e2e
 ```
 
-### Unit E2E Directories
+### E2E Tests Directories
 
 ```bash
 .
