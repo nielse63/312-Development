@@ -169,7 +169,7 @@
 
 "@vue/test-utils@^1.0.0-beta.27":
   version "1.0.0-beta.27"
-  resolved "https://artifact.devsnc.com/content/groups/npm-all/@vue/test-utils/-/test-utils-1.0.0-beta.27.tgz#7e5f7b7180c00e28a4ca55c0ff0a7e754377fdb2"
+  resolved "https://registry.yarnpkg.com/@vue/test-utils/-/test-utils-1.0.0-beta.27.tgz#7e5f7b7180c00e28a4ca55c0ff0a7e754377fdb2"
   integrity sha512-Lzrd4ZBkS70Tl8JbXbDrN/NcSaH9aZT6+7emU3QhTJ+CrorJpyFDA1dkvSIhH+rDTs8sHFbGeXjXV/qorXxtRw==
   dependencies:
     dom-event-types "^1.0.0"
@@ -501,7 +501,7 @@ ansi-regex@^3.0.0:
 
 ansi-regex@^4.0.0:
   version "4.0.0"
-  resolved "https://artifact.devsnc.com/content/groups/npm-all/ansi-regex/-/ansi-regex-4.0.0.tgz#70de791edf021404c3fd615aa89118ae0432e5a9"
+  resolved "https://registry.yarnpkg.com/ansi-regex/-/ansi-regex-4.0.0.tgz#70de791edf021404c3fd615aa89118ae0432e5a9"
   integrity sha512-iB5Dda8t/UqpPI/IjsejXu5jOGDrzn41wJyljwPH65VCIbk6+1BzFIMJGFwTNrYXT1CrD+B4l19U7awiQ8rk7w==
 
 ansi-styles@^2.2.1:
@@ -935,7 +935,7 @@ babel-helpers@^6.24.1:
 
 babel-jest@^23.6.0:
   version "23.6.0"
-  resolved "https://artifact.devsnc.com/content/groups/npm-all/babel-jest/-/babel-jest-23.6.0.tgz#a644232366557a2240a0c083da6b25786185a2f1"
+  resolved "https://registry.yarnpkg.com/babel-jest/-/babel-jest-23.6.0.tgz#a644232366557a2240a0c083da6b25786185a2f1"
   integrity sha512-lqKGG6LYXYu+DQh/slrQ8nxXQkEkhugdXsU6St7GmhVS7Ilc/22ArwqXNJrf0QaOBjZB0360qZMwXqDYQHXaew==
   dependencies:
     babel-plugin-istanbul "^4.1.6"
@@ -2125,7 +2125,7 @@ clone-buffer@^1.0.0:
 
 clone-deep@^0.2.4:
   version "0.2.4"
-  resolved "https://artifact.devsnc.com/content/groups/npm-all/clone-deep/-/clone-deep-0.2.4.tgz#4e73dd09e9fb971cc38670c5dced9c1896481cc6"
+  resolved "https://registry.yarnpkg.com/clone-deep/-/clone-deep-0.2.4.tgz#4e73dd09e9fb971cc38670c5dced9c1896481cc6"
   integrity sha1-TnPdCen7lxzDhnDF3O2cGJZIHMY=
   dependencies:
     for-own "^0.1.3"
@@ -3109,7 +3109,7 @@ dom-converter@~0.1:
 
 dom-event-types@^1.0.0:
   version "1.0.0"
-  resolved "https://artifact.devsnc.com/content/groups/npm-all/dom-event-types/-/dom-event-types-1.0.0.tgz#5830a0a29e1bf837fe50a70cd80a597232813cae"
+  resolved "https://registry.yarnpkg.com/dom-event-types/-/dom-event-types-1.0.0.tgz#5830a0a29e1bf837fe50a70cd80a597232813cae"
   integrity sha512-2G2Vwi2zXTHBGqXHsJ4+ak/iP0N8Ar+G8a7LiD2oup5o4sQWytwqqrZu/O6hIMV0KMID2PL69OhpshLO0n7UJQ==
 
 dom-serializer@0, dom-serializer@0.1.0, dom-serializer@~0.1.0:
@@ -3639,7 +3639,7 @@ etag@~1.8.1:
 
 event-stream@=3.3.4:
   version "3.3.4"
-  resolved "https://artifact.devsnc.com/content/groups/npm-all/event-stream/-/event-stream-3.3.4.tgz#4ab4c9a0f5a54db9338b4c34d86bfce8f4b35571"
+  resolved "https://registry.yarnpkg.com/event-stream/-/event-stream-3.3.4.tgz#4ab4c9a0f5a54db9338b4c34d86bfce8f4b35571"
   integrity sha1-SrTJoPWlTbkzi0w02Gv86PSzVXE=
   dependencies:
     duplexer "~0.1.1"
@@ -3767,12 +3767,12 @@ expand-tilde@^1.2.2:
 
 expect-puppeteer@^3.5.1:
   version "3.5.1"
-  resolved "https://artifact.devsnc.com/content/groups/npm-all/expect-puppeteer/-/expect-puppeteer-3.5.1.tgz#28a26be1357387390b55b49045ec533895172c5a"
+  resolved "https://registry.yarnpkg.com/expect-puppeteer/-/expect-puppeteer-3.5.1.tgz#28a26be1357387390b55b49045ec533895172c5a"
   integrity sha512-SB5JeJCXWSRcUK39fBJlCA6qnVt3BG1/M9vYZ+XYq8gY9jab9Jm4BztsrAwDTWca1L+O/7dRYrG2BPziRtjh+Q==
 
 expect@^23.6.0:
   version "23.6.0"
-  resolved "https://artifact.devsnc.com/content/groups/npm-all/expect/-/expect-23.6.0.tgz#1e0c8d3ba9a581c87bd71fb9bc8862d443425f98"
+  resolved "https://registry.yarnpkg.com/expect/-/expect-23.6.0.tgz#1e0c8d3ba9a581c87bd71fb9bc8862d443425f98"
   integrity sha512-dgSoOHgmtn/aDGRVFWclQyPDKl2CQRq0hmIEoUAuQs/2rn2NcvCWcSCovm6BLeuB/7EZuLGu2QfnR+qRt5OM4w==
   dependencies:
     ansi-styles "^3.2.0"
@@ -4101,7 +4101,7 @@ find-pkg@^0.1.2:
 
 find-process@^1.2.1:
   version "1.2.1"
-  resolved "https://artifact.devsnc.com/content/groups/npm-all/find-process/-/find-process-1.2.1.tgz#2e817add52ef3bf5bdd07c9c739b3d4442bfddf4"
+  resolved "https://registry.yarnpkg.com/find-process/-/find-process-1.2.1.tgz#2e817add52ef3bf5bdd07c9c739b3d4442bfddf4"
   integrity sha512-z4RXYStNAcoi4+smpKbzJXbMT8DdvwqTE7wL7DWZMD0SkTRfQ49z9S7YaK24kuRseKr23YSZlnyL/TaJZtgM1g==
   dependencies:
     chalk "^2.0.1"
@@ -5228,7 +5228,7 @@ inquirer@^6.0.0:
 
 inquirer@^6.2.0:
   version "6.2.1"
-  resolved "https://artifact.devsnc.com/content/groups/npm-all/inquirer/-/inquirer-6.2.1.tgz#9943fc4882161bdb0b0c9276769c75b32dbfcd52"
+  resolved "https://registry.yarnpkg.com/inquirer/-/inquirer-6.2.1.tgz#9943fc4882161bdb0b0c9276769c75b32dbfcd52"
   integrity sha512-088kl3DRT2dLU5riVMKKr1DlImd6X7smDhpXUCkJDCKvTEJeRiXh0G132HG9u5a+6Ylw9plFRY7RuTnwohYSpg==
   dependencies:
     ansi-escapes "^3.0.0"
@@ -5773,7 +5773,7 @@ jest-changed-files@^23.4.2:
 
 jest-cli@^23.6.0:
   version "23.6.0"
-  resolved "https://artifact.devsnc.com/content/groups/npm-all/jest-cli/-/jest-cli-23.6.0.tgz#61ab917744338f443ef2baa282ddffdd658a5da4"
+  resolved "https://registry.yarnpkg.com/jest-cli/-/jest-cli-23.6.0.tgz#61ab917744338f443ef2baa282ddffdd658a5da4"
   integrity sha512-hgeD1zRUp1E1zsiyOXjEn4LzRLWdJBV//ukAHGlx6s5mfCNJTbhbHjgxnDUXA8fsKWN/HqFFF6X5XcCwC/IvYQ==
   dependencies:
     ansi-escapes "^3.0.0"
@@ -5815,7 +5815,7 @@ jest-cli@^23.6.0:
 
 jest-config@^23.6.0:
   version "23.6.0"
-  resolved "https://artifact.devsnc.com/content/groups/npm-all/jest-config/-/jest-config-23.6.0.tgz#f82546a90ade2d8c7026fbf6ac5207fc22f8eb1d"
+  resolved "https://registry.yarnpkg.com/jest-config/-/jest-config-23.6.0.tgz#f82546a90ade2d8c7026fbf6ac5207fc22f8eb1d"
   integrity sha512-i8V7z9BeDXab1+VNo78WM0AtWpBRXJLnkT+lyT+Slx/cbP5sZJ0+NDuLcmBE5hXAoK0aUp7vI+MOxR+R4d8SRQ==
   dependencies:
     babel-core "^6.0.0"
@@ -5835,7 +5835,7 @@ jest-config@^23.6.0:
 
 jest-dev-server@^3.6.0:
   version "3.6.0"
-  resolved "https://artifact.devsnc.com/content/groups/npm-all/jest-dev-server/-/jest-dev-server-3.6.0.tgz#fa3baf3b46109b9348e434203e449618af2b7278"
+  resolved "https://registry.yarnpkg.com/jest-dev-server/-/jest-dev-server-3.6.0.tgz#fa3baf3b46109b9348e434203e449618af2b7278"
   integrity sha512-UbDPDBjpD3t9hjZ6z4j1NW8+jYE1rP5jJ6qVLbWsnpPgfJDBziOhhUSspSvyCG3DW+txK8/Xtw1lwwiEponWpg==
   dependencies:
     chalk "^2.4.1"
@@ -5848,7 +5848,7 @@ jest-dev-server@^3.6.0:
 
 jest-diff@^23.6.0:
   version "23.6.0"
-  resolved "https://artifact.devsnc.com/content/groups/npm-all/jest-diff/-/jest-diff-23.6.0.tgz#1500f3f16e850bb3d71233408089be099f610c7d"
+  resolved "https://registry.yarnpkg.com/jest-diff/-/jest-diff-23.6.0.tgz#1500f3f16e850bb3d71233408089be099f610c7d"
   integrity sha512-Gz9l5Ov+X3aL5L37IT+8hoCUsof1CVYBb2QEkOupK64XyRR3h+uRpYIm97K7sY8diFxowR8pIGEdyfMKTixo3g==
   dependencies:
     chalk "^2.0.1"
@@ -5864,7 +5864,7 @@ jest-docblock@^23.2.0:
 
 jest-each@^23.6.0:
   version "23.6.0"
-  resolved "https://artifact.devsnc.com/content/groups/npm-all/jest-each/-/jest-each-23.6.0.tgz#ba0c3a82a8054387016139c733a05242d3d71575"
+  resolved "https://registry.yarnpkg.com/jest-each/-/jest-each-23.6.0.tgz#ba0c3a82a8054387016139c733a05242d3d71575"
   integrity sha512-x7V6M/WGJo6/kLoissORuvLIeAoyo2YqLOoCDkohgJ4XOXSqOtyvr8FbInlAWS77ojBsZrafbozWoKVRdtxFCg==
   dependencies:
     chalk "^2.0.1"
@@ -5887,7 +5887,7 @@ jest-environment-node@^23.4.0:
 
 jest-environment-puppeteer@^3.6.0:
   version "3.6.0"
-  resolved "https://artifact.devsnc.com/content/groups/npm-all/jest-environment-puppeteer/-/jest-environment-puppeteer-3.6.0.tgz#5a9ff756b30c11ed4613ec9c14153dcdb3b5d0f0"
+  resolved "https://registry.yarnpkg.com/jest-environment-puppeteer/-/jest-environment-puppeteer-3.6.0.tgz#5a9ff756b30c11ed4613ec9c14153dcdb3b5d0f0"
   integrity sha512-3ULqgH6f+HRu53wxP0NDFb8uZFxn2+97tK4eZicktgst/zWpSJucEpbsVVNWk4cIHrPo79rYoUfomxnui/ndAg==
   dependencies:
     chalk "^2.4.1"
@@ -5901,7 +5901,7 @@ jest-get-type@^22.1.0:
 
 jest-haste-map@^23.6.0:
   version "23.6.0"
-  resolved "https://artifact.devsnc.com/content/groups/npm-all/jest-haste-map/-/jest-haste-map-23.6.0.tgz#2e3eb997814ca696d62afdb3f2529f5bbc935e16"
+  resolved "https://registry.yarnpkg.com/jest-haste-map/-/jest-haste-map-23.6.0.tgz#2e3eb997814ca696d62afdb3f2529f5bbc935e16"
   integrity sha512-uyNhMyl6dr6HaXGHp8VF7cK6KpC6G9z9LiMNsst+rJIZ8l7wY0tk8qwjPmEghczojZ2/ZhtEdIabZ0OQRJSGGg==
   dependencies:
     fb-watchman "^2.0.0"
@@ -5915,7 +5915,7 @@ jest-haste-map@^23.6.0:
 
 jest-jasmine2@^23.6.0:
   version "23.6.0"
-  resolved "https://artifact.devsnc.com/content/groups/npm-all/jest-jasmine2/-/jest-jasmine2-23.6.0.tgz#840e937f848a6c8638df24360ab869cc718592e0"
+  resolved "https://registry.yarnpkg.com/jest-jasmine2/-/jest-jasmine2-23.6.0.tgz#840e937f848a6c8638df24360ab869cc718592e0"
   integrity sha512-pe2Ytgs1nyCs8IvsEJRiRTPC0eVYd8L/dXJGU08GFuBwZ4sYH/lmFDdOL3ZmvJR8QKqV9MFuwlsAi/EWkFUbsQ==
   dependencies:
     babel-traverse "^6.0.0"
@@ -5933,14 +5933,14 @@ jest-jasmine2@^23.6.0:
 
 jest-leak-detector@^23.6.0:
   version "23.6.0"
-  resolved "https://artifact.devsnc.com/content/groups/npm-all/jest-leak-detector/-/jest-leak-detector-23.6.0.tgz#e4230fd42cf381a1a1971237ad56897de7e171de"
+  resolved "https://registry.yarnpkg.com/jest-leak-detector/-/jest-leak-detector-23.6.0.tgz#e4230fd42cf381a1a1971237ad56897de7e171de"
   integrity sha512-f/8zA04rsl1Nzj10HIyEsXvYlMpMPcy0QkQilVZDFOaPbv2ur71X5u2+C4ZQJGyV/xvVXtCCZ3wQ99IgQxftCg==
   dependencies:
     pretty-format "^23.6.0"
 
 jest-matcher-utils@^23.6.0:
   version "23.6.0"
-  resolved "https://artifact.devsnc.com/content/groups/npm-all/jest-matcher-utils/-/jest-matcher-utils-23.6.0.tgz#726bcea0c5294261a7417afb6da3186b4b8cac80"
+  resolved "https://registry.yarnpkg.com/jest-matcher-utils/-/jest-matcher-utils-23.6.0.tgz#726bcea0c5294261a7417afb6da3186b4b8cac80"
   integrity sha512-rosyCHQfBcol4NsckTn01cdelzWLU9Cq7aaigDf8VwwpIRvWE/9zLgX2bON+FkEW69/0UuYslUe22SOdEf2nog==
   dependencies:
     chalk "^2.0.1"
@@ -5963,7 +5963,7 @@ jest-mock@^23.2.0:
 
 jest-puppeteer@^3.6.0:
   version "3.6.0"
-  resolved "https://artifact.devsnc.com/content/groups/npm-all/jest-puppeteer/-/jest-puppeteer-3.6.0.tgz#478d60b84fe83e627dbce2b14d0762c6c1621959"
+  resolved "https://registry.yarnpkg.com/jest-puppeteer/-/jest-puppeteer-3.6.0.tgz#478d60b84fe83e627dbce2b14d0762c6c1621959"
   integrity sha512-cYOYV+JTza5s8NKAGBgAjX2VRKE2lHgFZWIN4rz4Q53zt60M/DKl9Ej/L1nYsqeyic0lXPE3EYuVzswqAj8YrQ==
   dependencies:
     expect-puppeteer "^3.5.1"
@@ -5975,7 +5975,7 @@ jest-regex-util@^23.3.0:
 
 jest-resolve-dependencies@^23.6.0:
   version "23.6.0"
-  resolved "https://artifact.devsnc.com/content/groups/npm-all/jest-resolve-dependencies/-/jest-resolve-dependencies-23.6.0.tgz#b4526af24c8540d9a3fab102c15081cf509b723d"
+  resolved "https://registry.yarnpkg.com/jest-resolve-dependencies/-/jest-resolve-dependencies-23.6.0.tgz#b4526af24c8540d9a3fab102c15081cf509b723d"
   integrity sha512-EkQWkFWjGKwRtRyIwRwI6rtPAEyPWlUC2MpzHissYnzJeHcyCn1Hc8j7Nn1xUVrS5C6W5+ZL37XTem4D4pLZdA==
   dependencies:
     jest-regex-util "^23.3.0"
@@ -5983,7 +5983,7 @@ jest-resolve-dependencies@^23.6.0:
 
 jest-resolve@^23.6.0:
   version "23.6.0"
-  resolved "https://artifact.devsnc.com/content/groups/npm-all/jest-resolve/-/jest-resolve-23.6.0.tgz#cf1d1a24ce7ee7b23d661c33ba2150f3aebfa0ae"
+  resolved "https://registry.yarnpkg.com/jest-resolve/-/jest-resolve-23.6.0.tgz#cf1d1a24ce7ee7b23d661c33ba2150f3aebfa0ae"
   integrity sha512-XyoRxNtO7YGpQDmtQCmZjum1MljDqUCob7XlZ6jy9gsMugHdN2hY4+Acz9Qvjz2mSsOnPSH7skBmDYCHXVZqkA==
   dependencies:
     browser-resolve "^1.11.3"
@@ -5992,7 +5992,7 @@ jest-resolve@^23.6.0:
 
 jest-runner@^23.6.0:
   version "23.6.0"
-  resolved "https://artifact.devsnc.com/content/groups/npm-all/jest-runner/-/jest-runner-23.6.0.tgz#3894bd219ffc3f3cb94dc48a4170a2e6f23a5a38"
+  resolved "https://registry.yarnpkg.com/jest-runner/-/jest-runner-23.6.0.tgz#3894bd219ffc3f3cb94dc48a4170a2e6f23a5a38"
   integrity sha512-kw0+uj710dzSJKU6ygri851CObtCD9cN8aNkg8jWJf4ewFyEa6kwmiH/r/M1Ec5IL/6VFa0wnAk6w+gzUtjJzA==
   dependencies:
     exit "^0.1.2"
@@ -6011,7 +6011,7 @@ jest-runner@^23.6.0:
 
 jest-runtime@^23.6.0:
   version "23.6.0"
-  resolved "https://artifact.devsnc.com/content/groups/npm-all/jest-runtime/-/jest-runtime-23.6.0.tgz#059e58c8ab445917cd0e0d84ac2ba68de8f23082"
+  resolved "https://registry.yarnpkg.com/jest-runtime/-/jest-runtime-23.6.0.tgz#059e58c8ab445917cd0e0d84ac2ba68de8f23082"
   integrity sha512-ycnLTNPT2Gv+TRhnAYAQ0B3SryEXhhRj1kA6hBPSeZaNQkJ7GbZsxOLUkwg6YmvWGdX3BB3PYKFLDQCAE1zNOw==
   dependencies:
     babel-core "^6.0.0"
@@ -6042,7 +6042,7 @@ jest-serializer@^23.0.1:
 
 jest-snapshot@^23.6.0:
   version "23.6.0"
-  resolved "https://artifact.devsnc.com/content/groups/npm-all/jest-snapshot/-/jest-snapshot-23.6.0.tgz#f9c2625d1b18acda01ec2d2b826c0ce58a5aa17a"
+  resolved "https://registry.yarnpkg.com/jest-snapshot/-/jest-snapshot-23.6.0.tgz#f9c2625d1b18acda01ec2d2b826c0ce58a5aa17a"
   integrity sha512-tM7/Bprftun6Cvj2Awh/ikS7zV3pVwjRYU2qNYS51VZHgaAMBs5l4o/69AiDHhQrj5+LA2Lq4VIvK7zYk/bswg==
   dependencies:
     babel-types "^6.0.0"
@@ -6071,7 +6071,7 @@ jest-util@^23.4.0:
 
 jest-validate@^23.5.0, jest-validate@^23.6.0:
   version "23.6.0"
-  resolved "https://artifact.devsnc.com/content/groups/npm-all/jest-validate/-/jest-validate-23.6.0.tgz#36761f99d1ed33fcd425b4e4c5595d62b6597474"
+  resolved "https://registry.yarnpkg.com/jest-validate/-/jest-validate-23.6.0.tgz#36761f99d1ed33fcd425b4e4c5595d62b6597474"
   integrity sha512-OFKapYxe72yz7agrDAWi8v2WL8GIfVqcbKRCLbRG9PAxtzF9b1SEDdTpytNDN12z2fJynoBwpMpvj2R39plI2A==
   dependencies:
     chalk "^2.0.1"
@@ -6095,7 +6095,7 @@ jest-worker@^23.2.0:
 
 jest@^23.6.0:
   version "23.6.0"
-  resolved "https://artifact.devsnc.com/content/groups/npm-all/jest/-/jest-23.6.0.tgz#ad5835e923ebf6e19e7a1d7529a432edfee7813d"
+  resolved "https://registry.yarnpkg.com/jest/-/jest-23.6.0.tgz#ad5835e923ebf6e19e7a1d7529a432edfee7813d"
   integrity sha512-lWzcd+HSiqeuxyhG+EnZds6iO3Y3ZEnMrfZq/OTGvF/C+Z4fPMCdhWTGSAiO2Oym9rbEXfwddHhh6jqrTF3+Lw==
   dependencies:
     import-local "^1.0.0"
@@ -6298,7 +6298,7 @@ killable@^1.0.0:
 
 kind-of@^2.0.1:
   version "2.0.1"
-  resolved "https://artifact.devsnc.com/content/groups/npm-all/kind-of/-/kind-of-2.0.1.tgz#018ec7a4ce7e3a86cb9141be519d24c8faa981b5"
+  resolved "https://registry.yarnpkg.com/kind-of/-/kind-of-2.0.1.tgz#018ec7a4ce7e3a86cb9141be519d24c8faa981b5"
   integrity sha1-AY7HpM5+OobLkUG+UZ0kyPqpgbU=
   dependencies:
     is-buffer "^1.0.2"
@@ -6420,7 +6420,7 @@ latest-version@^3.0.0:
 
 lazy-cache@^0.2.3:
   version "0.2.7"
-  resolved "https://artifact.devsnc.com/content/groups/npm-all/lazy-cache/-/lazy-cache-0.2.7.tgz#7feddf2dcb6edb77d11ef1d117ab5ffdf0ab1b65"
+  resolved "https://registry.yarnpkg.com/lazy-cache/-/lazy-cache-0.2.7.tgz#7feddf2dcb6edb77d11ef1d117ab5ffdf0ab1b65"
   integrity sha1-f+3fLctu23fRHvHRF6tf/fCrG2U=
 
 lazy-cache@^1.0.3:
@@ -6992,7 +6992,7 @@ meow@^3.1.0, meow@^3.3.0, meow@^3.7.0:
 
 merge-deep@^3.0.2:
   version "3.0.2"
-  resolved "https://artifact.devsnc.com/content/groups/npm-all/merge-deep/-/merge-deep-3.0.2.tgz#f39fa100a4f1bd34ff29f7d2bf4508fbb8d83ad2"
+  resolved "https://registry.yarnpkg.com/merge-deep/-/merge-deep-3.0.2.tgz#f39fa100a4f1bd34ff29f7d2bf4508fbb8d83ad2"
   integrity sha512-T7qC8kg4Zoti1cFd8Cr0M+qaZfOwjlPDEdZIIPPB2JZctjaPM4fX+i7HOId69tAti2fvO6X5ldfYUONDODsrkA==
   dependencies:
     arr-union "^3.1.0"
@@ -8738,7 +8738,7 @@ progress@^2.0.0:
 
 progress@^2.0.1:
   version "2.0.3"
-  resolved "https://artifact.devsnc.com/content/groups/npm-all/progress/-/progress-2.0.3.tgz#7e8cf8d8f5b8f239c1bc68beb4eb78567d572ef8"
+  resolved "https://registry.yarnpkg.com/progress/-/progress-2.0.3.tgz#7e8cf8d8f5b8f239c1bc68beb4eb78567d572ef8"
   integrity sha512-7PiHtLll5LdnKIMw100I+8xJXR5gW2QwWYkT6iJva0bXitZKa/XMrSbdmg3r2Xnaidz9Qumd0VPaMrZlF9V9sA==
 
 promise-inflight@^1.0.1:
@@ -8785,7 +8785,7 @@ ps-node@^0.1.6:
 
 ps-tree@^1.1.1:
   version "1.2.0"
-  resolved "https://artifact.devsnc.com/content/groups/npm-all/ps-tree/-/ps-tree-1.2.0.tgz#5e7425b89508736cdd4f2224d028f7bb3f722ebd"
+  resolved "https://registry.yarnpkg.com/ps-tree/-/ps-tree-1.2.0.tgz#5e7425b89508736cdd4f2224d028f7bb3f722ebd"
   integrity sha512-0VnamPPYHl4uaU/nSFeZZpR21QAWRz+sRv4iW9+v/GS/J5U5iZB5BNN6J0RMoOvdx2gWM2+ZFMIm58q24e4UYA==
   dependencies:
     event-stream "=3.3.4"
@@ -8864,7 +8864,7 @@ puppeteer@1.7.0, puppeteer@^1.0.0:
 
 puppeteer@^1.11.0:
   version "1.11.0"
-  resolved "https://artifact.devsnc.com/content/groups/npm-all/puppeteer/-/puppeteer-1.11.0.tgz#63cdbe12b07275cd6e0b94bce41f3fcb20305770"
+  resolved "https://registry.yarnpkg.com/puppeteer/-/puppeteer-1.11.0.tgz#63cdbe12b07275cd6e0b94bce41f3fcb20305770"
   integrity sha512-iG4iMOHixc2EpzqRV+pv7o3GgmU2dNYEMkvKwSaQO/vMZURakwSOn/EYJ6OIRFYOque1qorzIBvrytPIQB3YzQ==
   dependencies:
     debug "^4.1.0"
@@ -9737,7 +9737,7 @@ sha.js@^2.4.0, sha.js@^2.4.8:
 
 shallow-clone@^0.1.2:
   version "0.1.2"
-  resolved "https://artifact.devsnc.com/content/groups/npm-all/shallow-clone/-/shallow-clone-0.1.2.tgz#5909e874ba77106d73ac414cfec1ffca87d97060"
+  resolved "https://registry.yarnpkg.com/shallow-clone/-/shallow-clone-0.1.2.tgz#5909e874ba77106d73ac414cfec1ffca87d97060"
   integrity sha1-WQnodLp3EG1zrEFM/sH/yofZcGA=
   dependencies:
     is-extendable "^0.1.1"
@@ -10004,7 +10004,7 @@ source-map@^0.6.0, source-map@^0.6.1, source-map@~0.6.0, source-map@~0.6.1:
 
 spawnd@^3.5.2:
   version "3.5.2"
-  resolved "https://artifact.devsnc.com/content/groups/npm-all/spawnd/-/spawnd-3.5.2.tgz#a3a546544666e5c8a22e0329fcfecc92cb10d307"
+  resolved "https://registry.yarnpkg.com/spawnd/-/spawnd-3.5.2.tgz#a3a546544666e5c8a22e0329fcfecc92cb10d307"
   integrity sha512-taf6nYLIl8b3b1RNt0YuxnIUUgHqfx+nix8Rdr2FkNG8259+Jt8YJahrPDShOPa9vCMnDPfPsefRAY/oJy+QBg==
   dependencies:
     exit "^0.1.2"
@@ -10278,7 +10278,7 @@ strip-ansi@^4.0.0:
 
 strip-ansi@^5.0.0:
   version "5.0.0"
-  resolved "https://artifact.devsnc.com/content/groups/npm-all/strip-ansi/-/strip-ansi-5.0.0.tgz#f78f68b5d0866c20b2c9b8c61b5298508dc8756f"
+  resolved "https://registry.yarnpkg.com/strip-ansi/-/strip-ansi-5.0.0.tgz#f78f68b5d0866c20b2c9b8c61b5298508dc8756f"
   integrity sha512-Uu7gQyZI7J7gn5qLn1Np3G9vcYGTVqB+lFTytnDJv83dd8T22aGH451P3jueT2/QemInJDfxHB5Tde5OzgG1Ow==
   dependencies:
     ansi-regex "^4.0.0"
@@ -10572,7 +10572,7 @@ term-size@^1.2.0:
 
 terminate@^2.1.2:
   version "2.1.2"
-  resolved "https://artifact.devsnc.com/content/groups/npm-all/terminate/-/terminate-2.1.2.tgz#3c78b9dc7559cb66af215c622cce906d415e2ef9"
+  resolved "https://registry.yarnpkg.com/terminate/-/terminate-2.1.2.tgz#3c78b9dc7559cb66af215c622cce906d415e2ef9"
   integrity sha512-ltKc9MkgcRe7gzD7XSttHCF1feKM1pTkCdb58jFVWk1efPN9JIk/BHSlOaYF+hCcWoubeJQ8C8Phb0++fa6iNQ==
   dependencies:
     ps-tree "^1.1.1"
@@ -11304,7 +11304,7 @@ vue-hot-reload-api@^2.3.0:
 
 vue-jest@^3.0.1:
   version "3.0.1"
-  resolved "https://artifact.devsnc.com/content/groups/npm-all/vue-jest/-/vue-jest-3.0.1.tgz#127cded1a57cdfcf01fa8a10ce29579e2cb3a04d"
+  resolved "https://registry.yarnpkg.com/vue-jest/-/vue-jest-3.0.1.tgz#127cded1a57cdfcf01fa8a10ce29579e2cb3a04d"
   integrity sha512-otS+n341cTsp0pF7tuTu2x43b23x/+K0LZdAXV+ewKYIMZRqhuQaJTECWEt/cN/YZw2JC6hUM6xybdnOB4ZQ+g==
   dependencies:
     babel-plugin-transform-es2015-modules-commonjs "^6.26.0"
@@ -11747,7 +11747,7 @@ ws@^5.1.1, ws@^5.2.0:
 
 ws@^6.1.0:
   version "6.1.2"
-  resolved "https://artifact.devsnc.com/content/groups/npm-all/ws/-/ws-6.1.2.tgz#3cc7462e98792f0ac679424148903ded3b9c3ad8"
+  resolved "https://registry.yarnpkg.com/ws/-/ws-6.1.2.tgz#3cc7462e98792f0ac679424148903ded3b9c3ad8"
   integrity sha512-rfUqzvz0WxmSXtJpPMX2EeASXabOrSMk1ruMOV3JBTBjo4ac2lDjGGsbQSyxj8Odhw5fBib8ZKEjDNvgouNKYw==
   dependencies:
     async-limiter "~1.0.0"
