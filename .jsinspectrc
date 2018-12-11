@@ -1,4 +1,0 @@
-{
-  "ignore":   "test|spec|mock|dist|coverage|node_modules",
-  "truncate": 80
-}
