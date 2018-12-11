@@ -18,5 +18,4 @@ after_success:
   - cat coverage/lcov.info | coveralls
 
 script:
-  - yarn test:unit
-  - yarn test:e2e
+  - yarn test
