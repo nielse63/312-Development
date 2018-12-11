@@ -1,20 +1,23 @@
 #!/usr/bin/env bash
 set -e
 
+# vars
+bin="node_modules/.bin"
+
 function lint_js() {
-  echo 'Linting JS files'
-  yarn eslint --ext .js,.vue ./*.js src/ build/ test/ --fix
+  echo '✨ Linting JS files'
+  $bin/eslint --ext .js,.vue ./*.js src/ build/ test/ --fix
 }
 
 function lint_scss() {
-  echo 'Linting SCSS files'
-  yarn stylelint 'src/**/*.scss' -s scss --fix
-  yarn stylelint 'src/**/*.vue' --custom-syntax postcss-html --fix
+  echo '✨ Linting SCSS files'
+  $bin/stylelint 'src/**/*.scss' -s scss --fix
+  $bin/stylelint 'src/**/*.vue' --custom-syntax postcss-html --fix
 }
 
 function lint_md() {
-  echo 'Linting .md files'
-  yarn lint:md -S
+  echo '✨ Linting .md files'
+  $bin/markdownlint --config .mdlrc docs/ README.md
 }
 
 function usage() {
@@ -40,6 +43,7 @@ elif [ "$1" == "md" ]; then
 elif [ "$1" == "help" ]; then
   usage
 else
-  usage
-  exit 1
+  lint_js
+  lint_scss
+  lint_md
 fi

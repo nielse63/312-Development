@@ -22,6 +22,7 @@ To see all available npm scripts, check out the [`package.json`](../package.json
 | `yarn lint:js`   | Lints `.js` files using eslint                                  |
 | `yarn lint:scss` | Lints `.scss` and `.vue` files using stylelint                  |
 | `yarn lint:md`   | Lints `.md` files using markdownlint                            |
+| `yarn lint`      | Runs all lint tasks                                             |
 | `yarn seo`       | Validations SEO rules against the production URL (uses seolint) |
 
 ### Testing Scripts
@@ -30,7 +31,7 @@ To see all available npm scripts, check out the [`package.json`](../package.json
 | :--------------- | :----------------------------------------- |
 | `yarn test:unit` | Runs unit tests using jest                 |
 | `yarn test:e2e`  | Runs end-to-end tests using jest-puppeteer |
-| `yarn test`      | Runs all test scripts (unit, e2e, etc.)    |
+| `yarn test`      | Runs all test tasks                        |
 
 ### Production Scripts
 
