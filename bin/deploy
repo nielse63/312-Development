@@ -8,11 +8,11 @@ if [ -f ".env" ]; then source .env; fi
 # DATE=$(date -u +"%Y-%m-%dT%H:%M:%S")
 branch=$(git branch | sed -n -e 's/^\* \(.*\)/\1/p')
 # echo $branch
-# if [ "$branch" != "deploy/production" ]; then
-#   echo "! only deploy from deploy/production"
-#   exit 1
-# fi
-# APP_NAME="three12-staging"
+if [ "$branch" != "master" ]; then
+  echo "! only deploy from master"
+  exit 1
+fi
+
 if ! [ $HEROKU_REPO ]; then
   echo "Environment variable $HEROKU_REPO must be defined"
   exit 1
@@ -20,12 +20,11 @@ fi
 
 git remote add heroku $HEROKU_REPO
 
-# yarn build
-echo $HEROKU_REPO
+yarn build
 git remote -v
 
 # install static buildpack
-if ! [ $TRAVIS ]; then
+if [ $TRAVIS ]; then
   git clone https://github.com/hone/heroku-cli-static.git
   cd heroku-cli-static
   npm i
@@ -33,7 +32,7 @@ if ! [ $TRAVIS ]; then
   cd ..
 fi
 
-heroku config:set API_HOST="$API_HOST"
+# heroku config:set API_HOST="$API_HOST"
 heroku static:deploy
 
 # cleanup
