@@ -2,13 +2,15 @@
 set -e
 
 # vars
-DATE=$(date -u +"%Y-%m-%dT%H:%M:%S")
+# DATE=$(date -u +"%Y-%m-%dT%H:%M:%S")
+branch=$(git branch | sed -n -e 's/^\* \(.*\)/\1/p')
 
 git add .
-git stash save "pre-deploy $DATE"
+git stash
 git checkout master
 git pull --rebase
 yarn build
-git checkout deploy/production
+git checkout $branch --force
 git add dist/
 git commit -m 'automated build and deploy'
+git stash pop
