@@ -6,11 +6,12 @@
 
 ## Usage
 
-| Script           | Description                                |
-| :--------------- | :----------------------------------------- |
-| `yarn test:unit` | Runs unit tests using jest                 |
-| `yarn test:e2e`  | Runs end-to-end tests using jest-puppeteer |
-| `yarn test`      | Runs all test tasks                        |
+| Script                 | Description                                |
+| :--------------------- | :----------------------------------------- |
+| `yarn test:unit`       | Runs unit tests using jest                 |
+| `yarn test:e2e`        | Runs end-to-end tests using jest-puppeteer |
+| `yarn test:lighthouse` | Executes a lighthouse run                  |
+| `yarn test`            | Runs all test tasks                        |
 
 ## Unit Tests
 
@@ -64,3 +65,27 @@ yarn test:e2e
 | :-------------------------------------------------------------- | :---------------------------------------------- |
 | [jest](https://jestjs.io/)                                      | Easy-to-use, modern JavaScript testing platform |
 | [Jest Puppeteer](https://github.com/smooth-code/jest-puppeteer) | Run your tests using Jest & Puppeteer           |
+
+## Lighthouse Tests
+
+### Running Lighthouse Tests
+
+```bash
+yarn test:lighthouse
+```
+
+### Lighthouse Tests Directories
+
+```bash
+.
+└─ test/
+   └─ lighthouse/
+      └─ index.js               # programatically runs lighthouse against a given url
+```
+
+### Lighthouse Test Dependencies
+
+| Dependency                                                                | Description                                                                                                                 |
+| :------------------------------------------------------------------------ | :-------------------------------------------------------------------------------------------------------------------------- |
+| [lighthouse](https://github.com/GoogleChrome/lighthouse#readme)           | Lighthouse analyzes web apps and web pages, collecting modern performance metrics and insights on developer best practices. |
+| [chrome-launcher](https://github.com/GoogleChrome/chrome-launcher#readme) | Launch Google Chrome with ease from node.                                                                                   |
