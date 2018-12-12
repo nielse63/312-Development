@@ -47,5 +47,4 @@ elif [ "$1" == "help" ]; then
 else
   test_unit
   test_e2e
-  test_lighthouse
 fi
