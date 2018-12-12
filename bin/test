@@ -19,7 +19,7 @@ function test_unit() {
 
 function test_lighthouse() {
   echo '✨ Running lighthouse tests'
-  node test/lighthouse/index.js $LIGHTHOUSE_URL
+  node test/lighthouse/index.js --url=$LIGHTHOUSE_URL
 }
 
 function usage() {

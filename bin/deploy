@@ -4,36 +4,51 @@ set -e
 # source env vars, if available
 if [ -f ".env" ]; then source .env; fi
 
-# vars
-# DATE=$(date -u +"%Y-%m-%dT%H:%M:%S")
+# global vars
+bin="node_modules/.bin"
 branch=$(git branch | sed -n -e 's/^\* \(.*\)/\1/p')
-# echo $branch
+
+# guard - make sure we're on master
 if [ "$branch" != "master" ]; then
-  echo "! only deploy from master"
+  echo "Only deploy from master"
   exit 1
 fi
 
-if ! [ $HEROKU_REPO ]; then
-  echo "Environment variable $HEROKU_REPO must be defined"
-  exit 1
-fi
+# functions
+function deploy() {
+  APP_ID=$HEROKU_STAGING_APP
+  APP_URL=$HEROKU_STAGING_URL
 
-git remote add heroku $HEROKU_REPO
+  if [ "$1" == "prod" ]; then
+    APP_ID=$HEROKU_PROD_APP
+    APP_URL=$HEROKU_PROD_URL
+  fi
 
+  # make sure we have the require env vars
+  echo "deploying app id: $APP_ID"
+  echo "deploying app url: $APP_URL"
+
+  if ! [ $APP_ID ]; then
+    echo "No heroku app id given. Exiting"
+    exit 1
+  fi
+  if ! [ $APP_URL ]; then
+    echo "No heroku app url given. Exiting"
+    exit 1
+  fi
+
+  # deploy remotely
+  heroku config:set API_HOST=$API_HOST --app=$APP_ID
+  heroku buildpacks:set https://github.com/hone/heroku-buildpack-static --app=$APP_ID
+  heroku static:deploy --app=$APP_ID
+
+  # run lighthouse test
+  $bin/cross-env LIGHTHOUSE_URL=$APP_URL yarn test:lighthouse
+}
+
+# build the app
 yarn build
-git remote -v
 
-# install static buildpack
-if [ $TRAVIS ]; then
-  git clone https://github.com/hone/heroku-cli-static.git
-  cd heroku-cli-static
-  npm i
-  heroku plugins:link .
-  cd ..
-fi
-
-# heroku config:set API_HOST="$API_HOST"
-heroku static:deploy
-
-# cleanup
-git remote remove heroku
+# deploy for staging then prod
+deploy
+deploy prod

@@ -5,10 +5,6 @@ set -e
 bin="node_modules/.bin"
 DATE=$(date -u +"%Y-%m-%dT%H:%M:%S")
 
-### pre-build ###
-echo "✨ pre-build"
-rm -rf dist/
-
 ### build ###
 echo "✨ build"
 $bin/cross-env NODE_ENV=production $bin/webpack --mode production --colors
