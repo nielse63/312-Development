@@ -31,6 +31,4 @@ deploy:
     all_branches: true
     repo: nielse63/312-Development
   skip_cleanup: true
-  # app:
-  #   master: three12-staging
-  #   production: three-one-two
+  app: three12-staging
