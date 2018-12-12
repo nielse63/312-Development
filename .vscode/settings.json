@@ -8,7 +8,7 @@
     "**/*.log": true,
     "**/*.log*": true,
     "**/node_modules": true,
-    "**/dist": false,
+    "**/dist": true,
     "**/coverage": true,
   },
   "editor.insertSpaces": true,
