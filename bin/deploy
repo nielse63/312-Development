@@ -1,16 +1,35 @@
 #!/usr/bin/env bash
 set -e
 
+# source env vars, if available
+if [ -f ".env" ]; then source .env; fi
+
 # vars
 # DATE=$(date -u +"%Y-%m-%dT%H:%M:%S")
 branch=$(git branch | sed -n -e 's/^\* \(.*\)/\1/p')
+APP_NAME="three12-staging"
 
 git add .
 git stash
 git checkout master
 git pull --rebase
 yarn build
+
+# rm -rf $APP_NAME *.tar.gz
+
+# mkdir $APP_NAME
+# cp -r dist $APP_NAME/dist
+# cp static.json $APP_NAME/static.json
+# cp package.json $APP_NAME/package.json
+# cp yarn.lock $APP_NAME/yarn.lock
+# tar czf $APP_NAME.tar.gz $APP_NAME
+# heroku builds:create --source-tar three12-staging.tar.gz -a three12-staging
+# git clone https://github.com/hone/heroku-cli-static.git
+# heroku plugins:link .
+heroku config:set API_HOST="$API_HOST"
+heroku static:deploy
+
+rm -rf dist/
+
 git checkout $branch --force
-git add dist/
-git commit -m 'automated build and deploy'
 git stash pop
