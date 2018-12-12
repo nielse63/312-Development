@@ -18,8 +18,7 @@
     "test:e2e": "bin/test e2e",
     "test:unit": "bin/test unit",
     "test:lighthouse": "bin/test lighthouse",
-    "test": "bin/test",
-    "heroku-postbuild": "yarn build"
+    "test": "bin/test"
   },
   "gitHooks": {
     "pre-commit": "lint-staged"
