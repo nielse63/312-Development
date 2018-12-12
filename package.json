@@ -17,7 +17,9 @@
     "new": "vg",
     "test:e2e": "bin/test e2e",
     "test:unit": "bin/test unit",
-    "test": "bin/test"
+    "test:lighthouse": "bin/test lighthouse",
+    "test": "bin/test",
+    "heroku-postbuild": "yarn build"
   },
   "gitHooks": {
     "pre-commit": "lint-staged"
@@ -40,6 +42,7 @@
     "babel-preset-stage-2": "^6.24.1",
     "body-parser": "^1.18.3",
     "case": "^1.5.5",
+    "chrome-launcher": "^0.10.5",
     "compression-webpack-plugin": "^2.0.0",
     "copy-webpack-plugin": "^4.5.2",
     "cross-env": "^5.2.0",
@@ -63,6 +66,7 @@
     "jest": "^23.6.0",
     "jest-canvas-mock": "^1.1.0",
     "jest-puppeteer": "^3.6.0",
+    "lighthouse": "^4.0.0-alpha.2-3.2.1",
     "lint-staged": "^8.0.0",
     "markdownlint-cli": "^0.13.0",
     "mini-css-extract-plugin": "^0.5.0",
@@ -99,7 +103,7 @@
     "yorkie": "^2.0.0"
   },
   "engines": {
-    "node": ">= 10.x",
+    "node": ">= 11.x",
     "npm": ">= 6.x",
     "yarn": ">= 1.x"
   },
