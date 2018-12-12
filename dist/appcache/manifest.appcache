@@ -1,0 +1,17 @@
+CACHE MANIFEST
+#ver:12/11/2018, 11:27:53 PM
+#plugin:5.0.5
+
+CACHE:
+/app.5051dab25869b0a66e77.js
+/manifest.2a9ffa5ca0930a8d0819.js
+/particles.b3e91eb5e03c2756f218.js
+/vendors.9b34e65ed2cc14f51ece.js
+/app.5051dab25869b0a66e77.css
+/
+
+NETWORK:
+*
+
+FALLBACK:
+/ /
