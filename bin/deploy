@@ -7,29 +7,34 @@ if [ -f ".env" ]; then source .env; fi
 # vars
 # DATE=$(date -u +"%Y-%m-%dT%H:%M:%S")
 branch=$(git branch | sed -n -e 's/^\* \(.*\)/\1/p')
-APP_NAME="three12-staging"
+# echo $branch
+# if [ "$branch" != "deploy/production" ]; then
+#   echo "! only deploy from deploy/production"
+#   exit 1
+# fi
+# APP_NAME="three12-staging"
+if ! [ $HEROKU_REPO ]; then
+  echo "Environment variable $HEROKU_REPO must be defined"
+  exit 1
+fi
 
-git add .
-git stash
-git checkout master
-git pull --rebase
-yarn build
+git remote add heroku $HEROKU_REPO
 
-# rm -rf $APP_NAME *.tar.gz
+# yarn build
+echo $HEROKU_REPO
+git remote -v
 
-# mkdir $APP_NAME
-# cp -r dist $APP_NAME/dist
-# cp static.json $APP_NAME/static.json
-# cp package.json $APP_NAME/package.json
-# cp yarn.lock $APP_NAME/yarn.lock
-# tar czf $APP_NAME.tar.gz $APP_NAME
-# heroku builds:create --source-tar three12-staging.tar.gz -a three12-staging
-# git clone https://github.com/hone/heroku-cli-static.git
-# heroku plugins:link .
+# install static buildpack
+if ! [ $TRAVIS ]; then
+  git clone https://github.com/hone/heroku-cli-static.git
+  cd heroku-cli-static
+  npm i
+  heroku plugins:link .
+  cd ..
+fi
+
 heroku config:set API_HOST="$API_HOST"
 heroku static:deploy
 
-rm -rf dist/
-
-git checkout $branch --force
-git stash pop
+# cleanup
+git remote remove heroku
