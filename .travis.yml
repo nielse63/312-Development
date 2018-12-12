@@ -6,6 +6,9 @@ dist: trusty
 env:
   global:
     - NODE_ENV=test
+    - API_HOST=https://three-one-two-api-server.herokuapp.com
+    - HEROKU_REPO=https://git.heroku.com/three12-staging.git
+    - secure: dVz6W9kF4FusnDs7TiiqbGfOQbtLCLog9Mg3j50PxDA+AXBLW2CA7jJrTRbQk9ksEGY0yaDD1PpNVcnX1AFSwobWt8r42xr0nzwS9pJLuIcM6yzBtZ7PiH/FVd50QP++xfR6m6oNxH+/fCgyxzvrSf/2P/GZUifw7yo3+yTFMi/+ksCEagnG0Lot+CscpyQWovBcg67JW3YXmu+voeH1D9gFICxa5EgGrOKcPsdXPSqKuRvkDIzgeO6+I6idJVptnmkiDxE145s76xq9anmtkLHS5dafJ5thAJqXrn7Al5XH0LJDOSpzAHx9SopogWveZxn1t+4QkIN9/c6NIr3fIAGmI5lc1gChFZb0k3dM7nYcL86gmhY4q7NDi5RsXoLRAydHDqllbI3SNHszukb1sSSBOLz004lQ78qHnmYCiuNyE6pJfCucZ9/jjbftgcxpmcB76ETzVKoiWBz+Bup1t2wMRakZqBY2ZCyqkolb+ZMHtHlR3xNpc1lPPl+1XFOxuBY+3aA5w+Yuwdjl522oU1utumJi3lISOUNCaXq5GfYrb8YnCIxoYuc0tBXx2TPNvO0ZBGEXukJsacnzNmbuxeL/dtAsZ9lqX7xVyj9thsaXK71MXUfFjGag0f+SBZlTwYJ/zVwJE5I6cQEyjgnjsUJOqdsfwLxoWklqk/2EMCM=
 before_install:
   - npm config set spin false
   - npm i -g http-server greenkeeper-lockfile@2
@@ -19,3 +22,15 @@ after_success:
 
 script:
   - yarn test
+
+deploy:
+  provider: heroku
+  api_key:
+    secure: HvxXLE/RGVcaPZIpCLG7D5+zSG02DeereSKkkTu8upaOFYO1FF8NrZv3iMouxhZdzQGIE5MtzDPnhlAztU6DtEJhkl2buM1Bh32WyJBPYA+Zw3n57IGaEYIMzy3dgFdfCARt6EkimdvUtkkf/yChtEgN3sZunJJWfq8q8SnFJO9FNGGdBnJlyRn7Mrmob9gxgkmiHwZoHVaObKt2XwDBk9SJMEsddX8PqWwaLKZAHQJV0jcL+SOOb7CMHf1OLlVQ3SC3GL3CKzTkst1zSmDHpdqKLtvwtztrXhJ0l2z0LFMJOhgGv2FZbWgBA/7Qf9PnCNiXDZypw+K/OFvHcM+P20nCbk/f4TPllRpUGvVy0u7Q9rUNJTJbmCmNwW/e2f5LZd6xbIcmaOAR4JuyauJYBxXu/hujaqbKPiCjG0UJsbUDB/ZQ3Y9a+FW3Qfwi0uVd8XVvrLCyCL6GQxrYtbpdEqZC1Zeg0iVA+XqxMtaf4XNFCL1EJbjIviq4Nsff5HqV2jJUfj26ZgWhCDjYfsbJGqP8jzBZP59SPqroEWt9c83Y3cjJmrDTDtDs+VPOE9KfJN7I4rCfOuyefNUS1xX8R0azVVhgfr+dqV+aXyE9VhRtbsJrmPSq4wnSa+2Zm6AsO2dK6OybkbGL5ncH+LQjTabpoPpQPN+Q26UCiGld+Gc=
+  on:
+    all_branches: true
+    repo: nielse63/312-Development
+  skip_cleanup: true
+  # app:
+  #   master: three12-staging
+  #   production: three-one-two

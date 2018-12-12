@@ -8,7 +8,7 @@
 
 To build for production, execute the script `yarn build` - this simple compiled the source files using [Webpack](https://webpack.js.org/).  Files are compiled to the `dist/` directory.
 
-For production releases, this script is called during the `heroku-postbuild` hook of the Heroku deployment process.
+For production releases, the app is build using the `bin/deploy` script, which (for the time being) must be run manually.
 
 See the [webpack production configuration](../build/webpack.prod.conf.js) for the full production build process.
 
