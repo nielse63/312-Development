@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+set -e
+
+# vars
+DATE=$(date -u +"%Y-%m-%dT%H:%M:%S")
+
+git add .
+git stash --save "pre-deploy $DATE"
+git checkout master
+git pull --rebase
+yarn build
+git checkout deploy/production
+git add dist/
+git commit -m 'automated build and deploy'
