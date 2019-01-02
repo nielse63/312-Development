@@ -8789,9 +8789,10 @@ postcss-syntax@^0.31.0:
   version "0.31.0"
   resolved "https://registry.yarnpkg.com/postcss-syntax/-/postcss-syntax-0.31.0.tgz#13d955c705d339595d10a19efa4a1bee82dfb78f"
 
-postcss-syntax@^0.34.0:
-  version "0.34.0"
-  resolved "https://registry.yarnpkg.com/postcss-syntax/-/postcss-syntax-0.34.0.tgz#4a85c022f1cdecea72102775c91af1e7f506d83a"
+postcss-syntax@^0.36.0:
+  version "0.36.0"
+  resolved "https://registry.yarnpkg.com/postcss-syntax/-/postcss-syntax-0.36.0.tgz#9d3d48d25d9feb9903e283690e72dc1925d39952"
+  integrity sha512-n5Dfl1wBSoJWxymDns0NvTrw+TDZi/56DexLRXWOZ+HhxAl/DOtXdvWstFvx9mxHh5fsUfQ93cakCVy8E8JVuw==
 
 postcss-unique-selectors@^4.0.0:
   version "4.0.0"
