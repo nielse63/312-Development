@@ -46,7 +46,7 @@
     "copy-webpack-plugin": "^4.5.2",
     "cross-env": "^5.2.0",
     "css-loader": "^2.0.0",
-    "dotenv": "^6.0.0",
+    "dotenv": "^8.0.0",
     "ejs": "^2.6.1",
     "eslint": "^5.2.0",
     "eslint-config-airbnb-base": "^13.0.0",
