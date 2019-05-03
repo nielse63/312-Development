@@ -24,7 +24,7 @@
     "pre-commit": "lint-staged"
   },
   "dependencies": {
-    "offline-plugin": "^5.0.5",
+    "offline-plugin": "5.0.6",
     "vue": "^2.5.17",
     "vuex": "^3.0.1"
   },
