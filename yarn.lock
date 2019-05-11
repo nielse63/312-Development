@@ -6260,16 +6260,17 @@ js-yaml@^3.11.0, js-yaml@^3.7.0, js-yaml@^3.8.1, js-yaml@^3.9.0:
     argparse "^1.0.7"
     esprima "^4.0.0"
 
-js-yaml@~3.10.0:
-  version "3.10.0"
-  resolved "https://registry.yarnpkg.com/js-yaml/-/js-yaml-3.10.0.tgz#2e78441646bd4682e963f22b6e92823c309c62dc"
+js-yaml@^3.13.1:
+  version "3.13.1"
+  resolved "https://registry.yarnpkg.com/js-yaml/-/js-yaml-3.13.1.tgz#aff151b30bfdfa8e49e05da22e7415e9dfa37847"
+  integrity sha512-YfbcO7jXDdyj0DGxYVSlSeQNHbD7XPWvrVWeVUujrQEoZzWJIRrCPoyk6kL6IAjAG2IolMK4T0hNUe0HOUs5Jw==
   dependencies:
     argparse "^1.0.7"
     esprima "^4.0.0"
 
-js-yaml@~3.11.0:
-  version "3.11.0"
-  resolved "https://registry.yarnpkg.com/js-yaml/-/js-yaml-3.11.0.tgz#597c1a8bd57152f26d622ce4117851a51f5ebaef"
+js-yaml@~3.10.0:
+  version "3.10.0"
+  resolved "https://registry.yarnpkg.com/js-yaml/-/js-yaml-3.10.0.tgz#2e78441646bd4682e963f22b6e92823c309c62dc"
   dependencies:
     argparse "^1.0.7"
     esprima "^4.0.0"
@@ -7031,24 +7032,26 @@ markdown-table@^1.1.0:
   version "1.1.2"
   resolved "https://registry.yarnpkg.com/markdown-table/-/markdown-table-1.1.2.tgz#c78db948fa879903a41bce522e3b96f801c63786"
 
-markdownlint-cli@^0.13.0:
-  version "0.13.0"
-  resolved "https://registry.yarnpkg.com/markdownlint-cli/-/markdownlint-cli-0.13.0.tgz#af1d29e5d8b434256c451c81b87dff1c218844cb"
+markdownlint-cli@^0.16.0:
+  version "0.16.0"
+  resolved "https://registry.yarnpkg.com/markdownlint-cli/-/markdownlint-cli-0.16.0.tgz#725b3a9140a6d4b65e866f76e6086c0a3f3ee480"
+  integrity sha512-BmtWhDvbsnbgYirYOiSOxP8THhkCjp28+xVfTyj3D1JsOlj0Txf3IA9wlT5GHCYaR6QfDlWq4pz/rh+bfOw2Vg==
   dependencies:
     commander "~2.9.0"
     deep-extend "~0.5.1"
     get-stdin "~5.0.1"
     glob "~7.1.2"
-    js-yaml "~3.11.0"
+    js-yaml "^3.13.1"
     lodash.differencewith "~4.5.0"
     lodash.flatten "~4.4.0"
-    markdownlint "~0.11.0"
+    markdownlint "~0.14.1"
     minimatch "~3.0.4"
     rc "~1.2.7"
 
-markdownlint@~0.11.0:
-  version "0.11.0"
-  resolved "https://registry.yarnpkg.com/markdownlint/-/markdownlint-0.11.0.tgz#3858bbdbc1ab78abf0c098d841c72b63dd3206a0"
+markdownlint@~0.14.1:
+  version "0.14.1"
+  resolved "https://registry.yarnpkg.com/markdownlint/-/markdownlint-0.14.1.tgz#62666d897284b44af20627229334045248f1c941"
+  integrity sha512-W3RxMP8GYyJAhgUXIXvBOXT2ai89qDIuLf2ZM0Xd+XcwXBS6Hu06Hg2UKNwMDPTy0uQK8YWCH4hkdxlevm/BgQ==
   dependencies:
     markdown-it "8.4.2"
 
