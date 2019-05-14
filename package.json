@@ -63,7 +63,7 @@
     "img-loader": "^3.0.0",
     "inject-loader": "^4.0.1",
     "jest": "^23.6.0",
-    "jest-canvas-mock": "^1.1.0",
+    "jest-canvas-mock": "^2.1.0",
     "jest-puppeteer": "^3.6.0",
     "lighthouse": "^4.0.0-alpha.2-3.2.1",
     "lint-staged": "^8.0.0",
