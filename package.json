@@ -88,7 +88,7 @@
     "svgo": "^1.0.5",
     "uglifyjs-webpack-plugin": "^2.0.0",
     "vue-generator": "^1.1.0",
-    "vue-jest": "^3.0.1",
+    "vue-jest": "^3.0.5",
     "vue-loader": "^15.2.6",
     "vue-style-loader": "^4.1.1",
     "vue-template-compiler": "^2.5.17",
