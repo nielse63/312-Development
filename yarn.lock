@@ -5837,9 +5837,10 @@ isurl@^1.0.0-alpha5:
     has-to-string-tag-x "^1.2.0"
     is-object "^1.0.1"
 
-jest-canvas-mock@^2.0.0:
-  version "2.0.0"
-  resolved "https://registry.yarnpkg.com/jest-canvas-mock/-/jest-canvas-mock-2.0.0.tgz#20a4e79994b937b5047833c5b320cb60a57b52fe"
+jest-canvas-mock@^2.1.2:
+  version "2.1.2"
+  resolved "https://registry.yarnpkg.com/jest-canvas-mock/-/jest-canvas-mock-2.1.2.tgz#0d16c9f91534f773fd132fc289f2e6b6db8faa28"
+  integrity sha512-1VI4PK4/X70yrSjYScYVkYJYbXYlZLKJkUrAlyHjQsfolv64aoFyIrmMDtqCjpYrpVvWYEcAGUaYv5DVJj00oQ==
   dependencies:
     cssfontparser "^1.2.1"
     parse-color "^1.0.0"
