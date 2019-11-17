@@ -79,7 +79,7 @@
     "resource-hints-webpack-plugin": "^0.0.2",
     "sass-loader": "^7.1.0",
     "seolint": "^0.14.2",
-    "sharp": "^0.21.0",
+    "sharp": "^0.23.3",
     "style-loader": "^0.23.0",
     "stylelint": "^9.4.0",
     "stylelint-config-recommended-scss": "^3.2.0",
